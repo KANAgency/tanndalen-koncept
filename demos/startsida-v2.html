@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="sv" class="theme-TD">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tänndalen</title>
+    <link rel="stylesheet" href="../ds/generated/tokens.css" />
+    <link rel="stylesheet" href="../ds/generated/fonts-td.css" />
+    <link rel="stylesheet" href="../ds/generated/typography-td.css" />
+    <link rel="stylesheet" href="../ds/components/button.css?v=lg" />
+    <link rel="stylesheet" href="../ds/components/booking.css?v=calendar-nav" />
+    <link rel="stylesheet" href="../ds/components/just-nu-header.css?v=stroke" />
+    <link rel="stylesheet" href="../ds/components/just-nu-data.css" />
+    <link rel="stylesheet" href="../ds/components/just-nu-stack.css?v=klick" />
+    <link rel="stylesheet" href="../ds/components/just-nu-fraga.css" />
+    <link rel="stylesheet" href="../ds/components/just-nu-kamera.css?v=snow" />
+    <link rel="stylesheet" href="../ds/components/just-nu-pagang.css" />
+    <link rel="stylesheet" href="../ds/components/just-nu-rapport.css" />
+    <link rel="stylesheet" href="../ds/components/just-nu-grid.css?v=segmented-inset" />
+    <link rel="stylesheet" href="../ds/components/hitta-hit.css" />
+    <link rel="stylesheet" href="../ds/components/textblock.css" />
+    <link rel="stylesheet" href="startsida-v2.css?v=faktakort" />
+  </head>
+  <body data-season="vinter">
+    <p class="intro-copy" id="intro-copy" aria-live="polite">Tänndalen</p>
+    <div class="stage" id="stage">
+      <div class="film" id="film">
+        <svg class="mask-def" aria-hidden="true">
+          <mask id="reveal" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+            <polygon id="glyph-a" fill="white" />
+            <polygon id="glyph-b" fill="white" />
+          </mask>
+        </svg>
+        <div class="film-stage" id="film-stage">
+          <video id="hero-video" poster="../assets/video/hero-poster.jpg" autoplay playsinline muted loop preload="auto">
+            <source src="../assets/video/hero.mp4" type="video/mp4" />
+          </video>
+          <img class="poster" src="../assets/video/hero-poster.jpg" alt="" />
+          <button class="pause" id="pause" type="button" aria-pressed="false" aria-label="Pausa rörelse">II</button>
+          <button class="play" id="play" type="button" hidden>Spela</button>
+        </div>
+        <svg class="logo-svg" id="logo-svg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+          <polygon id="logo-a" fill="#25282a" />
+          <polygon id="logo-b" fill="#25282a" />
+        </svg>
+      </div>
+    </div>
+    <div class="page">
+      <h1 class="visually-hidden">Tänndalen</h1>
+      <header class="top">
+        <div class="top-glass" aria-hidden="true"><span class="top-progress" aria-hidden="true"></span></div>
+        <div class="top-start">
+        <div class="menu-control">
+          <button class="menu-control-label td-button td-button-text td-ui-cta" type="button" aria-expanded="false" aria-controls="site-menu-panel"><span id="menu-current">Meny</span></button>
+          <div class="td-segmented site-season site-season-full" role="group" aria-label="Säsong">
+            <button type="button" class="td-ui-cta-sm" data-season="vinter" aria-pressed="true"><span class="site-season-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1.5v13M2.2 4.8l11.6 6.4M13.8 4.8L2.2 11.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Vinter</span></button>
+            <button type="button" class="td-ui-cta-sm" data-season="sommar" aria-pressed="false"><span class="site-season-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span>Sommar</span></button>
+          </div>
+          <button class="menu-control-icon" type="button" aria-expanded="false" aria-controls="site-menu-panel" aria-label="Öppna meny">
+            <svg class="menu-icon-open" width="12" height="7" viewBox="0 0 12 6.5" aria-hidden="true"><path d="M0 0.75H12M0 5.75H12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+            <svg class="menu-icon-close" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5L15 15M15 5L5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>
+          </button>
+        </div>
+        <button class="site-season-dot" type="button" aria-label="Välj säsong">
+          <svg class="icon-vinter" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M2.2 4.8l11.6 6.4M13.8 4.8L2.2 11.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg class="icon-sommar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="site-menu" id="site-menu" inert>
+          <div class="site-menu-panel" id="site-menu-panel" role="dialog" aria-modal="true" aria-label="Meny">
+            <ul class="site-menu-list">
+              <li class="site-menu-item is-current" data-key="skida">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#skidakning">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="../assets/startsida/endag-0830.jpg" data-src-sommar="../assets/startsida/teaser-paket-a.png" src="../assets/startsida/endag-0830.jpg" />
+                    <span class="site-menu-title td-heading-xs-regular" data-title-vinter="Skidåkning" data-title-sommar="Cykling">Skidåkning</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="true" aria-label="Visa undersidor för Skidåkning">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub is-open">
+                  <div class="site-menu-sub-clip">
+                    <ul class="site-menu-subs" data-season-list="vinter">
+                      <li><a class="td-ui-body" href="#liftkort">Liftkort</a></li>
+                      <li><a class="td-ui-body" href="#skidskola">Skidskola</a></li>
+                      <li><a class="td-ui-title-sm" href="#skidhyra" aria-current="page">Skidhyra</a></li>
+                      <li><a href="#langd">Längdskidåkning</a></li>
+                      <li><a href="#hamra">Hamra Syd</a></li>
+                    </ul>
+                    <ul class="site-menu-subs" data-season-list="sommar" hidden>
+                      <li><a href="#liftkort">Liftkort</a></li>
+                      <li><a href="#cykelpark">Cykelpark</a></li>
+                      <li><a href="#cykeluthyrning">Cykeluthyrning</a></li>
+                      <li><a href="#leder">Leder</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="site-menu-item" data-key="boende">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#boende">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" src="../assets/startsida/teaser-boende-a.jpeg" />
+                    <span class="site-menu-title td-heading-xs-regular">Boende</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Boende">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a href="#ski-lodge">Ski Lodge</a></li>
+                      <li><a href="#omraden">Områden</a></li>
+                      <li><a href="#erbjudanden">Erbjudanden</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="site-menu-item" data-key="aktiviteter">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#aktiviteter">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" src="../assets/startsida/teaser-skola-a.png" />
+                    <span class="site-menu-title td-heading-xs-regular">Aktiviteter</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Aktiviteter">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a href="#barn">För barn</a></li>
+                      <li><a href="#evenemang">Evenemang</a></li>
+                      <li><a href="#veckoprogram">Veckoprogram</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="site-menu-item" data-key="plats">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#pa-plats">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" src="../assets/startsida/webbkamera.png" />
+                    <span class="site-menu-title td-heading-xs-regular">På plats</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för På plats">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a href="#liftstatus">Liftstatus</a></li>
+                      <li><a href="#webbkameror">Webbkameror</a></li>
+                      <li><a href="#service">Mat, butiker och service</a></li>
+                      <li><a href="#kartor">Kartor</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="site-menu-item" data-key="planera">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#planera">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" src="../assets/startsida/rapport-raw-1.png" />
+                    <span class="site-menu-title td-heading-xs-regular">Planera resan</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Planera resan">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a href="#hitta">Hitta hit</a></li>
+                      <li><a href="#fragor">Frågor och svar</a></li>
+                      <li><a href="#om">Om Tänndalen</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <nav class="site-menu-foot" aria-label="Mer">
+              <a class="td-ui-body-sm" href="#konferens">Konferens</a>
+              <a class="td-ui-body-sm" href="#jobb">Jobba hos oss</a>
+              <a class="td-ui-body-sm" href="#kontakt">Kontakt</a>
+              <a class="td-ui-body-sm" href="#english">English</a>
+            </nav>
+          </div>
+        </div>
+        </div>
+        <img class="logo" src="../assets/brand/logo-horizontal-black.svg" alt="Tänndalen" />
+        <div class="actions">
+          <button class="td-button td-button-md td-button-fill-neutral td-ui-cta-sm" id="fraga-launch" type="button">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="help-long">Fråga eller sök</span><span class="help-short">Fråga</span>
+            <kbd class="fraga-kbd" id="fraga-kbd">⌘K</kbd>
+          </button>
+          <a class="td-button td-button-md td-button-primary td-ui-cta-sm" href="#boka">Boka</a>
+        </div>
+      </header>
+      <main>
+
+      <section class="hero" aria-label="Tänndalen">
+        <div class="hero-frame">
+        <video class="hero-media" data-depth="front" muted playsinline loop poster="../assets/video/hero-poster.jpg">
+          <source src="../assets/video/hero.mp4" type="video/mp4" />
+        </video>
+        </div>
+        <button class="pause" id="hero-pause" type="button" aria-pressed="false" aria-label="Pausa filmen">II</button>
+        <button class="play" id="hero-play" type="button" hidden aria-label="Spela filmen">Spela</button>
+        <div class="td-booking" id="booking" data-depth="front">
+          <div class="td-booking-clip" id="booking-clip"></div>
+          <div class="td-booking-cats" id="booking-cats"></div>
+        </div>
+      </section>
+
+        <img class="hero-doodle" data-depth="sun" src="../assets/startsida/sol-mask.png" alt="" />
+      <p class="statement td-statement" data-depth="mid">Tänndalen är renodlat skidåkning och fjäll på riktigt. Buret av hundra års genuint värdskap, med gott om plats i både pister och liftköer.</p>
+        <img class="hero-topo" data-depth="back" src="../assets/startsida/topografi.svg" alt="" />
+        <p class="place-label place-storvigeln" data-depth="back"><strong>Storvigeln</strong></p>
+        <p class="place-label place-hojd td-ui-nav" data-depth="back">1 561 m ö.h. · 180 m fallhöjd</p>
+        <p class="place-label place-temp td-ui-nav" data-depth="back">−4 °C på toppen · 11:04</p>
+
+      <section class="just-nu" aria-labelledby="just-nu-title">
+        <div class="just-nu-head" data-depth="mid">
+          <div>
+            <p class="td-status td-ui-label"><span class="td-status-dot" aria-hidden="true"></span>Uppdaterat: 09:42</p>
+            <h2 class="td-heading-sm" id="just-nu-title">Just nu i dalen</h2>
+          </div>
+          <div class="td-segmented" role="group" aria-label="Gren">
+            <button class="td-ui-cta" type="button" data-gren="alpint" aria-pressed="true">Alpint</button>
+            <button class="td-ui-cta" type="button" data-gren="langd" aria-pressed="false">Längd</button>
+          </div>
+        </div>
+        <div class="just-cols">
+          <div>
+            <section class="td-just-nu-stack" data-depth="front" data-gren-panel="alpint" aria-label="Just nu, alpint">
+              <div class="td-just-nu-stack-viewport">
+                <div class="td-just-nu-stack-track">
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/nysno-32.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">12</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">30</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/snodjup-32.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">134</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">71</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/liftar-32.svg" alt=""></span><span class="td-ui-title">Öppet</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">41</span><span class="td-ui-figure-unit-lg">av 54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">14</span><span class="td-ui-figure-unit-md">av 17</span></div><span class="td-ui-body-sm td-just-nu-data-caption">liftar</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/nypreparerat-32.svg" alt=""></span><span class="td-ui-title">Nypreparerat</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">32</span><span class="td-ui-figure-unit-lg">av 54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Headstråket</span></div><span class="td-ui-body-sm td-just-nu-data-caption">bäst just nu</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/storm-32.svg" alt=""></span><span class="td-ui-title">Vind</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Hård vind</span></div><span class="td-ui-body-sm td-just-nu-data-caption">Stormliftarna går, resten står still</span></div></div></article>
+                </div>
+              </div>
+              <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
+            </section>
+            <section class="td-just-nu-stack" data-depth="front" data-gren-panel="langd" hidden aria-label="Just nu, längd">
+              <div class="td-just-nu-stack-viewport"><div class="td-just-nu-stack-track">
+                <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/spar-32.svg" alt=""></span><span class="td-ui-title">Spår</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">98</span><span class="td-ui-figure-unit-lg">av 145 km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">öppna</span></div></div></article>
+                <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/valla-32.svg" alt=""></span><span class="td-ui-title">Valla</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">Blå</span></div><span class="td-ui-body-sm td-just-nu-data-caption">fästvalla</span></div></div></article>
+                <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/nysno-32.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">12</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div></div></article>
+                <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/storm-32.svg" alt=""></span><span class="td-ui-title">Vind</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Hård vind</span></div><span class="td-ui-body-sm td-just-nu-data-caption">Stormliftarna går, resten står still</span></div></div></article>
+              </div></div>
+              <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
+            </section>
+            <a class="td-fraga td-just-nu-card" id="fraga-card" data-depth="front" href="#fraga">
+              <header class="td-just-nu-header td-just-nu-header-sm"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/hjalp-24.svg" alt=""></span><span class="td-ui-kicker">Undrar du något?</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Ställ frågan</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
+              <div class="td-fraga-body"><p class="td-heading-sm">Det regnar, vad kan vi göra idag?</p><p class="td-ui-body">Tre tips på saker att göra inomhus idag.</p></div>
+            </a>
+          </div>
+          <article class="td-rapport td-rapport-overlay" data-depth="front">
+            <img class="td-rapport-image" src="../assets/startsida/rapport-raw-1.png" alt="" loading="lazy">
+            <span class="td-rapport-shade"></span>
+            <div class="td-rapport-body">
+              <p class="td-rapport-chip td-ui-caption"><span class="td-rapport-diff" aria-hidden="true"></span>Medelsvår · Headstråket</p>
+              <div class="td-rapport-lower">
+                <p class="td-ui-kicker">Från backen i morse · 07:40</p>
+                <div class="td-rapport-copy">
+                  <p class="td-heading-xs-regular">”Fast och snabbt i morse. Solsidan mjuknar runt elva, skuggsidan håller hela dagen.”</p>
+                  <div class="td-rapport-footer">
+                    <p class="td-rapport-author"><img class="td-rapport-avatar" src="../assets/startsida/rapport-avatar.png" alt="" width="32" height="32"><span class="td-ui-caption">Jonas Berg, pistförare</span></p>
+                    <p class="td-rapport-chip td-rapport-chip-line td-ui-caption">Preparerad 05:30</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div>
+            <section class="td-pagang" data-depth="front" data-gren-panel="alpint">
+              <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../ds/components/icons/content/kalender-32.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
+              <div class="td-pagang-groups">
+                <section><h3 class="td-pagang-group-name td-ui-nav">Snart</h3>
+                  <a class="td-pagang-row" href="#sportlovet"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">16 feb–8 mar</span><span class="td-ui-body">Sportlovet</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><hr class="td-pagang-divider"></a>
+                  <a class="td-pagang-row" href="#maj"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">28 apr–3 maj</span><span class="td-ui-body">1:a Maj Trofén</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+                </section>
+                <section><h3 class="td-pagang-group-name td-ui-nav">Längre fram</h3>
+                  <a class="td-pagang-row" href="#fjallturen"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">21–24 jul</span><span class="td-ui-body">Fjällturen</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><hr class="td-pagang-divider"></a>
+                  <a class="td-pagang-row" href="#musik"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">juli</span><span class="td-ui-body">Musikkväll på kalfjäll</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+                </section>
+              </div>
+            </section>
+            <a class="td-kamera td-kamera-pan td-just-nu-card" data-depth="front" href="#kameror">
+              <img class="td-kamera-media" src="../assets/startsida/webbkamera.png" alt="" loading="lazy">
+              <span class="td-kamera-shade"></span>
+              <header class="td-just-nu-header td-just-nu-header-sm td-kamera-header"><div class="td-just-nu-header-identity"><span class="td-ui-kicker">Webbkamera · Storvigeln</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Alla kameror</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
+              <p class="td-kamera-status"><span class="td-kamera-live"><span class="td-kamera-dot"></span><span class="td-ui-label">Live</span></span><span class="td-ui-caption">Uppdaterad 09:42</span></p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <blockquote class="quote" data-depth="back">
+        <img class="quote-doodle" src="../assets/startsida/citat-cirkel.svg" alt="" loading="lazy" />
+        <p class="quote-text">”Vi har åkt hit varje sportlov sedan 2014.”</p>
+        <p class="quote-by">Anna, Uppsala · 12:e säsongen</p>
+      </blockquote>
+
+      <section class="en-dag" id="en-dag" aria-labelledby="en-dag-title">
+        <h2 class="en-dag-heading td-heading-xxl" id="en-dag-title">En dag i Tänndalen</h2>
+        <div class="en-dag-pin">
+          <article class="en-dag-slide">
+            <div class="en-dag-media" data-depth="front">
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="../assets/startsida/endag-0830.jpg">
+                <source src="../assets/startsida/endag-0830.mp4" type="video/mp4" />
+              </video>
+              <div class="en-dag-dim" aria-hidden="true"></div>
+              <button class="pause en-dag-pause" type="button" aria-pressed="false" aria-label="Pausa filmen">II</button>
+            </div>
+            <div class="en-dag-copy en-dag-copy-end" data-depth="mid" data-depth-own>
+              <article class="td-textblock">
+                <p class="td-textblock-eyebrow td-ui-label">08:30</p>
+                <h3 class="td-textblock-title td-heading-sm">Först i liften</h3>
+                <p class="td-textblock-body td-ui-body-sm">Inget att stressa över. Kön är kort, pisterna är orörda, och hela fjället ligger framför er.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#liftkort">Köp liftkort <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/startsida/endag-1015.png" alt="" />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+            </div>
+            <div class="en-dag-copy en-dag-copy-start" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <p class="td-textblock-eyebrow td-ui-label">10:15</p>
+                <h3 class="td-textblock-title td-heading-sm">Barnen drar iväg själva</h3>
+                <p class="td-textblock-body td-ui-body-sm">Efter två åk har de hittat sin favoritbacke och vill inte ha sällskap längre.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#barn">Se alla barnaktiviteter <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/startsida/endag-1300.png" alt="" />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+            </div>
+            <div class="en-dag-copy en-dag-copy-end" data-depth="mid" data-depth-own>
+              <article class="td-textblock">
+                <p class="td-textblock-eyebrow td-ui-label">13:00</p>
+                <h3 class="td-textblock-title td-heading-sm">Våfflor i solgropen</h3>
+                <p class="td-textblock-body td-ui-body-sm">Skidorna i snön, ansiktet mot solen. Ingen har bråttom tillbaka upp.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#paus">Se var ni kan ta en paus <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide">
+            <div class="en-dag-media" data-depth="front">
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="../assets/startsida/endag-1530.jpg">
+                <source src="../assets/startsida/endag-1530.mp4" type="video/mp4" />
+              </video>
+              <div class="en-dag-dim" aria-hidden="true"></div>
+              <button class="pause en-dag-pause" type="button" aria-pressed="false" aria-label="Pausa filmen">II</button>
+            </div>
+            <div class="en-dag-copy en-dag-copy-start" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <p class="td-textblock-eyebrow td-ui-label">15:30</p>
+                <h3 class="td-textblock-title td-heading-sm">Sista åket ner mot dalen</h3>
+                <p class="td-textblock-body td-ui-body-sm">Ljuset blir lågt och snön mjuk. Ett åk till, säger alla, och menar det inte.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#pistar">Se pistkartorna <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide is-puff">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/startsida/endag-1700.png" alt="" />
+              <div class="en-dag-puff-shade" aria-hidden="true"></div>
+              <div class="en-dag-puff-copy">
+                <p class="td-ui-label">17:00 · Tillbaka i stugan</p>
+                <p class="td-heading-md">I morgon gör ni likadant.</p>
+                <a class="td-button td-button-secondary td-button-md" href="#boende">Hitta ert boende <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="td-hitta" id="hitta" aria-label="Hitta hit">
+        <div class="td-hitta-sticky">
+        <div class="td-hitta-kart" id="hitta-kart" data-depth="back">
+          <div class="td-hitta-map" style="background-image:url('../assets/hitta-hit/karta.png?v=noroute')" aria-hidden="true"></div>
+        <div class="td-hitta-scene" id="hitta-scene">
+        <svg class="td-hitta-route" id="hitta-route" viewBox="0 0 539 631" preserveAspectRatio="none" aria-hidden="true">
+          <path id="hitta-line" d="M537.146 629.472C430.988 521.129 300.988 421.129 230.288 282.729C170.988 166.729 80.9878 71.1289 0.987793 1.12891" />
+          <path id="hitta-done" d="M537.146 629.472C430.988 521.129 300.988 421.129 230.288 282.729C170.988 166.729 80.9878 71.1289 0.987793 1.12891" />
+        </svg>
+        <svg class="td-hitta-route td-hitta-point-layer" viewBox="0 0 539 631" preserveAspectRatio="none" aria-hidden="true">
+          <circle class="td-hitta-point" id="hitta-point" r="8" cx="537" cy="629" />
+        </svg>
+        <p class="td-hitta-label td-hitta-label-tand" style="left:605px;top:391px">Tänndalen</p>
+        <span class="td-hitta-pin" style="left:672px;top:430px"></span>
+        <p class="td-hitta-label" style="left:828px;top:702px">Orsa</p>
+        <span class="td-hitta-pin" style="left:900px;top:711px"></span>
+        <p class="td-hitta-label" style="left:1144px;top:1079px">Stockholm</p>
+        <span class="td-hitta-pin" style="left:1208px;top:1059px"></span>
+        </div>
+        </div>
+        <div class="td-hitta-copy">
+          <h2 class="td-heading-lg" data-depth="mid">En dag på vägen. En vecka på fjället.</h2>
+          <p class="td-hitta-ingress" data-depth="mid">Kör på morgonen, åk skidor dagen efter. Eller ta tåget till Östersund och bussen sista biten.</p>
+          <a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#vag">Så tar du dig hit <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
+        </div>
+        <ol class="hitta-tid">
+          <li><span class="hitta-tid-klocka td-ui-label">07:00</span><span class="td-ui-body">Stockholm</span><span class="hitta-tid-note td-ui-body-sm">Packat, tankat, iväg.</span></li>
+          <li><span class="hitta-tid-klocka td-ui-label">10:30</span><span class="td-ui-body">Orsa</span><span class="hitta-tid-note td-ui-body-sm">Fika vid Siljan. Halva vägen avklarad.</span></li>
+          <li><span class="hitta-tid-klocka td-ui-label">14:00</span><span class="td-ui-body">Tänndalen</span><span class="hitta-tid-note td-ui-body-sm">Framme med tid över för eftermiddagens första åk.</span></li>
+        </ol>
+        <article class="td-faktakort td-faktakort-frost" data-depth="front">
+          <div class="td-faktakort-main">
+          <div class="td-faktakort-top">
+            <h3 class="td-heading-xs-regular">Från Stockholm</h3>
+            <a class="td-corner-link" href="#vagbeskrivning"><span class="td-corner-link-label td-ui-cta-sm">Vägbeskrivning</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a>
+          </div>
+          <div class="td-faktakort-stats">
+            <div>
+              <p class="td-faktakort-figure"><span class="td-ui-figure-lg">7</span><span class="td-ui-figure-unit-lg">h</span></p>
+              <p class="td-ui-body-sm">med bil</p>
+            </div>
+            <div>
+              <p class="td-faktakort-figure"><span class="td-ui-figure-md">570</span><span class="td-ui-figure-unit-md">km</span></p>
+              <p class="td-ui-body-sm">köravstånd</p>
+            </div>
+          </div>
+          </div>
+          <hr class="td-faktakort-rule">
+          <div class="td-faktakort-more">
+          <h3 class="td-heading-xxxs-regular">Från andra platser</h3>
+          <div class="td-faktakort-places">
+            <div><p class="td-faktakort-figure"><span class="td-ui-figure">3</span><span class="td-ui-figure-unit-md">h</span></p><span class="td-ui-caption">Trondheim</span></div>
+            <div><p class="td-faktakort-figure"><span class="td-ui-figure">5</span><span class="td-ui-figure-unit-md">h</span></p><span class="td-ui-caption">Oslo</span></div>
+            <div><p class="td-faktakort-figure"><span class="td-ui-figure">8</span><span class="td-ui-figure-unit-md">h</span></p><span class="td-ui-caption">Göteborg</span></div>
+            <div><p class="td-faktakort-figure"><span class="td-ui-figure">11</span><span class="td-ui-figure-unit-md">h</span></p><span class="td-ui-caption">Malmö</span></div>
+          </div>
+          </div>
+        </article>
+        <article class="td-hitta-stop" id="hitta-stop" data-depth="front" aria-live="polite">
+          <strong class="td-ui-title-sm" id="hitta-stop-title"></strong>
+          <span class="td-ui-body-sm" id="hitta-stop-body"></span>
+          <div class="td-hitta-meter">
+            <span class="td-hitta-meter-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="td-hitta-meter-hours td-ui-caption" id="hitta-stop-hours"></span>
+          </div>
+        </article>
+        <button type="button" class="td-button td-button-secondary td-button-sm td-ui-cta-sm td-hitta-skip" id="hitta-skip">Hoppa över resan</button>
+        </div>
+      </section>
+      <section class="td-nasta" aria-label="Nästa sektion">
+        <p class="td-ui-body">Nästa sektion</p>
+      </section>
+      <div id="hitta-end"></div>
+      </main>
+    </div>
+    <script>
+      const body = document.body;
+      const film = document.getElementById("film");
+      const video = document.getElementById("hero-video");
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const mobileQ = matchMedia("(max-width: 1023px)");
+      const params = new URLSearchParams(location.search);
+      const KEY = "td-startsida-seen";
+      let seen = localStorage.getItem(KEY) === "1";
+      if (params.get("visit") === "new") seen = false;
+      if (params.get("visit") === "returning") seen = true;
+      let introDone = seen || reduced;
+      if (reduced || seen) document.getElementById("film-stage").classList.add("is-open");
+      if (reduced) {
+        body.classList.add("is-reduced", "is-landed");
+        document.getElementById("play").hidden = false;
+        document.getElementById("pause").hidden = true;
+      } else if (seen) {
+        body.classList.add("is-landed");
+        video.play().catch(() => {});
+      } else {
+        body.classList.add("is-intro");
+      }
+      function land() {
+        introDone = true;
+        body.classList.remove("is-intro", "is-expand");
+        body.classList.add("is-landed");
+        localStorage.setItem(KEY, "1");
+        video.play().catch(() => {});
+      }
+      const leftGlyph = [[141.73,170.51],[72.35,101.12],[58.47,115],[86.23,142.75],[58.47,170.51],[72.35,184.38],[100.1,156.63],[127.86,184.38]];
+      const rightGlyph = [[211.11,184.38],[224.99,170.51],[141.73,87.25],[113.98,115],[127.86,128.88],[141.73,115]];
+      const glyphA = document.getElementById("glyph-a");
+      const glyphB = document.getElementById("glyph-b");
+      const filmStage = document.getElementById("film-stage");
+      let symbol = [];
+      let focus = [0.5, 0.5];
+      let endScale = 1;
+      let typeTimer = 0;
+      function writePts(el, pts) {
+        el.setAttribute("points", pts.map(([x, y]) => x + "," + y).join(" "));
+      }
+      function zoomPts(points, scale) {
+        return points.map(([x, y]) => [focus[0] + (x - focus[0]) * scale, focus[1] + (y - focus[1]) * scale]);
+      }
+      function inside(poly, x, y) {
+        let winding = 0;
+        for (let i = 0; i < poly.length; i++) {
+          const [x1, y1] = poly[i];
+          const [x2, y2] = poly[(i + 1) % poly.length];
+          if (y1 <= y) {
+            if (y2 > y && (x2 - x1) * (y - y1) - (x - x1) * (y2 - y1) > 0) winding++;
+          } else if (y2 <= y && (x2 - x1) * (y - y1) - (x - x1) * (y2 - y1) < 0) winding--;
+        }
+        return winding !== 0;
+      }
+      function layoutMask() {
+        const w = filmStage.clientWidth || 526;
+        const h = filmStage.clientHeight || 306;
+        const pad = 10;
+        const minX = 58.47 - pad, maxX = 224.99 + pad, minY = 87.25 - pad, maxY = 184.38 + pad;
+        const bw = maxX - minX, bh = maxY - minY;
+        const contentAspect = bw / bh, boxAspect = w / h;
+        let nw, nh, ox, oy;
+        if (contentAspect > boxAspect) { nw = 1; nh = boxAspect / contentAspect; ox = 0; oy = (1 - nh) / 2; }
+        else { nh = 1; nw = contentAspect / boxAspect; ox = (1 - nw) / 2; oy = 0; }
+        const place = ([x, y]) => [ox + ((x - minX) / bw) * nw, oy + ((y - minY) / bh) * nh];
+        focus = place([105, 155]);
+        symbol = [leftGlyph.map(place), rightGlyph.map(place)];
+        let lo = 1, hi = 48, scale = 1;
+        const covered = (s) => {
+          const steps = 16;
+          for (let iy = 0; iy <= steps; iy++) {
+            for (let ix = 0; ix <= steps; ix++) {
+              const x = focus[0] + (ix / steps - focus[0]) / s;
+              const y = focus[1] + (iy / steps - focus[1]) / s;
+              if (!symbol.some((poly) => inside(poly, x, y))) return false;
+            }
+          }
+          return true;
+        };
+        for (let i = 0; i < 16; i++) {
+          const mid = (lo + hi) / 2;
+          if (covered(mid)) { scale = mid; hi = mid; } else lo = mid;
+        }
+        endScale = covered(scale) ? scale : hi;
+        writePts(glyphA, symbol[0]);
+        writePts(glyphB, symbol[1]);
+        writePts(document.getElementById("logo-a"), symbol[0]);
+        writePts(document.getElementById("logo-b"), symbol[1]);
+      }
+      function typeCaption(text) {
+        const copy = document.getElementById("intro-copy");
+        return new Promise((resolve) => {
+          if (reduced) { copy.textContent = text; resolve(); return; }
+          copy.textContent = "";
+          let i = 0;
+          const step = () => {
+            i += 1;
+            copy.textContent = text.slice(0, i);
+            if (i >= text.length || introDone) { resolve(); return; }
+            typeTimer = setTimeout(step, 52);
+          };
+          step();
+        });
+      }
+      function openMask() {
+        return new Promise((resolve) => {
+          const u = mobileQ.matches ? 1 : Math.min(1, innerWidth / 1440);
+          const from = film.getBoundingClientRect();
+          const stageBox = document.getElementById("stage").getBoundingClientRect();
+          const to = mobileQ.matches
+            ? { x: 24, y: 88, w: innerWidth - 48, h: (innerWidth - 48) * 1.25 }
+            : { x: 80 * u, y: 135 * u, w: 1280 * u, h: Math.max(593 * u, innerHeight - 135 * u - 70 * u) };
+          body.classList.remove("is-intro", "is-grow");
+          film.style.background = "transparent";
+          film.style.left = from.left - stageBox.left + "px";
+          film.style.top = from.top - stageBox.top + "px";
+          film.style.width = from.width + "px";
+          film.style.height = from.height + "px";
+          film.style.transform = "none";
+          const copy = document.getElementById("intro-copy");
+          const started = performance.now();
+          const dur = 400;
+          function tick(now) {
+            const t = Math.min(1, (now - started) / dur);
+            const e = t ** 3.6;
+            film.style.left = (from.left - stageBox.left) + (to.x - (from.left - stageBox.left)) * e + "px";
+            film.style.top = (from.top - stageBox.top) + (to.y - (from.top - stageBox.top)) * e + "px";
+            film.style.width = from.width + (to.w - from.width) * e + "px";
+            film.style.height = from.height + (to.h - from.height) * e + "px";
+            film.style.borderRadius = (16 * e) + "px";
+            const out = Math.min(1, e / 0.5);
+            copy.style.opacity = String(1 - out);
+            writePts(glyphA, zoomPts(symbol[0], 1 + (endScale * 1.12 - 1) * e));
+            writePts(glyphB, zoomPts(symbol[1], 1 + (endScale * 1.12 - 1) * e));
+            if (t < 1) { requestAnimationFrame(tick); return; }
+            filmStage.classList.add("is-open");
+            film.style.left = "";
+            film.style.top = "";
+            film.style.width = "";
+            film.style.height = "";
+            film.style.borderRadius = "";
+            film.style.transform = "";
+            film.style.background = "";
+            resolve();
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+      function runIntro() {
+        layoutMask();
+        video.play().catch(() => {});
+        const copy = document.getElementById("intro-copy");
+        copy.textContent = "Tänndalen";
+        let growTimer = 0;
+        const skip = () => {
+          if (introDone) return;
+          clearTimeout(typeTimer);
+          clearTimeout(growTimer);
+          filmStage.classList.add("is-open");
+          land();
+        };
+        window.addEventListener("wheel", skip, { once: true, passive: true });
+        window.addEventListener("keydown", skip, { once: true });
+        window.addEventListener("pointerdown", skip, { once: true });
+        growTimer = setTimeout(() => {
+          if (introDone) return;
+          body.classList.add("is-grow");
+          const startLine = () => {
+            if (introDone) return;
+            body.classList.add("is-typed");
+            copy.style.transition = "none";
+            typeCaption("Älskat av skidåkare.").then(() => {
+              if (introDone) return;
+              setTimeout(() => { if (!introDone) openMask().then(land); }, 1000);
+            });
+          };
+          const onEnd = (e) => {
+            if (e.propertyName !== "transform") return;
+            film.removeEventListener("transitionend", onEnd);
+            body.classList.add("is-reveal");
+            setTimeout(startLine, 1000);
+          };
+          film.addEventListener("transitionend", onEnd);
+        }, 800);
+      }
+      if (body.classList.contains("is-intro")) runIntro();
+    </script>
+    <script type="module">
+      import { initBookingFields } from "../ds/components/booking.js?v=calendar-nav";
+      import { initJustNuStack } from "../ds/components/just-nu-stack.js?v=klick";
+      import { initSegmented } from "../ds/components/segmented.js?v=inset5";
+      document.querySelectorAll(".td-just-nu-stack").forEach(initJustNuStack);
+      document.querySelectorAll(".td-segmented").forEach(initSegmented);
+      const menu = document.getElementById("site-menu");
+      const menuPanel = document.getElementById("site-menu-panel");
+      const menuControl = document.querySelector(".menu-control");
+      const menuLabel = document.getElementById("menu-current");
+      const menuButtons = menuControl.querySelectorAll("button");
+      let menuOpen = false;
+      function seasonName() {
+        return document.body.dataset.season === "sommar" ? "sommar" : "vinter";
+      }
+      function applySeason(season) {
+        document.body.dataset.season = season;
+        document.querySelectorAll(".site-season [data-season]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.season === season));
+        });
+        document.querySelectorAll("[data-title-vinter]").forEach((node) => {
+          node.textContent = node.dataset[season === "sommar" ? "titleSommar" : "titleVinter"];
+        });
+        document.querySelectorAll("[data-src-vinter]").forEach((img) => {
+          img.src = img.dataset[season === "sommar" ? "srcSommar" : "srcVinter"];
+        });
+        document.querySelectorAll("[data-season-list]").forEach((list) => {
+          list.hidden = list.dataset.seasonList !== season;
+        });
+        const ski = document.querySelector('[data-key="skida"] .site-menu-chevron');
+        if (ski) ski.setAttribute("aria-label", season === "sommar" ? "Visa undersidor för Cykling" : "Visa undersidor för Skidåkning");
+      }
+      document.querySelectorAll(".site-season [data-season]").forEach((button) => {
+        button.addEventListener("click", () => applySeason(button.dataset.season));
+      });
+      function menuFocusables() {
+        return [...menuPanel.querySelectorAll("a, button")].filter((el) => !el.closest("[inert]") && !el.hidden && !el.closest("[hidden]"));
+      }
+      function openMenu(focusSeason) {
+        menuOpen = true;
+        menu.inert = false;
+        menu.classList.add("is-open");
+        document.body.classList.add("menu-open");
+        menuButtons.forEach((button) => button.setAttribute("aria-expanded", "true"));
+        menuControl.querySelector(".menu-control-icon").setAttribute("aria-label", "Stäng meny");
+        const target = focusSeason ? menuControl.querySelector(".site-season-full button[aria-pressed='true']") : menuFocusables()[0];
+        target?.focus();
+        requestAnimationFrame(() => {
+          dispatchEvent(new Event("resize"));
+          menuControl.querySelector(".site-season-full")?.classList.add("is-ready");
+        });
+      }
+      function closeMenu() {
+        if (!menuOpen) return;
+        menuOpen = false;
+        menu.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+        menuButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+        menuControl.querySelector(".menu-control-icon").setAttribute("aria-label", "Öppna meny");
+        menuControl.querySelector(".menu-control-icon").focus();
+        window.setTimeout(() => { if (!menuOpen) menu.inert = true; }, 160);
+      }
+      menuControl.addEventListener("click", (event) => {
+        if (event.target.closest(".site-season")) return;
+        menuOpen ? closeMenu() : openMenu(false);
+      });
+      document.querySelector(".site-season-dot").addEventListener("click", () => openMenu(true));
+      document.addEventListener("keydown", (event) => {
+        if (!menuOpen) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeMenu();
+          return;
+        }
+        if (event.key !== "Tab") return;
+        const items = menuFocusables();
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+      document.addEventListener("pointerdown", (event) => {
+        if (!menuOpen) return;
+        if (event.target.closest(".site-menu, .menu-control, .site-season-dot")) return;
+        closeMenu();
+      });
+      menuPanel.addEventListener("click", (event) => {
+        const chevron = event.target.closest(".site-menu-chevron");
+        if (chevron) {
+          const item = chevron.closest(".site-menu-item");
+          const sub = item.querySelector(".site-menu-sub");
+          const clip = item.querySelector(".site-menu-sub-clip");
+          const open = !sub.classList.contains("is-open");
+          menuPanel.querySelectorAll(".site-menu-sub.is-open").forEach((other) => {
+            other.classList.remove("is-open");
+            other.querySelector(".site-menu-sub-clip").inert = true;
+            other.parentElement.querySelector(".site-menu-chevron").setAttribute("aria-expanded", "false");
+          });
+          if (open) {
+            sub.classList.add("is-open");
+            clip.inert = false;
+            chevron.setAttribute("aria-expanded", "true");
+          }
+          return;
+        }
+        const link = event.target.closest("a");
+        if (!link) return;
+        const item = link.closest(".site-menu-item");
+        if (item) {
+          menuPanel.querySelectorAll(".is-current").forEach((node) => node.classList.remove("is-current"));
+          item.classList.add("is-current");
+          if (!link.classList.contains("site-menu-link")) link.classList.add("is-current");
+        }
+        closeMenu();
+      });
+      applySeason(seasonName());
+      const cats = [
+        ["boende", "Boende"],
+        ["liftkort", "Liftkort"],
+        ["skidhyra", "Skidhyra"],
+        ["skidskola", "Skidskola"],
+        ["paket", "Paket"],
+      ];
+      const root = document.getElementById("booking-cats");
+      const clip = document.getElementById("booking-clip");
+      const pill = document.createElement("span");
+      pill.className = "td-booking-pill";
+      pill.hidden = true;
+      root.append(pill);
+      cats.forEach(([id, label], index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "td-ui-label";
+        button.setAttribute("aria-label", label);
+        button.innerHTML = `<span class="booking-icon-slot"><img alt="" src="../ds/components/icons/content/${id}-32.svg" /></span><span>${label}</span>`;
+        button.addEventListener("click", () => {
+          const same = button.getAttribute("aria-pressed") === "true";
+          [...root.querySelectorAll("button")].forEach((item) => item.setAttribute("aria-pressed", "false"));
+          pill.hidden = same;
+          if (!same) {
+            button.setAttribute("aria-pressed", "true");
+            pill.style.transform = `translateX(${index * 78}px)`;
+          }
+          clip.querySelectorAll(".td-booking-pane").forEach((pane) => pane.classList.toggle("is-shown", !same && pane.dataset.cat === id));
+          const shown = clip.querySelector(".is-shown");
+          clip.style.height = shown ? `${shown.offsetHeight}px` : "0px";
+        });
+        root.append(button);
+        const pane = document.createElement("div");
+        pane.className = "td-booking-pane";
+        pane.dataset.cat = id;
+        const search = { boende: "Sök boende", liftkort: "Sök liftkort", skidhyra: "Sök skidhyra", skidskola: "Sök skidskola", paket: "Sök paket" }[id];
+        const dateLabel = id === "liftkort" ? "Dag" : "Datum";
+        const dateValue = id === "liftkort" ? "Välj dag" : id === "skidhyra" || id === "skidskola" ? "Välj dag eller period" : "Välj reseperiod";
+        const whoLabel = id === "boende" || id === "paket" ? "Resesällskap" : "Antal";
+        const whoValue = id === "boende" || id === "paket" ? "Välj resande" : "Välj antal";
+        const icon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+        const links = {
+          boende: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#omraden"><img src="../assets/startsida/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`,
+          liftkort: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#priser">Liftkort och priser</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
+          skidhyra: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#hyra">Om skidhyran</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
+          skidskola: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#kurser"><img src="../assets/startsida/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`,
+          paket: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#paket"><img src="../assets/startsida/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`,
+        }[id];
+        const cal = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3V6M10 3V6M4 8H12M4 5H12V13H4V5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const chev = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        pane.innerHTML = `<div class="td-field-group"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${dateLabel}</span><span class="td-field-value td-ui-body">${dateValue}</span></span>${cal}</button><hr class="td-field-divider"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${whoLabel}</span><span class="td-field-value td-ui-body">${whoValue}</span></span>${chev}</button></div><button class="td-button td-button-primary td-ui-cta td-booking-search" type="button">${icon}${search}</button>${links}`;
+        clip.append(pane);
+      });
+      initBookingFields(document.getElementById("booking"), { inline: true });
+      const heroVideo = document.querySelector(".hero-media");
+      const heroPause = document.getElementById("hero-pause");
+      const heroPlay = document.getElementById("hero-play");
+      const motion = matchMedia("(prefers-reduced-motion: reduce)");
+      let userPaused = motion.matches;
+      const syncVideo = () => {
+        if (!heroVideo) return;
+        if (document.hidden || userPaused) heroVideo.pause();
+        else heroVideo.play().catch(() => {});
+        heroPause.hidden = heroVideo.paused;
+        heroPlay.hidden = !heroVideo.paused;
+        heroPause.setAttribute("aria-pressed", String(heroVideo.paused));
+      };
+      heroPause.addEventListener("click", () => { userPaused = true; syncVideo(); });
+      heroPlay.addEventListener("click", () => { userPaused = false; syncVideo(); });
+      document.addEventListener("visibilitychange", syncVideo);
+      heroVideo.addEventListener("play", syncVideo);
+      heroVideo.addEventListener("pause", syncVideo);
+      syncVideo();
+      const enDag = document.getElementById("en-dag");
+      const enSlides = [...enDag.querySelectorAll(".en-dag-slide")];
+      const enHeading = document.getElementById("en-dag-title");
+      const enVideos = [...enDag.querySelectorAll(".en-dag-video")];
+      const enHeld = new Set();
+      enDag.querySelectorAll(".en-dag-pause").forEach((button) => {
+        const video = button.parentElement.querySelector(".en-dag-video");
+        button.addEventListener("click", () => {
+          if (enHeld.has(video)) enHeld.delete(video);
+          else enHeld.add(video);
+          const paused = enHeld.has(video);
+          button.setAttribute("aria-pressed", String(paused));
+          button.textContent = paused ? "▶" : "II";
+          if (paused) video.pause();
+          else video.play().catch(() => {});
+        });
+      });
+      const enPin = enDag.querySelector(".en-dag-pin");
+      const enMobile = matchMedia("(max-width: 1023px)");
+      const clamp01 = (value) => Math.min(1, Math.max(0, value));
+      function focusFrame() {
+        const headingHeight = enHeading.offsetHeight || 106;
+        const stick = parseFloat(getComputedStyle(enHeading).top) || 104;
+        const focusTop = stick + headingHeight * 0.5 + 20;
+        const edge = 16;
+        const textW = 302;
+        const textGap = 64;
+        let height = Math.min(900, Math.max(560, innerHeight - 48 - focusTop));
+        let width = height * (554 / 680);
+        const maxWidth = innerWidth - edge * 2 - 2 * (textW + textGap);
+        if (width > maxWidth) {
+          width = Math.max(240, maxWidth);
+          height = width * (680 / 554);
+        }
+        return { height, width, headingHeight };
+      }
+      function headingInk(head) {
+        const cs = getComputedStyle(enHeading);
+        const fontSize = parseFloat(cs.fontSize) || 96;
+        const lineHeight = parseFloat(cs.lineHeight) || fontSize * 1.1;
+        const lines = Math.max(1, Math.round(enHeading.offsetHeight / lineHeight));
+        const canvas = headingInk.canvas || (headingInk.canvas = document.createElement("canvas"));
+        const ctx = canvas.getContext("2d");
+        ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        const g = ctx.measureText("g");
+        const descent = g.actualBoundingBoxDescent || fontSize * 0.22;
+        const fontAscent = g.fontBoundingBoxAscent || fontSize * 0.8;
+        const fontDescent = g.fontBoundingBoxDescent || fontSize * 0.2;
+        const baseline = (lineHeight - fontAscent - fontDescent) / 2 + fontAscent;
+        const bottom = head.top + (parseFloat(cs.paddingTop) || 0) + (lines - 1) * lineHeight + baseline + descent;
+        return { bottom };
+      }
+      function layoutEnDag() {
+        if (reduced) return;
+        if (enMobile.matches) {
+          enDag.style.height = "";
+          enPin.style.marginTop = "";
+          enDag.querySelectorAll(".en-dag-slide, .en-dag-media, .en-dag-copy").forEach((el) => {
+            el.style.left = "";
+            el.style.width = "";
+            el.style.height = "";
+          });
+          return;
+        }
+        if (!enMobile.matches) {
+          const frame = focusFrame();
+          const left = (innerWidth - frame.width) / 2;
+          enDag.querySelectorAll(".en-dag-slide").forEach((slide) => { slide.style.height = `${frame.height}px`; });
+          enDag.querySelectorAll(".en-dag-media").forEach((media) => {
+            media.style.left = `${left}px`;
+            media.style.width = `${frame.width}px`;
+            media.style.height = `${frame.height}px`;
+          });
+          enDag.querySelectorAll(".en-dag-copy-end").forEach((copy) => { copy.style.left = `${left + frame.width + 64}px`; });
+          enDag.querySelectorAll(".en-dag-copy-start").forEach((copy) => { copy.style.left = `${left - 64 - 302}px`; });
+        }
+        const exitScroll = innerHeight * (enSlides.length + 1);
+        const lockAt = parseFloat(getComputedStyle(enHeading).top) || 0;
+        enDag.style.height = `${exitScroll - lockAt}px`;
+        enPin.style.marginTop = `-${enHeading.offsetHeight}px`;
+        const after = innerHeight;
+        const end = enDag.offsetTop + enDag.offsetHeight + after;
+        document.querySelector(".page").style.setProperty("--en-dag-end", `${end}px`);
+      }
+      function placeEnDagMobile() {
+        const slides = [...enDag.querySelectorAll(".en-dag-slide")];
+        const pin = enPin.getBoundingClientRect();
+        const span = Math.max(1, enDag.offsetHeight - innerHeight * 0.8);
+        const start = enDag.getBoundingClientRect().top + scrollY;
+        const t = Math.min(1, Math.max(0, (scrollY + 128 - start) / span));
+        const index = t * (slides.length - 1);
+        slides.forEach((slide, i) => {
+          const delta = i - index;
+          const abs = Math.abs(delta);
+          const scale = delta > 0 ? 1 - Math.min(delta, 1) * 0.06 : 1 - Math.min(-delta, 1) * 0.05;
+          const media = slide.querySelector(".en-dag-media");
+          const copy = slide.querySelector(".en-dag-copy");
+          const sample = slides[0].querySelector(".en-dag-copy");
+          const step = Math.min(pin.height - 36, (sample?.offsetTop || 0) + (sample?.offsetHeight || 0) + 24);
+          slide.style.transform = `translate3d(0, ${delta * step}px, 0)`;
+          slide.style.opacity = abs > 1.15 ? "0" : "1";
+          slide.style.zIndex = String(delta <= 0.2 ? 6 : 3);
+          if (media) media.style.transform = `scale(${scale})`;
+          if (copy) copy.style.opacity = String(Math.max(0, 1 - abs * 1.8));
+        });
+      }
+      function placeEnDag() {
+        if (reduced) return;
+        if (enMobile.matches) {
+          placeEnDagMobile();
+          return;
+        }
+        enDag.querySelectorAll(".en-dag-media").forEach((media) => { media.style.transform = ""; });
+        const sectionTop = enDag.getBoundingClientRect().top;
+        const lockAt = parseFloat(getComputedStyle(enHeading).top) || 24;
+        const locked = sectionTop <= lockAt;
+        const scrolled = Math.max(0, locked ? lockAt - sectionTop : 0);
+        const head = enHeading.getBoundingClientRect();
+        const vh = innerHeight;
+        const focus = head.bottom - 16;
+        const pinTop = enPin.getBoundingClientRect().top;
+        const n = enSlides.length;
+        const progress = scrolled / vh;
+        const frame = focusFrame();
+        const baseLeft = (innerWidth - frame.width) / 2;
+        const smooth = (t) => { const x = clamp01(t); return x * x * (3 - 2 * x); };
+        const pose = (p) => {
+          const scale = p >= 1 ? 0.88
+            : p >= 0 ? 1 + (0.88 - 1) * smooth(p)
+            : p >= -1 ? 0.92 + (1 - 0.92) * smooth(p + 1)
+            : 0.92;
+          const y = p >= 1 ? vh
+            : p >= 0 ? focus + (vh - focus) * smooth(p)
+            : p >= -1 ? (focus - 36) + 36 * smooth(p + 1)
+            : p >= -2 ? -frame.height + (focus - 36 + frame.height) * smooth(p + 2)
+            : -frame.height;
+          const fade = p >= 1.4 ? 0
+            : p > 1 ? smooth((1.4 - p) / 0.4)
+            : p >= -1 ? 1
+            : p >= -2 ? smooth(p + 2)
+            : 0;
+          const text = p >= 0.3 ? 0
+            : p > 0.1 ? 1 - smooth((p - 0.1) / 0.2)
+            : p >= -0.2 ? 1
+            : p > -0.4 ? smooth((p + 0.4) / 0.2)
+            : 0;
+          return { scale, y, fade, text };
+        };
+        const front = Math.floor(progress);
+        const cards = enSlides.map((slide, index) => {
+          const p = index - progress;
+          const card = pose(p);
+          const parked = pose(-1);
+          if (index < n - 1 && p <= -0.6) {
+            card.y = parked.y;
+            card.scale = parked.scale;
+            card.fade = 1;
+          }
+          if (index === 0 && p > -0.75) {
+            card.y = head.bottom + 24;
+            if (p <= 0) card.scale = 1;
+          }
+          if (index <= front - 2) card.fade = 0;
+          return card;
+        });
+        cards.forEach((card, index) => {
+          if (index !== front - 1 || index >= n - 1) return;
+          const cover = cards[index + 1];
+          if (cover && cover.y <= card.y + 4) card.fade = 0;
+        });
+        enSlides.forEach((slide, index) => {
+          const media = slide.querySelector(".en-dag-media");
+          const copy = slide.querySelector(".en-dag-copy");
+          const puff = slide.querySelector(".en-dag-puff-copy");
+          const p = index - progress;
+          const card = cards[index];
+          const textShift = 24 * (1 - card.text);
+          slide.style.opacity = String(card.fade);
+          slide.style.visibility = card.fade === 0 ? "hidden" : "visible";
+          slide.style.zIndex = String(2 + index);
+          slide.style.transform = `translateY(${card.y - pinTop}px)`;
+          media.style.width = `${frame.width}px`;
+          media.style.height = `${frame.height}px`;
+          media.style.left = `${baseLeft}px`;
+          media.style.transform = `translateZ(0) scale(${card.scale})`;
+          if (copy) {
+            copy.style.opacity = String(card.text);
+            copy.style.setProperty("--en-shift", `${textShift}px`);
+          }
+          if (puff) {
+            puff.style.opacity = String(card.text);
+            puff.style.transform = `translateY(${textShift}px)`;
+          }
+        });
+        const puff = pose((n - 1) - progress);
+        const puffBottom = puff.y + frame.height * puff.scale;
+        const headingGone = puffBottom <= 0;
+        enHeading.style.opacity = headingGone ? "0" : String(clamp01((puff.y + frame.height) / frame.height));
+        enHeading.style.visibility = headingGone ? "hidden" : "visible";
+        const hitta = document.getElementById("hitta");
+        const hittaTop = hitta.getBoundingClientRect().top;
+        const showHitta = headingGone && hittaTop < innerHeight;
+        hitta.style.visibility = showHitta ? "visible" : "hidden";
+        const kart = document.getElementById("hitta-kart");
+        if (kart) kart.style.opacity = showHitta ? "1" : "0";
+        const playing = Math.round(progress);
+        enVideos.forEach((video) => {
+          const index = enSlides.indexOf(video.closest(".en-dag-slide"));
+          if (index === playing && progress < n - 1 && !enHeld.has(video)) video.play().catch(() => {});
+          else video.pause();
+        });
+      }
+      layoutEnDag();
+      if (!reduced) {
+        addEventListener("scroll", placeEnDag, { passive: true });
+        addEventListener("resize", () => { layoutEnDag(); placeEnDag(); });
+        enMobile.addEventListener("change", () => { layoutEnDag(); placeEnDag(); });
+        placeEnDag();
+      }
+      const hitta = document.getElementById("hitta");
+      const hittaKart = document.getElementById("hitta-kart");
+      function hittaMapMask(fadeEnd, topClip, bottomClip) {
+        const canvas = hittaMapMask.canvas || (hittaMapMask.canvas = document.createElement("canvas"));
+        canvas.width = 1440;
+        canvas.height = 1382;
+        const g = canvas.getContext("2d");
+        const fade = 180;
+        const top0 = Math.max(0, Math.min(760, topClip));
+        const top1 = Math.min(900, top0 + fade);
+        const bot1 = Math.max(top1 + 80, Math.min(1382, bottomClip));
+        const bot0 = Math.max(top1 + 40, bot1 - fade);
+        const end = Math.min(1432, Math.max(80, fadeEnd));
+        const start = Math.min(end - 40, Math.max(end - 220, 80));
+        g.clearRect(0, 0, 1440, 1382);
+        g.globalCompositeOperation = "source-over";
+        const vertical = g.createLinearGradient(0, 0, 0, 1382);
+        vertical.addColorStop(0, "rgba(255,255,255,0)");
+        vertical.addColorStop(top0 / 1382, "rgba(255,255,255,0)");
+        vertical.addColorStop(top1 / 1382, "#fff");
+        vertical.addColorStop(bot0 / 1382, "#fff");
+        vertical.addColorStop(bot1 / 1382, "rgba(255,255,255,0)");
+        vertical.addColorStop(1, "rgba(255,255,255,0)");
+        g.fillStyle = vertical;
+        g.fillRect(0, 0, 1440, 1382);
+        g.globalCompositeOperation = "destination-in";
+        const horizontal = g.createLinearGradient(0, 0, 1440, 0);
+        horizontal.addColorStop(0, "rgba(255,255,255,0)");
+        horizontal.addColorStop(0.092, "#fff");
+        horizontal.addColorStop(start / 1440, "#fff");
+        horizontal.addColorStop(end / 1440, "rgba(255,255,255,0)");
+        horizontal.addColorStop(1, "rgba(255,255,255,0)");
+        g.fillStyle = horizontal;
+        g.fillRect(0, 0, 1440, 1382);
+        g.globalCompositeOperation = "source-over";
+        return `url("${canvas.toDataURL()}")`;
+      }
+      let hittaMaskKey = "";
+      function updateHittaMask() {
+        const map = hittaKart.querySelector(".td-hitta-map");
+        if (mobileQ.matches) {
+          map.style.maskImage = "none";
+          map.style.webkitMaskImage = "none";
+          return;
+        }
+        const box = map.getBoundingClientRect();
+        if (box.bottom < -40 || box.top > innerHeight + 40) return;
+        const scaleY = box.height / 1382 || 1;
+        const scaleX = box.width / 1440 || 1;
+        const topClip = Math.max(0, -box.top / scaleY);
+        const bottomClip = Math.min(1382, (innerHeight - box.top) / scaleY);
+        const fadeEnd = Math.min(1432, (innerWidth - 48 - box.left) / scaleX);
+        const key = `${Math.round(topClip / 8)}:${Math.round(bottomClip / 8)}:${Math.round(fadeEnd / 8)}`;
+        if (key === hittaMaskKey) return;
+        hittaMaskKey = key;
+        const mask = hittaMapMask(fadeEnd, topClip, bottomClip);
+        map.style.setProperty("--hitta-mask", mask);
+        map.style.webkitMaskImage = mask;
+        map.style.maskImage = mask;
+        map.style.webkitMaskSize = "100% 100%";
+        map.style.maskSize = "100% 100%";
+      }
+      let hittaFit = { s: 1, ox: 952, oy: 750, dy: 0 };
+      let hittaLaid = false;
+      function stageToSticky(x, y) {
+        const sticky = hitta.querySelector(".td-hitta-sticky");
+        const { s, ox, oy, dy } = hittaFit;
+        return {
+          x: sticky.clientWidth / 2 - 720 + ox + (x - ox) * s,
+          y: oy + (y - oy) * s + dy
+        };
+      }
+      function placeHittaFrame() {
+        const sticky = hitta.querySelector(".td-hitta-sticky");
+        if (mobileQ.matches) {
+          sticky.style.height = "";
+          hittaKart.style.transform = "";
+          hittaKart.style.transformOrigin = "";
+          return;
+        }
+        const areaTop = parseFloat(getComputedStyle(sticky).top) || 56;
+        const viewH = innerHeight - areaTop;
+        sticky.style.height = `${viewH}px`;
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        hittaKart.querySelectorAll(".td-hitta-label, .td-hitta-pin").forEach((el) => {
+          minX = Math.min(minX, el.offsetLeft);
+          minY = Math.min(minY, el.offsetTop);
+          maxX = Math.max(maxX, el.offsetLeft + el.offsetWidth);
+          maxY = Math.max(maxY, el.offsetTop + el.offsetHeight);
+        });
+        const boxW = Math.max(1, maxX - minX);
+        const boxH = Math.max(1, maxY - minY);
+        const skipEl = document.getElementById("hitta-skip");
+        const skipH = hitta.classList.contains("is-held") ? skipEl.offsetHeight + 8 : 0;
+        const availH = Math.max(1, viewH - 24 - skipH);
+        const availW = Math.max(1, sticky.clientWidth - 32);
+        const s = Math.min(1, availH / boxH, availW / boxW);
+        const ox = (minX + maxX) / 2;
+        const oy = (minY + maxY) / 2;
+        const scaledH = boxH * s;
+        const visualTop = oy + (minY - oy) * s;
+        const dy = (availH - scaledH) / 2 - visualTop;
+        hittaFit = { s, ox, oy, dy };
+        hittaKart.style.transformOrigin = `${ox}px ${oy}px`;
+        hittaKart.style.transform = `translateX(-50%) translateY(calc(${dy}px + var(--parallax-y, 0px))) scale(${s})`;
+        updateHittaMask();
+        const skip = document.getElementById("hitta-skip");
+        if (hitta.classList.contains("is-held")) {
+          const stickyBox = sticky.getBoundingClientRect();
+          const contentRight = document.querySelector(".page").getBoundingClientRect().right;
+          skip.style.right = "auto";
+          skip.style.bottom = "auto";
+          skip.style.left = `${contentRight - 24 - skip.offsetWidth - stickyBox.left}px`;
+          skip.style.top = `${innerHeight - 24 - skip.offsetHeight - stickyBox.top}px`;
+        }
+        if (hittaLaid) paint(progress);
+      }
+      addEventListener("resize", placeHittaFrame);
+      addEventListener("scroll", () => { updateHittaMask(); placeHittaFrame(); }, { passive: true });
+      placeHittaFrame();
+      const line = document.getElementById("hitta-line");
+      const done = document.getElementById("hitta-done");
+      const point = document.getElementById("hitta-point");
+      const stopEl = document.getElementById("hitta-stop");
+      const stops = [
+        ["07:00 · Stockholm", "Packat, tankat, iväg.", "0 av 7 h"],
+        ["10:30 · Orsa", "Fika vid Siljan. Halva vägen avklarad.", "3,5 av 7 h"],
+        ["14:00 · Tänndalen", "Framme med tid över för eftermiddagens första åk.", "7 av 7 h"]
+      ];
+      const pins = [...hitta.querySelectorAll(".td-hitta-pin")].map((pin) => {
+        const left = parseFloat(pin.style.left);
+        const top = parseFloat(pin.style.top);
+        return { left, x: (left + 5 - 675) / 536 * 539, y: (top + 5 - 435) / 628 * 631 };
+      }).sort((a, b) => b.left - a.left);
+      const length = line.getTotalLength();
+      const stopT = pins.map((pin) => {
+        let best = 0;
+        let bestD = Infinity;
+        for (let i = 0; i <= 240; i++) {
+          const t = i / 240;
+          const p = line.getPointAtLength(length * t);
+          const d = (p.x - pin.x) ** 2 + (p.y - pin.y) ** 2;
+          if (d < bestD) { bestD = d; best = t; }
+        }
+        return best;
+      });
+      function easeTravel(t) {
+        const x1 = 0.65, y1 = 0, x2 = 0.35, y2 = 1;
+        const bx = (s) => 3 * (1 - s) * (1 - s) * s * x1 + 3 * (1 - s) * s * s * x2 + s * s * s;
+        const by = (s) => 3 * (1 - s) * (1 - s) * s * y1 + 3 * (1 - s) * s * s * y2 + s * s * s;
+        let s = t;
+        for (let i = 0; i < 6; i++) s = Math.min(1, Math.max(0, s - (bx(s) - t) / ((bx(s + 0.001) - bx(s)) / 0.001 || 1)));
+        return by(s);
+      }
+      let progress = stopT[0];
+      let step = 0;
+      let held = false;
+      let trackStart = 0;
+      let snapping = false;
+      let gestureLock = 0;
+      let gestureAcc = 0;
+      let travelId = 0;
+      let rafId = 0;
+      let hideTimer = 0;
+      let heading = 0;
+      function paint(t) {
+        progress = t;
+        const spot = line.getPointAtLength(Math.max(0, length * t));
+        point.setAttribute("cx", String(spot.x));
+        point.setAttribute("cy", String(spot.y));
+        if (t <= 0.004) {
+          done.setAttribute("d", "");
+        } else {
+          const steps = Math.max(2, Math.ceil(t * 64));
+          let d = "";
+          for (let i = 0; i <= steps; i++) {
+            const p = line.getPointAtLength(length * t * (i / steps));
+            d += `${i === 0 ? "M" : "L"}${p.x.toFixed(2)} ${p.y.toFixed(2)}`;
+          }
+          done.setAttribute("d", d);
+        }
+        done.style.strokeDasharray = "6 6";
+        const x = 675 + spot.x / 539 * 536;
+        const y = 435 + spot.y / 631 * 628;
+        const p = stageToSticky(x, y);
+        let index = 0;
+        let best = Infinity;
+        stopT.forEach((value, i) => {
+          const dist = Math.abs(value - t);
+          if (dist < best) { best = dist; index = i; }
+        });
+        if (index === 0) {
+          stopEl.style.left = `${p.x - 196 - 16}px`;
+          stopEl.style.top = `${p.y - 148}px`;
+        } else if (index === 2) {
+          stopEl.style.left = `${p.x - 196 - 16}px`;
+          stopEl.style.top = `${p.y + 16}px`;
+        } else {
+          stopEl.style.left = `${p.x + 26}px`;
+          stopEl.style.top = `${p.y + 18}px`;
+        }
+      }
+      function fillCard(index) {
+        const [title, body, hours] = stops[index];
+        document.getElementById("hitta-stop-title").textContent = title;
+        document.getElementById("hitta-stop-body").textContent = body;
+        document.getElementById("hitta-stop-hours").textContent = hours;
+        stopEl.querySelectorAll(".td-hitta-meter-dots i").forEach((dot, i) => dot.classList.toggle("is-on", i <= index));
+      }
+      function showCard(index) {
+        fillCard(index);
+        stopEl.classList.remove("is-leaving");
+        stopEl.classList.add("is-shown");
+      }
+      function hideCard() {
+        stopEl.classList.remove("is-shown");
+        stopEl.classList.add("is-leaving");
+      }
+      function smoothScroll(y, ms, doneFn) {
+        const start = scrollY;
+        const t0 = performance.now();
+        snapping = true;
+        const frame = (now) => {
+          const p = Math.min(1, (now - t0) / ms);
+          const e = 1 - (1 - p) ** 3;
+          scrollTo(0, start + (y - start) * e);
+          if (p < 1) requestAnimationFrame(frame);
+          else { snapping = false; if (doneFn) doneFn(); }
+        };
+        requestAnimationFrame(frame);
+      }
+      function park(index) {
+        if (!held) return;
+        scrollTo(0, trackStart + index * innerHeight);
+      }
+      function arrive(index) {
+        step = index;
+        heading = index;
+        travelId++;
+        paint(stopT[index]);
+        showCard(index);
+        park(index);
+      }
+      function runTravel(toIndex) {
+        const from = progress;
+        const to = stopT[toIndex];
+        const t0 = performance.now();
+        const id = ++travelId;
+        heading = toIndex;
+        park(toIndex);
+        const frame = (now) => {
+          if (id !== travelId) return;
+          const p = Math.min(1, (now - t0) / 1200);
+          paint(from + (to - from) * easeTravel(p));
+          if (p < 1) rafId = requestAnimationFrame(frame);
+          else arrive(toIndex);
+        };
+        rafId = requestAnimationFrame(frame);
+      }
+      function startStep(toIndex) {
+        heading = toIndex;
+        window.clearTimeout(hideTimer);
+        hideCard();
+        hideTimer = window.setTimeout(() => {
+          if (heading !== toIndex) return;
+          stopEl.classList.remove("is-leaving", "is-shown");
+          runTravel(toIndex);
+        }, reduced ? 0 : 150);
+      }
+      function go(dir) {
+        const moving = travelId !== 0 && heading !== step;
+        const base = moving ? heading : step;
+        const next = base + dir;
+        if (dir < 0) { releaseUp(); return; }
+        if (next > 2) { release(1); return; }
+        if (moving) {
+          cancelAnimationFrame(rafId);
+          travelId++;
+          paint(stopT[heading]);
+          step = heading;
+        }
+        startStep(next);
+      }
+      function fadeHome() {
+        const id = ++travelId;
+        cancelAnimationFrame(rafId);
+        stopEl.classList.remove("is-shown");
+        stopEl.classList.add("is-leaving");
+        point.style.transition = "opacity 300ms linear";
+        point.style.opacity = "0";
+        window.setTimeout(() => {
+          if (id !== travelId) return;
+          step = 0;
+          heading = 0;
+          paint(stopT[0]);
+          point.style.opacity = "1";
+          showCard(0);
+        }, reduced ? 0 : 300);
+      }
+      function releaseUp() {
+        const top = hitta.getBoundingClientRect().top + scrollY;
+        held = false;
+        hitta.classList.remove("is-held");
+        scrollTo(0, top);
+        fadeHome();
+      }
+      function release(dir) {
+        const top = hitta.getBoundingClientRect().top + scrollY;
+        const tall = hitta.offsetHeight;
+        held = false;
+        hitta.classList.remove("is-held");
+        const y = dir > 0 ? top + tall - innerHeight : top;
+        smoothScroll(y, 320);
+      }
+      function acquire(dir) {
+        const rect = hitta.getBoundingClientRect();
+        if (dir > 0 && rect.top < innerHeight * 0.7 && rect.top > 0) {
+          smoothScroll(scrollY + rect.top, 280, () => {
+            held = true;
+            hitta.classList.add("is-held");
+            trackStart = scrollY;
+            step = 0;
+            heading = 0;
+            paint(stopT[0]);
+            showCard(0);
+          });
+          return true;
+        }
+        if (dir < 0 && rect.bottom < innerHeight && rect.top < 0) {
+          const start = scrollY + rect.top;
+          smoothScroll(start + 2 * innerHeight, 280, () => {
+            held = true;
+            hitta.classList.add("is-held");
+            trackStart = start;
+            arrive(2);
+          });
+          return true;
+        }
+        return false;
+      }
+      function acceptGesture(dir) {
+        if (reduced || mobileQ.matches) return false;
+        const now = performance.now();
+        if (now < gestureLock) return true;
+        if (!held) return acquire(dir);
+        gestureLock = now + 400;
+        gestureAcc = 0;
+        go(dir);
+        return true;
+      }
+      hittaLaid = true;
+      paint(stopT[0]);
+      showCard(0);
+      addEventListener("scroll", () => {
+        if (!held || snapping) return;
+        const want = trackStart + (heading !== step ? heading : step) * innerHeight;
+        if (Math.abs(scrollY - want) > 4) scrollTo(0, want);
+      });
+      if (reduced) {
+        paint(1);
+        paint(stopT[2]);
+        stops.forEach((_, index) => {
+          const card = index === 2 ? stopEl : stopEl.cloneNode(true);
+          if (index !== 2) hitta.querySelector(".td-hitta-sticky").append(card);
+          const spot = line.getPointAtLength(length * stopT[index]);
+          const x = 675 + spot.x / 539 * 536;
+          const y = 435 + spot.y / 631 * 628;
+          const p = stageToSticky(x, y);
+          card.style.left = `${p.x + 18}px`;
+          card.style.top = `${p.y - 28}px`;
+          card.classList.add("is-shown");
+          card.querySelector("#hitta-stop-title, strong").textContent = stops[index][0];
+          card.querySelector("#hitta-stop-body, .td-ui-body-sm").textContent = stops[index][1];
+          card.querySelector("#hitta-stop-hours, .td-hitta-meter-hours").textContent = stops[index][2];
+          card.querySelectorAll(".td-hitta-meter-dots i").forEach((dot, i) => dot.classList.toggle("is-on", i <= index));
+        });
+      } else {
+        addEventListener("wheel", (event) => {
+          if (mobileQ.matches) return;
+          if (snapping) { event.preventDefault(); return; }
+          const dir = event.deltaY === 0 ? 0 : event.deltaY > 0 ? 1 : -1;
+          if (!dir) return;
+          const now = performance.now();
+          if (held && dir < 0) { releaseUp(); return; }
+          if (held && now < gestureLock) { event.preventDefault(); return; }
+          if (!held) {
+            if (acquire(dir)) event.preventDefault();
+            return;
+          }
+          gestureAcc += event.deltaY;
+          event.preventDefault();
+          if (Math.abs(gestureAcc) < 40) return;
+          gestureAcc = 0;
+          gestureLock = now + 400;
+          go(dir);
+        }, { passive: false });
+        let touchY = 0;
+        addEventListener("touchstart", (event) => { touchY = event.touches[0].clientY; }, { passive: true });
+        addEventListener("touchend", (event) => {
+          const dy = touchY - event.changedTouches[0].clientY;
+          if (Math.abs(dy) < 40) return;
+          if (acceptGesture(dy > 0 ? 1 : -1)) event.preventDefault();
+        }, { passive: false });
+        addEventListener("keydown", (event) => {
+          if (!held || event.altKey || event.metaKey || event.ctrlKey) return;
+          if (event.key === "Tab") return;
+          const down = ["ArrowDown", "PageDown", " "].includes(event.key);
+          const up = ["ArrowUp", "PageUp"].includes(event.key);
+          if (!down && !up) return;
+          event.preventDefault();
+          if (!down) { releaseUp(); return; }
+          if (performance.now() < gestureLock) return;
+          gestureLock = performance.now() + 400;
+          go(1);
+        });
+        document.getElementById("hitta-skip").addEventListener("click", (event) => {
+          event.preventDefault();
+          cancelAnimationFrame(rafId);
+          travelId++;
+          arrive(2);
+          release(1);
+        });
+      }
+      if (!reduced) {
+        const pageStyle = getComputedStyle(document.querySelector(".page"));
+        const depthFactor = (name) => {
+          const value = parseFloat(pageStyle.getPropertyValue(`--depth-${name}`));
+          return Number.isFinite(value) ? value : 1;
+        };
+        const depthMax = () => {
+          const value = parseFloat(pageStyle.getPropertyValue("--depth-max"));
+          return Number.isFinite(value) ? value : 32;
+        };
+        const visible = new Set();
+        const watch = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) visible.add(entry.target);
+            else visible.delete(entry.target);
+          });
+          requestTick();
+        }, { rootMargin: "120px" });
+        document.querySelectorAll("[data-depth]").forEach((node) => {
+          if (node.dataset.depth !== "front") watch.observe(node);
+        });
+        let frame = 0;
+        function tick() {
+          frame = 0;
+          paintProgress();
+          const center = innerHeight / 2;
+          visible.forEach((el) => {
+            const heldMap = el.id === "hitta-kart" && document.getElementById("hitta").classList.contains("is-held");
+            if (heldMap) {
+              el.style.setProperty("--parallax-y", "0px");
+              return;
+            }
+            const box = el.getBoundingClientRect();
+            const previous = parseFloat(el.style.getPropertyValue("--parallax-y")) || 0;
+            const delta = box.top + box.height / 2 - previous - center;
+            const limit = depthMax();
+            const shift = Math.max(-limit, Math.min(limit, delta * (1 - depthFactor(el.dataset.depth))));
+            el.style.setProperty("--parallax-y", `${shift.toFixed(2)}px`);
+          });
+        }
+        function requestTick() {
+          if (!frame) frame = requestAnimationFrame(tick);
+        }
+        addEventListener("scroll", requestTick, { passive: true });
+        addEventListener("resize", requestTick);
+        requestTick();
+      }
+      document.querySelectorAll("[data-gren]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const gren = button.dataset.gren;
+          document.querySelectorAll("[data-gren]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gren === gren)));
+          document.querySelectorAll("[data-gren-panel]").forEach((panel) => { panel.hidden = panel.dataset.grenPanel !== gren; });
+        });
+      });
+      const topBar = document.querySelector(".top");
+      const topProgress = topBar.querySelector(".top-progress");
+      const topDesktop = matchMedia("(min-width: 1024px)");
+      function paintProgress() {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const amount = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+        topProgress.style.transform = `scaleX(${amount})`;
+      }
+      function syncTopBar() {
+        topBar.classList.toggle("is-scrolled", scrollY >= 24);
+        if (reduced) paintProgress();
+      }
+      addEventListener("scroll", syncTopBar, { passive: true });
+      topDesktop.addEventListener("change", syncTopBar);
+      syncTopBar();
+    </script>
+    <div class="fraga-layer" id="fraga-layer" hidden>
+      <div class="fraga-dim" data-fraga-close></div>
+      <div class="fraga-panel" id="fraga-panel" role="dialog" aria-modal="true" aria-labelledby="fraga-dialog-title">
+        <h2 class="fraga-sr" id="fraga-dialog-title">Fråga eller sök</h2>
+        <div class="fraga-top">
+          <p class="fraga-brand td-ui-body">Frågerutan</p>
+          <label class="fraga-field">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input id="fraga-input" class="td-ui-body" type="text" placeholder="Fråga eller sök" autocomplete="off" enterkeyhint="search" />
+          </label>
+          <button class="fraga-new td-button td-button-sm td-button-fill-neutral" type="button">Ny fråga</button>
+          <button class="fraga-x" type="button" data-fraga-close aria-label="Stäng">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+          </button>
+        </div>
+        <div class="fraga-mid">
+          <div class="fraga-view is-on" data-view="search">
+            <p class="fraga-suggest-label td-ui-kicker">Andra brukar fråga</p>
+            <ul class="fraga-suggest" id="fraga-suggest"></ul>
+          </div>
+          <div class="fraga-view" data-view="answer">
+            <h3 class="td-heading-xs" id="fraga-q"></h3>
+            <p class="fraga-think td-ui-caption" id="fraga-think" hidden>Tänker<span aria-hidden="true"><i></i><i></i><i></i></span></p>
+            <p class="td-body fraga-prose" id="fraga-answer" aria-live="polite"></p>
+            <p class="fraga-sources td-ui-caption" id="fraga-sources" hidden></p>
+            <div class="fraga-cards" id="fraga-cards"></div>
+            <div class="fraga-chips" id="fraga-chips"></div>
+            <p class="fraga-note td-ui-caption" id="fraga-note" hidden></p>
+          </div>
+        </div>
+        <div class="fraga-bottom">
+          <form class="fraga-follow" id="fraga-follow">
+            <input class="fraga-follow-input td-ui-body" type="text" placeholder="Ställ en följdfråga..." autocomplete="off" />
+            <button class="fraga-send" type="submit" aria-label="Skicka">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+          <footer class="fraga-foot td-ui-caption">
+            <a href="#kontakt">Prata med en människa</a>
+            <span>Esc för att stänga</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const RAIN = "Det regnar, vad kan vi göra idag?";
+        const RAIN_ANSWER = "Regn är ingen katastrof här. Det finns gott om saker att göra inomhus: simma och bada bastu på hotellet, klättra på klätterväggen, eller ta en lång fika med våfflor medan barnen leker i lekhallen. Och blir det uppehåll är pisterna ofta tomma.";
+        const GENERIC = "Det här är en demo – den här frågan har inget förinspelat svar än.";
+        const FOLLOW = "Det här är en demo – fler svar kommer";
+        const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
+        const CARDS = [
+          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "../assets/startsida/fraga-bastu.jpg" },
+          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "../assets/startsida/endag-1300.png" },
+          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "../assets/startsida/fraga-klatter.jpg" }
+        ];
+        const CHIPS = ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"];
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const mobileQ = matchMedia("(max-width: 1023px)");
+        const layer = document.getElementById("fraga-layer");
+        const panel = document.getElementById("fraga-panel");
+        const dim = layer.querySelector(".fraga-dim");
+        const input = document.getElementById("fraga-input");
+        const views = [...panel.querySelectorAll(".fraga-view")];
+        const suggest = document.getElementById("fraga-suggest");
+        const qEl = document.getElementById("fraga-q");
+        const think = document.getElementById("fraga-think");
+        const answer = document.getElementById("fraga-answer");
+        const sources = document.getElementById("fraga-sources");
+        const cards = document.getElementById("fraga-cards");
+        const chips = document.getElementById("fraga-chips");
+        const note = document.getElementById("fraga-note");
+        const follow = document.getElementById("fraga-follow");
+        const launch = document.getElementById("fraga-launch");
+        const card = document.getElementById("fraga-card");
+        const kbd = document.getElementById("fraga-kbd");
+        let gen = 0;
+        let timers = [];
+        let trigger = launch;
+        let typing = false;
+        kbd.textContent = /Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K";
+        suggest.innerHTML = SUGGEST.map((text) => `<li><button class="td-ui-body" type="button">${text}</button></li>`).join("");
+        function later(ms, fn) {
+          const id = setTimeout(fn, ms);
+          timers.push(id);
+          return id;
+        }
+        function clearTimers() {
+          timers.forEach(clearTimeout);
+          timers = [];
+          typing = false;
+        }
+        function show(name) {
+          views.forEach((view) => view.classList.toggle("is-on", view.dataset.view === name));
+          panel.classList.toggle("is-answer", name === "answer");
+        }
+        function dock() {
+          const w = Math.min(720, innerWidth - 32);
+          const h = Math.min(760, innerHeight - 160);
+          return { top: 96, left: (innerWidth - w) / 2, width: w, height: h };
+        }
+        function markOverflow() {
+          views.forEach((view) => view.classList.toggle("is-overflow", view.scrollHeight > view.clientHeight + 48));
+        }
+        function place(animate) {
+          const box = dock();
+          const top = box.top;
+          const left = box.left;
+          const w = box.width;
+          const h = box.height;
+          panel.style.transition = animate && !reduced
+            ? "top 420ms var(--motion-easing-out-soft), left 420ms var(--motion-easing-out-soft), width 420ms var(--motion-easing-out-soft), height 420ms var(--motion-easing-out-soft), border-radius 420ms var(--motion-easing-out-soft)"
+            : "none";
+          panel.style.top = `${top}px`;
+          panel.style.left = `${left}px`;
+          panel.style.width = `${w}px`;
+          panel.style.height = `${h}px`;
+        }
+        function resetAnswer() {
+          qEl.textContent = "";
+          think.hidden = true;
+          answer.textContent = "";
+          answer.classList.remove("is-caret");
+          sources.hidden = true;
+          sources.textContent = "";
+          cards.innerHTML = "";
+          chips.innerHTML = "";
+          note.hidden = true;
+          note.textContent = "";
+          follow.reset();
+        }
+        function open(from, autotype) {
+          gen += 1;
+          const token = gen;
+          clearTimers();
+          trigger = from;
+          resetAnswer();
+          show("search");
+          input.value = "";
+          layer.hidden = false;
+          document.body.classList.add("fraga-open");
+          const fromRect = from.getBoundingClientRect();
+          panel.classList.remove("is-settled");
+          panel.style.transition = "none";
+          dim.style.transition = "none";
+          dim.style.opacity = "0";
+          panel.style.top = `${fromRect.top}px`;
+          panel.style.left = `${fromRect.left}px`;
+          panel.style.width = `${fromRect.width}px`;
+          panel.style.height = `${fromRect.height}px`;
+          requestAnimationFrame(() => {
+            if (token !== gen) return;
+            dim.style.transition = reduced ? "none" : "opacity 420ms var(--motion-easing-out-soft)";
+            dim.style.opacity = "1";
+            place(true);
+            later(reduced ? 0 : 420, () => {
+              if (token !== gen) return;
+              panel.classList.add("is-settled");
+              input.focus();
+              if (autotype) later(500, () => typeQuestion(token));
+            });
+          });
+        }
+        function close() {
+          gen += 1;
+          clearTimers();
+          const back = trigger && trigger.isConnected ? trigger : launch;
+          const rect = back.getBoundingClientRect();
+          panel.classList.remove("is-settled");
+          dim.style.transition = reduced ? "none" : "opacity 300ms var(--motion-easing-out-soft)";
+          dim.style.opacity = "0";
+          panel.style.transition = reduced ? "none" : "top 300ms var(--motion-easing-out-soft), left 300ms var(--motion-easing-out-soft), width 300ms var(--motion-easing-out-soft), height 300ms var(--motion-easing-out-soft)";
+          panel.style.top = `${rect.top}px`;
+          panel.style.left = `${rect.left}px`;
+          panel.style.width = `${rect.width}px`;
+          panel.style.height = `${rect.height}px`;
+          const token = gen;
+          later(reduced ? 0 : 300, () => {
+            if (token !== gen) return;
+            layer.hidden = true;
+            document.body.classList.remove("fraga-open");
+            show("search");
+            resetAnswer();
+            input.value = "";
+            back.focus();
+          });
+        }
+        function typeQuestion(token) {
+          typing = true;
+          let i = 0;
+          const step = () => {
+            if (token !== gen || !typing) return;
+            i += 1;
+            input.value = RAIN.slice(0, i);
+            input.setSelectionRange(i, i);
+            if (i < RAIN.length) later(30 + Math.random() * 15, step);
+            else later(400, () => { if (token === gen && typing) ask(RAIN, token); });
+          };
+          step();
+        }
+        function stopTyping() {
+          typing = false;
+        }
+        function ask(question, token = ++gen && gen) {
+          if (token !== gen) token = gen;
+          clearTimers();
+          typing = false;
+          const mine = gen;
+          resetAnswer();
+          qEl.textContent = question;
+          show("answer");
+          think.hidden = false;
+          markOverflow();
+          const rain = question === RAIN || question === "Vad gör vi om det regnar?";
+          const run = () => {
+            if (mine !== gen) return;
+            think.hidden = true;
+            if (reduced) {
+              answer.textContent = rain ? RAIN_ANSWER : GENERIC;
+              finish(rain, mine);
+              return;
+            }
+            typeAnswer(rain ? RAIN_ANSWER : GENERIC, mine, () => finish(rain, mine));
+          };
+          if (reduced) run();
+          else later(900, run);
+        }
+        function typeAnswer(text, token, done) {
+          let i = 0;
+          answer.classList.add("is-caret");
+          const step = () => {
+            if (token !== gen) return;
+            i += 1;
+            answer.textContent = text.slice(0, i);
+            markOverflow();
+            if (i < text.length) later(12 + Math.random() * 6, step);
+            else { answer.classList.remove("is-caret"); done(); }
+          };
+          step();
+        }
+        function finish(rain, token) {
+          if (token !== gen) return;
+          if (!rain) {
+            note.hidden = false;
+            note.innerHTML = `<button class="td-ui-body-sm" type="button" id="fraga-rain">Prova regnfrågan</button>`;
+            markOverflow();
+            return;
+          }
+          sources.innerHTML = `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#service">Mat, butiker och service</a>`;
+          cards.innerHTML = CARDS.map((item) => {
+            const media = item.image ? `<img src="${item.image}" alt="" />` : "";
+            const kicker = item.type === "plats" ? "Plats" : "Aktivitet";
+            return `<article class="fraga-card fraga-card-${item.type}"><span class="fraga-card-media">${media}</span><span class="fraga-card-copy"><span class="td-ui-kicker">${kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${item.title}</span><svg class="fraga-card-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="td-ui-body-sm">${item.line}</span></span></article>`;
+          }).join("");
+          chips.innerHTML = CHIPS.map((text) => `<button class="td-ui-body-sm" type="button">${text}</button>`).join("");
+          [...cards.children].forEach((el) => { el.hidden = true; });
+          chips.hidden = true;
+          sources.hidden = true;
+          const bits = [sources, ...cards.children, chips];
+          const reveal = (index) => {
+            if (token !== gen) return;
+            bits[index].hidden = false;
+            markOverflow();
+            requestAnimationFrame(() => bits[index].classList.add("is-in"));
+            if (index < bits.length - 1) later(80, () => reveal(index + 1));
+          };
+          reveal(0);
+        }
+        function demoNote() {
+          note.hidden = false;
+          note.textContent = FOLLOW;
+          markOverflow();
+        }
+        panel.querySelector(".fraga-new").addEventListener("click", () => {
+          gen += 1;
+          clearTimers();
+          resetAnswer();
+          show("search");
+          input.value = "";
+          input.focus();
+          markOverflow();
+        });
+        launch.addEventListener("click", () => open(launch, false));
+        card.addEventListener("click", (event) => { event.preventDefault(); open(card, true); });
+        layer.addEventListener("click", (event) => {
+          if (event.target.closest("[data-fraga-close]")) close();
+        });
+        suggest.addEventListener("click", (event) => {
+          const button = event.target.closest("button");
+          if (button) ask(button.textContent);
+        });
+        input.addEventListener("keydown", (event) => {
+          if (typing && event.key !== "Tab") stopTyping();
+          if (event.key === "Enter" && input.value.trim()) ask(input.value.trim());
+        });
+        input.addEventListener("pointerdown", () => { if (typing) stopTyping(); });
+        chips.addEventListener("click", (event) => { if (event.target.closest("button")) demoNote(); });
+        note.addEventListener("click", (event) => {
+          if (event.target.id === "fraga-rain") ask(RAIN);
+        });
+        follow.addEventListener("submit", (event) => { event.preventDefault(); demoNote(); });
+        addEventListener("keydown", (event) => {
+          const hotkey = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
+          if (hotkey) { event.preventDefault(); if (layer.hidden) open(launch, false); else close(); return; }
+          if (layer.hidden) return;
+          if (event.key === "Escape") { event.preventDefault(); close(); return; }
+          if (event.key !== "Tab") return;
+          const nodes = [...panel.querySelectorAll("button, a, input")].filter((el) => el.getClientRects().length);
+          if (!nodes.length) return;
+          const first = nodes[0];
+          const last = nodes[nodes.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        });
+      })();
+    </script>
+  </body>
+</html>
