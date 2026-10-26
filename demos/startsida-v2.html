@@ -909,8 +909,8 @@
           return;
         }
         if (!enMobile.matches) {
-          const cardW = 628;
-          const cardH = 770;
+          const cardH = Math.min(770, innerHeight - 270);
+          const cardW = cardH * (628 / 770);
           const left = (innerWidth - cardW) / 2;
           enDag.querySelectorAll(".en-dag-slide").forEach((slide) => { slide.style.height = `${cardH}px`; });
           enDag.querySelectorAll(".en-dag-media").forEach((media) => {
@@ -974,39 +974,33 @@
         const sectionTop = enDag.getBoundingClientRect().top;
         const lockAt = parseFloat(getComputedStyle(enHeading).top) || 24;
         const scrolled = Math.max(0, lockAt - sectionTop);
-        const head = enHeading.getBoundingClientRect();
         const vh = innerHeight;
         const pinTop = enPin.getBoundingClientRect().top;
         const n = enSlides.length;
-        const cardW = 628;
-        const cardH = 770;
-        const backScale = 0.882;
+        const cardH = Math.min(770, vh - 270);
+        const cardW = cardH * (628 / 770);
         const cardLeft = (innerWidth - cardW) / 2;
-        const front = head.bottom + 28;
-        const back = head.bottom - 44;
-        const start = vh + 24;
-        const travel = Math.max(1, start - front);
-        const lead = 140;
-        const begin = (index) => (index === 0 ? 0 : (index - 1) * (lead + travel) + lead);
-        const arrive = (index) => {
-          if (index <= 0) return 1;
-          const local = scrolled - begin(index);
-          if (local <= 0) return 0;
-          return Math.min(1, local / travel);
-        };
-        const mix = (u) => (u <= 0.82 ? u : 0.82 + 0.18 * easeOutSoft((u - 0.82) / 0.18));
-        const frontIndex = enSlides.findLastIndex((_, index) => arrive(index) >= 1);
+        const front = 238;
+        const back = 166;
+        const backScale = 0.882;
+        const start = vh;
+        const span = Math.max(1, start - front);
+        const mix = (u) => (u <= 0.82 ? u : 0.82 + 0.18 * easeOutSoft((Math.min(1, u) - 0.82) / 0.18));
+        const unit = (index) => clamp01((scrolled - index * span) / span);
+        const textMid = front + 0.518 * cardH;
         enSlides.forEach((slide, index) => {
           const media = slide.querySelector(".en-dag-media");
           const copy = slide.querySelector(".en-dag-copy");
           const puff = slide.querySelector(".en-dag-puff-copy");
-          const a = arrive(index);
-          const next = index < n - 1 ? arrive(index + 1) : 0;
-          const buried = index + 2 < n && arrive(index + 2) >= 1;
-          const y = a < 1 && index > 0
-            ? start + (front - start) * mix(a)
-            : front + (back - front) * mix(next);
-          const scale = a < 1 && index > 0 ? 1 : 1 + (backScale - 1) * mix(next);
+          const into = index === 0 ? 1 : unit(index - 1);
+          const onward = index < n - 1 ? unit(index) : 0;
+          const parked = into >= 1;
+          const rising = !parked;
+          const y = rising
+            ? start + (front - start) * mix(into)
+            : front + (back - front) * mix(onward);
+          const scale = rising ? 1 : 1 + (backScale - 1) * mix(onward);
+          const buried = scrolled >= (index + 2) * span;
           slide.style.opacity = buried ? "0" : "1";
           slide.style.visibility = buried ? "hidden" : "visible";
           slide.style.zIndex = String(2 + index);
@@ -1017,21 +1011,26 @@
           media.style.transformOrigin = "top center";
           media.style.transform = `translateZ(0) scale(${scale})`;
           if (copy) {
+            const focusStart = (index - 0.5) * span;
+            const focusEnd = (index + 0.5) * span;
+            const f = clamp01((scrolled - focusStart) / (focusEnd - focusStart));
+            const textOpacity = f < 0.2 ? f / 0.2 : f <= 0.8 ? 1 : (1 - f) / 0.2;
             const onRight = copy.classList.contains("en-dag-copy-end");
             copy.style.left = onRight ? `${cardLeft + cardW + 24}px` : `${cardLeft - 302 - 24}px`;
             copy.style.width = "302px";
             copy.style.top = "0px";
             copy.style.bottom = "auto";
-            const textTop = 637 + Math.max(0, sectionTop - lockAt);
+            copy.style.transition = "none";
+            const textTop = textMid + 24 - 48 * f + Math.max(0, sectionTop - lockAt);
             copy.style.transform = `translateY(${textTop - y}px)`;
-            copy.style.opacity = index === frontIndex ? "1" : "0";
+            copy.style.opacity = String(textOpacity);
           }
           if (puff) {
             puff.style.opacity = "1";
-            puff.style.transform = "translateY(0)";
+            puff.style.transform = "none";
           }
         });
-        const puffArrives = begin(n - 1) + travel;
+        const puffArrives = (n - 1) * span;
         const headingFade = clamp01((scrolled - puffArrives) / vh);
         enHeading.style.opacity = String(1 - headingFade);
         enHeading.style.visibility = headingFade >= 1 ? "hidden" : "visible";

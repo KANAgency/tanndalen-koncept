@@ -848,7 +848,6 @@ body.is-landed .hero-doodle {
   position: absolute;
   top: auto;
   bottom: 80px;
-  transition: opacity var(--motion-duration-normal) var(--motion-easing-out-soft);
   z-index: 2;
   width: 302px;
   max-width: 302px;
