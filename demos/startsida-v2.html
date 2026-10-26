@@ -1039,20 +1039,25 @@
         hitta.style.visibility = showHitta ? "visible" : "hidden";
         const kart = document.getElementById("hitta-kart");
         if (kart) kart.style.opacity = showHitta ? "1" : "0";
-        const playing = Math.max(0, focusIndex);
+        let playing = 0;
+        for (let i = 1; i < n; i++) {
+          if (unit(i - 1) >= 1) playing = i;
+        }
         enVideos.forEach((video) => {
           const index = enSlides.indexOf(video.closest(".en-dag-slide"));
           if (index === playing && playing < n - 1 && !enHeld.has(video)) video.play().catch(() => {});
           else video.pause();
         });
       }
-      layoutEnDag();
-      if (!reduced) {
-        addEventListener("scroll", placeEnDag, { passive: true });
-        addEventListener("resize", () => { layoutEnDag(); placeEnDag(); });
-        enMobile.addEventListener("change", () => { layoutEnDag(); placeEnDag(); });
-        placeEnDag();
-      }
+      try {
+        layoutEnDag();
+        if (!reduced) {
+          addEventListener("scroll", () => { try { placeEnDag(); } catch (error) { console.error(error); } }, { passive: true });
+          addEventListener("resize", () => { try { layoutEnDag(); placeEnDag(); } catch (error) { console.error(error); } });
+          enMobile.addEventListener("change", () => { try { layoutEnDag(); placeEnDag(); } catch (error) { console.error(error); } });
+          placeEnDag();
+        }
+      } catch (error) { console.error(error); }
       const hitta = document.getElementById("hitta");
       const hittaKart = document.getElementById("hitta-kart");
       function hittaMapMask(fadeEnd, topClip, bottomClip) {
@@ -1170,9 +1175,11 @@
         }
         if (hittaLaid) paint(progress);
       }
-      addEventListener("resize", placeHittaFrame);
-      addEventListener("scroll", () => { updateHittaMask(); placeHittaFrame(); }, { passive: true });
-      placeHittaFrame();
+      try {
+        addEventListener("resize", () => { try { placeHittaFrame(); } catch (error) { console.error(error); } });
+        addEventListener("scroll", () => { try { updateHittaMask(); placeHittaFrame(); } catch (error) { console.error(error); } }, { passive: true });
+        placeHittaFrame();
+      } catch (error) { console.error(error); }
       const line = document.getElementById("hitta-line");
       const done = document.getElementById("hitta-done");
       const point = document.getElementById("hitta-point");
@@ -1403,14 +1410,18 @@
         go(dir);
         return true;
       }
-      hittaLaid = true;
-      paint(stopT[0]);
-      showCard(0);
-      addEventListener("scroll", () => {
-        if (!held || snapping) return;
-        const want = trackStart + (heading !== step ? heading : step) * innerHeight;
-        if (Math.abs(scrollY - want) > 4) scrollTo(0, want);
-      });
+      try {
+        hittaLaid = true;
+        paint(stopT[0]);
+        showCard(0);
+        addEventListener("scroll", () => {
+          try {
+            if (!held || snapping) return;
+            const want = trackStart + (heading !== step ? heading : step) * innerHeight;
+            if (Math.abs(scrollY - want) > 4) scrollTo(0, want);
+          } catch (error) { console.error(error); }
+        });
+      } catch (error) { console.error(error); }
       if (reduced) {
         paint(1);
         paint(stopT[2]);
@@ -1519,9 +1530,11 @@
         function requestTick() {
           if (!frame) frame = requestAnimationFrame(tick);
         }
-        addEventListener("scroll", requestTick, { passive: true });
-        addEventListener("resize", requestTick);
-        requestTick();
+        try {
+          addEventListener("scroll", () => { try { requestTick(); } catch (error) { console.error(error); } }, { passive: true });
+          addEventListener("resize", () => { try { requestTick(); } catch (error) { console.error(error); } });
+          requestTick();
+        } catch (error) { console.error(error); }
       }
       document.querySelectorAll("[data-gren]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -1542,9 +1555,11 @@
         topBar.classList.toggle("is-scrolled", scrollY >= 24);
         if (reduced) paintProgress();
       }
-      addEventListener("scroll", syncTopBar, { passive: true });
-      topDesktop.addEventListener("change", syncTopBar);
-      syncTopBar();
+      try {
+        addEventListener("scroll", () => { try { syncTopBar(); } catch (error) { console.error(error); } }, { passive: true });
+        topDesktop.addEventListener("change", () => { try { syncTopBar(); } catch (error) { console.error(error); } });
+        syncTopBar();
+      } catch (error) { console.error(error); }
     </script>
     <div class="fraga-layer" id="fraga-layer" hidden>
       <div class="fraga-dim" data-fraga-close></div>
