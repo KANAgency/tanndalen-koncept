@@ -950,6 +950,22 @@
           if (copy) copy.style.opacity = String(Math.max(0, 1 - abs * 1.8));
         });
       }
+      function easeOutSoft(u) {
+        const x1 = 0.22;
+        const y1 = 1;
+        const x2 = 0.36;
+        const y2 = 1;
+        let t = clamp01(u);
+        for (let i = 0; i < 8; i++) {
+          const mt = 1 - t;
+          const x = 3 * mt * mt * t * x1 + 3 * mt * t * t * x2 + t * t * t;
+          const dx = 3 * mt * mt * x1 + 6 * mt * t * (x2 - x1) + 3 * t * t * (1 - x2);
+          if (Math.abs(dx) < 1e-6) break;
+          t = clamp01(t - (x - u) / dx);
+        }
+        const mt = 1 - t;
+        return 3 * mt * mt * t * y1 + 3 * mt * t * t * y2 + t * t * t;
+      }
       function placeEnDag() {
         if (reduced) return;
         if (enMobile.matches) {
@@ -959,100 +975,70 @@
         enDag.querySelectorAll(".en-dag-media").forEach((media) => { media.style.transform = ""; });
         const sectionTop = enDag.getBoundingClientRect().top;
         const lockAt = parseFloat(getComputedStyle(enHeading).top) || 24;
-        const locked = sectionTop <= lockAt;
-        const scrolled = Math.max(0, locked ? lockAt - sectionTop : 0);
+        const scrolled = Math.max(0, lockAt - sectionTop);
         const head = enHeading.getBoundingClientRect();
         const vh = innerHeight;
-        const focus = head.bottom - 16;
         const pinTop = enPin.getBoundingClientRect().top;
         const n = enSlides.length;
-        const progress = scrolled / vh;
         const frame = focusFrame();
         const baseLeft = (innerWidth - frame.width) / 2;
-        const smooth = (t) => { const x = clamp01(t); return x * x * (3 - 2 * x); };
-        const pose = (p) => {
-          const scale = p >= 1 ? 0.88
-            : p >= 0 ? 1 + (0.88 - 1) * smooth(p)
-            : p >= -1 ? 0.92 + (1 - 0.92) * smooth(p + 1)
-            : 0.92;
-          const y = p >= 1 ? vh
-            : p >= 0 ? focus + (vh - focus) * smooth(p)
-            : p >= -1 ? (focus - 36) + 36 * smooth(p + 1)
-            : p >= -2 ? -frame.height + (focus - 36 + frame.height) * smooth(p + 2)
-            : -frame.height;
-          const fade = p >= 1.4 ? 0
-            : p > 1 ? smooth((1.4 - p) / 0.4)
-            : p >= -1 ? 1
-            : p >= -2 ? smooth(p + 2)
-            : 0;
-          const text = p >= 0.3 ? 0
-            : p > 0.1 ? 1 - smooth((p - 0.1) / 0.2)
-            : p >= -0.2 ? 1
-            : p > -0.4 ? smooth((p + 0.4) / 0.2)
-            : 0;
-          return { scale, y, fade, text };
+        const rest = head.bottom + 33;
+        const start = vh + 24;
+        const travel = Math.max(1, start - rest);
+        const lead = 140;
+        const easeFrom = 0.82;
+        const yAt = (local) => {
+          if (local <= lead) return start;
+          const u = Math.min(1, (local - lead) / travel);
+          if (u <= easeFrom) return start + (rest - start) * u;
+          const eased = easeOutSoft((u - easeFrom) / (1 - easeFrom));
+          const y0 = start + (rest - start) * easeFrom;
+          return y0 + (rest - y0) * eased;
         };
-        const front = Math.floor(progress);
-        const cards = enSlides.map((slide, index) => {
-          const p = index - progress;
-          const card = pose(p);
-          const parked = pose(-1);
-          if (index < n - 1 && p <= -0.6) {
-            card.y = parked.y;
-            card.scale = parked.scale;
-            card.fade = 1;
-          }
-          if (index === 0 && p > -0.75) {
-            card.y = head.bottom + 24;
-            if (p <= 0) card.scale = 1;
-          }
-          if (index <= front - 2) card.fade = 0;
-          return card;
+        const slots = enSlides.map((_, index) => {
+          const local = scrolled - index * vh;
+          return local < 0 ? start : yAt(local);
         });
-        cards.forEach((card, index) => {
-          if (index !== front - 1 || index >= n - 1) return;
-          const cover = cards[index + 1];
-          if (cover && cover.y <= card.y + 4) card.fade = 0;
-        });
+        const focusIndex = enSlides.findLastIndex((_, index) => scrolled - index * vh >= lead);
         enSlides.forEach((slide, index) => {
           const media = slide.querySelector(".en-dag-media");
           const copy = slide.querySelector(".en-dag-copy");
           const puff = slide.querySelector(".en-dag-puff-copy");
-          const p = index - progress;
-          const card = cards[index];
-          const textShift = 24 * (1 - card.text);
-          slide.style.opacity = String(card.fade);
-          slide.style.visibility = card.fade === 0 ? "hidden" : "visible";
+          const y = index === 0 ? rest : slots[index];
+          const next = slots[index + 1];
+          const covered = next !== undefined && next <= y + 0.5;
+          const fade = covered ? 0 : 1;
+          const text = index === Math.max(0, focusIndex) && fade === 1 ? 1 : 0;
+          slide.style.opacity = String(fade);
+          slide.style.visibility = fade === 0 ? "hidden" : "visible";
           slide.style.zIndex = String(2 + index);
-          slide.style.transform = `translateY(${card.y - pinTop}px)`;
+          slide.style.transform = `translateY(${y - pinTop}px)`;
           media.style.width = `${frame.width}px`;
           media.style.height = `${frame.height}px`;
           media.style.left = `${baseLeft}px`;
-          media.style.transform = `translateZ(0) scale(${card.scale})`;
+          media.style.transform = "translateZ(0) scale(1)";
           if (copy) {
-            copy.style.opacity = String(card.text);
-            copy.style.setProperty("--en-shift", `${textShift}px`);
+            copy.style.opacity = String(text);
+            copy.style.setProperty("--en-shift", "0px");
           }
           if (puff) {
-            puff.style.opacity = String(card.text);
-            puff.style.transform = `translateY(${textShift}px)`;
+            puff.style.opacity = String(text);
+            puff.style.transform = "translateY(0)";
           }
         });
-        const puff = pose((n - 1) - progress);
-        const puffBottom = puff.y + frame.height * puff.scale;
-        const headingGone = puffBottom <= 0;
-        enHeading.style.opacity = headingGone ? "0" : String(clamp01((puff.y + frame.height) / frame.height));
-        enHeading.style.visibility = headingGone ? "hidden" : "visible";
+        const puffArrives = (n - 1) * vh + lead + travel;
+        const headingFade = clamp01((scrolled - puffArrives) / vh);
+        enHeading.style.opacity = String(1 - headingFade);
+        enHeading.style.visibility = headingFade >= 1 ? "hidden" : "visible";
         const hitta = document.getElementById("hitta");
-        const hittaTop = hitta.getBoundingClientRect().top;
-        const showHitta = headingGone && hittaTop < innerHeight;
+        const showHitta = hitta.getBoundingClientRect().top < innerHeight;
         hitta.style.visibility = showHitta ? "visible" : "hidden";
         const kart = document.getElementById("hitta-kart");
         if (kart) kart.style.opacity = showHitta ? "1" : "0";
-        const playing = Math.round(progress);
+        const playing = Math.max(0, focusIndex);
         enVideos.forEach((video) => {
           const index = enSlides.indexOf(video.closest(".en-dag-slide"));
-          if (index === playing && progress < n - 1 && !enHeld.has(video)) video.play().catch(() => {});
+          if (index === playing && playing < n - 1 && !enHeld.has(video)) video.play().catch(() => {});
           else video.pause();
         });
       }
