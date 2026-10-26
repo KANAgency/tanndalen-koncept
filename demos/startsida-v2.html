@@ -995,18 +995,17 @@
           const y0 = start + (rest - start) * easeFrom;
           return y0 + (rest - y0) * eased;
         };
-        const slots = enSlides.map((_, index) => {
-          const local = scrolled - index * vh;
-          return local < 0 ? start : yAt(local);
-        });
-        const focusIndex = enSlides.findLastIndex((_, index) => scrolled - index * vh >= lead);
+        const begin = (index) => (index === 0 ? 0 : (index - 1) * (lead + travel) + lead);
+        const slots = enSlides.map((_, index) => (index === 0 ? rest : yAt(scrolled - begin(index) + lead)));
+        const focusIndex = enSlides.findLastIndex((_, index) => scrolled >= begin(index));
         enSlides.forEach((slide, index) => {
           const media = slide.querySelector(".en-dag-media");
           const copy = slide.querySelector(".en-dag-copy");
           const puff = slide.querySelector(".en-dag-puff-copy");
-          const y = index === 0 ? rest : slots[index];
+          const y = slots[index];
           const next = slots[index + 1];
-          const covered = next !== undefined && next <= y + 0.5;
+          const nextBegun = index < n - 1 && scrolled >= begin(index + 1);
+          const covered = nextBegun && next <= y + 0.5;
           const fade = covered ? 0 : 1;
           const text = index === Math.max(0, focusIndex) && fade === 1 ? 1 : 0;
           slide.style.opacity = String(fade);
@@ -1026,7 +1025,7 @@
             puff.style.transform = "translateY(0)";
           }
         });
-        const puffArrives = (n - 1) * vh + lead + travel;
+        const puffArrives = begin(n - 1) + travel;
         const headingFade = clamp01((scrolled - puffArrives) / vh);
         enHeading.style.opacity = String(1 - headingFade);
         enHeading.style.visibility = headingFade >= 1 ? "hidden" : "visible";
