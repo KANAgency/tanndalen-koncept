@@ -1,0 +1,12 @@
+{
+  "name": "tanndalen-testing",
+  "private": true,
+  "scripts": {
+    "test:season": "playwright test tests/season-switch.spec.js",
+    "test:intro": "playwright test tests/intro-scroll.spec.js",
+    "test:init": "playwright test tests/page-init.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
