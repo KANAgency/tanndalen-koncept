@@ -977,7 +977,7 @@ html.is-intro-done .page .place-labels .place-label {
 .quote {
   position: absolute;
   z-index: 6;
-  left: calc(100vw * 566 / 1440 - (100vw - 100%) / 2);
+  left: calc(100vw * 566 / 1440 - (100vw - 100%) / 2 - 100px);
   width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   max-width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   height: auto;
