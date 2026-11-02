@@ -40,18 +40,34 @@
         if (storedSeason === "summer" || storedSeason === "sommar") document.documentElement.dataset.season = "summer";
       } catch (e) {}
       try {
-        var introSeen = localStorage.getItem("td-startsida-seen") === "1";
+        var params = new URLSearchParams(location.search);
+        var mode = params.get("mode");
+        if (mode !== "new" && mode !== "returning" && mode !== "booking") {
+          if (/[?&]visit=new(?:&|$)/.test(location.search)) mode = "new";
+          else if (/[?&]visit=returning(?:&|$)/.test(location.search)) mode = "returning";
+          else {
+            try { mode = localStorage.getItem("td-mode"); } catch (err) { mode = null; }
+            if (mode !== "new" && mode !== "returning" && mode !== "booking") {
+              var seen = false;
+              try { seen = localStorage.getItem("td-startsida-seen") === "1"; } catch (err) {}
+              mode = seen ? "returning" : "new";
+            }
+          }
+        }
+        document.documentElement.dataset.mode = mode;
+        if (params.get("demo") === "0") document.documentElement.dataset.demo = "0";
+        var introSeen = mode !== "new";
+        if (mode === "new") {
+          try { localStorage.setItem("td-startsida-seen", "1"); } catch (err) {}
+        }
         if (/[?&]visit=new(?:&|$)/.test(location.search)) {
-          introSeen = false;
-          try { localStorage.setItem("td-startsida-seen", "1"); } catch (e) {}
           try {
             var kept = new URLSearchParams(location.search);
             kept.delete("visit");
             var qs = kept.toString();
             history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
-          } catch (e) {}
+          } catch (err) {}
         }
-        if (/[?&]visit=returning(?:&|$)/.test(location.search)) introSeen = true;
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) introSeen = true;
         document.documentElement.classList.add(introSeen ? "is-returning" : "is-intro");
         if (window.scrollY > 4) document.documentElement.classList.add("is-scrolled");
@@ -735,11 +751,11 @@
           </div>
           <ul class="faq-list">
             <!-- TODO: answers for the non-clickable FAQ rows are not written yet, make them clickable when the content exists -->
-            <li><div class="faq-row faq-row-static td-body-lg">Hur lång tid tar det hit?</div></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Passar Tänndalen för nybörjare?</div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Hur lång tid tar det hit?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Passar Tänndalen för nybörjare?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
             <li><button class="faq-row td-body-lg" type="button" data-fraga-title="Vad gör vi om det regnar?">Vad gör vi om det regnar?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Får jag ta med hund?</div></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Kan jag ändra min bokning?</div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Får jag ta med hund?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Kan jag ändra min bokning?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
             <li>
               <form class="faq-ask">
                 <input class="td-body-lg" type="text" name="fraga" maxlength="200" autocomplete="off" placeholder="Ställ din egen fråga" aria-label="Ställ din egen fråga">
@@ -3813,18 +3829,8 @@
           const rainRow = faq.querySelector("[data-fraga-title]");
           rainRow.addEventListener("click", () => open(rainRow, true));
           const faqForm = faq.querySelector(".faq-ask");
-          const faqInput = faqForm.querySelector("input");
           faqForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            const text = faqInput.value.trim();
-            if (!text) {
-              faqForm.classList.remove("is-shake");
-              void faqForm.offsetWidth;
-              faqForm.classList.add("is-shake");
-              return;
-            }
-            window.tdFragaAsk(text, faqForm);
-            faqInput.value = "";
           });
           if (!reduced) {
             const io = new IntersectionObserver((entries) => {
@@ -4419,6 +4425,10 @@
           });
         });
       })();
+    </script>
+    <script type="module">
+      import { init } from "./modes.js";
+      init();
     </script>
   </body>
 </html>

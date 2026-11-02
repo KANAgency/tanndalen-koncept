@@ -3,6 +3,7 @@
 
 :root {
   --aktuellt-shift: 80px; /* extra space above Aktuellt, moves Aktuellt and everything below it down */
+  --space-m: var(--space-md); /* no --space-m token; medium step is --space-md */
 }
 
 html,
@@ -165,7 +166,7 @@ body {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  height: 44px;
+  height: 36px;
   padding-inline: var(--space-md);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
@@ -977,7 +978,7 @@ html.is-intro-done .page .place-labels .place-label {
 .quote {
   position: absolute;
   z-index: 6;
-  left: calc(100vw * 566 / 1440 - (100vw - 100%) / 2 - 100px);
+  left: calc(100vw * 566 / 1440 - (100vw - 100%) / 2 - 80px);
   width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   max-width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   height: auto;
@@ -1005,7 +1006,7 @@ html.is-intro-done .page .place-labels .place-label {
 }
 
 .quote-by {
-  margin-top: 24px;
+  margin-top: 36px;
   font-family: var(--font-family-TD-secondary), sans-serif;
   font-size: 14px;
   font-weight: var(--font-weight-book);
@@ -2731,7 +2732,7 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
     letter-spacing: -0.3px;
   }
 
-  .quote-by { margin-top: 10px; }
+  .quote-by { margin-top: 22px; }
 
   .en-dag { height: 280vh; }
 
@@ -4382,7 +4383,6 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 button.faq-row {
   width: 100%;
   border: 0;
-  font: inherit;
   text-align: left;
   cursor: pointer;
 }
@@ -4609,3 +4609,128 @@ button.faq-row:hover svg { transform: translate(2px, -2px); }
   .site-footer-nav a,
   .site-footer-legal a { transition: none; }
 }
+
+.mode-switch {
+  position: fixed;
+  right: var(--space-m);
+  bottom: var(--space-m);
+  z-index: 30;
+}
+
+html[data-demo="0"] .mode-switch { display: none; }
+
+.mode-switch-button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-neutral-subtlest);
+  color: var(--color-TD-neutral-strong);
+  cursor: pointer;
+}
+
+.mode-switch-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + var(--space-sm));
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  margin: 0;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  box-shadow: 0 16px 40px rgb(36 39 42 / 0.16);
+}
+
+.mode-switch-menu[hidden] { display: none; }
+
+.mode-switch-menu button {
+  padding: var(--space-sm) var(--space-md);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-primary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-switch-menu button[aria-checked="true"] { background: var(--color-TD-neutral-subtlest); }
+
+.mode-switch-note { color: var(--color-TD-neutral); }
+
+html[data-mode="booking"][data-season="winter"] .td-booking {
+  overflow: visible;
+  border-radius: var(--radius-lg);
+}
+
+html[data-mode="booking"][data-season="winter"] #booking-cats button[aria-label="Boende"] img {
+  opacity: 0.45;
+}
+
+html[data-mode="booking"][data-season="winter"] .booking-icon-slot { position: relative; }
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: var(--color-status-success);
+  transform: translate(-50%, -50%);
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-check svg { width: 20px; height: 20px; }
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip {
+  --tooltip-w: 340px;
+  position: absolute;
+  bottom: calc(100% + var(--space-sm) - 13px);
+  z-index: 3;
+  box-sizing: border-box;
+  width: min(var(--tooltip-w), calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-inverted);
+  color: var(--color-TD-snow);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  pointer-events: none;
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip[hidden] { display: none; }
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip-title {
+  margin: 0 0 var(--space-xs);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip-body {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip-arrow {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: var(--tip-arrow, 50%);
+  width: 12px;
+  height: 7px;
+  transform: translateX(-50%);
+  background: var(--color-bg-inverted);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* Booking calendar row styles are not applied. The list needs 501px and the card is 316px. */
