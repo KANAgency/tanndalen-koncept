@@ -25,6 +25,15 @@
     <link rel="stylesheet" href="startsida.css?v=boka-panel" />
     <link rel="stylesheet" href="intro.css" />
     <script>
+      /* Hamrafjället, etikett och citat. En gemensam offset. Vila är offset 0. */
+      var TOPO2_MOTION = {
+        START_OFFSET: 100, /* topografi-topp = kortens underkant − 104 */
+        RANGE_START: 0.70, /* kortens underkant, andel av vyhöjden */
+        RANGE_END: 0.05,
+        PHASE3_VH: 0.9, /* fas 3 längd i vyhöjder */
+        PHASE3_SPEED: 0.96, /* sluthastighet, startar på 1 och går hit med smootherstep */
+        QUOTE_SCALE: 0.98 /* citatet 2 % närmare sidan, hastighetsskillnad under 0.03 */
+      };
       history.scrollRestoration = "manual";
       try {
         var storedSeason = localStorage.getItem("td-season");
@@ -264,7 +273,7 @@
             <p class="td-topo2-name">Hamrafjället</p>
             <div class="td-topo2-facts">
               <p>1 137 m ö.h. · 295 m fallhöjd</p>
-              <p>−4 °C på toppen · 11:04</p>
+              <p data-placeholder="true">−4 °C på toppen · 11:04</p>
             </div>
           </div>
         </div>
@@ -714,12 +723,84 @@
         <button type="button" class="td-button td-button-secondary td-hitta-skip is-skip-gone" id="hitta-skip" aria-label="Hoppa över" aria-hidden="true" tabindex="-1">Hoppa över<svg width="20" height="20" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg></button>
         </div>
       </section>
-      <section class="td-nasta" aria-label="Nästa sektion">
-        <p class="td-ui-body">Nästa sektion</p>
-      </section>
       <div id="hitta-end"></div>
+      <section class="faq" id="fragor" aria-labelledby="fragor-title">
+        <div class="faq-grid">
+          <div class="faq-copy">
+            <p class="faq-eyebrow">Frågor</p>
+            <h2 class="td-heading-lg" id="fragor-title">Saker man undrar<br>innan man åker.</h2>
+            <p class="td-lead-sm">Hur du kommer hit, vad som ingår och vad du gör om det blir dåligt väder. Saknar du något svarar vi gärna.</p>
+            <!-- TODO: länka när sidan vanliga frågor finns. -->
+            <a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="/vanliga-fragor">Se alla vanliga frågor <span class="td-button-arrow"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
+          </div>
+          <ul class="faq-list">
+            <!-- TODO: answers for the non-clickable FAQ rows are not written yet, make them clickable when the content exists -->
+            <li><div class="faq-row faq-row-static td-body-lg">Hur lång tid tar det hit?</div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Passar Tänndalen för nybörjare?</div></li>
+            <li><button class="faq-row td-body-lg" type="button" data-fraga-title="Vad gör vi om det regnar?">Vad gör vi om det regnar?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Får jag ta med hund?</div></li>
+            <li><div class="faq-row faq-row-static td-body-lg">Kan jag ändra min bokning?</div></li>
+            <li>
+              <form class="faq-ask">
+                <input class="td-body-lg" type="text" name="fraga" maxlength="200" autocomplete="off" placeholder="Ställ din egen fråga" aria-label="Ställ din egen fråga">
+                <button type="submit" aria-label="Skicka frågan"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </section>
       </main>
     </div>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="site-footer-top">
+          <div class="site-footer-brand">
+            <img src="assets/brand/logo-horizontal-white.svg" alt="Tänndalen" width="206" height="32">
+            <p class="td-heading-sm">Skidåkning och fjäll på riktigt.</p>
+            <a class="td-button td-button-secondary td-button-md" href="#" data-todo="boka">Boka din vistelse</a>
+          </div>
+          <nav class="site-footer-nav" aria-label="Sidfot">
+            <div>
+              <h2>Åk</h2>
+              <ul>
+                <li><a href="#boende">Boende</a></li>
+                <li><a href="#" data-todo="liftkort">Liftkort</a></li>
+                <li><a href="#" data-todo="skidhyra">Skidhyra</a></li>
+                <li><a href="#" data-todo="skidskola">Skidskola</a></li>
+                <li><a href="#" data-todo="paket">Paket</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Hitta hit</h2>
+              <ul>
+                <li><a href="#hitta">Hitta hit</a></li>
+                <li><a href="#" data-todo="webbkameror">Webbkameror</a></li>
+                <li><a href="#" data-todo="snorapport">Snörapport</a></li>
+                <li><a href="#fragor">Vanliga frågor</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Tänndalen</h2>
+              <ul>
+                <li><a href="#" data-todo="om">Om Tänndalen</a></li>
+                <li><a href="#" data-todo="kontakt">Kontakt</a></li>
+                <li><a href="#" data-todo="press">Pressrum</a></li>
+                <li><a href="#" data-todo="jobb">Jobba hos oss</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="site-footer-rule"></div>
+        <div class="site-footer-bottom">
+          <p class="td-ui-body-sm">© 2026 Tänndalen</p>
+          <ul class="site-footer-legal">
+            <li><a class="td-ui-body-sm" href="#" data-todo="integritet">Integritet</a></li>
+            <li><a class="td-ui-body-sm" href="#" data-todo="cookies">Cookies</a></li>
+            <li><a class="td-ui-body-sm" href="#" data-todo="tillganglighet">Tillgänglighet</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
     <script>
       const body = document.body;
       try {
@@ -2696,23 +2777,27 @@
           topo.style.top = `${cardsBottom + scrollY - 204 - (pageTop + scrollY)}px`;
           blue.style.marginTop = `${topoH - 119}px`;
           const blueTop = blue.getBoundingClientRect().top;
-          quote.style.top = `${blueTop - 91 - quote.getBoundingClientRect().height - pageTop}px`;
-          /* Phase 3 is 0.9vh long and lags the page, so the group starts this far above rest. */
-          const phase3 = innerHeight * 0.9;
-          const ahead = phase3 * 0.075;
+          const quoteLift = innerWidth >= 1024 ? 149 : 91;
+          quote.style.top = `${blueTop - quoteLift - quote.getBoundingClientRect().height - pageTop}px`;
+          const phase3 = innerHeight * TOPO2_MOTION.PHASE3_VH;
+          const lag = 1 - TOPO2_MOTION.PHASE3_SPEED;
+          const ahead = phase3 * lag * 0.5;
+          const span = TOPO2_MOTION.RANGE_START - TOPO2_MOTION.RANGE_END;
           const p = cardsBottom / innerHeight;
-          let group = 228;
-          if (p < 0.5 && p > 0.1) group = 228 - (228 + ahead) * topoEase((0.5 - p) / 0.4);
-          else if (p <= 0.1) {
-            const start = (cards.getBoundingClientRect().bottom + scrollY) - innerHeight * 0.1;
+          let group = TOPO2_MOTION.START_OFFSET;
+          if (p < TOPO2_MOTION.RANGE_START && p > TOPO2_MOTION.RANGE_END) {
+            const eased = topoEase((TOPO2_MOTION.RANGE_START - p) / span);
+            group = TOPO2_MOTION.START_OFFSET * (1 - eased) - ahead * eased;
+          } else if (p <= TOPO2_MOTION.RANGE_END) {
+            const start = (cards.getBoundingClientRect().bottom + scrollY) - innerHeight * TOPO2_MOTION.RANGE_END;
             const u = Math.max(0, Math.min(1, (scrollY - start) / phase3));
-            group = -ahead + phase3 * 0.15 * (Math.pow(u, 6) - 3 * Math.pow(u, 5) + 2.5 * Math.pow(u, 4));
+            group = -ahead + phase3 * lag * (Math.pow(u, 6) - 3 * Math.pow(u, 5) + 2.5 * Math.pow(u, 4));
           }
-          /* Quote shares the group and stays within 2% of its offset, so the speed gap stays under 0.04. */
           topo.style.setProperty("--parallax-y", `${group.toFixed(2)}px`);
-          quote.style.setProperty("--parallax-y", `${(group * 0.98).toFixed(2)}px`);
+          quote.style.setProperty("--parallax-y", `${(group * TOPO2_MOTION.QUOTE_SCALE).toFixed(2)}px`);
           const label = topo.querySelector(".td-topo2-label");
           if (!label) return;
+          label.toggleAttribute("aria-hidden", innerWidth <= 1024);
           const lb = label.getBoundingClientRect();
           const cardEls = [...document.querySelectorAll(".td-just-nu-data")].filter((el) => !el.closest("[hidden]"));
           const covered = cardEls.some((el) => {
@@ -3447,7 +3532,7 @@
           clearTimers();
           trigger = from;
           resetAnswer();
-          const question = direct ? (from.querySelector("[data-fraga-title]")?.textContent.trim() || "") : "";
+          const question = direct ? (from.querySelector("[data-fraga-title]")?.textContent.trim() || from.getAttribute("data-fraga-title") || "") : "";
           if (direct) show("answer");
           else show("search");
           input.value = "";
@@ -3718,6 +3803,38 @@
           if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
           else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
         });
+        window.tdFragaAsk = (question, from) => {
+          open(from || launch, false);
+          const token = gen;
+          later(reduced ? 0 : 480, () => { if (token === gen) ask(question, token, 0); });
+        };
+        const faq = document.getElementById("fragor");
+        if (faq) {
+          const rainRow = faq.querySelector("[data-fraga-title]");
+          rainRow.addEventListener("click", () => open(rainRow, true));
+          const faqForm = faq.querySelector(".faq-ask");
+          const faqInput = faqForm.querySelector("input");
+          faqForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const text = faqInput.value.trim();
+            if (!text) {
+              faqForm.classList.remove("is-shake");
+              void faqForm.offsetWidth;
+              faqForm.classList.add("is-shake");
+              return;
+            }
+            window.tdFragaAsk(text, faqForm);
+            faqInput.value = "";
+          });
+          if (!reduced) {
+            const io = new IntersectionObserver((entries) => {
+              if (!entries.some((entry) => entry.isIntersecting)) return;
+              faq.classList.add("is-in");
+              io.disconnect();
+            }, { threshold: 0.2 });
+            io.observe(faq);
+          } else faq.classList.add("is-in");
+        }
         } catch (error) { console.error("frågerutan", error); }
       try {
       const boendeReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;

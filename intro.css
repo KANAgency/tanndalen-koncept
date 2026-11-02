@@ -23,9 +23,9 @@ html.is-intro:not(.is-intro-done) .intro-stage {
 }
 
 html.is-intro:not(.is-intro-done) { --intro-extra: calc(60vh + 50vh); }
-html.is-intro:not(.is-intro-done) .quote { top: calc(1967px + var(--intro-extra)); }
-html.is-intro:not(.is-intro-done) .en-dag { top: calc(2235px + var(--intro-extra)); }
-html.is-intro:not(.is-intro-done) .page { --en-dag-end: calc(2235px + 200vh + var(--intro-extra)); }
+html.is-intro:not(.is-intro-done) .quote { top: calc(1967px + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
+html.is-intro:not(.is-intro-done) .en-dag { top: calc(2235px + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
+html.is-intro:not(.is-intro-done) .page { --en-dag-end: calc(2235px + 200vh + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
 
 html.is-intro-done .intro-lock,
 html.is-intro-done #intro-scroll,
