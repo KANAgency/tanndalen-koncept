@@ -4,6 +4,11 @@
 :root {
   --aktuellt-shift: 80px; /* extra space above Aktuellt, moves Aktuellt and everything below it down */
   --space-m: var(--space-md); /* no --space-m token; medium step is --space-md */
+  --parallax-factor: 0.8;
+  --parallax-factor-mobile: 0.92;
+  --parallax-offset: 0px;
+  --label-parallax-delta: 0.04;
+  --label-max-drift: 40px;
 }
 
 html,
@@ -187,7 +192,7 @@ body {
 
 .boka-row:hover {
   background: none;
-  color: var(--color-season-winter);
+  color: var(--color-accent);
 }
 
 .boka-row:focus-visible {
@@ -206,11 +211,6 @@ html[data-season="summer"] .boka-row:focus-visible {
   color: var(--contrast-on-season-summer);
 }
 
-html[data-season="summer"] .boka-row:hover {
-  background: none;
-  color: var(--color-season-summer);
-}
-
 .boka-row:focus-visible {
   outline: 2px solid var(--color-TD-cta);
   outline-offset: 0;
@@ -221,7 +221,8 @@ html[data-season="summer"] .boka-row:hover {
   flex-wrap: wrap;
   gap: 20px;
   margin: 0;
-  padding: 16px var(--space-xl) 0;
+  /* samma sidopadding som .boka-row → text i linje med Boende/Liftkort */
+  padding: 16px var(--space-md) 0;
   border-top: 1px solid var(--color-TD-neutral-subtlest);
 }
 
@@ -336,7 +337,7 @@ html[data-season="summer"] .boka-row:hover {
   max-height: none;
   margin: 0;
   padding: 16px 33px;
-  border-radius: 0;
+  border-radius: var(--radius-none);
   background: transparent;
   animation: td-booking-fade var(--motion-duration-normal) var(--motion-easing-out-soft);
 }
@@ -347,7 +348,7 @@ html[data-season="summer"] .boka-row:hover {
   bottom: auto;
   left: auto;
   width: auto;
-  border-radius: 0;
+  border-radius: var(--radius-none);
 }
 
 .td-booking .td-picker-head {
@@ -400,15 +401,15 @@ html[data-season="summer"] .boka-row:hover {
 }
 
 .td-booking .td-calendar-week button[data-round="left"]::before {
-  border-radius: 18px 0 0 18px;
+  border-radius: var(--radius-lg) var(--radius-none) var(--radius-none) var(--radius-lg);
 }
 
 .td-booking .td-calendar-week button[data-round="right"]::before {
-  border-radius: 0 18px 18px 0;
+  border-radius: var(--radius-none) var(--radius-lg) var(--radius-lg) var(--radius-none);
 }
 
 .td-booking .td-calendar-week button[data-round="both"]::before {
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
 }
 
 .td-booking .td-calendar-week button[aria-pressed="true"]::after,
@@ -427,13 +428,13 @@ html[data-season="summer"] .boka-row:hover {
 
 .td-booking .td-calendar-week button[aria-pressed="true"],
 .td-booking .td-calendar-week button[data-edge] {
-  border-radius: 0;
+  border-radius: var(--radius-none);
   background: transparent;
   color: var(--color-TD-snow);
 }
 
 .td-booking .td-calendar-week button[data-in-range="true"] {
-  border-radius: 0;
+  border-radius: var(--radius-none);
   background: transparent;
   color: var(--color-text-primary);
 }
@@ -546,7 +547,7 @@ html[data-season="summer"] .boka-row:hover {
 
 body.is-landed .hero-doodle {
   opacity: 1;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: none;
   transition: opacity var(--motion-duration-slow) var(--motion-easing-out-soft);
 }
 
@@ -607,21 +608,49 @@ html[data-season="summer"] .hero-sun {
   mask: url("assets/startsida/doodle-sol-black.svg") center / contain no-repeat;
 }
 
-.hero-topo {
+/* Storvigeln-enhet: gemensamt koordinatsystem, två parallaxfaktorer. */
+.parallax-item--hero {
+  --topo-w: 1249px;
+  --topo-shift-x: 0px;
+  --topo-shift-y: 600px; /* topo +200 från 400 */
+  --label-nudge-x: -90px; /* −40 + −50 */
+  --label-nudge-y: -280px; /* −312 + 32 */
+  --label-anchor-x: 0.218;
+  --label-anchor-y: 0.58;
+  --hero-topo-ty: 0px;
+  --hero-label-ty: 0px;
   position: absolute;
   z-index: -1;
-  left: calc(50% + 127px);
-  top: 713px;
-  width: 812px;
-  height: 962px;
+  left: 0;
+  top: 617px; /* skrivs om av ankare */
+  width: var(--topo-w);
+  height: calc(var(--topo-w) * 962 / 812);
   pointer-events: none;
-  background-color: var(--color-TD-neutral-subtle);
+  overflow: visible;
+  transform: none;
+}
+
+.hero-topo-unit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Parallax ovanpå fast shift: shift-y + (1−f)×scrollY′ via --hero-topo-ty. */
+  transform: translate3d(var(--topo-shift-x), calc(var(--topo-shift-y) + var(--hero-topo-ty)), 0);
+  will-change: transform;
+}
+
+.parallax-item--hero .hero-topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: var(--color-TD-neutral-light);
   -webkit-mask: url("assets/startsida/topografi.svg") center / contain no-repeat;
   mask: url("assets/startsida/topografi.svg") center / contain no-repeat;
   -webkit-mask-mode: alpha;
   mask-mode: alpha;
-  object-fit: none;
-  object-position: -9999px -9999px;
 }
 
 .top,
@@ -671,10 +700,6 @@ html[data-season="summer"] .hero-sun {
     opacity: 1;
   }
 
-  .top.is-scrolled #fraga-launch {
-    background: var(--color-TD-snow);
-  }
-
   .top-progress {
     position: absolute;
     left: 0;
@@ -700,11 +725,6 @@ html[data-season="summer"] .hero-sun {
   transition: opacity 140ms linear;
 }
 
-html.is-intro-done .page .hero-topo,
-html.is-intro-done .page .place-labels {
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
-}
-
 html.is-intro-done .page .place-labels .place-label {
   transform: none;
 }
@@ -717,22 +737,26 @@ html.is-intro-done .page .place-labels .place-label {
   line-height: 1.5;
 }
 
-.place-labels {
+.parallax-item--hero .place-labels {
   position: absolute;
-  left: calc(50% + 127px);
-  top: 713px;
-  width: 812px;
-  height: 962px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: translate3d(0, var(--hero-label-ty), 0);
+  will-change: transform;
 }
 
 .place-label-block {
   position: absolute;
-  right: calc(100% * 721 / 812 - 90px);
-  bottom: calc(100% * 337 / 962 + 30px);
+  /* Högerkant vid 21,8 % av topografins bredd; topp vid 58 %. */
+  right: calc((1 - var(--label-anchor-x, 0.218)) * 100%);
+  top: calc(var(--label-anchor-y, 0.58) * 100%);
+  bottom: auto;
+  left: auto;
   width: max-content;
   text-align: right;
+  transform: translate3d(var(--label-nudge-x), var(--label-nudge-y), 0);
 }
 
 .place-labels .place-label {
@@ -841,10 +865,11 @@ html.is-intro-done .page .place-labels .place-label {
   align-items: center;
   gap: var(--space-xs);
   margin: 0;
-  padding: 0 var(--space-sm);
+  padding: var(--space-xs) var(--space-md); /* Figma 4×12 */
   border-radius: var(--radius-full);
   background: var(--color-TD-night);
   color: var(--color-TD-snow);
+  line-height: var(--font-leading-caption, 18px);
 }
 
 .td-rapport-chip-line {
@@ -862,10 +887,13 @@ html.is-intro-done .page .place-labels .place-label {
 }
 
 .td-rapport-diff {
+  box-sizing: border-box;
   width: 12px;
-  height: 6px;
-  border-radius: 0;
-  background: var(--difficulty-red);
+  height: 12px; /* Figma difficulty sm — streck centrerat */
+  flex: none;
+  border-radius: var(--radius-none);
+  background:
+    linear-gradient(var(--difficulty-red), var(--difficulty-red)) center / 12px 6px no-repeat;
 }
 
 .td-rapport-lower {
@@ -964,9 +992,10 @@ html.is-intro-done .page .place-labels .place-label {
   height: 500px;
 }
 
+/* Depth-parallax borttagen — bara #parallax-layer / .parallax-item--hero. */
 [data-depth="mid"],
 [data-depth="back"] {
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: none;
 }
 
 .just-nu h2,
@@ -977,14 +1006,14 @@ html.is-intro-done .page .place-labels .place-label {
 
 .quote {
   position: absolute;
-  z-index: 6;
+  z-index: 0; /* under Fråga/Block; över topo (−1) */
   left: calc(100vw * 566 / 1440 - (100vw - 100%) / 2 - 80px);
   width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   max-width: clamp(360px, calc(100vw * 460 / 1440), 520px);
   height: auto;
   margin: 0;
   background: transparent;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: none; /* ingen parallax — bara layout */
 }
 
 .quote-text,
@@ -1022,6 +1051,10 @@ html.is-intro-done .page .place-labels .place-label {
   width: 100%;
   height: auto;
   overflow: visible;
+  --snap-settle-delay: 90ms;
+  --snap-threshold: 0.30;
+  --snap-velocity-max: 1.2;
+  --snap-duration: 520ms;
 }
 
 .en-dag-season {
@@ -1051,7 +1084,7 @@ html.is-intro-done .page .place-labels .place-label {
     bottom: 0;
     left: 0;
     margin-top: 0;
-    padding-top: var(--space-5xl);
+    padding-top: 0; /* gap sätts i JS mot kortbotten */
   }
 }
 
@@ -1111,7 +1144,7 @@ html.is-intro-done .page .place-labels .place-label {
 .en-dag-stage { display: contents; }
 
 @media (min-width: 1024px) {
-  .en-dag { --endag-heading-air: 48px; }
+  .en-dag { --endag-heading-air: 28px; } /* tätare under «En …dag» */
 
   .en-dag-stack {
     display: block;
@@ -1135,7 +1168,7 @@ html.is-intro-done .page .place-labels .place-label {
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 680px;
+  height: 748px; /* 680 × 1,1 */
   pointer-events: none;
 }
 
@@ -1161,9 +1194,9 @@ html.is-intro-done .page .place-labels .place-label {
 }
 
 .en-dag-media {
-  left: 363px;
-  width: 554px;
-  height: 680px;
+  left: 320px; /* centrerad @ 1280 mot 640 */
+  width: 640px; /* 554 × 1,1 × 1,05 */
+  height: 748px; /* 680 × 1,1 */
 }
 
 .en-dag-dim {
@@ -1209,7 +1242,7 @@ html.is-intro-done .page .place-labels .place-label {
   overflow: visible;
   color: var(--color-text-primary);
   text-align: right;
-  transform: translateY(calc(var(--en-shift, 0px) + var(--parallax-y, 0px)));
+  transform: translateY(var(--en-shift, 0px));
 }
 
 .en-dag-copy .td-textblock {
@@ -1246,7 +1279,10 @@ html.is-intro-done .page .place-labels .place-label {
 
 .en-dag-puff-copy {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 33.333%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1320,6 +1356,11 @@ html.is-intro-done .page .place-labels .place-label {
   right: 0;
   height: 0;
   overflow: visible;
+}
+
+.en-dag-sun-event {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .en-dag-sun-label,
@@ -1517,7 +1558,8 @@ html.is-intro-done .page .place-labels .place-label {
 
 @media (min-width: 1024px) {
   .en-dag-intro {
-    top: calc(var(--menu-edge) + var(--menu-pad) + 40px + 40px);
+    /* Samma höjd från start som när pin sticky-låst — under meny, luft till kort. */
+    top: calc(var(--menu-edge) + var(--menu-pad) + var(--size-control-md) + 20px);
     left: calc((100vw - min(1280px, 100vw - var(--space-lg) * 2)) / 2);
     width: min(1280px, calc(100vw - var(--space-lg) * 2));
   }
@@ -1732,7 +1774,7 @@ html.is-intro-done .page .place-labels .place-label {
     bottom: auto;
     width: calc(100% - 32px);
     margin: 16px 0 0;
-    transform: translate3d(0, calc(var(--en-shift, 0px) + var(--parallax-y, 0px)), 0);
+    transform: translate3d(0, var(--en-shift, 0px), 0);
   }
 }
 
@@ -1851,7 +1893,8 @@ html.is-intro-done .page .place-labels .place-label {
   opacity: 0.75;
 }
 
-.td-hitta-skip {
+.td-hitta-skip,
+.en-dag-skip-bar {
   position: fixed;
   left: 50%;
   bottom: var(--space-xl);
@@ -1859,15 +1902,52 @@ html.is-intro-done .page .place-labels .place-label {
   min-height: 44px;
   display: none;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   transform: translateX(-50%);
+  pointer-events: auto;
+  transition: opacity 200ms linear;
 }
-
-.td-hitta-skip svg { width: 20px; height: 20px; }
-
 
 .td-hitta.is-held .td-hitta-skip {
   display: inline-flex;
+}
+
+.en-dag-skip-bar.is-en-skip-live {
+  display: inline-flex;
+  opacity: 1;
+}
+
+.en-dag-skip-bar.is-skip-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.td-en-dag-skip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-control-lg);
+}
+
+.td-en-dag-next {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  width: var(--size-control-lg);
+  height: var(--size-control-lg);
+  min-width: var(--size-control-lg);
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+.td-en-dag-next svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.td-en-dag-next:disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2019,15 +2099,7 @@ html[data-season="summer"] .td-fraga .td-corner-link {
   color: inherit;
 }
 
-html[data-season="summer"] .td-fraga .td-just-nu-header-icon {
-  background-color: currentColor;
-  -webkit-mask: url("assets/icons/all/24/light/fraga-oss.svg") center / contain no-repeat;
-  mask: url("assets/icons/all/24/light/fraga-oss.svg") center / contain no-repeat;
-}
-
-html[data-season="summer"] .td-fraga .td-just-nu-header-icon img {
-  opacity: 0;
-}
+/* Chatt Light/Dark via img i just-nu-fraga.css — ingen fraga-oss-mask. */}
 
 .td-rapport [hidden] {
   display: none !important;
@@ -2043,6 +2115,22 @@ a.td-rapport:focus-visible {
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-md);
+  width: 100%;
+}
+
+/* Chip i toppraden (alpine); hörnlänk alltid till höger när den syns. */
+.td-rapport-top .td-rapport-chip {
+  flex: 0 0 auto;
+}
+
+.td-rapport-top .td-corner-link {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* Alpine-rapport: ingen hörnpil (Figma showCornerLink=false). */
+.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-top .td-corner-link {
+  display: none !important;
 }
 
 .td-rapport.is-activity .td-rapport-shade {
@@ -2051,8 +2139,15 @@ a.td-rapport:focus-visible {
     linear-gradient(to top, rgb(36 38 41 / 0.72) 0%, rgb(36 38 41 / 0) 58%);
 }
 
+/* Aktivitets-CTA: etiketten alltid synlig (inte hover-reveal som övriga hörnlänkar). */
 .td-rapport.is-activity .td-corner-link {
+  min-width: 0;
+  gap: 8px;
   color: var(--color-TD-snow);
+}
+
+.td-rapport.is-activity .td-corner-link-label {
+  opacity: 1;
 }
 
 .td-just-nu-data .td-ui-figure-unit-lg.is-wind { font-size: var(--font-size-32); }
@@ -2128,6 +2223,14 @@ a.td-rapport:focus-visible {
 .page :focus-visible {
   outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
+}
+
+.page .td-fraga-falt-input:focus,
+.page .td-fraga-falt-input:focus-visible,
+.page .td-fraga-falt:focus-within {
+  outline: none;
+  outline-offset: 0;
+  box-shadow: none;
 }
 
 .top-start {
@@ -2432,13 +2535,8 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
 
 .site-menu-link:hover .site-menu-title,
 .site-menu-link:focus-visible .site-menu-title {
-  color: var(--color-season-winter);
+  color: var(--color-accent);
   text-decoration-color: currentColor;
-}
-
-html[data-season="summer"] .site-menu-link:hover .site-menu-title,
-html[data-season="summer"] .site-menu-link:focus-visible .site-menu-title {
-  color: var(--color-season-summer);
 }
 
 .site-menu-chevron {
@@ -2598,10 +2696,6 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
   html.is-scrolled .top-glass,
   .top.is-scrolled .top-glass { opacity: 1; }
 
-  .top.is-scrolled #fraga-launch {
-    background: var(--color-TD-snow);
-  }
-
   .top-progress {
     position: absolute;
     left: 0;
@@ -2652,14 +2746,14 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
   .site-menu.is-open {
     top: 64px;
     max-height: calc(100svh - 64px - 112px);
-    border-radius: 0;
+    border-radius: var(--radius-none);
     background: var(--color-TD-snow);
     opacity: 1;
     box-shadow: none;
   }
 
   .site-menu-panel {
-    border-radius: 0;
+    border-radius: var(--radius-none);
     background: var(--color-TD-snow);
     opacity: 1;
   }
@@ -2667,6 +2761,7 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
   .hero-frame { aspect-ratio: 16 / 9; }
 
   .hero-doodle,
+  .parallax-item--hero,
   .hero-topo,
   .place-label,
   .quote { display: block; }
@@ -2680,21 +2775,28 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
     z-index: 2;
   }
 
-  .hero-topo {
+  .parallax-item--hero {
     position: relative;
     left: auto;
     top: auto;
-    display: block;
     width: 280px;
     height: 120px;
     margin: 8px -72px 0 auto;
-    object-fit: none;
-    object-position: -9999px -9999px;
+    transform: none;
+  }
+
+  .parallax-item--hero .hero-topo {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: 100%;
     -webkit-mask: url("assets/startsida/topografi.svg") right center / cover no-repeat;
     mask: url("assets/startsida/topografi.svg") right center / cover no-repeat;
     z-index: 0;
   }
 
+  .parallax-item--hero .place-labels,
   .place-labels { display: none; }
 
   .statement {
@@ -2858,6 +2960,7 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
   }
 
   .td-hitta-skip,
+  .en-dag-skip-bar,
   .td-nasta { display: none; }
 }
 
@@ -2880,10 +2983,11 @@ html[data-season="summer"] .site-menu-subs a:focus-visible {
 }
 
 .fraga-kbd {
+  display: none; /* dold i UI; ⌘K/Ctrl+K fungerar kvar via JS */
   margin-left: 4px;
   padding: 1px 6px;
   border: 1px solid var(--color-TD-neutral-subtlest);
-  border-radius: var(--radius-sm, 6px);
+  border-radius: var(--radius-sm);
   font-family: var(--font-family-TD-secondary), sans-serif;
   font-weight: var(--font-weight-book);
 }
@@ -2937,7 +3041,7 @@ body.fraga-open { overflow: hidden; }
   flex-direction: column;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 16px 24px;
+  padding: 16px 24px 0;
   border-radius: var(--radius-lg);
   background: var(--color-TD-snow);
   color: var(--color-TD-night);
@@ -2946,6 +3050,18 @@ body.fraga-open { overflow: hidden; }
 
 .fraga-top,
 .fraga-bottom { flex: none; }
+
+.fraga-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+  margin-inline: -24px;
+}
+
+.fraga-bottom .fraga-follow {
+  margin-inline: 24px;
+}
 
 .fraga-top {
   display: flex;
@@ -2958,7 +3074,8 @@ body.fraga-open { overflow: hidden; }
 
 .fraga-brand { flex: 1; margin: 0; }
 
-.fraga-panel.is-answer .fraga-field { display: none; }
+.fraga-x { margin-left: auto; }
+
 .fraga-panel.is-answer .fraga-brand,
 .fraga-panel.is-answer .fraga-new { display: inline-flex; }
 
@@ -2967,6 +3084,11 @@ body.fraga-open { overflow: hidden; }
   flex: 1;
   min-height: 0;
   margin-top: 16px;
+}
+
+/* Sökvy: listan närmare toppen (bara X i fraga-top). */
+.fraga-panel:not(.is-answer) .fraga-mid {
+  margin-top: var(--space-xs);
 }
 
 .fraga-panel:not(.is-settled) .fraga-view { opacity: 0; }
@@ -2991,7 +3113,7 @@ body.fraga-open { overflow: hidden; }
 }
 
 .fraga-view::-webkit-scrollbar { width: 8px; }
-.fraga-view::-webkit-scrollbar-thumb { background: var(--color-TD-neutral); border-radius: 8px; }
+.fraga-view::-webkit-scrollbar-thumb { background: var(--color-TD-neutral); border-radius: var(--radius-md); }
 
 .fraga-x {
   display: grid;
@@ -2999,24 +3121,10 @@ body.fraga-open { overflow: hidden; }
   height: 32px;
   place-items: center;
   border: 0;
-  border-radius: var(--radius-full, 999px);
+  border-radius: var(--radius-full);
   background: transparent;
   color: inherit;
   cursor: pointer;
-}
-
-.fraga-field { flex: 1; min-width: 0; }
-
-.fraga-field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--color-TD-neutral-subtlest);
-  border-radius: var(--radius-md);
-  background: var(--color-TD-snow);
-  color: inherit;
 }
 
 .fraga-follow {
@@ -3029,6 +3137,13 @@ body.fraga-open { overflow: hidden; }
   background: var(--color-TD-snow);
 }
 
+.fraga-follow-icon {
+  flex: none;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
 .fraga-send {
   display: grid;
   flex: none;
@@ -3037,17 +3152,9 @@ body.fraga-open { overflow: hidden; }
   place-items: center;
   border: 0;
   border-radius: var(--radius-full);
-  background: var(--color-TD-neutral-subtlest);
-  color: inherit;
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
   cursor: pointer;
-}
-
-.fraga-field input {
-  width: 100%;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: inherit;
 }
 
 .fraga-follow-input {
@@ -3055,40 +3162,80 @@ body.fraga-open { overflow: hidden; }
   flex: 1;
   min-width: 0;
   box-sizing: border-box;
+  margin-left: 4px;
   padding: 8px 0;
   border: 0;
   outline: none;
   background: transparent;
 }
 
-.fraga-field input { padding: 0; border-radius: 0; }
-
-.fraga-suggest-label { margin: 20px 0 8px; }
-
-.fraga-suggest { margin: 0; padding: 0; list-style: none; }
-
-.fraga-suggest button {
-  width: 100%;
-  padding: 12px 0;
-  border: 0;
-  border-bottom: 1px solid var(--color-TD-neutral-subtlest);
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
+/* Sökvy: frågelistan stylas via .td-fraga-fragelista (design-system). */
+.fraga-view[data-view="search"] {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.fraga-suggest button:hover { color: var(--color-accent); }
+.fraga-view[data-view="search"] .td-fraga-fragelista {
+  max-width: none;
+}
+
+.fraga-view[data-view="search"] .td-fraga-fragelista-rubrik {
+  padding-top: 0;
+}
 
 .fraga-foot {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 16px;
+  margin: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-TD-neutral-subtlest);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  background: color-mix(in srgb, var(--color-TD-night) 5%, var(--color-TD-snow));
+}
+
+.fraga-foot-live {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fraga-foot-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-night);
+}
+
+.fraga-foot-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.fraga-foot-title,
+.fraga-foot-meta {
+  margin: 0;
+}
+
+.fraga-foot-title {
+  color: var(--color-TD-night);
+}
+
+.fraga-foot-meta {
   color: var(--color-TD-neutral);
 }
 
-.fraga-foot a { color: var(--color-TD-night); font-weight: 700; }
+.fraga-foot-chat {
+  flex: none;
+  border: 1px solid var(--color-TD-night);
+}
 
 .fraga-think { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; }
 .fraga-think[hidden],
@@ -3103,7 +3250,7 @@ body.fraga-open { overflow: hidden; }
   width: 6px;
   height: 6px;
   margin-left: 4px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: var(--color-TD-night);
   animation: fraga-dot calc(900ms * var(--fraga-slow)) var(--motion-easing-out-soft) infinite;
 }
@@ -3195,7 +3342,7 @@ body.fraga-open { overflow: hidden; }
 #fraga-rain {
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--color-TD-neutral-subtlest);
-  border-radius: var(--radius-full, 999px);
+  border-radius: var(--radius-full);
   background: var(--color-TD-snow);
   color: inherit;
   cursor: pointer;
@@ -3259,7 +3406,6 @@ body.fraga-open { overflow: hidden; }
 
 #fraga-now { margin: var(--space-lg) 0 0; }
 
-.fraga-bottom { margin-top: 8px; }
 .fraga-note { margin: 12px 0 0; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3518,7 +3664,7 @@ body.fraga-open { overflow: hidden; }
   }
 
   .just-nu { z-index: 5; }
-  .quote { z-index: 6; }
+  .quote { z-index: 0; }
 }
 
 .boende {
@@ -3850,7 +3996,7 @@ body.fraga-open { overflow: hidden; }
   .en-dag { position: relative; top: auto; margin-top: calc(163px - var(--aktuellt-endag-overlap)); }
   .citat-band { position: relative; top: auto; background: transparent; }
   .just-nu { z-index: 5; margin-top: 0; background: transparent; }
-  .quote { position: absolute; z-index: 6; margin-top: 0; }
+  .quote { position: absolute; z-index: 0; margin-top: 0; }
   .boende { position: relative; top: auto; z-index: 2; }
   .page .td-hitta,
   .page .td-hitta.is-pan { position: relative; top: auto; margin-top: 175px; }
@@ -3938,8 +4084,10 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   gap: var(--aktuellt-gap);
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: max(80px, (100vw - 1280px) / 2);
-  scroll-padding-inline-start: max(80px, (100vw - 1280px) / 2);
+  /* Samma vänsterkant som .page / «Nytt» — inte egna 80/40/20-steg. */
+  --aktuellt-inline: max(var(--space-lg), (100vw - 1280px) / 2);
+  padding-inline: var(--aktuellt-inline);
+  scroll-padding-inline-start: var(--aktuellt-inline);
   overflow-x: auto;
   scroll-snap-type: none;
   scrollbar-width: none;
@@ -3949,96 +4097,7 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 
 .td-aktuellt-track::-webkit-scrollbar { display: none; }
 
-.td-aktuellt-card {
-  display: flex;
-  flex: 0 0 519px;
-  flex-direction: column;
-  gap: 24px;
-  width: 519px;
-  scroll-snap-align: start;
-}
-
-.td-aktuellt-media {
-  position: relative;
-  box-sizing: border-box;
-  height: 394px;
-  padding: 24px;
-  border-radius: 2px;
-  background: var(--color-season-winter);
-}
-
-.td-aktuellt-card[data-tone="summer"] .td-aktuellt-media { background: var(--color-season-summer); }
-.td-aktuellt-card[data-tone="autumn"] .td-aktuellt-media { background: var(--color-season-autumn); }
-
-.td-aktuellt-media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 2px;
-  object-fit: cover;
-  background: var(--color-TD-neutral-subtle, var(--color-bg-base));
-}
-
-.td-aktuellt-chip {
-  position: absolute;
-  top: 34px;
-  right: 34px;
-  display: inline-flex;
-  align-items: center;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 4px;
-  background: var(--color-bg-inverted);
-  color: var(--color-TD-snow);
-  font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-book);
-  line-height: 21px;
-  white-space: nowrap;
-}
-
-.td-aktuellt-copy {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 480px;
-  margin-left: 20px;
-}
-
-.td-aktuellt-copy h3 {
-  margin: 0;
-  font-family: var(--font-family-TD-primary), serif;
-  font-size: var(--font-size-32);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.15;
-  letter-spacing: -0.6px;
-  color: var(--color-text-primary);
-}
-
-.td-aktuellt-copy p {
-  margin: 0;
-  padding-top: 12px;
-  font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-book);
-  line-height: 24px;
-  color: var(--color-text-primary);
-}
-
-.td-aktuellt-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  padding-top: 24px;
-}
-
-@media (max-width: 1279px) {
-  .td-aktuellt-track {
-    padding-inline: 40px;
-    scroll-padding-inline-start: 40px;
-  }
-}
+/* Kortlayout ligger i ds/components/aktuellt-kort.css */
 
 @media (max-width: 767px) {
   .td-aktuellt-titles h2 {
@@ -4047,62 +4106,68 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   }
 
   .td-aktuellt-nav { display: none; }
-
-  .td-aktuellt-track {
-    padding-inline: 20px;
-    scroll-padding-inline-start: 20px;
-  }
-
-  .td-aktuellt-card {
-    flex-basis: clamp(280px, 82vw, 519px);
-    width: clamp(280px, 82vw, 519px);
-  }
-
-  .td-aktuellt-media { padding: 16px; }
-
-  .td-aktuellt-chip { top: 26px; right: 26px; }
-
-  .td-aktuellt-copy {
-    width: auto;
-    padding-inline: 16px;
-  }
-
-  .td-aktuellt-copy h3 { font-size: 28px; }
 }
 
-/* Hamrafjället. Eget lager under sidans innehåll. --parallax-y är offset från viloläget. */
-.td-topo2-layer {
+/* Parallax-lager: dokumentkoordinater, en gemensam transform. */
+#parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  transform: translate3d(0, var(--parallax-offset, 0px), 0);
+  will-change: transform;
+}
+
+/* Hamrafjället i lagret. left/width = layout mot Fråga-block; top = ankare. */
+.td-topo2-layer,
+.parallax-item--hamra {
   position: absolute;
   z-index: -1;
-  left: calc(-7.08vw - (100vw - 100%) / 2);
-  width: clamp(640px, 66.25vw, 1272px);
-  aspect-ratio: 954 / 693;
+  left: 0;
+  width: 1316px;
+  aspect-ratio: 1316 / 949;
   pointer-events: none;
   background: transparent;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: none;
 }
 
 .td-topo2 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: fill;
-  opacity: 0.1;
+  background-color: var(--color-TD-neutral-light);
+  -webkit-mask-image: url("assets/startsida/topografi-hamrafjallet.svg");
+  mask-image: url("assets/startsida/topografi-hamrafjallet.svg");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
+/* Figma Frame 1: left/top av Union — ovanför glaset, inte till höger. */
 .td-topo2-label {
+  --hamra-label-ty: 0px;
   position: absolute;
-  left: 101.3%;
-  top: 32.9%;
+  left: 53.42%;
+  top: 8.11%;
   transition: opacity 160ms linear;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4px;
   width: max-content;
   margin: 0;
-  text-align: left;
+  text-align: center;
   color: var(--color-TD-neutral);
   pointer-events: auto;
+  transform: translate3d(0, var(--hamra-label-ty), 0);
+  will-change: transform;
 }
 
 .td-topo2-label.is-covered { opacity: 0; }
@@ -4144,8 +4209,59 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #parallax-layer,
+  .parallax-item--hero,
+  .parallax-item--hero .place-labels,
   .td-topo2-layer,
-  .quote { transform: none; }
+  .td-topo2-label,
+  .quote { transform: none !important; }
+  /* Behåll bara fast shift — ingen scroll-parallax. */
+  .parallax-item--hero .hero-topo-unit {
+    transform: translate3d(var(--topo-shift-x), var(--topo-shift-y), 0) !important;
+  }
+}
+
+#parallax-debug,
+#snap-debug {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 9999;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgb(36 38 41 / 0.85);
+  color: #fff;
+  font: 12px/1.35 ui-monospace, monospace;
+  pointer-events: none;
+}
+
+#snap-debug-marks {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.snap-debug-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid rgb(0 160 255 / 0.7);
+}
+
+.snap-debug-zone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border: 1px solid rgb(0 160 255 / 0.35);
+  background: rgb(0 160 255 / 0.06);
+}
+
+.is-parallax-debug,
+.is-parallax-debug-anchor {
+  outline: 1px solid rgb(0 120 255 / 0.7);
+  outline-offset: 0;
 }
 
 .utforsakning {
@@ -4199,7 +4315,7 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   width: 258px;
   height: 258px;
   pointer-events: none;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: none;
 }
 
 .utforsakning-doodle img {
@@ -4331,13 +4447,21 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   .utforsakning-clip { transition: none; }
 }
 
+/* Efter Just nu: Figma 156 px (Just nu botten y4210 → block topp y4366).
+   Inget space-token = 156; explicit. */
 .faq {
   position: relative;
-  padding-block: 120px;
+  z-index: 1; /* ovanför .quote (0) och topo (−1) */
+  display: flex;
+  justify-content: center;
+  margin-top: 156px;
+  margin-bottom: 0;
+  padding: 0;
   background: transparent;
   color: var(--color-text-primary);
 }
 
+/* Legacy .faq-grid / .faq-row behålls för ev. äldre referenser; demot använder .td-fraga-block. */
 .faq-grid { display: grid; gap: 32px; }
 
 .faq-eyebrow {
@@ -4668,28 +4792,59 @@ html[data-mode="booking"][data-season="winter"] .td-booking {
   border-radius: var(--radius-lg);
 }
 
-html[data-mode="booking"][data-season="winter"] #booking-cats button[aria-label="Boende"] img {
+html[data-mode="booking"][data-season="winter"] #booking-cats button.is-done img {
   opacity: 0.45;
+}
+
+html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-nu .td-kamera {
+  display: none;
+}
+
+html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang {
+  flex: 1 1 auto;
+  align-self: stretch;
+  justify-content: flex-start;
+}
+
+html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang-groups {
+  flex: none;
+  gap: var(--space-xl);
+}
+
+html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text {
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: var(--space-lg);
+}
+
+html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text .td-ui-body {
+  white-space: nowrap;
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-where {
+  margin-left: var(--space-sm);
+  color: var(--color-cta-primary);
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
 }
 
 html[data-mode="booking"][data-season="winter"] .booking-icon-slot { position: relative; }
 
-html[data-mode="booking"][data-season="winter"] .mode-booking-check {
+html[data-mode="booking"][data-season="winter"] button.is-done .mode-booking-check {
   position: absolute;
   top: 50%;
   left: 50%;
   display: grid;
   place-items: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: var(--color-status-success);
   transform: translate(-50%, -50%);
 }
 
-html[data-mode="booking"][data-season="winter"] .mode-booking-check svg { width: 20px; height: 20px; }
+html[data-mode="booking"][data-season="winter"] .mode-booking-check svg { width: 18px; height: 18px; }
 
 html[data-mode="booking"][data-season="winter"] .mode-booking-tip {
-  --tooltip-w: 340px;
+  --tooltip-w: 270px;
   position: absolute;
   bottom: calc(100% + var(--space-sm) - 13px);
   z-index: 3;
@@ -4720,6 +4875,21 @@ html[data-mode="booking"][data-season="winter"] .mode-booking-tip-body {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
+}
+
+html[data-mode="booking"][data-season="winter"] .mode-booking-tip-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-TD-snow);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 html[data-mode="booking"][data-season="winter"] .mode-booking-tip-arrow {

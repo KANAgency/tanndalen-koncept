@@ -87,7 +87,6 @@ html.is-intro-done .intro-word {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   transform: translateX(-50%);
   pointer-events: auto;
   transition: opacity 200ms linear;
@@ -98,8 +97,6 @@ html.is-skip-gone #intro-scroll {
   visibility: hidden;
   pointer-events: none;
 }
-
-#intro-scroll svg { width: 20px; height: 20px; }
 
 @media (max-width: 1023px) {
   .intro-word,

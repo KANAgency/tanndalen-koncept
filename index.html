@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="ds/generated/tokens.css" />
     <link rel="stylesheet" href="ds/generated/fonts-td.css" />
     <link rel="stylesheet" href="ds/generated/typography-td.css" />
-    <link rel="stylesheet" href="ds/components/button.css?v=lg" />
+    <link rel="stylesheet" href="ds/components/button.css?v=graphic" />
+    <link rel="stylesheet" href="ds/components/chip-tag.css" />
+    <link rel="stylesheet" href="ds/components/aktuellt-kort.css?v=typo3" />
+    <link rel="stylesheet" href="ds/components/fraga-block.css?v=typo3" />
+    <link rel="stylesheet" href="ds/components/fraga-fragelista.css?v=1" />
     <link rel="stylesheet" href="ds/components/booking.css?v=radius-sm" />
-    <link rel="stylesheet" href="ds/components/just-nu-header.css?v=stroke" />
+    <link rel="stylesheet" href="ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="ds/components/just-nu-stack.css?v=langd-data" />
     <link rel="stylesheet" href="ds/components/just-nu-fraga.css" />
@@ -25,14 +29,12 @@
     <link rel="stylesheet" href="startsida.css?v=boka-panel" />
     <link rel="stylesheet" href="intro.css" />
     <script>
-      /* Hamrafjället, etikett och citat. En gemensam offset. Vila är offset 0. */
-      var TOPO2_MOTION = {
-        START_OFFSET: 100, /* topografi-topp = kortens underkant − 104 */
-        RANGE_START: 0.70, /* kortens underkant, andel av vyhöjden */
-        RANGE_END: 0.05,
-        PHASE3_VH: 0.9, /* fas 3 längd i vyhöjder */
-        PHASE3_SPEED: 0.96, /* sluthastighet, startar på 1 och går hit med smootherstep */
-        QUOTE_SCALE: 0.98 /* citatet 2 % närmare sidan, hastighetsskillnad under 0.03 */
+      /* Hamrafjället / citat — endast layout (horisontellt), ingen parallax-motion. */
+      var TOPO2_LAYOUT = {
+        BLOCK_DX: -779,
+        TOPO_W: 1316,
+        BLOCK_W: 845,
+        QUOTE_DX: 645
       };
       history.scrollRestoration = "manual";
       try {
@@ -87,7 +89,7 @@
       
       <p class="intro-copy" id="intro-copy" aria-live="off"></p>
       </div>
-    <button class="td-button td-button-secondary" id="intro-scroll" type="button">Hoppa över<svg width="20" height="20" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg></button>
+    <button class="td-button td-button-secondary" id="intro-scroll" type="button">Hoppa över</button>
     <div class="page">
 
       <h1 class="visually-hidden" tabindex="-1" data-title-vinter="Tänndalen. Älskat av skidåkare." data-title-sommar="Tänndalen. Älskat av fjällvandrare.">Tänndalen. Älskat av skidåkare.</h1>
@@ -230,9 +232,12 @@
         </div>
         <a href="?visit=new"><img class="logo" src="assets/brand/logo-horizontal-black.svg" alt="Tänndalen" /></a>
         <div class="actions">
-          <button class="td-button td-button-md td-button-fill-neutral td-ui-cta-sm" id="fraga-launch" type="button">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="help-long">Behöver du hjälp?</span><span class="help-short">Fråga</span>
+          <button class="td-button td-button-md td-button-secondary td-button-fill-winter td-ui-cta-sm" id="fraga-launch" type="button">
+            <span class="td-button-graphic" data-context="auto" aria-hidden="true">
+              <img data-graphic-light src="ds/components/icons/content/chatt-24-light.svg" alt="" width="24" height="24">
+              <img data-graphic-dark src="ds/components/icons/content/chatt-24-dark.svg" alt="" width="24" height="24">
+            </span>
+            <span class="help-long">Fråga oss</span><span class="help-short">Fråga</span>
             <kbd class="fraga-kbd" id="fraga-kbd">⌘K</kbd>
           </button>
           <div class="boka-menu">
@@ -271,30 +276,37 @@
         </div>
       </section>
 
-      <p class="statement td-statement" data-depth="mid" data-title-vinter="Tänndalen är renodlat skidåkning och fjäll på riktigt. Buret av hundra års genuint värdskap, med gott om plats i både pister och liftköer." data-title-sommar="Tänndalen är renodlat fjäll och friluftsliv på riktigt. Buret av hundra års genuint värdskap, med gott om plats på både cykelleder och vandringsstigar.">Tänndalen är renodlat skidåkning och fjäll på riktigt. Buret av hundra års genuint värdskap, med gott om plats i både pister och liftköer.</p>
-        <img class="hero-topo" data-depth="back" src="assets/startsida/topografi.svg" alt="" />
-        <div class="place-labels">
-          <div class="place-label-block">
-            <p class="place-label place-storvigeln" data-depth="back" data-placeholder="true"><strong>Storvigeln</strong></p>
-            <p class="place-label place-hojd td-ui-nav" data-depth="back" data-placeholder="true" data-title-vinter="1 561 m ö.h. · 180 m fallhöjd" data-title-sommar="1 561 m ö.h. · 14 cykelleder">1 561 m ö.h. · 180 m fallhöjd</p>
-            <p class="place-label place-temp td-ui-nav" data-depth="back" data-placeholder="true" data-title-vinter="−4 °C på toppen · 11:04" data-title-sommar="14 °C på toppen · 11:04">−4 °C på toppen · 11:04</p>
+      <p class="statement td-statement" id="statement" data-depth="mid" data-title-vinter="Tänndalen är renodlat skidåkning och fjäll på riktigt. Buret av hundra års genuint värdskap, med gott om plats i både pister och liftköer." data-title-sommar="Tänndalen är renodlat fjäll och friluftsliv på riktigt. Buret av hundra års genuint värdskap, med gott om plats på både cykelleder och vandringsstigar.">Tänndalen är renodlat skidåkning och fjäll på riktigt. Buret av hundra års genuint värdskap, med gott om plats i både pister och liftköer.</p>
+        <!-- Storvigeln: gemensam enhet, separat parallax för topo och etikett. -->
+        <div class="parallax-item parallax-item--hero" data-anchor="#statement" data-parallax-item="storvigeln" style="--topo-offset-y: 0px">
+          <div class="hero-topo-unit">
+            <div class="hero-topo" role="img" aria-hidden="true"></div>
+            <div class="place-labels">
+              <div class="place-label-block">
+                <p class="place-label place-storvigeln" data-placeholder="true"><strong>Storvigeln</strong></p>
+                <p class="place-label place-hojd td-ui-nav" data-placeholder="true" data-title-vinter="1 561 m ö.h. · 180 m fallhöjd" data-title-sommar="1 561 m ö.h. · 14 cykelleder">1 561 m ö.h. · 180 m fallhöjd</p>
+                <p class="place-label place-temp td-ui-nav" data-placeholder="true" data-title-vinter="−4 °C på toppen · 11:04" data-title-sommar="14 °C på toppen · 11:04">−4 °C på toppen · 11:04</p>
+              </div>
+            </div>
           </div>
         </div>
         </div>
       </div>
       <main>
-        <div class="td-topo2-layer" data-depth="back" aria-hidden="true">
-          <img class="td-topo2" src="assets/startsida/topografi-hamrafjallet.svg" alt="" decoding="async" loading="lazy">
-          <div class="td-topo2-label">
-            <p class="td-topo2-name">Hamrafjället</p>
-            <div class="td-topo2-facts">
-              <p>1 137 m ö.h. · 295 m fallhöjd</p>
-              <p data-placeholder="true">−4 °C på toppen · 11:04</p>
+        <div id="parallax-layer" aria-hidden="true">
+          <div class="parallax-item parallax-item--hamra td-topo2-layer" data-anchor="#just-nu" data-parallax-item="hamrafjallet" style="--topo-offset-y: 0px">
+            <div class="td-topo2" role="presentation" aria-hidden="true"></div>
+            <div class="td-topo2-label">
+              <p class="td-topo2-name">Hamrafjället</p>
+              <div class="td-topo2-facts">
+                <p>1 137 m ö.h. · 295 m fallhöjd</p>
+                <p data-placeholder="true">−4 °C på toppen · 11:04</p>
+              </div>
             </div>
           </div>
         </div>
       <!-- Aktuellt. Slots that stay unrendered: icon, eyebrow, meta, byline, facts, price, primary button, link. -->
-      <section class="td-aktuellt" aria-labelledby="aktuellt-title">
+      <section class="td-aktuellt" id="aktuellt" aria-labelledby="aktuellt-title">
         <div class="td-aktuellt-head">
           <div class="td-aktuellt-titles">
             <p class="td-aktuellt-eyebrow">Aktuellt</p>
@@ -310,41 +322,86 @@
           </div>
         </div>
         <div class="td-aktuellt-track" id="aktuellt-track" role="region" aria-label="Nytt i Tänndalen" tabindex="0">
-          <article class="td-aktuellt-card" data-tone="winter">
-            <div class="td-aktuellt-media">
-              <img src="assets/aktuellt/sprakande-nyar.jpg" alt="Stjärnhimmel över en snötäckt fjällsida i Tänndalen" width="471" height="346" decoding="async">
-              <span class="td-aktuellt-chip">Pris fr. 11 900 kr/pers</span>
+          <article class="td-aktuellt-kort" data-typ="innehall" data-platta="glas">
+            <div class="td-aktuellt-kort-platta">
+              <div class="td-aktuellt-kort-bild">
+                <img src="assets/aktuellt/sprakande-nyar.jpg" alt="Stjärnhimmel över en snötäckt fjällsida i Tänndalen" width="471" height="346" decoding="async">
+                <span class="td-aktuellt-kort-kicker"><span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark">Erbjudande</span></span>
+              </div>
             </div>
-            <div class="td-aktuellt-copy">
-              <h3>Sprakande nyår</h3>
-              <p>Fira in det nya året i Tänndalen med gnistrande snö, härlig skidåkning och fjällmys tillsammans med familj och vänner.</p>
-              <div class="td-aktuellt-actions"><a class="td-button td-button-secondary td-button-md" href="#">Boka här</a></div>
-            </div>
-          </article>
-          <article class="td-aktuellt-card" data-tone="summer">
-            <div class="td-aktuellt-media">
-              <img src="assets/aktuellt/jobba-fjallifran.jpg" alt="Fyra personer med skidhjälmar och goggles vilar mot en vägg i solen" width="471" height="346" decoding="async" loading="lazy">
-            </div>
-            <div class="td-aktuellt-copy">
-              <h3>Jobba fjällifrån</h3>
-              <p>Att jobba fjällifrån i Tänndalen handlar om att skapa utrymme. För fokus, för återhämtning och för nya perspektiv.</p>
-              <div class="td-aktuellt-actions"><a class="td-button td-button-secondary td-button-md" href="#">Upptäck mer</a></div>
-            </div>
-          </article>
-          <article class="td-aktuellt-card" data-tone="autumn">
-            <div class="td-aktuellt-media">
-              <img src="assets/aktuellt/fjalltagen.jpg" alt="Närbild av en kvinna med skidmössa och speglande goggles" width="471" height="346" decoding="async" loading="lazy">
-            </div>
-            <div class="td-aktuellt-copy">
-              <h3>Fjälltagen</h3>
-              <p>Det finns stunder som stannar kvar. När fjällvinden rensar tankarna, när skratten i backen blir större än själva åket, när kaffet vid en solvarm vägg smakar mer än någon annanstans.</p>
-              <div class="td-aktuellt-actions"><a class="td-button td-button-secondary td-button-md" href="#">Fjället kallar</a></div>
+            <div class="td-aktuellt-kort-body">
+              <div class="td-aktuellt-kort-text">
+                <div class="td-aktuellt-kort-rubrik-meta">
+                  <h3 class="td-aktuellt-kort-rubrik td-heading-sm">Sprakande nyår</h3>
+                  <p class="td-aktuellt-kort-meta td-ui-body-sm">fr. 11 900 kr per person</p>
+                </div>
+                <p class="td-aktuellt-kort-beskrivning td-body-sm">Fira in det nya året i Tänndalen med gnistrande snö, härlig skidåkning och fjällmys.</p>
+              </div>
+              <div class="td-aktuellt-kort-handling">
+                <div class="td-aktuellt-kort-action"><a class="td-button td-button-secondary td-button-md" href="#">Boka</a></div>
+              </div>
             </div>
           </article>
+          <article class="td-aktuellt-kort" data-typ="innehall" data-platta="sommar">
+            <div class="td-aktuellt-kort-platta">
+              <div class="td-aktuellt-kort-bild">
+                <img src="assets/aktuellt/jobba-fjallifran.jpg" alt="Fyra personer med skidhjälmar och goggles vilar mot en vägg i solen" width="471" height="346" decoding="async" loading="lazy">
+              </div>
+            </div>
+            <div class="td-aktuellt-kort-body">
+              <div class="td-aktuellt-kort-text">
+                <div class="td-aktuellt-kort-rubrik-meta">
+                  <h3 class="td-aktuellt-kort-rubrik td-heading-sm">Jobba fjällifrån</h3>
+                </div>
+                <p class="td-aktuellt-kort-beskrivning td-body-sm">Att jobba fjällifrån i Tänndalen handlar om att skapa utrymme. För fokus, för återhämtning och för nya perspektiv.</p>
+              </div>
+              <div class="td-aktuellt-kort-handling">
+                <div class="td-aktuellt-kort-action"><a class="td-button td-button-secondary td-button-md" href="#">Upptäck mer</a></div>
+              </div>
+            </div>
+          </article>
+          <article class="td-aktuellt-kort" data-typ="innehall" data-platta="host">
+            <div class="td-aktuellt-kort-platta">
+              <div class="td-aktuellt-kort-bild">
+                <img src="assets/aktuellt/fjalltagen.jpg" alt="Närbild av en kvinna med skidmössa och speglande goggles" width="471" height="346" decoding="async" loading="lazy">
+              </div>
+            </div>
+            <div class="td-aktuellt-kort-body">
+              <div class="td-aktuellt-kort-text">
+                <div class="td-aktuellt-kort-rubrik-meta">
+                  <h3 class="td-aktuellt-kort-rubrik td-heading-sm">Fjälltagen</h3>
+                </div>
+                <p class="td-aktuellt-kort-beskrivning td-body-sm">Det finns stunder som stannar kvar. När fjällvinden rensar tankarna, när skratten i backen blir större än själva åket.</p>
+              </div>
+              <div class="td-aktuellt-kort-handling">
+                <div class="td-aktuellt-kort-action"><a class="td-button td-button-secondary td-button-md" href="#">Upptäck mer</a></div>
+              </div>
+            </div>
+          </article>
+          <button class="td-aktuellt-kort" type="button" data-typ="fraga" data-platta="vinter" data-fraga-title="Vad kostar en skidvecka för två vuxna och två barn?" data-fraga-context="Om: Startsida">
+            <header class="td-aktuellt-kort-header td-just-nu-header td-just-nu-header-sm">
+              <div class="td-just-nu-header-identity">
+                <span class="td-just-nu-header-icon"><img data-graphic-light src="ds/components/icons/content/chatt-32-light.svg" alt="" width="32" height="32"><img data-graphic-dark src="ds/components/icons/content/chatt-32-dark.svg" alt="" width="32" height="32"></span>
+                <span class="td-ui-cta-sm">Fråga oss</span>
+              </div>
+              <span class="td-corner-link" aria-label="Ställ frågan">
+                <span class="td-corner-link-label td-ui-cta-sm">Ställ frågan</span>
+                <svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg>
+              </span>
+            </header>
+            <div class="td-aktuellt-kort-fraga-body">
+              <p class="td-aktuellt-kort-fraga td-heading-md">Vad kostar en skidvecka för två vuxna och två barn?</p>
+              <p class="td-aktuellt-kort-hint td-body-sm">Vad som ingår, vad som ändrar priset och hur du bokar.</p>
+            </div>
+          </button>
         </div>
       </section>
       <section class="en-dag" id="en-dag" aria-labelledby="en-dag-title">
         <div class="en-dag-pin">
+          <div class="en-dag-skip-bar is-skip-gone" id="en-dag-skip-bar" aria-hidden="true">
+            <button type="button" class="td-button td-button-secondary td-en-dag-next" id="en-dag-next" aria-label="Nästa kort" tabindex="-1"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3.18 9.18 8 14l4.82-4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+            <button type="button" class="td-button td-button-secondary td-en-dag-skip" id="en-dag-skip" aria-label="Hoppa över" tabindex="-1">Hoppa över</button>
+          </div>
           <div class="en-dag-intro">
             <h2 class="en-dag-heading td-heading-xxl" id="en-dag-title" tabindex="-1">En dag i Tänndalen</h2>
           </div>
@@ -411,7 +468,7 @@
           </article>
           <article class="en-dag-slide" data-time="13:00" data-name="Våfflor i solen" data-summer-time="14:00" data-summer-name="Lämmelstigen" data-summer-title="Barnen tar över Lämmelstigen" data-summer-body="Få fart på vattenhjulet, smyg förbi räven och mät dig mot en myskoxe. Två kilometer för barn mellan 3 och 10 år." data-summer-cta="Läs mer om Lämmelstigen" data-summer-href="#barn" data-summer-src="assets/startsida/sommar-dag-03.jpg?v=3">
             <div class="en-dag-media" data-depth="front">
-              <img src="assets/startsida/endag-1300.jpg" alt="" />
+              <img src="assets/startsida/endag-1300.jpg?v=2" alt="Våfflor och kaffe på utomhusbordet med pist och röda stugor i bakgrunden" />
               <img class="en-dag-season-photo" alt="Barn längs Lämmelstigen, med vattenhjul och labyrinter" loading="lazy" hidden />
               <div class="en-dag-dim" aria-hidden="true"></div>
             </div>
@@ -484,7 +541,7 @@
         </figure>
       </section>
 
-      <section class="just-nu" aria-labelledby="just-nu-title">
+      <section class="just-nu" id="just-nu" aria-labelledby="just-nu-title">
         <div class="just-nu-head" data-depth="mid">
           <div>
             <p class="td-status td-ui-label"><span class="td-status-dot" aria-hidden="true"></span>Uppdaterat: <span data-just-nu-updated>09:42</span></p>
@@ -530,7 +587,7 @@
               <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
             </section>
             <a class="td-fraga td-just-nu-card" id="fraga-card" data-depth="front" href="#fraga">
-              <header class="td-just-nu-header td-just-nu-header-sm"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/24/light/fraga-oss.svg" alt=""></span><span class="td-ui-kicker">Undrar du något?</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Ställ frågan</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
+              <header class="td-just-nu-header td-just-nu-header-sm"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img data-season-icon="light" src="ds/components/icons/content/chatt-32-light.svg" alt="" width="32" height="32"><img data-season-icon="dark" src="ds/components/icons/content/chatt-32-dark.svg" alt="" width="32" height="32"></span><span class="td-ui-cta-sm">Fråga oss</span></div><span class="td-corner-link" aria-label="Ställ frågan"><span class="td-corner-link-label td-ui-cta-sm">Ställ frågan</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
               <div class="td-fraga-body"><p class="td-heading-sm" data-fraga-title>Det regnar, vad kan vi göra idag?</p><p class="td-ui-body" data-fraga-sub>Tre tips på saker att göra inomhus idag.</p></div>
             </a>
           </div>
@@ -539,11 +596,11 @@
             <video class="td-rapport-image" data-langd-video hidden muted playsinline preload="none"></video>
             <span class="td-rapport-shade"></span>
             <div class="td-rapport-body">
-              <div class="td-rapport-top" data-rapport-top hidden>
+              <div class="td-rapport-top" data-rapport-top>
                 <p class="td-heading-xxxs" data-rapport-today hidden>Händer idag</p>
+                <p class="td-rapport-chip td-ui-caption" data-rapport-chip><span class="td-rapport-diff" aria-hidden="true"></span>Medelsvår · Headstråket</p>
                 <span class="td-corner-link" data-rapport-corner hidden><span class="td-corner-link-label td-ui-cta-sm" data-rapport-corner-label></span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span>
               </div>
-              <p class="td-rapport-chip td-ui-caption" data-rapport-chip><span class="td-rapport-diff" aria-hidden="true"></span>Medelsvår · Headstråket</p>
               <div class="td-rapport-lower">
                 <p class="td-ui-kicker" data-rapport-caption>Från backen i morse · 07:40</p>
                 <div class="td-rapport-copy">
@@ -579,6 +636,36 @@
               <header class="td-just-nu-header td-just-nu-header-sm td-kamera-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8.4375 6.25C8.4375 5.94097 8.52914 5.63887 8.70083 5.38192C8.87252 5.12497 9.11655 4.9247 9.40206 4.80644C9.68757 4.68818 10.0017 4.65723 10.3048 4.71752C10.6079 4.77781 10.8863 4.92663 11.1049 5.14515C11.3234 5.36367 11.4722 5.64208 11.5325 5.94517C11.5928 6.24827 11.5618 6.56243 11.4436 6.84794C11.3253 7.13345 11.125 7.37748 10.8681 7.54917C10.6111 7.72086 10.309 7.8125 10 7.8125C9.5856 7.8125 9.18817 7.64788 8.89515 7.35485C8.60212 7.06183 8.4375 6.6644 8.4375 6.25ZM4.6875 6.25C4.6875 4.84104 5.24721 3.48978 6.2435 2.4935C7.23978 1.49721 8.59104 0.9375 10 0.9375C11.409 0.9375 12.7602 1.49721 13.7565 2.4935C14.7528 3.48978 15.3125 4.84104 15.3125 6.25C15.3125 11.1133 10.6633 13.8281 10.4648 13.9391C10.3233 14.0199 10.163 14.0624 10 14.0624C9.83696 14.0624 9.67674 14.0199 9.53516 13.9391C9.33672 13.8281 4.6875 11.1133 4.6875 6.25ZM6.5625 6.25C6.5625 9.23438 8.96172 11.2656 10 12.0031C11.032 11.2617 13.4375 9.21875 13.4375 6.25C13.4375 5.33832 13.0753 4.46398 12.4307 3.81932C11.786 3.17466 10.9117 2.8125 10 2.8125C9.08832 2.8125 8.21398 3.17466 7.56932 3.81932C6.92466 4.46398 6.5625 5.33832 6.5625 6.25ZM16.2945 11.375C16.1804 11.3266 16.0579 11.3013 15.9339 11.3005C15.81 11.2998 15.6871 11.3237 15.5724 11.3707C15.4578 11.4178 15.3536 11.4871 15.2659 11.5747C15.1782 11.6623 15.1087 11.7664 15.0615 11.881C15.0143 11.9956 14.9903 12.1184 14.9909 12.2424C14.9914 12.3663 15.0166 12.4889 15.0648 12.6031C15.1131 12.7172 15.1835 12.8207 15.272 12.9075C15.3605 12.9942 15.4654 13.0626 15.5805 13.1086C16.6844 13.5633 17.1875 14.0836 17.1875 14.375C17.1875 14.6875 16.6305 15.2398 15.4086 15.7094C13.9789 16.2563 12.0578 16.5625 10 16.5625C7.94219 16.5625 6.02109 16.2594 4.59141 15.7094C3.36875 15.2398 2.8125 14.6875 2.8125 14.375C2.8125 14.0836 3.31562 13.5633 4.41953 13.1086C4.53463 13.0626 4.63947 12.9942 4.72797 12.9075C4.81648 12.8207 4.8869 12.7172 4.93517 12.6031C4.98343 12.4889 5.00858 12.3663 5.00915 12.2424C5.00972 12.1184 4.98571 11.9956 4.9385 11.881C4.8913 11.7664 4.82183 11.6623 4.73413 11.5747C4.64643 11.4871 4.54223 11.4178 4.42756 11.3707C4.31289 11.3237 4.19003 11.2998 4.06608 11.3005C3.94214 11.3013 3.81957 11.3266 3.70547 11.375C2.44297 11.8945 0.9375 12.8367 0.9375 14.375C0.9375 17.0422 5.49687 18.4375 10 18.4375C12.2828 18.4375 14.4422 18.0906 16.082 17.4594C17.1953 17.0312 19.0625 16.0617 19.0625 14.375C19.0625 12.8367 17.557 11.8945 16.2945 11.375Z" fill="currentColor"/></svg></span><span class="td-ui-kicker" data-kamera-label>Webbkamera · Storvigeln</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Alla kameror</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
               <p class="td-kamera-status"><span class="td-kamera-live"><span class="td-kamera-dot"></span><span class="td-ui-label">Live</span></span><span class="td-ui-caption" data-kamera-line>Uppdaterad 09:42</span></p>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="fragor" aria-labelledby="fragor-title">
+        <div class="td-fraga-block" data-fraga-context="Om: Startsida">
+          <div class="td-fraga-block-overrubrik">
+            <img class="td-fraga-block-overrubrik-icon" src="ds/components/icons/content/chatt-48-light.svg" alt="" width="48" height="48">
+            <p class="td-fraga-block-overrubrik-label">Fråga oss</p>
+          </div>
+          <div class="td-fraga-block-innehall">
+            <div class="td-fraga-block-rubrikgrupp">
+              <h2 class="td-fraga-block-rubrik td-heading-lg" id="fragor-title">Vi svarar på dina frågor, stort som smått.</h2>
+              <p class="td-fraga-block-ingress td-lead-sm">Fråga om vad du vill, från avstånd till liften till vad man gör en regnig dag. Är det öppet i Hamra Syd? Behöver barnen hjälm? Skriv som du tänker.</p>
+            </div>
+            <form class="td-fraga-falt" data-fraga-falt>
+              <input class="td-fraga-falt-input td-lead-sm" type="text" name="fraga" maxlength="200" autocomplete="off" placeholder="Ställ en fråga" aria-label="Ställ en fråga">
+              <button class="td-button td-button-md td-button-secondary td-button-fill-winter td-fraga-falt-submit" type="submit" aria-label="Fråga"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </form>
+          </div>
+          <div class="td-fraga-fragelista">
+            <p class="td-fraga-fragelista-rubrik td-ui-kicker">Vanliga frågor</p>
+            <ul class="td-fraga-fragelista-platta">
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-fraga-title="Hur lång tid tar det hit?"><span class="td-fraga-fragelista-rad-text">Hur lång tid tar det hit?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Passar Tänndalen för nybörjare?"><span class="td-fraga-fragelista-rad-text">Passar Tänndalen för nybörjare?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Vad gör vi om det regnar?"><span class="td-fraga-fragelista-rad-text">Vad gör vi om det regnar?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Får jag ta med hund?"><span class="td-fraga-fragelista-rad-text">Får jag ta med hund?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Kan jag ändra min bokning?"><span class="td-fraga-fragelista-rad-text">Kan jag ändra min bokning?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Hur bokar jag?"><span class="td-fraga-fragelista-rad-text">Hur bokar jag?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -736,35 +823,10 @@
             <span class="td-hitta-meter-hours td-ui-caption" id="hitta-stop-hours"></span>
           </div>
         </article>
-        <button type="button" class="td-button td-button-secondary td-hitta-skip is-skip-gone" id="hitta-skip" aria-label="Hoppa över" aria-hidden="true" tabindex="-1">Hoppa över<svg width="20" height="20" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg></button>
+        <button type="button" class="td-button td-button-secondary td-hitta-skip is-skip-gone" id="hitta-skip" aria-label="Hoppa över" aria-hidden="true" tabindex="-1">Hoppa över</button>
         </div>
       </section>
       <div id="hitta-end"></div>
-      <section class="faq" id="fragor" aria-labelledby="fragor-title">
-        <div class="faq-grid">
-          <div class="faq-copy">
-            <p class="faq-eyebrow">Frågor</p>
-            <h2 class="td-heading-lg" id="fragor-title">Saker man undrar<br>innan man åker.</h2>
-            <p class="td-lead-sm">Hur du kommer hit, vad som ingår och vad du gör om det blir dåligt väder. Saknar du något svarar vi gärna.</p>
-            <!-- TODO: länka när sidan vanliga frågor finns. -->
-            <a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="/vanliga-fragor">Se alla vanliga frågor <span class="td-button-arrow"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
-          </div>
-          <ul class="faq-list">
-            <!-- TODO: answers for the non-clickable FAQ rows are not written yet, make them clickable when the content exists -->
-            <li><div class="faq-row faq-row-static td-body-lg">Hur lång tid tar det hit?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Passar Tänndalen för nybörjare?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
-            <li><button class="faq-row td-body-lg" type="button" data-fraga-title="Vad gör vi om det regnar?">Vad gör vi om det regnar?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Får jag ta med hund?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
-            <li><div class="faq-row faq-row-static td-body-lg">Kan jag ändra min bokning?<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></div></li>
-            <li>
-              <form class="faq-ask">
-                <input class="td-body-lg" type="text" name="fraga" maxlength="200" autocomplete="off" placeholder="Ställ din egen fråga" aria-label="Ställ din egen fråga">
-                <button type="submit" aria-label="Skicka frågan"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
-              </form>
-            </li>
-          </ul>
-        </div>
-      </section>
       </main>
     </div>
     <footer class="site-footer">
@@ -1052,18 +1114,32 @@
         ["skidskola", "Skidskola"],
         ["paket", "Paket"],
       ];
+      /* R360 category ids. MTB has no id in the configuration yet. */
+      const r360CategoryIds = { mtb: "" };
       const root = document.getElementById("booking-cats");
       const clip = document.getElementById("booking-clip");
       const pill = document.createElement("span");
       pill.className = "td-booking-pill";
       pill.hidden = true;
       root.append(pill);
-      cats.forEach(([id, label], index) => {
+      function bookingCats() {
+        const summer = document.documentElement.dataset.season === "summer";
+        return cats.map(([id, label]) => summer && id === "skidhyra" ? ["mtb", "Cykel"] : [id, label]);
+      }
+      function renderBookingCats() {
+        root.querySelectorAll("button").forEach((button) => button.remove());
+        clip.querySelectorAll(".td-booking-pane").forEach((pane) => pane.remove());
+        bookingCats().forEach(addBookingCat);
+      }
+      function addBookingCat([id, label], index) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "td-ui-label";
         button.setAttribute("aria-label", label);
-        button.innerHTML = `<span class="booking-icon-slot"><img alt="" src="assets/icons/all/32/light/${id}.svg" /></span><span>${label}</span>`;
+        const iconSlot = id === "mtb"
+          ? `<span class="booking-icon-slot"><svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true"><path fill="var(--color-text-primary)" d="M13,22 Q13,24.485 11.243,26.243 Q9.485,28 7,28 Q4.515,28 2.757,26.243 Q1,24.485 1,22 Q1,19.515 2.757,17.757 Q4.515,16 7,16 Q9.485,16 11.243,17.757 Q13,19.515 13,22 Z M11,22 Q11,18 7,18 Q3,18 3,22 Q3,26 7,26 Q11,26 11,22 Z"/><path fill="var(--color-text-primary)" d="M31,22 Q31,24.485 29.243,26.243 Q27.485,28 25,28 Q22.515,28 20.757,26.243 Q19,24.485 19,22 Q19,19.515 20.757,17.757 Q22.515,16 25,16 Q27.485,16 29.243,17.757 Q31,19.515 31,22 Z M29,22 Q29,18 25,18 Q21,18 21,22 Q21,26 25,26 Q29,26 29,22 Z"/><path fill="var(--color-text-primary)" d="M22.5,13.791 L25.916,21.599 Q26.082,21.979 25.931,22.364 Q25.78,22.75 25.401,22.916 Q25.021,23.082 24.636,22.931 Q24.25,22.78 24.084,22.401 L21.305,16.049 L16.86,22.515 Q16.779,22.653 16.658,22.756 Q16.487,22.908 16.257,22.967 Q16.191,22.984 16.124,22.993 Q16.026,23.005 15.932,23 L7.054,23 Q6.884,23.011 6.724,22.964 Q6.535,22.911 6.377,22.783 Q6.217,22.658 6.123,22.486 Q6.026,22.315 6.006,22.113 Q5.981,21.912 6.036,21.724 Q6.081,21.563 6.18,21.425 L11.112,13.533 Q11.156,13.452 11.217,13.377 Q11.342,13.217 11.514,13.123 Q11.685,13.027 11.887,13.006 Q11.982,12.994 12.075,13 L20.5,13 L20.5,10.5 Q20.5,10.086 20.793,9.793 Q21.086,9.5 21.5,9.5 L24,9.5 Q24.414,9.5 24.707,9.793 Q25,10.086 25,10.5 Q25,10.914 24.707,11.207 Q24.414,11.5 24,11.5 L22.5,11.5 L22.5,13.791 Z M13.618,15 L16.136,20.037 L19.599,15 L13.618,15 Z M8.804,21 L14.382,21 L11.903,16.042 L8.804,21 Z M10,10.5 L13.5,10.5 Q13.914,10.5 14.207,10.793 Q14.5,11.086 14.5,11.5 Q14.5,11.914 14.207,12.207 Q13.914,12.5 13.5,12.5 L10,12.5 Q9.586,12.5 9.293,12.207 Q9,11.914 9,11.5 Q9,11.086 9.293,10.793 Q9.586,10.5 10,10.5 Z"/><path fill="var(--color-accent)" d="M17.6,22 A1.6 1.6 0 1 1 14.4,22 A1.6 1.6 0 1 1 17.6,22 Z"/></svg></span>`
+          : `<span class="booking-icon-slot"><img alt="" src="assets/icons/all/32/light/${id}.svg" /></span>`;
+        button.innerHTML = `${iconSlot}<span>${label}</span>`;
         button.addEventListener("click", () => {
           const same = button.getAttribute("aria-pressed") === "true";
           [...root.querySelectorAll("button")].forEach((item) => item.setAttribute("aria-pressed", "false"));
@@ -1080,9 +1156,10 @@
         const pane = document.createElement("div");
         pane.className = "td-booking-pane";
         pane.dataset.cat = id;
-        const search = { boende: "Sök boende", liftkort: "Sök liftkort", skidhyra: "Sök skidhyra", skidskola: "Sök skidskola", paket: "Sök paket" }[id];
+        pane.dataset.r360CategoryId = r360CategoryIds[id] || "";
+        const search = { boende: "Sök boende", liftkort: "Sök liftkort", skidhyra: "Sök skidhyra", mtb: "Sök cykel", skidskola: "Sök skidskola", paket: "Sök paket" }[id];
         const dateLabel = id === "liftkort" ? "Dag" : "Datum";
-        const dateValue = id === "liftkort" ? "Välj dag" : id === "skidhyra" || id === "skidskola" ? "Välj dag eller period" : "Välj reseperiod";
+        const dateValue = id === "liftkort" ? "Välj dag" : id === "skidhyra" || id === "mtb" || id === "skidskola" ? "Välj dag eller period" : "Välj reseperiod";
         const whoLabel = id === "boende" || id === "paket" ? "Resesällskap" : "Antal";
         const whoValue = id === "boende" || id === "paket" ? "Välj resande" : "Välj antal";
         const icon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
@@ -1090,6 +1167,7 @@
           boende: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#omraden"><img src="assets/startsida/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`,
           liftkort: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#priser">Liftkort och priser</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
           skidhyra: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#hyra">Om skidhyran</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
+          mtb: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
           skidskola: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#kurser"><img src="assets/startsida/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`,
           paket: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#paket"><img src="assets/startsida/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`,
         }[id];
@@ -1097,7 +1175,9 @@
         const chev = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         pane.innerHTML = `<div class="td-field-group"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${dateLabel}</span><span class="td-field-value td-ui-body">${dateValue}</span></span>${cal}</button><hr class="td-field-divider"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${whoLabel}</span><span class="td-field-value td-ui-body">${whoValue}</span></span>${chev}</button></div><button class="td-button td-button-primary td-ui-cta td-booking-search" type="button">${icon}${search}</button>${links}`;
         clip.append(pane);
-      });
+      }
+      renderBookingCats();
+      document.addEventListener("td-season", renderBookingCats);
       initBookingFields(document.getElementById("booking"), { inline: true });
       document.addEventListener("pointerdown", (event) => {
         if (event.target.closest("#booking-clip, #booking-cats")) return;
@@ -1409,17 +1489,19 @@
       refreshTimelineLabelWidth();
       function focusFrame() {
         const headingHeight = enHeading.offsetHeight || 106;
-        const stick = parseFloat(getComputedStyle(enHeading).top) || 104;
+        const intro = enHeading.closest(".en-dag-intro");
+        const stick = parseFloat(getComputedStyle(intro || enHeading).top) || 76;
         const focusTop = stick + headingHeight * 0.5 + 20;
         const edge = 16;
         const textW = 302;
         const textGap = 64;
+        /* 10 % större + 5 % bredare (554×680 → 640×748). */
         let height = Math.min(900, Math.max(560, innerHeight - 48 - focusTop));
-        let width = height * (554 / 680);
+        let width = height * (640 / 748);
         const maxWidth = innerWidth - edge * 2 - 2 * (textW + textGap);
         if (width > maxWidth) {
           width = Math.max(240, maxWidth);
-          height = width * (680 / 554);
+          height = width * (748 / 640);
         }
         return { height, width, headingHeight };
       }
@@ -1470,8 +1552,9 @@
           placeAfterEnDag(enDag.offsetHeight);
           return;
         }
-        const cardH = Math.min(770, innerHeight - 270);
-        const cardW = cardH * (628 / 770);
+        /* 770×628 → 10 % större + 5 % bredare; landar högre under rubriken. */
+        const cardH = Math.min(847, innerHeight - 220);
+        const cardW = cardH * ((628 / 770) * 1.05);
         const left = (innerWidth - cardW) / 2;
         enDag.querySelectorAll(".en-dag-slide").forEach((slide) => { slide.style.height = `${cardH}px`; });
         enDag.querySelectorAll(".en-dag-media").forEach((media) => {
@@ -1479,8 +1562,8 @@
           media.style.width = `${cardW}px`;
           media.style.height = `${cardH}px`;
         });
-        const lockAt = parseFloat(getComputedStyle(enHeading).top) || 0;
-        const span = Math.max(1, innerHeight * 1.35 - 238);
+        const lockAt = parseFloat(getComputedStyle(enPin).top) || 0;
+        const span = Math.max(1, innerHeight * 1.35 - 188);
         const puffArrives = (enSlides.length - 1) * span;
         // Hold tills linjen når solnedgång. Kort exit — ~120 px lucka till citatet.
         const sunHold = Math.max(120, span * 0.35);
@@ -1488,9 +1571,8 @@
         const exitRun = Math.round(innerHeight * 0.4);
         const seasonSlot = document.querySelector(".en-dag-season");
         if (seasonSlot) {
-          seasonSlot.style.left = `${left - enDag.getBoundingClientRect().left}px`;
-          seasonSlot.style.width = `${cardW}px`;
-          seasonSlot.style.right = "auto";
+          const sectionBox = enDag.getBoundingClientRect();
+          placeSeasonBanner(sectionBox, left, cardW, null, false);
         }
         const sectionH = puffArrives + hold + lockAt + exitRun + (seasonSlot ? seasonSlot.offsetHeight : 0);
         enDag.style.height = `${sectionH}px`;
@@ -1543,17 +1625,33 @@
         const kart = document.getElementById("hitta-kart");
         if (kart) kart.style.opacity = showHitta ? "1" : "0";
       }
+      const EN_SEASON_GAP = 40; /* stabil luft under sista kortet */
       function syncEnDagHang() {
         if (reduced || enMobile.matches) return;
         const vh = innerHeight;
         const air = parseFloat(getComputedStyle(enDag).getPropertyValue("--endag-heading-air")) || 0;
-        const cardBottom = 238 + air + Math.min(770, vh - 270);
+        const cardBottom = 188 + air + Math.min(847, vh - 220);
         enDag.style.setProperty("--en-dag-card-bottom", `${Math.round(cardBottom)}px`);
         const season = enDag.querySelector(".en-dag-season");
-        const padTop = season ? parseFloat(getComputedStyle(season).paddingTop) || 0 : 0;
         const seasonH = season ? season.offsetHeight : 0;
-        const hang = cardBottom + 80 + seasonH - padTop - vh;
+        const hang = cardBottom + EN_SEASON_GAP + seasonH - vh;
         enDag.style.setProperty("--en-dag-hang", `${Math.round(hang)}px`);
+      }
+      function placeSeasonBanner(sectionBox, cardLeft, cardW, mediaBox, followCard) {
+        const season = enDag.querySelector(".en-dag-season");
+        if (!season || enMobile.matches) return;
+        const left = mediaBox ? mediaBox.left - sectionBox.left : cardLeft - sectionBox.left;
+        const width = mediaBox ? mediaBox.width : cardW;
+        season.style.left = `${left}px`;
+        season.style.width = `${width}px`;
+        season.style.right = "auto";
+        if (followCard && mediaBox) {
+          season.style.bottom = "auto";
+          season.style.top = `${mediaBox.bottom + EN_SEASON_GAP - sectionBox.top}px`;
+        } else {
+          season.style.top = "";
+          season.style.bottom = "";
+        }
       }
       function placeEnDag() {
         if (reduced) return;
@@ -1566,16 +1664,17 @@
           return;
         }
         const sectionTop = sectionBox.top;
-        const lockAt = parseFloat(getComputedStyle(enHeading).top) || 24;
+        /* Pin sticky top — inte heading.top (auto→24) som låste för tidigt / lägre. */
+        const lockAt = parseFloat(getComputedStyle(enPin).top) || 0;
         const scrolled = Math.max(0, lockAt - sectionTop);
         const vh = innerHeight;
         const pinTop = enPin.getBoundingClientRect().top;
         const n = enSlides.length;
-        const cardH = Math.min(770, vh - 270);
-        const cardW = cardH * (628 / 770);
+        const cardH = Math.min(847, vh - 220);
+        const cardW = cardH * ((628 / 770) * 1.05);
         const cardLeft = (innerWidth - cardW) / 2;
-        const front = 238;
-        const back = 166;
+        const front = 188; /* högre under rubriken (var 238) */
+        const back = 131;
         const backScale = 0.882;
         const start = vh * 1.35;
         const span = Math.max(1, start - front);
@@ -1598,12 +1697,17 @@
           const puff = slide.querySelector(".en-dag-puff-copy");
           const into = index === 0 ? 1 : unit(index - 1);
           const onward = index < n - 1 ? unit(index) : 0;
+          /* När nästa kort rör sig bakåt: krymp ytterligare ~2 % så bakre
+             inte landar i exakt samma skala som det som närmar sig. */
+          const recess = index < n - 1 ? unit(index + 1) : 0;
           const parked = into >= 1;
           const rising = !parked;
           const y = rising
             ? start + (front - start) * mix(into)
             : front + (back - front) * mix(onward);
-          const scale = rising ? 1 : 1 + (backScale - 1) * mix(onward);
+          const scale = rising
+            ? 1
+            : 1 + (backScale - 1) * mix(onward) - 0.02 * mix(recess);
           const waiting = index > 0 && into <= 0;
           // Alla kort utom puffen grävs när puffen landat (samma beteende).
           const buried = index < n - 1 && scrolled >= Math.min((index + 2) * span, puffArrives);
@@ -1651,6 +1755,13 @@
             puff.style.transform = "none";
           }
         });
+        /* Säsongsbanner: samma left/width som kortet; följer sista kortet med fast gap. */
+        {
+          const lastMedia = enSlides[n - 1]?.querySelector(".en-dag-media");
+          const mediaBox = lastMedia?.getBoundingClientRect();
+          const follow = scrolled >= puffArrives - span * 0.2;
+          placeSeasonBanner(sectionBox, cardLeft, cardW, mediaBox, follow);
+        }
         enHeading.style.opacity = "1";
         enHeading.style.visibility = "visible";
         enHeading.style.top = "";
@@ -1772,6 +1883,435 @@
           enMobile.addEventListener("change", () => { try { layoutEnDag(); placeEnDag(); } catch (error) { console.error(error); } });
           if (document.fonts?.ready) document.fonts.ready.then(() => { try { refreshTimelineLabelWidth(); placeEnDag(); } catch (error) { console.error(error); } });
           placeEnDag();
+          /* Snap: hard (jack) | settle (tröskel efter idle) | off. */
+          const EN_FRONT = 188;
+          const enSkipBtn = document.getElementById("en-dag-skip");
+          const enSkipBar = document.getElementById("en-dag-skip-bar");
+          const enNextBtn = document.getElementById("en-dag-next");
+          const enSnapParams = new URLSearchParams(location.search);
+          const enSnapParam = enSnapParams.get("snap");
+          const enSnapModeInit = enSnapParam === "hard" || enSnapParam === "off" || enSnapParam === "settle"
+            ? enSnapParam
+            : "settle";
+          enDag.dataset.snap = enSnapModeInit;
+          const enSnapDebugOn = enSnapParams.get("debug") === "snap";
+          const enSnapReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          let enSnapping = false;
+          let enSnapRaf = 0;
+          let enSnapAcc = 0;
+          let enSnapLock = 0;
+          let enSettleTimer = 0;
+          let enSkipHideTimer = 0;
+          let enSkipReady = false;
+          let enTouchActive = false;
+          let enSnapArmed = false;
+          let enVelSamples = []; /* { t, v } — |dy|/dt över senaste 100 ms */
+          let enLastScrollAt = 0;
+          let enLastDirection = 0; /* +1 ned, −1 upp, 0 okänd — bara auto-settle */
+          let enPrevY = scrollY;
+          let enPrevT = performance.now();
+          let enDebugPick = "—";
+          let enDebugEl = null;
+          let enDebugMarks = null;
+          let enPdCount = { wheel: 0, touchstart: 0, touchmove: 0, keydown: 0 };
+          function enSnapMode() {
+            const m = enDag.dataset.snap;
+            return m === "hard" || m === "off" || m === "settle" ? m : "settle";
+          }
+          function enSnapCssNum(name, fallback) {
+            const raw = getComputedStyle(enDag).getPropertyValue(name).trim();
+            const n = parseFloat(raw);
+            return Number.isFinite(n) ? n : fallback;
+          }
+          function enSnapMetrics() {
+            const lockAt = parseFloat(getComputedStyle(enPin).top) || 0;
+            const span = Math.max(1, innerHeight * 1.35 - EN_FRONT);
+            const sectionDocTop = enDag.getBoundingClientRect().top + scrollY;
+            const points = enSlides.map((_, i) => sectionDocTop - lockAt + i * span);
+            return { lockAt, span, points };
+          }
+          function enSnapZone() {
+            if (enMobile.matches) return false;
+            if (document.body.classList.contains("fraga-open")) return false;
+            const hitta = document.getElementById("hitta");
+            if (hitta?.classList.contains("is-held")) return false;
+            const box = enDag.getBoundingClientRect();
+            const { lockAt } = enSnapMetrics();
+            return box.top <= lockAt + 4 && box.bottom > innerHeight * 0.5;
+          }
+          function enNearestStep(points) {
+            let step = 0;
+            let best = Infinity;
+            points.forEach((p, i) => {
+              const d = Math.abs(scrollY - p);
+              if (d < best) { best = d; step = i; }
+            });
+            return { step, best };
+          }
+          function enAnchorStep(points, dir) {
+            if (dir > 0) {
+              let step = 0;
+              for (let i = 0; i < points.length; i++) {
+                if (points[i] <= scrollY + 2) step = i;
+              }
+              return step;
+            }
+            let step = points.length - 1;
+            for (let i = points.length - 1; i >= 0; i--) {
+              if (points[i] >= scrollY - 2) step = i;
+            }
+            return step;
+          }
+          function enEaseSnapHard(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          }
+          function enCancelSnap() {
+            if (enSnapRaf) cancelAnimationFrame(enSnapRaf);
+            enSnapRaf = 0;
+            enSnapping = false;
+            enSnapArmed = false;
+          }
+          function enSmoothTo(y, ms) {
+            if (enSnapReduced) return;
+            const from = scrollY;
+            const t0 = performance.now();
+            const duration = Math.max(1, ms);
+            const ease = enSnapMode() === "hard" ? enEaseSnapHard : easeOutSoft;
+            enCancelSnap();
+            enSnapping = true;
+            enSnapArmed = true;
+            const tick = (now) => {
+              if (!enSnapping) return;
+              const u = Math.min(1, (now - t0) / duration);
+              scrollTo(0, from + (y - from) * ease(u));
+              if (u < 1) enSnapRaf = requestAnimationFrame(tick);
+              else {
+                scrollTo(0, y);
+                enSnapping = false;
+                enSnapArmed = false;
+                enSnapRaf = 0;
+              }
+            };
+            enSnapRaf = requestAnimationFrame(tick);
+          }
+          function enPruneVel(now = performance.now()) {
+            while (enVelSamples.length && now - enVelSamples[0].t > 100) enVelSamples.shift();
+          }
+          /* Riktning/hastighet: dy/dt mot prevY/prevT — spara först, skriv sen prev (aldrig tvärtom).
+             lastDirection nollställs aldrig av tystnad; bara ny rörelse åt andra hållet. */
+          function enRecordVel() {
+            const now = performance.now();
+            const y = scrollY;
+            const dy = y - enPrevY;
+            const dt = Math.max(0.001, now - enPrevT);
+            if (Math.abs(dy) >= 1) {
+              enLastDirection = Math.sign(dy);
+              enVelSamples.push({ t: now, v: Math.abs(dy) / dt });
+              enPruneVel(now);
+            }
+            enPrevY = y;
+            enPrevT = now;
+          }
+          function enVelocity() {
+            enPruneVel();
+            if (!enVelSamples.length) return 0;
+            let sum = 0;
+            for (let i = 0; i < enVelSamples.length; i++) sum += enVelSamples[i].v;
+            return sum / enVelSamples.length;
+          }
+          /* Settle-kandidat: bara punkter i lastDirection, tröskel framåt. */
+          function enSettleCandidate(points, span) {
+            const threshold = enSnapCssNum("--snap-threshold", 0.3);
+            const allowed = [];
+            if (!enLastDirection) {
+              return { allowed, pick: null, reason: "ingen (riktning okänd)" };
+            }
+            for (let i = 0; i < points.length; i++) {
+              if (Math.abs(scrollY - points[i]) <= 1) {
+                return { allowed: [{ i, p: points[i] }], pick: null, reason: "på kort" };
+              }
+            }
+            points.forEach((p, i) => {
+              if (enLastDirection > 0 && p >= scrollY - 1) allowed.push({ i, p });
+              if (enLastDirection < 0 && p <= scrollY + 1) allowed.push({ i, p });
+            });
+            let pick = null;
+            let bestD = Infinity;
+            allowed.forEach((a) => {
+              const d = Math.abs(a.p - scrollY);
+              if (d < bestD) { bestD = d; pick = a; }
+            });
+            if (!pick || bestD > span * threshold) {
+              return { allowed, pick: null, reason: "ingen (död zon eller bakåt)" };
+            }
+            return { allowed, pick, reason: `→${pick.i}` };
+          }
+          function enTrySettle() {
+            try {
+              const mode = enSnapMode();
+              if (mode === "off" || enSnapReduced) return;
+              if (!enSnapZone() || enSnapping || enTouchActive) return;
+              const delay = enSnapCssNum("--snap-settle-delay", 90);
+              /* Under pågående scroll: snappa aldrig (timer kan elda mellan ramar). */
+              if (performance.now() - enLastScrollAt < delay - 8) {
+                enArmSettle();
+                return;
+              }
+              const { points, span } = enSnapMetrics();
+              if (!points.length) return;
+              const { step, best } = enNearestStep(points);
+              const threshold = enSnapCssNum("--snap-threshold", 0.3);
+              const velMax = enSnapCssNum("--snap-velocity-max", 1.2);
+              const duration = enSnapCssNum("--snap-duration", 520);
+              if (mode === "hard") {
+                const catchPx = span * 0.12;
+                if (best > 3 && best < catchPx) enSmoothTo(points[step], 380);
+                return;
+              }
+              /* settle: utanför första/sista + tröskel → på väg ut, snappa inte */
+              const edge = span * threshold;
+              if (scrollY < points[0] - edge || scrollY > points[points.length - 1] + edge) {
+                enDebugPick = "ingen (ut ur sektion)";
+                return;
+              }
+              const vel = enVelocity();
+              if (Math.abs(vel) > velMax) {
+                enArmSettle();
+                return;
+              }
+              const cand = enSettleCandidate(points, span);
+              enDebugPick = cand.reason;
+              if (!cand.pick) return;
+              enSmoothTo(cand.pick.p, duration);
+            } catch (error) { console.error(error); }
+          }
+          function enArmSettle() {
+            const mode = enSnapMode();
+            if (mode === "off") return;
+            window.clearTimeout(enSettleTimer);
+            const delay = enSnapCssNum("--snap-settle-delay", 90);
+            enSnapArmed = true;
+            enSettleTimer = window.setTimeout(() => {
+              enSnapArmed = false;
+              enTrySettle();
+            }, delay);
+          }
+          function enUpdateDebug() {
+            if (!enSnapDebugOn) return;
+            const mode = enSnapMode();
+            const { points, span } = enSnapMetrics();
+            const { step, best } = enNearestStep(points);
+            const threshold = enSnapCssNum("--snap-threshold", 0.3);
+            const vel = enVelocity();
+            const cand = enSettleCandidate(points, span);
+            const allowedStr = cand.allowed.length
+              ? cand.allowed.map((a) => `${a.i}@${a.p | 0}`).join(",")
+              : "—";
+            if (!enDebugEl) {
+              enDebugEl = document.createElement("div");
+              enDebugEl.id = "snap-debug";
+              document.body.append(enDebugEl);
+              enDebugMarks = document.createElement("div");
+              enDebugMarks.id = "snap-debug-marks";
+              document.body.append(enDebugMarks);
+            }
+            enDebugEl.textContent =
+              `snap=${mode}  y=${scrollY | 0}  dir=${enLastDirection || "?"}  near=${step}  d=${best.toFixed(0)}  allowed=[${allowedStr}]  pick=${cand.reason || enDebugPick}  armed=${enSnapArmed || enSnapping ? 1 : 0}  v=${vel.toFixed(2)}  thr=${threshold}  delay=${enSnapCssNum("--snap-settle-delay", 90)}  dur=${enSnapCssNum("--snap-duration", 520)}`;
+            enDebugMarks.replaceChildren();
+            points.forEach((p) => {
+              const line = document.createElement("div");
+              line.className = "snap-debug-line";
+              line.style.top = `${p - scrollY}px`;
+              enDebugMarks.append(line);
+              const zone = document.createElement("div");
+              zone.className = "snap-debug-zone";
+              const band = span * threshold;
+              zone.style.top = `${p - band - scrollY}px`;
+              zone.style.height = `${band * 2}px`;
+              enDebugMarks.append(zone);
+            });
+          }
+          addEventListener("scroll", () => {
+            enLastScrollAt = performance.now();
+            enRecordVel();
+            if (enSnapDebugOn) enUpdateDebug();
+            if (enSnapMode() === "off") return;
+            if (enSnapping) return;
+            if (!enSnapZone()) return;
+            enArmSettle();
+          }, { passive: true });
+          if ("onscrollend" in window) {
+            addEventListener("scrollend", () => {
+              /* Armera samma debounce — snappa aldrig direkt på scrollend (kan elda per scrollBy). */
+              if (enSnapMode() === "settle" || enSnapMode() === "hard") enArmSettle();
+            }, { passive: true });
+          }
+          addEventListener("wheel", (event) => {
+            try {
+              const mode = enSnapMode();
+              if (mode !== "hard") {
+                if (enSnapping) enCancelSnap();
+                return;
+              }
+              if (!enSnapZone()) {
+                if (enSnapping) enCancelSnap();
+                return;
+              }
+              if (enSnapping) { event.preventDefault(); enPdCount.wheel++; return; }
+              const dir = event.deltaY === 0 ? 0 : event.deltaY > 0 ? 1 : -1;
+              if (!dir) return;
+              const { points, span } = enSnapMetrics();
+              if (!points.length) return;
+              const step = enAnchorStep(points, dir);
+              if (dir < 0 && step === 0 && scrollY <= points[0] + 12) return;
+              if (dir > 0 && step === points.length - 1 && scrollY >= points[points.length - 1] - 12) return;
+              const freePx = span * 0.22;
+              const traveled = dir > 0 ? scrollY - points[step] : points[step] - scrollY;
+              if (traveled >= 0 && traveled < freePx) {
+                enSnapAcc = 0;
+                return;
+              }
+              const now = performance.now();
+              if (now < enSnapLock) { event.preventDefault(); enPdCount.wheel++; return; }
+              event.preventDefault();
+              enPdCount.wheel++;
+              enSnapAcc += event.deltaY;
+              if (Math.abs(enSnapAcc) < 40) return;
+              const go = enSnapAcc > 0 ? 1 : -1;
+              enSnapAcc = 0;
+              const next = Math.max(0, Math.min(points.length - 1, step + go));
+              if (next === step) return;
+              enSnapLock = now + 320;
+              const dist = Math.abs(points[next] - scrollY);
+              enSmoothTo(points[next], Math.min(780, Math.max(420, dist * 0.48)));
+            } catch (error) { console.error(error); }
+          }, { passive: false });
+          addEventListener("touchstart", () => {
+            enTouchActive = true;
+            if (enSnapping) enCancelSnap();
+          }, { passive: true });
+          addEventListener("touchend", () => {
+            enTouchActive = false;
+            if (enSnapMode() === "settle") enArmSettle();
+          }, { passive: true });
+          addEventListener("touchcancel", () => { enTouchActive = false; }, { passive: true });
+          addEventListener("keydown", (event) => {
+            if (enSnapping) enCancelSnap();
+            const mode = enSnapMode();
+            if (mode === "off" || enSnapReduced) return;
+            if (!enSnapZone()) return;
+            const down = ["ArrowDown", "PageDown", " "].includes(event.key);
+            const up = ["ArrowUp", "PageUp"].includes(event.key);
+            if (!down && !up) return;
+            if (event.target && /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)) return;
+            if (event.target?.isContentEditable) return;
+            const { points } = enSnapMetrics();
+            if (!points.length) return;
+            const dir = down ? 1 : -1;
+            const step = enAnchorStep(points, dir);
+            const next = Math.max(0, Math.min(points.length - 1, step + dir));
+            if (next === step && Math.abs(scrollY - points[step]) < 2) return;
+            /* Soft go — ingen preventDefault (fokusordning oförändrad). */
+            const duration = enSnapCssNum("--snap-duration", 520);
+            enSmoothTo(points[next], mode === "hard" ? Math.min(780, 520) : duration);
+          }, { passive: true });
+          enEventEls.forEach((el, index) => {
+            el.addEventListener("click", () => {
+              if (enSnapMode() === "off" || enSnapReduced) return;
+              const { points } = enSnapMetrics();
+              if (!points[index]) return;
+              enSmoothTo(points[index], enSnapCssNum("--snap-duration", 520));
+            });
+          });
+          function enSkipTargetY() {
+            const citat = document.getElementById("citat-band");
+            if (citat) return citat.getBoundingClientRect().top + scrollY - 24;
+            return enDag.getBoundingClientRect().bottom + scrollY - Math.round(innerHeight * 0.15);
+          }
+          function syncEnDagSkip() {
+            if (!enSkipBar || !enSkipBtn) return;
+            const show = enSnapZone();
+            const first = !enSkipReady;
+            enSkipReady = true;
+            if (first) enSkipBar.style.transition = "none";
+            if (show) enSkipBar.classList.add("is-en-skip-live");
+            const setTab = (on) => {
+              const tab = on ? 0 : -1;
+              enSkipBtn.tabIndex = tab;
+              if (enNextBtn) enNextBtn.tabIndex = tab;
+            };
+            if (!show) {
+              const already = enSkipBar.classList.contains("is-skip-gone");
+              enSkipBar.classList.add("is-skip-gone");
+              enSkipBar.setAttribute("aria-hidden", "true");
+              setTab(false);
+              window.clearTimeout(enSkipHideTimer);
+              if (first || already) enSkipBar.style.visibility = "hidden";
+              else {
+                enSkipHideTimer = window.setTimeout(() => {
+                  if (enSkipBar.classList.contains("is-skip-gone")) {
+                    enSkipBar.style.visibility = "hidden";
+                    enSkipBar.classList.remove("is-en-skip-live");
+                  }
+                }, 200);
+              }
+            } else {
+              window.clearTimeout(enSkipHideTimer);
+              enSkipBar.style.visibility = "";
+              enSkipBar.classList.remove("is-skip-gone");
+              enSkipBar.setAttribute("aria-hidden", "false");
+              setTab(true);
+              const { points } = enSnapMetrics();
+              if (enNextBtn && points.length) {
+                const onLast = scrollY >= points[points.length - 1] - 2;
+                enNextBtn.disabled = onLast;
+                enNextBtn.setAttribute("aria-disabled", onLast ? "true" : "false");
+              }
+            }
+            if (first) {
+              enSkipBar.getBoundingClientRect();
+              enSkipBar.style.transition = "";
+            }
+          }
+          addEventListener("scroll", () => { try { syncEnDagSkip(); } catch (error) { console.error(error); } }, { passive: true });
+          syncEnDagSkip();
+          enSkipBtn?.addEventListener("click", (event) => {
+            event.preventDefault();
+            enSmoothTo(enSkipTargetY(), 720);
+          });
+          enNextBtn?.addEventListener("click", (event) => {
+            event.preventDefault();
+            if (enSnapReduced || enSnapMode() === "off") return;
+            const { points } = enSnapMetrics();
+            if (!points.length) return;
+            const step = enAnchorStep(points, 1);
+            const next = Math.min(points.length - 1, step + 1);
+            if (next === step) return;
+            enLastDirection = 1;
+            enSmoothTo(points[next], enSnapCssNum("--snap-duration", 520));
+          });
+          if (enSnapDebugOn) {
+            addEventListener("scroll", enUpdateDebug, { passive: true });
+            enUpdateDebug();
+          }
+          window.__enSnap = {
+            mode: enSnapMode,
+            metrics: enSnapMetrics,
+            cancel: enCancelSnap,
+            smoothTo: enSmoothTo,
+            trySettle: enTrySettle,
+            settleCandidate: enSettleCandidate,
+            forceSettle: () => {
+              enLastScrollAt = performance.now() - 1000;
+              enVelSamples = [];
+              enTrySettle();
+            },
+            pdCount: () => ({ ...enPdCount }),
+            velocity: enVelocity,
+            direction: () => enLastDirection,
+            setDirection: (d) => { enLastDirection = d; },
+            zone: enSnapZone,
+          };
         }
       } catch (error) { console.error("season", error); }
       } catch (error) { console.error("season", error); }
@@ -1927,7 +2467,7 @@
         const dy = (availH - scaledH) / 2 - visualTop;
         hittaFit = { s, ox, oy, dy };
         hittaKart.style.transformOrigin = `${ox}px ${oy}px`;
-        hittaKart.style.transform = `translateX(-50%) translateY(calc(${dy}px + var(--parallax-y, 0px))) scale(${s})`;
+        hittaKart.style.transform = `translateX(-50%) translateY(${dy}px) scale(${s})`;
         updateHittaMask();
         const skip = document.getElementById("hitta-skip");
         if (hitta.classList.contains("is-held")) {
@@ -2753,166 +3293,257 @@
       }
       } catch (error) { console.error("pan", error); }
       try {
-      if (!reduced) {
-        const pageStyle = getComputedStyle(document.querySelector(".page"));
-        const depthFactor = (name) => {
-          const value = parseFloat(pageStyle.getPropertyValue(`--depth-${name}`));
-          return Number.isFinite(value) ? value : 1;
-        };
-        const depthMax = () => {
-          const value = parseFloat(pageStyle.getPropertyValue("--depth-max"));
-          return Number.isFinite(value) ? value : 32;
-        };
-        const visible = new Set();
-        const watch = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) visible.add(entry.target);
-            else visible.delete(entry.target);
-          });
-          requestTick();
-        }, { rootMargin: "120px" });
-        document.querySelectorAll("[data-depth]").forEach((node) => {
-          if (node.dataset.depth !== "front") watch.observe(node);
-        });
-        let frame = 0;
-        const topoEase = (t) => {
-          const x = Math.max(0, Math.min(1, t));
-          return x * x * x * (x * (x * 6 - 15) + 10);
-        };
-        function placeTopoQuote() {
-          const topo = document.querySelector(".td-topo2-layer");
-          const quote = document.querySelector("blockquote.quote");
-          const cards = document.querySelector(".just-cols");
-          const blue = document.querySelector(".boende");
-          const page = document.querySelector(".page");
-          if (!topo || !quote || !cards || !blue || !page) return;
-          const topoH = topo.getBoundingClientRect().height;
-          if (topoH < 40) return;
-          const cardsBottom = cards.getBoundingClientRect().bottom;
-          const pageTop = page.getBoundingClientRect().top;
-          topo.style.top = `${cardsBottom + scrollY - 204 - (pageTop + scrollY)}px`;
-          blue.style.marginTop = `${topoH - 119}px`;
-          const blueTop = blue.getBoundingClientRect().top;
-          const quoteLift = innerWidth >= 1024 ? 69 : 91;
-          quote.style.top = `${blueTop - quoteLift - quote.getBoundingClientRect().height - pageTop}px`;
-          const phase3 = innerHeight * TOPO2_MOTION.PHASE3_VH;
-          const lag = 1 - TOPO2_MOTION.PHASE3_SPEED;
-          const ahead = phase3 * lag * 0.5;
-          const span = TOPO2_MOTION.RANGE_START - TOPO2_MOTION.RANGE_END;
-          const p = cardsBottom / innerHeight;
-          let group = TOPO2_MOTION.START_OFFSET;
-          if (p < TOPO2_MOTION.RANGE_START && p > TOPO2_MOTION.RANGE_END) {
-            const eased = topoEase((TOPO2_MOTION.RANGE_START - p) / span);
-            group = TOPO2_MOTION.START_OFFSET * (1 - eased) - ahead * eased;
-          } else if (p <= TOPO2_MOTION.RANGE_END) {
-            const start = (cards.getBoundingClientRect().bottom + scrollY) - innerHeight * TOPO2_MOTION.RANGE_END;
-            const u = Math.max(0, Math.min(1, (scrollY - start) / phase3));
-            group = -ahead + phase3 * lag * (Math.pow(u, 6) - 3 * Math.pow(u, 5) + 2.5 * Math.pow(u, 4));
+      /* Enkel parallax: ett lager, en faktor, ankare per topografi. */
+      (function initParallax() {
+        const root = document.documentElement;
+        const layer = document.getElementById("parallax-layer");
+        const runway = document.getElementById("intro-runway");
+        const page = document.querySelector(".page");
+        const quote = document.querySelector("blockquote.quote");
+        const block = document.querySelector(".td-fraga-block");
+        const blue = document.querySelector(".boende");
+        const params = new URLSearchParams(location.search);
+        const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const mobileQ = matchMedia("(max-width: 1023px)");
+        let factor = 0.8;
+        const qFactor = parseFloat(params.get("parallax"));
+        if (Number.isFinite(qFactor) && qFactor >= 0.5 && qFactor <= 1) factor = qFactor;
+        const debugOn = params.get("debug") === "parallax";
+        function activeFactor() {
+          if (reducedMotion) return 1;
+          if (mobileQ.matches) {
+            const m = parseFloat(getComputedStyle(root).getPropertyValue("--parallax-factor-mobile"));
+            return Number.isFinite(m) ? m : 0.92;
           }
-          topo.style.setProperty("--parallax-y", `${group.toFixed(2)}px`);
-          quote.style.setProperty("--parallax-y", `${(group * TOPO2_MOTION.QUOTE_SCALE).toFixed(2)}px`);
-          const label = topo.querySelector(".td-topo2-label");
-          if (!label) return;
-          label.toggleAttribute("aria-hidden", innerWidth <= 1024);
-          const lb = label.getBoundingClientRect();
-          const cardEls = [...document.querySelectorAll(".td-just-nu-data")].filter((el) => !el.closest("[hidden]"));
-          const covered = cardEls.some((el) => {
-            const b = el.getBoundingClientRect();
-            return lb.top >= b.top && lb.bottom <= b.bottom && lb.left >= b.left && lb.right <= b.right;
-          });
-          label.classList.toggle("is-covered", covered);
+          const cssF = parseFloat(getComputedStyle(root).getPropertyValue("--parallax-factor"));
+          return Number.isFinite(cssF) ? cssF : factor;
         }
-        function placeHeroTopo() {
-          const topo = document.querySelector(".hero-topo");
-          const card = document.querySelector(".td-aktuellt-card");
-          const statement = document.querySelector(".statement");
-          if (!topo || !card || !statement) return;
-          const labels = [...document.querySelectorAll(".place-labels")];
-          const shiftOf = (el) => parseFloat(el.style.getPropertyValue("--parallax-y")) || 0;
-          const topoTop = topo.getBoundingClientRect().top - shiftOf(topo);
-          const topoH = topo.getBoundingClientRect().height;
-          if (topoH < 40) return;
-          const cardsTop = card.getBoundingClientRect().top;
-          const base = cardsTop - topoTop;
-          const shiftFor = (uncovered) => base - uncovered * topoH;
-          const cardsDoc = cardsTop + scrollY;
-          const freezeY = cardsDoc - 0.647 * innerHeight;
-          const y = Math.min(scrollY, freezeY);
-          const sMid = cardsDoc - Math.min(450, innerHeight - 1);
-          const sLow = cardsDoc - Math.min(150, innerHeight / 2);
-          const stmtBottom = statement.getBoundingClientRect().bottom - shiftOf(statement) + scrollY;
-          const eMid = shiftFor(0.78);
-          const eLow = shiftFor(0.45);
-          const eStay = shiftFor(0.12);
-          const eFull = shiftFor(0);
-          let shift = 0;
-          if (y > 0 && y < sMid) shift = eMid * topoEase(y / Math.max(sMid, 1));
-          else if (y >= sMid && y < sLow) shift = eMid + (eLow - eMid) * topoEase((y - sMid) / Math.max(sLow - sMid, 1));
-          else if (y >= sLow) {
-            const sStay = Math.max(sLow + 1, stmtBottom);
-            if (y < sStay) shift = eLow + (eStay - eLow) * topoEase((y - sLow) / (sStay - sLow));
-            else {
-              const sFull = sStay + topoH * 0.45;
-              shift = y >= sFull ? eFull : eStay + (eFull - eStay) * topoEase((y - sStay) / (sFull - sStay));
-            }
+        root.style.setProperty("--parallax-factor", String(factor));
+        root.style.setProperty("--parallax-factor-mobile", "0.92");
+        root.style.setProperty("--parallax-offset", "0px");
+        let heroS0 = 0;
+        let hamraS0 = 0;
+        /* Bevara etikettens sidposition (högerkant) från tidigare layout vid 1440. */
+        const HERO_LABEL_RIGHT_INSET = 345.15625; /* 1065.16 − 50vw@1440 */
+        function runwayAdjust() {
+          /* Extra löpbane-scroll bara under aktivt intro — annars 0. */
+          if (!runway) return 0;
+          if (root.classList.contains("is-intro-done") || root.classList.contains("is-returning")) return 0;
+          if (!root.classList.contains("is-intro")) return 0;
+          return Math.max(0, runway.offsetHeight - innerHeight);
+        }
+        function scrollPrime() {
+          return Math.max(0, scrollY - runwayAdjust());
+        }
+        function labelDelta() {
+          if (reducedMotion || mobileQ.matches) return 0;
+          const d = parseFloat(getComputedStyle(root).getPropertyValue("--label-parallax-delta"));
+          return Number.isFinite(d) ? d : 0.04;
+        }
+        function labelMaxDrift() {
+          const m = parseFloat(getComputedStyle(root).getPropertyValue("--label-max-drift"));
+          return Number.isFinite(m) ? m : 40;
+        }
+        function clampedLabelDrift(y, s0) {
+          const raw = labelDelta() * (y - s0);
+          const max = labelMaxDrift();
+          return Math.max(-max, Math.min(max, raw));
+        }
+        function placeQuoteLayout() {
+          if (!quote || !block || !blue || !page) return;
+          const pageBox = page.getBoundingClientRect();
+          const blockBox = block.getBoundingClientRect();
+          const scale = blockBox.width / TOPO2_LAYOUT.BLOCK_W;
+          quote.style.left = `${(blockBox.left - pageBox.left + TOPO2_LAYOUT.QUOTE_DX * scale).toFixed(2)}px`;
+          quote.style.width = `${Math.min(520, 460 * scale).toFixed(2)}px`;
+          quote.style.maxWidth = quote.style.width;
+          quote.style.top = `${blockBox.bottom - pageBox.top}px`;
+          quote.style.removeProperty("--parallax-y");
+          blue.style.marginTop = `${Math.max(0, quote.getBoundingClientRect().height + 40).toFixed(2)}px`;
+        }
+        function placeHamraHorizontal() {
+          const hamra = document.querySelector(".parallax-item--hamra");
+          if (!hamra || !block || !page) return;
+          const pageBox = page.getBoundingClientRect();
+          const blockBox = block.getBoundingClientRect();
+          const scale = blockBox.width / TOPO2_LAYOUT.BLOCK_W;
+          hamra.style.width = `${(TOPO2_LAYOUT.TOPO_W * scale).toFixed(2)}px`;
+          hamra.style.left = `${(blockBox.left - pageBox.left + TOPO2_LAYOUT.BLOCK_DX * scale).toFixed(2)}px`;
+        }
+        function layoutHeight(f) {
+          const docH = document.documentElement.scrollHeight;
+          const vh = innerHeight;
+          return Math.max(vh, f * (docH - vh) + vh + 200);
+        }
+        function placeHeroStorvigeln() {
+          const hero = document.querySelector(".parallax-item--hero");
+          if (!hero || mobileQ.matches) return;
+          const nameEl = hero.querySelector(".place-storvigeln strong") || hero.querySelector(".place-storvigeln");
+          const factEl = hero.querySelector(".place-hojd");
+          const nameFs = parseFloat(getComputedStyle(nameEl).fontSize) || 16;
+          const factFs = parseFloat(getComputedStyle(factEl).fontSize) || 14;
+          const W = Math.round((nameFs / 0.0136 + factFs / 0.0106) / 2);
+          hero.style.setProperty("--topo-w", `${W}px`);
+          hero.style.setProperty("--hero-topo-ty", "0px");
+          hero.style.setProperty("--hero-label-ty", "0px");
+          const label = hero.querySelector(".place-label-block");
+          const section = document.querySelector(hero.getAttribute("data-anchor") || "#statement");
+          if (!label || !section || !page) return;
+          const f = activeFactor();
+          const vh = innerHeight;
+          const parent = hero.offsetParent || page;
+          const parentBox = parent.getBoundingClientRect();
+          const parentDocTop = parentBox.top + scrollY;
+          const parentDocLeft = parentBox.left + scrollX;
+          const ax = parseFloat(getComputedStyle(hero).getPropertyValue("--label-anchor-x")) || 0.218;
+          /* Horisontellt: etikettens högerkant oförändrad på sidan. Shift via --topo-shift-*. */
+          const labelRightDoc = innerWidth / 2 + HERO_LABEL_RIGHT_INSET;
+          const heroDocLeft = labelRightDoc - ax * W;
+          hero.style.left = `${(heroDocLeft - parentDocLeft).toFixed(2)}px`;
+          /* Vertikalt: etikettens mitt ankars som tidigare (mot #statement). */
+          const secBox = section.getBoundingClientRect();
+          const c = secBox.top + scrollY + secBox.height / 2;
+          const offsetY = parseFloat(getComputedStyle(hero).getPropertyValue("--topo-offset-y")) || 0;
+          const labelMidTarget = f * (c - vh / 2) + vh / 2 + offsetY;
+          /* Mät utan shift/parallax/nudge så ankaret inte dubbelräknar. */
+          const unit = hero.querySelector(".hero-topo-unit");
+          if (unit) unit.style.transform = "none";
+          label.style.transform = "none";
+          hero.style.top = "0px";
+          void hero.offsetHeight;
+          const heroBox = hero.getBoundingClientRect();
+          const labelBox = label.getBoundingClientRect();
+          const labelMidInHero = labelBox.top + labelBox.height / 2 - heroBox.top;
+          const heroDocTop = labelMidTarget - labelMidInHero;
+          hero.style.top = `${(heroDocTop - parentDocTop).toFixed(2)}px`;
+          if (unit) unit.style.transform = "";
+          label.style.transform = "";
+          void hero.offsetHeight;
+          const labelMidDoc = label.getBoundingClientRect().top + scrollY + label.getBoundingClientRect().height / 2;
+          heroS0 = Math.max(0, labelMidDoc - vh / 2);
+        }
+        function placeHamraLabelS0() {
+          const label = document.querySelector(".td-topo2-label");
+          if (!label || mobileQ.matches) {
+            hamraS0 = 0;
+            return;
           }
-          const value = `${shift.toFixed(2)}px`;
-          topo.style.setProperty("--parallax-y", value);
-          labels.forEach((el) => el.style.setProperty("--parallax-y", value));
+          label.style.setProperty("--hamra-label-ty", "0px");
+          void label.offsetHeight;
+          const box = label.getBoundingClientRect();
+          hamraS0 = Math.max(0, box.top + scrollY + box.height / 2 - innerHeight / 2);
         }
-        function tick() {
-          frame = 0;
-          paintProgress();
-          placeTopoQuote();
-          placeHeroTopo();
-          const center = innerHeight / 2;
-          const card = document.querySelector(".td-aktuellt-card");
-          const freezeY = card ? card.getBoundingClientRect().top + scrollY - 0.647 * innerHeight : Infinity;
-          visible.forEach((el) => {
-            if (el.classList.contains("td-topo2-layer") || el.classList.contains("quote") || el.classList.contains("hero-topo") || el.classList.contains("place-label")) return;
-            const heldMap = el.id === "hitta-kart" && document.getElementById("hitta").classList.contains("is-held");
-            if (heldMap) {
-              el.style.setProperty("--parallax-y", "0px");
-              return;
+        function paintHeroDual() {
+          const hero = document.querySelector(".parallax-item--hero");
+          const y = scrollPrime();
+          const fTopo = activeFactor();
+          const topoTy = reducedMotion ? 0 : (1 - fTopo) * y;
+          if (hero) {
+            hero.style.setProperty("--hero-topo-ty", `${topoTy.toFixed(2)}px`);
+            /* Etikett-delta bara desktop; mobil delta = 0 via labelDelta(). */
+            hero.style.setProperty("--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
+          }
+          const hamraLabel = document.querySelector(".td-topo2-label");
+          if (hamraLabel) {
+            hamraLabel.style.setProperty(
+              "--hamra-label-ty",
+              `${clampedLabelDrift(y, hamraS0).toFixed(2)}px`
+            );
+          }
+        }
+        function placeAnchors() {
+          const f = activeFactor();
+          const vh = innerHeight;
+          if (layer) layer.style.height = `${layoutHeight(f)}px`;
+          placeHamraHorizontal();
+          placeQuoteLayout();
+          /* Nollställ offset under mätning så getBoundingClientRect inte inkluderar parallax. */
+          root.style.setProperty("--parallax-offset", "0px");
+          void (layer && layer.offsetHeight);
+          document.querySelectorAll(".parallax-item[data-anchor]").forEach((item) => {
+            const sel = item.getAttribute("data-anchor");
+            const section = sel ? document.querySelector(sel) : null;
+            if (!section) return;
+            if (item.classList.contains("parallax-item--hero")) return;
+            if (mobileQ.matches && item.classList.contains("parallax-item--hero")) return;
+            const secBox = section.getBoundingClientRect();
+            const c = secBox.top + scrollY + secBox.height / 2;
+            const offsetY = parseFloat(getComputedStyle(item).getPropertyValue("--topo-offset-y")) || 0;
+            const mid = f * (c - vh / 2) + vh / 2 + offsetY;
+            const h = item.offsetHeight || item.getBoundingClientRect().height;
+            const parent = item.offsetParent || page;
+            const parentDocTop = parent.getBoundingClientRect().top + scrollY;
+            item.style.top = `${(mid - h / 2 - parentDocTop).toFixed(2)}px`;
+            const label = item.querySelector(".td-topo2-label");
+            if (label) {
+              label.toggleAttribute("aria-hidden", innerWidth <= 1024);
+              const cols = document.querySelector(".just-cols");
+              if (cols) {
+                const lb = label.getBoundingClientRect();
+                const cb = cols.getBoundingClientRect();
+                label.classList.toggle("is-covered", lb.bottom > cb.top && lb.top < cb.bottom && lb.right > cb.left && lb.left < cb.right);
+              }
             }
-            const box = el.getBoundingClientRect();
-            const previous = parseFloat(el.style.getPropertyValue("--parallax-y")) || 0;
-            const at = el.closest("#stage") && scrollY > freezeY ? freezeY : scrollY;
-            const delta = box.top + box.height / 2 - previous + scrollY - at - center;
-            const limit = depthMax();
-            const shift = Math.max(-limit, Math.min(limit, delta * (1 - depthFactor(el.dataset.depth))));
-            el.style.setProperty("--parallax-y", `${shift.toFixed(2)}px`);
           });
+          placeHeroStorvigeln();
+          placeHamraLabelS0();
+          paint();
         }
-        function requestTick() {
-          if (!frame) frame = requestAnimationFrame(tick);
+        let raf = 0;
+        function paint() {
+          raf = 0;
+          const f = activeFactor();
+          const yPrime = scrollPrime();
+          const offset = reducedMotion ? 0 : (1 - f) * yPrime;
+          root.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
+          paintHeroDual();
+          if (debugOn) updateDebug(f, yPrime, offset);
         }
-        try {
-          addEventListener("scroll", () => { try { requestTick(); } catch (error) { console.error(error); } }, { passive: true });
-          addEventListener("resize", () => { try { requestTick(); } catch (error) { console.error(error); } });
-          requestTick();
-        } catch (error) { console.error("parallax", error); }
-      } else {
-        const placeTopoRest = () => {
-          const topo = document.querySelector(".td-topo2-layer");
-          const quote = document.querySelector("blockquote.quote");
-          const cards = document.querySelector(".just-cols");
-          const blue = document.querySelector(".boende");
-          const page = document.querySelector(".page");
-          if (!topo || !quote || !cards || !blue || !page) return;
-          const topoH = topo.getBoundingClientRect().height;
-          if (topoH < 40) return;
-          const pageTop = page.getBoundingClientRect().top;
-          topo.style.top = `${cards.getBoundingClientRect().bottom + scrollY - 204 - (pageTop + scrollY)}px`;
-          topo.style.setProperty("--parallax-y", "0px");
-          quote.style.setProperty("--parallax-y", "0px");
-          blue.style.marginTop = `${topoH - 119}px`;
-          quote.style.top = `${blue.getBoundingClientRect().top - 91 - quote.getBoundingClientRect().height - pageTop}px`;
+        function requestPaint() {
+          if (!raf) raf = requestAnimationFrame(paint);
+        }
+        let debugEl = null;
+        function updateDebug(f, yPrime, offset) {
+          if (!debugEl) {
+            debugEl = document.createElement("div");
+            debugEl.id = "parallax-debug";
+            document.body.append(debugEl);
+            document.querySelectorAll(".parallax-item[data-anchor]").forEach((item) => {
+              item.classList.add("is-parallax-debug");
+              const sel = item.getAttribute("data-anchor");
+              const section = sel && document.querySelector(sel);
+              if (section) section.classList.add("is-parallax-debug-anchor");
+            });
+          }
+          const mid = innerHeight / 2;
+          let nearest = "—";
+          let best = Infinity;
+          document.querySelectorAll(".parallax-item[data-parallax-item]").forEach((item) => {
+            const box = item.getBoundingClientRect();
+            const d = Math.abs(box.top + box.height / 2 - mid);
+            if (d < best) { best = d; nearest = item.dataset.parallaxItem || "?"; }
+          });
+          debugEl.textContent = `f=${f.toFixed(3)}  scrollY=${scrollY | 0}  y'=${yPrime | 0}  offset=${offset.toFixed(1)}  near=${nearest}`;
+        }
+        addEventListener("scroll", requestPaint, { passive: true });
+        addEventListener("resize", () => { placeAnchors(); requestPaint(); });
+        mobileQ.addEventListener("change", () => { placeAnchors(); requestPaint(); });
+        if (document.fonts?.ready) document.fonts.ready.then(() => { placeAnchors(); requestPaint(); });
+        const ro = new ResizeObserver(() => { placeAnchors(); requestPaint(); });
+        ro.observe(document.body);
+        if (runway) ro.observe(runway);
+        placeAnchors();
+        requestPaint();
+        window.__parallax = {
+          placeAnchors,
+          activeFactor,
+          scrollPrime,
+          paint,
+          heroS0: () => heroS0,
+          hamraS0: () => hamraS0,
+          placeHero: placeHeroStorvigeln,
         };
-        addEventListener("scroll", placeTopoRest, { passive: true });
-        addEventListener("resize", placeTopoRest);
-        placeTopoRest();
-      }
+      })();
       } catch (error) { console.error("parallax", error); }
       try {
       /* TODO: demoinnehåll, inte riktiga fakta. */
@@ -3044,8 +3675,19 @@
         justNuRapport.removeAttribute("rel");
         justNuRapport.removeAttribute("aria-label");
         justNuRapport.querySelector("[data-rapport-corner]").hidden = true;
+        /* Top behålls synlig — där ligger chip (alpine) / today (längd). */
+      }
+      function placeRapportChip(where) {
+        const chip = justNuRapport.querySelector("[data-rapport-chip]");
         const top = justNuRapport.querySelector("[data-rapport-top]");
-        top.hidden = justNuRapport.querySelector("[data-rapport-today]").hidden;
+        const lower = justNuRapport.querySelector(".td-rapport-lower");
+        const corner = justNuRapport.querySelector("[data-rapport-corner]");
+        if (where === "top") top.insertBefore(chip, corner);
+        else if (where === "before-caption") lower.insertBefore(chip, justNuRapport.querySelector("[data-rapport-caption]"));
+        else if (where === "before-title") {
+          const title = justNuRapport.querySelector("[data-rapport-title]");
+          title.parentElement.insertBefore(chip, title);
+        }
       }
       function armImage(img, src, alt, missingHost) {
         missingHost.classList.add("is-missing");
@@ -3089,22 +3731,23 @@
         const rapportBody = justNuRapport.querySelector(".td-rapport-body");
         if (langd) {
           setChip(`${event.place} · ${event.when}`);
-          rapportLower.insertBefore(rapportChip, rapportCaption);
+          placeRapportChip("before-caption");
           rapportCaption.hidden = true;
-        rapportTitle.className = "td-heading-xs-regular";
-        rapportTitle.textContent = event.title;
+          rapportTitle.className = "td-heading-xs-regular";
+          rapportTitle.textContent = event.title;
           rapportTitle.hidden = false;
           rapportQuote.hidden = true;
           justNuRapport.querySelector(".td-rapport-footer").style.display = "";
           justNuRapport.querySelector("[data-rapport-today]").textContent = "Händer idag";
           justNuRapport.querySelector("[data-rapport-today]").hidden = false;
           justNuRapport.querySelector("[data-rapport-top]").hidden = false;
+          justNuRapport.querySelector("[data-rapport-chip]").hidden = false;
           clearActivityLink();
           justNuRapport.querySelector("[data-rapport-excerpt]").hidden = true;
           justNuRapport.querySelector("[data-rapport-more]").hidden = true;
         } else {
           setChip(rapport.chip);
-          rapportBody.insertBefore(rapportChip, rapportLower);
+          placeRapportChip("top");
           rapportCaption.hidden = false;
           rapportCaption.textContent = rapport.caption;
           justNuRapport.querySelector("[data-rapport-quote]").textContent = rapport.quote;
@@ -3113,7 +3756,8 @@
           rapportTitle.hidden = true;
           rapportQuote.hidden = false;
           justNuRapport.querySelector("[data-rapport-today]").hidden = true;
-          justNuRapport.querySelector("[data-rapport-top]").hidden = true;
+          justNuRapport.querySelector("[data-rapport-top]").hidden = false;
+          justNuRapport.querySelector("[data-rapport-chip]").hidden = false;
           clearActivityLink();
           justNuRapport.querySelector("[data-rapport-excerpt]").hidden = true;
           justNuRapport.querySelector("[data-rapport-more]").hidden = true;
@@ -3231,7 +3875,7 @@
         const rapportChip = justNuRapport.querySelector("[data-rapport-chip]");
         const rapportCaption = justNuRapport.querySelector("[data-rapport-caption]");
         setChip(tip.pill, false);
-        rapportTitle.parentElement.insertBefore(rapportChip, rapportTitle);
+        placeRapportChip("before-title");
         rapportCaption.hidden = true;
         rapportTitle.className = "td-heading-sm-regular";
         rapportTitle.textContent = tip.title;
@@ -3240,6 +3884,7 @@
         const today = justNuRapport.querySelector("[data-rapport-today]");
         today.textContent = tip.label;
         today.hidden = false;
+        justNuRapport.querySelector("[data-rapport-chip]").hidden = false;
         const excerpt = justNuRapport.querySelector("[data-rapport-excerpt]");
         excerpt.hidden = false;
         excerpt.textContent = tip.excerpt;
@@ -3395,21 +4040,19 @@
       <div class="fraga-panel" id="fraga-panel" role="dialog" aria-modal="true" aria-labelledby="fraga-dialog-title">
         <h2 class="fraga-sr" id="fraga-dialog-title">Fråga eller sök</h2>
         <div class="fraga-top">
-          <p class="fraga-brand td-ui-body">Frågerutan</p>
-          <label class="fraga-field">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <input id="fraga-input" class="td-ui-body" type="text" placeholder="Fråga eller sök" autocomplete="off" enterkeyhint="search" />
-          </label>
+          <p class="fraga-brand td-ui-body">Fråga oss</p>
           <button class="fraga-new td-button td-button-sm td-button-fill-neutral" type="button">Ny fråga</button>
           <button class="fraga-x" type="button" data-fraga-close aria-label="Stäng">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
           </button>
-    </div>
+        </div>
         <div class="fraga-mid">
           <div class="fraga-view is-on" data-view="search">
-            <p class="fraga-suggest-label td-ui-kicker">Andra brukar fråga</p>
-            <ul class="fraga-suggest" id="fraga-suggest"></ul>
-      </div>
+            <div class="td-fraga-fragelista">
+              <p class="td-fraga-fragelista-rubrik fraga-suggest-label td-ui-kicker">Andra brukar fråga</p>
+              <ul class="td-fraga-fragelista-platta fraga-suggest" id="fraga-suggest"></ul>
+            </div>
+          </div>
           <div class="fraga-view" data-view="answer">
             <h3 class="td-heading-xs" id="fraga-q"></h3>
             <p class="fraga-think td-ui-caption" id="fraga-think" hidden>Tänker<span aria-hidden="true"><i></i><i></i><i></i></span></p>
@@ -3425,14 +4068,21 @@
             </div>
         <div class="fraga-bottom">
           <form class="fraga-follow" id="fraga-follow">
-            <input class="fraga-follow-input td-ui-body" type="text" placeholder="Ställ en följdfråga..." autocomplete="off" />
+            <img class="fraga-follow-icon" src="ds/components/icons/content/chatt-24-light.svg" alt="" width="24" height="24" aria-hidden="true">
+            <input id="fraga-input" class="fraga-follow-input td-ui-body" type="text" placeholder="Fråga eller sök" autocomplete="off" enterkeyhint="search" aria-label="Fråga eller sök" />
             <button class="fraga-send" type="submit" aria-label="Skicka">
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+            </button>
           </form>
-          <footer class="fraga-foot td-ui-caption">
-            <a href="#kontakt">Prata med en människa</a>
-            <span>Esc för att stänga</span>
+          <footer class="fraga-foot">
+            <div class="fraga-foot-live">
+              <span class="fraga-foot-dot" aria-hidden="true"></span>
+              <div class="fraga-foot-copy">
+                <p class="fraga-foot-title td-ui-cta-sm">Prata med en människa</p>
+                <p class="fraga-foot-meta td-ui-caption">Gästservice · öppet nu till 20:00 · svarar oftast inom 5 min</p>
+              </div>
+            </div>
+            <a class="td-button td-button-sm td-button-secondary fraga-foot-chat" href="#kontakt">Chatta</a>
           </footer>
           </div>
         </div>
@@ -3450,7 +4100,7 @@
         const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
         const CARDS = [
           { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "assets/startsida/fraga-bastu.jpg" },
-          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "assets/startsida/endag-1300.jpg" },
+          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "assets/startsida/endag-1300.jpg?v=2" },
           { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "assets/startsida/fraga-klatter.jpg" }
         ];
         const CHIPS = ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"];
@@ -3485,7 +4135,8 @@
         let answerFull = "";
         let questionFull = "";
         kbd.textContent = /Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K";
-        suggest.innerHTML = SUGGEST.map((text) => `<li><button class="td-ui-body" type="button">${text}</button></li>`).join("");
+        const suggestArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg class="fraga-suggest-arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
+        suggest.innerHTML = SUGGEST.map((text) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp fraga-suggest-row td-body-sm" type="button"><span class="td-fraga-fragelista-rad-text fraga-suggest-text">${text}</span>${suggestArrow}</button></li>`).join("");
         function later(ms, fn) {
           const id = setTimeout(fn, ms);
           timers.push(id);
@@ -3542,15 +4193,33 @@
           note.textContent = "";
           follow.reset();
         }
+        let fragaOmContext = "";
+        function setOmContext(from, explicit) {
+          const raw = explicit
+            || from?.getAttribute?.("data-fraga-context")
+            || from?.closest?.("[data-fraga-context]")?.getAttribute("data-fraga-context")
+            || "";
+          fragaOmContext = raw;
+          if (raw) {
+            sources.hidden = false;
+            sources.textContent = raw;
+          }
+        }
+        function clearOmContext() {
+          fragaOmContext = "";
+        }
         function open(from, direct) {
           gen += 1;
           const token = gen;
           clearTimers();
           trigger = from;
           resetAnswer();
+          clearOmContext();
           const question = direct ? (from.querySelector("[data-fraga-title]")?.textContent.trim() || from.getAttribute("data-fraga-title") || "") : "";
-          if (direct) show("answer");
-          else show("search");
+          if (direct) {
+            setOmContext(from);
+            show("answer");
+          } else show("search");
           input.value = "";
           layer.hidden = false;
           document.body.classList.add("fraga-open");
@@ -3710,7 +4379,8 @@
           tiles.hidden = true;
           tiles.innerHTML = config.tiles.map(tileMarkup).join("");
           chips.innerHTML = config.follow.map((text) => `<button class="td-ui-body-sm" type="button" data-fraga-follow="${text}">${text}</button>`).join("");
-          sources.textContent = time ? `${config.source} kl. ${time}` : config.source;
+          const base = time ? `${config.source} kl. ${time}` : config.source;
+          sources.textContent = fragaOmContext ? `${fragaOmContext} · ${base}` : base;
           nowLabel.hidden = true;
           tiles.hidden = true;
           chips.hidden = true;
@@ -3729,6 +4399,10 @@
           if (config) {
             showConfig(config);
             return;
+          }
+          if (fragaOmContext) {
+            sources.hidden = false;
+            sources.textContent = fragaOmContext;
           }
           if (!rain) {
             if (quiet) return;
@@ -3785,18 +4459,22 @@
         });
         input.addEventListener("keydown", (event) => {
           if (typing && event.key !== "Tab") stopTyping();
-          if (event.key === "Enter" && input.value.trim()) ask(input.value.trim());
         });
         input.addEventListener("pointerdown", () => { if (typing) stopTyping(); });
         chips.addEventListener("click", (event) => {
-          const follow = event.target.closest("[data-fraga-follow]");
-          if (follow) { ask(follow.getAttribute("data-fraga-follow")); return; }
+          const chip = event.target.closest("[data-fraga-follow]");
+          if (chip) { ask(chip.getAttribute("data-fraga-follow")); return; }
           if (event.target.closest("button")) demoNote();
         });
         note.addEventListener("click", (event) => {
           if (event.target.id === "fraga-rain") ask(RAIN);
         });
-        follow.addEventListener("submit", (event) => { event.preventDefault(); demoNote(); });
+        follow.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const value = input.value.trim();
+          if (value) ask(value);
+          else demoNote();
+        });
         panel.addEventListener("pointerdown", (event) => {
           if (!typing || event.target.closest("button, a, input")) return;
           skipAnswer();
@@ -3819,19 +4497,31 @@
           if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
           else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
         });
-        window.tdFragaAsk = (question, from) => {
+        window.tdFragaAsk = (question, from, context) => {
           open(from || launch, false);
+          if (context) setOmContext(from || launch, context);
+          else if (from) setOmContext(from);
           const token = gen;
           later(reduced ? 0 : 480, () => { if (token === gen) ask(question, token, 0); });
         };
         const faq = document.getElementById("fragor");
         if (faq) {
-          const rainRow = faq.querySelector("[data-fraga-title]");
-          rainRow.addEventListener("click", () => open(rainRow, true));
-          const faqForm = faq.querySelector(".faq-ask");
-          faqForm.addEventListener("submit", (event) => {
-            event.preventDefault();
+          faq.querySelectorAll(".td-fraga-fragelista-knapp[data-fraga-title], .td-fraga-rad[data-fraga-title]").forEach((row) => {
+            row.addEventListener("click", () => open(row, true));
           });
+          const faqForm = faq.querySelector("[data-fraga-falt]");
+          if (faqForm) {
+            faqForm.addEventListener("submit", (event) => {
+              event.preventDefault();
+              const value = faqForm.querySelector("input")?.value.trim() || "";
+              setOmContext(faqForm);
+              open(faqForm, false);
+              if (value) {
+                const token = gen;
+                later(reduced ? 0 : 480, () => { if (token === gen) ask(value, token, 0); });
+              }
+            });
+          }
           if (!reduced) {
             const io = new IntersectionObserver((entries) => {
               if (!entries.some((entry) => entry.isIntersecting)) return;
@@ -3841,6 +4531,9 @@
             io.observe(faq);
           } else faq.classList.add("is-in");
         }
+        document.querySelectorAll(".td-aktuellt-kort[data-typ='fraga']").forEach((card) => {
+          card.addEventListener("click", () => open(card, true));
+        });
         } catch (error) { console.error("frågerutan", error); }
       try {
       const boendeReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -4183,7 +4876,7 @@
           const next = buttons[1];
           const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
           const step = () => {
-            const card = track.querySelector(".td-aktuellt-card");
+            const card = track.querySelector(".td-aktuellt-kort");
             const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
             return (card ? card.getBoundingClientRect().width : 0) + gap;
           };
@@ -4196,9 +4889,12 @@
             next.setAttribute("aria-disabled", atEnd ? "true" : "false");
           };
           const endGap = () => {
-            const cards = track.querySelectorAll(".td-aktuellt-card");
-            const media = cards[cards.length - 1]?.querySelector(".td-aktuellt-media");
-            if (!media) return step();
+            const cards = track.querySelectorAll(".td-aktuellt-kort");
+            const last = cards[cards.length - 1];
+            if (!last) return step();
+            /* Innehåll: bildkant. Fråga (ingen bild): hela kortet — annars
+               ingen spacer och sista kortet klipps av vid track-slut. */
+            const target = last.querySelector(".td-aktuellt-kort-bild") || last;
             let spacer = track.querySelector(".td-aktuellt-end");
             if (!spacer) {
               spacer = document.createElement("div");
@@ -4207,14 +4903,16 @@
               track.append(spacer);
             }
             spacer.style.flex = "0 0 0px";
-            const want = media.getBoundingClientRect().right - next.getBoundingClientRect().right;
+            const want = target.getBoundingClientRect().right - next.getBoundingClientRect().right;
             const room = track.scrollWidth - track.clientWidth - track.scrollLeft;
             spacer.style.flex = `0 0 ${Math.max(0, want - room)}px`;
-            return media.getBoundingClientRect().right - next.getBoundingClientRect().right;
+            return target.getBoundingClientRect().right - next.getBoundingClientRect().right;
           };
           const go = (dir) => {
-            const delta = dir < 0 ? -track.scrollLeft : endGap();
-            track.scrollBy({ left: delta, behavior: reduced ? "auto" : "smooth" });
+            endGap(); /* behåll slut-spacer så sista kortet kan visas */
+            const s = step();
+            if (!s) return;
+            track.scrollBy({ left: dir * s, behavior: reduced ? "auto" : "smooth" });
           };
           prev.addEventListener("click", () => go(-1));
           next.addEventListener("click", () => go(1));
@@ -4232,6 +4930,7 @@
             const box = getComputedStyle(section);
             const extra = section.offsetHeight + (parseFloat(box.marginTop) || 0) + (parseFloat(box.marginBottom) || 0);
             document.documentElement.style.setProperty("--aktuellt-extra", `${Math.round(extra)}px`);
+            endGap();
           };
           const broken = (img) => {
             img.style.visibility = "hidden";
