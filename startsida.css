@@ -4122,17 +4122,23 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   will-change: transform;
 }
 
-/* Hamrafjället i lagret. left/width = layout mot Fråga-block; top = ankare. */
+/* Skarvarna i lagret. Bredd = --topo2-w; left/top via JS; shift via CSS-variabler. */
 .td-topo2-layer,
 .parallax-item--hamra {
+  --topo2-w: 811px;
+  --topo2-h: calc(var(--topo2-w) * 210.96667 / 98.287064);
+  --topo2-shift-x: 0px;
+  --topo2-shift-y: 0px;
   position: absolute;
   z-index: -1;
   left: 0;
-  width: 1316px;
-  aspect-ratio: 1316 / 949;
+  width: var(--topo2-w);
+  height: var(--topo2-h);
+  aspect-ratio: 98.287064 / 210.96667;
   pointer-events: none;
   background: transparent;
-  transform: none;
+  overflow: visible;
+  transform: translate3d(var(--topo2-shift-x), var(--topo2-shift-y), 0);
 }
 
 .td-topo2 {
@@ -4148,26 +4154,38 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  opacity: 1;
 }
 
-/* Figma Frame 1: left/top av Union — ovanför glaset, inte till höger. */
-.td-topo2-label {
-  --hamra-label-ty: 0px;
+/* Etikett + citat: ett textlager med egen (nästan lika) parallax. */
+.td-topo2-text {
+  --hamra-text-ty: 0px;
   position: absolute;
-  left: 53.42%;
-  top: 8.11%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  transform: translate3d(0, var(--hamra-text-ty), 0);
+  will-change: transform;
+}
+
+.td-topo2-label {
+  position: absolute;
+  left: 75.4%;
+  top: 8.5%;
   transition: opacity 160ms linear;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
   width: max-content;
   margin: 0;
-  text-align: center;
+  text-align: left;
   color: var(--color-TD-neutral);
   pointer-events: auto;
-  transform: translate3d(0, var(--hamra-label-ty), 0);
-  will-change: transform;
+  transform: none;
 }
 
 .td-topo2-label.is-covered { opacity: 0; }
@@ -4195,16 +4213,45 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-  .td-topo2-label { opacity: 0; }
+/* Citat i Skarvarna-enheten — relativa % mot topo (quote fyller enheten som CB). */
+.parallax-item--hamra .quote {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  transform: none;
+  pointer-events: none;
+}
+
+.parallax-item--hamra .quote-text {
+  position: absolute;
+  left: 97.6%;
+  top: 95.7%;
+  width: max-content;
+  margin: 0;
+}
+
+.parallax-item--hamra .quote-by {
+  position: absolute;
+  left: 97.6%;
+  top: 102.8%;
+  width: max-content;
+  margin: 0;
 }
 
 @media (max-width: 1023px) {
-  .quote {
-    position: relative;
+  .parallax-item--hamra .quote {
+    position: absolute;
     left: 0;
+    top: 0;
     width: 100%;
-    max-width: none;
+    height: 100%;
+    margin: 0;
   }
 }
 
@@ -4212,12 +4259,16 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   #parallax-layer,
   .parallax-item--hero,
   .parallax-item--hero .place-labels,
-  .td-topo2-layer,
+  .td-topo2-text,
   .td-topo2-label,
   .quote { transform: none !important; }
   /* Behåll bara fast shift — ingen scroll-parallax. */
   .parallax-item--hero .hero-topo-unit {
     transform: translate3d(var(--topo-shift-x), var(--topo-shift-y), 0) !important;
+  }
+  .td-topo2-layer,
+  .parallax-item--hamra {
+    transform: translate3d(var(--topo2-shift-x), var(--topo2-shift-y), 0) !important;
   }
 }
 

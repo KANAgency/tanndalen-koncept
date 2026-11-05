@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-05 (Skarvarna ersätter Hamrafjället)
+
+Hamra-topo bytt till Skarvarna-SVG (samma filnamn). Etikett+citat ett textlager med delta 0,04 / max 40. Placering via % mot topo; W från fontstorlekar (~811). Top låst till tidigare doc-top. Överlapp citat↔citat-band / källa↔just-nu vid s0 — ej justerat, väntar shift.
+
 ## 2026-11-05 (Hoppa över + En dag nästa)
 
 Chevron bort från alla Hoppa över. En dag: cirkelknapp med nedåtpil till vänster → nästa kort.

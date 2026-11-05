@@ -29,12 +29,17 @@
     <link rel="stylesheet" href="startsida.css?v=boka-panel" />
     <link rel="stylesheet" href="intro.css" />
     <script>
-      /* Hamrafjället / citat — endast layout (horisontellt), ingen parallax-motion. */
+      /* Skarvarna — proporitioner från referens (etikett/citat mot topo). */
       var TOPO2_LAYOUT = {
-        BLOCK_DX: -779,
-        TOPO_W: 1316,
-        BLOCK_W: 845,
-        QUOTE_DX: 645
+        LABEL_LEFT: 0.754,
+        LABEL_TOP: 0.085,
+        QUOTE_LEFT: 0.976,
+        QUOTE_TOP: 0.957,
+        SOURCE_TOP: 1.028,
+        SVG_W: 98.287064,
+        SVG_H: 210.96667,
+        /* Doc-top för topo före bytet (1440×900, scrollY=0 mätning). */
+        LOCK_DOC_TOP: 6217.40625
       };
       history.scrollRestoration = "manual";
       try {
@@ -294,14 +299,20 @@
       </div>
       <main>
         <div id="parallax-layer" aria-hidden="true">
-          <div class="parallax-item parallax-item--hamra td-topo2-layer" data-anchor="#just-nu" data-parallax-item="hamrafjallet" style="--topo-offset-y: 0px">
+          <div class="parallax-item parallax-item--hamra td-topo2-layer" data-anchor="#just-nu" data-parallax-item="skarvarna" style="--topo-offset-y: 0px">
             <div class="td-topo2" role="presentation" aria-hidden="true"></div>
-            <div class="td-topo2-label">
-              <p class="td-topo2-name">Hamrafjället</p>
-              <div class="td-topo2-facts">
-                <p>1 137 m ö.h. · 295 m fallhöjd</p>
-                <p data-placeholder="true">−4 °C på toppen · 11:04</p>
+            <div class="td-topo2-text">
+              <div class="td-topo2-label">
+                <p class="td-topo2-name">Skarvarna</p>
+                <div class="td-topo2-facts">
+                  <p>1 137 m ö.h. · 295 m fallhöjd</p>
+                  <p data-placeholder="true">−4 °C på toppen · 11:04</p>
+                </div>
               </div>
+              <blockquote class="quote" data-depth="back">
+                <p class="quote-text">”Vi har åkt hit varje<br>sportlov sedan 2014.”</p>
+                <p class="quote-by">Anna, Uppsala · 12:e säsongen</p>
+              </blockquote>
             </div>
           </div>
         </div>
@@ -669,11 +680,6 @@
           </div>
         </div>
       </section>
-
-      <blockquote class="quote" data-depth="back">
-        <p class="quote-text">”Vi har åkt hit varje<br>sportlov sedan 2014.”</p>
-        <p class="quote-by">Anna, Uppsala · 12:e säsongen</p>
-      </blockquote>
 
       <section class="boende" id="boende" aria-label="Boende i Tänndalen">
         <div class="boende-frame">
@@ -3349,26 +3355,47 @@
           const max = labelMaxDrift();
           return Math.max(-max, Math.min(max, raw));
         }
+        function computeTopo2W() {
+          const name = document.querySelector(".td-topo2-name");
+          const fact = document.querySelector(".td-topo2-facts p");
+          const qText = document.querySelector(".parallax-item--hamra .quote-text");
+          if (!name || !fact || !qText) return 811;
+          const nameFs = parseFloat(getComputedStyle(name).fontSize) || 16;
+          const factFs = parseFloat(getComputedStyle(fact).fontSize) || 14;
+          const quoteFs = parseFloat(getComputedStyle(qText).fontSize) || 30;
+          return (nameFs / 0.022 + factFs / 0.017 + quoteFs / 0.034) / 3;
+        }
         function placeQuoteLayout() {
-          if (!quote || !block || !blue || !page) return;
-          const pageBox = page.getBoundingClientRect();
-          const blockBox = block.getBoundingClientRect();
-          const scale = blockBox.width / TOPO2_LAYOUT.BLOCK_W;
-          quote.style.left = `${(blockBox.left - pageBox.left + TOPO2_LAYOUT.QUOTE_DX * scale).toFixed(2)}px`;
-          quote.style.width = `${Math.min(520, 460 * scale).toFixed(2)}px`;
-          quote.style.maxWidth = quote.style.width;
-          quote.style.top = `${blockBox.bottom - pageBox.top}px`;
-          quote.style.removeProperty("--parallax-y");
-          blue.style.marginTop = `${Math.max(0, quote.getBoundingClientRect().height + 40).toFixed(2)}px`;
+          /* Citatet ligger i Skarvarna-enheten; Boende-marginal = text+källa+40 (som tidigare box+40). */
+          if (!blue) return;
+          const qText = document.querySelector(".parallax-item--hamra .quote-text");
+          const qBy = document.querySelector(".parallax-item--hamra .quote-by");
+          const h = (qText ? qText.getBoundingClientRect().height : 0)
+            + (qBy ? qBy.getBoundingClientRect().height : 0);
+          blue.style.marginTop = `${Math.max(0, h + 40).toFixed(2)}px`;
         }
         function placeHamraHorizontal() {
           const hamra = document.querySelector(".parallax-item--hamra");
-          if (!hamra || !block || !page) return;
+          if (!hamra || !page) return;
+          const W = computeTopo2W();
+          const H = W * (TOPO2_LAYOUT.SVG_H / TOPO2_LAYOUT.SVG_W);
+          hamra.style.setProperty("--topo2-w", `${W.toFixed(2)}px`);
+          hamra.style.setProperty("--topo2-h", `${H.toFixed(2)}px`);
+          hamra.style.width = `${W.toFixed(2)}px`;
+          hamra.style.height = `${H.toFixed(2)}px`;
+          void hamra.offsetHeight;
+          const qText = hamra.querySelector(".quote-text");
           const pageBox = page.getBoundingClientRect();
-          const blockBox = block.getBoundingClientRect();
-          const scale = blockBox.width / TOPO2_LAYOUT.BLOCK_W;
-          hamra.style.width = `${(TOPO2_LAYOUT.TOPO_W * scale).toFixed(2)}px`;
-          hamra.style.left = `${(blockBox.left - pageBox.left + TOPO2_LAYOUT.BLOCK_DX * scale).toFixed(2)}px`;
+          const contentRight = pageBox.right;
+          const qW = qText ? qText.getBoundingClientRect().width : 0;
+          const unitLeftDoc = contentRight - qW - TOPO2_LAYOUT.QUOTE_LEFT * W;
+          const parent = hamra.offsetParent || page;
+          const parentBox = parent.getBoundingClientRect();
+          const parentDocTop = parentBox.top + scrollY;
+          /* --topo2-shift-x/y appliceras via CSS transform, inte här. */
+          hamra.style.left = `${(unitLeftDoc - parentBox.left).toFixed(2)}px`;
+          hamra.style.top = `${(TOPO2_LAYOUT.LOCK_DOC_TOP - parentDocTop).toFixed(2)}px`;
+          hamra.dataset.topo2Placed = "1";
         }
         function layoutHeight(f) {
           const docH = document.documentElement.scrollHeight;
@@ -3423,14 +3450,16 @@
           heroS0 = Math.max(0, labelMidDoc - vh / 2);
         }
         function placeHamraLabelS0() {
-          const label = document.querySelector(".td-topo2-label");
-          if (!label || mobileQ.matches) {
+          const hamra = document.querySelector(".parallax-item--hamra");
+          const text = document.querySelector(".td-topo2-text");
+          if (!hamra || mobileQ.matches) {
             hamraS0 = 0;
+            if (text) text.style.setProperty("--hamra-text-ty", "0px");
             return;
           }
-          label.style.setProperty("--hamra-label-ty", "0px");
-          void label.offsetHeight;
-          const box = label.getBoundingClientRect();
+          if (text) text.style.setProperty("--hamra-text-ty", "0px");
+          void hamra.offsetHeight;
+          const box = hamra.getBoundingClientRect();
           hamraS0 = Math.max(0, box.top + scrollY + box.height / 2 - innerHeight / 2);
         }
         function paintHeroDual() {
@@ -3443,10 +3472,10 @@
             /* Etikett-delta bara desktop; mobil delta = 0 via labelDelta(). */
             hero.style.setProperty("--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
           }
-          const hamraLabel = document.querySelector(".td-topo2-label");
-          if (hamraLabel) {
-            hamraLabel.style.setProperty(
-              "--hamra-label-ty",
+          const text = document.querySelector(".td-topo2-text");
+          if (text) {
+            text.style.setProperty(
+              "--hamra-text-ty",
               `${clampedLabelDrift(y, hamraS0).toFixed(2)}px`
             );
           }
@@ -3465,6 +3494,20 @@
             const section = sel ? document.querySelector(sel) : null;
             if (!section) return;
             if (item.classList.contains("parallax-item--hero")) return;
+            /* Skarvarna: top låses i placeHamraHorizontal, inte mid-ankare. */
+            if (item.classList.contains("parallax-item--hamra")) {
+              const label = item.querySelector(".td-topo2-label");
+              if (label) {
+                label.toggleAttribute("aria-hidden", innerWidth <= 1024);
+                const cols = document.querySelector(".just-cols");
+                if (cols) {
+                  const lb = label.getBoundingClientRect();
+                  const cb = cols.getBoundingClientRect();
+                  label.classList.toggle("is-covered", lb.bottom > cb.top && lb.top < cb.bottom && lb.right > cb.left && lb.left < cb.right);
+                }
+              }
+              return;
+            }
             if (mobileQ.matches && item.classList.contains("parallax-item--hero")) return;
             const secBox = section.getBoundingClientRect();
             const c = secBox.top + scrollY + secBox.height / 2;
@@ -3474,16 +3517,6 @@
             const parent = item.offsetParent || page;
             const parentDocTop = parent.getBoundingClientRect().top + scrollY;
             item.style.top = `${(mid - h / 2 - parentDocTop).toFixed(2)}px`;
-            const label = item.querySelector(".td-topo2-label");
-            if (label) {
-              label.toggleAttribute("aria-hidden", innerWidth <= 1024);
-              const cols = document.querySelector(".just-cols");
-              if (cols) {
-                const lb = label.getBoundingClientRect();
-                const cb = cols.getBoundingClientRect();
-                label.classList.toggle("is-covered", lb.bottom > cb.top && lb.top < cb.bottom && lb.right > cb.left && lb.left < cb.right);
-              }
-            }
           });
           placeHeroStorvigeln();
           placeHamraLabelS0();
