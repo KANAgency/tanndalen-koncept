@@ -26,20 +26,35 @@
     <link rel="stylesheet" href="ds/components/citat.css" />
     <link rel="stylesheet" href="ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=boka-panel" />
+    <link rel="stylesheet" href="startsida.css?v=onsite-field-gap" />
     <link rel="stylesheet" href="intro.css" />
     <script>
-      /* Skarvarna — proporitioner från referens (etikett/citat mot topo). */
+      /* Skarvarna — etikett/citat/källa i enheter av ritningens bredd W_b (mot bbox-origo). */
       var TOPO2_LAYOUT = {
         LABEL_LEFT: 0.754,
-        LABEL_TOP: 0.085,
+        LABEL_TOP: 0.113,   /* 0.085 × 1.33 — referenshöjd omräknad till bredd */
         QUOTE_LEFT: 0.976,
-        QUOTE_TOP: 0.957,
-        SOURCE_TOP: 1.028,
+        QUOTE_TOP: 1.273,   /* 0.957 × 1.33 */
+        SOURCE_TOP: 1.367,  /* legacy W_b — citat/avsändare styrs nu via flöde + QUOTE_BY_GAP */
+        /* Panel-mål vid s_c (px från panelens vänster/över/underkant; ej viewportskalade). */
+        PANEL_LABEL_X: 123,
+        PANEL_LABEL_Y: -20,
+        PANEL_QUOTE_X: 296,
+        PANEL_QUOTE_Y: 24,  /* under panelens underkant — används för enhets-L/T */
+        QUOTE_NUDGE_X: 48,  /* legacy */
+        SCALE: 0.7,         /* ca 30 % mindre än font-driven W */
+        /* Info (namn+fakta): till höger om topo, mitt i gap Just nu → Fråga oss. */
+        INFO_GAP_X: 24,
+        /* Anna-citat: till höger om topo, mitt i gap Fråga → Boende. */
+        QUOTE_GAP_X: 24,
         SVG_W: 98.287064,
-        SVG_H: 210.96667,
-        /* Doc-top för topo före bytet (1440×900, scrollY=0 mätning). */
-        LOCK_DOC_TOP: 6217.40625
+        SVG_H: 210.96667
+      };
+      /* TODO: Skarvarna: höjd/fallhöjd gissade (Lill-Skarven 1 226 m, fot ~850 m vid Skarvruet) — verifiera med Tänndalen; temp/tid från väderstationen */
+      var TOPO2_FACTS = {
+        verify: true,
+        line1: "1 226 m ö.h. · 380 m fallhöjd",
+        line2: "−4 °C på toppen · 11:04"
       };
       history.scrollRestoration = "manual";
       try {
@@ -49,7 +64,14 @@
       try {
         var params = new URLSearchParams(location.search);
         var mode = params.get("mode");
-        if (mode !== "new" && mode !== "returning" && mode !== "booking") {
+        var baseMode = mode;
+        if (mode === "onsite") {
+          baseMode = "returning";
+          try {
+            var storedBase = localStorage.getItem("td-mode");
+            if (storedBase === "new" || storedBase === "returning" || storedBase === "booking") baseMode = storedBase;
+          } catch (err) {}
+        } else if (mode !== "new" && mode !== "returning" && mode !== "booking") {
           if (/[?&]visit=new(?:&|$)/.test(location.search)) mode = "new";
           else if (/[?&]visit=returning(?:&|$)/.test(location.search)) mode = "returning";
           else {
@@ -60,8 +82,22 @@
               mode = seen ? "returning" : "new";
             }
           }
+          baseMode = mode;
         }
+        /* Early onsite from storage / ?plats=1 (modes.js re-applies; no geolocation here). */
+        try {
+          var onsiteRaw = localStorage.getItem("td-onsite-tanndalen");
+          var onsiteData = onsiteRaw ? JSON.parse(onsiteRaw) : null;
+          var onsiteExpired = onsiteData && typeof onsiteData.until === "number" && Date.now() > onsiteData.until;
+          if (onsiteExpired) { localStorage.removeItem("td-onsite-tanndalen"); onsiteData = null; }
+          var forcePlats = params.get("plats") === "1";
+          var manualOff = onsiteData && onsiteData.source === "manual" && onsiteData.value === false;
+          if (mode === "onsite" || (onsiteData && onsiteData.value === true) || (forcePlats && !manualOff)) {
+            mode = "onsite";
+          }
+        } catch (err) {}
         document.documentElement.dataset.mode = mode;
+        document.documentElement.dataset.baseMode = baseMode === "onsite" ? "returning" : baseMode;
         if (params.get("demo") === "0") document.documentElement.dataset.demo = "0";
         var introSeen = mode !== "new";
         if (mode === "new") {
@@ -118,7 +154,7 @@
               <li class="site-menu-item" data-key="skida">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#skidakning">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/startsida/meny-skidakning.png" data-src-sommar="assets/startsida/meny-cykling-sommar.jpg?v=3" src="assets/startsida/meny-skidakning.png" />
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-skidakning.png" data-src-sommar="assets/img/meny-cykling-sommar.jpg?v=3" src="assets/img/meny-skidakning.png" />
                     <span class="site-menu-title td-heading-xs-regular" data-title-vinter="Skidåkning" data-title-sommar="Cykling">Skidåkning</span>
                   </a>
                   <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Skidåkning">
@@ -146,7 +182,7 @@
               <li class="site-menu-item" data-key="boende">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#boende">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/startsida/meny-boende.jpg?v=2" data-src-sommar="assets/startsida/meny-boende-sommar.jpg?v=2" src="assets/startsida/meny-boende.jpg?v=2" />
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-boende.jpg?v=2" data-src-sommar="assets/img/meny-boende-sommar.jpg?v=2" src="assets/img/meny-boende.jpg?v=2" />
                     <span class="site-menu-title td-heading-xs-regular">Boende</span>
                   </a>
                   <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Boende">
@@ -166,7 +202,7 @@
               <li class="site-menu-item" data-key="aktiviteter">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#aktiviteter">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/startsida/meny-aktiviteter.jpg" data-src-sommar="assets/startsida/meny-aktiviteter-sommar.png" src="assets/startsida/meny-aktiviteter.jpg" />
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-aktiviteter.jpg" data-src-sommar="assets/img/meny-aktiviteter-sommar.png" src="assets/img/meny-aktiviteter.jpg" />
                     <span class="site-menu-title td-heading-xs-regular">Aktiviteter</span>
                   </a>
                   <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Aktiviteter">
@@ -186,7 +222,7 @@
               <li class="site-menu-item" data-key="plats">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#pa-plats">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/startsida/meny-pa-plats.jpg" data-src-sommar="assets/startsida/meny-pa-plats-sommar.jpg" src="assets/startsida/meny-pa-plats.jpg" />
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-pa-plats.jpg" data-src-sommar="assets/img/meny-pa-plats-sommar.jpg" src="assets/img/meny-pa-plats.jpg" />
                     <span class="site-menu-title td-heading-xs-regular">På plats</span>
                   </a>
                   <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för På plats">
@@ -207,7 +243,7 @@
               <li class="site-menu-item" data-key="planera">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#planera">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/startsida/meny-planera.jpg?v=2" data-src-sommar="assets/startsida/meny-planera-sommar.jpg" src="assets/startsida/meny-planera.jpg?v=2" />
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-planera.jpg?v=2" data-src-sommar="assets/img/meny-planera-sommar.jpg" src="assets/img/meny-planera.jpg?v=2" />
                     <span class="site-menu-title td-heading-xs-regular">Planera resan</span>
                   </a>
                   <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Planera resan">
@@ -226,6 +262,15 @@
               </li>
             </ul>
             <div data-season-toggle="labeled"></div>
+            <div class="onsite-toggle-field">
+              <label class="onsite-toggle td-ui-nav" for="onsite-toggle-input">
+                <span>Jag är på plats i Tänndalen</span>
+                <span class="onsite-switch">
+                  <input id="onsite-toggle-input" data-onsite-toggle type="checkbox" role="switch" aria-checked="false" />
+                  <span class="onsite-switch-track" aria-hidden="true"><span class="onsite-switch-thumb"></span></span>
+                </span>
+              </label>
+            </div>
             <nav class="site-menu-foot" aria-label="Mer">
               <a class="td-ui-body-sm" href="#konferens">Konferens</a>
               <a class="td-ui-body-sm" href="#jobb">Jobba hos oss</a>
@@ -235,7 +280,9 @@
           </div>
         </div>
         </div>
-        <a href="?visit=new"><img class="logo" src="assets/brand/logo-horizontal-black.svg" alt="Tänndalen" /></a>
+        <div class="brand-center">
+          <a href="?visit=new"><img class="logo" src="assets/brand/logo-horizontal-black.svg" alt="Tänndalen" /></a>
+        </div>
         <div class="actions">
           <button class="td-button td-button-md td-button-secondary td-button-fill-winter td-ui-cta-sm" id="fraga-launch" type="button">
             <span class="td-button-graphic" data-context="auto" aria-hidden="true">
@@ -259,15 +306,67 @@
               </div>
             </nav>
           </div>
+          <div class="account-menu">
+            <button class="account-user" id="account-user" type="button" aria-expanded="false" aria-controls="account-panel" aria-label="Min bokning">
+              <span class="account-user-icon" data-account-icon aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M18.3091 16.4073C17.2382 14.5272 15.5661 13.0623 13.5618 12.2484C14.5585 11.5006 15.2948 10.4581 15.6662 9.26849C16.0377 8.0789 16.0256 6.80255 15.6316 5.62022C15.2376 4.4379 14.4818 3.40955 13.4711 2.68084C12.4604 1.95213 11.2461 1.56 10.0002 1.56C8.75436 1.56 7.54007 1.95213 6.52937 2.68084C5.51867 3.40955 4.7628 4.4379 4.36882 5.62022C3.97485 6.80255 3.96274 8.0789 4.33421 9.26849C4.70569 10.4581 5.44192 11.5006 6.43861 12.2484C4.43437 13.0623 2.76222 14.5272 1.69136 16.4073C1.62501 16.514 1.58078 16.633 1.56132 16.7572C1.54185 16.8813 1.54754 17.0082 1.57805 17.1301C1.60856 17.252 1.66326 17.3665 1.7389 17.4669C1.81455 17.5673 1.90959 17.6514 2.01839 17.7142C2.12718 17.7771 2.2475 17.8175 2.37219 17.8329C2.49689 17.8483 2.62341 17.8385 2.74424 17.8041C2.86507 17.7696 2.97774 17.7112 3.07555 17.6323C3.17336 17.5534 3.25432 17.4557 3.31361 17.3449C4.72888 14.8978 7.22826 13.4383 10.0002 13.4383C12.7722 13.4383 15.2716 14.8986 16.6868 17.3449C16.8153 17.5515 17.0191 17.7001 17.2552 17.7592C17.4912 17.8183 17.7409 17.7833 17.9516 17.6615C18.1623 17.5398 18.3174 17.3408 18.3841 17.1068C18.4508 16.8727 18.4239 16.6219 18.3091 16.4073ZM5.93874 7.50032C5.93874 6.69677 6.17694 5.91126 6.62322 5.24313C7.0695 4.57501 7.70382 4.05426 8.44596 3.74676C9.1881 3.43925 10.0047 3.3588 10.7926 3.51556C11.5804 3.67233 12.3041 4.05927 12.8721 4.62747C13.4401 5.19566 13.827 5.91959 13.9837 6.7077C14.1404 7.49581 14.0599 8.31271 13.7525 9.0551C13.4451 9.79748 12.9246 10.432 12.2567 10.8784C11.5888 11.3249 10.8035 11.5631 10.0002 11.5631C8.92343 11.5619 7.8911 11.1335 7.12969 10.3718C6.36828 9.61014 5.93998 8.57747 5.93874 7.50032Z" fill="currentColor"/></svg>
+              </span>
+              <span class="account-user-initials td-ui-label" data-account-initials hidden>AB</span>
+              <span class="account-user-dot" aria-hidden="true"></span>
+            </button>
+            <div class="account-panel" id="account-panel" role="dialog" aria-label="Min bokning" hidden>
+              <div data-account-view="login">
+                <h2 class="td-heading-xxs-regular">Hitta din bokning</h2>
+                <p class="td-body-xs account-lead">Fyll i bokningsnummer och efternamn så visar vi din vistelse.</p>
+                <form class="account-form" data-account-form>
+                  <label class="account-field">
+                    <span class="td-ui-label">Bokningsnummer</span>
+                    <input class="td-body-xs" name="booking-number" type="text" autocomplete="off" placeholder="Ange ditt bokningsnummer…" required />
+                  </label>
+                  <label class="account-field">
+                    <span class="td-ui-label">Efternamn</span>
+                    <input class="td-body-xs" name="last-name" type="text" autocomplete="family-name" placeholder="Ange ditt efternamn…" required />
+                  </label>
+                  <button class="td-button td-button-secondary td-button-md td-button-fill-spring" type="submit">Visa min bokning</button>
+                </form>
+                <hr class="account-divider" />
+                <div class="account-foot">
+                  <a class="td-ui-caption" href="#bokningsnummer">Hittar inte numret?</a>
+                  <a class="td-ui-caption" href="#fraga" data-account-fraga>Fråga oss om bokning</a>
+                </div>
+              </div>
+              <div data-account-view="stay" hidden>
+                <div class="account-stay-head">
+                  <p class="td-ui-kicker account-stay-status" data-stay-status data-status="upcoming"></p>
+                  <h2 class="td-heading-xxs-regular" data-stay-title>Ski Lodge Premium</h2>
+                </div>
+                <div class="account-stay-rows td-body-sm">
+                  <div><span>Sällskap</span><span data-stay-party>2 vuxna, 1 barn</span></div>
+                  <div><span>Incheckning</span><span data-stay-checkin>Från 15:00</span></div>
+                </div>
+                <button class="td-button td-button-secondary td-button-md td-button-fill-spring" type="button" data-stay-onsite>Visa På plats</button>
+                <a class="td-button td-button-secondary td-button-md td-button-fill-spring" href="#bokning" data-todo="r360">Se hela bokningen</a>
+                <div class="account-foot account-foot-center">
+                  <a class="td-ui-caption" href="#logga-ut" data-account-logout>Logga ut</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
+      <div class="onsite-quiet-row" data-onsite-pill-row hidden>
+        <button class="td-button td-button-secondary td-button-sm td-button-fill-neutral onsite-quiet-pill" type="button" data-onsite-pill>
+          <img src="assets/icons/map-pin-20.svg" alt="" width="20" height="20" aria-hidden="true" />
+          <span>På plats i Tänndalen</span>
+        </button>
+      </div>
       <div class="intro-runway" id="intro-runway">
         <div class="intro-stage" id="stage">
       <section class="hero" id="hero-heading" tabindex="-1" aria-label="Tänndalen">
         <div class="hero-frame">
         <video class="hero-media" data-depth="front" muted playsinline loop src="assets/video/hero-vinter.mov"></video>
         </div>
-        <img class="hero-doodle hero-sun" data-depth="sun" src="assets/startsida/doodle-sol-black.svg" alt="" width="258" height="258" aria-hidden="true" />
+        <img class="hero-doodle hero-sun" data-depth="sun" src="assets/img/doodle-sol-black.svg" alt="" width="258" height="258" aria-hidden="true" />
         <span class="hero-doodle hero-goggles" data-depth="sun"></span>
         <script>
           if (document.documentElement.dataset.season === "summer") {
@@ -299,13 +398,14 @@
       </div>
       <main>
         <div id="parallax-layer" aria-hidden="true">
-          <div class="parallax-item parallax-item--hamra td-topo2-layer" data-anchor="#just-nu" data-parallax-item="skarvarna" style="--topo-offset-y: 0px">
+          <div class="parallax-item parallax-item--skarvarna td-topo2-layer" data-anchor="#fragor" data-parallax-item="skarvarna" style="--topo-offset-y: 0px">
             <div class="td-topo2" role="presentation" aria-hidden="true"></div>
             <div class="td-topo2-text">
               <div class="td-topo2-label">
                 <p class="td-topo2-name">Skarvarna</p>
-                <div class="td-topo2-facts">
-                  <p>1 137 m ö.h. · 295 m fallhöjd</p>
+                <!-- TODO: Skarvarna: 1 226 / 380 gissade (Lill-Skarven → Skarvruet) — verifiera med Tänndalen; temp/tid från väderstationen -->
+                <div class="td-topo2-facts" data-facts-verify="true">
+                  <p>1 226 m ö.h. · 380 m fallhöjd</p>
                   <p data-placeholder="true">−4 °C på toppen · 11:04</p>
                 </div>
               </div>
@@ -336,7 +436,7 @@
           <article class="td-aktuellt-kort" data-typ="innehall" data-platta="glas">
             <div class="td-aktuellt-kort-platta">
               <div class="td-aktuellt-kort-bild">
-                <img src="assets/aktuellt/sprakande-nyar.jpg" alt="Stjärnhimmel över en snötäckt fjällsida i Tänndalen" width="471" height="346" decoding="async">
+                <img src="assets/img/sprakande-nyar.jpg" alt="Stjärnhimmel över en snötäckt fjällsida i Tänndalen" width="471" height="346" decoding="async">
                 <span class="td-aktuellt-kort-kicker"><span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark">Erbjudande</span></span>
               </div>
             </div>
@@ -356,7 +456,7 @@
           <article class="td-aktuellt-kort" data-typ="innehall" data-platta="sommar">
             <div class="td-aktuellt-kort-platta">
               <div class="td-aktuellt-kort-bild">
-                <img src="assets/aktuellt/jobba-fjallifran.jpg" alt="Fyra personer med skidhjälmar och goggles vilar mot en vägg i solen" width="471" height="346" decoding="async" loading="lazy">
+                <img src="assets/img/jobba-fjallifran.jpg" alt="Fyra personer med skidhjälmar och goggles vilar mot en vägg i solen" width="471" height="346" decoding="async" loading="lazy">
               </div>
             </div>
             <div class="td-aktuellt-kort-body">
@@ -374,7 +474,7 @@
           <article class="td-aktuellt-kort" data-typ="innehall" data-platta="host">
             <div class="td-aktuellt-kort-platta">
               <div class="td-aktuellt-kort-bild">
-                <img src="assets/aktuellt/fjalltagen.jpg" alt="Närbild av en kvinna med skidmössa och speglande goggles" width="471" height="346" decoding="async" loading="lazy">
+                <img src="assets/img/fjalltagen.jpg" alt="Närbild av en kvinna med skidmössa och speglande goggles" width="471" height="346" decoding="async" loading="lazy">
               </div>
             </div>
             <div class="td-aktuellt-kort-body">
@@ -432,7 +532,7 @@
                   <p class="en-dag-sun-name">Soluppgång</p>
                 </div>
                 <span class="en-dag-sun-icon-wrap">
-                  <img class="en-dag-sun-icon" src="assets/icons/all/48/light/soluppgang.svg" width="48" height="48" alt="" />
+                  <img class="en-dag-sun-icon" src="assets/icons/soluppgang-48.svg" width="48" height="48" alt="" />
                 </span>
               </div>
               <div class="en-dag-sun-set en-dag-sun-mark" data-sun="set">
@@ -441,15 +541,15 @@
                   <p class="en-dag-sun-name">Solnedgång</p>
                 </div>
                 <span class="en-dag-sun-icon-wrap">
-                  <img class="en-dag-sun-icon" src="assets/icons/all/48/light/solnedgang.svg" width="48" height="48" alt="" />
+                  <img class="en-dag-sun-icon" src="assets/icons/solnedgang-48.svg" width="48" height="48" alt="" />
                 </span>
               </div>
             </div>
           </aside>
-          <article class="en-dag-slide" data-time="08:30" data-name="Första åket" data-summer-time="10:00" data-summer-name="Fjället på cykel" data-summer-title="Liften upp, cykeln med" data-summer-body="Ta liften upp på kalfjället och rulla ner med utsikt över hela fjällvärlden. Fjorton leder, och de flesta klarar hela familjen." data-summer-cta="Se Fjällcykelparken" data-summer-href="#cykling" data-summer-src="assets/startsida/sommar-dag-01.jpg?v=4">
+          <article class="en-dag-slide" data-time="08:30" data-name="Första åket" data-summer-time="10:00" data-summer-name="Fjället på cykel" data-summer-title="Liften upp, cykeln med" data-summer-body="Ta liften upp på kalfjället och rulla ner med utsikt över hela fjällvärlden. Fjorton leder, och de flesta klarar hela familjen." data-summer-cta="Se Fjällcykelparken" data-summer-href="#cykling" data-summer-src="assets/img/sommar-dag-01.jpg?v=4">
             <div class="en-dag-media" data-depth="front">
-              <video class="en-dag-video" muted playsinline loop preload="none" poster="assets/startsida/endag-0830.jpg">
-                <source src="assets/startsida/endag-0830.mp4" type="video/mp4" />
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="assets/img/endag-0830.jpg">
+                <source src="assets/video/endag-0830.mp4" type="video/mp4" />
               </video>
               <img class="en-dag-season-photo" alt="Lift upp på kalfjället, med cykel och utsikt över fjällen" loading="lazy" hidden />
               <div class="en-dag-dim" aria-hidden="true"></div>
@@ -463,9 +563,9 @@
               </article>
             </div>
           </article>
-          <article class="en-dag-slide" data-time="10:15" data-name="Backar för alla" data-summer-time="12:30" data-summer-name="Lunchpaus" data-summer-title="Pizza på Lodgen" data-summer-body="Efter en förmiddag i sadeln smakar det mesta bra. Jillie, med renkött och svamp, är fjällfavoriten." data-summer-cta="Se menyn" data-summer-href="#mat" data-summer-src="assets/startsida/sommar-dag-02.jpg?v=3">
+          <article class="en-dag-slide" data-time="10:15" data-name="Backar för alla" data-summer-time="12:30" data-summer-name="Lunchpaus" data-summer-title="Pizza på Lodgen" data-summer-body="Efter en förmiddag i sadeln smakar det mesta bra. Jillie, med renkött och svamp, är fjällfavoriten." data-summer-cta="Se menyn" data-summer-href="#mat" data-summer-src="assets/img/sommar-dag-02.jpg?v=3">
             <div class="en-dag-media" data-depth="front">
-              <img src="assets/startsida/endag-1015.jpg" alt="" />
+              <img src="assets/img/endag-1015.jpg" alt="" />
               <img class="en-dag-season-photo" alt="Pizza serverad på Lodgen" loading="lazy" hidden />
               <div class="en-dag-dim" aria-hidden="true"></div>
             </div>
@@ -477,9 +577,9 @@
               </article>
             </div>
           </article>
-          <article class="en-dag-slide" data-time="13:00" data-name="Våfflor i solen" data-summer-time="14:00" data-summer-name="Lämmelstigen" data-summer-title="Barnen tar över Lämmelstigen" data-summer-body="Få fart på vattenhjulet, smyg förbi räven och mät dig mot en myskoxe. Två kilometer för barn mellan 3 och 10 år." data-summer-cta="Läs mer om Lämmelstigen" data-summer-href="#barn" data-summer-src="assets/startsida/sommar-dag-03.jpg?v=3">
+          <article class="en-dag-slide" data-time="13:00" data-name="Våfflor i solen" data-summer-time="14:00" data-summer-name="Lämmelstigen" data-summer-title="Barnen tar över Lämmelstigen" data-summer-body="Få fart på vattenhjulet, smyg förbi räven och mät dig mot en myskoxe. Två kilometer för barn mellan 3 och 10 år." data-summer-cta="Läs mer om Lämmelstigen" data-summer-href="#barn" data-summer-src="assets/img/sommar-dag-03.jpg?v=3">
             <div class="en-dag-media" data-depth="front">
-              <img src="assets/startsida/endag-1300.jpg?v=2" alt="Våfflor och kaffe på utomhusbordet med pist och röda stugor i bakgrunden" />
+              <img src="assets/img/endag-1300.jpg?v=2" alt="Våfflor och kaffe på utomhusbordet med pist och röda stugor i bakgrunden" />
               <img class="en-dag-season-photo" alt="Barn längs Lämmelstigen, med vattenhjul och labyrinter" loading="lazy" hidden />
               <div class="en-dag-dim" aria-hidden="true"></div>
             </div>
@@ -491,10 +591,10 @@
               </article>
             </div>
           </article>
-          <article class="en-dag-slide" data-time="15:00" data-name="Sista åket" data-summer-time="17:00" data-summer-name="Grillmiddag vid stugan" data-summer-title="Grilla vid stugan" data-summer-body="Tänd grillen på altanen. Solen går ner sent, så ingen behöver skynda sig med middagen." data-summer-cta="Handla mat här" data-summer-href="#handla" data-summer-src="assets/startsida/sommar-dag-04.jpg?v=2">
+          <article class="en-dag-slide" data-time="15:00" data-name="Sista åket" data-summer-time="17:00" data-summer-name="Grillmiddag vid stugan" data-summer-title="Grilla vid stugan" data-summer-body="Tänd grillen på altanen. Solen går ner sent, så ingen behöver skynda sig med middagen." data-summer-cta="Handla mat här" data-summer-href="#handla" data-summer-src="assets/img/sommar-dag-04.jpg?v=2">
             <div class="en-dag-media" data-depth="front">
-              <video class="en-dag-video" muted playsinline loop preload="none" poster="assets/startsida/endag-1530.jpg">
-                <source src="assets/startsida/endag-1530.mp4" type="video/mp4" />
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="assets/img/endag-1530.jpg">
+                <source src="assets/video/endag-1530.mp4" type="video/mp4" />
               </video>
               <img class="en-dag-season-photo" alt="Grillning vid en stuga i fjället" loading="lazy" hidden />
               <div class="en-dag-dim" aria-hidden="true"></div>
@@ -508,9 +608,9 @@
               </article>
             </div>
           </article>
-          <article class="en-dag-slide is-puff" data-time="16:00" data-name="Tillbaka i stugan" data-summer-time="19:00" data-summer-name="Musikkväll" data-summer-label="Musikkväll på Kalfjäll" data-summer-title="Njut av sommarkvällen" data-summer-cta="Hitta ert boende" data-summer-href="#boende" data-summer-src="assets/startsida/sommar-dag-05.jpg?v=2">
+          <article class="en-dag-slide is-puff" data-time="16:00" data-name="Tillbaka i stugan" data-summer-time="19:00" data-summer-name="Musikkväll" data-summer-label="Musikkväll på Kalfjäll" data-summer-title="Njut av sommarkvällen" data-summer-cta="Hitta ert boende" data-summer-href="#boende" data-summer-src="assets/img/sommar-dag-05.jpg?v=2">
             <div class="en-dag-media" data-depth="front">
-              <img src="assets/startsida/endag-1700.png" alt="" />
+              <img src="assets/img/endag-1700.png" alt="" />
               <img class="en-dag-season-photo" alt="Musikkväll på kalfjället i kvällsljus" loading="lazy" hidden />
               <div class="en-dag-puff-shade" aria-hidden="true"></div>
               <div class="en-dag-puff-copy">
@@ -529,29 +629,6 @@
         <p class="visually-hidden" id="en-dag-live" aria-live="polite"></p>
       </section>
 
-      <section class="citat-band" id="citat-band" aria-label="Citat">
-        <figure class="td-citat">
-          <img
-            class="td-citat-image"
-            src="assets/startsida/citat-rasmus-bent.png"
-            alt=""
-            width="120"
-            height="120"
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="td-citat-copy">
-            <blockquote class="td-citat-quote td-quote-xs">
-              <p>“Tänndalen är en dalgång som det tar sekunder att bli förälskad i, men en livstid att utforska.”</p>
-            </blockquote>
-            <figcaption class="td-citat-credit">
-              <p class="td-citat-name td-ui-title-sm">Rasmus Bent</p>
-              <p class="td-citat-role td-ui-caption">VD för Sveriges bästa skidort</p>
-            </figcaption>
-          </div>
-        </figure>
-      </section>
-
       <section class="just-nu" id="just-nu" aria-labelledby="just-nu-title">
         <div class="just-nu-head" data-depth="mid">
           <div>
@@ -568,32 +645,32 @@
             <section class="td-just-nu-stack" data-depth="front" data-gren-panel="alpint" aria-label="Just nu, alpint">
               <div class="td-just-nu-stack-viewport">
                 <div class="td-just-nu-stack-track">
-                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">12</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">30</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
-                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">134</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">71</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
-                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/liftar.svg" alt=""></span><span class="td-ui-title">Öppet</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">41</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">14</span><span class="td-ui-figure-unit-md">/</span><span class="td-ui-figure-unit-md">17</span></div><span class="td-ui-body-sm td-just-nu-data-caption">liftar</span></div></div></article>
-                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/nypreparerat.svg" alt=""></span><span class="td-ui-title">Preparerat i natt</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">32</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Headstråket</span></div><span class="td-ui-body-sm td-just-nu-data-caption">bäst just nu</span></div></div></article>
-                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/vind-storm.svg" alt=""></span><span class="td-ui-title">Vind</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-wind">Hård vind</span></div><span class="td-ui-body-sm td-just-nu-data-caption">Stormliftarna går, resten står still</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">12</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">30</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">134</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">71</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/liftar.svg" alt=""></span><span class="td-ui-title">Öppet</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">41</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">14</span><span class="td-ui-figure-unit-md">/</span><span class="td-ui-figure-unit-md">17</span></div><span class="td-ui-body-sm td-just-nu-data-caption">liftar</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/nypreparerat.svg" alt=""></span><span class="td-ui-title">Preparerat i natt</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">32</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Headstråket</span></div><span class="td-ui-body-sm td-just-nu-data-caption">bäst just nu</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/vind-storm.svg" alt=""></span><span class="td-ui-title">Vind</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-wind">Hård vind</span></div><span class="td-ui-body-sm td-just-nu-data-caption">Stormliftarna går, resten står still</span></div></div></article>
                 </div>
               </div>
               <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
             </section>
             <section class="td-just-nu-stack" data-depth="front" data-gren-panel="langd" hidden aria-label="Just nu, längd">
               <div class="td-just-nu-stack-viewport"><div class="td-just-nu-stack-track">
-                <article class="td-just-nu-data" data-status="spar"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/langdspar.svg" alt=""></span><span class="td-ui-title">Spår</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-status-unit></span><span class="td-ui-figure-unit-lg">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nypreparerat</span></div></div></article>
-                <article class="td-just-nu-data" data-status="valla"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/valla.svg" alt=""></span><span class="td-ui-title">Valla</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-wax-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-status-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">fästvalla</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">°C</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i spåret</span></div></div></article>
-                <article class="td-just-nu-data" data-status="nysno"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
-                <article class="td-just-nu-data" data-status="snodjup"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
+                <article class="td-just-nu-data" data-status="spar"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/langdspar.svg" alt=""></span><span class="td-ui-title">Spår</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-status-unit></span><span class="td-ui-figure-unit-lg">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nypreparerat</span></div></div></article>
+                <article class="td-just-nu-data" data-status="valla"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/valla.svg" alt=""></span><span class="td-ui-title">Valla</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-wax-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-status-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">fästvalla</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">°C</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i spåret</span></div></div></article>
+                <article class="td-just-nu-data" data-status="nysno"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
+                <article class="td-just-nu-data" data-status="snodjup"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
               </div></div>
               <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
             </section>
             <section class="td-just-nu-stack" data-depth="front" data-gren-panel="sommar" hidden aria-label="Just nu, sommar">
               <div class="td-just-nu-stack-viewport"><div class="td-just-nu-stack-track">
-                <article class="td-just-nu-data" data-summer="temperatur"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/temperatur.svg" alt=""></span><span class="td-ui-title">Temperatur</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">på toppen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i sjön</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="temperatur"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/temperatur.svg" alt=""></span><span class="td-ui-title">Temperatur</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">på toppen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i sjön</span></div></div></article>
                 <!-- TODO: ingen moln- eller regnikon i ikonbiblioteket. -->
-                <article class="td-just-nu-data" data-summer="vader"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon" ><img src="assets/icons/all/32/light/vader.svg" alt=""></span><span class="td-ui-title">Väder</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">%</span></div><span class="td-ui-body-sm td-just-nu-data-caption">risk för regn</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind på toppen</span></div></div></article>
-                <article class="td-just-nu-data" data-summer="leder"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/leder.svg" alt=""></span><span class="td-ui-title">Lederna</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-summer-unit></span></div><span class="td-ui-body-sm td-just-nu-data-caption">cykelleder öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-word" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">lederna idag</span></div></div></article>
-                <article class="td-just-nu-data" data-summer="lift"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/liftar.svg" alt=""></span><span class="td-ui-title">Liften</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-summer-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">Hamra Komfort</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption" data-summer-caption-2>dagens öppettider</span></div></div></article>
-                <article class="td-just-nu-data" data-summer="sol"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/soluppgang.svg" alt=""></span><span class="td-ui-title">Sol</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">soluppgång</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">solnedgång</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="vader"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon" ><img src="assets/icons/vader.svg" alt=""></span><span class="td-ui-title">Väder</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">%</span></div><span class="td-ui-body-sm td-just-nu-data-caption">risk för regn</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind på toppen</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="leder"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/leder.svg" alt=""></span><span class="td-ui-title">Lederna</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-summer-unit></span></div><span class="td-ui-body-sm td-just-nu-data-caption">cykelleder öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-word" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">lederna idag</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="lift"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/liftar.svg" alt=""></span><span class="td-ui-title">Liften</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-summer-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">Hamra Komfort</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption" data-summer-caption-2>dagens öppettider</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="sol"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/soluppgang.svg" alt=""></span><span class="td-ui-title">Sol</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">soluppgång</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">solnedgång</span></div></div></article>
               </div></div>
               <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
             </section>
@@ -603,7 +680,7 @@
             </a>
           </div>
           <a class="td-rapport td-rapport-overlay" data-depth="front">
-            <img class="td-rapport-image" src="assets/startsida/rapport-raw-1.png" alt="" loading="lazy">
+            <img class="td-rapport-image" src="assets/img/rapport-raw-1.png" alt="" loading="lazy">
             <video class="td-rapport-image" data-langd-video hidden muted playsinline preload="none"></video>
             <span class="td-rapport-shade"></span>
             <div class="td-rapport-body">
@@ -620,7 +697,7 @@
                   <p class="td-ui-body-sm" data-rapport-excerpt hidden></p>
                   <span class="td-ui-caption" data-rapport-more hidden>Läs mer →</span>
                   <div class="td-rapport-footer">
-                    <p class="td-rapport-author"><img class="td-rapport-avatar" src="assets/startsida/rapport-avatar.png" alt="" width="32" height="32"><span class="td-ui-caption" data-rapport-sign>Jonas Berg, pistförare</span></p>
+                    <p class="td-rapport-author"><img class="td-rapport-avatar" src="assets/img/rapport-avatar.png" alt="" width="32" height="32"><span class="td-ui-caption" data-rapport-sign>Jonas Berg, pistförare</span></p>
                     <p class="td-rapport-chip td-rapport-chip-line td-ui-caption" data-rapport-badge>Preparerad 05:30</p>
                   </div>
                 </div>
@@ -629,7 +706,7 @@
           </a>
           <div>
             <section class="td-pagang" data-depth="front">
-              <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/all/32/light/kalender.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
+              <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/kalender.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
               <div class="td-pagang-groups">
                 <section><h3 class="td-pagang-group-name td-ui-nav">Snart</h3>
                   <a class="td-pagang-row" href="#sportlovet"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">16 feb–8 mar</span><span class="td-ui-body">Sportlovet</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><hr class="td-pagang-divider"></a>
@@ -642,7 +719,7 @@
               </div>
             </section>
             <a class="td-kamera td-kamera-pan td-just-nu-card" data-depth="front" href="#kameror">
-              <img class="td-kamera-media" src="assets/startsida/webbkamera.png" alt="" loading="lazy">
+              <img class="td-kamera-media" src="assets/img/webbkamera.png" alt="" loading="lazy">
               <span class="td-kamera-shade"></span>
               <header class="td-just-nu-header td-just-nu-header-sm td-kamera-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8.4375 6.25C8.4375 5.94097 8.52914 5.63887 8.70083 5.38192C8.87252 5.12497 9.11655 4.9247 9.40206 4.80644C9.68757 4.68818 10.0017 4.65723 10.3048 4.71752C10.6079 4.77781 10.8863 4.92663 11.1049 5.14515C11.3234 5.36367 11.4722 5.64208 11.5325 5.94517C11.5928 6.24827 11.5618 6.56243 11.4436 6.84794C11.3253 7.13345 11.125 7.37748 10.8681 7.54917C10.6111 7.72086 10.309 7.8125 10 7.8125C9.5856 7.8125 9.18817 7.64788 8.89515 7.35485C8.60212 7.06183 8.4375 6.6644 8.4375 6.25ZM4.6875 6.25C4.6875 4.84104 5.24721 3.48978 6.2435 2.4935C7.23978 1.49721 8.59104 0.9375 10 0.9375C11.409 0.9375 12.7602 1.49721 13.7565 2.4935C14.7528 3.48978 15.3125 4.84104 15.3125 6.25C15.3125 11.1133 10.6633 13.8281 10.4648 13.9391C10.3233 14.0199 10.163 14.0624 10 14.0624C9.83696 14.0624 9.67674 14.0199 9.53516 13.9391C9.33672 13.8281 4.6875 11.1133 4.6875 6.25ZM6.5625 6.25C6.5625 9.23438 8.96172 11.2656 10 12.0031C11.032 11.2617 13.4375 9.21875 13.4375 6.25C13.4375 5.33832 13.0753 4.46398 12.4307 3.81932C11.786 3.17466 10.9117 2.8125 10 2.8125C9.08832 2.8125 8.21398 3.17466 7.56932 3.81932C6.92466 4.46398 6.5625 5.33832 6.5625 6.25ZM16.2945 11.375C16.1804 11.3266 16.0579 11.3013 15.9339 11.3005C15.81 11.2998 15.6871 11.3237 15.5724 11.3707C15.4578 11.4178 15.3536 11.4871 15.2659 11.5747C15.1782 11.6623 15.1087 11.7664 15.0615 11.881C15.0143 11.9956 14.9903 12.1184 14.9909 12.2424C14.9914 12.3663 15.0166 12.4889 15.0648 12.6031C15.1131 12.7172 15.1835 12.8207 15.272 12.9075C15.3605 12.9942 15.4654 13.0626 15.5805 13.1086C16.6844 13.5633 17.1875 14.0836 17.1875 14.375C17.1875 14.6875 16.6305 15.2398 15.4086 15.7094C13.9789 16.2563 12.0578 16.5625 10 16.5625C7.94219 16.5625 6.02109 16.2594 4.59141 15.7094C3.36875 15.2398 2.8125 14.6875 2.8125 14.375C2.8125 14.0836 3.31562 13.5633 4.41953 13.1086C4.53463 13.0626 4.63947 12.9942 4.72797 12.9075C4.81648 12.8207 4.8869 12.7172 4.93517 12.6031C4.98343 12.4889 5.00858 12.3663 5.00915 12.2424C5.00972 12.1184 4.98571 11.9956 4.9385 11.881C4.8913 11.7664 4.82183 11.6623 4.73413 11.5747C4.64643 11.4871 4.54223 11.4178 4.42756 11.3707C4.31289 11.3237 4.19003 11.2998 4.06608 11.3005C3.94214 11.3013 3.81957 11.3266 3.70547 11.375C2.44297 11.8945 0.9375 12.8367 0.9375 14.375C0.9375 17.0422 5.49687 18.4375 10 18.4375C12.2828 18.4375 14.4422 18.0906 16.082 17.4594C17.1953 17.0312 19.0625 16.0617 19.0625 14.375C19.0625 12.8367 17.557 11.8945 16.2945 11.375Z" fill="currentColor"/></svg></span><span class="td-ui-kicker" data-kamera-label>Webbkamera · Storvigeln</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Alla kameror</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
               <p class="td-kamera-status"><span class="td-kamera-live"><span class="td-kamera-dot"></span><span class="td-ui-label">Live</span></span><span class="td-ui-caption" data-kamera-line>Uppdaterad 09:42</span></p>
@@ -715,11 +792,11 @@
         <div class="utforsakning-stage">
           <div class="utforsakning-media">
             <div class="utforsakning-clips">
-              <video class="utforsakning-clip" data-tab="alpin" muted loop playsinline preload="metadata" src="assets/utforsakning/klipp-8.mp4"></video>
-              <img class="utforsakning-clip is-on" data-tab="langd" src="assets/utforsakning/langd.jpg" alt="Skidåkare i en vid fjällsluttning ovanför skogen" width="1063" height="732">
-              <img class="utforsakning-clip" data-tab="snow" src="assets/utforsakning/snow.jpg" alt="Snowboardåkare i ett hopp ovanför snöparken" width="1063" height="732">
+              <video class="utforsakning-clip" data-tab="alpin" muted loop playsinline preload="metadata" src="assets/video/klipp-8.mp4"></video>
+              <img class="utforsakning-clip is-on" data-tab="langd" src="assets/img/langd.jpg" alt="Skidåkare i en vid fjällsluttning ovanför skogen" width="1063" height="732">
+              <img class="utforsakning-clip" data-tab="snow" src="assets/img/snow.jpg" alt="Snowboardåkare i ett hopp ovanför snöparken" width="1063" height="732">
             </div>
-            <span class="utforsakning-doodle" data-depth="mitt" aria-hidden="true"><img src="assets/doodles/handske.svg" alt="" width="151" height="232"></span>
+            <span class="utforsakning-doodle" data-depth="mitt" aria-hidden="true"><img src="assets/img/handske.svg" alt="" width="151" height="232"></span>
           </div>
           <div class="utforsakning-card">
             <div class="utforsakning-tabs" role="tablist" aria-label="Aktivitet">
@@ -757,11 +834,24 @@
         </div>
       </section>
 
+      <section class="citat-band" id="citat-band" aria-label="Citat">
+        <figure class="td-citat td-citat--text">
+          <div class="td-citat-copy">
+            <blockquote class="td-citat-quote">
+              <p>“Tänndalen är en dalgång som det tar sekunder att bli förälskad i, men en livstid att utforska.”</p>
+            </blockquote>
+            <figcaption class="td-citat-credit">
+              <p class="td-citat-by">Rasmus Bent · VD för Sveriges bästa skidort</p>
+            </figcaption>
+          </div>
+        </figure>
+      </section>
+
       <section class="td-hitta" id="hitta" aria-label="Hitta hit">
         <div class="td-hitta-sticky">
         <div class="td-hitta-kart" id="hitta-kart" data-depth="back">
           <div class="hitta-world" id="hitta-world">
-            <img class="hitta-world-map td-hitta-map" src="assets/hitta-hit/sverigekarta-hitta-hit.svg?v=15" alt="" width="5040" height="4973" aria-hidden="true" />
+            <img class="hitta-world-map td-hitta-map" src="assets/img/sverigekarta-hitta-hit.svg?v=15" alt="" width="5040" height="4973" aria-hidden="true" />
             <svg class="hitta-world-svg" id="hitta-route" viewBox="0 0 1440 1373" width="1440" height="1373" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <mask id="hitta-route-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="1373">
@@ -944,8 +1034,8 @@
       const seasonBanner = mountSeasonBanner(document.querySelector("[data-season-banner]"), {
         mode: dayView,
         image: {
-          winter: "assets/startsida/banner-sommar.jpg",
-          summer: "assets/startsida/banner-vinter.jpg"
+          winter: "assets/img/banner-sommar.jpg",
+          summer: "assets/img/banner-vinter.jpg"
         },
         onSwitch() {
           const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1033,7 +1123,7 @@
       function menuFocusables() {
         return [...menuPanel.querySelectorAll("a, button")].filter((el) => !el.closest("[inert]") && !el.hidden && !el.closest("[hidden]"));
       }
-      function openMenu(focusSeason) {
+      function openMenu(focusSeason, focusOnsite) {
         menuOpen = true;
         menu.inert = false;
         menu.classList.add("is-open");
@@ -1041,10 +1131,15 @@
         menuControl.setAttribute("aria-expanded", "true");
         menuControl.setAttribute("aria-label", "Stäng meny");
         const seasonRadio = menuPanel.querySelector(`.td-season-toggle [role="radio"][aria-checked="true"]`);
-        const target = focusSeason ? seasonRadio : menuFocusables()[0];
+        const onsiteToggle = menuPanel.querySelector("[data-onsite-toggle]");
+        const target = focusOnsite ? onsiteToggle : focusSeason ? seasonRadio : menuFocusables()[0];
         target?.focus();
+        if (focusOnsite) onsiteToggle?.scrollIntoView({ block: "nearest" });
         requestAnimationFrame(() => dispatchEvent(new Event("resize")));
       }
+      document.addEventListener("td-open-menu", (event) => {
+        openMenu(false, event.detail?.focus === "onsite");
+      });
       function closeMenu() {
         if (!menuOpen) return;
         menuOpen = false;
@@ -1120,6 +1215,11 @@
         ["skidskola", "Skidskola"],
         ["paket", "Paket"],
       ];
+      const onsiteCats = [
+        ["skidskola", "Skidskola"],
+        ["skidhyra", "Skidhyra"],
+        ["aktiviteter", "Aktiviteter"],
+      ];
       /* R360 category ids. MTB has no id in the configuration yet. */
       const r360CategoryIds = { mtb: "" };
       const root = document.getElementById("booking-cats");
@@ -1130,7 +1230,9 @@
       root.append(pill);
       function bookingCats() {
         const summer = document.documentElement.dataset.season === "summer";
-        return cats.map(([id, label]) => summer && id === "skidhyra" ? ["mtb", "Cykel"] : [id, label]);
+        const onsite = document.documentElement.dataset.mode === "onsite";
+        const list = onsite ? onsiteCats : cats;
+        return list.map(([id, label]) => (!onsite && summer && id === "skidhyra") ? ["mtb", "Cykel"] : [id, label]);
       }
       function renderBookingCats() {
         root.querySelectorAll("button").forEach((button) => button.remove());
@@ -1142,9 +1244,10 @@
         button.type = "button";
         button.className = "td-ui-label";
         button.setAttribute("aria-label", label);
+        const iconSrc = id === "aktiviteter" ? "assets/icons/skidskola.svg" : `assets/icons/${id}.svg`;
         const iconSlot = id === "mtb"
           ? `<span class="booking-icon-slot"><svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true"><path fill="var(--color-text-primary)" d="M13,22 Q13,24.485 11.243,26.243 Q9.485,28 7,28 Q4.515,28 2.757,26.243 Q1,24.485 1,22 Q1,19.515 2.757,17.757 Q4.515,16 7,16 Q9.485,16 11.243,17.757 Q13,19.515 13,22 Z M11,22 Q11,18 7,18 Q3,18 3,22 Q3,26 7,26 Q11,26 11,22 Z"/><path fill="var(--color-text-primary)" d="M31,22 Q31,24.485 29.243,26.243 Q27.485,28 25,28 Q22.515,28 20.757,26.243 Q19,24.485 19,22 Q19,19.515 20.757,17.757 Q22.515,16 25,16 Q27.485,16 29.243,17.757 Q31,19.515 31,22 Z M29,22 Q29,18 25,18 Q21,18 21,22 Q21,26 25,26 Q29,26 29,22 Z"/><path fill="var(--color-text-primary)" d="M22.5,13.791 L25.916,21.599 Q26.082,21.979 25.931,22.364 Q25.78,22.75 25.401,22.916 Q25.021,23.082 24.636,22.931 Q24.25,22.78 24.084,22.401 L21.305,16.049 L16.86,22.515 Q16.779,22.653 16.658,22.756 Q16.487,22.908 16.257,22.967 Q16.191,22.984 16.124,22.993 Q16.026,23.005 15.932,23 L7.054,23 Q6.884,23.011 6.724,22.964 Q6.535,22.911 6.377,22.783 Q6.217,22.658 6.123,22.486 Q6.026,22.315 6.006,22.113 Q5.981,21.912 6.036,21.724 Q6.081,21.563 6.18,21.425 L11.112,13.533 Q11.156,13.452 11.217,13.377 Q11.342,13.217 11.514,13.123 Q11.685,13.027 11.887,13.006 Q11.982,12.994 12.075,13 L20.5,13 L20.5,10.5 Q20.5,10.086 20.793,9.793 Q21.086,9.5 21.5,9.5 L24,9.5 Q24.414,9.5 24.707,9.793 Q25,10.086 25,10.5 Q25,10.914 24.707,11.207 Q24.414,11.5 24,11.5 L22.5,11.5 L22.5,13.791 Z M13.618,15 L16.136,20.037 L19.599,15 L13.618,15 Z M8.804,21 L14.382,21 L11.903,16.042 L8.804,21 Z M10,10.5 L13.5,10.5 Q13.914,10.5 14.207,10.793 Q14.5,11.086 14.5,11.5 Q14.5,11.914 14.207,12.207 Q13.914,12.5 13.5,12.5 L10,12.5 Q9.586,12.5 9.293,12.207 Q9,11.914 9,11.5 Q9,11.086 9.293,10.793 Q9.586,10.5 10,10.5 Z"/><path fill="var(--color-accent)" d="M17.6,22 A1.6 1.6 0 1 1 14.4,22 A1.6 1.6 0 1 1 17.6,22 Z"/></svg></span>`
-          : `<span class="booking-icon-slot"><img alt="" src="assets/icons/all/32/light/${id}.svg" /></span>`;
+          : `<span class="booking-icon-slot"><img alt="" src="${iconSrc}" /></span>`;
         button.innerHTML = `${iconSlot}<span>${label}</span>`;
         button.addEventListener("click", () => {
           const same = button.getAttribute("aria-pressed") === "true";
@@ -1163,19 +1266,20 @@
         pane.className = "td-booking-pane";
         pane.dataset.cat = id;
         pane.dataset.r360CategoryId = r360CategoryIds[id] || "";
-        const search = { boende: "Sök boende", liftkort: "Sök liftkort", skidhyra: "Sök skidhyra", mtb: "Sök cykel", skidskola: "Sök skidskola", paket: "Sök paket" }[id];
+        const search = { boende: "Sök boende", liftkort: "Sök liftkort", skidhyra: "Sök skidhyra", mtb: "Sök cykel", skidskola: "Sök skidskola", paket: "Sök paket", aktiviteter: "Sök aktiviteter" }[id];
         const dateLabel = id === "liftkort" ? "Dag" : "Datum";
-        const dateValue = id === "liftkort" ? "Välj dag" : id === "skidhyra" || id === "mtb" || id === "skidskola" ? "Välj dag eller period" : "Välj reseperiod";
+        const dateValue = id === "liftkort" ? "Välj dag" : id === "skidhyra" || id === "mtb" || id === "skidskola" || id === "aktiviteter" ? "Välj dag eller period" : "Välj reseperiod";
         const whoLabel = id === "boende" || id === "paket" ? "Resesällskap" : "Antal";
         const whoValue = id === "boende" || id === "paket" ? "Välj resande" : "Välj antal";
         const icon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10L13 13M7 3C4.791 3 3 4.791 3 7C3 9.209 4.791 11 7 11C9.209 11 11 9.209 11 7C11 4.791 9.209 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
         const links = {
-          boende: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#omraden"><img src="assets/startsida/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`,
+          boende: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#omraden"><img src="assets/img/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`,
           liftkort: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#priser">Liftkort och priser</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
           skidhyra: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#hyra">Om skidhyran</a><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
           mtb: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>`,
-          skidskola: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#kurser"><img src="assets/startsida/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`,
-          paket: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#paket"><img src="assets/startsida/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`,
+          skidskola: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#kurser"><img src="assets/img/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`,
+          paket: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p><a class="td-booking-teaser" href="#paket"><img src="assets/img/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`,
+          aktiviteter: `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#aktiviteter">Alla aktiviteter</a></p>`,
         }[id];
         const cal = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3V6M10 3V6M4 8H12M4 5H12V13H4V5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         const chev = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -1184,6 +1288,8 @@
       }
       renderBookingCats();
       document.addEventListener("td-season", renderBookingCats);
+      document.addEventListener("td-onsite-booking-cats", renderBookingCats);
+      document.addEventListener("td-mode", renderBookingCats);
       initBookingFields(document.getElementById("booking"), { inline: true });
       document.addEventListener("pointerdown", (event) => {
         if (event.target.closest("#booking-clip, #booking-cats")) return;
@@ -1534,15 +1640,12 @@
           const sectionDoc = enDag.getBoundingClientRect().top + scrollY;
           const pageDoc = page.getBoundingClientRect().top + scrollY;
           const boendeH = Math.max(640, Math.min(innerHeight, 960));
-          const citatBand = document.getElementById("citat-band");
-          const citatH = citatBand ? citatBand.offsetHeight : 0;
-          const citatTop = sectionDoc + sectionH - pageDoc;
-          const boendeTop = citatTop + citatH;
+          /* Rasmus-citat ligger i flöde under utforsakning — inte mellan En dag och Boende. */
+          const boendeTop = sectionDoc + sectionH - pageDoc;
           const hittaEl = document.getElementById("hitta");
           const hittaHeading = hittaEl.querySelector(".td-hitta-copy h2");
           const headingInto = hittaHeading.getBoundingClientRect().top - hittaEl.getBoundingClientRect().top;
           const hittaTop = boendeTop + boendeH + Math.max(0, 200 - headingInto);
-          page.style.setProperty("--citat-top", `${citatTop}px`);
           page.style.setProperty("--boende-top", `${boendeTop}px`);
           page.style.setProperty("--en-dag-end", `${hittaTop}px`);
         };
@@ -1943,7 +2046,14 @@
             if (hitta?.classList.contains("is-held")) return false;
             const box = enDag.getBoundingClientRect();
             const { lockAt } = enSnapMetrics();
-            return box.top <= lockAt + 4 && box.bottom > innerHeight * 0.5;
+            if (!(box.top <= lockAt + 4 && box.bottom > innerHeight * 0.5)) return false;
+            /* När säsongsbanan syns ska Hoppa över/nästa vara borta (annars ligger de kvar över/bakom). */
+            const season = enDag.querySelector(".en-dag-season");
+            if (season) {
+              const s = season.getBoundingClientRect();
+              if (s.top < innerHeight - 8 && s.bottom > 8) return false;
+            }
+            return true;
           }
           function enNearestStep(points) {
             let step = 0;
@@ -2230,8 +2340,8 @@
             });
           });
           function enSkipTargetY() {
-            const citat = document.getElementById("citat-band");
-            if (citat) return citat.getBoundingClientRect().top + scrollY - 24;
+            const justNu = document.getElementById("just-nu");
+            if (justNu) return justNu.getBoundingClientRect().top + scrollY - 24;
             return enDag.getBoundingClientRect().bottom + scrollY - Math.round(innerHeight * 0.15);
           }
           function syncEnDagSkip() {
@@ -3308,9 +3418,13 @@
         const quote = document.querySelector("blockquote.quote");
         const block = document.querySelector(".td-fraga-block");
         const blue = document.querySelector(".boende");
+        const citatBand = document.getElementById("citat-band");
+        const citatWindow = document.querySelector(".citat-window");
+        const citatFig = citatWindow && citatWindow.querySelector(".td-citat");
         const params = new URLSearchParams(location.search);
         const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
         const mobileQ = matchMedia("(max-width: 1023px)");
+        let citatSStart = 0;
         let factor = 0.8;
         const qFactor = parseFloat(params.get("parallax"));
         if (Number.isFinite(qFactor) && qFactor >= 0.5 && qFactor <= 1) factor = qFactor;
@@ -3328,7 +3442,10 @@
         root.style.setProperty("--parallax-factor-mobile", "0.92");
         root.style.setProperty("--parallax-offset", "0px");
         let heroS0 = 0;
-        let hamraS0 = 0;
+        let skarvarnaS0 = 0;
+        let skarvarnaSc = 0;
+        let topo2BBox = null; /* SVG-user units från getBBox */
+        let topo2PlaceErr = { x: 0, y: 0 };
         /* Bevara etikettens sidposition (högerkant) från tidigare layout vid 1440. */
         const HERO_LABEL_RIGHT_INSET = 345.15625; /* 1065.16 − 50vw@1440 */
         function runwayAdjust() {
@@ -3356,46 +3473,207 @@
           return Math.max(-max, Math.min(max, raw));
         }
         function computeTopo2W() {
+          const scale = TOPO2_LAYOUT.SCALE || 1;
           const name = document.querySelector(".td-topo2-name");
           const fact = document.querySelector(".td-topo2-facts p");
-          const qText = document.querySelector(".parallax-item--hamra .quote-text");
-          if (!name || !fact || !qText) return 811;
+          const qText = document.querySelector(".parallax-item--skarvarna .quote-text");
+          if (!name || !fact || !qText) return 811 * scale;
           const nameFs = parseFloat(getComputedStyle(name).fontSize) || 16;
           const factFs = parseFloat(getComputedStyle(fact).fontSize) || 14;
           const quoteFs = parseFloat(getComputedStyle(qText).fontSize) || 30;
-          return (nameFs / 0.022 + factFs / 0.017 + quoteFs / 0.034) / 3;
+          return ((nameFs / 0.022 + factFs / 0.017 + quoteFs / 0.034) / 3) * scale;
+        }
+        function loadTopo2BBox() {
+          if (topo2BBox) return Promise.resolve(topo2BBox);
+          return fetch("assets/img/topografi-skarvarna.svg")
+            .then((r) => r.text())
+            .then((text) => {
+              const host = document.createElement("div");
+              host.setAttribute("aria-hidden", "true");
+              host.style.cssText = "position:absolute;left:-99999px;top:0;width:0;height:0;overflow:hidden";
+              host.innerHTML = text;
+              document.body.appendChild(host);
+              const svg = host.querySelector("svg");
+              let box = null;
+              try {
+                const b = svg.getBBox();
+                box = { x: b.x, y: b.y, width: b.width, height: b.height };
+              } catch (err) {
+                box = { x: 0, y: 0, width: TOPO2_LAYOUT.SVG_W, height: TOPO2_LAYOUT.SVG_H };
+              }
+              host.remove();
+              topo2BBox = box;
+              return box;
+            })
+            .catch(() => {
+              topo2BBox = { x: 0, y: 0, width: TOPO2_LAYOUT.SVG_W, height: TOPO2_LAYOUT.SVG_H };
+              return topo2BBox;
+            });
         }
         function placeQuoteLayout() {
           /* Citatet ligger i Skarvarna-enheten; Boende-marginal = text+källa+40 (som tidigare box+40). */
           if (!blue) return;
-          const qText = document.querySelector(".parallax-item--hamra .quote-text");
-          const qBy = document.querySelector(".parallax-item--hamra .quote-by");
+          const qText = document.querySelector(".parallax-item--skarvarna .quote-text");
+          const qBy = document.querySelector(".parallax-item--skarvarna .quote-by");
           const h = (qText ? qText.getBoundingClientRect().height : 0)
             + (qBy ? qBy.getBoundingClientRect().height : 0);
           blue.style.marginTop = `${Math.max(0, h + 40).toFixed(2)}px`;
         }
-        function placeHamraHorizontal() {
-          const hamra = document.querySelector(".parallax-item--hamra");
-          if (!hamra || !page) return;
+        function citatParallaxOn() {
+          return !reducedMotion && !mobileQ.matches && !!citatBand && !!citatWindow && !!citatFig;
+        }
+        function placeCitatWindow() {
+          if (!citatBand || !citatWindow) return;
+          if (!citatParallaxOn()) {
+            citatWindow.style.height = "";
+            citatBand.style.removeProperty("--citat-window-h");
+            citatBand.style.removeProperty("--citat-ty");
+            citatSStart = 0;
+            return;
+          }
+          const cols = document.querySelector(".just-cols");
+          if (!cols) return;
+          const bandDocTop = citatBand.getBoundingClientRect().top + scrollY;
+          const colsDocTop = cols.getBoundingClientRect().top + scrollY;
+          const winH = Math.max(0, colsDocTop - bandDocTop);
+          citatWindow.style.height = `${winH.toFixed(2)}px`;
+          citatBand.style.setProperty("--citat-window-h", `${winH.toFixed(2)}px`);
+          const startFrac = parseFloat(getComputedStyle(citatBand).getPropertyValue("--citat-start"));
+          const frac = Number.isFinite(startFrac) ? startFrac : 0.75;
+          citatSStart = Math.max(0, bandDocTop - frac * innerHeight);
+        }
+        function paintCitat() {
+          if (!citatParallaxOn()) return;
+          const y = scrollPrime();
+          const fCss = parseFloat(getComputedStyle(citatBand).getPropertyValue("--citat-parallax-factor"));
+          const f = Number.isFinite(fCss) ? fCss : 0.88;
+          const offsetCss = parseFloat(getComputedStyle(citatBand).getPropertyValue("--citat-offset"));
+          const offset = Number.isFinite(offsetCss) ? offsetCss : 24;
+          let d = offset + (1 - f) * (y - citatSStart);
+          const figH = citatFig.offsetHeight || 267;
+          const winH = citatWindow.offsetHeight || 385;
+          const minD = -(figH + 60);
+          const maxD = winH + 60;
+          d = Math.max(minD, Math.min(maxD, d));
+          citatBand.style.setProperty("--citat-ty", `${d.toFixed(2)}px`);
+        }
+        function placeSkarvarnaHorizontal() {
+          const skarvarna = document.querySelector(".parallax-item--skarvarna");
+          const panel = block || document.querySelector(".td-fraga-block");
+          if (!skarvarna || !page || !panel) return;
           const W = computeTopo2W();
           const H = W * (TOPO2_LAYOUT.SVG_H / TOPO2_LAYOUT.SVG_W);
-          hamra.style.setProperty("--topo2-w", `${W.toFixed(2)}px`);
-          hamra.style.setProperty("--topo2-h", `${H.toFixed(2)}px`);
-          hamra.style.width = `${W.toFixed(2)}px`;
-          hamra.style.height = `${H.toFixed(2)}px`;
-          void hamra.offsetHeight;
-          const qText = hamra.querySelector(".quote-text");
-          const pageBox = page.getBoundingClientRect();
-          const contentRight = pageBox.right;
-          const qW = qText ? qText.getBoundingClientRect().width : 0;
-          const unitLeftDoc = contentRight - qW - TOPO2_LAYOUT.QUOTE_LEFT * W;
-          const parent = hamra.offsetParent || page;
+          skarvarna.style.setProperty("--topo2-w", `${W.toFixed(2)}px`);
+          skarvarna.style.setProperty("--topo2-h", `${H.toFixed(2)}px`);
+          skarvarna.style.width = `${W.toFixed(2)}px`;
+          skarvarna.style.height = `${H.toFixed(2)}px`;
+          const bbox = topo2BBox || { x: 0, y: 0, width: TOPO2_LAYOUT.SVG_W * 0.92, height: TOPO2_LAYOUT.SVG_H * 0.92 };
+          const scale = W / TOPO2_LAYOUT.SVG_W;
+          const Wb = bbox.width * scale;
+          const ox = bbox.x * scale;
+          const oy = bbox.y * scale;
+          const label = skarvarna.querySelector(".td-topo2-label");
+          const quoteEl = skarvarna.querySelector(".quote");
+          const qText = skarvarna.querySelector(".quote-text");
+          const qBy = skarvarna.querySelector(".quote-by");
+          const labelInX = ox + TOPO2_LAYOUT.LABEL_LEFT * Wb;
+          const labelInY = oy + TOPO2_LAYOUT.LABEL_TOP * Wb;
+          const quoteInX = ox + TOPO2_LAYOUT.QUOTE_LEFT * Wb;
+          const quoteInY = oy + TOPO2_LAYOUT.QUOTE_TOP * Wb;
+          if (label) {
+            label.style.left = `${labelInX.toFixed(2)}px`;
+            label.style.top = `${labelInY.toFixed(2)}px`;
+          }
+          /* Rensa legacy absolute-offsets — avstånd citat↔avsändare via CSS margin. */
+          if (qText) {
+            qText.style.left = "";
+            qText.style.top = "";
+          }
+          if (qBy) {
+            qBy.style.left = "";
+            qBy.style.top = "";
+          }
+          void skarvarna.offsetHeight;
+          const parent = skarvarna.offsetParent || page;
           const parentBox = parent.getBoundingClientRect();
           const parentDocTop = parentBox.top + scrollY;
+          const parentDocLeft = parentBox.left + scrollX;
+          /* Mobil: oförändrad legacy-placering (ingen panel-px-anknytning). */
+          if (mobileQ.matches) {
+            const pageBox = page.getBoundingClientRect();
+            const qW = qText ? qText.getBoundingClientRect().width : 0;
+            const unitLeftDoc = pageBox.right - qW - quoteInX;
+            skarvarna.style.left = `${(unitLeftDoc - parentDocLeft).toFixed(2)}px`;
+            const LOCK_DOC_TOP = 6217.40625;
+            skarvarna.style.top = `${(LOCK_DOC_TOP - parentDocTop).toFixed(2)}px`;
+            skarvarnaSc = 0;
+            skarvarna.dataset.topo2Placed = "1";
+            return;
+          }
+          const f = activeFactor();
+          const vh = innerHeight;
+          const panelBox = panel.getBoundingClientRect();
+          const panelDocTop = panelBox.top + scrollY;
+          const panelDocLeft = panelBox.left + scrollX;
+          const panelH = panelBox.height;
+          const s_c = Math.max(0, panelDocTop + panelH / 2 - vh / 2);
+          skarvarnaSc = s_c;
+          /* Vid y'=s_c: screenY = docY − f·s_c. Mål: etikett/citat mot panelen. */
+          const panelTopAtSc = vh / 2 - panelH / 2;
+          const panelBottomAtSc = vh / 2 + panelH / 2;
+          const T_label = panelTopAtSc + TOPO2_LAYOUT.PANEL_LABEL_Y - labelInY - parentDocTop + f * s_c;
+          const T_quote = panelBottomAtSc + TOPO2_LAYOUT.PANEL_QUOTE_Y - quoteInY - parentDocTop + f * s_c;
+          const T = (T_label + T_quote) / 2;
+          const L_label = panelDocLeft + TOPO2_LAYOUT.PANEL_LABEL_X - labelInX - parentDocLeft;
+          const L_quote = panelDocLeft + TOPO2_LAYOUT.PANEL_QUOTE_X - quoteInX - parentDocLeft;
+          const L = (L_label + L_quote) / 2;
+          topo2PlaceErr = {
+            x: (L_label - L_quote) / 2,
+            y: (T_label - T_quote) / 2
+          };
           /* --topo2-shift-x/y appliceras via CSS transform, inte här. */
-          hamra.style.left = `${(unitLeftDoc - parentBox.left).toFixed(2)}px`;
-          hamra.style.top = `${(TOPO2_LAYOUT.LOCK_DOC_TOP - parentDocTop).toFixed(2)}px`;
-          hamra.dataset.topo2Placed = "1";
+          skarvarna.style.left = `${L.toFixed(2)}px`;
+          skarvarna.style.top = `${T.toFixed(2)}px`;
+          skarvarna.dataset.topo2Placed = "1";
+          skarvarna.dataset.topo2Sc = String(Math.round(s_c));
+          const shiftY =
+            parseFloat(getComputedStyle(skarvarna).getPropertyValue("--topo2-shift-y")) || 0;
+          const gapX = TOPO2_LAYOUT.INFO_GAP_X || 24;
+          const blockLeft = W + gapX;
+          /* Info: till höger om topo, mitt i Just nu → Fråga-gapet. */
+          if (label) {
+            const justEl = document.getElementById("just-nu");
+            const faqEl = document.querySelector(".faq");
+            if (justEl && faqEl) {
+              const labelH = label.offsetHeight || 59;
+              const justBottomDoc = justEl.getBoundingClientRect().bottom + scrollY;
+              const faqTopDoc = faqEl.getBoundingClientRect().top + scrollY;
+              const gapMidDoc = (justBottomDoc + faqTopDoc) / 2;
+              const sGap = Math.max(0, gapMidDoc - vh / 2);
+              const infoTop =
+                vh / 2 - labelH / 2 - parentDocTop - T - shiftY + f * sGap;
+              label.style.left = `${blockLeft.toFixed(2)}px`;
+              label.style.top = `${infoTop.toFixed(2)}px`;
+            }
+          }
+          /* Anna-citat: till höger om topo, mitt i Fråga → Boende-gapet.
+             Citat+avsändare i flöde (CSS margin-top 8px) — inte separate absolute tops. */
+          if (quoteEl) {
+            const faqEl = document.querySelector(".faq");
+            const boendeEl = document.querySelector(".boende");
+            if (faqEl && boendeEl) {
+              void quoteEl.offsetHeight;
+              const quoteH = quoteEl.offsetHeight || 120;
+              const faqBottomDoc = faqEl.getBoundingClientRect().bottom + scrollY;
+              const boendeTopDoc = boendeEl.getBoundingClientRect().top + scrollY;
+              const gapMidDoc = (faqBottomDoc + boendeTopDoc) / 2;
+              const sGap = Math.max(0, gapMidDoc - vh / 2);
+              const quoteTop =
+                vh / 2 - quoteH / 2 - parentDocTop - T - shiftY + f * sGap;
+              quoteEl.style.left = `${(W + (TOPO2_LAYOUT.QUOTE_GAP_X || gapX)).toFixed(2)}px`;
+              quoteEl.style.top = `${quoteTop.toFixed(2)}px`;
+            }
+          }
         }
         function layoutHeight(f) {
           const docH = document.documentElement.scrollHeight;
@@ -3449,18 +3727,17 @@
           const labelMidDoc = label.getBoundingClientRect().top + scrollY + label.getBoundingClientRect().height / 2;
           heroS0 = Math.max(0, labelMidDoc - vh / 2);
         }
-        function placeHamraLabelS0() {
-          const hamra = document.querySelector(".parallax-item--hamra");
+        function placeSkarvarnaLabelS0() {
+          const skarvarna = document.querySelector(".parallax-item--skarvarna");
           const text = document.querySelector(".td-topo2-text");
-          if (!hamra || mobileQ.matches) {
-            hamraS0 = 0;
-            if (text) text.style.setProperty("--hamra-text-ty", "0px");
+          if (!skarvarna || mobileQ.matches) {
+            skarvarnaS0 = 0;
+            if (text) text.style.setProperty("--skarvarna-text-ty", "0px");
             return;
           }
-          if (text) text.style.setProperty("--hamra-text-ty", "0px");
-          void hamra.offsetHeight;
-          const box = hamra.getBoundingClientRect();
-          hamraS0 = Math.max(0, box.top + scrollY + box.height / 2 - innerHeight / 2);
+          /* Textlagrets s0 = panelens s_c så delta är 0 i mittläget. */
+          skarvarnaS0 = skarvarnaSc;
+          if (text) text.style.setProperty("--skarvarna-text-ty", "0px");
         }
         function paintHeroDual() {
           const hero = document.querySelector(".parallax-item--hero");
@@ -3475,8 +3752,8 @@
           const text = document.querySelector(".td-topo2-text");
           if (text) {
             text.style.setProperty(
-              "--hamra-text-ty",
-              `${clampedLabelDrift(y, hamraS0).toFixed(2)}px`
+              "--skarvarna-text-ty",
+              `${clampedLabelDrift(y, skarvarnaS0).toFixed(2)}px`
             );
           }
         }
@@ -3484,18 +3761,18 @@
           const f = activeFactor();
           const vh = innerHeight;
           if (layer) layer.style.height = `${layoutHeight(f)}px`;
-          placeHamraHorizontal();
-          placeQuoteLayout();
           /* Nollställ offset under mätning så getBoundingClientRect inte inkluderar parallax. */
           root.style.setProperty("--parallax-offset", "0px");
           void (layer && layer.offsetHeight);
+          placeSkarvarnaHorizontal();
+          placeQuoteLayout();
           document.querySelectorAll(".parallax-item[data-anchor]").forEach((item) => {
             const sel = item.getAttribute("data-anchor");
             const section = sel ? document.querySelector(sel) : null;
             if (!section) return;
             if (item.classList.contains("parallax-item--hero")) return;
-            /* Skarvarna: top låses i placeHamraHorizontal, inte mid-ankare. */
-            if (item.classList.contains("parallax-item--hamra")) {
+            /* Skarvarna: top låses i placeSkarvarnaHorizontal, inte mid-ankare. */
+            if (item.classList.contains("parallax-item--skarvarna")) {
               const label = item.querySelector(".td-topo2-label");
               if (label) {
                 label.toggleAttribute("aria-hidden", innerWidth <= 1024);
@@ -3519,7 +3796,8 @@
             item.style.top = `${(mid - h / 2 - parentDocTop).toFixed(2)}px`;
           });
           placeHeroStorvigeln();
-          placeHamraLabelS0();
+          placeSkarvarnaLabelS0();
+          placeCitatWindow();
           paint();
         }
         let raf = 0;
@@ -3530,6 +3808,7 @@
           const offset = reducedMotion ? 0 : (1 - f) * yPrime;
           root.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
           paintHeroDual();
+          paintCitat();
           if (debugOn) updateDebug(f, yPrime, offset);
         }
         function requestPaint() {
@@ -3562,9 +3841,20 @@
         addEventListener("resize", () => { placeAnchors(); requestPaint(); });
         mobileQ.addEventListener("change", () => { placeAnchors(); requestPaint(); });
         if (document.fonts?.ready) document.fonts.ready.then(() => { placeAnchors(); requestPaint(); });
+        addEventListener("load", () => { placeAnchors(); requestPaint(); });
         const ro = new ResizeObserver(() => { placeAnchors(); requestPaint(); });
         ro.observe(document.body);
         if (runway) ro.observe(runway);
+        if (block) ro.observe(block);
+        const justNu = document.getElementById("just-nu");
+        const fragor = document.getElementById("fragor");
+        if (justNu) ro.observe(justNu);
+        if (fragor) ro.observe(fragor);
+        if (blue) ro.observe(blue);
+        if (citatBand) ro.observe(citatBand);
+        const justCols = document.querySelector(".just-cols");
+        if (justCols) ro.observe(justCols);
+        loadTopo2BBox().then(() => { placeAnchors(); requestPaint(); });
         placeAnchors();
         requestPaint();
         window.__parallax = {
@@ -3573,8 +3863,13 @@
           scrollPrime,
           paint,
           heroS0: () => heroS0,
-          hamraS0: () => hamraS0,
+          skarvarnaS0: () => skarvarnaS0,
+          skarvarnaSc: () => skarvarnaSc,
+          topo2PlaceErr: () => topo2PlaceErr,
+          topo2BBox: () => topo2BBox,
           placeHero: placeHeroStorvigeln,
+          citatSStart: () => citatSStart,
+          placeCitatWindow,
         };
       })();
       } catch (error) { console.error("parallax", error); }
@@ -3589,8 +3884,8 @@
             quote: "”Fast och snabbt i morse. Solsidan mjuknar runt elva, skuggsidan håller hela dagen.”",
             sign: "Jonas Berg, pistförare",
             badge: "Preparerad 05:30",
-            image: "assets/startsida/rapport-raw-1.png",
-            avatar: "assets/startsida/rapport-avatar.png"
+            image: "assets/img/rapport-raw-1.png",
+            avatar: "assets/img/rapport-avatar.png"
           }
         },
         langd: {
@@ -3615,9 +3910,9 @@
           },
           rapport: {
             /* TODO: byt ut när riktiga filer finns. */
-            image: "/images/langd/just-nu-01.jpg",
+            image: "/assets/img/just-nu/langd/just-nu-01.jpg",
             video: "/videos/langd/just-nu-01.mp4",
-            poster: "/images/langd/just-nu-01.jpg",
+            poster: "/assets/img/just-nu/langd/just-nu-01.jpg",
             alt: "Hamra Komfort-liften på kvällen, upplyst i lila, rosa och orange, sedd från backen."
           },
           calendar: {
@@ -3627,7 +3922,7 @@
           /* TODO: sidan för spårkartan är inte vald. Länken pekar på en platshållare. */
           karta: {
             label: "Spårkarta",
-            image: "/images/langd/sparkarta.png",
+            image: "/assets/img/just-nu/langd/sparkarta.png",
             alt: "Karta över Tänndalens längdspår.",
             line: "Se vilka spår som är öppna",
             href: "#sparkarta",
@@ -3658,7 +3953,7 @@
             link: "Hyr kanot eller kajak",
             /* TODO: uthyrningssidan är inte vald. Tom sträng faller tillbaka på #. */
             rentalHref: "",
-            image: "/images/sommar/svansjon.jpg?v=2",
+            image: "/assets/img/just-nu/sommar/svansjon.jpg?v=2",
             alt: "Två personer paddlar kanot på Svansjön, med gröna fjäll runt sjön."
           },
           calendar: {
@@ -3668,7 +3963,7 @@
           kamera: {
             label: "Webbkamera · Storvigeln",
             /* TODO: byt ut när en kamerabild finns. */
-            image: "/images/sommar/webbkamera.jpg",
+            image: "/assets/img/just-nu/sommar/webbkamera.jpg",
             alt: "Webbkamera vid Storvigeln"
           }
         }
@@ -4073,8 +4368,6 @@
       <div class="fraga-panel" id="fraga-panel" role="dialog" aria-modal="true" aria-labelledby="fraga-dialog-title">
         <h2 class="fraga-sr" id="fraga-dialog-title">Fråga eller sök</h2>
         <div class="fraga-top">
-          <p class="fraga-brand td-ui-body">Fråga oss</p>
-          <button class="fraga-new td-button td-button-sm td-button-fill-neutral" type="button">Ny fråga</button>
           <button class="fraga-x" type="button" data-fraga-close aria-label="Stäng">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
           </button>
@@ -4087,7 +4380,7 @@
             </div>
           </div>
           <div class="fraga-view" data-view="answer">
-            <h3 class="td-heading-xs" id="fraga-q"></h3>
+            <h3 class="td-heading-sm" id="fraga-q"></h3>
             <p class="fraga-think td-ui-caption" id="fraga-think" hidden>Tänker<span aria-hidden="true"><i></i><i></i><i></i></span></p>
             <p class="td-body fraga-prose" id="fraga-answer"></p>
             <p class="fraga-sr" id="fraga-answer-live" aria-live="polite"></p>
@@ -4103,6 +4396,7 @@
           <form class="fraga-follow" id="fraga-follow">
             <img class="fraga-follow-icon" src="ds/components/icons/content/chatt-24-light.svg" alt="" width="24" height="24" aria-hidden="true">
             <input id="fraga-input" class="fraga-follow-input td-ui-body" type="text" placeholder="Fråga eller sök" autocomplete="off" enterkeyhint="search" aria-label="Fråga eller sök" />
+            <button class="fraga-new td-button td-button-text td-ui-cta-sm" type="button">Ny fråga</button>
             <button class="fraga-send" type="submit" aria-label="Skicka">
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -4132,9 +4426,9 @@
         const FOLLOW = "Det här är en demo – fler svar kommer";
         const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
         const CARDS = [
-          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "assets/startsida/fraga-bastu.jpg" },
-          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "assets/startsida/endag-1300.jpg?v=2" },
-          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "assets/startsida/fraga-klatter.jpg" }
+          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "assets/img/fraga-bastu.jpg" },
+          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "assets/img/endag-1300.jpg?v=2" },
+          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "assets/img/fraga-klatter.jpg" }
         ];
         const CHIPS = ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"];
         const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -4585,7 +4879,7 @@
             { label: "Bastu", value: "I alla" }
           ],
           video: "assets/video/area1.mp4",
-          poster: "assets/startsida/meny-boende.jpg",
+          poster: "assets/img/meny-boende.jpg",
           mirror: true,
           parallax: 0.2,
           r360AreaId: "",

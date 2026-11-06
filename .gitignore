@@ -1,3 +1,5 @@
-/assets/video/klipp-8.mp4
-/assets/video/klipp-8-9x16.mp4
+node_modules/
 .DS_Store
+test-results/
+playwright-report/
+*.bak*

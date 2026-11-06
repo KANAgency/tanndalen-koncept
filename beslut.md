@@ -1,5 +1,117 @@
 # Beslut
 
+## 2026-11-06 (På plats-fält avstånd)
+
+`.onsite-toggle-field`: margin-top −16 (space-md−16) och margin-bottom +16 mot foot. Ratades: röra season-toggle padding. Öppet: inget.
+
+## 2026-11-06 (Just nu +80 mot säsong)
+
+`.just-nu` `padding-top: 80px` mot säsongsbannern. Margin på head/sektion kollapsade mot `--en-dag-hang` (≥1024). Ratades: margin-top på `.just-nu-head`. Öppet: om mobil ska ha mindre.
+
+## 2026-11-06 (På plats-pill under menyn)
+
+Pillen «På plats i Tänndalen» ligger nu bara i `.onsite-quiet-row` direkt efter headern, centrerad under hela menyraden på desktop och mobil. Raden är sticky med höjd 0 (ingen layoutförskjutning) och döljs när menypanelen är öppen. Klick öppnar menyn med fokus på onsite-toggle som förut. Brand-center-dubbletten och mobil-/desktop-växlingen i CSS är borta. Ratades: pill i brand-center på desktop. Öppet: inget.
+
+## 2026-11-06 (Rasmus under utforsakning)
+
+`#citat-band` flyttat till flöde efter utforsakning, centrerat. Parallax/klipp bort. Boende ankras direkt efter En dag. Ratades: absolut band före Just nu. Öppet: vertikal padding kan trimmas.
+
+## 2026-11-06 (Geo-suggest bort)
+
+Länk «Är du i Tänndalen?» (meny + footer), geo-banner och haversine bort. På plats = meny-toggle / konto. Ratades: geo-förslag. Öppet: coords/wifi-hook kvar i config oanvänd.
+
+## 2026-11-06 (Account-fält utan active-ring)
+
+Bokningsfält: ingen orange accent-outline/inset vid focus. Ratades: accent-ring. Öppet: om fokusindikator ska återkomma i annan form.
+
+## 2026-11-06 (Onsite-toggle Form/Toggle Light)
+
+Off = day-track + snow-thumb; on = night-track + snow-thumb; 2 px inset. Ratades: night även i off (tidigare). Öppet: inget.
+
+## 2026-11-06 (Citat färg tillbaka)
+
+Anna+Rasmus → `--color-TD-neutral` igen (ångrade muted). Ratades: muted. Öppet: inget.
+
+## 2026-11-06 (Citat regular)
+
+Anna+Rasmus citat och avsändare → `font-weight-regular` + `font-synthesis: none` (avsändare var book). Ratades: behålla book. Öppet: inget.
+
+## 2026-11-06 (Citat muted + Rasmus −1)
+
+Anna+Rasmus färg → `--color-TD-neutral-muted`. Rasmus citat 30→`font-size-xl` (24). Ratades: behålla neutral. Öppet: inget.
+
+## 2026-11-06 (Citat-gap 8 + Rasmus vänster)
+
+Gap 20→8 (−12). Rasmus `align-items/text-align: left` (var centrerad via `.td-citat`). Ratades: behålla center. Öppet: inget.
+
+## 2026-11-06 (Meny bleed smal desktop)
+
+`--menu-bleed` 0 under 1440, 16 från 1440. Under 1440: `--menu-inline-pad: 16px` så glaset behåller sidopadding utan att blöda ut. Logo 190×22 bara under 1280; 206×24 från 1280. Ratades: nolla vertikal edge; 32 px pad via pad+bleed; mindre logo överallt. Öppet: om 1280–1439 också ska blöda lite.
+
+## 2026-11-06 (Account-lead body-xs)
+
+Ingress «Fyll i…» → `td-body-xs` (14/150). Klassen saknades i genererad typografi — tillagd manuellt. Ratades: behålla body-sm (16). Öppet: synka body-xs in i typography-styles JSON vid nästa token-export.
+
+## 2026-11-06 (Hitta din bokning-panel)
+
+Panel mot Figma 2376:16465: gap 16, fält `bg-base` + radius-md utan kant, knapp Secondary fill-spring fullbredd, avdelare + foot space-between. Efternamn behålls (prompt > skissens E-post). Ratades: fill-autumn. Öppet: inget.
+
+## 2026-11-06 (På plats-läge)
+
+Nytt läge `onsite` ovanpå new/returning/booking. State i `td-onsite-tanndalen` (value/source/until), manuell av stänger auto till dagens slut. Quiet pill under logo (mobil: rad under header). Meny-toggle, geo bara på klick, mockad vistelse utan bokningsnummer i storage. Just nu order −1. En dag redan flödesankrad — ingen top-refaktor. Ratades: wifi, gissade koordinater, Byt läge-länk. Öppet: geo-koordinater TODO; morgonrapport-innehåll.
+
+## 2026-11-06 (Anna-citat + avsändaravstånd)
+
+Citatblock till höger om topo, mitt i Fråga→Boende-gap. `.quote-text`/`.quote-by` i flöde med `margin-top: 44px` (36+8) — absolute top ratades (margin dog, SOURCE_GAP_NUDGE räckte inte). Öppet: inget.
+
+## 2026-11-06 (Skarvarna-info i gap)
+
+Namn+fakta till höger om topo (`W+24`) och mitt i Just nu→Fråga-gapet (skärmmål vh/2 vid s_gap). Enhetens L/T oförändrad. Ratades: flytta via PANEL_LABEL. Öppet: textTy-drift ~22 px vid s_gap vs s_c.
+
+## 2026-11-06 (Skarvarna −300 px)
+
+`--topo2-shift-y: -300px` (CSS transform). Panelankare oförändrade. Ratades: ändra top i placeSkarvarna. Öppet: om etikett/citat ska följa panelen snarare än topon.
+
+## 2026-11-06 (Ny fråga → textlänk i fält)
+
+”Ny fråga” bort från fraga-top; textlänk (`td-button-text`) till vänster om Skicka i `.fraga-follow`, syns i is-answer. Brand redan bort. Ratades: fill-neutral i toppen. Öppet: inget.
+
+## 2026-11-06 (Skarvarna topo −30 %)
+
+`TOPO2_LAYOUT.SCALE: 0.7` i `computeTopo2W`; CSS-fallback `--topo2-w` 568. Etikett/citat följer W_b. Ratades: skala bara mask/CSS utan W. Öppet: panelankare kan behöva finjusteras visuellt.
+
+## 2026-11-06 (Rasmus citat text-only)
+
+Porträtt bort. `.td-citat--text`: samma typografi som Skarvarna `.quote-text`/`.quote-by`, gap 44 px (36+8). En rad `Rasmus Bent · VD…`. Ratades: behålla namn+roll-stack. Öppet: bandhöjd/parallax kan behöva trim utan bild.
+
+## 2026-11-06 (Skarvarna citat–avsändare)
+
+`SOURCE_GAP_NUDGE: 8` på källradens top (W_b-placering). Visuellt +8 px mellan citat och Anna-rad. Ratades: CSS margin (absolute top från JS). Öppet: inget.
+
+## 2026-11-05 (En dag Hoppa över vs säsong)
+
+`enSnapZone` false när `.en-dag-season` syns i viewport — Hoppa över/nästa döljs så de inte ligger kvar över säsongsbanan.
+
+## 2026-11-05 (Frågeblock luft)
+
+`--fraga-space-before/after` 224/288 (mobil 96/128) på `.faq`. Ersätter 156 + citat-driven Boende-marginal. Boende `margin-top: 0 !important` så efter-gap = variabeln.
+
+## 2026-11-05 (Rasmus-citat parallax)
+
+`#citat-band` → `--citat-band-h: 300px` (−167 vs padding-flöde). `.td-citat` i `.citat-window` (clip till Just nu-kortrad), parallax d = 24+(1−f)×(y′−s_start) i samma rAF. Mobil/<1024 och reduced-motion: static flöde 48/64. Ratades: citat i #parallax-layer. Öppet: geometriskt AABB-överlapp mot Just nu-rubrik/reglage bakom z-index 5 — ej layoutändrat.
+
+## 2026-11-05 (Skarvarna-SVG UTF-8)
+
+`topografi-skarvarna.svg` var Latin-1 med UTF-8-deklaration (ö i Höjdkurvor) → Chrome naturalWidth 0, mask osynlig. Omencodad till UTF-8. `.td-topo2` fick samma mask-shorthand + alpha som hero-topo.
+
+## 2026-11-05 (Skarvarna mot Frågepanelen)
+
+Enheten ankras till `.td-fraga-block` vid s_c (panelmitt = viewportmitt), inte luckan Just nu↔panel. Etikett/citat/källa i W_b-enheter från SVG-getBBox; top via jämn fördelning av ~29 px höjdfelet (865 vs 895). Fakta = platshållare + TODO/verify. Text+topo bakom (#parallax-layer −1), panel blur 5 px framför. Ratades: citat i luckan ovanför panelen; låst LOCK_DOC_TOP. Öppet: slutetikett ~+124 vs mål +86 (text-delta 0,04); citat/källa ryms inte i 127 px gap till Boende.
+
+## 2026-11-05 (Städning testing-katalog)
+
+Bak, changelogs, qa/ och one-shot-skript bort. Assets till brand/icons/video/img. Topo-fil → topografi-skarvarna.svg, klass --skarvarna. Oanvända ikoner/bildkällor bort. Syskon-backup och parent-testing orörda.
+
 ## 2026-11-05 (Skarvarna ersätter Hamrafjället)
 
 Hamra-topo bytt till Skarvarna-SVG (samma filnamn). Etikett+citat ett textlager med delta 0,04 / max 40. Placering via % mot topo; W från fontstorlekar (~811). Top låst till tidigare doc-top. Överlapp citat↔citat-band / källa↔just-nu vid s0 — ej justerat, väntar shift.

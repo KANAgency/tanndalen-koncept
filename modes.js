@@ -1,5 +1,18 @@
-/* View modes. Overrides only. Mode 4 "På plats" will be added later. */
-const MODES = ["new", "returning", "booking"];
+/* View modes. Overrides only. Priority: onsite > booking > returning > new. */
+import { onsiteStorageKey, stayStorageKey, wifiOnsiteSignal } from "./site-config.js";
+import {
+  DEMO_STAY,
+  demoToday,
+  loadTodayOverride,
+  lookupStay,
+  setTodayOverride,
+  statusLabel,
+  stayStatus,
+  stayToStorage
+} from "./demo-stay.js";
+
+const BASE_MODES = ["new", "returning", "booking"];
+const MODES = [...BASE_MODES, "onsite"];
 
 /* TODO: demo content, confirm with Tänndalen */
 /* TODO: time for Utrustning and Utcheckning are placeholders, confirm with Tänndalen */
@@ -47,7 +60,144 @@ const BOOKING_CALENDAR = {
 };
 
 export function modes() {
-  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR } };
+  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR }, onsite: {} };
+}
+
+function endOfLocalDay(from = new Date()) {
+  const d = new Date(from);
+  d.setHours(23, 59, 59, 999);
+  return d.getTime();
+}
+
+function readOnsite() {
+  try {
+    const raw = localStorage.getItem(onsiteStorageKey());
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (!data || typeof data.value !== "boolean") return null;
+    if (typeof data.until === "number" && Date.now() > data.until) {
+      localStorage.removeItem(onsiteStorageKey());
+      return null;
+    }
+    return data;
+  } catch (err) {
+    return null;
+  }
+}
+
+function writeOnsite(state) {
+  try {
+    if (!state) localStorage.removeItem(onsiteStorageKey());
+    else localStorage.setItem(onsiteStorageKey(), JSON.stringify(state));
+  } catch (err) {}
+}
+
+function readStay() {
+  try {
+    const raw = localStorage.getItem(stayStorageKey());
+    return raw ? JSON.parse(raw) : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function writeStay(stay) {
+  try {
+    if (!stay) localStorage.removeItem(stayStorageKey());
+    else localStorage.setItem(stayStorageKey(), JSON.stringify(stayToStorage(stay)));
+  } catch (err) {}
+}
+
+function stayCoversToday(stay) {
+  if (!stay?.checkIn || !stay?.checkOut) return false;
+  const today = demoToday();
+  return today >= stay.checkIn && today <= stay.checkOut;
+}
+
+function untilForOnsite(stay) {
+  if (stay?.checkOut) {
+    const end = new Date(`${stay.checkOut}T23:59:59`);
+    if (!Number.isNaN(end.getTime())) return end.getTime();
+  }
+  return endOfLocalDay();
+}
+
+function baseModeFromDom() {
+  const mode = document.documentElement.dataset.baseMode || document.documentElement.dataset.mode;
+  return BASE_MODES.includes(mode) ? mode : "returning";
+}
+
+function setBaseMode(next) {
+  if (!BASE_MODES.includes(next)) return;
+  document.documentElement.dataset.baseMode = next;
+  try { localStorage.setItem("td-mode", next); } catch (err) {}
+}
+
+function applyEffectiveMode(reloadIntro) {
+  const onsite = isOnsiteActive();
+  const base = baseModeFromDom();
+  const effective = onsite ? "onsite" : base;
+  const current = document.documentElement.dataset.mode;
+  const introFlip = (current === "new") !== (effective === "new");
+  if ((introFlip || reloadIntro) && effective !== "onsite" && current !== "onsite") {
+    try { localStorage.setItem("td-mode", effective); } catch (err) {}
+    const url = new URL(location.href);
+    url.searchParams.set("mode", effective);
+    url.searchParams.delete("visit");
+    location.assign(url.pathname + url.search + url.hash);
+    return;
+  }
+  document.documentElement.dataset.mode = effective;
+  if (effective === "onsite" || effective === "returning" || effective === "booking") {
+    document.documentElement.classList.add("is-returning");
+    document.documentElement.classList.remove("is-intro");
+    document.body.classList.add("is-returning");
+    document.body.classList.remove("is-intro");
+  }
+  const url = new URL(location.href);
+  if (onsite) url.searchParams.set("mode", "onsite");
+  else url.searchParams.set("mode", base);
+  url.searchParams.delete("visit");
+  history.replaceState(null, "", url.pathname + url.search + url.hash);
+  applyBooking();
+  applyOnsitePage();
+  syncOnsiteUi();
+  document.dispatchEvent(new CustomEvent("td-mode", { detail: { mode: effective, onsite, base } }));
+}
+
+export function isOnsiteActive() {
+  const state = readOnsite();
+  return Boolean(state?.value);
+}
+
+/** Manual always wins until `until`. Turning off blocks auto for the same day. */
+export function setOnsite(value, source = "manual") {
+  const stay = readStay();
+  if (value) {
+    writeOnsite({ value: true, source, until: untilForOnsite(stay) });
+  } else {
+    writeOnsite({ value: false, source: "manual", until: endOfLocalDay() });
+  }
+  applyEffectiveMode(false);
+}
+
+function canAutoEnable() {
+  const state = readOnsite();
+  if (!state) return true;
+  if (state.source === "manual" && state.value === false && Date.now() <= state.until) return false;
+  if (state.value === true) return false;
+  return true;
+}
+
+function tryAutoOnsite() {
+  /* wifiOnsiteSignal is a documented hook only — browsers cannot detect resort Wi‑Fi. */
+  void wifiOnsiteSignal;
+  if (!canAutoEnable()) return;
+  const params = new URLSearchParams(location.search);
+  const fromPlats = params.get("plats") === "1";
+  const fromStay = stayCoversToday(readStay());
+  if (!fromPlats && !fromStay) return;
+  writeOnsite({ value: true, source: "auto", until: untilForOnsite(readStay()) });
 }
 
 function weekdayLabel(iso) {
@@ -165,8 +315,33 @@ function applyBooking() {
   placeTooltip();
 }
 
+function applyOnsitePage() {
+  const on = isOnsiteActive();
+  document.documentElement.classList.toggle("is-onsite", on);
+  const bar = document.getElementById("booking");
+  if (bar) bar.classList.toggle("is-onsite-compact", on);
+  document.querySelectorAll("[data-onsite-pill]").forEach((el) => {
+    el.hidden = !on;
+  });
+  document.querySelectorAll("[data-onsite-pill-row]").forEach((el) => {
+    el.hidden = !on;
+  });
+  document.dispatchEvent(new CustomEvent("td-onsite-booking-cats", { detail: { onsite: on } }));
+}
+
 function setMode(next, reload) {
   if (!MODES.includes(next)) return;
+  if (next === "onsite") {
+    setOnsite(true, "manual");
+    return;
+  }
+  /* Leaving onsite via demo selector: manual off for the day. */
+  if (isOnsiteActive() || readOnsite()?.value === false) {
+    writeOnsite({ value: false, source: "manual", until: endOfLocalDay() });
+  } else {
+    writeOnsite(null);
+  }
+  setBaseMode(next);
   const current = document.documentElement.dataset.mode;
   if ((current === "new") !== (next === "new") || reload) {
     try { localStorage.setItem("td-mode", next); } catch (err) {}
@@ -183,24 +358,151 @@ function setMode(next, reload) {
   url.searchParams.delete("visit");
   history.replaceState(null, "", url.pathname + url.search + url.hash);
   applyBooking();
+  applyOnsitePage();
+  syncOnsiteUi();
 }
 
-export function init() {
+function syncOnsiteUi() {
+  const on = isOnsiteActive();
+  document.querySelectorAll("[data-onsite-toggle]").forEach((input) => {
+    input.checked = on;
+    input.setAttribute("aria-checked", String(on));
+  });
+  document.querySelectorAll("[data-mode-choice]").forEach((radio) => {
+    const choice = radio.dataset.modeChoice;
+    const selected = on ? choice === "onsite" : choice === baseModeFromDom();
+    radio.setAttribute("aria-checked", String(selected));
+    radio.tabIndex = selected ? 0 : -1;
+  });
+  const todayOpt = document.querySelector("[data-demo-today]");
+  if (todayOpt) {
+    const active = Boolean(loadTodayOverride());
+    todayOpt.setAttribute("aria-pressed", String(active));
+  }
+  renderAccountUi();
+}
+
+function renderAccountUi() {
+  const stay = readStay();
+  const loggedIn = Boolean(stay);
+  const status = stay ? stayStatus(stay) : null;
+  const userBtn = document.getElementById("account-user");
+  const panel = document.getElementById("account-panel");
+  if (!userBtn || !panel) return;
+  userBtn.classList.toggle("is-logged-in", loggedIn);
+  userBtn.classList.toggle("is-ongoing", status === "ongoing");
+  userBtn.setAttribute("aria-label", loggedIn ? "Din vistelse" : "Min bokning");
+  const initials = userBtn.querySelector("[data-account-initials]");
+  const icon = userBtn.querySelector("[data-account-icon]");
+  if (initials) {
+    initials.hidden = !loggedIn;
+    initials.textContent = stay?.initials || DEMO_STAY.initials;
+  }
+  if (icon) icon.hidden = loggedIn;
+  const loginView = panel.querySelector("[data-account-view='login']");
+  const stayView = panel.querySelector("[data-account-view='stay']");
+  if (loginView) loginView.hidden = loggedIn;
+  if (stayView) stayView.hidden = !loggedIn;
+  if (loggedIn && stayView) {
+    const statusEl = stayView.querySelector("[data-stay-status]");
+    const titleEl = stayView.querySelector("[data-stay-title]");
+    const partyEl = stayView.querySelector("[data-stay-party]");
+    const checkEl = stayView.querySelector("[data-stay-checkin]");
+    const onsiteBtn = stayView.querySelector("[data-stay-onsite]");
+    if (statusEl) {
+      statusEl.textContent = statusLabel(status, stay);
+      statusEl.dataset.status = status;
+    }
+    if (titleEl) titleEl.textContent = stay.title || DEMO_STAY.title;
+    if (partyEl) partyEl.textContent = stay.party || DEMO_STAY.party;
+    if (checkEl) checkEl.textContent = stay.checkInTime || DEMO_STAY.checkInTime;
+    if (onsiteBtn) onsiteBtn.hidden = isOnsiteActive();
+  }
+}
+
+function initAccount() {
+  const userBtn = document.getElementById("account-user");
+  const panel = document.getElementById("account-panel");
+  if (!userBtn || !panel) return;
+  const setOpen = (open) => {
+    panel.hidden = !open;
+    userBtn.setAttribute("aria-expanded", String(open));
+    document.querySelector(".account-menu")?.classList.toggle("is-open", open);
+  };
+  userBtn.addEventListener("click", () => {
+    setOpen(panel.hidden);
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (event.target.closest(".account-menu")) return;
+    setOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+  panel.addEventListener("click", (event) => {
+    const fraga = event.target.closest("[data-account-fraga]");
+    if (fraga) {
+      event.preventDefault();
+      setOpen(false);
+      document.getElementById("fraga-launch")?.click();
+      return;
+    }
+    const logout = event.target.closest("[data-account-logout]");
+    if (logout) {
+      event.preventDefault();
+      writeStay(null);
+      renderAccountUi();
+      tryAutoOnsite();
+      applyEffectiveMode(false);
+      return;
+    }
+    const onsiteBtn = event.target.closest("[data-stay-onsite]");
+    if (onsiteBtn) {
+      event.preventDefault();
+      setOnsite(true, "manual");
+      setOpen(false);
+      return;
+    }
+  });
+  const form = panel.querySelector("[data-account-form]");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const number = form.querySelector("[name='booking-number']")?.value;
+    const lastName = form.querySelector("[name='last-name']")?.value;
+    const found = lookupStay(number, lastName);
+    if (!found) return;
+    writeStay(found);
+    renderAccountUi();
+    tryAutoOnsite();
+    applyEffectiveMode(false);
+  });
+  renderAccountUi();
+}
+
+function initOnsiteToggle() {
+  document.querySelectorAll("[data-onsite-toggle]").forEach((input) => {
+    input.addEventListener("change", () => {
+      setOnsite(input.checked, "manual");
+    });
+  });
+  document.querySelectorAll("[data-onsite-pill]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("td-open-menu", { detail: { focus: "onsite" } }));
+    });
+  });
+}
+
+function initModeSwitch() {
   const root = document.createElement("div");
   root.className = "mode-switch";
-  root.innerHTML = `<button class="mode-switch-button" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Visningsläge"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="mode-switch-menu" role="radiogroup" aria-label="Visningsläge" hidden><button type="button" role="radio" data-mode-choice="new">1 Ny besökare</button><button type="button" role="radio" data-mode-choice="returning">2 Återkommande besökare</button><button type="button" role="radio" data-mode-choice="booking">3 Påbörjad bokning<span class="mode-switch-note" hidden> (endast vinter)</span></button></div>`;
+  root.innerHTML = `<button class="mode-switch-button" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Visningsläge"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="mode-switch-menu" role="radiogroup" aria-label="Visningsläge" hidden><button type="button" role="radio" data-mode-choice="new">1 Ny besökare</button><button type="button" role="radio" data-mode-choice="returning">2 Återkommande besökare</button><button type="button" role="radio" data-mode-choice="booking">3 Påbörjad bokning<span class="mode-switch-note" hidden> (endast vinter)</span></button><button type="button" role="radio" data-mode-choice="onsite">4 På plats</button><button type="button" data-demo-today aria-pressed="false">Demo: vistelse pågår nu</button></div>`;
   document.body.append(root);
   const button = root.querySelector(".mode-switch-button");
   const menu = root.querySelector(".mode-switch-menu");
   const radios = [...menu.querySelectorAll("[data-mode-choice]")];
   const sync = () => {
-    const mode = document.documentElement.dataset.mode;
+    syncOnsiteUi();
     const summer = document.documentElement.dataset.season === "summer";
-    radios.forEach((radio) => {
-      const on = radio.dataset.modeChoice === mode;
-      radio.setAttribute("aria-checked", String(on));
-      radio.tabIndex = on ? 0 : -1;
-    });
     const note = menu.querySelector(".mode-switch-note");
     if (note) note.hidden = !summer;
   };
@@ -232,6 +534,15 @@ export function init() {
       next.focus();
     });
   });
+  menu.querySelector("[data-demo-today]")?.addEventListener("click", () => {
+    const on = !loadTodayOverride();
+    /* Mid-stay date so status becomes Pågår nu without guessing real GPS/time. */
+    setTodayOverride(on ? "2027-02-15" : null);
+    if (on && !readStay()) writeStay(DEMO_STAY);
+    tryAutoOnsite();
+    applyEffectiveMode(false);
+    sync();
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !menu.hidden) { event.preventDefault(); close(true); }
   });
@@ -244,5 +555,30 @@ export function init() {
   });
   window.addEventListener("resize", placeTooltip);
   sync();
+}
+
+export function init() {
+  loadTodayOverride();
+  const params = new URLSearchParams(location.search);
+  let modeParam = params.get("mode");
+  const current = document.documentElement.dataset.mode;
+  if (BASE_MODES.includes(current)) setBaseMode(current);
+  else if (BASE_MODES.includes(modeParam)) setBaseMode(modeParam);
+  else {
+    try {
+      const stored = localStorage.getItem("td-mode");
+      setBaseMode(BASE_MODES.includes(stored) ? stored : "returning");
+    } catch (err) {
+      setBaseMode("returning");
+    }
+  }
+  if (modeParam === "onsite") {
+    writeOnsite({ value: true, source: "manual", until: untilForOnsite(readStay()) });
+  }
+  tryAutoOnsite();
+  initModeSwitch();
+  initOnsiteToggle();
+  initAccount();
+  applyEffectiveMode(false);
   applyBooking();
 }
