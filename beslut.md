@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-09 (Onsite-etiketter med kolon)
+
+Öppet:, Nysnö:, Snödjup: i topbaren. Ratades: utan kolon. Öppet: inget.
+
 ## 2026-11-09 (bytt namn testing → tanndalen-koncept)
 
 Mappen `src/testing` → `src/tanndalen-koncept`. Workspace + design-system-referenser uppdaterade. Ratades: behålla namnet testing. Öppet: öppna om workspace i Cursor.
