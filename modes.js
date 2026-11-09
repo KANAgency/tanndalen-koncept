@@ -315,11 +315,48 @@ function applyBooking() {
   placeTooltip();
 }
 
+const SUGGEST_DISMISS_KEY = "td-onsite-suggest-dismiss";
+
+function isOnsiteSuggestDismissed() {
+  try {
+    const raw = localStorage.getItem(SUGGEST_DISMISS_KEY);
+    if (!raw) return false;
+    const until = Number(raw);
+    if (!Number.isFinite(until) || Date.now() > until) {
+      localStorage.removeItem(SUGGEST_DISMISS_KEY);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+function dismissOnsiteSuggest() {
+  try {
+    localStorage.setItem(SUGGEST_DISMISS_KEY, String(endOfLocalDay()));
+  } catch (err) {}
+}
+
+function clearOnsiteSuggestDismiss() {
+  try {
+    localStorage.removeItem(SUGGEST_DISMISS_KEY);
+  } catch (err) {}
+}
+
 function applyOnsitePage() {
   const on = isOnsiteActive();
+  const showSuggest = !on && baseModeFromDom() === "booking" && !isOnsiteSuggestDismissed();
   document.documentElement.classList.toggle("is-onsite", on);
   document.querySelectorAll("[data-onsite-pill-row]").forEach((el) => {
+    el.hidden = !(on || showSuggest);
+    el.dataset.onsiteVariant = on ? "status" : showSuggest ? "suggest" : "";
+  });
+  document.querySelectorAll("[data-onsite-status]").forEach((el) => {
     el.hidden = !on;
+  });
+  document.querySelectorAll("[data-onsite-suggest]").forEach((el) => {
+    el.hidden = !showSuggest;
   });
 }
 
@@ -335,6 +372,8 @@ function setMode(next, reload) {
   } else {
     writeOnsite(null);
   }
+  /* Demo: picking Påbörjad bokning always resurfaces the suggest bar. */
+  if (next === "booking") clearOnsiteSuggestDismiss();
   setBaseMode(next);
   const current = document.documentElement.dataset.mode;
   if ((current === "new") !== (next === "new") || reload) {
@@ -472,6 +511,18 @@ function initOnsiteToggle() {
   });
   document.querySelectorAll("[data-onsite-leave]").forEach((btn) => {
     btn.addEventListener("click", () => {
+      setOnsite(false, "manual");
+    });
+  });
+  document.querySelectorAll("[data-onsite-suggest-yes]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      clearOnsiteSuggestDismiss();
+      setOnsite(true, "manual");
+    });
+  });
+  document.querySelectorAll("[data-onsite-suggest-no]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      dismissOnsiteSuggest();
       setOnsite(false, "manual");
     });
   });

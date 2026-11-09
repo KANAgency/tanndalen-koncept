@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="ds/generated/typography-td.css" />
     <link rel="stylesheet" href="ds/components/button.css?v=graphic" />
     <link rel="stylesheet" href="ds/components/chip-tag.css" />
-    <link rel="stylesheet" href="ds/components/aktuellt-kort.css?v=typo3" />
+    <link rel="stylesheet" href="ds/components/aktuellt-kort.css?v=plate1" />
     <link rel="stylesheet" href="ds/components/fraga-block.css?v=typo3" />
     <link rel="stylesheet" href="ds/components/fraga-fragelista.css?v=1" />
     <link rel="stylesheet" href="ds/components/booking.css?v=cykel-nudge" />
@@ -132,15 +132,28 @@
       </div>
     <button class="td-button td-button-secondary" id="intro-scroll" type="button">Hoppa över</button>
     <div class="onsite-topbar" data-onsite-pill-row hidden>
-      <strong class="onsite-topbar-title td-ui-body-sm">På plats i Tänndalen</strong>
-      <p class="onsite-topbar-text td-ui-body-sm">
-        <span><strong class="onsite-topbar-label">Öppet:</strong> 41/54 nedfarter, 14/17 liftar</span>
+      <div class="onsite-topbar-status" data-onsite-status>
+        <div class="onsite-topbar-start">
+          <a class="onsite-topbar-title td-ui-body" href="#just-nu">På plats i Tänndalen</a>
+          <button class="onsite-topbar-leave td-ui-caption" type="button" data-onsite-leave>(inte på plats?)</button>
+        </div>
+        <p class="onsite-topbar-text td-ui-body">
+          <span><strong class="onsite-topbar-label">Öppet:</strong> 41/54 nedfarter, 14/17 liftar</span>
+          <span class="onsite-topbar-sep" aria-hidden="true">·</span>
+          <span><strong class="onsite-topbar-label">Nysnö:</strong> 12 cm i natt, 30 cm väntat fram till lördag</span>
+          <span class="onsite-topbar-sep" aria-hidden="true">·</span>
+          <span><strong class="onsite-topbar-label">Snödjup:</strong> 134 cm uppe, 71 cm nere</span>
+        </p>
+      </div>
+      <p class="onsite-topbar-suggest td-ui-body" data-onsite-suggest hidden>
+        <strong class="onsite-topbar-title">Du verkar vara i Tänndalen?</strong>
         <span class="onsite-topbar-sep" aria-hidden="true">·</span>
-        <span><strong class="onsite-topbar-label">Nysnö:</strong> 12 cm i natt, 30 cm väntat fram till lördag</span>
-        <span class="onsite-topbar-sep" aria-hidden="true">·</span>
-        <span><strong class="onsite-topbar-label">Snödjup:</strong> 134 cm uppe, 71 cm nere</span>
+        <span class="onsite-topbar-suggest-actions">
+          <button class="onsite-topbar-leave" type="button" data-onsite-suggest-yes>Ja det stämmer</button>
+          <span class="onsite-topbar-suggest-pipe" aria-hidden="true"></span>
+          <button class="onsite-topbar-leave" type="button" data-onsite-suggest-no>Nej det stämmer inte</button>
+        </span>
       </p>
-      <button class="onsite-topbar-leave td-ui-body-sm" type="button" data-onsite-leave>Jag är inte på plats</button>
     </div>
     <div class="page">
 

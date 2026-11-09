@@ -1,5 +1,21 @@
 # Beslut
 
+## 2026-11-09 (Aktuellt-platta → season)
+
+`--color-plate-*` saknas i tokens → bakgrund osynlig. Mappar till `--color-season-*` (samma som season-banner). Glas kvar på frost-active. Ratades: lägga till plate-tokens. Öppet: om plate ska in i token-export.
+
+## 2026-11-09 (Booking-suggest i topbar)
+
+Påbörjad bokning: topbar-variant «Du verkar vara i Tänndalen?» + Ja/Nej. Ja → på plats; Nej → egen dismiss-nyckel (inte samma som onsite manual-off). Mode-switch till booking rensar dismiss. Ratades: geo-banner; koppla dismiss till onsite false. Öppet: om copy/separator ska trimmas.
+
+## 2026-11-09 (Onsite-leave intill titel)
+
+Leave flyttad höger om «På plats…», text «(inte på plats?)» i caption, gap xs+2. Statusrad `td-ui-body` samma som titel. Ingen hover-pil. Ratades: leave högerställd; body-sm på status. Öppet: inget.
+
+## 2026-11-09 (Onsite-titel → Just nu)
+
+«På plats i Tänndalen» ett steg större (`td-ui-body`), länk till `#just-nu`. Ratades: behålla body-sm / stark utan navigering. Öppet: inget.
+
 ## 2026-11-09 (Onsite-etiketter med kolon)
 
 Öppet:, Nysnö:, Snödjup: i topbaren. Ratades: utan kolon. Öppet: inget.
