@@ -2614,33 +2614,60 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   position: relative;
   display: flex;
   align-items: center;
+  gap: var(--space-xs);
   box-sizing: border-box;
   width: 100%;
   min-height: 32px;
   margin-block: calc(var(--space-xs) - var(--space-sm));
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
+  background: transparent;
   color: var(--color-TD-night);
   text-decoration: none;
+  transition: color var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+/* Standard horizontal text arrow — fades/slides in on hover (no bg). */
+.site-menu-subs a::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto;
+  background-color: currentColor;
+  opacity: 0;
+  transform: translateX(-3px);
   transition:
-    background-color var(--motion-duration-fast) var(--motion-easing-out-soft),
-    color var(--motion-duration-fast) var(--motion-easing-out-soft);
+    opacity var(--motion-duration-fast) var(--motion-easing-out-soft),
+    transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+  pointer-events: none;
+  -webkit-mask: url("ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
+  mask: url("ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
 }
 
 .site-menu-subs a:hover,
 .site-menu-subs a:focus-visible {
-  background: var(--color-season-winter);
+  background: transparent;
+  color: var(--color-cta-primary);
 }
 
-html[data-season="summer"] .site-menu-subs a:hover,
-html[data-season="summer"] .site-menu-subs a:focus-visible {
-  background: var(--color-season-summer);
-  color: var(--contrast-on-season-summer);
+.site-menu-subs a:hover::after,
+.site-menu-subs a:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+  transition-duration: var(--motion-duration-normal);
 }
 
 .site-menu-subs a:focus-visible {
   outline: 2px solid var(--color-TD-cta);
   outline-offset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-menu-subs a::after {
+    transition: none;
+    transform: none;
+  }
 }
 
 .site-menu-subs a[aria-current="page"]::before {
@@ -3660,29 +3687,41 @@ body.fraga-open { overflow: hidden; }
   transform: none;
 }
 
-/* Rasmus-citat i dokumentflöde under utforsakning, horisontellt centrerat. */
+/* Flödesankare under utforsakning — synligt citat i #parallax-layer. */
 .citat-band {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   box-sizing: border-box;
   width: 100%;
+  height: 252px; /* 64 + ~108 + 80 — matchar tidigare padding+citat */
   margin: 0;
-  padding: 64px 24px 80px;
-  overflow: visible;
+  padding: 0;
+  pointer-events: none;
   background: transparent;
 }
 
-.citat-band .td-citat {
-  position: relative;
+/* Rasmus: samma parallax-lager + text-delta som övrig bg-text. */
+.parallax-item--citat {
+  --citat-text-ty: 0px;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 24px;
+  pointer-events: none;
+  transform: translate3d(0, var(--citat-text-ty), 0);
+  will-change: transform;
+}
+
+.parallax-item--citat .td-citat {
   width: 100%;
   max-width: 34rem;
   margin: 0 auto;
-  transform: none;
-  will-change: auto;
-  pointer-events: auto;
+  transition: opacity 160ms linear;
 }
 
-.citat-band .td-citat--text {
+.parallax-item--citat .td-citat--text {
   --td-citat-ink: var(--color-TD-neutral);
   gap: 0;
   align-items: center;
@@ -3690,13 +3729,13 @@ body.fraga-open { overflow: hidden; }
   color: var(--color-TD-neutral);
 }
 
-.citat-band .td-citat--text .td-citat-copy {
+.parallax-item--citat .td-citat--text .td-citat-copy {
   align-items: center;
   gap: 8px;
   text-align: center;
 }
 
-.citat-band .td-citat--text .td-citat-quote {
+.parallax-item--citat .td-citat--text .td-citat-quote {
   font-family: var(--font-family-TD-primary), serif;
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-regular);
@@ -3707,12 +3746,12 @@ body.fraga-open { overflow: hidden; }
   color: var(--color-TD-neutral);
 }
 
-.citat-band .td-citat--text .td-citat-credit {
+.parallax-item--citat .td-citat--text .td-citat-credit {
   align-items: center;
   text-align: center;
 }
 
-.citat-band .td-citat--text .td-citat-by {
+.parallax-item--citat .td-citat--text .td-citat-by {
   margin: 0;
   font-family: var(--font-family-TD-secondary), sans-serif;
   font-size: 14px;
@@ -3726,11 +3765,24 @@ body.fraga-open { overflow: hidden; }
 
 @media (max-width: 1023px) {
   .citat-band {
-    padding: 48px 16px 64px;
+    height: 220px;
+  }
+
+  .parallax-item--citat {
+    padding: 0 16px;
+    transform: none !important;
+    will-change: auto;
   }
 
   .just-nu { z-index: 5; }
   .quote { z-index: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-item--citat {
+    transform: none !important;
+    will-change: auto;
+  }
 }
 
 .boende {
@@ -4253,7 +4305,19 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   transform: none;
 }
 
-.td-topo2-label.is-covered { opacity: 0; }
+/* Bakom foreground-lager: tona till 30 % (Storvigeln, Skarvarna, citat). */
+.place-label-block.is-covered,
+.td-topo2-label.is-covered,
+.parallax-item--skarvarna .quote.is-covered,
+.parallax-item--citat .td-citat.is-covered {
+  opacity: 0.3;
+}
+
+.place-label-block,
+.parallax-item--skarvarna .quote,
+.parallax-item--citat .td-citat {
+  transition: opacity 160ms linear;
+}
 
 .td-topo2-label p { margin: 0; }
 
@@ -5051,47 +5115,80 @@ html[data-mode="booking"][data-season="winter"] .mode-booking-tip-arrow {
 
 .brand-center .logo { display: block; }
 
-.onsite-quiet-pill {
-  gap: var(--space-sm);
+/* Onsite status bar: title left, status centered, leave right. */
+.onsite-topbar {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-sm) var(--space-2xl);
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
 }
 
-.onsite-quiet-pill img {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+html[data-season="summer"] .onsite-topbar {
+  background: var(--color-season-summer);
+  color: var(--contrast-on-season-summer);
 }
 
-.onsite-quiet-pill[hidden],
-.onsite-quiet-row[hidden] {
+.onsite-topbar[hidden] {
   display: none !important;
 }
 
-/* Single source: pill row sits under the header bar (zero layout height, sticky). */
-.onsite-quiet-row {
-  --onsite-row-top: calc(12px + var(--size-control-md) + var(--space-md));
-  position: sticky;
-  top: var(--onsite-row-top);
-  z-index: 29;
-  display: flex;
-  justify-content: center;
-  height: 0;
-  overflow: visible;
-  pointer-events: none;
+.onsite-topbar-title {
+  grid-column: 1;
+  justify-self: start;
+  margin: 0;
+  margin-inline-start: var(--space-lg);
+  font-weight: 700;
+  color: inherit;
+  white-space: nowrap;
 }
 
-.onsite-quiet-row .onsite-quiet-pill {
-  pointer-events: auto;
+.onsite-topbar-text {
+  grid-column: 2;
+  margin: 0;
+  color: inherit;
+  text-align: center;
 }
 
-/* Hide while the menu panel is open (it opens from the header). */
-.page:has(.site-menu.is-open) .onsite-quiet-row {
-  display: none;
+.onsite-topbar-label {
+  font-weight: 700;
 }
 
-@media (min-width: 1024px) {
-  .onsite-quiet-row {
-    --onsite-row-top: calc(var(--menu-edge) + var(--menu-pad) + var(--size-control-md) + var(--menu-pad) + var(--space-sm));
-  }
+.onsite-topbar-sep {
+  margin-inline: var(--space-sm);
+}
+
+.onsite-topbar-leave {
+  grid-column: 3;
+  justify-self: end;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: none;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.onsite-topbar-leave:hover,
+.onsite-topbar-leave:active,
+.onsite-topbar-leave:focus,
+.onsite-topbar-leave:focus-visible {
+  outline: none;
+  box-shadow: none;
+  background: none;
+  color: inherit;
 }
 
 .onsite-toggle-field {
@@ -5316,7 +5413,15 @@ html[data-mode="booking"][data-season="winter"] .mode-booking-tip-arrow {
 
 .account-foot-center { justify-content: center; }
 
-.account-stay-head { display: flex; flex-direction: column; gap: 6px; }
+.account-stay-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.account-stay-head > * { margin: 0; }
 
 .account-stay-status {
   display: inline-flex;
@@ -5379,9 +5484,3 @@ html[data-mode="onsite"] #just-nu {
   margin-top: var(--space-3xl);
 }
 
-html[data-mode="onsite"] #booking.is-onsite-compact,
-html[data-mode="onsite"] .td-booking.is-onsite-compact {
-  opacity: 0.82;
-  transform: scale(0.92);
-  transform-origin: center bottom;
-}

@@ -1,5 +1,69 @@
 # Beslut
 
+## 2026-11-09 (Onsite-titel vänster)
+
+«På plats i Tänndalen» i vänsterkolumn, större inline-start (pad 2xl + margin lg). Data centrerad, leave höger. Ratades: titel i mittenflödet. Öppet: inget.
+
+## 2026-11-09 (Onsite-leave som textlänk)
+
+Leave utan `td-button-text` — nollställd knapp, underline. Ratades: button-text hover/padding. Öppet: inget.
+
+## 2026-11-09 (Onsite-topbar säsongsfärg)
+
+Topbar-bg: winter/summer via `data-season` + matchande contrast-text. Ratades: alltid winter. Öppet: inget.
+
+## 2026-11-09 (Onsite-dataetiketter bold)
+
+Öppet, Nysnö, Snödjup bold i topbaren (samma som «På plats…»). Ratades: hela datasträngen bold. Öppet: inget.
+
+## 2026-11-09 (Onsite-leave höger)
+
+«Jag är inte på plats» högerställd i topbaren; statusraden centrerad. Ratades: leave i mittenflödet. Öppet: inget.
+
+## 2026-11-09 (Onsite-topbar label + leave utan outline)
+
+Rad börjar med bold «På plats i Tänndalen»; leave-länk utan focus-outline. Ratades: behålla tom outline. Öppet: inget.
+
+## 2026-11-09 (Meny-sub hover CTA + pil)
+
+Undermenylänkar: hover/focus = CTA-textfärg, ingen bakgrund; textpil (arrow-right) animeras in. Ratades: säsongsfärgad hover-yta. Öppet: inget.
+
+## 2026-11-09 (Onsite-topbar ersätter quiet-pill)
+
+Quiet-pill bort. Statusrad längst upp (inte sticky), winter-färg, centrerad text: Öppet/Nysnö/Snödjup + länk «Jag är inte på plats» (stänger onsite). Ratades: sticky pill under meny. Öppet: live-data vs hårdkodat; sommarvariant.
+
+## 2026-11-09 (Quiet-pill synlig med öppen meny)
+
+Tog bort `.page:has(.site-menu.is-open) .onsite-quiet-row { display: none }`. Ratades: dölja pillen när menyn är öppen. Öppet: om z-index mot fullbreddsmeny på mobil.
+
+## 2026-11-06 (Account stay-head botten)
+
+`.account-stay-head` utan bottenpadding; barn `margin: 0` (h2-default). Ratades: röra stay-gap. Öppet: inget.
+
+## 2026-11-06 (Rasmus parallax)
+
+Rasmus-citat in i `#parallax-layer` (`.parallax-item--citat`, ankare `#citat-band`). Samma lager-offset + label-delta som övrig bg-text. Flödessektion = luft. Ratades: flöde utan parallax. Öppet: ankarehöjd 252 kan trimmas.
+
+## 2026-11-06 (Lager-tona 30 %)
+
+Storvigeln-etikett, Skarvarna-info, Anna-citat, Rasmus: `is-covered` → opacity 0.3 vid AABB mot foreground (Just nu, FAQ, m.fl.). Tidigare Skarvarna gick till 0. Ratades: dölja helt. Öppet: om fler occluders behövs.
+
+## 2026-11-06 (Cykel-ikon −4 px)
+
+Cykel/MTB-ikon `translateY(-4px)` i `.booking-icon-slot--cykel`. Ratades: ändra SVG-viewBox. Öppet: inget.
+
+## 2026-11-06 (Sommar: Aktiviteter ersätter Skidskola)
+
+Sommar-cats: Boende, Liftkort, Cykel, Aktiviteter, Paket (samma remap-mönster som Cykel). Kompass inline med CSS-var; kanot bara i ikonsettet. Fält = dag/period som Skidhyra. R360-id tomt. Länk `#aktiviteter` «Utforska aktiviteter». Ratades: röra vinterraden. Öppet: R360-id för Aktiviteter (och Cykel).
+
+## 2026-11-06 (Visa På plats bort)
+
+Knapp «Visa På plats» i account stay-vy bort (HTML + handlers). På plats via meny-toggle / quiet-pill. Ratades: CTA i vistelsepanelen. Öppet: inget.
+
+## 2026-11-06 (Onsite booking = vanliga)
+
+På plats: samma cats (Boende–Paket) och ingen compact (scale 0.92 / opacity 0.82 bort). Ratades: separat onsite-rad och nedtonad bar. Öppet: inget.
+
 ## 2026-11-06 (På plats-fält avstånd)
 
 `.onsite-toggle-field`: margin-top −16 (space-md−16) och margin-bottom +16 mot foot. Ratades: röra season-toggle padding. Öppet: inget.

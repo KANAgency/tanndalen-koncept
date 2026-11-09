@@ -318,15 +318,9 @@ function applyBooking() {
 function applyOnsitePage() {
   const on = isOnsiteActive();
   document.documentElement.classList.toggle("is-onsite", on);
-  const bar = document.getElementById("booking");
-  if (bar) bar.classList.toggle("is-onsite-compact", on);
-  document.querySelectorAll("[data-onsite-pill]").forEach((el) => {
-    el.hidden = !on;
-  });
   document.querySelectorAll("[data-onsite-pill-row]").forEach((el) => {
     el.hidden = !on;
   });
-  document.dispatchEvent(new CustomEvent("td-onsite-booking-cats", { detail: { onsite: on } }));
 }
 
 function setMode(next, reload) {
@@ -408,7 +402,6 @@ function renderAccountUi() {
     const titleEl = stayView.querySelector("[data-stay-title]");
     const partyEl = stayView.querySelector("[data-stay-party]");
     const checkEl = stayView.querySelector("[data-stay-checkin]");
-    const onsiteBtn = stayView.querySelector("[data-stay-onsite]");
     if (statusEl) {
       statusEl.textContent = statusLabel(status, stay);
       statusEl.dataset.status = status;
@@ -416,7 +409,6 @@ function renderAccountUi() {
     if (titleEl) titleEl.textContent = stay.title || DEMO_STAY.title;
     if (partyEl) partyEl.textContent = stay.party || DEMO_STAY.party;
     if (checkEl) checkEl.textContent = stay.checkInTime || DEMO_STAY.checkInTime;
-    if (onsiteBtn) onsiteBtn.hidden = isOnsiteActive();
   }
 }
 
@@ -456,13 +448,6 @@ function initAccount() {
       applyEffectiveMode(false);
       return;
     }
-    const onsiteBtn = event.target.closest("[data-stay-onsite]");
-    if (onsiteBtn) {
-      event.preventDefault();
-      setOnsite(true, "manual");
-      setOpen(false);
-      return;
-    }
   });
   const form = panel.querySelector("[data-account-form]");
   form?.addEventListener("submit", (event) => {
@@ -485,9 +470,9 @@ function initOnsiteToggle() {
       setOnsite(input.checked, "manual");
     });
   });
-  document.querySelectorAll("[data-onsite-pill]").forEach((btn) => {
+  document.querySelectorAll("[data-onsite-leave]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      document.dispatchEvent(new CustomEvent("td-open-menu", { detail: { focus: "onsite" } }));
+      setOnsite(false, "manual");
     });
   });
 }
