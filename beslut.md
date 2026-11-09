@@ -1,5 +1,13 @@
 # Beslut
 
+## 2026-11-09 (td-body-xs tillbaka)
+
+`.td-body-xs` (14/150) i startsida.css — saknades efter generering, account-lead/fält utan stil. Ligger lokalt eftersom `ds/` är symlink utanför git. Ratades: byta till td-ui-body-sm. Öppet: synka in i typography-styles JSON.
+
+## 2026-11-09 (Meny Vanliga frågor: ny lista)
+
+Undermeny: Ställ en fråga / Boka och ändra / Före ankomst / I backen / Kontakt. Hitta hit och Om bokning bort. Ställ → #fragor, Kontakt → #kontakt; övriga slug-platshållare. Ratades: behålla gamla tre. Öppet: om kategori-länkar ska öppna Fråga-panelen eller egna ankar.
+
 ## 2026-11-09 (Booking-tip stängs vid cat)
 
 «Liftkort nästa» dismissas vid klick på booking-cats (samma som ×). Ratades: bara Liftkort-knappen. Öppet: inget.

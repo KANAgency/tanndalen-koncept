@@ -22,6 +22,18 @@ body {
   color: var(--color-text-primary);
 }
 
+/* body-xs saknas i genererad typografi (ds utanför git). 14/150. */
+.td-body-xs {
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
 .page a {
   color: inherit;
   text-decoration: none;
