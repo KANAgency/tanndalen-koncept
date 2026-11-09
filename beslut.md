@@ -1,5 +1,13 @@
 # Beslut
 
+## 2026-11-09 (bytt namn testing → tanndalen-koncept)
+
+Mappen `src/testing` → `src/tanndalen-koncept`. Workspace + design-system-referenser uppdaterade. Ratades: behålla namnet testing. Öppet: öppna om workspace i Cursor.
+
+## 2026-11-09 (dist via npm build)
+
+`npm run build` → `dist/`; `npm run preview` serverar den över HTTP. file:// funkar inte (ES-moduler). Ratades: göra prototypen file://-kompatibel. Öppet: publicering till host.
+
 ## 2026-11-09 (Onsite-titel vänster)
 
 «På plats i Tänndalen» i vänsterkolumn, större inline-start (pad 2xl + margin lg). Data centrerad, leave höger. Ratades: titel i mittenflödet. Öppet: inget.
