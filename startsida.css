@@ -2431,8 +2431,8 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   top: calc(100% + 8px);
   left: 0;
   width: 440px;
-  max-height: min(760px, calc(100vh - 120px));
-  overflow: auto;
+  max-height: none;
+  overflow: visible;
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
@@ -2486,7 +2486,7 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
 .site-menu-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2500,6 +2500,7 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
 .site-menu.is-open .site-menu-item:nth-child(3) { animation-delay: 40ms; }
 .site-menu.is-open .site-menu-item:nth-child(4) { animation-delay: 60ms; }
 .site-menu.is-open .site-menu-item:nth-child(5) { animation-delay: 80ms; }
+.site-menu.is-open .site-menu-item:nth-child(6) { animation-delay: 100ms; }
 
 @keyframes site-menu-in {
   from { opacity: 0; }
@@ -2510,14 +2511,14 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  min-height: 64px;
-  padding: 6px 0;
+  min-height: 56px;
+  padding: 2px 0;
   gap: 16px;
 }
 
 .site-menu-item:has(.site-menu-sub.is-open) > .site-menu-row {
-  min-height: 68px;
-  padding: 6px 0 10px;
+  min-height: 56px;
+  padding: 2px 0 6px;
 }
 
 .site-menu-link {
@@ -2529,6 +2530,20 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   min-width: 0;
   color: inherit;
   text-decoration: none;
+}
+
+.site-menu-link--static {
+  cursor: default;
+}
+
+.site-menu-link--static .site-menu-title {
+  text-decoration: none;
+}
+
+.site-menu-link--static:hover .site-menu-title,
+.site-menu-link--static:focus-visible .site-menu-title {
+  color: inherit;
+  text-decoration-color: transparent;
 }
 
 .site-menu-thumb {
@@ -2596,7 +2611,10 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   transition: grid-template-rows var(--motion-duration-normal) var(--motion-easing-out-soft);
 }
 
-.site-menu-sub.is-open { grid-template-rows: 1fr; }
+.site-menu-sub.is-open {
+  grid-template-rows: 1fr;
+  margin-bottom: 8px;
+}
 
 .site-menu-sub-clip { overflow: hidden; }
 
@@ -2607,7 +2625,11 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   padding: 12px 0 12px var(--space-md);
   list-style: none;
   border-radius: var(--radius-sm);
-  background: var(--color-TD-day);
+  background: var(--color-TD-neutral-highlight);
+}
+
+.site-menu-subs li + li {
+  margin-top: 1px;
 }
 
 .site-menu-subs a {
@@ -2617,9 +2639,9 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
   gap: var(--space-xs);
   box-sizing: border-box;
   width: 100%;
-  min-height: 32px;
-  margin-block: calc(var(--space-xs) - var(--space-sm));
-  padding: var(--space-sm) var(--space-md);
+  min-height: 24px;
+  margin-block: 0;
+  padding: 3px var(--space-md);
   border-radius: var(--radius-md);
   background: transparent;
   color: var(--color-TD-night);
@@ -2800,7 +2822,8 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
 
   .site-menu.is-open {
     top: 64px;
-    max-height: calc(100svh - 64px - 112px);
+    max-height: none;
+    overflow: visible;
     border-radius: var(--radius-none);
     background: var(--color-TD-snow);
     opacity: 1;
@@ -5155,6 +5178,10 @@ html[data-season="summer"] .onsite-topbar {
   display: none !important;
 }
 
+.onsite-topbar-status.is-metrics-tight {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
 .onsite-topbar-start {
   grid-column: 1;
   justify-self: start;
@@ -5176,9 +5203,28 @@ html[data-season="summer"] .onsite-topbar {
 
 .onsite-topbar-text {
   grid-column: 2;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0;
   margin: 0;
+  min-width: 0;
   color: inherit;
   text-align: center;
+  white-space: nowrap;
+}
+
+.onsite-topbar-status.is-metrics-tight .onsite-topbar-text {
+  grid-column: 2;
+  justify-self: stretch;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.onsite-topbar-metric[hidden],
+.onsite-topbar-sep[hidden] {
+  display: none !important;
 }
 
 .onsite-topbar-suggest {

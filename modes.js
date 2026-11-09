@@ -246,6 +246,11 @@ let baseTitle = "";
 let tooltip = null;
 let tipClosed = false;
 
+function dismissTooltip() {
+  tipClosed = true;
+  if (tooltip) tooltip.hidden = true;
+}
+
 function ensureTooltip() {
   const bar = document.getElementById("booking");
   if (!bar || tooltip) return tooltip;
@@ -253,9 +258,10 @@ function ensureTooltip() {
   tooltip.className = "mode-booking-tip";
   tooltip.setAttribute("role", "note");
   tooltip.innerHTML = `<p class="mode-booking-tip-title">Liftkort nästa</p><p class="mode-booking-tip-body">Boendet är på plats. Var redo för backen och köp liftkorten nu.</p><button class="mode-booking-tip-close" type="button" aria-label="Stäng">×</button><span class="mode-booking-tip-arrow" aria-hidden="true"></span>`;
-  tooltip.querySelector(".mode-booking-tip-close").addEventListener("click", () => {
-    tipClosed = true;
-    tooltip.hidden = true;
+  tooltip.querySelector(".mode-booking-tip-close").addEventListener("click", dismissTooltip);
+  bar.querySelector("#booking-cats")?.addEventListener("click", (event) => {
+    if (!event.target.closest("button")) return;
+    dismissTooltip();
   });
   bar.append(tooltip);
   return tooltip;
@@ -344,6 +350,50 @@ function clearOnsiteSuggestDismiss() {
   } catch (err) {}
 }
 
+function syncOnsiteMetricSeps(metrics, seps) {
+  seps.forEach((sep, index) => {
+    const left = metrics[index];
+    const right = metrics[index + 1];
+    sep.hidden = Boolean(!left || !right || left.hidden || right.hidden);
+  });
+}
+
+/** Hide metrics from the end until the row fits; right-align as soon as centered layout is too tight. */
+function fitOnsiteMetrics() {
+  document.querySelectorAll("[data-onsite-status]").forEach((status) => {
+    const text = status.querySelector("[data-onsite-metrics]");
+    const start = status.querySelector(".onsite-topbar-start");
+    if (!text || !start || status.hidden) return;
+
+    const metrics = [...text.querySelectorAll("[data-onsite-metric]")];
+    const seps = [...text.querySelectorAll("[data-onsite-metric-sep]")];
+    metrics.forEach((metric) => {
+      metric.hidden = false;
+    });
+    syncOnsiteMetricSeps(metrics, seps);
+    status.classList.remove("is-metrics-tight");
+
+    const styles = getComputedStyle(status);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    const statusRect = status.getBoundingClientRect();
+    const startRect = start.getBoundingClientRect();
+    const startWidth = startRect.right - statusRect.left;
+    const textWidth = text.scrollWidth;
+
+    /* Centered needs equal side columns ≥ start block. */
+    const fitsCentered = startWidth * 2 + textWidth + gap * 2 <= statusRect.width + 0.5;
+    if (!fitsCentered) status.classList.add("is-metrics-tight");
+
+    const available = Math.max(0, statusRect.right - startRect.right - gap);
+    for (let i = metrics.length - 1; i >= 0; i -= 1) {
+      if (text.scrollWidth <= available + 0.5) break;
+      metrics[i].hidden = true;
+      syncOnsiteMetricSeps(metrics, seps);
+      if (!status.classList.contains("is-metrics-tight")) status.classList.add("is-metrics-tight");
+    }
+  });
+}
+
 function applyOnsitePage() {
   const on = isOnsiteActive();
   const showSuggest = !on && baseModeFromDom() === "booking" && !isOnsiteSuggestDismissed();
@@ -358,6 +408,18 @@ function applyOnsitePage() {
   document.querySelectorAll("[data-onsite-suggest]").forEach((el) => {
     el.hidden = !showSuggest;
   });
+  requestAnimationFrame(fitOnsiteMetrics);
+}
+
+function initOnsiteMetricsFit() {
+  const topbar = document.querySelector("[data-onsite-pill-row]");
+  if (!topbar || typeof ResizeObserver === "undefined") {
+    window.addEventListener("resize", fitOnsiteMetrics);
+    return;
+  }
+  const ro = new ResizeObserver(() => fitOnsiteMetrics());
+  ro.observe(topbar);
+  document.querySelectorAll("[data-onsite-status] .onsite-topbar-start").forEach((start) => ro.observe(start));
 }
 
 function setMode(next, reload) {
@@ -614,6 +676,7 @@ export function init() {
   tryAutoOnsite();
   initModeSwitch();
   initOnsiteToggle();
+  initOnsiteMetricsFit();
   initAccount();
   applyEffectiveMode(false);
   applyBooking();

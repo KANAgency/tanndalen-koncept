@@ -137,12 +137,12 @@
           <a class="onsite-topbar-title td-ui-body" href="#just-nu">På plats i Tänndalen</a>
           <button class="onsite-topbar-leave td-ui-caption" type="button" data-onsite-leave>(inte på plats?)</button>
         </div>
-        <p class="onsite-topbar-text td-ui-body">
-          <span><strong class="onsite-topbar-label">Öppet:</strong> 41/54 nedfarter, 14/17 liftar</span>
-          <span class="onsite-topbar-sep" aria-hidden="true">·</span>
-          <span><strong class="onsite-topbar-label">Nysnö:</strong> 12 cm i natt, 30 cm väntat fram till lördag</span>
-          <span class="onsite-topbar-sep" aria-hidden="true">·</span>
-          <span><strong class="onsite-topbar-label">Snödjup:</strong> 134 cm uppe, 71 cm nere</span>
+        <p class="onsite-topbar-text td-ui-body" data-onsite-metrics>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Öppet:</strong> 41/54 nedfarter, 14/17 liftar</span>
+          <span class="onsite-topbar-sep" data-onsite-metric-sep aria-hidden="true">·</span>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Nysnö:</strong> 12 cm i natt, 30 cm väntat fram till lördag</span>
+          <span class="onsite-topbar-sep" data-onsite-metric-sep aria-hidden="true">·</span>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Snödjup:</strong> 134 cm uppe, 71 cm nere</span>
         </p>
       </div>
       <p class="onsite-topbar-suggest td-ui-body" data-onsite-suggest hidden>
@@ -175,6 +175,26 @@
         <div class="site-menu" id="site-menu" inert>
           <div class="site-menu-panel" id="site-menu-panel" role="dialog" aria-modal="true" aria-label="Meny">
             <ul class="site-menu-list">
+              <li class="site-menu-item" data-key="boende">
+                <div class="site-menu-row">
+                  <a class="site-menu-link" href="#boende">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-boende.jpg?v=2" data-src-sommar="assets/img/meny-boende-sommar.jpg?v=2" src="assets/img/meny-boende.jpg?v=2" />
+                    <span class="site-menu-title td-heading-xs-regular">Boende</span>
+                  </a>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Boende">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a href="#ski-lodge">Ski Lodge</a></li>
+                      <li><a href="#omraden">Områden</a></li>
+                      <li><a href="#erbjudanden">Erbjudanden</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
               <li class="site-menu-item" data-key="skida">
                 <div class="site-menu-row">
                   <a class="site-menu-link" href="#skidakning">
@@ -199,26 +219,6 @@
                       <li><a href="#cykelpark">Cykelpark</a></li>
                       <li><a href="#cykeluthyrning">Cykeluthyrning</a></li>
                       <li><a href="#leder">Leder</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li class="site-menu-item" data-key="boende">
-                <div class="site-menu-row">
-                  <a class="site-menu-link" href="#boende">
-                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-boende.jpg?v=2" data-src-sommar="assets/img/meny-boende-sommar.jpg?v=2" src="assets/img/meny-boende.jpg?v=2" />
-                    <span class="site-menu-title td-heading-xs-regular">Boende</span>
-                  </a>
-                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Boende">
-                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
-                  </button>
-                </div>
-                <div class="site-menu-sub">
-                  <div class="site-menu-sub-clip" inert>
-                    <ul class="site-menu-subs">
-                      <li><a href="#ski-lodge">Ski Lodge</a></li>
-                      <li><a href="#omraden">Områden</a></li>
-                      <li><a href="#erbjudanden">Erbjudanden</a></li>
                     </ul>
                   </div>
                 </div>
@@ -278,8 +278,28 @@
                   <div class="site-menu-sub-clip" inert>
                     <ul class="site-menu-subs">
                       <li><a href="#hitta">Hitta hit</a></li>
-                      <li><a href="#fragor">Frågor och svar</a></li>
                       <li><a href="#om">Om Tänndalen</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="site-menu-item" data-key="fragor">
+                <div class="site-menu-row">
+                  <span class="site-menu-link site-menu-link--static">
+                    <img class="site-menu-thumb" alt="" width="80" height="52" data-src-vinter="assets/img/meny-fragor.jpg?v=2" data-src-sommar="assets/img/meny-fragor-sommar.jpg?v=2" src="assets/img/meny-fragor.jpg?v=2" />
+                    <span class="site-menu-title td-heading-xs-regular">Vanliga frågor</span>
+                  </span>
+                  <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Vanliga frågor">
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg>
+                  </button>
+                </div>
+                <div class="site-menu-sub">
+                  <div class="site-menu-sub-clip" inert>
+                    <ul class="site-menu-subs">
+                      <li><a class="td-ui-body" href="#fragor">Ställ en fråga</a></li>
+                      <li><a class="td-ui-body" href="#hitta">Hitta hit</a></li>
+                      <li><a class="td-ui-body" href="#fragor">Om bokning</a></li>
+                      <li><a class="td-ui-body" href="#kontakt">Kontakt</a></li>
                     </ul>
                   </div>
                 </div>
@@ -1018,7 +1038,7 @@
       } catch (error) { console.error("boka", error); }
     </script>
     <script type="module">
-      import { initBookingFields } from "./ds/components/booking.js?v=outside-close";
+      import { initBookingFields } from "./ds/components/booking.js?v=rebind-panes";
       import { initJustNuStack } from "./ds/components/just-nu-stack.js?v=langd-data";
       import { initSegmented } from "./ds/components/segmented.js?v=inset5";
       import { initSeasonToggles, getSeason, setSeason, subscribeSeason } from "./ds/components/season-toggle.js?v=1";
@@ -1252,10 +1272,12 @@
           return [id, label];
         });
       }
+      let bookingFields = null;
       function renderBookingCats() {
         root.querySelectorAll("button").forEach((button) => button.remove());
         clip.querySelectorAll(".td-booking-pane").forEach((pane) => pane.remove());
         bookingCats().forEach(addBookingCat);
+        bookingFields?.bindPanes();
       }
       function addBookingCat([id, label], index) {
         const button = document.createElement("button");
@@ -1305,10 +1327,10 @@
         pane.innerHTML = `<div class="td-field-group"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${dateLabel}</span><span class="td-field-value td-ui-body">${dateValue}</span></span>${cal}</button><hr class="td-field-divider"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${whoLabel}</span><span class="td-field-value td-ui-body">${whoValue}</span></span>${chev}</button></div><button class="td-button td-button-primary td-ui-cta td-booking-search" type="button">${icon}${search}</button>${links}`;
         clip.append(pane);
       }
-      renderBookingCats();
       document.addEventListener("td-season", renderBookingCats);
       document.addEventListener("td-mode", renderBookingCats);
-      initBookingFields(document.getElementById("booking"), { inline: true });
+      bookingFields = initBookingFields(document.getElementById("booking"), { inline: true });
+      renderBookingCats();
       document.addEventListener("pointerdown", (event) => {
         if (event.target.closest("#booking-clip, #booking-cats")) return;
         if (!clip.querySelector(".td-booking-pane.is-shown")) return;

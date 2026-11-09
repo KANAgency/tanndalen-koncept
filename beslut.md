@@ -1,5 +1,33 @@
 # Beslut
 
+## 2026-11-09 (Booking-tip stängs vid cat)
+
+«Liftkort nästa» dismissas vid klick på booking-cats (samma som ×). Ratades: bara Liftkort-knappen. Öppet: inget.
+
+## 2026-11-09 (Booking Dag/Antal igen)
+
+`td-mode` efter modes-init byggde om cat-paneler utan fältklick. `initBookingFields` returnerar `bindPanes`; anropas efter varje cat-render. Ratades: event-delegation överallt. Öppet: om mode-byte ska slippa full cat-rerender.
+
+## 2026-11-09 (Neutral highlight)
+
+Ny TD-token `neutral-highlight` `#F5F4F2` (Figma color/neutral-highlight). Bakgrund på expanderad `.site-menu-subs`. Ratades: subtlest/snow. Öppet: spegla hex om Figma avviker.
+
+## 2026-11-09 (Onsite-metrics prioriterad döljning)
+
+Statusrad: högeralignas när centrerad layout inte får plats; döljer Snödjup → Nysnö → Öppet en i taget. Ratades: wrappa/klippa text. Öppet: sommarvarianter av mätetal.
+
+## 2026-11-09 (Säsongsbyte stänger undermeny)
+
+Vinter/sommar fäller ihop öppna `.site-menu-sub`. Ratades: lämna utfällt över säsongsbyte. Öppet: inget.
+
+## 2026-11-09 (Meny tätare, ingen scroll)
+
+Huvudrader 64→56, gap 6→2; underlänkar tajtare. `max-height`/`overflow:auto` bort — ingen intern scroll. Ratades: behålla scroll vid sex poster. Öppet: om mobil behöver klipp.
+
+## 2026-11-09 (Meny: Vanliga frågor)
+
+Ny huvudpost med underlänkar Ställ en fråga / Hitta hit / Om bokning / Kontakt. Thumbs från Unsplash: snöfjäll (vinter), vandrare (sommar). Huvudrad ej länk (ingen scroll). «Frågor och svar» bort från Planera. Ratades: bastu/pizza; klättervägg. Öppet: om Om bokning ska öppna Fråga-panelen.
+
 ## 2026-11-09 (Aktuellt-platta → season)
 
 `--color-plate-*` saknas i tokens → bakgrund osynlig. Mappar till `--color-season-*` (samma som season-banner). Glas kvar på frost-active. Ratades: lägga till plate-tokens. Öppet: om plate ska in i token-export.
