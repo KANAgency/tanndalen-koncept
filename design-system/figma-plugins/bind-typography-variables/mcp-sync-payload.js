@@ -135,7 +135,8 @@ var __designSystemSync = (() => {
     "4xl": 48,
     "5xl": 60,
     "6xl": 72,
-    "7xl": 96
+    "88": 88,
+    "112": 112
   };
   function familyVariableName(familyKey) {
     const dot = familyKey.indexOf(".");
@@ -273,7 +274,7 @@ var __designSystemSync = (() => {
   var OG_STYLE_DEFS = {
     "heading-1": {
       family: "OG.primary",
-      size: "7xl",
+      size: "88",
       weight: "regular",
       leading: "tight",
       tracking: "tighter"
@@ -378,7 +379,7 @@ var __designSystemSync = (() => {
     caption: { family: "OG.secondary", size: "xs", weight: "regular", leading: "normal", tracking: "normal" }
   };
   var TD_STYLE_DEFS = {
-    "heading-1": { family: "TD.primary", size: "7xl", weight: "bold", leading: "tight", tracking: "normal" },
+    "heading-1": { family: "TD.primary", size: "88", weight: "bold", leading: "tight", tracking: "normal" },
     "heading-2": { family: "TD.primary", size: "6xl", weight: "bold", leading: "tight", tracking: "normal" },
     "heading-3": { family: "TD.primary", size: "5xl", weight: "bold", leading: "tight", tracking: "normal" },
     "heading-4": { family: "TD.primary", size: "4xl", weight: "bold", leading: "tight", tracking: "normal" },

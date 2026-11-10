@@ -45,7 +45,8 @@ export const FONT_SIZE_PX: Record<string, number> = {
   "4xl": 48,
   "5xl": 60,
   "6xl": 72,
-  "7xl": 96,
+  "88": 88,
+  "112": 112,
 };
 
 /** family key e.g. OG.primary → font/family/OG/primary */
@@ -196,7 +197,7 @@ export const TD_STYLE_KEYS = [
 export const OG_STYLE_DEFS: Record<string, StyleDef> = {
   "heading-1": {
     family: "OG.primary",
-    size: "7xl",
+    size: "88",
     weight: "regular",
     leading: "tight",
     tracking: "tighter",
@@ -320,7 +321,7 @@ export const TD_STYLE_DEFS: Record<string, StyleDef> = {
   "heading-1": {
     group: "Editorial",
     family: "TD.primary",
-    size: "7xl",
+    size: "88",
     weight: "bold",
     leading: "tight",
     tracking: "compressed",

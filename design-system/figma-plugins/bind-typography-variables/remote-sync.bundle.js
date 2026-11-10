@@ -400,7 +400,8 @@ var __designSystemSync = (() => {
     "4xl": 48,
     "5xl": 60,
     "6xl": 72,
-    "7xl": 96
+    "88": 88,
+    "112": 112
   };
   function familyVariableName(familyKey) {
     const dot = familyKey.indexOf(".");
@@ -538,7 +539,7 @@ var __designSystemSync = (() => {
   var OG_STYLE_DEFS = {
     "heading-1": {
       family: "OG.primary",
-      size: "7xl",
+      size: "88",
       weight: "regular",
       leading: "tight",
       tracking: "tighter"
@@ -661,7 +662,7 @@ var __designSystemSync = (() => {
     "heading-1": {
       group: "Editorial",
       family: "TD.primary",
-      size: "7xl",
+      size: "88",
       weight: "bold",
       leading: "tight",
       tracking: "compressed"
