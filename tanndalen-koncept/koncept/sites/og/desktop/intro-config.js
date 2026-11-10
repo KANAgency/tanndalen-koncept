@@ -26,7 +26,7 @@ export const SEASON_CALENDAR = Object.freeze({
 
 export const HERO_MEDIA = Object.freeze({
   winter: Object.freeze({
-    video: "assets/video/winter.mp4",
+    video: "assets/video/winter.web.mp4",
     poster: "assets/img/og-hero-winter.jpg"
   }),
   /* Summer: no clip/poster yet — hero falls back to Orsa-black placeholder. */
