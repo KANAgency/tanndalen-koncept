@@ -11,6 +11,7 @@
     "test:td:capture": "rm -rf regression/td-after && mkdir -p regression/td-after && TD_SHOT_DIR=regression/td-after playwright test tests/td-screenshots.spec.js --grep-invert \"diff against baseline\" --reporter=line",
     "test:td:diff": "TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-after TD_DIFF=regression/td-diff TD_DIFF_BASE_URL=http://127.0.0.1:4173 node scripts/td-shot-diff.mjs",
     "test:td:promote": "node scripts/td-promote.mjs",
+    "test:td:if-changed": "node scripts/td-if-changed.mjs",
     "test:td": "rm -rf regression/td-after regression/td-diff && mkdir -p regression/td-after regression/td-diff && TD_SHOT_DIR=regression/td-after TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-after TD_DIFF=regression/td-diff TD_DIFF_BASE_URL=http://127.0.0.1:4173 playwright test tests/td-screenshots.spec.js --reporter=line"
   },
   "devDependencies": {
