@@ -19,6 +19,15 @@ const SHOT_TIMEOUT_MS = 60_000;
 const MODES = ["new", "returning", "booking", "onsite"];
 const SEASONS = ["winter", "summer"];
 
+/** Comma-separated shot basenames without .png (e.g. mode-new-winter,intro-start). Empty = all. */
+const ONLY = new Set(
+  (process.env.TD_ONLY || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+);
+const want = (name) => ONLY.size === 0 || ONLY.has(name);
+
 fs.mkdirSync(OUT, { recursive: true });
 
 async function clearDemoState(page) {
@@ -181,7 +190,9 @@ test.beforeEach(async ({ page }) => {
 
 for (const mode of MODES) {
   for (const season of SEASONS) {
+    const name = `mode-${mode}-${season}`;
     test(`mode ${mode} ${season}`, async ({ page }) => {
+      test.skip(!want(name), `TD_ONLY skips ${name}`);
       await page.addInitScript((value) => {
         try {
           localStorage.setItem("td-season", value);
@@ -193,12 +204,13 @@ for (const mode of MODES) {
         document.documentElement.dataset.season = s;
       }, season);
       await expect(page.locator("html")).toHaveAttribute("data-mode", mode, { timeout: 5000 }).catch(() => {});
-      expect(await shot(page, `mode-${mode}-${season}`)).toBe(true);
+      expect(await shot(page, name)).toBe(true);
     });
   }
 }
 
 test("intro start", async ({ page }) => {
+  test.skip(!want("intro-start"), "TD_ONLY skips intro-start");
   await gotoShot(page, "/?visit=new&mode=new");
   try {
     await page.locator("html.is-intro").waitFor({ timeout: 10000 });
@@ -209,6 +221,7 @@ test("intro start", async ({ page }) => {
 });
 
 test("intro end", async ({ page }) => {
+  test.skip(!want("intro-end"), "TD_ONLY skips intro-end");
   await gotoShot(page, "/?visit=new&mode=new");
   await skipIntroIfPresent(page);
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -225,7 +238,8 @@ test("diff against baseline", async () => {
       TD_BEFORE: BASELINE,
       TD_AFTER: OUT,
       TD_DIFF: DIFF_DIR,
-      TD_DIFF_BASE_URL: DIFF_BASE_URL
+      TD_DIFF_BASE_URL: DIFF_BASE_URL,
+      ...(ONLY.size ? { TD_ONLY: [...ONLY].join(",") } : {})
     }
   });
   if (r.stdout) process.stdout.write(r.stdout);

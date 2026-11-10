@@ -15,7 +15,7 @@ const afterDir = resolve(root, process.env.TD_AFTER || "regression/td-after");
 const diffDir = resolve(root, process.env.TD_DIFF || "regression/td-diff");
 const baseURL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:4173";
 
-const MODE_SHOTS = {
+const ALL_MODE_SHOTS = {
   "mode-new-winter.png": ["new", "winter"],
   "mode-new-summer.png": ["new", "summer"],
   "mode-returning-winter.png": ["returning", "winter"],
@@ -27,6 +27,19 @@ const MODE_SHOTS = {
   "intro-start.png": ["new", "winter", { visit: "new", keepIntro: true }],
   "intro-end.png": ["new", "winter", { visit: "new" }]
 };
+
+const ONLY = new Set(
+  (process.env.TD_ONLY || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => (s.endsWith(".png") ? s : `${s}.png`))
+);
+
+const MODE_SHOTS =
+  ONLY.size === 0
+    ? ALL_MODE_SHOTS
+    : Object.fromEntries(Object.entries(ALL_MODE_SHOTS).filter(([name]) => ONLY.has(name)));
 
 function names(dir) {
   if (!existsSync(dir)) return [];
@@ -180,10 +193,13 @@ def max_component_bbox(mask_img):
                 max_box = [x0 + minx, y0 + miny, bw, bh]
     return max_box
 
+only = set(${JSON.stringify([...ONLY])})
 print(f"{'name':<32} {'status':<8} {'ratio':>10} {'bbox':>36} {'max_blob':>16}")
 fail = 0
 report = {}
 for name in sorted(p.name for p in before.glob('*.png')):
+    if only and name not in only:
+        continue
     b, a = before/name, after/name
     if not a.exists():
         print(f"{name:<32} MISSING")
