@@ -1157,7 +1157,7 @@ html.is-intro-done .page .place-labels .place-label {
 
 @media (min-width: 1024px) {
   .en-dag-heading {
-    font-size: 5rem;
+    /* size from .td-heading-xxl (--font-size-88); do not hardcode */
     white-space: nowrap;
   }
 }
