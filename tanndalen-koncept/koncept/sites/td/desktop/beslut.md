@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (test:td snabbare)
+
+`test:td` mätt ~95 s seriellt; efteråt ~21 s (2 workers, masker från capture, hoppa tomma `en-dag-season-photo`). Nya kommandon: `test:td:smoke` (3 vyer, ~9 s) och `test:td:if-changed` (kör fullt bara om TD/shared/DS/testharnäss ändrats mot `origin/main` — ingen pre-push-hook). Diff använder `*.masks.json` från capture; ingen sidomladdning. 3 workers ratades (ENOENT/connection-vägran under last); 2 OK. Tomma hidden season-photos är avsiktliga placeholders, inte sajtfel — testet väntar inte längre 8 s på dem. Ratades: pre-push-hook; röra baseline/OG/TD-utseende. Öppet: ev. pre-push senare.
+
 ## 2026-11-10 (rubrikskala 112/88)
 
 Delad heading-skala synkad med Figma: `--font-size-112` / `--font-size-88`, heading xxxl ny, xxl→88, `--font-size-7xl` (96) bort. TD `.en-dag-heading` hade `font-size: 5rem` (80px) som dolde token-bytet — override bort så xxl gäller. OG `h1`/`.og-h1` → 88 (xxl); hero `.og-hero-title` → 112 (xxxl) via clamp mot DS-tokens. OG `heading-1` i typography-styles → 88. `verify-heading-scale` i `tokens:css`. TD-baseline promotad (xxl synlig i En dag). Ratades: behålla 7xl-alias; låta 5rem-override ligga kvar. Öppet: intro.css DS-byte ligger i ocommittat OG-intro-arbete (inte stägat här).
