@@ -1,0 +1,121 @@
+/* Citat — redaktörsblock.
+   Props (HTML):
+     quote         — text i blockquote.td-citat-quote (+ typografiklass .td-quote-xs)
+     name          — .td-citat-name (+ .td-ui-title-sm)
+     title         — .td-citat-role (+ .td-ui-caption)
+     by            — .td-citat-by (text-only, en rad)
+     image         — img.td-citat-image[src] (valfri; utelämna + .td-citat--text)
+     imagePosition — --td-citat-object-position (default center), t.ex. "30% 40%"
+
+   Semantik: figure > [img] + blockquote + figcaption.
+   Layout: vertikal stack, centrerad (porträtt → citat → credit, eller citat → by).
+   Inga filter, blend, mask, stroke eller skugga på porträttet.
+   All text: color/neutral (TD #686868). Fungerar i OG via theme-override. */
+
+.td-citat {
+  --td-citat-ink: var(--color-TD-neutral);
+  --td-citat-object-position: center;
+  --td-citat-image-size: 120px;
+  --td-citat-copy-max: 34rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2xl);
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: var(--td-citat-ink);
+}
+
+.theme-OG .td-citat {
+  --td-citat-ink: var(--color-OG-neutral);
+}
+
+.td-citat-image {
+  display: block;
+  flex: none;
+  width: var(--td-citat-image-size);
+  height: var(--td-citat-image-size);
+  margin: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: var(--td-citat-object-position);
+  box-shadow: none;
+  opacity: 0.8;
+}
+
+.td-citat-copy {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  box-sizing: border-box;
+  max-width: var(--td-citat-copy-max);
+  min-width: 0;
+  width: 100%;
+}
+
+.td-citat-quote {
+  margin: 0;
+  color: var(--td-citat-ink);
+  opacity: 1;
+}
+
+.td-citat-quote p {
+  margin: 0;
+}
+
+.td-citat-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0;
+}
+
+.td-citat-name,
+.td-citat-role {
+  margin: 0;
+  color: var(--td-citat-ink);
+  opacity: 1;
+}
+
+.td-citat-by {
+  margin: 0;
+  color: var(--td-citat-ink);
+  opacity: 1;
+}
+
+/* Text-only (ingen porträtt): samma rytm som startsidans .quote-text / .quote-by. */
+.td-citat--text {
+  gap: 0;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.td-citat--text .td-citat-copy {
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+}
+
+.td-citat--text .td-citat-credit {
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (max-width: 1023px) {
+  .td-citat {
+    --td-citat-image-size: 96px;
+    --td-citat-copy-max: none;
+    gap: var(--space-xl);
+  }
+
+  .td-citat--text {
+    gap: 0;
+  }
+}

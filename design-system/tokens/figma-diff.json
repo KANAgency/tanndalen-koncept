@@ -1,0 +1,14 @@
+{
+  "syncedAt": "2026-09-23T09:05:00Z",
+  "sourceOfTruth": "figma",
+  "status": "tokens-and-plugin-updated-to-match-figma-snapshot",
+  "decisions": [
+    "TD variable keys: English (day/night/snow/season-*) to match Figma variables",
+    "TD paint styles: keep Swedish names via TD_PAINT_STYLE_ALIAS",
+    "TD text weights: mirror Figma (body Bold, cta/nav/label/intro Book, quote Italic+fine)",
+    "Dropped semantic bg-overlay (absent in Figma)",
+    "Spacing: space-{step} hyphen names",
+    "Do not push-sync until John asks — Figma already has the values"
+  ],
+  "snapshot": "figma-snapshot.json"
+}

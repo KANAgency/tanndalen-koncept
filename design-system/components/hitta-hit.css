@@ -1,0 +1,137 @@
+/* Hitta hit, Concept Desktop - 28.
+   Masker från Figma:
+   topp/botten: svart 0 / 35 % / 75 % / 100 % med alfa 0, 1, 1, 0.
+   vänster: alfa 0 och 1 på position 0, sedan 1 på 100 %.
+   Rutten är 3 px, streck 6 6, color/neutral-subtle. */
+
+.td-hitta {
+  position: relative;
+  width: min(1440px, 100%);
+  aspect-ratio: 3200 / 2424;
+  margin: 64px auto 0;
+  overflow: hidden;
+  color: var(--color-text-primary);
+}
+
+.td-hitta-map {
+  position: absolute;
+  inset: 0;
+  background: center / 100% auto no-repeat;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 35%, #000 75%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 0%, #000 100%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 35%, #000 75%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 0%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.td-hitta-route {
+  position: absolute;
+  left: 30.9%;
+  top: 31.5%;
+  width: 37.2%;
+  height: 45.4%;
+  overflow: visible;
+}
+
+.td-hitta-route path {
+  fill: none;
+  stroke: var(--color-TD-neutral-subtle);
+  stroke-width: 3;
+  stroke-dasharray: 6 6;
+}
+
+.td-hitta-point {
+  fill: var(--color-TD-night);
+}
+
+.td-hitta-stop {
+  position: absolute;
+  width: 196px;
+  opacity: 0;
+  color: var(--color-text-primary);
+}
+
+.td-hitta-stop p {
+  margin: 0;
+}
+
+.td-hitta-copy {
+  position: relative;
+  z-index: 1;
+  width: min(519px, calc(100% - 48px));
+  margin-left: auto;
+  padding: 80px 48px 0 0;
+}
+
+.td-hitta-copy h2,
+.td-hitta-ingress {
+  margin: 0;
+}
+
+.td-hitta-ingress {
+  margin-top: 32px;
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-book);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.td-hitta-copy a {
+  display: inline-flex;
+  margin-top: 32px;
+  color: inherit;
+}
+
+.td-faktakort {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: min(519px, calc(100% - 48px));
+  margin: 220px 0 48px 48px;
+  padding: 32px;
+  border: 1px solid var(--color-TD-snow);
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+.td-faktakort-frost {
+  background: rgb(255 255 255 / 0.28);
+  border-color: rgb(255 255 255 / 0.7);
+  backdrop-filter: blur(28px);
+}
+
+.td-faktakort-top,
+.td-faktakort-places {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.td-faktakort-rule {
+  height: 1px;
+  margin: 20px 0;
+  border: 0;
+  background: var(--color-TD-neutral-subtlest);
+}
+
+.td-faktakort-figure {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-hitta-route path {
+    stroke-dashoffset: 0 !important;
+  }
+
+  .td-hitta-stop {
+    opacity: 1 !important;
+  }
+}

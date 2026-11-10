@@ -1,0 +1,155 @@
+{
+  "$description": "Semantiska roller för Tänndalen (TD). Pekar in i primitives.json — ändra aldrig värden här.",
+  "$status": "Färg + typografi speglad Figma TD 2026-10-02. Superclarendon + CircularXX TT.",
+
+  "color": {
+    "bg-base": { "ref": "color.TD.day" },
+    "bg-inverted": { "ref": "color.TD.night" },
+    "bg-overlay": {
+      "ref": "color.TD.night",
+      "alpha": 0.55,
+      "status": "decided",
+      "role": "scrim",
+      "note": "Scrim / bakgrundsdimning bakom modaler, mobilmeny, lightbox. Värde = night (#24272A) @ 55% alfa — INTE ny solid hex. CSS: rgba(36,39,42,0.55)."
+    },
+    "frost": {
+      "value": "rgba(255, 255, 255, 0.12)",
+      "note": "Figma Semantic: ren rgba (snow @ 12 %), ingen alias. Fyllningens egen opacitet = 100 %."
+    },
+    "frost-hover": {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "note": "Figma Semantic: ren rgba (snow @ 20 %), ingen alias."
+    },
+    "frost-active": {
+      "value": "rgba(255, 255, 255, 0.28)",
+      "note": "Figma Semantic: ren rgba (snow @ 28 %), ingen alias."
+    },
+    "text-primary": { "ref": "color.TD.night" },
+    "text-inverted": { "ref": "color.TD.snow" },
+    "cta-primary": { "ref": "color.TD.cta" },
+    "cta-on-dark": {
+      "ref": "color.TD.snow",
+      "note": "Figma TD Semantic: cta-on-dark → snow. Annan modell än OG."
+    },
+    "accent": { "ref": "color.TD.accent" },
+    "error": { "ref": "color.shared.error", "note": "Systemfärg, variabel only — ingen paint style." },
+    "on-error": { "ref": "color.shared.on-error", "note": "Variabel only — ingen paint style." },
+    "season-spring": { "ref": "color.TD.season-spring" },
+    "season-summer": { "ref": "color.TD.season-summer" },
+    "season-autumn": { "ref": "color.TD.season-autumn" },
+    "season-winter": {
+      "ref": "color.TD.season-winter",
+      "note": "Får inte dominera, aldrig på text eller logo mot bild"
+    },
+    "bg-surface": { "ref": "color.TD.snow" },
+    "bg-base-dark": { "ref": "color.TD.night" },
+    "text-primary-dark": { "ref": "color.TD.snow" },
+    "just-nu-pager-inactive": { "ref": "color.TD.neutral-subtle" },
+    "just-nu-pager-inactive-dark": { "ref": "color.TD.neutral-strong" },
+    "just-nu-overlay-transparent": { "value": "rgba(36, 39, 42, 0)" },
+    "just-nu-secondary": { "ref": "color.TD.neutral-strong" },
+    "just-nu-secondary-dark": { "ref": "color.TD.neutral-muted" },
+    "just-nu-period": { "ref": "color.TD.season-winter" },
+    "just-nu-period-dark": { "ref": "color.TD.season-winter" },
+    "just-nu-question-icon-0": { "value": "#456972" },
+    "just-nu-snow-accent": { "ref": "color.TD.accent" },
+    "booking-bar-surface": { "value": "rgba(255, 255, 255, 0)", "note": "Figma: snow med opacitet 0." },
+    "booking-bar-elevation-color": { "value": "rgba(0, 0, 0, 0)" },
+    "booking-calendar-surface": { "ref": "color.TD.snow" },
+    "booking-calendar-surface-dark": { "ref": "color.TD.night" },
+    "booking-calendar-text": { "ref": "color.TD.night" },
+    "booking-calendar-text-dark": { "ref": "color.TD.snow" },
+    "booking-calendar-muted": { "ref": "color.TD.neutral-strong" },
+    "booking-calendar-muted-dark": { "ref": "color.TD.neutral-subtle" },
+    "booking-calendar-disabled": { "ref": "color.TD.neutral-muted" },
+    "booking-calendar-disabled-dark": { "ref": "color.TD.neutral-muted" },
+    "booking-calendar-range": { "ref": "color.TD.day" },
+    "booking-calendar-range-dark": { "ref": "color.TD.neutral-strong" },
+    "booking-calendar-selected": { "ref": "color.TD.cta" },
+    "booking-calendar-selected-dark": { "ref": "color.TD.cta" },
+    "booking-calendar-on-selected": { "ref": "color.TD.snow" },
+    "booking-calendar-on-selected-dark": { "ref": "color.TD.snow" },
+    "booking-calendar-focus": { "ref": "color.TD.cta" },
+    "booking-calendar-focus-dark": { "ref": "color.TD.snow" }
+  },
+
+  "difficulty": {
+    "green": { "ref": "color.difficulty.green" },
+    "green-dark": { "ref": "color.difficulty.green" },
+    "blue": { "ref": "color.difficulty.blue" },
+    "blue-dark": { "ref": "color.difficulty.blue" },
+    "red": { "ref": "color.difficulty.red" },
+    "red-dark": { "ref": "color.difficulty.red" },
+    "black": { "ref": "color.difficulty.black" },
+    "black-dark": { "ref": "color.difficulty.black" },
+    "orange": { "ref": "color.difficulty.orange" },
+    "orange-dark": { "ref": "color.difficulty.orange" }
+  },
+
+  "status": {
+    "$figma": "Semantic COLOR status-{open|limited|closed|error}[+ -dark]. Alias till primitiver — CSS --status-*.",
+    "open": { "ref": "color.status.success" },
+    "open-dark": { "ref": "color.status.success-dark" },
+    "limited": { "ref": "color.status.warning" },
+    "limited-dark": { "ref": "color.status.warning-dark" },
+    "closed": { "ref": "color.TD.neutral-strong" },
+    "closed-dark": { "ref": "color.TD.neutral-muted" },
+    "error": { "ref": "color.shared.error" },
+    "error-dark": { "ref": "color.status.error-dark" }
+  },
+
+  "contrast": {
+    "$figma": "Semantic COLOR contrast/on-*. CSS --contrast-on-*. Speglad Figma 2026-10-02.",
+    "on-accent": { "ref": "color.TD.day" },
+    "on-cta": { "ref": "color.TD.snow" },
+    "on-cta-on-dark": { "ref": "color.TD.cta" },
+    "on-day": { "ref": "color.TD.night" },
+    "on-night": { "ref": "color.TD.day" },
+    "on-season-autumn": { "ref": "color.TD.day" },
+    "on-season-spring": { "ref": "color.TD.night" },
+    "on-season-summer": { "ref": "color.TD.day" },
+    "on-season-winter": { "ref": "color.TD.night" },
+    "on-snow": { "ref": "color.TD.night" }
+  },
+
+  "contrast-pair": {
+    "$source": "Godkänt 3×3-rutnät + Figma contrast/on-* 2026-09-23.",
+    "$note": "Explicit par, inte luminance. CTA → snow. night: day och snow.",
+    "night": {
+      "text": { "ref": "color.TD.day" },
+      "text-alt": { "ref": "color.TD.snow", "note": "Andra rutan för night i 3×3-facit." }
+    },
+    "season-summer": { "text": { "ref": "color.TD.day" } },
+    "season-autumn": { "text": { "ref": "color.TD.day" } },
+    "cta": { "text": { "ref": "color.TD.snow" }, "note": "Undantag — text = snow, inte day." },
+    "cta-on-dark": {
+      "text": { "ref": "color.TD.cta" },
+      "note": "Figma contrast/on-cta-on-dark → cta."
+    },
+    "day": { "text": { "ref": "color.TD.night" } },
+    "snow": { "text": { "ref": "color.TD.night" } },
+    "season-spring": { "text": { "ref": "color.TD.night" } },
+    "season-winter": { "text": { "ref": "color.TD.night" } },
+    "accent": {
+      "text": { "ref": "color.TD.day" },
+      "status": "verified-with-restriction",
+      "contrastRatio": 3.25,
+      "note": "3.25:1 — endast icke-text (kantlinjer/badges/ikoner). Aldrig knappfyllning eller brödtext."
+    },
+    "error": {
+      "text": { "ref": "color.shared.on-error" },
+      "note": "Systembakgrund. Text = on-error (vit)."
+    }
+  },
+
+  "typography": {
+    "font-heading": { "ref": "font.family.TD.primary", "status": "Superclarendon — Figma-arbetsfil" },
+    "font-body": { "ref": "font.family.TD.secondary", "status": "CircularXX TT — Book=450, Bold=700" },
+    "styles": { "ref-file": "typography-styles-tanndalen.json" },
+    "heading-treatment": { "note": "heading-1–6 Bold. Quote = Circular Book + accentlinje. body/caption = Book." }
+  },
+
+  "$open-questions": [
+    "Kundfråga #9: produktionstypsnitt — Figma kör Superclarendon/CircularXX TT; status-doc speglar arbetsfilen, kundbeslut kan fortfarande ändra stacken."
+  ]
+}

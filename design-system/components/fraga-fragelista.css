@@ -1,0 +1,133 @@
+/* Delad frågelista — Fråga / Block (Figma) och Fråga-dialogens sökvy.
+   Token: color/neutral-light → --color-TD-neutral-light (#D7D7D7). */
+
+.td-fraga-fragelista {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 627px;
+  gap: var(--space-none);
+}
+
+.td-fraga-fragelista-rubrik {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-md) 0;
+  color: var(--color-text-primary);
+  text-align: center;
+  text-transform: none;
+}
+
+.td-fraga-fragelista-platta {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-md) var(--space-xl);
+  border: 1px solid var(--color-TD-neutral-light);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  box-shadow: none;
+  list-style: none;
+  gap: var(--space-none);
+}
+
+/* Avdelare: .rad + .rad — klassen sitter på <li> så syskonväljaren följer antalet. */
+.td-fraga-fragelista-rad + .td-fraga-fragelista-rad {
+  border-top: 1px solid var(--color-TD-neutral-light);
+}
+
+.td-fraga-fragelista-rad {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.td-fraga-fragelista-rad > button,
+.td-fraga-fragelista-knapp {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-sm) 0;
+  min-height: 45px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-fraga-fragelista-rad-text {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.td-fraga-fragelista-rad-icon {
+  flex: none;
+  display: block;
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+  color: inherit;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-fraga-fragelista-rad-icon svg,
+.td-fraga-fragelista-rad .fraga-suggest-arrow {
+  display: block;
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+}
+
+/* Hover: accent + pil upp/höger — samma som .faq-row. */
+
+.td-fraga-fragelista-rad > button:hover,
+.td-fraga-fragelista-rad > button:focus-visible,
+.td-fraga-fragelista-knapp:hover,
+.td-fraga-fragelista-knapp:focus-visible {
+  color: var(--color-accent);
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-fraga-fragelista-rad > button:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-rad > button:focus-visible .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:focus-visible .td-fraga-fragelista-rad-icon {
+  transform: translate(2px, -2px);
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-fraga-fragelista-rad > button:focus-visible,
+.td-fraga-fragelista-knapp:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-fraga-fragelista-rad > button,
+  .td-fraga-fragelista-knapp,
+  .td-fraga-fragelista-rad-icon {
+    transition: none;
+  }
+
+  .td-fraga-fragelista-rad > button:hover .td-fraga-fragelista-rad-icon,
+  .td-fraga-fragelista-rad > button:focus-visible .td-fraga-fragelista-rad-icon,
+  .td-fraga-fragelista-knapp:hover .td-fraga-fragelista-rad-icon,
+  .td-fraga-fragelista-knapp:focus-visible .td-fraga-fragelista-rad-icon {
+    transform: none;
+  }
+}

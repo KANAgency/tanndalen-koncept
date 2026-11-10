@@ -1,0 +1,242 @@
+/* SeasonToggle — delad säsongsväljare (labeled | icon).
+   State: documentElement[data-season] = "winter" | "summer" (global + localStorage).
+   Montera via season-toggle.js: initSeasonToggles() / mountSeasonToggle(el). */
+
+.td-season-toggle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  box-sizing: border-box;
+  width: 100%;
+  /* Marginal lista → etikett på gruppen (Figma: 24 / 12), −8 px top. */
+  padding-top: calc(var(--space-xl) - 8px);
+  padding-bottom: var(--space-md);
+}
+
+.td-season-toggle-host--icon {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.td-season-toggle-label {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: var(--color-text-primary);
+}
+
+.td-season-toggle {
+  --td-season-track: var(--color-TD-day);
+  --td-season-inactive: var(--color-TD-neutral-strong);
+  --td-season-pad: 3px;
+  --td-season-height: 44px;
+  --td-season-glyph: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--td-season-height);
+  padding: var(--td-season-pad);
+  border-radius: var(--radius-full);
+  background: var(--td-season-track);
+  overflow: hidden;
+}
+
+.td-season-toggle--icon {
+  --td-season-track: var(--color-TD-neutral-subtlest);
+  --td-season-glyph: 24px;
+  --td-season-pad: var(--space-xs);
+  --td-season-circle: 28px;
+  --td-season-hit: 44px;
+  width: auto;
+  height: calc(var(--td-season-pad) * 2 + var(--td-season-circle));
+  overflow: visible;
+}
+
+.td-season-toggle-thumb {
+  position: absolute;
+  top: var(--td-season-pad);
+  bottom: var(--td-season-pad);
+  left: var(--td-season-pad);
+  z-index: 0;
+  width: calc((100% - var(--td-season-pad) * 2) / 2);
+  border-radius: var(--radius-full);
+  background: var(--color-season-winter);
+  pointer-events: none;
+  transition:
+    left var(--motion-duration-fast) var(--motion-easing-out-soft),
+    background-color var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-season-toggle[data-season="summer"] .td-season-toggle-thumb {
+  left: calc(50%);
+  background: var(--color-season-summer);
+}
+
+.td-season-toggle--icon .td-season-toggle-thumb {
+  width: var(--td-season-circle);
+  height: var(--td-season-circle);
+  top: var(--td-season-pad);
+  bottom: auto;
+  left: var(--td-season-pad);
+}
+
+.td-season-toggle--icon[data-season="summer"] .td-season-toggle-thumb {
+  left: calc(var(--td-season-pad) + var(--td-season-circle));
+}
+
+.td-season-toggle-option {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  box-sizing: border-box;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0 var(--space-lg) 0 var(--space-md);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--td-season-inactive);
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+
+.td-season-toggle--labeled .td-season-toggle-option {
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-normal);
+}
+
+.td-season-toggle--icon .td-season-toggle-option {
+  flex: none;
+  width: var(--td-season-hit);
+  min-width: var(--td-season-hit);
+  height: var(--td-season-hit);
+  min-height: var(--td-season-hit);
+  margin: calc((var(--td-season-circle) - var(--td-season-hit)) / 2);
+  padding: 0;
+}
+
+.td-season-toggle-option[aria-checked="true"] {
+  color: var(--color-text-primary);
+}
+
+.td-season-toggle[data-season="summer"] .td-season-toggle-option[aria-checked="true"] {
+  color: var(--contrast-on-season-summer);
+}
+
+.td-season-toggle-option:focus {
+  outline: none;
+}
+
+.td-season-toggle-option:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.td-season-toggle-text {
+  white-space: nowrap;
+}
+
+.td-season-toggle--icon .td-season-toggle-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.td-season-toggle-glyph {
+  display: block;
+  flex: none;
+  width: var(--td-season-glyph);
+  height: var(--td-season-glyph);
+  background: currentColor;
+  -webkit-mask: var(--td-season-icon) center / contain no-repeat;
+  mask: var(--td-season-icon) center / contain no-repeat;
+}
+
+.td-season-toggle-option[data-season="winter"] {
+  --td-season-icon: url("./icons/season-snowflake.svg");
+}
+
+.td-season-toggle-option[data-season="summer"] {
+  --td-season-icon: url("./icons/season-sun.svg");
+}
+
+.td-season-toggle--icon .td-season-toggle-option[data-season="winter"] {
+  --td-season-icon: url("./icons/season-snowflake-24.svg");
+}
+
+.td-season-toggle--icon .td-season-toggle-option[data-season="summer"] {
+  --td-season-icon: url("./icons/season-sun-24.svg");
+}
+
+/* Tooltip for icon variant (hover + keyboard focus) */
+.td-season-toggle--icon .td-season-toggle-option::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + var(--space-sm));
+  z-index: 2;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  color: var(--color-TD-snow);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-book);
+  line-height: var(--font-leading-relaxed);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(2px);
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-season-toggle--icon .td-season-toggle-option:hover::after,
+.td-season-toggle--icon .td-season-toggle-option:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Sekundära säsongsfärger (inte boknings-CTA) */
+:root[data-season="summer"] .td-button-fill-winter,
+html[data-season="summer"] .td-button-fill-winter {
+  background: var(--color-season-summer);
+  color: var(--contrast-on-season-summer);
+}
+
+:root[data-season="summer"] .td-button-fill-winter::before,
+html[data-season="summer"] .td-button-fill-winter::before {
+  background: var(--color-TD-snow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-season-toggle-thumb,
+  .td-season-toggle--icon .td-season-toggle-option::after {
+    transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .td-season-toggle-group,
+  .td-season-toggle--labeled {
+    max-width: 100%;
+  }
+}

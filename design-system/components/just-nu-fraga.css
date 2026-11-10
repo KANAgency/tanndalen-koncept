@@ -1,0 +1,63 @@
+/* Just nu / Fråga (1285:3738). 411 × 262, padding 24, space-between.
+   Vinter: color/season-winter + contrast/on-season-winter.
+   Natt: color/bg-inverted + contrast/on-night.
+   Snö: color/snow + contrast/on-day. Beige är sidans yta, inte kortet.
+   Frågan är Heading/sm. Hint är UI/body. Header Size=Small. */
+
+.td-fraga {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  box-sizing: border-box;
+  width: 411px;
+  height: 262px;
+  padding: var(--space-xl);
+  border-radius: var(--radius-sm);
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
+  text-decoration: none;
+}
+
+html[data-season="summer"] .td-fraga {
+  background: var(--color-season-summer);
+  color: var(--contrast-on-season-summer);
+}
+
+.td-fraga:focus-visible {
+  outline: 2px solid var(--contrast-on-season-winter);
+  outline-offset: var(--space-xs);
+}
+
+html[data-season="summer"] .td-fraga:focus-visible {
+  outline-color: var(--contrast-on-season-summer);
+}
+
+.td-fraga-natt {
+  background: var(--color-bg-inverted);
+  color: var(--contrast-on-night);
+}
+
+.td-fraga-sno {
+  background: var(--color-TD-snow);
+  color: var(--contrast-on-day);
+}
+
+.td-fraga-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.td-fraga-header {
+  width: 100%;
+}
+
+/* Small-header: UI/cta-sm (efter ikonyta 32). */
+.td-fraga .td-just-nu-header-sm .td-ui-cta-sm {
+  color: inherit;
+}
+
+.td-fraga .td-just-nu-header-icon img[data-season-icon="dark"] { display: none; }
+html[data-season="summer"] .td-fraga .td-just-nu-header-icon img[data-season-icon="light"] { display: none; }
+html[data-season="summer"] .td-fraga .td-just-nu-header-icon img[data-season-icon="dark"] { display: block; }

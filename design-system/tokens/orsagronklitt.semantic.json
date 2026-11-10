@@ -1,0 +1,126 @@
+{
+  "$description": "Semantiska roller för Orsa Grönklitt. Pekar in i primitives.json — ändra aldrig värden här.",
+  "$status": "Färg: samma struktur/alias som TD, pekar på OG-primitiver (beslut 2026-11-10). Typografi: låst, redan i produktion.",
+
+  "color": {
+    "bg-base": { "ref": "color.OG.day" },
+    "bg-inverted": { "ref": "color.OG.night" },
+    "bg-overlay": {
+      "ref": "color.OG.night",
+      "alpha": 0.55,
+      "status": "decided",
+      "role": "scrim",
+      "note": "Scrim = night (orsa-black) @ 55% alfa — samma mönster som TD (night = bg-inverted)."
+    },
+    "frost": {
+      "value": "rgba(255, 255, 255, 0.12)",
+      "note": "Samma struktur som TD: ren rgba (snow @ 12 %), ingen alias."
+    },
+    "frost-hover": {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "note": "Samma struktur som TD: ren rgba (snow @ 20 %)."
+    },
+    "frost-active": {
+      "value": "rgba(255, 255, 255, 0.28)",
+      "note": "Samma struktur som TD: ren rgba (snow @ 28 %)."
+    },
+    "text-primary": { "ref": "color.OG.night" },
+    "text-inverted": { "ref": "color.OG.snow" },
+    "cta-primary": { "ref": "color.OG.cta", "note": "cta = signal-orange." },
+    "cta-on-dark": {
+      "ref": "color.OG.snow",
+      "note": "Samma aliasmönster som TD (cta-on-dark → snow). Primitiven color.OG.cta-on-dark är fortfarande PLACEHOLDER."
+    },
+    "accent": { "ref": "color.OG.accent", "note": "accent = signal-orange." },
+    "error": { "ref": "color.shared.error", "note": "Systemfärg, identisk med TD." },
+    "on-error": { "ref": "color.shared.on-error", "note": "Text på error. Identisk med TD." },
+    "season-spring": { "ref": "color.OG.season-spring" },
+    "season-summer": { "ref": "color.OG.season-summer" },
+    "season-autumn": { "ref": "color.OG.season-autumn" },
+    "season-winter": {
+      "ref": "color.OG.season-winter",
+      "note": "OG = TD-värde tills vidare."
+    },
+    "bg-surface": { "ref": "color.OG.snow" },
+    "bg-base-dark": { "ref": "color.OG.night" },
+    "text-primary-dark": { "ref": "color.OG.snow" },
+    "just-nu-pager-inactive": { "ref": "color.OG.neutral-subtle" },
+    "just-nu-pager-inactive-dark": { "ref": "color.OG.neutral-strong" },
+    "just-nu-overlay-transparent": { "value": "rgba(60, 60, 59, 0)" },
+    "just-nu-secondary": { "ref": "color.OG.neutral-strong" },
+    "just-nu-secondary-dark": { "ref": "color.OG.neutral-muted" },
+    "just-nu-period": { "ref": "color.OG.season-winter" },
+    "just-nu-period-dark": { "ref": "color.OG.season-winter" },
+    "just-nu-question-icon-0": { "value": "#456972" },
+    "just-nu-snow-accent": { "ref": "color.OG.accent" },
+    "booking-bar-surface": { "value": "rgba(255, 255, 255, 0)", "note": "snow med opacitet 0." },
+    "booking-bar-elevation-color": { "value": "rgba(0, 0, 0, 0)" },
+    "booking-calendar-surface": { "ref": "color.OG.snow" },
+    "booking-calendar-surface-dark": { "ref": "color.OG.night" },
+    "booking-calendar-text": { "ref": "color.OG.night" },
+    "booking-calendar-text-dark": { "ref": "color.OG.snow" },
+    "booking-calendar-muted": { "ref": "color.OG.neutral-strong" },
+    "booking-calendar-muted-dark": { "ref": "color.OG.neutral-subtle" },
+    "booking-calendar-disabled": { "ref": "color.OG.neutral-muted" },
+    "booking-calendar-disabled-dark": { "ref": "color.OG.neutral-muted" },
+    "booking-calendar-range": { "ref": "color.OG.day" },
+    "booking-calendar-range-dark": { "ref": "color.OG.neutral-strong" },
+    "booking-calendar-selected": { "ref": "color.OG.cta" },
+    "booking-calendar-selected-dark": { "ref": "color.OG.cta" },
+    "booking-calendar-on-selected": { "ref": "color.OG.snow" },
+    "booking-calendar-on-selected-dark": { "ref": "color.OG.snow" },
+    "booking-calendar-focus": { "ref": "color.OG.cta" },
+    "booking-calendar-focus-dark": { "ref": "color.OG.snow" }
+  },
+
+  "difficulty": {
+    "green": { "ref": "color.OG.difficulty-green" },
+    "green-dark": { "ref": "color.OG.difficulty-green" },
+    "blue": { "ref": "color.OG.difficulty-blue" },
+    "blue-dark": { "ref": "color.OG.difficulty-blue" },
+    "red": { "ref": "color.OG.difficulty-red" },
+    "red-dark": { "ref": "color.OG.difficulty-red" },
+    "black": { "ref": "color.OG.difficulty-black" },
+    "black-dark": { "ref": "color.OG.difficulty-black" },
+    "orange": { "ref": "color.OG.difficulty-orange" },
+    "orange-dark": { "ref": "color.OG.difficulty-orange" }
+  },
+
+  "status": {
+    "$figma": "Semantic COLOR status-* — samma struktur som TD, OG-primitiver.",
+    "open": { "ref": "color.status.success" },
+    "open-dark": { "ref": "color.status.success-dark" },
+    "limited": { "ref": "color.status.warning" },
+    "limited-dark": { "ref": "color.status.warning-dark" },
+    "closed": { "ref": "color.OG.neutral-strong" },
+    "closed-dark": { "ref": "color.OG.neutral-muted" },
+    "error": { "ref": "color.shared.error" },
+    "error-dark": { "ref": "color.status.error-dark" }
+  },
+
+  "contrast": {
+    "$figma": "Semantic COLOR contrast/on-* — samma struktur som TD, OG-primitiver.",
+    "on-accent": { "ref": "color.OG.day" },
+    "on-cta": { "ref": "color.OG.snow" },
+    "on-cta-on-dark": { "ref": "color.OG.cta" },
+    "on-day": { "ref": "color.OG.night" },
+    "on-night": { "ref": "color.OG.day" },
+    "on-season-autumn": { "ref": "color.OG.day" },
+    "on-season-spring": { "ref": "color.OG.night" },
+    "on-season-summer": { "ref": "color.OG.day" },
+    "on-season-winter": { "ref": "color.OG.night" },
+    "on-snow": { "ref": "color.OG.night" }
+  },
+
+  "typography": {
+    "font-heading": { "ref": "font.family.OG.primary", "status": "Låst — redan i produktion" },
+    "font-body": { "ref": "font.family.OG.secondary", "status": "Låst — redan i produktion" },
+    "styles": { "ref-file": "typography-styles-orsagronklitt.json", "note": "Elva färdiga text styles, se separat fil" },
+    "heading-treatment": { "note": "Öppnare kerning, generösare radavstånd, lägre vikt än Tänndalen. Utnyttja Literatas opsz-axel." }
+  },
+
+  "$open-questions": [
+    "Hover/active/tonal/cta-on-dark fortfarande PLACEHOLDER — härledda förslag i uppdragets rapport.",
+    "Ny hero-copy för att undvika manualens felaktiga färgtabell (VIT/SVART fel funktionsbeskrivning)"
+  ]
+}

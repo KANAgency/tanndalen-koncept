@@ -1,0 +1,31 @@
+/* Chip / Tag. Solid Dark Large används av Aktuellt / Kort-kicker.
+   Fasta etiketter — inte klickbara. */
+
+.td-chip-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  height: 32px;
+  padding: 0 var(--space-md);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--nav-size, 14px);
+  font-weight: var(--font-weight-book, 450);
+  line-height: var(--nav-line-height, 15px);
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.td-chip-tag-solid.td-chip-tag-dark {
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+.td-chip-tag-solid.td-chip-tag-light {
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
+}

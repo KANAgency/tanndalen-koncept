@@ -1,0 +1,97 @@
+/* Just nu / Webbkamera (1550:11582). 411 × 236, padding 20 × 24.
+   Toning mätt #242629: 55 % / 0 % vid 45 % / 40 %. Närmaste token är night.
+   Panorama 1179 × 236. 40 s linjärt åt varje håll. */
+
+.td-kamera {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 411px;
+  height: 236px;
+  padding: 20px var(--space-xl);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary-dark);
+  text-decoration: none;
+}
+
+.td-kamera-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.td-kamera-pan .td-kamera-media {
+  width: 287%;
+  max-width: none;
+  object-fit: cover;
+  animation: td-kamera-pan 40s linear infinite alternate;
+}
+
+.td-kamera-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(36 38 41 / 0.55) 0%,
+    rgb(36 38 41 / 0) 45%,
+    rgb(36 38 41 / 0.4) 100%
+  );
+  pointer-events: none;
+}
+
+.td-kamera-header,
+.td-kamera-status {
+  position: relative;
+  z-index: 1;
+}
+
+.td-kamera-header {
+  width: 100%;
+  color: var(--color-text-primary-dark);
+}
+
+.td-kamera:not(.is-karta) .td-just-nu-header-icon {
+  display: none;
+}
+
+.td-kamera-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-TD-snow);
+}
+
+.td-kamera-status .td-ui-caption {
+  color: var(--color-TD-snow);
+}
+
+.td-kamera-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-inverted);
+}
+
+.td-kamera-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--status-open-dark);
+}
+
+@keyframes td-kamera-pan {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100% / 2.87 * -1.87)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-kamera-pan .td-kamera-media {
+    animation: none;
+    width: 100%;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "tanndalen-koncept",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-dist.mjs",
+    "preview": "node scripts/preview-dist.mjs",
+    "test:season": "playwright test tests/season-switch.spec.js",
+    "test:intro": "playwright test tests/intro-scroll.spec.js",
+    "test:init": "playwright test tests/page-init.spec.js",
+    "test:td:capture": "playwright test tests/td-screenshots.spec.js --reporter=line",
+    "test:td:diff": "node scripts/td-shot-diff.mjs",
+    "test:td": "rm -rf regression/td-current && mkdir -p regression/td-current && TD_SHOT_DIR=regression/td-current npm run test:td:capture && TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-current TD_DIFF=regression/td-diff-current TD_DIFF_BASE_URL=http://127.0.0.1:4173 npm run test:td:diff"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

@@ -1,0 +1,1034 @@
+{
+  "$description": "TD: Figma-variabelnamn \u2192 CSS custom property som generate-css-vars.mjs faktiskt producerar. Applicera som WEB codeSyntax i Figma.",
+  "$generatedAt": "2026-10-02",
+  "$fileKey": "HW7ZST3CotlOepEcjNI5LC",
+  "$source": {
+    "figmaVariables": "live use_figma dump 2026-10-02 (126 vars)",
+    "css": "generated/tokens.css",
+    "generator": "scripts/generate-css-vars.mjs"
+  },
+  "map": [
+    {
+      "figma": "color/accent",
+      "collection": "Semantic",
+      "css": "--color-accent",
+      "web": "var(--color-accent)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-accent)"
+    },
+    {
+      "figma": "color/bg-base",
+      "collection": "Semantic",
+      "css": "--color-bg-base",
+      "web": "var(--color-bg-base)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-day)"
+    },
+    {
+      "figma": "color/bg-inverted",
+      "collection": "Semantic",
+      "css": "--color-bg-inverted",
+      "web": "var(--color-bg-inverted)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "color/bg-overlay",
+      "collection": "Semantic",
+      "css": "--color-bg-overlay",
+      "web": "var(--color-bg-overlay)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "rgba(36, 39, 42, 0.55)"
+    },
+    {
+      "figma": "color/cta-on-dark",
+      "collection": "Semantic",
+      "css": "--color-cta-on-dark",
+      "web": "var(--color-cta-on-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-snow)"
+    },
+    {
+      "figma": "color/cta-primary",
+      "collection": "Semantic",
+      "css": "--color-cta-primary",
+      "web": "var(--color-cta-primary)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-cta)"
+    },
+    {
+      "figma": "color/error",
+      "collection": "Semantic",
+      "css": "--color-error",
+      "web": "var(--color-error)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-shared-error)"
+    },
+    {
+      "figma": "color/frost",
+      "collection": "Semantic",
+      "css": "--color-frost",
+      "web": "var(--color-frost)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "rgba(255, 255, 255, 0.12)"
+    },
+    {
+      "figma": "color/frost-active",
+      "collection": "Semantic",
+      "css": "--color-frost-active",
+      "web": "var(--color-frost-active)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "rgba(255, 255, 255, 0.28)"
+    },
+    {
+      "figma": "color/frost-hover",
+      "collection": "Semantic",
+      "css": "--color-frost-hover",
+      "web": "var(--color-frost-hover)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "figma": "color/on-error",
+      "collection": "Semantic",
+      "css": "--color-on-error",
+      "web": "var(--color-on-error)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-shared-on-error)"
+    },
+    {
+      "figma": "color/season-autumn",
+      "collection": "Semantic",
+      "css": "--color-season-autumn",
+      "web": "var(--color-season-autumn)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-season-autumn)"
+    },
+    {
+      "figma": "color/season-spring",
+      "collection": "Semantic",
+      "css": "--color-season-spring",
+      "web": "var(--color-season-spring)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-season-spring)"
+    },
+    {
+      "figma": "color/season-summer",
+      "collection": "Semantic",
+      "css": "--color-season-summer",
+      "web": "var(--color-season-summer)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-season-summer)"
+    },
+    {
+      "figma": "color/season-winter",
+      "collection": "Semantic",
+      "css": "--color-season-winter",
+      "web": "var(--color-season-winter)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-season-winter)"
+    },
+    {
+      "figma": "color/text-inverted",
+      "collection": "Semantic",
+      "css": "--color-text-inverted",
+      "web": "var(--color-text-inverted)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-snow)"
+    },
+    {
+      "figma": "color/text-primary",
+      "collection": "Semantic",
+      "css": "--color-text-primary",
+      "web": "var(--color-text-primary)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "contrast/on-accent",
+      "collection": "Semantic",
+      "css": "--contrast-on-accent",
+      "web": "var(--contrast-on-accent)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-day)"
+    },
+    {
+      "figma": "contrast/on-cta",
+      "collection": "Semantic",
+      "css": "--contrast-on-cta",
+      "web": "var(--contrast-on-cta)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-snow)"
+    },
+    {
+      "figma": "contrast/on-cta-on-dark",
+      "collection": "Semantic",
+      "css": "--contrast-on-cta-on-dark",
+      "web": "var(--contrast-on-cta-on-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-cta)"
+    },
+    {
+      "figma": "contrast/on-day",
+      "collection": "Semantic",
+      "css": "--contrast-on-day",
+      "web": "var(--contrast-on-day)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "contrast/on-night",
+      "collection": "Semantic",
+      "css": "--contrast-on-night",
+      "web": "var(--contrast-on-night)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-day)"
+    },
+    {
+      "figma": "contrast/on-season-autumn",
+      "collection": "Semantic",
+      "css": "--contrast-on-season-autumn",
+      "web": "var(--contrast-on-season-autumn)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-day)"
+    },
+    {
+      "figma": "contrast/on-season-spring",
+      "collection": "Semantic",
+      "css": "--contrast-on-season-spring",
+      "web": "var(--contrast-on-season-spring)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "contrast/on-season-summer",
+      "collection": "Semantic",
+      "css": "--contrast-on-season-summer",
+      "web": "var(--contrast-on-season-summer)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-day)"
+    },
+    {
+      "figma": "contrast/on-season-winter",
+      "collection": "Semantic",
+      "css": "--contrast-on-season-winter",
+      "web": "var(--contrast-on-season-winter)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "contrast/on-snow",
+      "collection": "Semantic",
+      "css": "--contrast-on-snow",
+      "web": "var(--contrast-on-snow)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-night)"
+    },
+    {
+      "figma": "opacity/disabled",
+      "collection": "Semantic",
+      "css": "--opacity-disabled",
+      "web": "var(--opacity-disabled)",
+      "emittedIn": ":root",
+      "valueExample": "0.4"
+    },
+    {
+      "figma": "status-closed",
+      "collection": "Semantic",
+      "css": "--status-closed",
+      "web": "var(--status-closed)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-neutral-strong)"
+    },
+    {
+      "figma": "status-closed-dark",
+      "collection": "Semantic",
+      "css": "--status-closed-dark",
+      "web": "var(--status-closed-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-TD-neutral-muted)"
+    },
+    {
+      "figma": "status-error",
+      "collection": "Semantic",
+      "css": "--status-error",
+      "web": "var(--status-error)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-shared-error)"
+    },
+    {
+      "figma": "status-error-dark",
+      "collection": "Semantic",
+      "css": "--status-error-dark",
+      "web": "var(--status-error-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-status-error-dark)"
+    },
+    {
+      "figma": "status-limited",
+      "collection": "Semantic",
+      "css": "--status-limited",
+      "web": "var(--status-limited)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-status-warning)"
+    },
+    {
+      "figma": "status-limited-dark",
+      "collection": "Semantic",
+      "css": "--status-limited-dark",
+      "web": "var(--status-limited-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-status-warning-dark)"
+    },
+    {
+      "figma": "status-open",
+      "collection": "Semantic",
+      "css": "--status-open",
+      "web": "var(--status-open)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-status-success)"
+    },
+    {
+      "figma": "status-open-dark",
+      "collection": "Semantic",
+      "css": "--status-open-dark",
+      "web": "var(--status-open-dark)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "var(--color-status-success-dark)"
+    },
+    {
+      "figma": "color/accent",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-accent",
+      "web": "var(--color-TD-accent)",
+      "emittedIn": ":root",
+      "valueExample": "#BF6A15"
+    },
+    {
+      "figma": "color/cta",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-cta",
+      "web": "var(--color-TD-cta)",
+      "emittedIn": ":root",
+      "valueExample": "#AE6113"
+    },
+    {
+      "figma": "color/day",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-day",
+      "web": "var(--color-TD-day)",
+      "emittedIn": ":root",
+      "valueExample": "#EBE8E5"
+    },
+    {
+      "figma": "color/error",
+      "collection": "Shared / Primitives",
+      "css": "--color-shared-error",
+      "web": "var(--color-shared-error)",
+      "emittedIn": ":root",
+      "valueExample": "#C42B2B"
+    },
+    {
+      "figma": "color/neutral",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral",
+      "web": "var(--color-TD-neutral)",
+      "emittedIn": ":root",
+      "valueExample": "#686868"
+    },
+    {
+      "figma": "color/neutral-highlight",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-highlight",
+      "web": "var(--color-TD-neutral-highlight)",
+      "emittedIn": ":root",
+      "valueExample": "#F5F4F2"
+    },
+    {
+      "figma": "color/neutral-light",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-light",
+      "web": "var(--color-TD-neutral-light)",
+      "emittedIn": ":root",
+      "valueExample": "#D7D7D7"
+    },
+    {
+      "figma": "color/neutral-muted",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-muted",
+      "web": "var(--color-TD-neutral-muted)",
+      "emittedIn": ":root",
+      "valueExample": "#A5A4A4"
+    },
+    {
+      "figma": "color/neutral-strong",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-strong",
+      "web": "var(--color-TD-neutral-strong)",
+      "emittedIn": ":root",
+      "valueExample": "#4C4D4F"
+    },
+    {
+      "figma": "color/neutral-subtle",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-subtle",
+      "web": "var(--color-TD-neutral-subtle)",
+      "emittedIn": ":root",
+      "valueExample": "#C3C1C0"
+    },
+    {
+      "figma": "color/neutral-subtlest",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-neutral-subtlest",
+      "web": "var(--color-TD-neutral-subtlest)",
+      "emittedIn": ":root",
+      "valueExample": "#E0DFDE"
+    },
+    {
+      "figma": "color/night",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-night",
+      "web": "var(--color-TD-night)",
+      "emittedIn": ":root",
+      "valueExample": "#24272A"
+    },
+    {
+      "figma": "color/on-error",
+      "collection": "Shared / Primitives",
+      "css": "--color-shared-on-error",
+      "web": "var(--color-shared-on-error)",
+      "emittedIn": ":root",
+      "valueExample": "#FFFFFF"
+    },
+    {
+      "figma": "color/season-autumn",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-season-autumn",
+      "web": "var(--color-TD-season-autumn)",
+      "emittedIn": ":root",
+      "valueExample": "#3C1F17"
+    },
+    {
+      "figma": "color/season-spring",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-season-spring",
+      "web": "var(--color-TD-season-spring)",
+      "emittedIn": ":root",
+      "valueExample": "#F6E0A2"
+    },
+    {
+      "figma": "color/season-summer",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-season-summer",
+      "web": "var(--color-TD-season-summer)",
+      "emittedIn": ":root",
+      "valueExample": "#1B4021"
+    },
+    {
+      "figma": "color/season-winter",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-season-winter",
+      "web": "var(--color-TD-season-winter)",
+      "emittedIn": ":root",
+      "valueExample": "#A1B5BA"
+    },
+    {
+      "figma": "color/snow",
+      "collection": "Shared / Primitives",
+      "css": "--color-TD-snow",
+      "web": "var(--color-TD-snow)",
+      "emittedIn": ":root",
+      "valueExample": "#FFFFFF"
+    },
+    {
+      "figma": "color/status/error-dark",
+      "collection": "Shared / Primitives",
+      "css": "--color-status-error-dark",
+      "web": "var(--color-status-error-dark)",
+      "emittedIn": ":root",
+      "valueExample": "#EF6B63"
+    },
+    {
+      "figma": "color/status/success",
+      "collection": "Shared / Primitives",
+      "css": "--color-status-success",
+      "web": "var(--color-status-success)",
+      "emittedIn": ":root",
+      "valueExample": "#2E7D46"
+    },
+    {
+      "figma": "color/status/success-dark",
+      "collection": "Shared / Primitives",
+      "css": "--color-status-success-dark",
+      "web": "var(--color-status-success-dark)",
+      "emittedIn": ":root",
+      "valueExample": "#4CAF6A"
+    },
+    {
+      "figma": "color/status/warning",
+      "collection": "Shared / Primitives",
+      "css": "--color-status-warning",
+      "web": "var(--color-status-warning)",
+      "emittedIn": ":root",
+      "valueExample": "#9A6B00"
+    },
+    {
+      "figma": "color/status/warning-dark",
+      "collection": "Shared / Primitives",
+      "css": "--color-status-warning-dark",
+      "web": "var(--color-status-warning-dark)",
+      "emittedIn": ":root",
+      "valueExample": "#D9A400"
+    },
+    {
+      "figma": "font/family/TD/primary",
+      "collection": "Shared / Primitives",
+      "css": "--font-family-TD-primary",
+      "web": "var(--font-family-TD-primary)",
+      "emittedIn": ":root",
+      "valueExample": "\"Superclarendon\""
+    },
+    {
+      "figma": "font/family/TD/secondary",
+      "collection": "Shared / Primitives",
+      "css": "--font-family-TD-secondary",
+      "web": "var(--font-family-TD-secondary)",
+      "emittedIn": ":root",
+      "valueExample": "\"CircularXX TT\""
+    },
+    {
+      "figma": "font/leading/normal",
+      "collection": "Shared / Primitives",
+      "css": "--font-leading-normal",
+      "web": "var(--font-leading-normal)",
+      "emittedIn": ":root",
+      "valueExample": "1.5"
+    },
+    {
+      "figma": "font/leading/relaxed",
+      "collection": "Shared / Primitives",
+      "css": "--font-leading-relaxed",
+      "web": "var(--font-leading-relaxed)",
+      "emittedIn": ":root",
+      "valueExample": "1.4"
+    },
+    {
+      "figma": "font/leading/snug",
+      "collection": "Shared / Primitives",
+      "css": "--font-leading-snug",
+      "web": "var(--font-leading-snug)",
+      "emittedIn": ":root",
+      "valueExample": "1.25"
+    },
+    {
+      "figma": "font/leading/tight",
+      "collection": "Shared / Primitives",
+      "css": "--font-leading-tight",
+      "web": "var(--font-leading-tight)",
+      "emittedIn": ":root",
+      "valueExample": "1.1"
+    },
+    {
+      "figma": "font/leading/title",
+      "collection": "Shared / Primitives",
+      "css": "--font-leading-title",
+      "web": "var(--font-leading-title)",
+      "emittedIn": ":root",
+      "valueExample": "1.3"
+    },
+    {
+      "figma": "font/size/2xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-2xl",
+      "web": "var(--font-size-2xl)",
+      "emittedIn": ":root",
+      "valueExample": "1.875rem"
+    },
+    {
+      "figma": "font/size/3xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-3xl",
+      "web": "var(--font-size-3xl)",
+      "emittedIn": ":root",
+      "valueExample": "2.25rem"
+    },
+    {
+      "figma": "font/size/4xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-4xl",
+      "web": "var(--font-size-4xl)",
+      "emittedIn": ":root",
+      "valueExample": "3rem"
+    },
+    {
+      "figma": "font/size/5xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-5xl",
+      "web": "var(--font-size-5xl)",
+      "emittedIn": ":root",
+      "valueExample": "3.75rem"
+    },
+    {
+      "figma": "font/size/6xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-6xl",
+      "web": "var(--font-size-6xl)",
+      "emittedIn": ":root",
+      "valueExample": "4.5rem"
+    },
+    {
+      "figma": "font/size/7xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-7xl",
+      "web": "var(--font-size-7xl)",
+      "emittedIn": ":root",
+      "valueExample": "6rem"
+    },
+    {
+      "figma": "font/size/base",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-base",
+      "web": "var(--font-size-base)",
+      "emittedIn": ":root",
+      "valueExample": "1rem"
+    },
+    {
+      "figma": "font/size/lg",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-lg",
+      "web": "var(--font-size-lg)",
+      "emittedIn": ":root",
+      "valueExample": "1.25rem"
+    },
+    {
+      "figma": "font/size/md",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-md",
+      "web": "var(--font-size-md)",
+      "emittedIn": ":root",
+      "valueExample": "1.125rem"
+    },
+    {
+      "figma": "font/size/sm",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-sm",
+      "web": "var(--font-size-sm)",
+      "emittedIn": ":root",
+      "valueExample": "0.875rem"
+    },
+    {
+      "figma": "font/size/xl",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-xl",
+      "web": "var(--font-size-xl)",
+      "emittedIn": ":root",
+      "valueExample": "1.5rem"
+    },
+    {
+      "figma": "font/size/xs",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-xs",
+      "web": "var(--font-size-xs)",
+      "emittedIn": ":root",
+      "valueExample": "0.75rem"
+    },
+    {
+      "figma": "font/tracking/compressed",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-compressed",
+      "web": "var(--font-tracking-compressed)",
+      "emittedIn": ":root",
+      "valueExample": "-5px"
+    },
+    {
+      "figma": "font/tracking/fine",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-fine",
+      "web": "var(--font-tracking-fine)",
+      "emittedIn": ":root",
+      "valueExample": "-0.5px"
+    },
+    {
+      "figma": "font/tracking/normal",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-normal",
+      "web": "var(--font-tracking-normal)",
+      "emittedIn": ":root",
+      "valueExample": "0px"
+    },
+    {
+      "figma": "font/tracking/snug",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-snug",
+      "web": "var(--font-tracking-snug)",
+      "emittedIn": ":root",
+      "valueExample": "-1px"
+    },
+    {
+      "figma": "font/tracking/tight",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-tight",
+      "web": "var(--font-tracking-tight)",
+      "emittedIn": ":root",
+      "valueExample": "-2px"
+    },
+    {
+      "figma": "font/tracking/tighter",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-tighter",
+      "web": "var(--font-tracking-tighter)",
+      "emittedIn": ":root",
+      "valueExample": "-3px"
+    },
+    {
+      "figma": "font/tracking/tightest",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-tightest",
+      "web": "var(--font-tracking-tightest)",
+      "emittedIn": ":root",
+      "valueExample": "-4px"
+    },
+    {
+      "figma": "font/tracking/wide",
+      "collection": "Shared / Primitives",
+      "css": "--font-tracking-wide",
+      "web": "var(--font-tracking-wide)",
+      "emittedIn": ":root",
+      "valueExample": "-1px"
+    },
+    {
+      "figma": "motion/duration-fast",
+      "collection": "Shared / Primitives",
+      "css": "--motion-duration-fast",
+      "web": "var(--motion-duration-fast)",
+      "emittedIn": ":root",
+      "valueExample": "0ms"
+    },
+    {
+      "figma": "motion/duration-normal",
+      "collection": "Shared / Primitives",
+      "css": "--motion-duration-normal",
+      "web": "var(--motion-duration-normal)",
+      "emittedIn": ":root",
+      "valueExample": "0ms"
+    },
+    {
+      "figma": "motion/duration-slow",
+      "collection": "Shared / Primitives",
+      "css": "--motion-duration-slow",
+      "web": "var(--motion-duration-slow)",
+      "emittedIn": ":root",
+      "valueExample": "0ms"
+    },
+    {
+      "figma": "motion/easing-standard",
+      "collection": "Shared / Primitives",
+      "css": "--motion-easing-standard",
+      "web": "var(--motion-easing-standard)",
+      "emittedIn": ":root",
+      "valueExample": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    {
+      "figma": "radius/full",
+      "collection": "Shared / Primitives",
+      "css": "--radius-full",
+      "web": "var(--radius-full)",
+      "emittedIn": ":root",
+      "valueExample": "9999px"
+    },
+    {
+      "figma": "radius/lg",
+      "collection": "Shared / Primitives",
+      "css": "--radius-lg",
+      "web": "var(--radius-lg)",
+      "emittedIn": ":root",
+      "valueExample": "16px"
+    },
+    {
+      "figma": "radius/md",
+      "collection": "Shared / Primitives",
+      "css": "--radius-md",
+      "web": "var(--radius-md)",
+      "emittedIn": ":root",
+      "valueExample": "8px"
+    },
+    {
+      "figma": "radius/sm",
+      "collection": "Shared / Primitives",
+      "css": "--radius-sm",
+      "web": "var(--radius-sm)",
+      "emittedIn": ":root",
+      "valueExample": "4px"
+    },
+    {
+      "figma": "size/control-lg",
+      "collection": "Shared / Primitives",
+      "css": "--size-control-lg",
+      "web": "var(--size-control-lg)",
+      "emittedIn": ":root",
+      "valueExample": "48px"
+    },
+    {
+      "figma": "size/control-md",
+      "collection": "Shared / Primitives",
+      "css": "--size-control-md",
+      "web": "var(--size-control-md)",
+      "emittedIn": ":root",
+      "valueExample": "40px"
+    },
+    {
+      "figma": "size/control-sm",
+      "collection": "Shared / Primitives",
+      "css": "--size-control-sm",
+      "web": "var(--size-control-sm)",
+      "emittedIn": ":root",
+      "valueExample": "32px"
+    },
+    {
+      "figma": "size/control-xs",
+      "collection": "Shared / Primitives",
+      "css": "--size-control-xs",
+      "web": "var(--size-control-xs)",
+      "emittedIn": ":root",
+      "valueExample": "24px"
+    },
+    {
+      "figma": "stroke/0-5",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-0-5",
+      "web": "var(--stroke-0-5)",
+      "emittedIn": ":root",
+      "valueExample": "0.5px"
+    },
+    {
+      "figma": "stroke/1",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-1",
+      "web": "var(--stroke-1)",
+      "emittedIn": ":root",
+      "valueExample": "1px"
+    },
+    {
+      "figma": "stroke/1-5",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-1-5",
+      "web": "var(--stroke-1-5)",
+      "emittedIn": ":root",
+      "valueExample": "1.5px"
+    },
+    {
+      "figma": "stroke/2",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-2",
+      "web": "var(--stroke-2)",
+      "emittedIn": ":root",
+      "valueExample": "2px"
+    },
+    {
+      "figma": "stroke/2-5",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-2-5",
+      "web": "var(--stroke-2-5)",
+      "emittedIn": ":root",
+      "valueExample": "2.5px"
+    },
+    {
+      "figma": "stroke/3",
+      "collection": "Shared / Primitives",
+      "css": "--stroke-3",
+      "web": "var(--stroke-3)",
+      "emittedIn": ":root",
+      "valueExample": "3px"
+    },
+    {
+      "figma": "z/base",
+      "collection": "Shared / Primitives",
+      "css": "--z-base",
+      "web": "var(--z-base)",
+      "emittedIn": ":root",
+      "valueExample": "0"
+    },
+    {
+      "figma": "z/dropdown",
+      "collection": "Shared / Primitives",
+      "css": "--z-dropdown",
+      "web": "var(--z-dropdown)",
+      "emittedIn": ":root",
+      "valueExample": "100"
+    },
+    {
+      "figma": "z/modal",
+      "collection": "Shared / Primitives",
+      "css": "--z-modal",
+      "web": "var(--z-modal)",
+      "emittedIn": ":root",
+      "valueExample": "300"
+    },
+    {
+      "figma": "z/sticky",
+      "collection": "Shared / Primitives",
+      "css": "--z-sticky",
+      "web": "var(--z-sticky)",
+      "emittedIn": ":root",
+      "valueExample": "200"
+    },
+    {
+      "figma": "z/toast",
+      "collection": "Shared / Primitives",
+      "css": "--z-toast",
+      "web": "var(--z-toast)",
+      "emittedIn": ":root",
+      "valueExample": "400"
+    },
+    {
+      "figma": "space-2xl",
+      "collection": "Spacing",
+      "css": "--space-2xl",
+      "web": "var(--space-2xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "32px"
+    },
+    {
+      "figma": "space-3xl",
+      "collection": "Spacing",
+      "css": "--space-3xl",
+      "web": "var(--space-3xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "40px"
+    },
+    {
+      "figma": "space-4xl",
+      "collection": "Spacing",
+      "css": "--space-4xl",
+      "web": "var(--space-4xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "56px"
+    },
+    {
+      "figma": "space-5xl",
+      "collection": "Spacing",
+      "css": "--space-48",
+      "web": "var(--space-48)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "48px"
+    },
+    {
+      "figma": "space-6xl",
+      "collection": "Spacing",
+      "css": "--space-6xl",
+      "web": "var(--space-6xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "88px"
+    },
+    {
+      "figma": "space-7xl",
+      "collection": "Spacing",
+      "css": "--space-7xl",
+      "web": "var(--space-7xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "112px"
+    },
+    {
+      "figma": "space-8xl",
+      "collection": "Spacing",
+      "css": "--space-8xl",
+      "web": "var(--space-8xl)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "144px"
+    },
+    {
+      "figma": "space-lg",
+      "collection": "Spacing",
+      "css": "--space-lg",
+      "web": "var(--space-lg)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "16px"
+    },
+    {
+      "figma": "space-md",
+      "collection": "Spacing",
+      "css": "--space-md",
+      "web": "var(--space-md)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "12px"
+    },
+    {
+      "figma": "space-sm",
+      "collection": "Spacing",
+      "css": "--space-sm",
+      "web": "var(--space-sm)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "8px"
+    },
+    {
+      "figma": "space-xl",
+      "collection": "Spacing",
+      "css": "--space-20",
+      "web": "var(--space-20)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "20px"
+    },
+    {
+      "figma": "space-xs",
+      "collection": "Spacing",
+      "css": "--space-xs",
+      "web": "var(--space-xs)",
+      "emittedIn": ".theme-TD",
+      "valueExample": "4px"
+    }
+  ],
+  "notEmittedByGenerateCssVars": [
+    {
+      "figma": "bp/*",
+      "css": null,
+      "note": "Referens only (generated/breakpoints.mjs). CSS custom properties cannot be used in @media."
+    },
+    {
+      "figma": "font/style/*",
+      "css": null,
+      "note": "Figma STRING (Regular/Book/Bold); CSS uses --font-weight-*"
+    }
+  ],
+  "checks": {
+    "figmaWithoutCss": [
+      {
+        "figma": "bp/lg",
+        "collection": "Shared / Primitives",
+        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+      },
+      {
+        "figma": "bp/md",
+        "collection": "Shared / Primitives",
+        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+      },
+      {
+        "figma": "bp/sm",
+        "collection": "Shared / Primitives",
+        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+      },
+      {
+        "figma": "font/style/primary/bold",
+        "collection": "Shared / Primitives",
+        "reason": "Figma STRING style name; CSS uses --font-weight-*"
+      },
+      {
+        "figma": "font/style/primary/regular",
+        "collection": "Shared / Primitives",
+        "reason": "Figma STRING style name; CSS uses --font-weight-*"
+      },
+      {
+        "figma": "font/style/secondary/bold",
+        "collection": "Shared / Primitives",
+        "reason": "Figma STRING style name; CSS uses --font-weight-*"
+      },
+      {
+        "figma": "font/style/secondary/regular",
+        "collection": "Shared / Primitives",
+        "reason": "Figma STRING style name; CSS uses --font-weight-*"
+      }
+    ],
+    "unexpectedFigmaWithoutCss": [],
+    "radiusXsRemovedFromTokens": true,
+    "radiusXsRemovedFromFigma": true
+  }
+}

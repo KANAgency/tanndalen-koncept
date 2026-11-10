@@ -1,0 +1,13 @@
+{
+  "name": "@tanndalen-orsa/design-system",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:css": "node scripts/generate-css-vars.mjs",
+    "generate:typography": "node scripts/generate-typography-css.mjs",
+    "verify:font-size-rem": "node scripts/verify-font-size-rem.mjs",
+    "tokens:css": "npm run generate:css && npm run generate:typography && npm run verify:font-size-rem",
+    "demo:export": "npm run tokens:css && node scripts/export-testing-demo.mjs",
+    "figma:bind-typography": "npm run build --prefix figma-plugins/bind-typography-variables"
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "$description": "ENDA källan för primitiva värden — färg, typografi, spacing, radii, stroke, breakpoints och z-index.",
+  "$naming": "Varumärkesnycklar OG och TD. Delad typografi-skala (font.size/weight/leading) utan varumärkesprefix. Spacing använder samma abstrakta stegnamn som font/size (xs–8xl) för båda varumärkena, med OG/TD-värden per steg (Figma-modes) — inte numeriska Tailwind-steg, eftersom de skulle ljuga om TD:s px.",
+
+  "color": {
+    "OG": {
+      "$palette": "Beslutad 2026-11-10. Sex brandfärger + rollprimitiver. Neutrals/säsong/difficulty = TD-värden tills vidare. Hover/active/tonal/cta-on-dark fortfarande öppna.",
+      "off-white": { "value": "#F5EEE5", "note": "Brand — day/rollbas." },
+      "signal-orange": { "value": "#E74011", "note": "Brand — cta + accent." },
+      "orsa-black": { "value": "#3C3C3B", "note": "Brand — night/rollbas." },
+      "black": { "value": "#000000" },
+      "white": { "value": "#FFFFFF", "note": "Brand — snow/rollbas." },
+      "dark-green": { "value": "#003E3A", "note": "Brand — ingen rollmappning." },
+      "night": { "value": "#3C3C3B", "note": "Roll = orsa-black." },
+      "day": { "value": "#F5EEE5", "note": "Roll = off-white." },
+      "snow": { "value": "#FFFFFF", "note": "Roll = white." },
+      "cta": { "value": "#E74011", "note": "Roll = signal-orange." },
+      "accent": { "value": "#E74011", "note": "Roll = signal-orange." },
+      "neutral-highlight": { "value": "#F5F4F2", "note": "Samma som TD tills vidare." },
+      "neutral-subtlest": { "value": "#E0DFDE", "note": "Samma som TD tills vidare." },
+      "neutral-light": { "value": "#D7D7D7", "note": "Samma som TD tills vidare." },
+      "neutral-subtle": { "value": "#C3C1C0", "note": "Samma som TD tills vidare." },
+      "neutral-muted": { "value": "#A5A4A4", "note": "Samma som TD tills vidare." },
+      "neutral": { "value": "#686868", "note": "Samma som TD tills vidare." },
+      "neutral-strong": { "value": "#4C4D4F", "note": "Samma som TD tills vidare." },
+      "season-spring": { "value": "#F6E0A2", "note": "Samma som TD tills vidare." },
+      "season-summer": { "value": "#1B4021", "note": "Samma som TD tills vidare." },
+      "season-autumn": { "value": "#3C1F17", "note": "Samma som TD tills vidare." },
+      "season-winter": { "value": "#A1B5BA", "note": "Samma som TD tills vidare." },
+      "difficulty-green": { "value": "#3A9A3A", "note": "Samma som TD/shared difficulty tills vidare." },
+      "difficulty-blue": { "value": "#1F67A6", "note": "Samma som TD/shared difficulty tills vidare." },
+      "difficulty-red": { "value": "#E31E24", "note": "Samma som TD/shared difficulty tills vidare." },
+      "difficulty-black": { "value": "#000000", "note": "Samma som TD/shared difficulty tills vidare." },
+      "difficulty-orange": { "value": "#F39200", "note": "Samma som TD/shared difficulty tills vidare." },
+      "signal-orange-hover": { "value": "#F3582B", "note": "PLACEHOLDER, not decided. Bygger på signal-orange." },
+      "signal-orange-active": { "value": "#D23B0F", "note": "PLACEHOLDER, not decided. Bygger på signal-orange." },
+      "cta-on-dark": {
+        "value": "#F59678",
+        "note": "PLACEHOLDER, not decided. Bygger på signal-orange/cta."
+      },
+      "dark-green-hover": { "value": "#0F524D", "note": "PLACEHOLDER, not decided. Bygger på dark-green." },
+      "dark-green-active": { "value": "#002D2A", "note": "PLACEHOLDER, not decided. Bygger på dark-green." },
+      "off-white-hover": { "value": "#F9F6F0", "note": "PLACEHOLDER, not decided. Bygger på off-white." },
+      "off-white-active": { "value": "#EBE3D5", "note": "PLACEHOLDER, not decided. Bygger på off-white." },
+      "off-white-link-active": { "value": "#D9D1C7", "note": "PLACEHOLDER, not decided. Bygger på off-white." },
+      "tonal": { "value": "#E1E1D7", "note": "PLACEHOLDER, not decided. Bygger på off-white." },
+      "tonal-hover": { "value": "#D5D5CB", "note": "PLACEHOLDER, not decided. Bygger på tonal." },
+      "tonal-active": { "value": "#C9C9BF", "note": "PLACEHOLDER, not decided. Bygger på tonal." }
+    },
+    "TD": {
+      "$naming": "Figma-variabler är engelska (day/night/snow/season-*). Paint styles behåller svenska namn (TD/dag …) via plugin-alias. Hex oförändrade.",
+      "night": { "value": "#24272A", "note": "F.d. natt. Figma color/TD/night." },
+      "day": { "value": "#EBE8E5", "note": "F.d. dag. Figma color/TD/day." },
+      "snow": { "value": "#FFFFFF", "note": "F.d. sno. Figma color/TD/snow." },
+      "accent": { "value": "#BF6A15" },
+      "cta": { "value": "#AE6113" },
+      "season-spring": { "value": "#F6E0A2", "note": "F.d. sasong-var." },
+      "season-summer": { "value": "#1B4021", "note": "F.d. sasong-sommar." },
+      "season-autumn": { "value": "#3C1F17", "note": "F.d. sasong-host." },
+      "season-winter": {
+        "value": "#A1B5BA",
+        "note": "F.d. sasong-vinter. Ligger ljushetsmässigt nära neutral-muted men får INTE användas som UI-neutral."
+      },
+      "$neutral-scale": {
+        "note": "Highlight → subtlest → light → subtle → muted → neutral → strong (ljus→mörk). Delade komponenter får INTE referera highlight/subtlest/light/muted (TD-only).",
+        "contrast-bg": "day #EBE8E5",
+        "method": "WCAG 2 relative luminance, uppmätt mot day."
+      },
+      "neutral-highlight": {
+        "value": "#F5F4F2",
+        "note": "Ljusaste neutralsteget (ovan subtlest). Figma Shared color/neutral-highlight. TD-only."
+      },
+      "neutral-subtle": {
+        "value": "#C3C1C0",
+        "mix": "20% night i day",
+        "contrast-on-day": "1.47:1",
+        "usage": "Dekorativ. Klarar inte AA för text i någon storlek."
+      },
+      "neutral-muted": {
+        "value": "#A5A4A4",
+        "mix": "35% night i day",
+        "contrast-on-day": "2.04:1",
+        "usage": "Dekorativ. TD-only — inte i delade komponenter. Klarar inte AA för text.",
+        "shared-components": "FÖRBJUDEN. Bind per-mode bara subtle/neutral/strong."
+      },
+      "neutral": {
+        "value": "#686868",
+        "mix": "Justerad till #686868 (tidigare 51.5% night i day / #858585)",
+        "contrast-on-day": "4.57:1",
+        "usage": "Text, ikoner och grafik mot day. Klarar WCAG AA för brödtext (4.5:1)."
+      },
+      "neutral-strong": {
+        "value": "#4C4D4F",
+        "mix": "80% night i day (ren mix #4C4E4F).",
+        "contrast-on-day": "6.93:1",
+        "usage": "Enda steget som klarar WCAG AA för brödtext (4.5:1) mot day."
+      },
+      "neutral-subtlest": {
+        "value": "#E0DFDE",
+        "note": "Nästa steg under highlight. Figma Shared color/neutral-subtlest 2026-10-02. TD-only."
+      },
+      "neutral-light": {
+        "value": "#D7D7D7",
+        "note": "Figma Shared color/neutral-light 2026-10-21. TD-only."
+      },
+      "icon-highlight": { "value": "#F6B73C", "note": "Figma Shared color/icon-highlight." },
+      "icon-on-dark": { "value": "#F4F1EA", "note": "Figma Shared color/icon-on-dark." }
+    },
+    "difficulty": {
+      "$figma": "Shared / Primitives difficulty/{black|blue|green|orange|red}.",
+      "black": { "value": "#000000" },
+      "blue": { "value": "#1F67A6" },
+      "green": { "value": "#3A9A3A" },
+      "orange": { "value": "#F39200" },
+      "red": { "value": "#E31E24" }
+    },
+    "shared": {
+      "$note": "Systemfärger — identiska för OG och TD. Inte varumärkesfärger. Delade komponenter binder hit, inte till brand-hex.",
+      "error": {
+        "value": "#C42B2B",
+        "contrast-on-error-with-white": "5.63:1",
+        "usage": "Destruktiv knappfyllning, felstatus. Samma hex i båda varumärkena."
+      },
+      "on-error": {
+        "value": "#FFFFFF",
+        "note": "Text/ikon på error. Egen roll — inte alias mot OG/white eller TD/snow, även om hex är densamma.",
+        "contrast-on-error": "5.63:1"
+      }
+    },
+    "status": {
+      "$figma": "Shared / Primitives COLOR color/status/{success|success-dark|warning|warning-dark|error-dark}. Speglad Figma TD 2026-10-02.",
+      "$note": "Statusprimitiver (ej varumärkespalett). Semantic status-* aliasar hit eller till neutral/error.",
+      "success": { "value": "#2E7D46" },
+      "success-dark": { "value": "#4CAF6A" },
+      "warning": { "value": "#9A6B00" },
+      "warning-dark": { "value": "#D9A400" },
+      "error-dark": { "value": "#EF6B63", "note": "Ljusare error för mörk yta. Light error = color.shared.error." }
+    }
+  },
+
+  "opacity": {
+    "$figma": "TD Semantic FLOAT opacity/disabled, scope OPACITY. Figma lagrar procent (40); CSS emitterar decimal (0.4). Generell regel: scope OPACITY → value/100.",
+    "disabled": {
+      "value": 40,
+      "scope": "OPACITY",
+      "note": "Figma = 40 (%). CSS --opacity-disabled: 0.4. Disabled-tillstånd för knappar/kontroller."
+    }
+  },
+
+  "size": {
+    "$figma": "Shared / Primitives FLOAT size/control-{lg|md|sm|xs}. Scope WIDTH_HEIGHT.",
+    "$usage": "Kontrollhöjd/-bredd: knappar, paginering, chips, avatar.",
+    "control-lg": { "value": 48, "note": "Large controls / knappar" },
+    "control-md": { "value": 40, "note": "Medium controls" },
+    "control-sm": { "value": 32, "note": "Small controls / chips" },
+    "control-xs": { "value": 24, "note": "Extra small / avatar sm" }
+  },
+
+  "font": {
+    "family": {
+      "OG": {
+        "primary": { "value": "Literata", "role": "rubrik/display", "status": "Låst — redan i produktion" },
+        "secondary": { "value": "Radio Canada Big", "role": "bröd/UI", "status": "Låst — redan i produktion" }
+      },
+      "TD": {
+        "primary": {
+          "value": "Superclarendon",
+          "figmaFamily": "Superclarendon",
+          "role": "rubrik/display",
+          "status": "Låst i Figma — Regular + Bold",
+          "note": "Figma family = Superclarendon. Endast Regular och Bold."
+        },
+        "secondary": {
+          "value": "CircularXX TT",
+          "figmaFamily": "CircularXX TT",
+          "role": "bröd/UI",
+          "status": "Låst i Figma — Regular + Bold",
+          "note": "Figma family = CircularXX TT. Vikter: Bold (700) + Book (450). Regular (400) = Superclarendon Regular. Plugin: weight book → Book."
+        },
+        "primary-fallback": { "value": "Bitter", "role": "reserv om Superclarendon inte fungerar i produktion" }
+      }
+    },
+    "size": {
+      "xs": 12,
+      "sm": 14,
+      "base": 16,
+      "md": 18,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 30,
+      "3xl": 36,
+      "4xl": 48,
+      "5xl": 60,
+      "6xl": 72,
+      "7xl": 96,
+      "32": 32,
+      "56": 56
+    },
+    "weight": { "light": 300, "regular": 400, "book": 450, "medium": 500, "semibold": 600, "bold": 700, "black": 900 },
+    "leading": {
+      "$scale-note": "Line-height (CSS line-height). Nycklar tight/snug/relaxed/normal/title gäller endast leading — inte letter-spacing.",
+      "tight": 1.1,
+      "snug": 1.25,
+      "title": 1.3,
+      "relaxed": 1.4,
+      "normal": 1.5
+    },
+    "tracking": {
+      "$scale-note": "Letter-spacing i px (CSS letter-spacing). Delar ord tight/snug/relaxed med leading-skalan men är en separat skala med egna värden — förvirra dem inte.",
+      "normal": { "value": 0, "note": "Brödtext och UI" },
+      "wide": { "value": -1, "note": "OG heading-3 och heading-4 — letter-spacing -1px" },
+      "fine": { "value": -0.5, "note": "OG/cta och OG/cta-sm — mellan 0 och snug" },
+      "snug": { "value": -1, "note": "Mindre rubriker (t.ex. h4)" },
+      "tight": { "value": -2, "note": "Mellanrubriker" },
+      "tighter": { "value": -3, "note": "Största rubriker" },
+      "tightest": { "value": -4, "note": "Hero / display (sparsamt)" },
+      "compressed": { "value": -5, "note": "Tätare än tightest — extra stora display-rader" }
+    },
+    "$leading-figma-note": "font/leading/* i Figma (110/125/140/150) = referens endast. Text styles: lineHeight som PERCENT i plugin — bind inte lineHeight till FLOAT-variabel.",
+    "$tracking-figma-note": "font/tracking/* = FLOAT px i Figma (binder letterSpacing). font/weight/* skapas inte i Figma — vikt via font/style/*; numerisk weight endast JSON/CSS."
+  },
+
+  "space": {
+    "$figma": "Collection Spacing, modes OG/TD, FLOAT space-{xs|sm|…|8xl} (bindestreck). Inte Shared / Primitives. bp/radius/z ligger bara i Shared med slash — hyphen-dubbletter i Spacing borttagna 2026-09-23 (se FIGMA-PRAXIS.md).",
+    "$rationale": "xs–lg identiska. Från 2026-11-09 även xl–8xl samma i OG och TD (brand-neutral layoutrytm för OG-skalet). Tidigare OG-tätare värden (20/24/32/40/48/64/80/96) ligger kvar i Figma OG-läge tills code syntax beslutas — se beslut.md.",
+    "xs": { "OG": 4, "TD": 4 },
+    "sm": { "OG": 8, "TD": 8 },
+    "md": { "OG": 12, "TD": 12 },
+    "lg": { "OG": 16, "TD": 16 },
+    "xl": { "OG": 24, "TD": 24 },
+    "2xl": { "OG": 32, "TD": 32 },
+    "3xl": { "OG": 40, "TD": 40 },
+    "4xl": { "OG": 56, "TD": 56 },
+    "5xl": { "OG": 64, "TD": 64 },
+    "6xl": { "OG": 88, "TD": 88 },
+    "7xl": { "OG": 112, "TD": 112 },
+    "8xl": { "OG": 144, "TD": 144 },
+    "20": { "OG": 20, "TD": 20 },
+    "48": { "OG": 48, "TD": 48 },
+    "none": { "OG": 0, "TD": 0 }
+  },
+
+  "radius": {
+    "$figma": "Shared / Primitives, FLOAT radius/{none|sm|md|lg|full|component-set}. radius/xs borttagen 2026-10-02.",
+    "none": 0,
+    "sm": 4,
+    "md": 8,
+    "lg": 16,
+    "full": 9999,
+    "component-set": 5
+  },
+
+  "motion": {
+    "$figma": "Shared / Primitives 2026-10-21. duration-fast 150, duration-normal 300, duration-slow 420, easing-standard, easing-out-soft.",
+    "duration-fast": { "value": 150 },
+    "duration-normal": { "value": 300 },
+    "duration-slow": { "value": 420 },
+    "easing-standard": { "value": "cubic-bezier(0.2, 0, 0, 1)" },
+    "easing-out-soft": { "value": "cubic-bezier(0.22, 1, 0.36, 1)" }
+  },
+
+  "stroke": {
+    "$figma": "Shared / Primitives, FLOAT stroke/{0-5|1|1-5|2|2-5|3} (punkt i nyckeln blir bindestreck i Figma). Scope STROKE_FLOAT.",
+    "$note": "Linjetjocklek i px. Nycklar är värdet (inte xs/sm) så 0.5 och 1.5 inte kolliderar med en abstrakt skala.",
+    "0.5": 0.5,
+    "1": 1,
+    "1.5": 1.5,
+    "2": 2,
+    "2.5": 2.5,
+    "3": 3
+  },
+
+  "breakpoint": {
+    "$figma": "Shared / Primitives, FLOAT bp/{sm|md|lg}. Delat.",
+    "$mobile-first": "Default är mobile-first, inte ett val. 78 % av trafiken är mobil; mobilkonverteringen är 3× sämre än desktop. Basvärden i alla komponenter = mobila. Breakpoints lägger bara till utrymme uppåt.",
+    "$container-queries": "Komponentspecifika behov: container queries, inte fler globala breakpoints.",
+    "sm": { "value": 640, "purpose": "En kolumn → två kolumner" },
+    "md": { "value": 1024, "purpose": "Hamburgare → horisontell nav, tre kolumner möjligt" },
+    "lg": { "value": 1280, "purpose": "Max-bredd/centrerat innehåll, hindrar för långa radlängder" }
+  },
+
+  "z": {
+    "$figma": "Shared / Primitives, FLOAT z/{base|dropdown|sticky|modal|toast}. Delat.",
+    "$note": "Lucka på 100 mellan nivåer så något kan skjutas in utan omräkning. Ingen komponent får hårdkoda z-index — alltid via token.",
+    "base": 0,
+    "dropdown": 100,
+    "sticky": 200,
+    "modal": 300,
+    "toast": 400
+  },
+
+  "$scale-note": "Fast px-skala (xs 12 → 7xl 96). Se tabell i typografi-docs; delad OG/TD.",
+  "$opsz-note": "Literata har opsz-axel (7-72). Sätt font-optical-sizing: auto i CSS.",
+  "$next-steps": ["shadow/elevation sm/md/lg (första kortet/dropdownen)"]
+}

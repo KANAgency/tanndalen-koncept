@@ -1,0 +1,67 @@
+{
+  "dumpedAt": "2026-10-02T12:39:44.420Z",
+  "fileKey": "HW7ZST3CotlOepEcjNI5LC",
+  "brand": "TD",
+  "syncDirection": "Figma → tokens (TD-only, no push)",
+  "counts": {
+    "variables": 126,
+    "textStyles": 22,
+    "paintStyles": 13,
+    "componentSets": 21,
+    "standaloneComponents": 19
+  },
+  "collections": [
+    { "name": "Shared / Primitives", "modes": ["Value"], "varCount": 78 },
+    { "name": "Semantic", "modes": ["Default"], "varCount": 36 },
+    { "name": "Spacing", "modes": ["Default"], "varCount": 12 }
+  ],
+  "diffVsPreviousDump": {
+    "previous": "tokens/figma-dump-2026-10-02-td.json (earlier same-day sync)",
+    "variables": { "before": 108, "after": 126, "note": "Previous dump was condensed; live count was already ~126. Net same session: radius/xs removed; font/leading/title present." },
+    "paintStyles": { "before": 14, "after": 13, "delta": "-1 neutral-subtlest paint style (variable kvar)" },
+    "componentSets": { "before": 20, "after": 21, "delta": "+1 Status" },
+    "textStyles": { "before": 22, "after": 22 },
+    "notable": [
+      "opacity/disabled = 40 (OPACITY scope, percent) — CSS 0.4",
+      "color/frost|frost-hover|frost-active = rgba snow @ 12/20/28 %, not aliases",
+      "radius/xs borttagen i Figma",
+      "font/leading/title tillagd i Shared",
+      "Komponentbeskrivningar ifyllda på alla 21 sets + ikoner",
+      "Ny komponent Status"
+    ]
+  },
+  "focus": {
+    "opacity/disabled": { "figma": 40, "scope": "OPACITY", "css": 0.4 },
+    "color/frost": { "rgba": "rgba(255,255,255,0.12)", "alias": false },
+    "color/frost-hover": { "rgba": "rgba(255,255,255,0.2)", "alias": false },
+    "color/frost-active": { "rgba": "rgba(255,255,255,0.28)", "alias": false }
+  },
+  "paintStyles": [
+    "accent", "cta", "dag", "natt", "neutral", "neutral-muted",
+    "neutral-strong", "neutral-subtle", "sasong-host", "sasong-sommar",
+    "sasong-var", "sasong-vinter", "sno"
+  ],
+  "componentSets": [
+    "Avatar",
+    "Button / Destructive",
+    "Button / Primary",
+    "Button / Secondary",
+    "Button / Tertiary",
+    "Button / Text button",
+    "Chip / Filter",
+    "Chip / Tag",
+    "Divider",
+    "Form / Checkbox",
+    "Form / Dropdown",
+    "Form / Radio",
+    "Form / Text area",
+    "Form / Text field",
+    "Form / Toggle",
+    "Link / Inline",
+    "Link / Standalone",
+    "Logo",
+    "Pagination / Compact",
+    "Pagination / Numbered",
+    "Status"
+  ]
+}

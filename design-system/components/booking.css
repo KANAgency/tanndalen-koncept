@@ -1,0 +1,469 @@
+/* Booking. Mätt 2026-10-21.
+   Bar 420 px, radie 8. Stängd Full 81. Panel växer i höjd, 420 ms.
+   Kategoribyten tonar innehållet. Vald yta glider (72 + 2 px).
+   Teaserbildens hörn är 2 px i Figma. Teaserramen är 4 px. */
+
+.td-booking {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-booking-calendar-surface);
+}
+
+.td-booking-cats {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  height: 81px;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.td-booking-cats > button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+  height: 57px;
+  padding: 0 0 var(--space-xs);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.td-booking-cats > button:hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-TD-night);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.booking-icon-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 40px;
+}
+
+.booking-icon-slot img {
+  width: var(--space-2xl);
+  height: var(--space-2xl);
+}
+
+.booking-icon-slot--cykel svg {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 1023px) {
+  .td-booking {
+    position: fixed;
+    z-index: 20;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.td-booking-clip {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  transition: height var(--motion-duration-slow) var(--motion-easing-out-soft);
+}
+
+.td-booking-pane {
+  display: none;
+  box-sizing: border-box;
+  padding: 16px 16px 0;
+}
+
+.td-booking-pane.is-shown {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: td-booking-fade var(--motion-duration-normal) var(--motion-easing-out-soft);
+}
+
+@keyframes td-booking-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.td-field-group {
+  border-radius: var(--radius-sm);
+  background: var(--color-booking-calendar-surface);
+  overflow: hidden;
+}
+
+.td-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.td-field-label {
+  display: block;
+  color: var(--color-booking-calendar-muted);
+}
+
+.td-field-value {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-booking-calendar-muted);
+}
+
+.td-field.is-filled .td-field-value {
+  color: var(--color-booking-calendar-text);
+}
+
+.td-field:hover {
+  background: var(--color-booking-calendar-range);
+}
+
+.td-field-divider {
+  height: 1px;
+  margin: 0 16px;
+  border: 0;
+  background: var(--color-TD-neutral-subtlest);
+}
+
+.td-booking-search {
+  width: 100%;
+}
+
+.td-booking-search svg {
+  width: 16px;
+  height: 16px;
+}
+
+.td-booking-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0;
+}
+
+.td-booking-links a {
+  color: var(--color-TD-night);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.td-booking-teaser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 8px 12px 8px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-base);
+  color: inherit;
+  text-decoration: none;
+}
+
+.td-booking-teaser img {
+  width: 84px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex: none;
+}
+
+.td-booking-teaser strong,
+.td-booking-teaser span {
+  display: block;
+}
+
+.td-booking-teaser span {
+  color: var(--color-booking-calendar-muted);
+}
+
+.td-booking-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 57px;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-day);
+  transform: translateX(0);
+  transition: transform var(--motion-duration-slow) var(--motion-easing-out-soft);
+  pointer-events: none;
+}
+
+.td-booking-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(36 39 42 / 0.4);
+}
+
+.td-booking-backdrop[hidden] {
+  display: none;
+}
+
+.td-guest-picker,
+.td-calendar {
+  position: fixed;
+  z-index: 41;
+  box-sizing: border-box;
+  background: var(--color-booking-calendar-surface);
+  color: var(--color-booking-calendar-text);
+}
+
+.td-guest-picker {
+  display: none;
+  width: 360px;
+  padding: 24px 16px;
+  border-radius: var(--radius-lg);
+}
+
+.td-guest-picker.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.td-guest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-TD-neutral-subtle);
+}
+
+.td-guest-row:last-of-type {
+  border-bottom: 0;
+}
+
+.td-guest-row p {
+  margin: 0;
+}
+
+.td-guest-hint {
+  color: var(--color-booking-calendar-muted);
+}
+
+.td-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.td-stepper button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-neutral-subtlest);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.td-stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.td-stepper output {
+  width: 24px;
+  text-align: center;
+}
+
+.td-calendar {
+  display: none;
+  width: 448px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.td-calendar.is-open,
+.td-guest-picker.is-open {
+  display: flex;
+  flex-direction: column;
+}
+
+.td-calendar-nav,
+.td-calendar-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.td-calendar-nav {
+  padding: 24px 16px 0;
+}
+
+.td-calendar-month {
+  padding: 16px 16px 24px;
+}
+
+.td-calendar-weekdays,
+.td-calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 48px);
+}
+
+.td-calendar-weekdays span {
+  height: 24px;
+  color: var(--color-booking-calendar-muted);
+  text-align: center;
+}
+
+.td-calendar-week button {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.td-calendar-week button[aria-pressed="true"],
+.td-calendar-week button[data-edge="start"],
+.td-calendar-week button[data-edge="end"] {
+  background: var(--color-booking-calendar-selected);
+  color: var(--color-booking-calendar-on-selected);
+  border-radius: var(--radius-full);
+}
+
+.td-calendar-week button[data-in-range="true"] {
+  background: var(--color-booking-calendar-range);
+  border-radius: var(--radius-none);
+}
+
+.td-calendar-week button:focus-visible {
+  outline: 2px solid var(--color-booking-calendar-focus);
+  outline-offset: -2px;
+}
+
+.td-calendar-foot {
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid var(--color-booking-calendar-range);
+}
+
+.td-picker-head {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  align-items: center;
+  height: 40px;
+  margin: 0 0 12px;
+}
+
+.td-picker-title {
+  margin: 0;
+  text-align: center;
+}
+
+.td-picker-back.td-button {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+  overflow: visible;
+}
+
+.td-picker-back.td-button::before {
+  border-radius: var(--radius-full);
+}
+
+.td-picker-back.td-button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+
+.td-guest-picker.is-open > .td-picker-head {
+  margin-bottom: -4px;
+}
+
+.td-calendar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-TD-night);
+  cursor: pointer;
+}
+
+.td-calendar-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.td-calendar-icon:hover {
+  background: color-mix(in srgb, var(--color-TD-night) 6%, transparent);
+}
+
+.td-calendar-dark .td-calendar-icon {
+  color: var(--color-TD-snow);
+}
+
+.td-calendar-icon:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.td-calendar-icon:disabled:hover {
+  background: transparent;
+}
+
+.td-calendar-foot [data-clear]:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 1023px) {
+  .td-guest-picker.is-open,
+  .td-calendar.is-open {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    max-height: 100%;
+    overflow: auto;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-none) var(--radius-none);
+  }
+
+  .td-guest-picker.is-open {
+    padding: 24px 24px calc(24px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-booking-pane.is-shown {
+    animation: none;
+  }
+}

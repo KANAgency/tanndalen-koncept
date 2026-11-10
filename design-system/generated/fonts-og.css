@@ -1,0 +1,21 @@
+/* OG webfonts — Literata + Radio Canada Big (variable).
+   Files: design-system/fonts/
+   Paths relative to generated/ → resolve as /og/ds/fonts/… and /ds/fonts/… */
+
+@font-face {
+  font-family: "Literata";
+  src: url("../fonts/Literata-Variable.ttf") format("truetype");
+  /* axis wght 200–900; instances ExtraLight…Black. No italic file. */
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Radio Canada Big";
+  src: url("../fonts/RadioCanadaBig-Variable.ttf") format("truetype");
+  /* axis wght 400–700; instances Regular…Bold. No italic file. */
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,95 @@
+/* Just nu / Data (1285:2766). 411 × 214, fast höjd, SPACE_BETWEEN.
+   Header Size=Large. Värdena ligger i botten.
+   Primär siffra UI/figure-lg, primär enhet UI/figure-unit-lg (24 px).
+   Sekundär siffra är samma 24 px-stil. Sekundär enhet UI/figure-unit-md.
+   Bildtext UI/body-sm. I Figma är färgen color/text-primary (Dark: vit). */
+
+.td-just-nu-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  box-sizing: border-box;
+  width: 411px;
+  height: 214px;
+  padding: var(--space-xl);
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+.td-just-nu-data-dark {
+  background: var(--color-TD-night);
+  color: var(--color-TD-snow);
+}
+
+.td-just-nu-data-values {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.td-just-nu-data-value {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.td-just-nu-data-value-secondary {
+  flex: 1;
+}
+
+.td-just-nu-data-figure {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.td-just-nu-data-figure > *:not(.td-status-dot) {
+  text-box: trim-both cap alphabetic;
+}
+
+@media (min-width: 1024px) {
+  .td-just-nu-data .td-ui-figure-lg:not(.is-word-primary) { font-size: var(--font-size-40); }
+}
+.td-just-nu-data .td-ui-figure-unit-lg { font-size: var(--font-size-xl); }
+.td-just-nu-data .td-ui-figure-unit-md { font-size: var(--font-size-base); }
+
+.td-just-nu-data-figure:has(.td-status-dot) {
+  align-items: center;
+  gap: 10px;
+}
+
+.td-just-nu-data .td-status-dot {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-neutral);
+  animation: none;
+  transform: none;
+}
+
+.td-just-nu-data .td-status-dot[data-tone="open"] { background: var(--color-status-success); }
+.td-just-nu-data .td-status-dot[data-tone="closed"] { background: var(--color-error); }
+.td-just-nu-data .td-status-dot[data-tone="blue"] { background: var(--color-difficulty-blue); }
+.td-just-nu-data .td-status-dot[data-tone="green"] { background: var(--color-difficulty-green); }
+.td-just-nu-data .td-status-dot[data-tone="red"] { background: var(--color-difficulty-red); }
+.td-just-nu-data .td-status-dot[data-tone="violet"],
+.td-just-nu-data .td-status-dot[data-tone="neutral"] { background: var(--color-TD-neutral); }
+
+.td-just-nu-data-unit:empty {
+  display: none;
+}
+
+.td-just-nu-data-caption {
+  color: var(--color-text-primary);
+}
+
+.td-just-nu-data-dark .td-just-nu-data-caption {
+  color: var(--color-TD-snow);
+}

@@ -1,0 +1,182 @@
+{
+  "$description": "Komponentanteckningar speglade från Figma TD (ej full tokenmodell).",
+  "$updated": "2026-10-02T12:39Z",
+  "$brand": "TD-only denna synk — OG-fil orörd.",
+  "$source": "Figma HW7ZST3CotlOepEcjNI5LC component set + icon descriptions",
+  "buttons": {
+    "arrow": {
+      "property": "Arrow (boolean)",
+      "icon": "Icon / Arrow right",
+      "appliesTo": [
+        "Button / Primary",
+        "Button / Secondary",
+        "Button / Tertiary",
+        "Button / Destructive",
+        "Button / Text button",
+        "Link / Standalone"
+      ],
+      "note": "Ersätter texten \"→\" — använd ikonkomponenten, inte glyph i label."
+    },
+    "primary": {
+      "description": "Den viktigaste handlingen på en yta, oftast bokning. Använd max en per vy; Arrow-egenskapen används för handlingar som leder vidare.",
+      "props": ["Label", "Arrow", "Type", "State", "Size", "Context"]
+    },
+    "secondary": {
+      "description": "Näst viktigaste handlingen, bredvid Primary eller fristående. Säsongsfill används endast i Light och säsongstematiserat innehåll, aldrig för bokning.",
+      "props": ["Label", "Arrow", "Fill", "Type", "State", "Size", "Context"],
+      "fillCta": {
+        "Light": "Tonal fyllning: neutral-subtle → neutral-muted vid hover/active",
+        "Dark": "Frost (color/frost → frost-hover / frost-active)"
+      },
+      "seasonFill": {
+        "note": "Säsongsfill (season-spring|summer|autumn|winter) finns bara på Secondary, bara Context=Light."
+      }
+    },
+    "tertiary": {
+      "description": "Fristående sekundär handling, till exempel Avbryt bredvid Spara. Använd inte för handlingar som ska konvertera.",
+      "props": ["Label", "Arrow", "State", "Size", "Context"]
+    },
+    "destructive": {
+      "description": "Endast för oåterkalleliga handlingar, till exempel att ta bort eller avboka. Använd inte för vanliga negativa eller sekundära handlingar.",
+      "context": ["Light", "Dark"],
+      "props": ["Label", "Arrow", "State", "Size", "Context"]
+    },
+    "textButton": {
+      "description": "Handling inbäddad i innehåll, till exempel Visa mer. Använd inte för viktiga handlingar på mobil eftersom affordance främst visas vid hover.",
+      "props": ["Label", "Arrow", "State", "Context"]
+    },
+    "sizes": {
+      "boundTo": ["size/control-lg", "size/control-md", "size/control-sm"],
+      "map": { "Large": "control-lg", "Medium": "control-md", "Small": "control-sm" }
+    }
+  },
+  "links": {
+    "inline": {
+      "description": "Länk i löpande text. Den ska alltid vara understruken; använd Standalone för fristående navigation.",
+      "props": ["Label", "State", "Context"]
+    },
+    "standalone": {
+      "description": "Fristående länk med pil som leder vidare. Välj denna i stället för knapp när handlingen är navigation, inte en åtgärd.",
+      "props": ["Label", "Arrow", "State", "Context"]
+    }
+  },
+  "form-controls": {
+    "note": "Etiketten ska alltid vara synlig; placeholder ersätter aldrig etiketten.",
+    "components": [
+      "Form / Text field",
+      "Form / Text area",
+      "Form / Dropdown",
+      "Form / Checkbox",
+      "Form / Radio",
+      "Form / Toggle"
+    ],
+    "textField": {
+      "description": "För kort textinmatning på en rad. Etiketten ska alltid vara synlig; placeholder ersätter aldrig etiketten."
+    },
+    "textArea": {
+      "description": "För längre textinmatning över flera rader. Etiketten ska alltid vara synlig; placeholder ersätter aldrig etiketten."
+    },
+    "dropdown": {
+      "description": "För val av ett alternativ ur en lista. Etiketten ska alltid vara synlig; placeholder ersätter aldrig etiketten."
+    },
+    "checkbox": {
+      "description": "För oberoende val där flera alternativ kan vara aktiva. Etiketten ska alltid vara synlig; placeholder ersätter aldrig etiketten.",
+      "states": ["Unchecked", "Checked", "Focus", "Indeterminate", "Disabled"],
+      "context": ["Light", "Dark"]
+    },
+    "radio": {
+      "description": "För ett ömsesidigt val i en grupp. Etiketten ska alltid vara synlig; använd Checkbox när flera val får vara aktiva.",
+      "states": ["Unchecked", "Checked", "Focus", "Disabled"],
+      "context": ["Light", "Dark"]
+    },
+    "toggle": {
+      "description": "För att slå en inställning av eller på direkt. Etiketten ska alltid vara synlig; använd Checkbox när valet bekräftas tillsammans med ett formulär."
+    },
+    "disabledOpacity": {
+      "token": "opacity/disabled",
+      "figmaValue": 40,
+      "figmaScope": "OPACITY",
+      "cssValue": 0.4,
+      "note": "Figma lagrar procent (40); CSS = 0.4. Lageropacitet 100 %."
+    }
+  },
+  "status": {
+    "description": "Visar läget för liftar, nedfarter och spår. Färgen används endast för punkten och texten har alltid textfärg; Stängd är neutralt och röd används bara för driftstopp.",
+    "props": ["Label", "Text", "Status", "Context"],
+    "added": "2026-10-02"
+  },
+  "pagination": {
+    "compact": {
+      "description": "Sidnavigering i listor på smala ytor och mobil. Använd Numbered när flera sidnummer behöver vara direkt åtkomliga."
+    },
+    "numbered": {
+      "description": "Sidnavigering i listor med känt antal sidor. Använd Compact på smala ytor och mobil.",
+      "sizeBinding": ["size/control-lg", "size/control-md", "size/control-sm"]
+    },
+    "shape": "runda knappar",
+    "context": ["Light", "Dark"]
+  },
+  "atoms": {
+    "Icons / Utility": {
+      "count": 14,
+      "description": "Funktionell ikon för gränssnittet. Färgen ärvs från komponenten den används i; använd inte som kategoriikon.",
+      "arrowRight": "Används via Arrow-egenskapen i knappar och länkar. Använd den inte som fristående ikon i text.",
+      "items": [
+        "Icon / Arrow left",
+        "Icon / Arrow right",
+        "Icon / Calendar",
+        "Icon / Check",
+        "Icon / Chevron down",
+        "Icon / Chevron right",
+        "Icon / Chevron up",
+        "Icon / Close",
+        "Icon / External link",
+        "Icon / Info",
+        "Icon / Menu",
+        "Icon / Minus",
+        "Icon / Plus",
+        "Icon / Search"
+      ]
+    },
+    "Icons / Category": {
+      "count": 5,
+      "description": "Ikon för en bokningskategori. Accenten är alltid color/accent; använd ingen egen ikonfärg.",
+      "accentToken": "color/accent",
+      "items": [
+        "Icon / Category / Boende",
+        "Icon / Category / Liftkort",
+        "Icon / Category / Paket",
+        "Icon / Category / Skidhyra",
+        "Icon / Category / Skidskola"
+      ]
+    },
+    "Logo": {
+      "count": 6,
+      "description": "Symbol, ordbild och lockup för Tänndalen. Ändra aldrig proportionerna; använd Light på ljus botten och Dark på mörk.",
+      "variants": ["Type=Symbol|Wordmark|Lockup × Context=Light|Dark"]
+    },
+    "Chip / Filter": {
+      "count": 20,
+      "description": "Valbara filter där flera kan vara aktiva. Valt läge visas med bock, inte bara färg; använd inte som fast etikett.",
+      "props": ["State", "Size", "Context"],
+      "sizeBinding": ["size/control-md", "size/control-sm"]
+    },
+    "Chip / Tag": {
+      "count": 6,
+      "description": "Fasta etiketter som inte går att klicka på, till exempel Går att boka och Fri på plats. Använd Filter för valbara alternativ.",
+      "props": ["Style=Solid|Outline|Dashed", "Context", "Icon boolean"]
+    },
+    "Avatar": {
+      "count": 3,
+      "description": "Rund bild av en person, till exempel i morgonrapporten. Aktivera Ring när avataren ligger ovanpå foto; använd inte för allmänna bildminiatyrer.",
+      "sizes": ["Large", "Medium", "Small"],
+      "sizeBinding": ["size/control-lg", "size/control-md", "size/control-sm"],
+      "props": ["Ring boolean"]
+    },
+    "Divider": {
+      "count": 4,
+      "description": "Avdelare mellan innehåll. Light använder neutral-subtle och Dark använder frost; använd inte som dekoration eller floatring.",
+      "variants": ["Orientation=Horizontal|Vertical × Context=Light|Dark"]
+    }
+  }
+}

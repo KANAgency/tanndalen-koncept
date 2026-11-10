@@ -1,0 +1,123 @@
+{
+  "$html-implementation": "Design tokens heading-1…heading-6 är VISUELL skala — oberoende av HTML. Använd semantiskt korrekt <h1>–<h6> i markup; mappa valfri heading-x-stil via class/component. eyebrow/intro är egna stilar, inte heading-nivåer.",
+  "$description": "Text styles för Figma (OG). Delad skala i primitives.json. Rubrikstege Literata: heading-1 (starkast) … heading-6. eyebrow/eyebrow-sm = caps-label (Radio Canada Big), utanför rubrikkedjan.",
+  "$naming": "Numrerade suffix (-1, -2…) endast för rangordnade kedjor (heading). Beskrivande suffix (-sm, -lg) för korta grupper: relativt till stilfamiljen (lead-sm = mindre lead), inte nödvändigtvis samma nyckel som font/size/* (t.ex. lead-sm → font/size/md, inte font/size/sm).",
+  "$weight-note": "Namnbytet ändrade inte vikt — weight följer tidigare h1–h6 / display (promptens vikt-kolumn ignoreras).",
+
+  "heading-1": {
+    "family": "OG.primary",
+    "size": "7xl",
+    "weight": "regular",
+    "leading": "tight",
+    "tracking": "tighter"
+  },
+  "heading-2": {
+    "family": "OG.primary",
+    "size": "5xl",
+    "weight": "regular",
+    "leading": "tight",
+    "tracking": "tight"
+  },
+  "heading-3": {
+    "family": "OG.primary",
+    "size": "4xl",
+    "weight": "regular",
+    "leading": "tight",
+    "tracking": "wide"
+  },
+  "heading-4": {
+    "family": "OG.primary",
+    "size": "3xl",
+    "weight": "regular",
+    "leading": "snug",
+    "tracking": "wide"
+  },
+  "heading-5": {
+    "family": "OG.primary",
+    "size": "xl",
+    "weight": "regular",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "heading-6": {
+    "family": "OG.primary",
+    "size": "md",
+    "weight": "regular",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "eyebrow": {
+    "family": "OG.secondary",
+    "size": "lg",
+    "weight": "medium",
+    "leading": "relaxed",
+    "tracking": "normal",
+    "textCase": "uppercase"
+  },
+  "eyebrow-sm": {
+    "family": "OG.secondary",
+    "size": "md",
+    "weight": "medium",
+    "leading": "relaxed",
+    "tracking": "normal",
+    "textCase": "uppercase"
+  },
+  "intro": {
+    "family": "OG.secondary",
+    "size": "base",
+    "weight": "semibold",
+    "leading": "normal",
+    "tracking": "normal"
+  },
+  "lead": {
+    "family": "OG.primary",
+    "size": "lg",
+    "weight": "regular",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "lead-sm": {
+    "family": "OG.primary",
+    "size": "md",
+    "weight": "regular",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "quote": {
+    "family": "OG.primary",
+    "size": "2xl",
+    "weight": "italic",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "quote-sm": {
+    "family": "OG.primary",
+    "size": "xl",
+    "weight": "italic",
+    "leading": "relaxed",
+    "tracking": "normal"
+  },
+  "body": { "family": "OG.secondary", "size": "base", "weight": "regular", "leading": "normal", "tracking": "normal" },
+  "body-sm": { "family": "OG.secondary", "size": "sm", "weight": "regular", "leading": "normal", "tracking": "normal" },
+  "cta": {
+    "family": "OG.primary",
+    "size": "base",
+    "weight": "medium",
+    "leading": "tight",
+    "tracking": "fine",
+    "leadingTrim": "CAP_HEIGHT"
+  },
+  "cta-sm": {
+    "family": "OG.primary",
+    "size": "sm",
+    "weight": "medium",
+    "leading": "tight",
+    "tracking": "fine",
+    "leadingTrim": "CAP_HEIGHT"
+  },
+  "nav": { "family": "OG.secondary", "size": "sm", "weight": "medium", "leading": "tight", "tracking": "normal" },
+  "label": { "family": "OG.secondary", "size": "sm", "weight": "semibold", "leading": "tight", "tracking": "normal" },
+  "caption": { "family": "OG.secondary", "size": "xs", "weight": "regular", "leading": "normal", "tracking": "normal" },
+
+  "$build-note": "Shared / Primitives. lineHeight = 110/125/140/150 % på styles. letterSpacing via font/tracking/*."
+}

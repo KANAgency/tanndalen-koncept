@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+dist/
+test-results/
+playwright-report/
+*.bak*
+
+# TD visual regression working dirs (baseline is tracked)
+regression/td-current/
+regression/td-diff-current/
+regression/td-before/
+regression/td-after/
+regression/td-diff/

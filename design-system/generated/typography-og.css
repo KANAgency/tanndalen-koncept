@@ -1,0 +1,666 @@
+/* OG typography — hand-authored for Orsa Grönklitt shell.
+   Family names match --font-family-OG-* (Literata / Radio Canada Big first; fallbacks after).
+   Webfonts via fonts-og.css (Literata, Radio Canada Big). */
+/* Requires tokens.css (+ fonts-og.css). */
+
+
+.td-heading-xxl,
+.td-heading-1 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-7xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxl-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-7xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xl,
+.td-heading-2 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xl-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-lg,
+.td-heading-3 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-lg-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-md,
+.td-heading-4 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-md-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-sm {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  letter-spacing: -0.019em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-sm-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.019em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xs {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.021em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xs-regular,
+.td-heading-5 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.2;
+  letter-spacing: -0.021em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxs {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxs-regular,
+.td-heading-6 {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxxs {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+  letter-spacing: -0.013em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxxs-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: -0.013em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-2-hero {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(2.5rem, 4vw + 1.5rem, var(--font-size-6xl));
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.056em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-eyebrow {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: var(--font-leading-relaxed);
+  letter-spacing: var(--font-tracking-normal);
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  text-transform: uppercase;
+}
+
+.td-eyebrow-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: var(--font-leading-relaxed);
+  letter-spacing: var(--font-tracking-normal);
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  text-transform: uppercase;
+}
+
+.td-annotation,
+.td-intro {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: -0.031em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-body-xl,
+.td-lead {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-body-lg {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-body,
+.td-lead-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.55;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-body-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.6;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+/* Manual: body-xs saknas i typography-styles JSON (14/150). */
+.td-body-xs {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-statement {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-56);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.18;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-quote {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: -0.017em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-quote-sm {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: -0.021em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-quote-xs {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-title {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-title-lg {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-title-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-body {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-body-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-caption {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-kicker {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.333;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-label {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.083;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-nav {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.071;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-cta {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-cta-sm {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  line-height: 1.071;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.111;
+  letter-spacing: -0.022em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-lg {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.083;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-md {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-sm {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.071;
+  letter-spacing: -0.029em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-sm-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.071;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-unit {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.083;
+  letter-spacing: -0.017em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-unit-lg {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.083;
+  letter-spacing: -0.021em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-unit-md {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.125;
+  letter-spacing: -0.019em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+/* Mobilstorlek från TD / Typography – responsive. Under bp/md (1024). */
+@media (max-width: 1023px) {
+  .td-heading-xxl,
+.td-heading-1 {
+    font-size: var(--font-size-4xl);
+    letter-spacing: -0.021em;
+  }
+
+  .td-heading-xxl-regular {
+    font-size: var(--font-size-4xl);
+    letter-spacing: -0.021em;
+  }
+
+  .td-heading-xl,
+.td-heading-2 {
+    font-size: var(--font-size-3xl);
+    letter-spacing: -0.019em;
+  }
+
+  .td-heading-xl-regular {
+    font-size: var(--font-size-3xl);
+    letter-spacing: -0.019em;
+  }
+
+  .td-heading-lg,
+.td-heading-3 {
+    font-size: var(--font-size-2xl);
+    letter-spacing: -0.02em;
+  }
+
+  .td-heading-lg-regular {
+    font-size: var(--font-size-2xl);
+    letter-spacing: -0.02em;
+  }
+
+  .td-heading-md,
+.td-heading-4 {
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.021em;
+  }
+
+  .td-heading-md-regular {
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.021em;
+  }
+
+  .td-heading-sm {
+    font-size: var(--font-size-2xl);
+    letter-spacing: -0.02em;
+  }
+
+  .td-heading-sm-regular {
+    font-size: var(--font-size-2xl);
+    letter-spacing: -0.02em;
+  }
+
+  .td-heading-xxs {
+    font-size: var(--font-size-md);
+    letter-spacing: -0.022em;
+  }
+
+  .td-heading-xxs-regular,
+.td-heading-6 {
+    font-size: var(--font-size-md);
+    letter-spacing: -0.022em;
+  }
+
+  .td-annotation,
+.td-intro {
+    letter-spacing: -0.019em;
+  }
+
+  .td-body-xl,
+.td-lead {
+    font-size: var(--font-size-lg);
+  }
+
+  .td-body,
+.td-lead-sm {
+    font-size: var(--font-size-base);
+  }
+
+  .td-statement {
+    font-size: var(--font-size-32);
+  }
+
+  .td-quote {
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.017em;
+  }
+
+  .td-quote-sm {
+    font-size: var(--font-size-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .td-ui-title {
+    font-size: var(--font-size-md);
+  }
+
+  .td-ui-title-lg {
+    font-size: var(--font-size-lg);
+  }
+
+  .td-ui-figure-lg {
+    font-size: var(--font-size-3xl);
+    letter-spacing: -0.017em;
+  }
+
+  .td-ui-figure-unit-lg {
+    font-size: var(--font-size-lg);
+    letter-spacing: -0.015em;
+  }
+
+  .td-ui-figure-unit-md {
+    font-size: var(--font-size-sm);
+    letter-spacing: -0.021em;
+  }
+
+}

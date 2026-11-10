@@ -1,0 +1,148 @@
+/* Säsongsbanner. color/plate/* och layout/banner-* saknas i tokens.css.
+   Plattan mappar till season-färgerna (samma värden som i Figma). */
+
+.td-season-banner {
+  --td-banner-width: var(--layout-banner-width, 628px);
+  --td-banner-image: var(--layout-banner-image-width, 270px);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: var(--td-banner-width);
+  max-width: 100%;
+  height: 120px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  color: var(--contrast-on-season-summer);
+  background: var(--color-season-summer);
+}
+
+.td-season-banner[data-mode="winter"]:hover {
+  background: color-mix(in srgb, white 8%, var(--color-season-summer));
+}
+
+.td-season-banner[data-mode="summer"] {
+  color: var(--contrast-on-season-winter);
+  background: var(--color-season-winter);
+}
+
+.td-season-banner[data-mode="summer"]:hover {
+  background: color-mix(in srgb, white 8%, var(--color-season-winter));
+}
+
+.td-season-banner-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-width: 0;
+  padding: var(--space-lg) var(--space-lg) var(--space-lg) var(--space-xl);
+}
+
+.td-season-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.td-season-banner-title,
+.td-season-banner-lead,
+.td-season-banner-link {
+  margin: 0;
+  color: inherit;
+}
+
+.td-season-banner-link {
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.td-season-banner-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.td-season-banner-link:focus {
+  outline: none;
+}
+
+.td-season-banner-link:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.td-season-banner-media {
+  flex: none;
+  width: var(--td-banner-image);
+  height: 100%;
+  background: var(--color-TD-neutral-subtlest);
+}
+
+.td-season-banner-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.td-season-banner-icons {
+  position: absolute;
+  z-index: 1;
+  right: var(--space-lg);
+  bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  pointer-events: none;
+}
+
+.td-season-banner-icons td-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: inherit;
+}
+
+.td-season-banner-icons td-icon svg,
+.td-season-banner-icons td-icon path {
+  stroke: currentColor;
+}
+
+@media (max-width: 1023px) {
+  .td-season-banner {
+    width: 100%;
+    height: auto;
+  }
+
+  .td-season-banner-copy {
+    padding: var(--space-lg);
+  }
+
+  .td-season-banner-media {
+    display: none;
+  }
+
+  .td-season-banner-icons {
+    top: auto;
+    bottom: var(--space-lg);
+    transform: translateY(3.5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-season-banner {
+    transition: none;
+  }
+}

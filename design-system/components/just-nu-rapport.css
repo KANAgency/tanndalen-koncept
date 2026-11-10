@@ -1,0 +1,72 @@
+/* Just nu / Rapport (1285:4020). 410 × 500.
+   Overlay-innehåll: padding 24, gap 12, space-between.
+   Overlay-toning: to top, #242629 opak vid 23 %, transparent vid 100 %.
+   Citat och artikelrubrik är Heading/xs-regular (24 / 1.2).
+   Kicker UI/kicker. Meta och byline UI/caption. */
+
+.td-rapport {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 410px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+.td-rapport-overlay {
+  color: var(--color-text-primary-dark);
+}
+
+.td-rapport-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.td-rapport-overlay .td-rapport-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.td-rapport-image-top .td-rapport-image {
+  height: 300px;
+  flex: none;
+}
+
+.td-rapport-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(36 38 41 / 1) 23%, rgb(36 38 41 / 0) 100%);
+  pointer-events: none;
+}
+
+.td-rapport-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 100%;
+  padding: var(--space-xl);
+}
+
+.td-rapport-image-top .td-rapport-body {
+  height: 200px;
+}
+
+.td-rapport-kicker,
+.td-rapport-meta,
+.td-rapport-byline {
+  margin: 0;
+}
+
+.td-rapport-quote,
+.td-rapport-title {
+  margin: 12px 0 0;
+}

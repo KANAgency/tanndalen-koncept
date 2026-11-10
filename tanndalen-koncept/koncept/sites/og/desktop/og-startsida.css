@@ -1,0 +1,135 @@
+/* OG startsida — grund. Inte en kopia av startsida.css.
+   Fonts: Literata (headings) / Radio Canada Big (UI+body) via fonts-og.css + typography-og.css.
+
+   Beslutad palett: off-white, signal-orange, orsa-black, black, white, dark-green
+   + rollprimitiver night/day/snow/cta/accent. Neutrals/säsong = TD tills vidare.
+   PLACEHOLDER kvar: hover/active, tonal, cta-on-dark, link-active.
+*/
+
+html.theme-OG {
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+
+html.theme-OG body {
+  margin: 0;
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+
+html.theme-OG .page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6xl);
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+html.theme-OG .site-header,
+html.theme-OG header.site-top,
+html.theme-OG .site-bar {
+  padding-inline: var(--space-3xl);
+  padding-block: var(--space-lg);
+}
+
+html.theme-OG .hero {
+  position: relative;
+  min-height: 70vh;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  align-items: end;
+}
+
+html.theme-OG .hero-frame,
+html.theme-OG .hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+html.theme-OG .hero-media {
+  /* fullbleed surface — no parallax layers */
+}
+
+html.theme-OG .td-booking {
+  position: relative;
+  z-index: 2;
+  margin-inline: auto;
+  width: min(100% - (var(--space-3xl) * 2), 72rem);
+}
+
+html.theme-OG .statement,
+html.theme-OG .td-statement {
+  font-family: "Literata", "Iowan Old Style", Georgia, serif;
+  font-size: var(--font-size-3xl);
+  line-height: var(--font-leading-snug);
+  padding-inline: var(--space-3xl);
+  max-width: 48rem;
+}
+
+html.theme-OG main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7xl);
+  padding-inline: var(--space-3xl);
+  padding-bottom: var(--space-8xl);
+}
+
+html.theme-OG .td-aktuellt,
+html.theme-OG .just-nu,
+html.theme-OG .en-dag,
+html.theme-OG .boende,
+html.theme-OG .faq,
+html.theme-OG .og-placeholder-module {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+html.theme-OG .og-placeholder-module {
+  border: var(--stroke-1) dashed var(--color-OG-neutral);
+  border-radius: var(--radius-md);
+  padding: var(--space-5xl);
+  background: var(--color-OG-tonal); /* PLACEHOLDER, not decided — tonal */
+}
+
+html.theme-OG .og-placeholder-eyebrow {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-OG-neutral-strong);
+  margin: 0 0 var(--space-sm);
+}
+
+html.theme-OG .og-placeholder-module h2 {
+  font-family: "Literata", "Iowan Old Style", Georgia, serif;
+  margin: 0 0 var(--space-md);
+}
+
+/* Fullbleed media/text band */
+html.theme-OG .utforsakning,
+html.theme-OG .boende {
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-inline: var(--space-3xl);
+}
+
+html.theme-OG img,
+html.theme-OG video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Hide intro runway chrome if leftover */
+html.theme-OG #intro-runway {
+  height: auto;
+}
+html.theme-OG.is-returning #intro-lock,
+html.theme-OG #intro-scroll {
+  display: none !important;
+}

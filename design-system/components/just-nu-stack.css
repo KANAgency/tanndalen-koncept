@@ -1,0 +1,79 @@
+/* Just nu / Stack (1285:3647). Fönster 411 × 214, remsa med gap 24.
+   Pagern står 6 px till höger om kortet, vertikalt centrerad.
+   Prickens ruta är 6 px, cirkeln i Figma är 5 px. */
+
+.td-just-nu-stack {
+  position: relative;
+  width: 411px;
+  height: 214px;
+}
+
+.td-just-nu-stack-viewport {
+  width: 411px;
+  height: 214px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.td-just-nu-stack-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  transition: transform var(--motion-duration-slow) var(--motion-easing-out-soft);
+}
+
+.td-just-nu-stack-track.is-instant {
+  transition: none;
+}
+
+.td-just-nu-pager {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 6px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateY(-50%);
+}
+
+.td-just-nu-pager li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6px;
+  height: 6px;
+}
+
+.td-just-nu-stack:focus-visible {
+  outline: 2px solid var(--color-TD-cta);
+  outline-offset: var(--space-xs);
+}
+
+.td-just-nu-pager-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-just-nu-pager-inactive);
+}
+
+.td-just-nu-pager-dot[aria-current="true"] {
+  background: var(--color-text-primary);
+}
+
+.td-just-nu-stack-dark .td-just-nu-pager-dot {
+  background: var(--color-just-nu-pager-inactive-dark);
+}
+
+.td-just-nu-stack-dark .td-just-nu-pager-dot[aria-current="true"] {
+  background: var(--color-TD-snow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-just-nu-stack-track {
+    transition: none;
+  }
+}

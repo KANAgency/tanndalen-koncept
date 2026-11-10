@@ -1,0 +1,132 @@
+/* Just nu / På gång (1284:4413) och På gång-rad (1284:3716).
+   Kort 411 × 500. Gruppnamn UI/nav, color/just-nu-secondary.
+   Divider Light: color/neutral-subtlest. Dark: color/frost.
+   Hover-ton: night 4 % / snow 6 %, radie 4, 8 px utanför.
+   Länkpil x=0 i Default, x=3 i Hover. */
+
+.td-pagang {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  box-sizing: border-box;
+  width: 411px;
+  height: 500px;
+  padding: var(--space-xl);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.td-pagang-dark {
+  background: var(--color-TD-night);
+  color: var(--color-TD-snow);
+}
+
+.td-pagang-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.td-pagang-group-name {
+  margin: 0;
+  color: var(--color-just-nu-secondary);
+}
+
+.td-pagang-dark .td-pagang-group-name {
+  color: var(--color-just-nu-secondary-dark);
+}
+
+.td-pagang-footer {
+  margin: 12px 0 0;
+}
+
+.td-pagang-row {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.td-pagang-row-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 0;
+}
+
+.td-pagang-row-text {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.td-pagang-row-arrow {
+  flex: none;
+  color: var(--color-TD-neutral-subtle);
+  transform: translateX(0);
+  transition:
+    color var(--motion-duration-fast) var(--motion-easing-out-soft),
+    transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-pagang-dark .td-pagang-row-arrow {
+  color: var(--color-TD-neutral-strong);
+}
+
+.td-pagang-row::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: -8px;
+  bottom: 0;
+  left: -8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  opacity: 0;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-pagang-dark .td-pagang-row::before {
+  background: var(--color-TD-snow);
+}
+
+.td-pagang-row:hover::before {
+  opacity: 0.04;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-pagang-dark .td-pagang-row:hover::before {
+  opacity: 0.06;
+}
+
+.td-pagang-row:hover .td-pagang-row-arrow {
+  color: var(--color-text-primary);
+  transform: translateX(3px);
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-pagang-dark .td-pagang-row:hover .td-pagang-row-arrow {
+  color: var(--color-text-primary-dark);
+}
+
+.td-pagang-row-main,
+.td-pagang-divider {
+  position: relative;
+  z-index: 1;
+}
+
+.td-pagang-divider {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--color-TD-neutral-subtlest);
+}
+
+.td-pagang-dark .td-pagang-divider {
+  background: var(--color-frost);
+}

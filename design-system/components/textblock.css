@@ -1,0 +1,35 @@
+/* Textblock. L: 640, rubrik Heading/lg, brödtext UI/body.
+   Synliga lager i Size=L Align=Left: eyebrow, title, body, secondary action.
+   Icon, meta, byline, facts, price och primary action är visible=false. */
+
+.td-textblock {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  max-width: 100%;
+  color: var(--color-text-primary);
+}
+
+.td-textblock-m { width: 480px; }
+.td-textblock-s { width: 320px; }
+.td-textblock-center { text-align: center; align-items: center; }
+.td-textblock-right { text-align: right; align-items: flex-end; }
+
+.td-textblock-eyebrow {
+  margin: 0 0 8px;
+}
+
+.td-textblock-title,
+.td-textblock-body {
+  margin: 0;
+}
+
+.td-textblock-body {
+  padding-top: 16px;
+}
+
+.td-textblock-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 32px;
+}

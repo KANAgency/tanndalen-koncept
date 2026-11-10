@@ -1,0 +1,1152 @@
+{
+  "dumpedAt": "2026-09-23T08:59:03.516Z",
+  "fileKey": "HW7ZST3CotlOepEcjNI5LC",
+  "sourceOfTruth": "figma",
+  "counts": {
+    "collections": 4,
+    "variables": 156,
+    "paintStyles": 26,
+    "textStyles": 40,
+    "pages": 4
+  },
+  "note": "Shared / Primitives also contains font/*, radius/*, stroke/*, z/* (slash names). Spacing collection duplicates space/bp/radius/z with hyphen names and OG/TD modes. Full Shared non-color vars omitted here except colors listed; see agent transcript dump for complete Shared list.",
+  "variables": {
+    "Shared / Primitives": {
+      "modes": [
+        "Value"
+      ],
+      "vars": [
+        {
+          "name": "bp/lg",
+          "type": "FLOAT",
+          "modes": {
+            "Value": 1280
+          }
+        },
+        {
+          "name": "bp/md",
+          "type": "FLOAT",
+          "modes": {
+            "Value": 1024
+          }
+        },
+        {
+          "name": "bp/sm",
+          "type": "FLOAT",
+          "modes": {
+            "Value": 640
+          }
+        },
+        {
+          "name": "color/OG/black",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#000000"
+          }
+        },
+        {
+          "name": "color/OG/cta",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#d23b0f"
+          }
+        },
+        {
+          "name": "color/OG/cta-on-dark",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#f59678"
+          }
+        },
+        {
+          "name": "color/OG/dark-green",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#003e3a"
+          }
+        },
+        {
+          "name": "color/OG/dark-green-active",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#002d2a"
+          }
+        },
+        {
+          "name": "color/OG/dark-green-hover",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#0f524d"
+          }
+        },
+        {
+          "name": "color/OG/neutral",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#8c8985"
+          }
+        },
+        {
+          "name": "color/OG/neutral-strong",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#5d5a57"
+          }
+        },
+        {
+          "name": "color/OG/neutral-subtle",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#d2ccc4"
+          }
+        },
+        {
+          "name": "color/OG/off-white",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#f5eee5"
+          }
+        },
+        {
+          "name": "color/OG/off-white-active",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ebe3d5"
+          }
+        },
+        {
+          "name": "color/OG/off-white-hover",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#f9f6f0"
+          }
+        },
+        {
+          "name": "color/OG/off-white-link-active",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#d9d1c7"
+          }
+        },
+        {
+          "name": "color/OG/orsa-black",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#3c3c3b"
+          }
+        },
+        {
+          "name": "color/OG/signal-orange",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#e74011"
+          }
+        },
+        {
+          "name": "color/OG/signal-orange-active",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#d23b0f"
+          }
+        },
+        {
+          "name": "color/OG/signal-orange-hover",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#f3582b"
+          }
+        },
+        {
+          "name": "color/OG/tonal",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#e1e1d7"
+          }
+        },
+        {
+          "name": "color/OG/tonal-active",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#c9c9bf"
+          }
+        },
+        {
+          "name": "color/OG/tonal-hover",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#d5d5cb"
+          }
+        },
+        {
+          "name": "color/OG/white",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ffffff"
+          }
+        },
+        {
+          "name": "color/TD/accent",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#bf6a15"
+          }
+        },
+        {
+          "name": "color/TD/cta",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ae6113"
+          }
+        },
+        {
+          "name": "color/TD/day",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ebe8e5"
+          }
+        },
+        {
+          "name": "color/TD/neutral",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#686868"
+          }
+        },
+        {
+          "name": "color/TD/neutral-muted",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#a5a4a4"
+          }
+        },
+        {
+          "name": "color/TD/neutral-strong",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#4c4d4f"
+          }
+        },
+        {
+          "name": "color/TD/neutral-subtle",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#c3c1c0"
+          }
+        },
+        {
+          "name": "color/TD/night",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#24272a"
+          }
+        },
+        {
+          "name": "color/TD/season-autumn",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#3c1f17"
+          }
+        },
+        {
+          "name": "color/TD/season-spring",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#f6e0a2"
+          }
+        },
+        {
+          "name": "color/TD/season-summer",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#1b4021"
+          }
+        },
+        {
+          "name": "color/TD/season-winter",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#a1b5ba"
+          }
+        },
+        {
+          "name": "color/TD/snow",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ffffff"
+          }
+        },
+        {
+          "name": "color/error",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#c42b2b"
+          }
+        },
+        {
+          "name": "color/on-error",
+          "type": "COLOR",
+          "modes": {
+            "Value": "#ffffff"
+          }
+        }
+      ]
+    },
+    "OG / Semantic": {
+      "modes": [
+        "Default"
+      ],
+      "vars": [
+        {
+          "name": "color/accent",
+          "modes": {
+            "Default": "→color/OG/signal-orange=#e74011"
+          }
+        },
+        {
+          "name": "color/bg-base",
+          "modes": {
+            "Default": "→color/OG/off-white=#f5eee5"
+          }
+        },
+        {
+          "name": "color/bg-inverted",
+          "modes": {
+            "Default": "→color/OG/dark-green=#003e3a"
+          }
+        },
+        {
+          "name": "color/cta-on-dark",
+          "modes": {
+            "Default": "→color/OG/cta-on-dark=#f59678"
+          }
+        },
+        {
+          "name": "color/cta-primary",
+          "modes": {
+            "Default": "→color/OG/cta=#d23b0f"
+          }
+        },
+        {
+          "name": "color/error",
+          "modes": {
+            "Default": "→color/error=#c42b2b"
+          }
+        },
+        {
+          "name": "color/on-cta-on-dark",
+          "modes": {
+            "Default": "→color/OG/orsa-black=#3c3c3b"
+          }
+        },
+        {
+          "name": "color/on-error",
+          "modes": {
+            "Default": "→color/on-error=#ffffff"
+          }
+        },
+        {
+          "name": "color/text-inverted",
+          "modes": {
+            "Default": "→color/OG/white=#ffffff"
+          }
+        },
+        {
+          "name": "color/text-primary",
+          "modes": {
+            "Default": "→color/OG/orsa-black=#3c3c3b"
+          }
+        },
+        {
+          "name": "contrast/on-cta",
+          "modes": {
+            "Default": "→color/on-error=#ffffff"
+          }
+        },
+        {
+          "name": "contrast/on-dark-green",
+          "modes": {
+            "Default": "→color/OG/white=#ffffff"
+          }
+        },
+        {
+          "name": "contrast/on-off-white",
+          "modes": {
+            "Default": "→color/OG/orsa-black=#3c3c3b"
+          }
+        }
+      ]
+    },
+    "TD / Semantic": {
+      "modes": [
+        "Default"
+      ],
+      "vars": [
+        {
+          "name": "color/accent",
+          "modes": {
+            "Default": "→color/TD/accent=#bf6a15"
+          }
+        },
+        {
+          "name": "color/bg-base",
+          "modes": {
+            "Default": "→color/TD/day=#ebe8e5"
+          }
+        },
+        {
+          "name": "color/bg-inverted",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        },
+        {
+          "name": "color/cta-on-dark",
+          "modes": {
+            "Default": "→color/TD/snow=#ffffff"
+          }
+        },
+        {
+          "name": "color/cta-primary",
+          "modes": {
+            "Default": "→color/TD/cta=#ae6113"
+          }
+        },
+        {
+          "name": "color/error",
+          "modes": {
+            "Default": "→color/error=#c42b2b"
+          }
+        },
+        {
+          "name": "color/on-error",
+          "modes": {
+            "Default": "→color/on-error=#ffffff"
+          }
+        },
+        {
+          "name": "color/season-autumn",
+          "modes": {
+            "Default": "→color/TD/season-autumn=#3c1f17"
+          }
+        },
+        {
+          "name": "color/season-spring",
+          "modes": {
+            "Default": "→color/TD/season-spring=#f6e0a2"
+          }
+        },
+        {
+          "name": "color/season-summer",
+          "modes": {
+            "Default": "→color/TD/season-summer=#1b4021"
+          }
+        },
+        {
+          "name": "color/season-winter",
+          "modes": {
+            "Default": "→color/TD/season-winter=#a1b5ba"
+          }
+        },
+        {
+          "name": "color/text-inverted",
+          "modes": {
+            "Default": "→color/TD/snow=#ffffff"
+          }
+        },
+        {
+          "name": "color/text-primary",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        },
+        {
+          "name": "contrast/on-accent",
+          "modes": {
+            "Default": "→color/TD/day=#ebe8e5"
+          }
+        },
+        {
+          "name": "contrast/on-cta",
+          "modes": {
+            "Default": "→color/TD/snow=#ffffff"
+          }
+        },
+        {
+          "name": "contrast/on-cta-on-dark",
+          "modes": {
+            "Default": "→color/TD/cta=#ae6113"
+          }
+        },
+        {
+          "name": "contrast/on-day",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        },
+        {
+          "name": "contrast/on-night",
+          "modes": {
+            "Default": "→color/TD/day=#ebe8e5"
+          }
+        },
+        {
+          "name": "contrast/on-season-autumn",
+          "modes": {
+            "Default": "→color/TD/day=#ebe8e5"
+          }
+        },
+        {
+          "name": "contrast/on-season-spring",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        },
+        {
+          "name": "contrast/on-season-summer",
+          "modes": {
+            "Default": "→color/TD/day=#ebe8e5"
+          }
+        },
+        {
+          "name": "contrast/on-season-winter",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        },
+        {
+          "name": "contrast/on-snow",
+          "modes": {
+            "Default": "→color/TD/night=#24272a"
+          }
+        }
+      ]
+    },
+    "Spacing": {
+      "modes": [
+        "OG",
+        "TD"
+      ],
+      "vars": [
+        {
+          "name": "bp-lg",
+          "modes": {
+            "OG": 1280,
+            "TD": 1280
+          }
+        },
+        {
+          "name": "bp-md",
+          "modes": {
+            "OG": 1024,
+            "TD": 1024
+          }
+        },
+        {
+          "name": "bp-sm",
+          "modes": {
+            "OG": 640,
+            "TD": 640
+          }
+        },
+        {
+          "name": "radius-full",
+          "modes": {
+            "OG": 9999,
+            "TD": 9999
+          }
+        },
+        {
+          "name": "radius-lg",
+          "modes": {
+            "OG": 16,
+            "TD": 16
+          }
+        },
+        {
+          "name": "radius-md",
+          "modes": {
+            "OG": 8,
+            "TD": 8
+          }
+        },
+        {
+          "name": "radius-sm",
+          "modes": {
+            "OG": 4,
+            "TD": 4
+          }
+        },
+        {
+          "name": "space-2xl",
+          "modes": {
+            "OG": 24,
+            "TD": 32
+          }
+        },
+        {
+          "name": "space-3xl",
+          "modes": {
+            "OG": 32,
+            "TD": 40
+          }
+        },
+        {
+          "name": "space-4xl",
+          "modes": {
+            "OG": 40,
+            "TD": 56
+          }
+        },
+        {
+          "name": "space-5xl",
+          "modes": {
+            "OG": 48,
+            "TD": 64
+          }
+        },
+        {
+          "name": "space-6xl",
+          "modes": {
+            "OG": 64,
+            "TD": 88
+          }
+        },
+        {
+          "name": "space-7xl",
+          "modes": {
+            "OG": 80,
+            "TD": 112
+          }
+        },
+        {
+          "name": "space-8xl",
+          "modes": {
+            "OG": 96,
+            "TD": 144
+          }
+        },
+        {
+          "name": "space-lg",
+          "modes": {
+            "OG": 16,
+            "TD": 16
+          }
+        },
+        {
+          "name": "space-md",
+          "modes": {
+            "OG": 12,
+            "TD": 12
+          }
+        },
+        {
+          "name": "space-sm",
+          "modes": {
+            "OG": 8,
+            "TD": 8
+          }
+        },
+        {
+          "name": "space-xl",
+          "modes": {
+            "OG": 20,
+            "TD": 24
+          }
+        },
+        {
+          "name": "space-xs",
+          "modes": {
+            "OG": 4,
+            "TD": 4
+          }
+        },
+        {
+          "name": "z-base",
+          "modes": {
+            "OG": 0,
+            "TD": 0
+          }
+        },
+        {
+          "name": "z-dropdown",
+          "modes": {
+            "OG": 100,
+            "TD": 100
+          }
+        },
+        {
+          "name": "z-modal",
+          "modes": {
+            "OG": 300,
+            "TD": 300
+          }
+        },
+        {
+          "name": "z-sticky",
+          "modes": {
+            "OG": 200,
+            "TD": 200
+          }
+        },
+        {
+          "name": "z-toast",
+          "modes": {
+            "OG": 400,
+            "TD": 400
+          }
+        }
+      ]
+    }
+  },
+  "paintStyles": [
+    {
+      "name": "OG/black",
+      "color": "#000000"
+    },
+    {
+      "name": "OG/cta",
+      "color": "#d23b0f"
+    },
+    {
+      "name": "OG/dark-green",
+      "color": "#003e3a"
+    },
+    {
+      "name": "OG/neutral",
+      "color": "#8c8985"
+    },
+    {
+      "name": "OG/neutral-strong",
+      "color": "#5d5a57"
+    },
+    {
+      "name": "OG/neutral-subtle",
+      "color": "#d2ccc4"
+    },
+    {
+      "name": "OG/off-white",
+      "color": "#f5eee5"
+    },
+    {
+      "name": "OG/orsa-black",
+      "color": "#3c3c3b"
+    },
+    {
+      "name": "OG/signal-orange",
+      "color": "#e74011"
+    },
+    {
+      "name": "OG/signal-orange-active",
+      "color": "#d23b0f"
+    },
+    {
+      "name": "OG/white",
+      "color": "#ffffff"
+    },
+    {
+      "name": "TD/accent",
+      "color": "#bf6a15"
+    },
+    {
+      "name": "TD/cta",
+      "color": "#ae6113"
+    },
+    {
+      "name": "TD/dag",
+      "color": "#ebe8e5"
+    },
+    {
+      "name": "TD/natt",
+      "color": "#24272a"
+    },
+    {
+      "name": "TD/neutral",
+      "color": "#686868"
+    },
+    {
+      "name": "TD/neutral-muted",
+      "color": "#a5a4a4"
+    },
+    {
+      "name": "TD/neutral-strong",
+      "color": "#4c4d4f"
+    },
+    {
+      "name": "TD/neutral-subtle",
+      "color": "#c3c1c0"
+    },
+    {
+      "name": "TD/sasong-host",
+      "color": "#3c1f17"
+    },
+    {
+      "name": "TD/sasong-sommar",
+      "color": "#1b4021"
+    },
+    {
+      "name": "TD/sasong-var",
+      "color": "#f6e0a2"
+    },
+    {
+      "name": "TD/sasong-vinter",
+      "color": "#a1b5ba"
+    },
+    {
+      "name": "TD/sno",
+      "color": "#ffffff"
+    },
+    {
+      "name": "error",
+      "color": "#c42b2b"
+    },
+    {
+      "name": "on-error",
+      "color": "#ffffff"
+    }
+  ],
+  "textStyles": [
+    {
+      "name": "OG/body",
+      "fontSize": 16,
+      "family": "Radio Canada Big",
+      "style": "Regular",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "OG/body-sm",
+      "fontSize": 14,
+      "family": "Radio Canada Big",
+      "style": "Regular",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "OG/caption",
+      "fontSize": 12,
+      "family": "Radio Canada Big",
+      "style": "Regular",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "OG/cta",
+      "fontSize": 16,
+      "family": "Literata",
+      "style": "Medium",
+      "lh": 110,
+      "ls": -0.5
+    },
+    {
+      "name": "OG/cta-sm",
+      "fontSize": 14,
+      "family": "Literata",
+      "style": "Medium",
+      "lh": 110,
+      "ls": -0.5
+    },
+    {
+      "name": "OG/eyebrow",
+      "fontSize": 20,
+      "family": "Radio Canada Big",
+      "style": "Medium",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/eyebrow-sm",
+      "fontSize": 18,
+      "family": "Radio Canada Big",
+      "style": "Medium",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/heading-1",
+      "fontSize": 96,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 110,
+      "ls": -3
+    },
+    {
+      "name": "OG/heading-2",
+      "fontSize": 60,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 110,
+      "ls": -2
+    },
+    {
+      "name": "OG/heading-3",
+      "fontSize": 48,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 110,
+      "ls": -1
+    },
+    {
+      "name": "OG/heading-4",
+      "fontSize": 36,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 125,
+      "ls": -1
+    },
+    {
+      "name": "OG/heading-5",
+      "fontSize": 24,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/heading-6",
+      "fontSize": 18,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/intro",
+      "fontSize": 16,
+      "family": "Radio Canada Big",
+      "style": "SemiBold",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "OG/label",
+      "fontSize": 14,
+      "family": "Radio Canada Big",
+      "style": "SemiBold",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "OG/lead",
+      "fontSize": 20,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/lead-sm",
+      "fontSize": 18,
+      "family": "Literata",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/nav",
+      "fontSize": 14,
+      "family": "Radio Canada Big",
+      "style": "Medium",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "OG/quote",
+      "fontSize": 30,
+      "family": "Literata",
+      "style": "Italic",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "OG/quote-sm",
+      "fontSize": 24,
+      "family": "Literata",
+      "style": "Italic",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/body",
+      "fontSize": 16,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "TD/body-sm",
+      "fontSize": 14,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "TD/caption",
+      "fontSize": 12,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "TD/cta",
+      "fontSize": 16,
+      "family": "CircularXX TT",
+      "style": "Book",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "TD/cta-sm",
+      "fontSize": 14,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "TD/eyebrow",
+      "fontSize": 20,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/eyebrow-sm",
+      "fontSize": 18,
+      "family": "CircularXX TT",
+      "style": "Bold",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/heading-1",
+      "fontSize": 96,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 110,
+      "ls": -5
+    },
+    {
+      "name": "TD/heading-2",
+      "fontSize": 60,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 110,
+      "ls": -4
+    },
+    {
+      "name": "TD/heading-3",
+      "fontSize": 48,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 110,
+      "ls": -2
+    },
+    {
+      "name": "TD/heading-4",
+      "fontSize": 36,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 125,
+      "ls": -1
+    },
+    {
+      "name": "TD/heading-5",
+      "fontSize": 24,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/heading-6",
+      "fontSize": 18,
+      "family": "Superclarendon",
+      "style": "Bold",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/intro",
+      "fontSize": 16,
+      "family": "CircularXX TT",
+      "style": "Book",
+      "lh": 150,
+      "ls": 0
+    },
+    {
+      "name": "TD/label",
+      "fontSize": 12,
+      "family": "CircularXX TT",
+      "style": "Book",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "TD/lead",
+      "fontSize": 20,
+      "family": "Superclarendon",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/lead-sm",
+      "fontSize": 18,
+      "family": "Superclarendon",
+      "style": "Regular",
+      "lh": 140,
+      "ls": 0
+    },
+    {
+      "name": "TD/nav",
+      "fontSize": 14,
+      "family": "CircularXX TT",
+      "style": "Book",
+      "lh": 110,
+      "ls": 0
+    },
+    {
+      "name": "TD/quote",
+      "fontSize": 30,
+      "family": "Superclarendon",
+      "style": "Italic",
+      "lh": 140,
+      "ls": -0.5
+    },
+    {
+      "name": "TD/quote-sm",
+      "fontSize": 24,
+      "family": "Superclarendon",
+      "style": "Italic",
+      "lh": 140,
+      "ls": -0.5
+    }
+  ],
+  "pages": {
+    "Concept": [
+      "Notis CTA/Accent",
+      "Frame 3–16"
+    ],
+    "Foundations & Components": [
+      "og-button-link-system",
+      "og-form-elements-system",
+      "og-pagination-system",
+      "OG — Foundations exempel",
+      "TD — Foundations exempel",
+      "TD — Kontrastpar",
+      "td-button-link-system",
+      "td-form-elements-system",
+      "td-pagination-system",
+      "td-components",
+      "og-components"
+    ],
+    "Blocks": [
+      "Content_Block_Variations_Set"
+    ],
+    "Old": []
+  }
+}

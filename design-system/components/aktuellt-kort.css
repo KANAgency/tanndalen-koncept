@@ -1,0 +1,299 @@
+/* Aktuellt / Kort (2235:16983). Typ Innehåll | Fråga × Platta × Layout.
+   Mobilbrytpunkt 767 px = där Aktuellt-spåret redan går till en-kolumns kort. */
+
+/* color/plate/* saknas i tokens.css — mappar till season (samma som season-banner). */
+.td-aktuellt-kort {
+  --td-aktuellt-plate: var(--color-season-winter);
+  --td-aktuellt-on-plate: var(--contrast-on-season-winter);
+  --td-aktuellt-img-radius: var(--radius-sm);
+  --td-aktuellt-action-pad: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 519px;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.td-aktuellt-kort[data-platta="var"] {
+  --td-aktuellt-plate: var(--color-season-spring);
+  --td-aktuellt-on-plate: var(--contrast-on-season-spring);
+}
+
+.td-aktuellt-kort[data-platta="sommar"] {
+  --td-aktuellt-plate: var(--color-season-summer);
+  --td-aktuellt-on-plate: var(--contrast-on-season-summer);
+}
+
+.td-aktuellt-kort[data-platta="host"] {
+  --td-aktuellt-plate: var(--color-season-autumn);
+  --td-aktuellt-on-plate: var(--contrast-on-season-autumn);
+}
+
+.td-aktuellt-kort[data-platta="vinter"] {
+  --td-aktuellt-plate: var(--color-season-winter);
+  --td-aktuellt-on-plate: var(--contrast-on-season-winter);
+}
+
+.td-aktuellt-kort[data-platta="glas"] {
+  --td-aktuellt-plate: var(--color-frost-active);
+  --td-aktuellt-img-radius: 2px; /* hardkodad tills radius-token finns */
+  background: transparent;
+}
+
+.td-aktuellt-kort-platta {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-xl);
+  background: var(--td-aktuellt-plate);
+}
+
+.td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta {
+  border: 1px solid rgb(255 255 255 / 0.7);
+  border-radius: 2px;
+  backdrop-filter: blur(2px); /* Figma 4 → CSS 2 */
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.td-aktuellt-kort-bild {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 346px;
+  overflow: hidden;
+  border-radius: var(--td-aktuellt-img-radius);
+  background: var(--color-bg-inverted);
+}
+
+.td-aktuellt-kort-bild img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.td-aktuellt-kort-kicker {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 1;
+}
+
+.td-aktuellt-kort-body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl) 0;
+}
+
+.td-aktuellt-kort-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.td-aktuellt-kort-rubrik-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.td-aktuellt-kort-rubrik {
+  margin: 0;
+  color: var(--color-text-primary);
+  /* Lokal override — rör inte global .td-heading-sm (−0.019em ≈ −0.608 px).
+     Figma Heading/sm: letter-spacing −0.6 px. Med Superclarendon-Bold-06.ttf
+     blir platshållartexten tre rader vid −0.6/−0.019em; −0.8 px ger Figmas
+     två rader (36.8×2 ≈ 74). Orsak: se RAPPORT.md (fontfil/metrics). */
+  letter-spacing: -0.8px; /* Figma −0.6 px; lokal −0.8 px för samma wrap */
+}
+
+.td-aktuellt-kort-meta {
+  margin: 0;
+  color: var(--color-TD-neutral-strong);
+}
+
+.td-aktuellt-kort-beskrivning {
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.td-aktuellt-kort-handling {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.td-aktuellt-kort-action {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--td-aktuellt-action-pad);
+}
+
+/* Book på knappar i kortet (UI/nav), inte Bold. */
+.td-aktuellt-kort-action .td-button {
+  font-weight: var(--font-weight-book, 450);
+}
+
+/* —— Typ = Fråga —— */
+.td-aktuellt-kort[data-typ="fraga"] {
+  justify-content: space-between;
+  gap: var(--space-xl);
+  min-height: 629px;
+  padding: var(--space-2xl) var(--space-2xl) var(--space-4xl);
+  border: 0; /* button UA-border bort */
+  border-radius: var(--radius-md);
+  background: var(--td-aktuellt-plate);
+  color: var(--td-aktuellt-on-plate);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book, 450);
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-header {
+  width: 100%;
+  color: inherit;
+}
+
+/* Chatt: Light default; Dark när on-plate är ljus (sommar/höst). */
+.td-aktuellt-kort[data-typ="fraga"] .td-just-nu-header-icon img[data-graphic-dark] {
+  display: none;
+}
+
+.td-aktuellt-kort[data-typ="fraga"][data-platta="sommar"] .td-just-nu-header-icon img[data-graphic-light],
+.td-aktuellt-kort[data-typ="fraga"][data-platta="host"] .td-just-nu-header-icon img[data-graphic-light] {
+  display: none;
+}
+
+.td-aktuellt-kort[data-typ="fraga"][data-platta="sommar"] .td-just-nu-header-icon img[data-graphic-dark],
+.td-aktuellt-kort[data-typ="fraga"][data-platta="host"] .td-just-nu-header-icon img[data-graphic-dark] {
+  display: block;
+}
+
+.td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-fraga-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  width: 100%;
+  color: var(--td-aktuellt-on-plate);
+  text-align: left;
+}
+
+.td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-fraga,
+.td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-hint {
+  margin: 0;
+  width: 100%;
+  color: inherit;
+  text-align: left;
+}
+
+/* Hover/focus: samma overlay-mönster som .td-button::before */
+.td-aktuellt-kort[data-typ="fraga"] {
+  position: relative;
+  overflow: hidden;
+}
+
+.td-aktuellt-kort[data-typ="fraga"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-TD-night);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-aktuellt-kort[data-typ="fraga"]:hover::before {
+  opacity: 0.08;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-aktuellt-kort[data-typ="fraga"]:active::before {
+  opacity: 0.16;
+}
+
+.td-aktuellt-kort[data-typ="fraga"]:focus-visible {
+  outline: 2px solid var(--td-aktuellt-on-plate);
+  outline-offset: 2px;
+}
+
+/* Hörnlänk: samma hover som Just nu-kort (etikett syns, gap 8). */
+.td-aktuellt-kort[data-typ="fraga"]:hover .td-corner-link,
+.td-aktuellt-kort[data-typ="fraga"]:focus-visible .td-corner-link {
+  gap: 8px;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-aktuellt-kort[data-typ="fraga"]:hover .td-corner-link-label,
+.td-aktuellt-kort[data-typ="fraga"]:focus-visible .td-corner-link-label {
+  opacity: 1;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-aktuellt-kort[data-typ="fraga"][data-platta="sommar"]::before {
+  background: var(--color-TD-snow);
+}
+
+/* Track/carousel: fast desktopbredd 519, stretch-höjd i rutnät via align-items */
+.td-aktuellt-track .td-aktuellt-kort {
+  flex: 0 0 519px;
+  width: 519px;
+  min-width: 519px;
+  scroll-snap-align: start;
+}
+
+.td-aktuellt-track {
+  align-items: stretch;
+}
+
+.td-aktuellt-track .td-aktuellt-kort[data-typ="fraga"] {
+  min-height: 100%;
+  height: auto;
+  align-self: stretch;
+}
+
+@media (max-width: 767px) {
+  .td-aktuellt-kort {
+    --td-aktuellt-action-pad: 16px;
+    min-width: 0;
+  }
+
+  .td-aktuellt-track .td-aktuellt-kort {
+    flex-basis: 361px;
+    width: min(361px, calc(100vw - 32px));
+    min-width: 0;
+  }
+
+  .td-aktuellt-kort-bild {
+    height: 209px;
+  }
+
+  .td-aktuellt-kort[data-typ="fraga"] {
+    min-height: 400px;
+    padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+  }
+
+  .td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-fraga.td-heading-md {
+    /* Mobil: Heading/xs */
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+    letter-spacing: -0.021em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-aktuellt-kort[data-typ="fraga"]::before {
+    transition: none;
+  }
+}

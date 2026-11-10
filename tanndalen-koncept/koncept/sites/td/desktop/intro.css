@@ -1,0 +1,190 @@
+/* Intro. Numbers live here or at the top of intro.js. */
+:root {
+  --intro-hold-a: 1100ms; /* pause on the full logo, matches TANNDALEN_HOLD_MS */
+  --intro-grow-duration: 900ms;
+  --intro-grow-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --intro-a-symbol-w: 15vw;
+  --intro-b-symbol-w: 26vw;
+  --intro-word-w: 37.7vw;
+  --intro-hold-b: 450ms; /* pause before typing */
+  --intro-text-lift: 80px; /* typed line sits this much higher than the previous build */
+  --intro-smooth: 0.22; /* displayed scroll progress catch-up per 16.7 ms frame */
+  /* 60vh = 0.6 × viewport (zoom), 50vh = 0.5 × viewport (hold). Not 0.6vh. */
+  --intro-extra: calc(60vh + 50vh);
+}
+
+html.is-intro .intro-runway { position: relative; }
+.intro-stage { position: relative; }
+html.is-intro:not(.is-intro-done) .intro-stage {
+  position: sticky;
+  top: var(--stage-top, var(--space-3xl));
+  z-index: 1;
+  overflow: visible;
+}
+
+html.is-intro:not(.is-intro-done) { --intro-extra: calc(60vh + 50vh); }
+html.is-intro:not(.is-intro-done) .quote { top: calc(1967px + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
+html.is-intro:not(.is-intro-done) .en-dag { top: calc(2235px + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
+html.is-intro:not(.is-intro-done) .page { --en-dag-end: calc(2235px + 200vh + var(--intro-extra) + var(--aktuellt-shift, 0px)); }
+
+html.is-intro-done .intro-lock,
+html.is-intro-done #intro-scroll,
+html.is-intro-done .intro-copy,
+html.is-intro-done .intro-word {
+  visibility: hidden;
+}
+
+.intro-lock {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--color-bg-base);
+}
+
+.intro-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  color: var(--color-bg-base);
+}
+
+.intro-plate path { pointer-events: auto; }
+
+#intro-zoom { transition: none; }
+
+.intro-plate path { shape-rendering: geometricPrecision; }
+
+.intro-word,
+.intro-copy {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-TD-primary), serif;
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+}
+
+.intro-copy {
+  transition: opacity 280ms linear;
+}
+
+#intro-scroll {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-xl);
+  z-index: 50;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transform: translateX(-50%);
+  pointer-events: auto;
+  transition: opacity 200ms linear;
+}
+
+html.is-skip-gone #intro-scroll {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  .intro-word,
+  .intro-copy { font-size: var(--font-size-3xl); }
+}
+
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .page > .top,
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .intro-stage > :not(.hero),
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .hero > :not(.hero-frame),
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .quote,
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .statement,
+html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .intro-line {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes intro-fail {
+  to { opacity: 1; visibility: visible; clip-path: none; }
+}
+
+html.is-intro:not(.is-intro-ready) .page > .top,
+html.is-intro:not(.is-intro-ready) .intro-stage > :not(.hero),
+html.is-intro:not(.is-intro-ready) .hero > :not(.hero-frame),
+html.is-intro:not(.is-intro-ready) .quote {
+  animation: intro-fail 0.01s linear 6s forwards;
+}
+
+html.is-intro-reveal .top {
+  animation: intro-header 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.is-intro-reveal .td-booking {
+  animation: intro-rise 350ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+html.is-intro-reveal .hero-doodle {
+  animation: intro-wipe 450ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+html.is-intro-reveal .hero-topo {
+  animation: intro-wipe 550ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+html.is-intro-reveal .place-label {
+  animation: intro-wipe-label 550ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+html.is-intro-reveal .statement .intro-line {
+  animation: intro-line 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.is-intro-done .hero-doodle {
+  animation: none;
+  opacity: 1;
+  visibility: visible;
+  clip-path: none;
+}
+html.is-intro-done .top,
+html.is-intro-done .td-booking,
+html.is-intro-done .hero-topo,
+html.is-intro-done .statement,
+html.is-intro-done .place-label,
+html.is-intro-done .intro-line {
+  animation: none;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  clip-path: none;
+}
+
+@keyframes intro-header {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes intro-rise {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes intro-wipe {
+  from { opacity: 1; visibility: visible; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; visibility: visible; clip-path: inset(0); }
+}
+@keyframes intro-wipe-label {
+  from { opacity: 1; visibility: visible; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; visibility: visible; clip-path: none; }
+}
+@keyframes intro-line {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.intro-line { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-lock, #intro-scroll { display: none; }
+}

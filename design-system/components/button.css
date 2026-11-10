@@ -1,0 +1,294 @@
+/* Button / Primary, Secondary, Link / Standalone. Mätt i Figma 2026-10-21. */
+
+.td-button {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 12px 32px;
+  border: 0;
+  border-radius: var(--radius-full);
+  font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17.6px;
+  letter-spacing: 0;
+  font-synthesis: none;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.td-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-TD-night);
+  opacity: 0;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft);
+  pointer-events: none;
+}
+
+.td-button:hover::before {
+  opacity: 0.08;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-button:active::before {
+  opacity: 0.16;
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-button-md {
+  height: 40px;
+  padding: 8px 24px;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.td-button-sm {
+  height: 32px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.td-button-primary {
+  background: var(--color-cta-primary);
+  color: var(--contrast-on-cta);
+}
+
+a.td-button.td-button-primary,
+button.td-button.td-button-primary {
+  color: var(--contrast-on-cta);
+}
+
+.td-button-secondary {
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+a.td-button.td-button-secondary,
+button.td-button.td-button-secondary {
+  color: var(--color-text-primary);
+}
+
+.td-button-fill-neutral {
+  background: var(--color-TD-neutral-subtlest);
+  color: var(--color-text-primary);
+}
+
+a.td-button.td-button-fill-neutral,
+button.td-button.td-button-fill-neutral {
+  color: var(--color-text-primary);
+}
+
+.td-button-fill-winter {
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
+}
+
+a.td-button.td-button-fill-winter,
+button.td-button.td-button-fill-winter {
+  color: var(--contrast-on-season-winter);
+}
+
+.td-button-fill-spring {
+  background: var(--color-season-spring);
+  color: var(--contrast-on-season-spring);
+}
+
+a.td-button.td-button-fill-spring,
+button.td-button.td-button-fill-spring {
+  color: var(--contrast-on-season-spring);
+}
+
+.td-button-fill-spring::before {
+  background: var(--color-TD-night);
+}
+
+/* Season-autumn lightens. Summer, spring, winter, neutral and snow darken.
+   Figma has no Fill=night. Season-summer uses a night tone layer, not snow. */
+.td-button-fill-autumn {
+  background: var(--color-season-autumn);
+  color: var(--color-TD-day);
+}
+
+.td-button-fill-autumn::before {
+  background: var(--color-TD-snow);
+}
+
+.td-button-fill-summer {
+  background: var(--color-season-summer);
+  color: var(--contrast-on-season-summer);
+}
+
+a.td-button.td-button-fill-summer,
+button.td-button.td-button-fill-summer {
+  color: var(--contrast-on-season-summer);
+}
+
+.td-button-fill-summer::before {
+  background: var(--color-TD-night);
+}
+
+.td-button-tertiary {
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.td-button-tertiary::before {
+  content: none;
+}
+
+.td-button-tertiary:hover {
+  background: var(--color-TD-night);
+  color: var(--color-TD-snow);
+}
+
+.td-button-tertiary:active {
+  background: var(--color-TD-neutral-strong);
+  color: var(--color-TD-snow);
+}
+
+.td-button-dark.td-button-tertiary {
+  color: var(--color-TD-snow);
+}
+
+.td-button-dark.td-button-tertiary:hover {
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+
+.td-button-dark.td-button-tertiary:active {
+  background: var(--color-TD-day);
+  color: var(--color-text-primary);
+}
+
+.td-button-text {
+  height: auto;
+  padding: var(--space-xs) var(--space-sm);
+  background: transparent;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+}
+
+.td-button-text.td-ui-cta-sm {
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.td-button-text::before {
+  content: none;
+}
+
+.td-button-text:hover,
+.td-button-text:active {
+  background: var(--color-TD-night);
+  color: var(--color-TD-snow);
+}
+
+.td-button .td-button-icon,
+.td-button > svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+}
+
+/* Graphic icon: 24@Medium / 32@Large. Gap 12 = button gap 8 + 4 på wrap.
+   Context Light/Dark styrs av etikettens kontrast; Name överstyrbart via img src. */
+.td-button-graphic {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding-inline-end: 4px;
+  box-sizing: content-box;
+}
+
+.td-button-md .td-button-graphic {
+  width: 24px;
+  height: 24px;
+}
+
+.td-button-graphic img,
+.td-button-graphic svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.td-button:has(.td-button-graphic) .td-button-icon,
+.td-button:has(.td-button-graphic) > svg:not(.td-button-graphic svg) {
+  display: none;
+}
+
+/* Chatt Dark (#F4F1EA) när etiketten är ljus: Primary (cta), Fill summer/autumn,
+   Dark-knapp, samt Secondary+fill-winter under data-season=summer (samma ljusa
+   contrast-on-season-summer). Annars Chatt Light (#24272A). */
+.td-button-graphic[data-context="auto"] img[data-graphic-dark] { display: none; }
+.td-button-graphic[data-context="auto"] img[data-graphic-light] { display: block; }
+
+.td-button-primary .td-button-graphic[data-context="auto"] img[data-graphic-light],
+.td-button-fill-summer .td-button-graphic[data-context="auto"] img[data-graphic-light],
+.td-button-fill-autumn .td-button-graphic[data-context="auto"] img[data-graphic-light],
+.td-button-dark .td-button-graphic[data-context="auto"] img[data-graphic-light],
+html[data-season="summer"] .td-button-fill-winter .td-button-graphic[data-context="auto"] img[data-graphic-light],
+:root[data-season="summer"] .td-button-fill-winter .td-button-graphic[data-context="auto"] img[data-graphic-light] {
+  display: none;
+}
+
+.td-button-primary .td-button-graphic[data-context="auto"] img[data-graphic-dark],
+.td-button-fill-summer .td-button-graphic[data-context="auto"] img[data-graphic-dark],
+.td-button-fill-autumn .td-button-graphic[data-context="auto"] img[data-graphic-dark],
+.td-button-dark .td-button-graphic[data-context="auto"] img[data-graphic-dark],
+html[data-season="summer"] .td-button-fill-winter .td-button-graphic[data-context="auto"] img[data-graphic-dark],
+:root[data-season="summer"] .td-button-fill-winter .td-button-graphic[data-context="auto"] img[data-graphic-dark] {
+  display: block;
+}
+
+.td-button .td-button-arrow {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-start;
+  width: 19px;
+  height: 16px;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+
+.td-button .td-button-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.td-button:hover .td-button-arrow {
+  transform: translateX(3px);
+  transition-duration: var(--motion-duration-normal);
+}
+
+.td-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-button::before,
+  .td-button .td-button-arrow {
+    transition: none;
+  }
+}

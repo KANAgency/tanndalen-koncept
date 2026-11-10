@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+tanndalen-koncept-backup/
+tanndalen-koncept-backup-2/
+backup-2026-11-01-before-hero-revert/
+recovered/
+workshop-wizard/
+*.log
+.env.local
+.env*.local
+.next/
+testing/
+export/
+tanndalen-concept.code-workspace
+tanndalen-koncept/dist/
+assets/video/
+**/assets/video/
