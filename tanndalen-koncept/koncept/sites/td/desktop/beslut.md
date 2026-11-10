@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (OG intro/hero)
+
+OG ny-besökare-intro i `sites/og` only: helskärmsvideo per säsong, typewriter+backspace mot fast «i skidparadiset», scrim från Orsa svart, scroll-krymp + fryst fras, topbar (mörk wordmark, meny, säsong, CTA). CTA = `--color-OG-dark-green` via lokal override av `--color-cta-primary`. Fraser/video/säsongskalender/brand mark i `intro-content.js` + `intro-config.js`. Videor `assets/video/winter|summer.mp4` + poster; saknad fil → poster. Reduced-motion/mobil/slow → poster + stilla fras. Shared/DS/TD orörda av intron. Ratades: porta TD `intro.js`; flytta typewriter till shared. Öppet: sommarfraser; SVG-loggor (BRAND_MARK.src); posterfiler; `test:td` röd p.g.a. parallell Figma-skala 112/88 på TD (2c5d04c), inte OG-intro.
+
 ## 2026-11-10 (OG neutral BASE)
 
 OG `/og/` fick en token-baserad neutral bas: container/rytm/typ/topbar/meny/hero + sektions-slots. Egen `og-startsida.css` + `og-base.js` (meny Escape/fokus). TD-copy neutraliserad till Orsa Grönklitt/Rubrik/Brödtext; ds-komponenter kvar i slots orörda. Ratades: kopiera TD `startsida.css`; hårdkodad hex/px/fontnamn; mobilregler. Öppet: layout-max/topbar-höjd-tokens saknas (närmaste använda); TD-bilder kvar i slot-innehåll; dolda fraga/boka-hosts för skriptkompatibilitet.
