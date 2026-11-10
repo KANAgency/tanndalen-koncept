@@ -182,6 +182,7 @@ async function skipIntroIfPresent(page) {
 async function shot(page, name) {
   await freezeForShot(page);
   const masks = await videoMasks(page);
+  fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, `${name}.masks.json`), JSON.stringify(masks));
   const file = path.join(OUT, `${name}.png`);
   try {
