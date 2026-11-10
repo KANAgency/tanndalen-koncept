@@ -1,5 +1,5 @@
 {
-  "$description": "TD: Figma-variabelnamn \u2192 CSS custom property som generate-css-vars.mjs faktiskt producerar. Applicera som WEB codeSyntax i Figma.",
+  "$description": "TD: Figma-variabelnamn → CSS custom property som generate-css-vars.mjs faktiskt producerar. Applicera som WEB codeSyntax i Figma.",
   "$generatedAt": "2026-10-02",
   "$fileKey": "HW7ZST3CotlOepEcjNI5LC",
   "$source": {
@@ -345,14 +345,6 @@
       "valueExample": "#F5F4F2"
     },
     {
-      "figma": "color/neutral-light",
-      "collection": "Shared / Primitives",
-      "css": "--color-TD-neutral-light",
-      "web": "var(--color-TD-neutral-light)",
-      "emittedIn": ":root",
-      "valueExample": "#D7D7D7"
-    },
-    {
       "figma": "color/neutral-muted",
       "collection": "Shared / Primitives",
       "css": "--color-TD-neutral-muted",
@@ -537,6 +529,14 @@
       "valueExample": "1.3"
     },
     {
+      "figma": "font/size/112",
+      "collection": "Shared / Primitives",
+      "css": "--font-size-112",
+      "web": "var(--font-size-112)",
+      "emittedIn": ":root",
+      "valueExample": "7rem"
+    },
+    {
       "figma": "font/size/2xl",
       "collection": "Shared / Primitives",
       "css": "--font-size-2xl",
@@ -577,12 +577,12 @@
       "valueExample": "4.5rem"
     },
     {
-      "figma": "font/size/7xl",
+      "figma": "font/size/88",
       "collection": "Shared / Primitives",
-      "css": "--font-size-7xl",
-      "web": "var(--font-size-7xl)",
+      "css": "--font-size-88",
+      "web": "var(--font-size-88)",
       "emittedIn": ":root",
-      "valueExample": "6rem"
+      "valueExample": "5.5rem"
     },
     {
       "figma": "font/size/base",
@@ -907,10 +907,10 @@
     {
       "figma": "space-5xl",
       "collection": "Spacing",
-      "css": "--space-48",
-      "web": "var(--space-48)",
+      "css": "--space-5xl",
+      "web": "var(--space-5xl)",
       "emittedIn": ".theme-TD",
-      "valueExample": "48px"
+      "valueExample": "64px"
     },
     {
       "figma": "space-6xl",
@@ -963,10 +963,10 @@
     {
       "figma": "space-xl",
       "collection": "Spacing",
-      "css": "--space-20",
-      "web": "var(--space-20)",
+      "css": "--space-xl",
+      "web": "var(--space-xl)",
       "emittedIn": ".theme-TD",
-      "valueExample": "20px"
+      "valueExample": "24px"
     },
     {
       "figma": "space-xs",
@@ -994,17 +994,17 @@
       {
         "figma": "bp/lg",
         "collection": "Shared / Primitives",
-        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+        "reason": "bp/* — referens only; CSS vars invalid in @media"
       },
       {
         "figma": "bp/md",
         "collection": "Shared / Primitives",
-        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+        "reason": "bp/* — referens only; CSS vars invalid in @media"
       },
       {
         "figma": "bp/sm",
         "collection": "Shared / Primitives",
-        "reason": "bp/* \u2014 referens only; CSS vars invalid in @media"
+        "reason": "bp/* — referens only; CSS vars invalid in @media"
       },
       {
         "figma": "font/style/primary/bold",

@@ -4,10 +4,32 @@
 /* Requires tokens.css (+ fonts-og.css). */
 
 
+.td-heading-xxxl {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-112);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-heading-xxxl-regular {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-112);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
 .td-heading-xxl,
 .td-heading-1 {
   font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: var(--font-size-7xl);
+  font-size: var(--font-size-88);
   font-weight: var(--font-weight-bold);
   line-height: 1.1;
   letter-spacing: -0.04em;
@@ -18,7 +40,7 @@
 
 .td-heading-xxl-regular {
   font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: var(--font-size-7xl);
+  font-size: var(--font-size-88);
   font-weight: var(--font-weight-regular);
   line-height: 1.1;
   letter-spacing: -0.04em;
@@ -546,6 +568,16 @@
 
 /* Mobilstorlek från TD / Typography – responsive. Under bp/md (1024). */
 @media (max-width: 1023px) {
+  .td-heading-xxxl {
+    font-size: var(--font-size-5xl);
+    letter-spacing: -0.04em;
+  }
+
+  .td-heading-xxxl-regular {
+    font-size: var(--font-size-5xl);
+    letter-spacing: -0.04em;
+  }
+
   .td-heading-xxl,
 .td-heading-1 {
     font-size: var(--font-size-4xl);

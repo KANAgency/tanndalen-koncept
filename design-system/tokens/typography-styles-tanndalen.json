@@ -2,15 +2,17 @@
   "$html-implementation": "Klasser följer Figma-namn: .td-heading-xxl, .td-body-xl, .td-annotation. Gamla namn är alias.",
   "$description": "Text styles för Figma/CSS (TD). Speglad Figma TD 2026-10-21.",
   "$figma-groups": {
-    "Heading": ["heading-xxl", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "heading-xxs", "heading-xxxs"],
+    "Heading": ["heading-xxxl", "heading-xxl", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "heading-xxs", "heading-xxxs"],
     "Editorial": ["annotation", "body-xl", "body-lg", "body", "body-sm", "eyebrow", "eyebrow-sm", "quote", "quote-sm", "quote-xs", "statement"],
     "UI": ["ui-title", "ui-title-lg", "ui-title-sm", "ui-body", "ui-body-sm", "ui-caption", "ui-kicker", "ui-label", "ui-nav", "ui-cta", "ui-cta-sm", "ui-figure", "ui-figure-lg", "ui-figure-md", "ui-figure-sm", "ui-figure-sm-regular", "ui-figure-unit", "ui-figure-unit-lg", "ui-figure-unit-md"]
   },
   "$naming": "leading är enhetslös multiplikator när den är ett tal. tracking är em (px / fontstorlek, tre decimaler).",
   "$weights": "Regular=400. Book=450. Bold=700.",
 
-  "heading-xxl": { "family": "TD.primary", "size": "7xl", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
-  "heading-xxl-regular": { "family": "TD.primary", "size": "7xl", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
+  "heading-xxxl": { "family": "TD.primary", "size": "112", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "5xl", "tracking": -0.04 } },
+  "heading-xxxl-regular": { "family": "TD.primary", "size": "112", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "5xl", "tracking": -0.04 } },
+  "heading-xxl": { "family": "TD.primary", "size": "88", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
+  "heading-xxl-regular": { "family": "TD.primary", "size": "88", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
   "heading-xl": { "family": "TD.primary", "size": "5xl", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.019 } },
   "heading-xl-regular": { "family": "TD.primary", "size": "5xl", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.019 } },
   "heading-lg": { "family": "TD.primary", "size": "4xl", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "2xl", "tracking": -0.02 } },

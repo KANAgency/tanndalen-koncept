@@ -192,7 +192,8 @@
       "4xl": 48,
       "5xl": 60,
       "6xl": 72,
-      "7xl": 96,
+      "88": 88,
+      "112": 112,
       "32": 32,
       "56": 56
     },
@@ -289,7 +290,7 @@
     "toast": 400
   },
 
-  "$scale-note": "Fast px-skala (xs 12 → 7xl 96). Se tabell i typografi-docs; delad OG/TD.",
+  "$scale-note": "Fast px-skala (xs 12 → 112). Heading: 112/88/60/48/36/32/24/20/16. Delad OG/TD.",
   "$opsz-note": "Literata har opsz-axel (7-72). Sätt font-optical-sizing: auto i CSS.",
   "$next-steps": ["shadow/elevation sm/md/lg (första kortet/dropdownen)"]
 }

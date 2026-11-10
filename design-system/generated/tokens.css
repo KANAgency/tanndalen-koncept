@@ -78,6 +78,8 @@ html {
   /* —— Primitives: font.size (px in JSON → rem in CSS) —— */
   --font-size-32: 2rem;
   --font-size-56: 3.5rem;
+  --font-size-88: 5.5rem;
+  --font-size-112: 7rem;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -89,7 +91,6 @@ html {
   --font-size-4xl: 3rem;
   --font-size-5xl: 3.75rem;
   --font-size-6xl: 4.5rem;
-  --font-size-7xl: 6rem;
 
   /* —— Primitives: font.weight —— */
   --font-weight-light: 300;
