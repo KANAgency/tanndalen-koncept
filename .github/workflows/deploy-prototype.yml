@@ -1,0 +1,61 @@
+name: Deploy prototype (Azure Static Web Apps)
+
+on:
+  push:
+    branches: [deploy]
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tanndalen-koncept
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The build has no npm dependencies (Playwright is only used for tests), so npm ci is not needed.
+      - name: Build dist
+        run: npm run build
+
+      # Videos are not stored in git. Every file in the blob container that
+      # VIDEO_CONTAINER_SAS_URL points to is downloaded to dist/assets/video/.
+      # The SAS token needs read and list permissions (sp=rl).
+      - name: Download videos
+        env:
+          VIDEO_SAS_URL: ${{ secrets.VIDEO_CONTAINER_SAS_URL }}
+        run: |
+          if [ -z "$VIDEO_SAS_URL" ]; then
+            echo "::warning::VIDEO_CONTAINER_SAS_URL is not set, deploying without videos."
+            exit 0
+          fi
+          base="${VIDEO_SAS_URL%%\?*}"
+          sas="${VIDEO_SAS_URL#*\?}"
+          mkdir -p dist/assets/video
+          names=$(curl -fsSL "$base?restype=container&comp=list&$sas" | grep -oP '(?<=<Name>)[^<]+')
+          if [ -z "$names" ]; then
+            echo "::warning::No videos found in the container."
+            exit 0
+          fi
+          while IFS= read -r f; do
+            echo "Downloading $f"
+            mkdir -p "dist/assets/video/$(dirname "$f")"
+            curl -fsSL "$base/$f?$sas" -o "dist/assets/video/$f"
+          done <<< "$names"
+          du -sh dist dist/assets/video
+
+      - name: Add SWA config
+        run: cp staticwebapp.config.json dist/
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: upload
+          app_location: tanndalen-koncept/dist
+          skip_app_build: true
+
