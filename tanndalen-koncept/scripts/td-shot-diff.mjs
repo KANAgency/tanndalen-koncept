@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * Diff TD regression shots. Scale = 1 (CSS px == shot px for layout).
- * Masks all <video> rects from live DOM per mode/season. Does not mask static images.
+ * Prefers *.masks.json written during capture; falls back to live DOM reloads.
+ * Does not mask static images.
  */
-import { mkdirSync, existsSync, writeFileSync, readdirSync } from "node:fs";
-import { resolve } from "node:path";
+import { mkdirSync, existsSync, writeFileSync, readdirSync, readFileSync } from "node:fs";
+import { resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
@@ -256,6 +257,25 @@ sys.exit(1 if fail else 0)
   return r.status ?? 1;
 }
 
+function loadCaptureMasks() {
+  const masks = {};
+  let missing = 0;
+  for (const name of Object.keys(MODE_SHOTS)) {
+    const base = name.replace(/\.png$/, "");
+    const file = join(afterDir, `${base}.masks.json`);
+    if (!existsSync(file)) {
+      missing += 1;
+      continue;
+    }
+    try {
+      masks[name] = JSON.parse(readFileSync(file, "utf8"));
+    } catch {
+      missing += 1;
+    }
+  }
+  return { masks, missing };
+}
+
 mkdirSync(diffDir, { recursive: true });
 if (!existsSync(beforeDir) || names(beforeDir).length === 0) {
   console.error(`Saknar baseline-bilder i ${beforeDir}`);
@@ -265,8 +285,21 @@ if (!existsSync(afterDir) || names(afterDir).length === 0) {
   console.error(`Saknar capture-bilder i ${afterDir}`);
   process.exit(1);
 }
-const { masks, overflow } = await collectMasks();
-writeFileSync("/tmp/td-video-masks.json", JSON.stringify({ masks, overflow }, null, 2));
-console.log("Video masks collected. Overflow probe:", JSON.stringify(overflow, null, 2));
+
+const fromCapture = loadCaptureMasks();
+let masks = fromCapture.masks;
+let overflow = null;
+if (fromCapture.missing === 0 && Object.keys(masks).length === Object.keys(MODE_SHOTS).length) {
+  console.log(`Video masks from capture (${Object.keys(masks).length} files). Skipping live reload.`);
+} else {
+  console.log(
+    `Capture masks incomplete (have ${Object.keys(masks).length}, missing ${fromCapture.missing}) — live DOM fallback.`
+  );
+  const live = await collectMasks();
+  masks = live.masks;
+  overflow = live.overflow;
+  console.log("Video masks collected. Overflow probe:", JSON.stringify(overflow, null, 2));
+}
+writeFileSync("/tmp/td-video-masks.json", JSON.stringify({ masks, overflow, source: fromCapture.missing === 0 ? "capture" : "live" }, null, 2));
 const status = runPillow(masks);
 process.exit(status);

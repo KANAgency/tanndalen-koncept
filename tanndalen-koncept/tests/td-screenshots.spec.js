@@ -2,16 +2,12 @@ import { test, expect } from "@playwright/test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
-import { spawnSync } from "node:child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const OUT = process.env.TD_SHOT_DIR
   ? path.resolve(process.env.TD_SHOT_DIR)
   : path.resolve(ROOT, "regression/td-after");
-const BASELINE = path.resolve(ROOT, process.env.TD_BEFORE || "regression/td-baseline");
-const DIFF_DIR = path.resolve(ROOT, process.env.TD_DIFF || "regression/td-diff");
-const DIFF_BASE_URL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:4173";
 
 const VIEWPORT = { width: 1440, height: 900 };
 const SHOT_TIMEOUT_MS = 60_000;
@@ -76,7 +72,11 @@ async function freezeForShot(page) {
     window.scrollTo(0, 0);
     window.dispatchEvent(new Event("scroll"));
 
-    const imgs = [...document.querySelectorAll("img")];
+    // Skip empty-src placeholders (e.g. hidden .en-dag-season-photo) — complete with naturalWidth 0 forever.
+    const imgs = [...document.querySelectorAll("img")].filter((img) => {
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      return src.length > 0;
+    });
     await Promise.all(
       imgs.map(async (img) => {
         if (!img.complete || img.naturalWidth === 0) {
@@ -143,6 +143,23 @@ async function freezeForShot(page) {
   await page.waitForTimeout(100);
 }
 
+async function videoMasks(page) {
+  return page.evaluate(() =>
+    [...document.querySelectorAll("video")]
+      .map((v) => {
+        const r = v.getBoundingClientRect();
+        return {
+          x: Math.floor(r.x),
+          y: Math.floor(r.y + scrollY),
+          w: Math.ceil(r.width),
+          h: Math.ceil(r.height),
+          src: (v.currentSrc || v.src || "").split("/").pop() || ""
+        };
+      })
+      .filter((r) => r.w > 1 && r.h > 1)
+  );
+}
+
 async function gotoShot(page, search) {
   const url = search.includes("?") ? `${search}&tdshot=1` : `${search}?tdshot=1`;
   await page.goto(url.startsWith("/") ? url : `/${url}`, {
@@ -164,6 +181,8 @@ async function skipIntroIfPresent(page) {
 
 async function shot(page, name) {
   await freezeForShot(page);
+  const masks = await videoMasks(page);
+  fs.writeFileSync(path.join(OUT, `${name}.masks.json`), JSON.stringify(masks));
   const file = path.join(OUT, `${name}.png`);
   try {
     await Promise.race([
@@ -180,7 +199,6 @@ async function shot(page, name) {
   }
 }
 
-test.describe.configure({ mode: "serial" });
 test.setTimeout(SHOT_TIMEOUT_MS + 45_000);
 
 test.beforeEach(async ({ page }) => {
@@ -226,23 +244,4 @@ test("intro end", async ({ page }) => {
   await skipIntroIfPresent(page);
   await page.evaluate(() => window.scrollTo(0, 0));
   expect(await shot(page, "intro-end")).toBe(true);
-});
-
-test("diff against baseline", async () => {
-  const r = spawnSync(process.execPath, [path.join(ROOT, "scripts/td-shot-diff.mjs")], {
-    cwd: ROOT,
-    encoding: "utf8",
-    maxBuffer: 20 * 1024 * 1024,
-    env: {
-      ...process.env,
-      TD_BEFORE: BASELINE,
-      TD_AFTER: OUT,
-      TD_DIFF: DIFF_DIR,
-      TD_DIFF_BASE_URL: DIFF_BASE_URL,
-      ...(ONLY.size ? { TD_ONLY: [...ONLY].join(",") } : {})
-    }
-  });
-  if (r.stdout) process.stdout.write(r.stdout);
-  if (r.stderr) process.stderr.write(r.stderr);
-  expect(r.status, `td-shot-diff exited ${r.status}`).toBe(0);
 });
