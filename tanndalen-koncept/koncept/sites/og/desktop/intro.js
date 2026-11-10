@@ -160,6 +160,10 @@ export function initOgIntro({ getSeason, subscribeSeason } = {}) {
 
     syncPosterSrc(media);
     const src = media.video;
+    if (!src) {
+      showPosterOnly();
+      return;
+    }
     const onReady = () => {
       videoEnabled = true;
       video.hidden = false;

@@ -29,9 +29,10 @@ export const HERO_MEDIA = Object.freeze({
     video: "assets/video/winter.mp4",
     poster: "assets/img/og-hero-winter.jpg"
   }),
+  /* Summer: no clip/poster yet — hero falls back to Orsa-black placeholder. */
   summer: Object.freeze({
-    video: "assets/video/summer.mp4",
-    poster: "assets/img/og-hero-summer.jpg"
+    video: null,
+    poster: null
   })
 });
 

@@ -6,7 +6,7 @@ Lokala videofiler för Orsa Grönklitt-skalet. Inte del av sajtens UI.
 - `winter.mp4` — kopia av *Grönklitt vinter 26 familj 16x9 clean.mp4*
 
 ## Saknas
-- `summer.mp4` — fanns inte hos TD; intro/sommar använder poster/placeholder tills den levereras
+- `summer.mp4` / sommarposter — hero visar Orsa-svart placeholder tills sommarklipp finns
 
 ## Tänndalen-material som placeholders (byt ut mot Grönklitt)
 - `area1.mp4`
