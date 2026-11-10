@@ -146,10 +146,11 @@ html.theme-OG .og-slot-heading {
 }
 
 /* ——— typography mapping ——— */
+/* h1 / .og-h1 = xxl (88). Hero uses .og-hero-title → xxxl (112) i intro.css. */
 html.theme-OG h1,
 html.theme-OG .og-h1 {
   font-family: var(--font-family-OG-primary);
-  font-size: var(--font-size-7xl);
+  font-size: var(--font-size-88);
   font-weight: var(--font-weight-bold);
   line-height: var(--font-leading-tight);
   letter-spacing: var(--font-tracking-tightest);
