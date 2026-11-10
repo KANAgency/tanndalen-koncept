@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (OG brand + hero-media)
+
+BRAND_MARK pekar på horisontella SVG:er (vit över video, svart i topbar); text-wordmark bara vid load-fel. Vinterposter från första bildruta; sommar utan klipp/poster → Orsa-svart placeholder. Hero spelar `winter.web.mp4` (~8 MB, 1080p H.264, mute, faststart); original `winter.mp4` orörd. Ratades: sommarposter-fil; dela assets med TD. Öppet: sommarklipp + egen poster.
+
 ## 2026-11-10 (test:td snabbare)
 
 `test:td` mätt ~95 s seriellt; efteråt ~21 s (2 workers, masker från capture, hoppa tomma `en-dag-season-photo`). Nya kommandon: `test:td:smoke` (3 vyer, ~9 s) och `test:td:if-changed` (kör fullt bara om TD/shared/DS/testharnäss ändrats mot `origin/main` — ingen pre-push-hook). Diff använder `*.masks.json` från capture; ingen sidomladdning. 3 workers ratades (ENOENT/connection-vägran under last); 2 OK. Tomma hidden season-photos är avsiktliga placeholders, inte sajtfel — testet väntar inte längre 8 s på dem. Ratades: pre-push-hook; röra baseline/OG/TD-utseende. Öppet: ev. pre-push senare.
