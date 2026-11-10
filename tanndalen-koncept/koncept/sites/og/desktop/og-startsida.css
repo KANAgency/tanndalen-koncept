@@ -1,135 +1,488 @@
-/* OG startsida — grund. Inte en kopia av startsida.css.
-   Fonts: Literata (headings) / Radio Canada Big (UI+body) via fonts-og.css + typography-og.css.
-
-   Beslutad palett: off-white, signal-orange, orsa-black, black, white, dark-green
-   + rollprimitiver night/day/snow/cta/accent. Neutrals/säsong = TD tills vidare.
-   PLACEHOLDER kvar: hover/active, tonal, cta-on-dark, link-active.
-*/
+/* OG startsida — neutral BASE (structure/spacing/type/nav only).
+   Tokens only. No decoration. Desktop 1440. */
 
 html.theme-OG {
+  /* Tunable in one place */
+  --og-section-gap: var(--space-6xl);
+  /* Nearest to requested 1440px container; no layout-max token exists */
+  --og-container-max: 90rem;
+  --og-side-margin: var(--space-3xl);
+  --og-gutter: var(--space-xl);
+  /* No --size-topbar; nearest fixed step */
+  --og-topbar-height: var(--space-5xl);
+  --og-focus: var(--color-cta-primary);
+
   background: var(--color-bg-base);
   color: var(--color-text-primary);
 }
 
 html.theme-OG body {
   margin: 0;
-  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-family: var(--font-family-OG-secondary);
   background: var(--color-bg-base);
   color: var(--color-text-primary);
 }
 
-html.theme-OG .page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6xl);
-  max-width: 100%;
-  overflow-x: clip;
+html.theme-OG *,
+html.theme-OG *::before,
+html.theme-OG *::after {
+  box-sizing: border-box;
 }
 
-html.theme-OG .site-header,
-html.theme-OG header.site-top,
-html.theme-OG .site-bar {
-  padding-inline: var(--space-3xl);
-  padding-block: var(--space-lg);
+/* ——— resets ——— */
+html.theme-OG ul,
+html.theme-OG ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-html.theme-OG .hero {
-  position: relative;
-  min-height: 70vh;
-  width: 100%;
-  overflow: hidden;
-  display: grid;
-  align-items: end;
+html.theme-OG button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
-html.theme-OG .hero-frame,
-html.theme-OG .hero-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+html.theme-OG a {
+  color: inherit;
+  text-decoration: none;
 }
 
-html.theme-OG .hero-media {
-  /* fullbleed surface — no parallax layers */
+html.theme-OG a:hover {
+  text-decoration: underline;
 }
 
-html.theme-OG .td-booking {
-  position: relative;
-  z-index: 2;
-  margin-inline: auto;
-  width: min(100% - (var(--space-3xl) * 2), 72rem);
-}
-
-html.theme-OG .statement,
-html.theme-OG .td-statement {
-  font-family: "Literata", "Iowan Old Style", Georgia, serif;
-  font-size: var(--font-size-3xl);
-  line-height: var(--font-leading-snug);
-  padding-inline: var(--space-3xl);
-  max-width: 48rem;
-}
-
-html.theme-OG main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-7xl);
-  padding-inline: var(--space-3xl);
-  padding-bottom: var(--space-8xl);
-}
-
-html.theme-OG .td-aktuellt,
-html.theme-OG .just-nu,
-html.theme-OG .en-dag,
-html.theme-OG .boende,
-html.theme-OG .faq,
-html.theme-OG .og-placeholder-module {
-  width: 100%;
-  max-width: 90rem;
-  margin-inline: auto;
-}
-
-html.theme-OG .og-placeholder-module {
-  border: var(--stroke-1) dashed var(--color-OG-neutral);
-  border-radius: var(--radius-md);
-  padding: var(--space-5xl);
-  background: var(--color-OG-tonal); /* PLACEHOLDER, not decided — tonal */
-}
-
-html.theme-OG .og-placeholder-eyebrow {
-  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-OG-neutral-strong);
-  margin: 0 0 var(--space-sm);
-}
-
-html.theme-OG .og-placeholder-module h2 {
-  font-family: "Literata", "Iowan Old Style", Georgia, serif;
-  margin: 0 0 var(--space-md);
-}
-
-/* Fullbleed media/text band */
-html.theme-OG .utforsakning,
-html.theme-OG .boende {
-  width: 100vw;
-  max-width: 100vw;
-  margin-inline: calc(50% - 50vw);
-  padding-inline: var(--space-3xl);
+html.theme-OG a:focus-visible,
+html.theme-OG button:focus-visible {
+  outline: var(--stroke-2) solid var(--og-focus);
+  outline-offset: var(--space-xs);
 }
 
 html.theme-OG img,
 html.theme-OG video {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* Hide intro runway chrome if leftover */
-html.theme-OG #intro-runway {
-  height: auto;
+html.theme-OG .visually-hidden,
+html.theme-OG .og-js-host {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
-html.theme-OG.is-returning #intro-lock,
-html.theme-OG #intro-scroll {
+
+/* Hide leftover TD chrome not part of the OG base */
+html.theme-OG .onsite-topbar,
+html.theme-OG .top-glass,
+html.theme-OG .top-progress,
+html.theme-OG .intro-runway > .intro-stage > .statement,
+html.theme-OG #intro-runway,
+html.theme-OG #intro-lock,
+html.theme-OG #intro-scroll,
+html.theme-OG .citat-band,
+html.theme-OG .og-placeholder-module,
+html.theme-OG .site-season-dot,
+html.theme-OG .menu-control-icon,
+html.theme-OG .site-menu-thumb,
+html.theme-OG .onsite-toggle-field {
   display: none !important;
+}
+
+/* ——— page / container ——— */
+html.theme-OG .page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: var(--og-topbar-height);
+}
+
+html.theme-OG .og-container {
+  width: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding-inline: var(--og-side-margin);
+}
+
+html.theme-OG .og-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--og-section-gap);
+  padding-block: var(--og-section-gap) var(--space-8xl);
+}
+
+html.theme-OG .og-slot {
+  width: 100%;
+}
+
+html.theme-OG .og-slot-inner {
+  width: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding-inline: var(--og-side-margin);
+}
+
+html.theme-OG .og-slot-label {
+  margin: 0 0 var(--space-lg);
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--font-tracking-normal);
+  text-transform: uppercase;
+  color: var(--color-OG-neutral-strong);
+}
+
+html.theme-OG .og-slot-heading {
+  margin: 0 0 var(--space-xl);
+}
+
+/* ——— typography mapping ——— */
+html.theme-OG h1,
+html.theme-OG .og-h1 {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-7xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-tightest);
+  margin: 0;
+}
+
+html.theme-OG h2,
+html.theme-OG .og-h2 {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-tighter);
+  margin: 0;
+}
+
+html.theme-OG h3,
+html.theme-OG .og-h3 {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-tight);
+  margin: 0;
+}
+
+html.theme-OG p,
+html.theme-OG .og-body {
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-normal);
+  margin: 0;
+}
+
+html.theme-OG small,
+html.theme-OG .og-small {
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-leading-normal);
+}
+
+html.theme-OG .og-ui,
+html.theme-OG .og-topbar,
+html.theme-OG .menu-control,
+html.theme-OG .site-menu-foot,
+html.theme-OG .og-menu-close {
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-leading-normal);
+}
+
+/* ——— topbar ——— */
+html.theme-OG .og-topbar,
+html.theme-OG header.top {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  height: var(--og-topbar-height);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border-bottom: var(--stroke-1) solid var(--color-OG-neutral-subtlest);
+}
+
+html.theme-OG .og-topbar-inner,
+html.theme-OG header.top > .og-topbar-inner {
+  height: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding-inline: var(--og-side-margin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--og-gutter);
+}
+
+html.theme-OG .og-wordmark {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-snug);
+  text-decoration: none;
+}
+
+html.theme-OG .og-wordmark:hover {
+  text-decoration: none;
+}
+
+html.theme-OG .og-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+html.theme-OG .og-topbar-actions [data-season-toggle] {
+  width: auto;
+}
+
+html.theme-OG .og-topbar-actions .td-season-toggle-group {
+  padding: 0;
+  width: auto;
+}
+
+html.theme-OG .menu-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--size-control-md);
+  padding-inline: var(--space-lg);
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+
+html.theme-OG .menu-control-label,
+html.theme-OG .menu-control-label::before,
+html.theme-OG .menu-control-label::after {
+  content: none;
+  display: inline;
+}
+
+html.theme-OG body.menu-open {
+  overflow: hidden;
+}
+
+/* ——— menu overlay ——— */
+html.theme-OG .site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+html.theme-OG .site-menu.is-open {
+  display: block;
+}
+
+html.theme-OG .site-menu-panel {
+  height: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding: var(--og-topbar-height) var(--og-side-margin) var(--space-5xl);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+html.theme-OG .og-menu-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+html.theme-OG .og-menu-close {
+  min-height: var(--size-control-md);
+  padding-inline: var(--space-lg);
+  background: var(--color-bg-base);
+}
+
+html.theme-OG .site-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+html.theme-OG .site-menu-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+html.theme-OG .site-menu-link,
+html.theme-OG .site-menu-link--static {
+  display: block;
+  text-decoration: none;
+}
+
+html.theme-OG .site-menu-title {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-tight);
+}
+
+html.theme-OG .site-menu-chevron {
+  width: var(--size-control-md);
+  height: var(--size-control-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html.theme-OG .site-menu-sub:not(.is-open) .site-menu-sub-clip {
+  display: none;
+}
+
+html.theme-OG .site-menu-subs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+html.theme-OG .site-menu-subs a {
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-md);
+}
+
+html.theme-OG .site-menu-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin-top: auto;
+  padding-top: var(--space-3xl);
+  border-top: var(--stroke-1) solid var(--color-OG-neutral-subtlest);
+}
+
+/* ——— hero ——— */
+html.theme-OG .og-hero,
+html.theme-OG section.hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--og-topbar-height));
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+}
+
+html.theme-OG .og-hero-media,
+html.theme-OG .hero > .og-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* empty src → broken-image chrome hidden when no natural size */
+}
+
+html.theme-OG .og-hero-media:not([src]),
+html.theme-OG .og-hero-media[src=""] {
+  display: none;
+}
+
+html.theme-OG .hero-frame,
+html.theme-OG .hero-media,
+html.theme-OG .hero video.hero-media {
+  display: none !important;
+}
+
+html.theme-OG .og-hero-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding: var(--space-5xl) var(--og-side-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+html.theme-OG .og-hero-copy h1 {
+  color: var(--color-text-inverted);
+  max-width: 20ch;
+}
+
+html.theme-OG .og-hero-copy .og-hero-lead {
+  color: var(--color-text-inverted);
+  max-width: 36ch;
+  font-size: var(--font-size-lg);
+}
+
+/* Booking leaves the hero; position only inside its slot */
+html.theme-OG .og-slot--booking .td-booking {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+html.theme-OG .site-footer {
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
+  padding-block: var(--space-5xl);
+}
+
+html.theme-OG .site-footer-inner {
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding-inline: var(--og-side-margin);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+html.theme-OG .site-footer a:hover {
+  text-decoration: underline;
+}
+
+html.theme-OG .site-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--og-gutter);
+}
+
+html.theme-OG .site-footer-nav h2 {
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-xl);
+  margin: 0 0 var(--space-md);
+}
+
+html.theme-OG .site-footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+html.theme-OG .site-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding-top: var(--space-xl);
+  border-top: var(--stroke-1) solid var(--color-OG-neutral-strong);
+}
+
+html.theme-OG .site-footer-legal {
+  display: flex;
+  gap: var(--space-lg);
 }
