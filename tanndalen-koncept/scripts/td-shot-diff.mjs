@@ -3,18 +3,17 @@
  * Diff TD regression shots. Scale = 1 (CSS px == shot px for layout).
  * Masks all <video> rects from live DOM per mode/season. Does not mask static images.
  */
-import { mkdirSync, existsSync, copyFileSync, writeFileSync, readdirSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { mkdirSync, existsSync, writeFileSync, readdirSync } from "node:fs";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
 
 const root = resolve(fileURLToPath(import.meta.url), "../..");
-const beforeDir = resolve(root, process.env.TD_BEFORE || "regression/td-before");
+const beforeDir = resolve(root, process.env.TD_BEFORE || "regression/td-baseline");
 const afterDir = resolve(root, process.env.TD_AFTER || "regression/td-after");
 const diffDir = resolve(root, process.env.TD_DIFF || "regression/td-diff");
-const baselineDir = resolve(root, "regression/td-baseline");
-const baseURL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:8765";
+const baseURL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:4173";
 
 const MODE_SHOTS = {
   "mode-new-winter.png": ["new", "winter"],
@@ -71,43 +70,54 @@ async function videoMasksFor(page, mode, season, opts = {}) {
 }
 
 async function collectMasks() {
-  const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
-  const masks = {};
-  for (const [name, spec] of Object.entries(MODE_SHOTS)) {
-    const [mode, season, opts] = spec;
-    masks[name] = await videoMasksFor(page, mode, season, opts || {});
-  }
-  // overflow source for report
-  const overflow = await page.evaluate(() => {
-    const vw = window.innerWidth;
-    const hits = [];
-    for (const el of document.querySelectorAll("body *")) {
-      const r = el.getBoundingClientRect();
-      if (r.width < 2) continue;
-      if (r.right > vw + 1 || r.left < -1) {
-        const cs = getComputedStyle(el);
-        hits.push({
-          tag: el.tagName,
-          id: el.id || null,
-          className: typeof el.className === "string" ? el.className.slice(0, 80) : null,
-          left: r.left,
-          right: r.right,
-          width: r.width,
-          position: cs.position
-        });
-      }
+  let browser;
+  try {
+    browser = await chromium.launch();
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+    try {
+      await page.goto(baseURL, { waitUntil: "domcontentloaded", timeout: 15000 });
+    } catch (err) {
+      const msg = err?.message || String(err);
+      console.error(`Kunde inte nå servern på ${baseURL}: ${msg}`);
+      console.error("Starta den via Playwright webServer (npm run test:td) eller manuellt på :4173.");
+      process.exit(1);
     }
-    hits.sort((a, b) => b.right - a.right);
-    return {
-      innerWidth: vw,
-      scrollWidth: document.documentElement.scrollWidth,
-      clientWidth: document.documentElement.clientWidth,
-      top: hits.slice(0, 12)
-    };
-  });
-  await browser.close();
-  return { masks, overflow };
+    const masks = {};
+    for (const [name, spec] of Object.entries(MODE_SHOTS)) {
+      const [mode, season, opts] = spec;
+      masks[name] = await videoMasksFor(page, mode, season, opts || {});
+    }
+    const overflow = await page.evaluate(() => {
+      const vw = window.innerWidth;
+      const hits = [];
+      for (const el of document.querySelectorAll("body *")) {
+        const r = el.getBoundingClientRect();
+        if (r.width < 2) continue;
+        if (r.right > vw + 1 || r.left < -1) {
+          const cs = getComputedStyle(el);
+          hits.push({
+            tag: el.tagName,
+            id: el.id || null,
+            className: typeof el.className === "string" ? el.className.slice(0, 80) : null,
+            left: r.left,
+            right: r.right,
+            width: r.width,
+            position: cs.position
+          });
+        }
+      }
+      hits.sort((a, b) => b.right - a.right);
+      return {
+        innerWidth: vw,
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth,
+        top: hits.slice(0, 12)
+      };
+    });
+    return { masks, overflow };
+  } finally {
+    if (browser) await browser.close();
+  }
 }
 
 function runPillow(masks) {
@@ -231,15 +241,16 @@ sys.exit(1 if fail else 0)
 }
 
 mkdirSync(diffDir, { recursive: true });
+if (!existsSync(beforeDir) || names(beforeDir).length === 0) {
+  console.error(`Saknar baseline-bilder i ${beforeDir}`);
+  process.exit(1);
+}
+if (!existsSync(afterDir) || names(afterDir).length === 0) {
+  console.error(`Saknar capture-bilder i ${afterDir}`);
+  process.exit(1);
+}
 const { masks, overflow } = await collectMasks();
 writeFileSync("/tmp/td-video-masks.json", JSON.stringify({ masks, overflow }, null, 2));
 console.log("Video masks collected. Overflow probe:", JSON.stringify(overflow, null, 2));
 const status = runPillow(masks);
-if (status === 0) {
-  mkdirSync(baselineDir, { recursive: true });
-  for (const name of names(afterDir)) {
-    copyFileSync(join(afterDir, name), join(baselineDir, name));
-  }
-  console.log(`BASELINE ← ${afterDir} → ${baselineDir}`);
-}
 process.exit(status);

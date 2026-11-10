@@ -2,11 +2,16 @@ import { test, expect } from "@playwright/test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, "..");
 const OUT = process.env.TD_SHOT_DIR
   ? path.resolve(process.env.TD_SHOT_DIR)
-  : path.resolve(__dirname, "../regression/td-baseline");
+  : path.resolve(ROOT, "regression/td-after");
+const BASELINE = path.resolve(ROOT, process.env.TD_BEFORE || "regression/td-baseline");
+const DIFF_DIR = path.resolve(ROOT, process.env.TD_DIFF || "regression/td-diff");
+const DIFF_BASE_URL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:4173";
 
 const VIEWPORT = { width: 1440, height: 900 };
 const SHOT_TIMEOUT_MS = 60_000;
@@ -188,7 +193,7 @@ for (const mode of MODES) {
         document.documentElement.dataset.season = s;
       }, season);
       await expect(page.locator("html")).toHaveAttribute("data-mode", mode, { timeout: 5000 }).catch(() => {});
-      await shot(page, `mode-${mode}-${season}`);
+      expect(await shot(page, `mode-${mode}-${season}`)).toBe(true);
     });
   }
 }
@@ -200,12 +205,30 @@ test("intro start", async ({ page }) => {
   } catch (err) {
     console.error(`[td-shot] intro start: no is-intro — ${err.message || err}`);
   }
-  await shot(page, "intro-start");
+  expect(await shot(page, "intro-start")).toBe(true);
 });
 
 test("intro end", async ({ page }) => {
   await gotoShot(page, "/?visit=new&mode=new");
   await skipIntroIfPresent(page);
   await page.evaluate(() => window.scrollTo(0, 0));
-  await shot(page, "intro-end");
+  expect(await shot(page, "intro-end")).toBe(true);
+});
+
+test("diff against baseline", async () => {
+  const r = spawnSync(process.execPath, [path.join(ROOT, "scripts/td-shot-diff.mjs")], {
+    cwd: ROOT,
+    encoding: "utf8",
+    maxBuffer: 20 * 1024 * 1024,
+    env: {
+      ...process.env,
+      TD_BEFORE: BASELINE,
+      TD_AFTER: OUT,
+      TD_DIFF: DIFF_DIR,
+      TD_DIFF_BASE_URL: DIFF_BASE_URL
+    }
+  });
+  if (r.stdout) process.stdout.write(r.stdout);
+  if (r.stderr) process.stderr.write(r.stderr);
+  expect(r.status, `td-shot-diff exited ${r.status}`).toBe(0);
 });

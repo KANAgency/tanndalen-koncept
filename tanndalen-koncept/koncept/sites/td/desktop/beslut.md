@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (test:td-grind)
+
+`npm run test:td` = en Playwright-körning (capture → diff) med webServer på :4173 hela vägen (`reuseExistingServer`). Capture till `regression/td-after`, aldrig till baseline. Auto-promote bort; baseline ersätts bara via `npm run test:td:promote -- --confirm`. Avvikelse över 0,01 % / blob >50×50 → felkod ≠0. Ratades: tvåstegs capture&&diff (servern dog mellan stegen). Öppet: inget.
+
 ## 2026-11-10 (OG-palett speglad)
 
 OG-paletten beslutad: sex brandfärger (off-white, signal-orange, orsa-black, black, white, dark-green) och rollmappning night/day/snow/cta/accent (cta+accent = signal-orange; day=off-white; night=orsa-black; snow=white). Mörkgrön har ingen roll. OG:s säsongsfärger och neutrals = TD:s tills vidare. `.theme-OG` speglar TD:s semantiska struktur mot OG-primitiver. Code syntax per Figma-fil: `code-syntax-figma.json` = TD, `code-syntax-figma-og.json` = OG. Ratades: behålla cta som separat mörkare orange; koppla dark-green till bg-inverted. Öppet: hover/active, tonal, cta-on-dark, link-active (PLACEHOLDER).
