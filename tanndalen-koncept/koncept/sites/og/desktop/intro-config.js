@@ -5,14 +5,14 @@
 export const INTRO_SEEN_KEY = "og-startsida-seen";
 
 /**
- * Brand mark — swap light/dark to SVG paths when delivered; null = text wordmark.
- * One place to replace logos site-wide.
+ * Brand mark — SVG when present; text wordmark only if an image fails to load.
+ * light = over hero video, dark = topbar.
  */
 export const BRAND_MARK = Object.freeze({
   label: "Orsa Grönklitt",
   src: Object.freeze({
-    light: null, /* e.g. "assets/brand/logo-light.svg" */
-    dark: null /* e.g. "assets/brand/logo-dark.svg" */
+    light: "assets/brand/logo-horizontal-white.svg",
+    dark: "assets/brand/logo-horizontal-black.svg"
   })
 });
 

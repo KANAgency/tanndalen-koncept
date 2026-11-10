@@ -37,16 +37,24 @@ export function paintBrandMarks(root = document) {
     host.dataset.ogLogoTone = tone;
     host.classList.add("og-brand-mark");
     host.setAttribute("aria-label", BRAND_MARK.label);
+    const paintText = () => {
+      host.textContent = BRAND_MARK.label;
+      host.dataset.ogLogoText = "1";
+    };
     if (src) {
       host.textContent = "";
+      delete host.dataset.ogLogoText;
       const img = document.createElement("img");
       img.src = src;
       img.alt = BRAND_MARK.label;
       img.decoding = "async";
+      img.onerror = () => {
+        img.remove();
+        paintText();
+      };
       host.append(img);
     } else if (!host.dataset.ogLogoText) {
-      host.textContent = BRAND_MARK.label;
-      host.dataset.ogLogoText = "1";
+      paintText();
     }
   });
 }
