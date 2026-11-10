@@ -1,0 +1,331 @@
+/* OG intro / hero — tokens only. */
+
+html.theme-OG {
+  /* DS heading xxxl/xxl with mobile clamp */
+  --og-font-size-xxxl: clamp(2.75rem, 4.2vw + 1.5rem, var(--font-size-112)); /* 44→112 */
+  --og-font-size-xxl: clamp(2.25rem, 3.2vw + 1.25rem, var(--font-size-88)); /* 36→88 */
+  --og-font-leading-hero: 1.1;
+  --og-hero-scrim-opacity: 40%;
+  --og-hero-shrink: 0;
+  --og-hero-scale: 1;
+  --og-topbar-reveal: 0;
+}
+
+/* CTA = dark-green on OG only (accent stays signal-orange). */
+html.theme-OG {
+  --color-cta-primary: var(--color-OG-dark-green);
+  --color-booking-calendar-selected: var(--color-OG-dark-green);
+  --color-booking-calendar-selected-dark: var(--color-OG-dark-green);
+  --color-booking-calendar-focus: var(--color-OG-dark-green);
+  --color-booking-calendar-focus-dark: var(--color-OG-dark-green);
+}
+
+html.theme-OG .og-hero-runway {
+  position: relative;
+  width: 100%;
+}
+
+html.theme-OG.is-intro:not(.is-intro-done) .og-hero-runway {
+  height: calc(100vh + 100vh * var(--og-runway-factor, 0.55));
+}
+
+html.theme-OG.is-intro-done .og-hero-runway,
+html.theme-OG.is-returning .og-hero-runway {
+  height: auto;
+}
+
+html.theme-OG .og-hero-stage {
+  position: relative;
+  width: 100%;
+}
+
+html.theme-OG.is-intro:not(.is-intro-done) .og-hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+}
+
+html.theme-OG .og-hero,
+html.theme-OG section.hero.og-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  display: grid;
+  align-items: end;
+  justify-items: stretch;
+  overflow: hidden;
+  background: var(--color-OG-orsa-black);
+  color: var(--color-OG-snow);
+  transform: scale(var(--og-hero-scale));
+  transform-origin: center top;
+  will-change: transform;
+}
+
+html.theme-OG.is-returning .og-hero,
+html.theme-OG.is-intro-done .og-hero {
+  min-height: calc(100vh - var(--og-topbar-height));
+  height: auto;
+  transform: none;
+  will-change: auto;
+}
+
+html.theme-OG .og-hero-media-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+html.theme-OG .og-hero-video,
+html.theme-OG .og-hero-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+html.theme-OG .og-hero-video[hidden],
+html.theme-OG .og-hero-poster[hidden] {
+  display: none;
+}
+
+html.theme-OG .og-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-OG-orsa-black) var(--og-hero-scrim-opacity), transparent) 0%,
+    transparent 55%
+  );
+}
+
+html.theme-OG .og-hero-video,
+html.theme-OG .og-hero-poster {
+  max-width: none;
+  height: 100%;
+}
+
+html.theme-OG .og-hero-brand {
+  position: absolute;
+  top: var(--space-3xl);
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  color: var(--color-OG-snow);
+  text-align: center;
+  pointer-events: none;
+}
+
+html.theme-OG .og-hero-brand .og-brand-mark {
+  color: var(--color-OG-snow);
+}
+
+html.theme-OG.is-intro-done .og-hero-brand,
+html.theme-OG.is-returning .og-hero-brand {
+  opacity: calc(1 - var(--og-topbar-reveal));
+}
+
+html.theme-OG .og-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--og-container-max);
+  margin-inline: auto;
+  padding: var(--space-5xl) var(--og-side-margin) var(--space-6xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+html.theme-OG .og-hero-title {
+  margin: 0;
+  max-width: 100%;
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--og-font-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--og-font-leading-hero);
+  letter-spacing: var(--font-tracking-tighter);
+}
+
+html.theme-OG .og-hero-title-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  column-gap: 0.28em;
+  row-gap: 0;
+  min-height: calc(var(--og-font-size-xxxl) * var(--og-font-leading-hero));
+  max-width: 100%;
+  overflow: hidden;
+}
+
+html.theme-OG .og-hero-phrase-slot {
+  position: relative;
+  display: inline-block;
+  min-width: var(--og-phrase-min-width, 8ch);
+  min-height: 1.1em;
+}
+
+html.theme-OG .og-hero-phrase-measure {
+  visibility: hidden;
+  display: block;
+  white-space: nowrap;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+html.theme-OG .og-hero-phrase {
+  display: inline-block;
+  white-space: nowrap;
+  min-height: 1.1em;
+}
+
+html.theme-OG .og-hero-title-fixed {
+  white-space: nowrap;
+}
+
+html.theme-OG .og-hero-pause {
+  position: absolute;
+  right: var(--og-side-margin);
+  bottom: var(--space-3xl);
+  z-index: 4;
+  min-height: var(--size-control-md);
+  padding-inline: var(--space-lg);
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 55%, transparent);
+  background: color-mix(in srgb, var(--color-OG-orsa-black) 45%, transparent);
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+html.theme-OG .og-hero-pause[hidden] {
+  display: none;
+}
+
+html.theme-OG .og-hero-pause:focus-visible {
+  outline: var(--stroke-2) solid var(--color-OG-snow);
+  outline-offset: var(--space-xs);
+}
+
+/* Brand mark (text or img) — light on hero, dark in topbar */
+html.theme-OG .og-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-snug);
+  text-decoration: none;
+  color: inherit;
+}
+
+html.theme-OG .og-brand-mark:hover {
+  text-decoration: none;
+}
+
+html.theme-OG .og-brand-mark img {
+  display: block;
+  height: var(--space-3xl);
+  width: auto;
+}
+
+html.theme-OG .og-brand-mark[data-og-logo-tone="light"] {
+  color: var(--color-OG-snow);
+}
+
+html.theme-OG .og-brand-mark[data-og-logo-tone="dark"] {
+  color: var(--color-OG-orsa-black);
+}
+
+/* Topbar: hidden during intro until scroll reveal */
+html.theme-OG.is-intro:not(.is-intro-done) .og-topbar {
+  opacity: var(--og-topbar-reveal);
+  pointer-events: none;
+  background: color-mix(in srgb, var(--color-OG-day) calc(var(--og-topbar-reveal) * 100%), transparent);
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--color-OG-neutral-subtlest) calc(var(--og-topbar-reveal) * 100%),
+    transparent
+  );
+  transform: translateY(calc((1 - var(--og-topbar-reveal)) * -12px));
+  transition: none;
+}
+
+html.theme-OG.is-intro:not(.is-intro-done) .og-topbar.is-revealed {
+  pointer-events: auto;
+}
+
+html.theme-OG.is-intro-done .og-topbar,
+html.theme-OG.is-returning .og-topbar {
+  opacity: 1;
+  pointer-events: auto;
+  background: var(--color-OG-day);
+  border-bottom-color: var(--color-OG-neutral-subtlest);
+  transform: none;
+}
+
+html.theme-OG .og-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-control-md);
+  padding-inline: var(--space-lg);
+  background: var(--color-cta-primary);
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+}
+
+html.theme-OG .og-topbar-cta:hover {
+  background: var(--color-OG-dark-green-hover);
+  text-decoration: none;
+}
+
+html.theme-OG .og-topbar-cta:active {
+  background: var(--color-OG-dark-green-active);
+}
+
+html.theme-OG .page {
+  background: var(--color-OG-day);
+}
+
+html.theme-OG.is-intro:not(.is-intro-done) .page {
+  padding-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-OG .og-hero {
+    transform: none;
+  }
+
+  html.theme-OG.is-intro:not(.is-intro-done) .og-topbar {
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--color-OG-day);
+    border-bottom-color: var(--color-OG-neutral-subtlest);
+    transform: none;
+  }
+
+  html.theme-OG.is-intro:not(.is-intro-done) .og-hero-runway {
+    height: auto;
+  }
+
+  html.theme-OG.is-intro:not(.is-intro-done) .og-hero-stage {
+    position: relative;
+    height: auto;
+  }
+}

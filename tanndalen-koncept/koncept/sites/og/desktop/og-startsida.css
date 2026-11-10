@@ -11,8 +11,10 @@ html.theme-OG {
   /* No --size-topbar; nearest fixed step */
   --og-topbar-height: var(--space-5xl);
   --og-focus: var(--color-cta-primary);
+  /* CTA = dark-green (accent stays signal-orange). Defined early so --og-focus follows. */
+  --color-cta-primary: var(--color-OG-dark-green);
 
-  background: var(--color-bg-base);
+  background: var(--color-OG-day);
   color: var(--color-text-primary);
 }
 
@@ -373,62 +375,12 @@ html.theme-OG .site-menu-foot {
   border-top: var(--stroke-1) solid var(--color-OG-neutral-subtlest);
 }
 
-/* ——— hero ——— */
-html.theme-OG .og-hero,
-html.theme-OG section.hero {
-  position: relative;
-  width: 100%;
-  min-height: calc(100vh - var(--og-topbar-height));
-  background: var(--color-bg-inverted);
-  color: var(--color-text-inverted);
-  display: grid;
-  align-items: end;
-  overflow: hidden;
-}
-
-html.theme-OG .og-hero-media,
-html.theme-OG .hero > .og-hero-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* empty src → broken-image chrome hidden when no natural size */
-}
-
-html.theme-OG .og-hero-media:not([src]),
-html.theme-OG .og-hero-media[src=""] {
-  display: none;
-}
-
+/* ——— hero (visuals live in intro.css) ——— */
 html.theme-OG .hero-frame,
 html.theme-OG .hero-media,
-html.theme-OG .hero video.hero-media {
+html.theme-OG .hero video.hero-media,
+html.theme-OG .og-hero-media {
   display: none !important;
-}
-
-html.theme-OG .og-hero-copy {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: var(--og-container-max);
-  margin-inline: auto;
-  padding: var(--space-5xl) var(--og-side-margin);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-xl);
-}
-
-html.theme-OG .og-hero-copy h1 {
-  color: var(--color-text-inverted);
-  max-width: 20ch;
-}
-
-html.theme-OG .og-hero-copy .og-hero-lead {
-  color: var(--color-text-inverted);
-  max-width: 36ch;
-  font-size: var(--font-size-lg);
 }
 
 /* Booking leaves the hero; position only inside its slot */
