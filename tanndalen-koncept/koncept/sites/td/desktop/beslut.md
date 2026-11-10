@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (rubrikskala 112/88)
+
+Delad heading-skala synkad med Figma: `--font-size-112` / `--font-size-88`, heading xxxl ny, xxl→88, `--font-size-7xl` (96) bort. TD `.en-dag-heading` hade `font-size: 5rem` (80px) som dolde token-bytet — override bort så xxl gäller. OG `h1`/`.og-h1` → 88 (xxl); hero `.og-hero-title` → 112 (xxxl) via clamp mot DS-tokens. OG `heading-1` i typography-styles → 88. `verify-heading-scale` i `tokens:css`. TD-baseline promotad (xxl synlig i En dag). Ratades: behålla 7xl-alias; låta 5rem-override ligga kvar. Öppet: intro.css DS-byte ligger i ocommittat OG-intro-arbete (inte stägat här).
+
 ## 2026-11-10 (OG intro/hero)
 
 OG ny-besökare-intro i `sites/og` only: helskärmsvideo per säsong, typewriter+backspace mot fast «i skidparadiset», scrim från Orsa svart, scroll-krymp + fryst fras, topbar (mörk wordmark, meny, säsong, CTA). CTA = `--color-OG-dark-green` via lokal override av `--color-cta-primary`. Fraser/video/säsongskalender/brand mark i `intro-content.js` + `intro-config.js`. Videor `assets/video/winter|summer.mp4` + poster; saknad fil → poster. Reduced-motion/mobil/slow → poster + stilla fras. Shared/DS/TD orörda av intron. Ratades: porta TD `intro.js`; flytta typewriter till shared. Öppet: sommarfraser; SVG-loggor (BRAND_MARK.src); posterfiler; `test:td` röd p.g.a. parallell Figma-skala 112/88 på TD (2c5d04c), inte OG-intro.
