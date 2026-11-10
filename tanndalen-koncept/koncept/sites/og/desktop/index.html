@@ -26,13 +26,22 @@
     <link rel="stylesheet" href="ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="ds/components/season-banner.css?v=radius-sm" />
     <link rel="stylesheet" href="og-startsida.css" />
+    <link rel="stylesheet" href="intro.css" />
     <script src="og-base.js" defer></script>
     <script>
-      /* OG early boot — no intro. Always returning. og-* keys only. */
+      /* OG early boot — mode=new shows intro; og-* keys only. */
       history.scrollRestoration = "manual";
       try {
         var storedSeason = localStorage.getItem("og-season");
-        if (storedSeason === "summer" || storedSeason === "sommar") document.documentElement.dataset.season = "summer";
+        if (storedSeason === "summer" || storedSeason === "sommar") {
+          document.documentElement.dataset.season = "summer";
+        } else if (storedSeason === "winter" || storedSeason === "vinter") {
+          document.documentElement.dataset.season = "winter";
+        } else {
+          /* Date default when unset — winter Oct–Apr, summer May–Sep */
+          var m = new Date().getMonth() + 1;
+          document.documentElement.dataset.season = (m >= 5 && m <= 9) ? "summer" : "winter";
+        }
       } catch (e) {}
       try {
         var params = new URLSearchParams(location.search);
@@ -45,8 +54,16 @@
             if (storedBase === "new" || storedBase === "returning" || storedBase === "booking") baseMode = storedBase;
           } catch (err) {}
         } else if (mode !== "new" && mode !== "returning" && mode !== "booking") {
-          try { mode = localStorage.getItem("og-mode"); } catch (err) { mode = null; }
-          if (mode !== "new" && mode !== "returning" && mode !== "booking") mode = "returning";
+          if (/[?&]visit=new(?:&|$)/.test(location.search)) mode = "new";
+          else if (/[?&]visit=returning(?:&|$)/.test(location.search)) mode = "returning";
+          else {
+            try { mode = localStorage.getItem("og-mode"); } catch (err) { mode = null; }
+            if (mode !== "new" && mode !== "returning" && mode !== "booking") {
+              var seen = false;
+              try { seen = localStorage.getItem("og-startsida-seen") === "1"; } catch (err) {}
+              mode = seen ? "returning" : "new";
+            }
+          }
           baseMode = mode;
         }
         try {
@@ -61,7 +78,21 @@
         document.documentElement.dataset.mode = mode || "returning";
         document.documentElement.dataset.baseMode = (baseMode === "onsite" ? "returning" : baseMode) || "returning";
         if (params.get("demo") === "0") document.documentElement.dataset.demo = "0";
-        document.documentElement.classList.add("is-returning", "is-intro-done");
+        var introSeen = mode !== "new";
+        if (mode === "new") {
+          try { localStorage.setItem("og-startsida-seen", "1"); } catch (err) {}
+        }
+        if (/[?&]visit=new(?:&|$)/.test(location.search)) {
+          try {
+            var kept = new URLSearchParams(location.search);
+            kept.delete("visit");
+            var qs = kept.toString();
+            history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+          } catch (err) {}
+        }
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) introSeen = true;
+        document.documentElement.classList.add(introSeen ? "is-returning" : "is-intro");
+        if (introSeen) document.documentElement.classList.add("is-intro-done");
         if (window.scrollY > 4) document.documentElement.classList.add("is-scrolled");
       } catch (e) {
         document.documentElement.classList.add("is-returning", "is-intro-done");
@@ -73,17 +104,18 @@
   <body data-season="winter">
     <script>
       document.body.dataset.season = document.documentElement.dataset.season === "summer" ? "summer" : "winter";
-      document.body.classList.add("is-returning");
+      document.body.classList.add(document.documentElement.classList.contains("is-returning") ? "is-returning" : "is-intro");
     </script>
             <div class="page">
       <header class="top og-topbar">
         <div class="og-topbar-inner">
-          <a class="og-wordmark" href="#hero-heading">Orsa Grönklitt</a>
+          <a class="og-wordmark og-brand-mark" href="#hero-heading" data-og-logo="dark">Orsa Grönklitt</a>
           <div class="og-topbar-actions">
             <div data-season-toggle="icon" data-og-topbar-season></div>
             <button class="menu-control" type="button" aria-expanded="false" aria-controls="site-menu-panel" aria-label="Öppna meny">
               <span class="menu-control-label" id="menu-current">Meny</span>
             </button>
+            <a class="og-topbar-cta" href="#boka">Boka</a>
           </div>
         </div>
         <div class="site-menu" id="site-menu" inert>
@@ -200,14 +232,33 @@
         </div>
       </header>
 
-      <section class="hero og-hero" id="hero-heading" tabindex="-1" aria-label="Orsa Grönklitt">
-        <img class="og-hero-media" alt="" />
-        <div class="og-hero-copy">
-          <h1 class="td-heading-1">Orsa Grönklitt</h1>
-          <p class="og-hero-lead td-lead-sm">Brödtext…</p>
-          <button class="td-button td-button-md td-button-primary td-ui-cta-sm" type="button">Rubrik</button>
+      <div class="og-hero-runway" id="og-hero-runway">
+        <div class="og-hero-stage" id="og-hero-stage">
+          <section class="hero og-hero" id="hero-heading" tabindex="-1" aria-label="Orsa Grönklitt">
+            <div class="og-hero-media-wrap">
+              <img class="og-hero-poster" alt="" hidden />
+              <video class="og-hero-video" muted playsinline loop preload="metadata" hidden></video>
+              <div class="og-hero-scrim" aria-hidden="true"></div>
+            </div>
+            <div class="og-hero-brand" aria-hidden="true">
+              <span class="og-brand-mark" data-og-logo="light">Orsa Grönklitt</span>
+            </div>
+            <div class="og-hero-copy">
+              <h1 class="og-hero-title td-heading-xxxl-regular">
+                <span class="visually-hidden" data-og-phrase-full></span>
+                <span class="og-hero-title-row" aria-hidden="true">
+                  <span class="og-hero-phrase-slot">
+                    <span class="og-hero-phrase-measure" data-og-phrase-measure></span>
+                    <span class="og-hero-phrase" data-og-phrase></span>
+                  </span>
+                  <span class="og-hero-title-fixed" data-og-title-fixed> i skidparadiset</span>
+                </span>
+              </h1>
+            </div>
+            <button class="og-hero-pause" type="button" data-og-video-pause hidden aria-pressed="false">Pausa video</button>
+          </section>
         </div>
-      </section>
+      </div>
       <main class="og-main">
       <section class="og-slot og-slot--booking" data-og-slot="booking">
         <div class="og-slot-inner">
@@ -754,6 +805,7 @@
       import { mountSeasonBanner } from "./ds/components/season-banner.js?v=3";
       import { hittaRoute } from "./hitta-route.js";
       import { SEASON_TOGGLE, SEASON_BANNER_COPY, BOOKING_GUEST_CATEGORIES } from "./site-config.js";
+      import { initOgIntro } from "./intro.js";
       const __ogDead = (() => {
         const el = document.createElement("div");
         el.hidden = true;
@@ -777,6 +829,9 @@
       const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       try {
       initSeasonToggles(document, SEASON_TOGGLE);
+      try {
+        initOgIntro({ getSeason, subscribeSeason });
+      } catch (error) { console.error("og-intro", error); }
       const enDayLive = document.getElementById("en-dag-live");
       const enDayHeading = document.getElementById("en-dag-title");
       let dayView = getSeason() === "summer" ? "summer" : "winter";
@@ -849,25 +904,9 @@
         }
       });
       applyDayView(dayView);
-      const heroFilms = { winter: "assets/video/hero-vinter.mov", summer: "assets/video/hero-sommar.mov" };
-      function applyHeroFilm(season) {
-        const key = season === "summer" ? "summer" : "winter";
-        const src = heroFilms[key];
-        document.querySelectorAll(".hero-media").forEach((el) => {
-          el.removeAttribute("poster");
-          if (el.getAttribute("src") === src && el.readyState > 0) {
-            el.play().catch(() => {});
-            return;
-          }
-          el.src = src;
-          el.load();
-          el.play().catch(() => {});
-        });
-      }
-      applyHeroFilm(getSeason());
+      /* OG hero video is owned by intro.js (assets/video/winter|summer.mp4 + poster). */
       subscribeSeason((season) => {
         document.dispatchEvent(new CustomEvent("og-season", { detail: season }));
-        applyHeroFilm(season);
         const next = season === "summer" ? "summer" : "winter";
         if (next === dayView) return;
         dayView = next;
