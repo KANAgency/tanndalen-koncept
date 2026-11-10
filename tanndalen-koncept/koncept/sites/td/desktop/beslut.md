@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-10 (OG neutral BASE)
+
+OG `/og/` fick en token-baserad neutral bas: container/rytm/typ/topbar/meny/hero + sektions-slots. Egen `og-startsida.css` + `og-base.js` (meny Escape/fokus). TD-copy neutraliserad till Orsa Grönklitt/Rubrik/Brödtext; ds-komponenter kvar i slots orörda. Ratades: kopiera TD `startsida.css`; hårdkodad hex/px/fontnamn; mobilregler. Öppet: layout-max/topbar-höjd-tokens saknas (närmaste använda); TD-bilder kvar i slot-innehåll; dolda fraga/boka-hosts för skriptkompatibilitet.
+
 ## 2026-11-10 (test:td-grind)
 
 `npm run test:td` = en Playwright-körning (capture → diff) med webServer på :4173 hela vägen (`reuseExistingServer`). Capture till `regression/td-after`, aldrig till baseline. Auto-promote bort; baseline ersätts bara via `npm run test:td:promote -- --confirm`. Avvikelse över 0,01 % / blob >50×50 → felkod ≠0. Ratades: tvåstegs capture&&diff (servern dog mellan stegen). Öppet: inget.
@@ -497,3 +501,7 @@ Tooltipens bredd stannade där brödtexten fortfarande är två rader. Pilen sit
 Cykel ersätter Skidhyra i sommar och använder Skidhyras fält. Det är ett antagande. R360-id för Cykel är tomt tills John ger ett.
 
 Öppet: R360-id för Cykel.
+
+## Repo och videor (2026-11-10)
+
+En git-repo under `src/` (branch `main`). Konsolideringscommit: `4e24285`. Gamla separata repon arkiverade i `../git-archive-pre-merge/` (`koncept.git`, old HEAD `f1e9443`; `design-system.git`, old HEAD `263c267`). Videor ligger inte i git (ignorerade via `**/assets/video/`). De måste finnas i `koncept/sites/td/desktop/assets/video/`: `klipp-8.mp4`, `hero-vinter.mov`, `area1.mp4`, `hero-sommar.mov`, `area2.mp4`, `endag-0830.mp4`, `endag-1530.mp4`. `test:td`: en körning, capture till `regression/td-after`, skriver aldrig över baseline; ersätt baseline med `npm run test:td:promote -- --confirm`.
