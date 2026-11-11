@@ -1,5 +1,10 @@
 # Beslut
 
+
+## 2026-11-11 (etapp 3: design-system under shared/)
+
+`design-system/` och `koncept/shared/{js,config}` ligger i `shared/`. `/ds` och `/shared` via dev-server. tokens.css oförändrad efter tokens:css; fonts-td bara kommentarsdiff. Full `test:td` PASS utan promote. Ratades: behålla DS som syskon till projektet. Öppet: etapp 4 (sajtkoncept-namn, sidväljare, build:td/og).
+
 ## 2026-11-11 (etapp 2: td/og platta, inga site-symlänkar)
 
 TD/OG ligger i `td/desktop` och `og/desktop`. Tester+regression under `td/`. Rot-skyltar och site-`ds`/`shared`-symlänkar borta. HTML/JS använder `/ds` och `/shared` via dev-server. Absoluta `/assets/` i index → relativa `assets/`. Smoke grön utan promote. Ratades: behålla skylt-symlänkar. Öppet: etapp 3–4 (design-system in i shared/, byt namn till sajtkoncept).

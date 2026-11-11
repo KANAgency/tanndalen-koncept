@@ -13,6 +13,7 @@ testing/
 export/
 tanndalen-concept.code-workspace
 tanndalen-koncept/dist/
+sajtkoncept/dist/
 assets/video/
 **/assets/video/
 backups/

@@ -1,4 +1,4 @@
-/* Tänndalen site identity. Shared helpers live in koncept/shared. */
+/* Tänndalen site identity. Shared helpers live in /shared/. */
 import {
   createSite,
   wifiOnsiteSignal,

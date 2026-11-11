@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "tokens:css": "npm run tokens:css --prefix shared/design-system",
     "build": "node scripts/build-dist.mjs",
     "preview": "node scripts/preview-dist.mjs",
     "test:season": "playwright test td/tests/season-switch.spec.js",

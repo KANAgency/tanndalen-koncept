@@ -1,14 +1,12 @@
 /**
- * Export a self-contained copy of src/tanndalen-koncept for zip/static hosting.
- * - Does NOT modify tanndalen-koncept/ or the local ds → ../design-system symlink.
- * - Replaces ds/ in the export with generated CSS + fonts/ only.
- * Prefer: npm run build in tanndalen-koncept (writes ./dist).
+ * Export a self-contained copy of the prototype for zip/static hosting.
+ * Prefer: npm run build / build:td / build:og in project root (writes ./dist).
  *
  * Usage:
  *   node scripts/export-testing-demo.mjs [outDir]
  *   DEMO_EXPORT_DIR=/path npm run demo:export
  *
- * Default outDir: ../export/testing-share (sibling of design-system under src/)
+ * Default outDir: <src>/export/testing-share
  */
 
 import {
@@ -25,13 +23,13 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DESIGN_SYSTEM = join(__dirname, "..");
-const SRC = join(DESIGN_SYSTEM, "..");
-const TESTING = join(SRC, "tanndalen-koncept");
+const PROJECT = join(DESIGN_SYSTEM, "..", ".."); /* …/tanndalen-koncept or sajtkoncept */
+const SRC = join(PROJECT, "..");
 const DEFAULT_OUT = join(SRC, "export", "testing-share");
 
 const GENERATED_FILES = ["tokens.css", "fonts-td.css", "typography-td.css"];
 
-const SKIP_DIR_NAMES = new Set([".git", "node_modules", ".DS_Store", "ds"]);
+const SKIP_DIR_NAMES = new Set([".git", "node_modules", ".DS_Store", "ds", "dist", "test-results"]);
 
 function die(msg) {
   console.error(msg);
@@ -45,10 +43,7 @@ function copyTestingTree(srcDir, destDir) {
     const from = join(srcDir, name);
     const to = join(destDir, name);
     const st = lstatSync(from);
-    if (st.isSymbolicLink()) {
-      // Never follow symlinks from tanndalen-koncept/ (e.g. ds) into the export.
-      continue;
-    }
+    if (st.isSymbolicLink()) continue;
     if (st.isDirectory()) {
       copyTestingTree(from, to);
     } else if (st.isFile()) {
@@ -61,7 +56,7 @@ function main() {
   const outArg = process.argv[2] || process.env.DEMO_EXPORT_DIR || DEFAULT_OUT;
   const outDir = resolve(outArg);
 
-  if (!existsSync(TESTING)) die(`Missing tanndalen-koncept/: ${TESTING}`);
+  if (!existsSync(PROJECT)) die(`Missing project root: ${PROJECT}`);
   const generatedDir = join(DESIGN_SYSTEM, "generated");
   const fontsDir = join(DESIGN_SYSTEM, "fonts");
   for (const file of GENERATED_FILES) {
@@ -76,7 +71,7 @@ function main() {
   }
   mkdirSync(outDir, { recursive: true });
 
-  copyTestingTree(TESTING, outDir);
+  copyTestingTree(PROJECT, outDir);
 
   const dsOut = join(outDir, "ds");
   const dsGenerated = join(dsOut, "generated");

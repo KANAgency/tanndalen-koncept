@@ -21,9 +21,10 @@ import { spawnSync } from "node:child_process";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const DESKTOP = resolve(ROOT, "td/desktop");
-const SHARED = resolve(ROOT, "koncept/shared");
+const SHARED_JS = resolve(ROOT, "shared/js");
+const SHARED_CONFIG = resolve(ROOT, "shared/config");
 const OUT = join(ROOT, "dist");
-const DS = resolve(ROOT, "..", "design-system");
+const DS = resolve(ROOT, "shared/design-system");
 
 const SKIP_ROOT_NAMES = new Set([
   ".git",
@@ -87,7 +88,7 @@ function refreshTokens() {
 }
 
 function main() {
-  if (!existsSync(join(ROOT, "index.html"))) die(`Saknar index.html i ${ROOT}`);
+  if (!existsSync(join(DESKTOP, "index.html"))) die(`Saknar index.html i ${DESKTOP}`);
   if (!existsSync(DS)) die(`Saknar design-system: ${DS}`);
 
   refreshTokens();
@@ -107,7 +108,10 @@ function main() {
   mkdirSync(OUT, { recursive: true });
 
   copyTree(DESKTOP, OUT, { skipName: shouldSkipName });
-  copyTree(SHARED, join(OUT, "shared"), { skipName: shouldSkipName });
+  if (existsSync(SHARED_JS)) copyTree(SHARED_JS, join(OUT, "shared/js"), { skipName: shouldSkipName });
+  if (existsSync(SHARED_CONFIG)) {
+    copyTree(SHARED_CONFIG, join(OUT, "shared/config"), { skipName: shouldSkipName });
+  }
 
   const dsOut = join(OUT, "ds");
   mkdirSync(join(dsOut, "generated"), { recursive: true });

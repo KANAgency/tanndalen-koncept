@@ -1,4 +1,4 @@
-/* Orsa Grönklitt site identity. Shared helpers live in koncept/shared.
+/* Orsa Grönklitt site identity. Shared helpers live in /shared/.
    OG-paletten beslutad 2026-11-10 (sex brandfärger + rollprimitiver). */
 import {
   createSite,

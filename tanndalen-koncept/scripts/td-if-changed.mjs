@@ -12,8 +12,7 @@ const repoRoot = resolve(konceptRoot, "..");
 
 const PATHS = [
   "tanndalen-koncept/td/",
-  "tanndalen-koncept/koncept/shared/",
-  "design-system/",
+  "tanndalen-koncept/shared/",
   "tanndalen-koncept/td/tests/td-screenshots.spec.js",
   "tanndalen-koncept/scripts/td-shot-diff.mjs",
   "tanndalen-koncept/scripts/td-promote.mjs",
