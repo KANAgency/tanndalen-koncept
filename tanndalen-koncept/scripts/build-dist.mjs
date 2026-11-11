@@ -45,7 +45,7 @@ const SKIP_ROOT_NAMES = new Set([
   ".gitignore",
 ]);
 
-const GENERATED_FILES = ["tokens.css", "fonts-td.css", "typography-td.css"];
+const GENERATED_FILES = ["tokens.css", "fonts-td.css", "typography-td.css", "breakpoints.mjs"];
 
 function die(msg) {
   console.error(msg);

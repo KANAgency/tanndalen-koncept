@@ -1,0 +1,17 @@
+{
+  "mimeTypes": {
+    ".mov": "video/quicktime",
+    ".mjs": "text/javascript",
+    ".otf": "font/otf",
+    ".ttf": "font/ttf"
+  },
+  "routes": [
+    {
+      "route": "/assets/video/*",
+      "headers": { "cache-control": "public, max-age=86400" }
+    }
+  ],
+  "globalHeaders": {
+    "X-Robots-Tag": "noindex, nofollow"
+  }
+}
