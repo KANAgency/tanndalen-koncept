@@ -1,0 +1,495 @@
+/* OG hero-test — isolated. Tokens only; no shared component styles. */
+
+html.theme-OG {
+  --page-bg: #ffffff;
+  --og-ht-headline-left: 14vw;
+  --og-ht-headline-top: 68vh;
+  --og-ht-headline-size: 5.35vw;
+  --og-ht-headline-leading: 1.05;
+  --og-ht-scroll-length: 200vh;
+}
+
+html.theme-OG,
+html.theme-OG body.og-ht-page {
+  margin: 0;
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--color-OG-orsa-black);
+  font-family: var(--font-family-OG-secondary);
+}
+
+/* Scroll runway — height drives sticky pin distance */
+.og-ht-runway {
+  position: relative;
+  width: 100%;
+  height: var(--og-ht-scroll-length, 200vh);
+}
+
+.og-ht-hero {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(160deg, #6b7c8c 0%, #4a5a6a 45%, #3d4a56 100%);
+}
+
+.og-ht-bg {
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  width: 112%;
+  height: 112%;
+  margin: auto;
+  object-fit: cover;
+  object-position: 50% 40%;
+  transform: scale(1.12) translate3d(0, 0, 0);
+  transform-origin: center center;
+  will-change: transform;
+  pointer-events: none;
+  user-select: none;
+}
+
+.og-ht-bg[hidden] {
+  display: none;
+}
+
+.og-ht-scrim-top {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  width: 100%;
+  height: 28%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-OG-orsa-black) 38%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.og-ht-scrim-headline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 48%;
+  z-index: 1;
+  height: 36%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--color-OG-orsa-black) 28%, transparent) 42%,
+    color-mix(in srgb, var(--color-OG-orsa-black) 18%, transparent) 70%,
+    transparent 100%
+  );
+}
+
+/* Left-aligned. Below clouds in z-order so clouds sink over it. */
+.og-ht-title {
+  position: absolute;
+  left: var(--og-ht-headline-left);
+  top: var(--og-ht-headline-top);
+  z-index: 2;
+  margin: 0;
+  max-width: 42vw;
+  width: max-content;
+  transform: translate3d(0, 0, 0);
+  text-align: left;
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-OG-primary);
+  font-size: clamp(3.75rem, var(--og-ht-headline-size), 8.5rem);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--og-ht-headline-leading);
+  letter-spacing: var(--font-tracking-tighter);
+  will-change: transform, opacity, filter;
+  pointer-events: none;
+}
+
+.og-ht-title-line {
+  display: block;
+}
+
+/*
+ * Cloud layers — parked fully below the hero, opacity 0, before JS runs.
+ * width/left/aspect set inline from config; height auto via aspect-ratio (no CLS).
+ */
+.og-ht-cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: block;
+  width: 150vw;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translate3d(0, 110vh, 0);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  mix-blend-mode: normal;
+}
+
+.og-ht-cloud[data-cloud="cloud-1"] {
+  z-index: 3;
+}
+
+.og-ht-cloud[data-cloud="cloud-gradient"] {
+  z-index: 4;
+}
+
+.og-ht-cloud[data-cloud="cloud-2"] {
+  z-index: 5;
+}
+
+.og-ht-cloud[hidden] {
+  display: none;
+}
+
+.og-ht-snow {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
+  will-change: opacity;
+}
+
+/* Soft bottom fade — opacity driven by JS (0 at p=0 → 1 by p≈0.15) */
+.og-ht-bottom-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  height: 20vh;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  background: linear-gradient(
+    to top,
+    var(--page-bg) 0%,
+    color-mix(in srgb, var(--page-bg) 70%, transparent) 45%,
+    transparent 100%
+  );
+}
+
+.og-ht-content {
+  position: relative;
+  z-index: 1;
+  background: var(--page-bg);
+  color: var(--color-OG-orsa-black);
+  padding: var(--space-6xl) var(--space-3xl) var(--space-8xl);
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.og-ht-content h2 {
+  margin: 0 0 var(--space-xl);
+  font-family: var(--font-family-OG-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-snug);
+}
+
+.og-ht-content p {
+  margin: 0 0 var(--space-lg);
+  font-size: var(--font-size-md);
+  line-height: var(--font-leading-normal);
+  color: color-mix(in srgb, var(--color-OG-orsa-black) 82%, transparent);
+}
+
+/* Debug panel */
+.og-ht-debug {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: min(20rem, calc(100vw - 2 * var(--space-md)));
+  max-height: calc(100svh - 2 * var(--space-md));
+  background: color-mix(in srgb, var(--color-OG-orsa-black) 88%, transparent);
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 22%, transparent);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--color-OG-black) 35%, transparent);
+}
+
+.og-ht-debug[hidden] {
+  display: none;
+}
+
+.og-ht-debug-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 14%, transparent);
+  cursor: default;
+}
+
+.og-ht-debug-bar h2 {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-family: inherit;
+}
+
+.og-ht-debug-toggle {
+  margin: 0;
+  min-height: 1.75rem;
+  padding: 0 0.55rem;
+  width: auto;
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 35%, transparent);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.og-ht-debug-body {
+  overflow: auto;
+  padding: var(--space-md);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.og-ht-debug.is-collapsed .og-ht-debug-body {
+  display: none;
+}
+
+.og-ht-debug.is-collapsed {
+  max-height: none;
+}
+
+.og-ht-debug-msg {
+  margin: 0 0 var(--space-sm);
+  min-height: 1.2em;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.og-ht-debug-msg[data-tone="error"] {
+  color: #ffb4a2;
+}
+
+.og-ht-debug-msg[data-tone="ok"] {
+  color: #b8e0c8;
+}
+
+.og-ht-debug-paste {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.og-ht-debug-paste span {
+  opacity: 0.85;
+}
+
+.og-ht-debug-paste textarea {
+  width: 100%;
+  min-height: 4.5rem;
+  resize: vertical;
+  box-sizing: border-box;
+  padding: var(--space-sm);
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 22%, transparent);
+  background: color-mix(in srgb, var(--color-OG-black) 40%, transparent);
+  color: inherit;
+  font: inherit;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.og-ht-debug-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.og-ht-debug-actions button {
+  margin: 0;
+}
+
+.og-ht-debug details.og-ht-debug-section {
+  margin-bottom: var(--space-sm);
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 14%, transparent);
+  padding: 0;
+}
+
+.og-ht-debug details.og-ht-debug-section > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  user-select: none;
+}
+
+.og-ht-debug details.og-ht-debug-section > summary::-webkit-details-marker {
+  display: none;
+}
+
+.og-ht-debug details.og-ht-debug-section > summary::before {
+  content: "▸ ";
+  opacity: 0.7;
+}
+
+.og-ht-debug details.og-ht-debug-section[open] > summary::before {
+  content: "▾ ";
+}
+
+.og-ht-debug-section-body {
+  padding: 0 var(--space-sm) var(--space-sm);
+}
+
+.og-ht-debug details.og-ht-debug-advanced {
+  margin-top: var(--space-xs);
+  border: 0;
+}
+
+.og-ht-debug details.og-ht-debug-advanced > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+
+.og-ht-debug details.og-ht-debug-advanced > summary::-webkit-details-marker {
+  display: none;
+}
+
+.og-ht-debug label.og-ht-debug-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1rem 0.5rem;
+  margin-bottom: var(--space-sm);
+  align-items: center;
+}
+
+.og-ht-debug label.og-ht-debug-field .og-ht-debug-name {
+  grid-column: 1 / -1;
+  opacity: 0.9;
+}
+
+.og-ht-debug label.og-ht-debug-field .og-ht-debug-hint {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 10px;
+  opacity: 0.55;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.og-ht-debug label.og-ht-debug-field input[type="range"] {
+  width: 100%;
+  grid-column: 1 / 2;
+  accent-color: var(--color-OG-signal-orange);
+}
+
+.og-ht-debug label.og-ht-debug-field input[type="number"] {
+  width: 4.2rem;
+  box-sizing: border-box;
+  padding: 0.15rem 0.3rem;
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 28%, transparent);
+  background: color-mix(in srgb, var(--color-OG-black) 35%, transparent);
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.og-ht-debug label.og-ht-debug-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.og-ht-debug label.og-ht-debug-check .og-ht-debug-check-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.og-ht-debug label.og-ht-debug-check .og-ht-debug-hint {
+  margin: 0;
+  font-size: 10px;
+  opacity: 0.55;
+}
+
+.og-ht-debug input[type="checkbox"] {
+  accent-color: var(--color-OG-signal-orange);
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.og-ht-debug button {
+  margin-top: var(--space-sm);
+  width: 100%;
+  min-height: var(--size-control-sm, 2rem);
+  border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-snow) 35%, transparent);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.og-ht-debug button:focus-visible,
+.og-ht-debug-toggle:focus-visible,
+.og-ht-debug-paste textarea:focus-visible,
+.og-ht-debug input:focus-visible {
+  outline: var(--stroke-2) solid var(--color-OG-snow);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .og-ht-runway {
+    height: auto;
+  }
+
+  .og-ht-hero {
+    position: relative;
+    top: auto;
+  }
+
+  .og-ht-bg,
+  .og-ht-cloud,
+  .og-ht-title,
+  .og-ht-bottom-fade {
+    will-change: auto;
+  }
+
+  .og-ht-snow {
+    display: none;
+  }
+
+  /* Soft bottom fade always on for reduced-motion static hero */
+  .og-ht-bottom-fade {
+    opacity: 1;
+  }
+}
