@@ -11,14 +11,14 @@ const konceptRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = resolve(konceptRoot, "..");
 
 const PATHS = [
-  "tanndalen-koncept/td/",
-  "tanndalen-koncept/shared/",
-  "tanndalen-koncept/td/tests/td-screenshots.spec.js",
-  "tanndalen-koncept/scripts/td-shot-diff.mjs",
-  "tanndalen-koncept/scripts/td-promote.mjs",
-  "tanndalen-koncept/scripts/td-if-changed.mjs",
-  "tanndalen-koncept/playwright.config.js",
-  "tanndalen-koncept/package.json"
+  "sajtkoncept/td/",
+  "sajtkoncept/shared/",
+  "sajtkoncept/td/tests/td-screenshots.spec.js",
+  "sajtkoncept/scripts/td-shot-diff.mjs",
+  "sajtkoncept/scripts/td-promote.mjs",
+  "sajtkoncept/scripts/td-if-changed.mjs",
+  "sajtkoncept/playwright.config.js",
+  "sajtkoncept/package.json"
 ];
 
 function run(cmd, args, opts = {}) {

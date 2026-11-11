@@ -17,14 +17,14 @@ Medvetet bortvalt för nu: Storybook, Figma Code Connect.
 
 ## Tokenstruktur
 
-`primitives.json` → `{varumärke}.semantic.json` → typography-styles-*.json. CSS via `scripts/generate-css-vars.mjs` → `generated/tokens.css`; TD text styles + `@font-face` via `scripts/generate-typography-css.mjs` → `generated/typography-td.css`, `generated/fonts-td.css`. Webfonts: `fonts/` (produkt — inte `src/tanndalen-koncept`).
+`primitives.json` → `{varumärke}.semantic.json` → typography-styles-*.json. CSS via `scripts/generate-css-vars.mjs` → `generated/tokens.css`; TD text styles + `@font-face` via `scripts/generate-typography-css.mjs` → `generated/typography-td.css`, `generated/fonts-td.css`. Webfonts: `fonts/` (produkt — inte sajtprototyperna).
 
-**Gräns:** `src/tanndalen-koncept` = startsida-prototyp och tillfälliga assets (video, HTML). Ingen demo-specifik token eller stil i design-system utom det som är avsiktlig produktdefinition (t.ex. `heading-2-hero` i Figma-paritet). Prototypen länkar design-system via symlink `tanndalen-koncept/ds` → `../design-system` (krävs när servern bara exponerar konceptmappen — `../design-system` ger 404).
+**Gräns:** `src/sajtkoncept` = TD/OG-prototyper (`td/desktop`, `og/desktop`) plus `shared/`. Designsystemet ligger i `shared/design-system/` och serveras på `/ds/` av `scripts/dev-server.py`. Inga symlänkar.
 
 ### Demo lokalt vs delning
 
-- **Lokalt:** behåll `tanndalen-koncept/ds` → `../design-system`. Servera från `tanndalen-koncept/` (t.ex. `python3 scripts/dev-server.py`).
-- **Export (zip/hosting):** från `tanndalen-koncept/` kör `npm run build` → `dist/`. (Äldre väg: `design-system` `npm run demo:export` → `src/export/testing-share/`.)
+- **Lokalt:** från `sajtkoncept/` kör `python3 scripts/dev-server.py` → `/td/`, `/og/`, `/ds/`, `/shared/`.
+- **Export (zip/hosting):** `npm run build:td` → `dist/td/`, `npm run build:og` → `dist/og/` (materialiserad `ds/` + `shared/`, inga symlänkar).
 
 ## Status per beslut
 

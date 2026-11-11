@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-11 (etapp 4: sajtkoncept)
+
+Bytt namn `tanndalen-koncept` → `sajtkoncept`. Sidväljare på `/`. `build:td`/`build:og` → `dist/td|og` med materialiserad ds+shared. Deploy-workflow pekar på `sajtkoncept/dist/td` (TD live). beslut.md i roten. Inga symlänkar. Ratades: behålla gammalt mappnamn; dela dist mellan sajter. Öppet: etapp 5 städlista; ev. OG-deploy.
+
 
 ## 2026-11-11 (etapp 3: design-system under shared/)
 

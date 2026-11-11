@@ -23,7 +23,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DESIGN_SYSTEM = join(__dirname, "..");
-const PROJECT = join(DESIGN_SYSTEM, "..", ".."); /* …/tanndalen-koncept or sajtkoncept */
+const PROJECT = join(DESIGN_SYSTEM, "..", ".."); /* …/sajtkoncept */
 const SRC = join(PROJECT, "..");
 const DEFAULT_OUT = join(SRC, "export", "testing-share");
 

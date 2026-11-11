@@ -1,11 +1,15 @@
 {
-  "name": "tanndalen-koncept",
+  "name": "sajtkoncept",
   "private": true,
   "type": "module",
   "scripts": {
     "tokens:css": "npm run tokens:css --prefix shared/design-system",
     "build": "node scripts/build-dist.mjs",
+    "build:td": "node scripts/build-dist.mjs --site=td",
+    "build:og": "node scripts/build-dist.mjs --site=og",
     "preview": "node scripts/preview-dist.mjs",
+    "preview:td": "node scripts/preview-dist.mjs --site=td",
+    "preview:og": "node scripts/preview-dist.mjs --site=og",
     "test:season": "playwright test td/tests/season-switch.spec.js",
     "test:intro": "playwright test td/tests/intro-scroll.spec.js",
     "test:init": "playwright test td/tests/page-init.spec.js",

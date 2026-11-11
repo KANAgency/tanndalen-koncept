@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: tanndalen-koncept
+        working-directory: sajtkoncept
     steps:
       - uses: actions/checkout@v4
 
@@ -18,12 +18,12 @@ jobs:
         with:
           node-version: 22
 
-      # The build has no npm dependencies (Playwright is only used for tests), so npm ci is not needed.
-      - name: Build dist
-        run: npm run build
+      # Playwright is only used for tests; build has no npm deps beyond that.
+      - name: Build TD dist
+        run: npm run build:td
 
       # Videos are not stored in git. Every file in the blob container that
-      # VIDEO_CONTAINER_SAS_URL points to is downloaded to dist/assets/video/.
+      # VIDEO_CONTAINER_SAS_URL points to is downloaded to dist/td/assets/video/.
       # The SAS token needs read and list permissions (sp=rl).
       - name: Download videos
         env:
@@ -35,7 +35,7 @@ jobs:
           fi
           base="${VIDEO_SAS_URL%%\?*}"
           sas="${VIDEO_SAS_URL#*\?}"
-          mkdir -p dist/assets/video
+          mkdir -p dist/td/assets/video
           names=$(curl -fsSL "$base?restype=container&comp=list&$sas" | grep -oP '(?<=<Name>)[^<]+')
           if [ -z "$names" ]; then
             echo "::warning::No videos found in the container."
@@ -43,19 +43,18 @@ jobs:
           fi
           while IFS= read -r f; do
             echo "Downloading $f"
-            mkdir -p "dist/assets/video/$(dirname "$f")"
-            curl -fsSL "$base/$f?$sas" -o "dist/assets/video/$f"
+            mkdir -p "dist/td/assets/video/$(dirname "$f")"
+            curl -fsSL "$base/$f?$sas" -o "dist/td/assets/video/$f"
           done <<< "$names"
-          du -sh dist dist/assets/video
+          du -sh dist/td dist/td/assets/video
 
       - name: Add SWA config
-        run: cp staticwebapp.config.json dist/
+        run: cp staticwebapp.config.json dist/td/
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: upload
-          app_location: tanndalen-koncept/dist
+          app_location: sajtkoncept/dist/td
           skip_app_build: true
-
