@@ -12,7 +12,7 @@ test("zoom point, scale curve and coverage", async ({ browser }) => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   await stubMedia(page);
   await page.addInitScript(() => localStorage.removeItem("td-startsida-seen"));
-  await page.goto("/?visit=new", { waitUntil: "domcontentloaded" });
+  await page.goto("/td/?visit=new", { waitUntil: "domcontentloaded" });
   await expect(page.locator("#intro-lock")).toBeVisible();
   const meta = await page.evaluate(() => ({
     inside: document.getElementById("intro-runway").dataset.originInside,
@@ -60,7 +60,7 @@ for (const viewport of [
     await stubMedia(page);
     await page.setViewportSize(viewport);
     await page.addInitScript(() => localStorage.removeItem("td-startsida-seen"));
-    await page.goto("/?visit=new", { waitUntil: "domcontentloaded" });
+    await page.goto("/td/?visit=new", { waitUntil: "domcontentloaded" });
     const result = await page.evaluate(() => {
       const runway = document.getElementById("intro-runway");
       const sMax = Number(runway.dataset.sMax);
@@ -86,7 +86,7 @@ test("skip, heading, pause and season line", async ({ page }) => {
     localStorage.setItem("td-season", "winter");
     localStorage.removeItem("td-startsida-seen");
   });
-  await page.goto("/?visit=new", { waitUntil: "domcontentloaded" });
+  await page.goto("/td/?visit=new", { waitUntil: "domcontentloaded" });
   const h1 = page.locator("h1");
   await expect(h1).toHaveText("Tänndalen. Älskat av skidåkare.");
   const box = await h1.boundingBox();
@@ -110,7 +110,7 @@ test("summer line", async ({ page }) => {
     localStorage.setItem("td-season", "summer");
     localStorage.removeItem("td-startsida-seen");
   });
-  await page.goto("/?visit=new", { waitUntil: "domcontentloaded" });
+  await page.goto("/td/?visit=new", { waitUntil: "domcontentloaded" });
   await expect(page.locator("#intro-copy")).toHaveText("Älskat av fjällvandrare.", { timeout: 2500 });
 });
 
@@ -118,7 +118,7 @@ test("returning and reduced motion skip the runway", async ({ browser }) => {
   const returning = await browser.newPage();
   await stubMedia(returning);
   await returning.addInitScript(() => localStorage.setItem("td-startsida-seen", "1"));
-  await returning.goto("/?visit=returning", { waitUntil: "domcontentloaded" });
+  await returning.goto("/td/?visit=returning", { waitUntil: "domcontentloaded" });
   await expect(returning.locator(".intro-runway")).toBeHidden();
   const lock = await returning.evaluate(() => getComputedStyle(document.getElementById("intro-lock")).transform);
   expect(lock === "none" || lock === "matrix(1, 0, 0, 1, 0, 0)").toBe(true);
@@ -129,7 +129,7 @@ test("returning and reduced motion skip the runway", async ({ browser }) => {
   await stubMedia(reduced);
   await reduced.emulateMedia({ reducedMotion: "reduce" });
   await reduced.addInitScript(() => localStorage.removeItem("td-startsida-seen"));
-  await reduced.goto("/?visit=new", { waitUntil: "domcontentloaded" });
+  await reduced.goto("/td/?visit=new", { waitUntil: "domcontentloaded" });
   await expect(reduced.locator(".intro-runway")).toBeHidden();
   await expect(reduced.locator("#hero-play")).toBeVisible();
   await reduced.close();

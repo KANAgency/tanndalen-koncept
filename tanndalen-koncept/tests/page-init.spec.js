@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const paths = ["/", "/?visit=new"];
+const paths = ["/td/", "/td/?visit=new"];
 const widths = [1280, 390];
 const seasons = ["winter", "summer"];
 

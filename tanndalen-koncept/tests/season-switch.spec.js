@@ -85,7 +85,7 @@ test("säsongen växlar utan blandat läge", async ({ page }) => {
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport);
-    await page.goto("/index.html");
+    await page.goto("/td/");
     await page.addStyleTag({ content: "*, *::before, *::after { animation: none !important; transition: none !important; }" });
     await assertSeason(page, "winter");
     const tally = await page.evaluate(() => ({ ...window.__seasonTally }));

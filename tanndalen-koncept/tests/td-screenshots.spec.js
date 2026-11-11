@@ -217,7 +217,7 @@ for (const mode of MODES) {
           localStorage.setItem("td-season", value);
         } catch (_) {}
       }, season);
-      await gotoShot(page, `/?mode=${mode}`);
+      await gotoShot(page, `/td/?mode=${mode}`);
       await skipIntroIfPresent(page);
       await page.evaluate((s) => {
         document.documentElement.dataset.season = s;
@@ -230,7 +230,7 @@ for (const mode of MODES) {
 
 test("intro start", async ({ page }) => {
   test.skip(!want("intro-start"), "TD_ONLY skips intro-start");
-  await gotoShot(page, "/?visit=new&mode=new");
+  await gotoShot(page, "/td/?visit=new&mode=new");
   try {
     await page.locator("html.is-intro").waitFor({ timeout: 10000 });
   } catch (err) {
@@ -241,7 +241,7 @@ test("intro start", async ({ page }) => {
 
 test("intro end", async ({ page }) => {
   test.skip(!want("intro-end"), "TD_ONLY skips intro-end");
-  await gotoShot(page, "/?visit=new&mode=new");
+  await gotoShot(page, "/td/?visit=new&mode=new");
   await skipIntroIfPresent(page);
   await page.evaluate(() => window.scrollTo(0, 0));
   expect(await shot(page, "intro-end")).toBe(true);

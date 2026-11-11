@@ -54,7 +54,7 @@ async function videoMasksFor(page, mode, season, opts = {}) {
       localStorage.setItem("td-season", s);
     } catch {}
   }, season);
-  let url = `/?mode=${mode}`;
+  let url = `/td/?mode=${mode}`;
   if (opts.visit) url += `&visit=${opts.visit}`;
   await page.goto(new URL(url, baseURL).href, { waitUntil: "domcontentloaded", timeout: 30000 });
   if (!opts.keepIntro) {
@@ -89,7 +89,7 @@ async function collectMasks() {
     browser = await chromium.launch();
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
     try {
-      await page.goto(baseURL, { waitUntil: "domcontentloaded", timeout: 15000 });
+      await page.goto(new URL("/td/", baseURL).href, { waitUntil: "domcontentloaded", timeout: 15000 });
     } catch (err) {
       const msg = err?.message || String(err);
       console.error(`Kunde inte nå servern på ${baseURL}: ${msg}`);
