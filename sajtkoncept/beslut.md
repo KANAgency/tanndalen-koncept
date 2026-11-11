@@ -1,5 +1,33 @@
 # Beslut
 
+## 2026-11-11 (hero-page header → OG theme)
+
+Header CSS slutade skugga tema med lokala TD-hex (#ae6113, #a1b5ba, #24272a, m.fl.) och egna font-stacks. Färger från `.theme-OG` + `og-overrides` (`--color-cta-primary`, `--color-text-primary`, `--color-OG-off-white`, …). Typ via befintliga `td-ui-cta` / `td-ui-cta-sm` / typography-og. Chatt-ikoner omfärgade #BF6A15→#003E3A. Layout/reveal/sticky oförändrat. Ratades: röra td/shared/intro/block. Öppet: om Fråga-fill ska vara något annat än season-winter.
+
+## 2026-11-11 (hero-page: verbatim TD-blockport)
+
+En dag / Just nu / FAQ / Fråga-modal / Boende porta verbatim från TD (markup + startsida.css-regler + modul-JS) till `hero-page/td-blocks.css` + `td-blocks.js`. Gamla og-hp-* + og-tokens omlänkade till `.old`. Teman via `.theme-OG` + typography-og; `og-overrides.css` sätter CTA #003e3a, accent #e74011, TD→OG-alias, overflow-x:clip (sticky), ingen a:hover-underline i block. OG-ikoner #BF6A15→#003E3A. Ratades: fortsatt omskrivning i og-hp-blocks; röra td/shared/header/intro. Öppet: FAQ-höjd ~27px p.g.a. Literata vs Superclarendon; boende-copy fortfarande TD-platshållare (Fjällöga/Hamra).
+
+## 2026-11-11 (hero-page block-bugfix #2: opaque fade / season / FAQ / områden)
+
+En dag: opaque stack-fade (utgående opacity 1, inkommande ovanpå); sol-ikon `--color-accent`; puff full-bleed bara vid `.is-puff-on`; CTA secondary vit/primary mörkgrön. Season: `--color-OG-dark-green`, sommarbild (TD-mappning), ikoner dolda, margin pull-up mot pin-fot. FAQ: varje rad border+padding 16/24. Områden: media 100vw cover + inline search-SVG. Ratades: röra header/intro/td/shared.
+
+## 2026-11-11 (hero-page block-bugfix: crossfade/pin/banner/puff/färger)
+
+Fem desktop-buggar i En dag/Just nu/FAQ/Områden: (1) copy/CTA sekventiell fade (media korsfadar, copy `is-copy-on` 150+150 ms, inactive `visibility:hidden`); (2) pin `top`/`height` offset mot sticky header inkl. logo/glass (inte closed menu); (3) season-banner i flöde efter `.en-dag-runway` inuti sektionen; (4) solspår göms vid puff via `.is-puff-on`; (5) TD-färger i blocken remapade till OG-tokens (season-winter #A1B5BA → neutral-subtlest, TD-cta/accent orange → cta-primary #003e3a, m.fl.). Bara hero-page content CSS/JS. Ratades: röra header/intro. Öppet: om secondary-knappar ska bli mörkgröna primaries.
+
+## 2026-11-11 (En dag: TD-sticky scroll-timeline ersätter karusell)
+
+En dag omskriven till TD:s mönster — pin + vertikal sun-track + staplade `.en-dag-slide` + puff + `.en-dag-season` — i stället för kortkarusellen från tidigare idag. Scoped i `og-hp-blocks.css`/`og-hp-en-dag.js`, ingen td/shared-kod rörd. Native `position: sticky` funkar inte på sidan (body/html har `overflow: hidden auto`, samma kända kvirk som `.og-hp-intro-pin.is-locked` redan kompenserar för) — pinnen styrs i stället JS-drivet mellan `absolute`/`fixed`/`is-released` utifrån scrollposition. Mobil (<1024) och reduced-motion faller tillbaka till ett staplat flöde utan pin/sun-track. `og-tokens.css` fick exakt Figma-typskala (vikt/letter-spacing/radie) för heading-, body- och ui-klasserna. Ratades: TD:s fulla snap-motor (förenklad scroll→slide-mappning i stället); briefens bokstavliga "copy höger/sol vänster" — TD:s faktiska layout (copy vänster, sol höger) användes i stället, flaggat i handoff. Öppet: riktig dagtitel (TODO i koden); soltider approximativa lat/lon (oförändrat sen tidigare).
+
+## 2026-11-11 (OG hero-page: fyra block under hero)
+
+Hero-page fick fyra block under hero/bokningsraden, ersätter `.og-hp-next`-platshållaren: En dag, Just nu, Frågor och svar, Områden (ankare `#en-dag`/`#just-nu`/`#fragor`/`#omraden`+`#boende`). Markup härledd från og-slots i `og/desktop/index.html` — `.td-fraga-block`/`.td-fraga-fragelista`, inte legacy `.faq-*`. Layout omskriven ren i ny `og-hp-blocks.css` scopead under `.og-hp-blocks`, proportioner från TD:s `startsida.css`; ny `og-tokens.css` pinnar färg/typ/spacing self-contained. Fyra JS-moduler plus `og-hp-blocks.js` som samlar dem, kallas från `hero-page.js` efter bokningsmount. DS-komponenter länkas direkt, inte kopierade. `scroll-margin-top` tillagd för ankarlänkarna mot den fasta headern. Ratades: TD:s scroll-pin-motor för En dag (dokumentflödes-karusell i stället), legacy faq-css, boende-parallax vid scroll, fler än två boendeområden. Öppet: riktiga Orsa Grönklitt-boendeområden (nu platshållare med TODO i koden), approximativ lat/lon för soltider.
+
+## 2026-11-11 (OG hero-test isolat)
+
+Ny isolerad routesida `/og/hero-test/` (OG-only preview: `/hero-test/`) med mist/snö/parallax-hero. Egna filer under `og/desktop/hero-test/` + valfri `og/desktop/hero-test.jpg`. Config-objekt + `?debug=1`-panel. Procedural fog (byt till WebP/AVIF via config.src). Ratades: röra intro.js/index, shared, TD, GSAP. Öppet: riktig fog-bild + hero-test.jpg när media finns.
+
 ## 2026-11-11 (etapp 4: sajtkoncept)
 
 Bytt namn `tanndalen-koncept` → `sajtkoncept`. Sidväljare på `/`. `build:td`/`build:og` → `dist/td|og` med materialiserad ds+shared. Deploy-workflow pekar på `sajtkoncept/dist/td` (TD live). beslut.md i roten. Inga symlänkar. Ratades: behålla gammalt mappnamn; dela dist mellan sajter. Öppet: etapp 5 städlista; ev. OG-deploy.

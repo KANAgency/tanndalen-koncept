@@ -1,0 +1,695 @@
+/* OG hero-page — intro → cloud transition → hero */
+
+html.theme-OG {
+  --page-bg: #f5eee5;
+  --og-hp-intro-scroll: 200vh;
+
+  /*
+   * OG type tokens — Figma Desktop - 32 (4042:18225).
+   * Fonts loaded via /ds/generated/fonts-og.css (Literata + Radio Canada Big).
+   */
+  --font-family-OG-primary: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-family-OG-secondary: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --color-text-primary: var(--color-OG-orsa-black, #3c3c3b);
+  --color-OG-white: #ffffff;
+  --space-sm: 8px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+
+  /* Heading/xxl-regular — intro headline @1440 */
+  --og-hp-heading-xxl-size: 88px;
+  --og-hp-heading-xxl-size-min: 36px;
+  --og-hp-heading-xxl-leading: 1.1;
+  --og-hp-heading-xxl-tracking: -0.04em;
+
+  /* Heading/xl-regular — hero H2 @1440 */
+  --heading-2-size: 60px;
+  --og-hp-heading-2-size-min: 40px;
+  --heading-2-letter-spacing: -0.04em; /* −2.4px @ 60 */
+  --og-hp-heading-xl-leading: 1.1;
+
+  /* Editorial/body-sm — hero body */
+  --og-hp-editorial-body-sm-size: 16px;
+  --og-hp-editorial-body-sm-leading: 1.6;
+  --og-hp-editorial-body-sm-tracking: 0em;
+
+  /* Intro layout — defaults from 1440 Figma frame */
+  --og-hp-intro-logo-width: 11.67vw;
+  --og-hp-intro-logo-top: 3.54vw;
+  --og-hp-headline-left: 8.68vw;
+  --og-hp-headline-bottom: 5.07vw; /* 73px @1440 */
+  --og-hp-headline-max-width: 55.42vw;
+  --og-hp-headline-size: 6.111vw; /* 88 / 1440 */
+  --og-hp-headline-size-min: var(--og-hp-heading-xxl-size-min);
+  --og-hp-headline-size-max: var(--og-hp-heading-xxl-size);
+  --og-hp-headline-leading: var(--og-hp-heading-xxl-leading);
+  --og-hp-headline-tracking: var(--og-hp-heading-xxl-tracking);
+  --og-hp-scrim-top: 0.35;
+  --og-hp-scrim-headline: 0.35;
+
+  /* Hero layout */
+  --og-hp-hero-copy-left: 13.96vw;
+  --og-hp-hero-copy-top: 6.94vw;
+  --og-hp-hero-copy-max-width: 54.65vw;
+  --og-hp-hero-title-size: 4.167vw; /* 60 / 1440 */
+  --og-hp-hero-title-size-min: var(--og-hp-heading-2-size-min);
+  --og-hp-hero-title-size-max: var(--heading-2-size);
+  --og-hp-hero-title-leading: var(--og-hp-heading-xl-leading);
+  --og-hp-hero-title-tracking: var(--heading-2-letter-spacing);
+  --og-hp-hero-body-size: var(--og-hp-editorial-body-sm-size);
+  --og-hp-hero-body-leading: var(--og-hp-editorial-body-sm-leading);
+  --og-hp-hero-body-tracking: var(--og-hp-editorial-body-sm-tracking);
+  --og-hp-hero-title-body-gap: var(--space-lg);
+  --og-hp-hero-frame-inset: 5.56vw;
+  --og-hp-hero-frame-gap-top: 4.24vw;
+  --og-hp-hero-frame-aspect: 1280 / 707;
+  --og-hp-booking-overlap-px: 40.5px;
+  --og-hp-booking-cats-h: 81px;
+  --color-cta-primary: var(--color-OG-dark-green, #003e3a);
+}
+
+html.theme-OG {
+  overflow-x: hidden;
+}
+
+html.theme-OG,
+html.theme-OG body.og-hp-page {
+  margin: 0;
+  min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--page-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-OG-secondary);
+}
+
+html.theme-OG body.og-hp-page {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+html.theme-OG *,
+html.theme-OG *::before,
+html.theme-OG *::after {
+  box-sizing: border-box;
+}
+
+:where(html.theme-OG) ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(html.theme-OG) button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:where(html.theme-OG) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(html.theme-OG) a:hover {
+  text-decoration: none;
+}
+
+html.theme-OG a:focus-visible,
+html.theme-OG button:focus-visible {
+  outline: 2px solid var(--color-OG-snow, #fff);
+  outline-offset: 3px;
+}
+
+html.theme-OG img,
+html.theme-OG video {
+  max-width: none;
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.og-hp-shell {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  /* Do NOT set overflow here — it breaks position:sticky on the intro pin */
+}
+
+/* ——— Header: hidden until headerRevealP; time-based slide+fade (not scroll-scrubbed) ——— */
+.og-hp-header[hidden],
+.og-hp-header.is-intro-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.og-hp-header {
+  --og-hp-header-reveal-ms: 350;
+  --og-hp-header-fade-ms: 200;
+  --og-hp-header-reveal-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  /* -50% X centers on the 1280 grid; -100% Y parks it above the viewport */
+  transform: translate3d(-50%, -100%, 0);
+  transition:
+    opacity calc(var(--og-hp-header-fade-ms) * 1ms) var(--og-hp-header-reveal-ease),
+    transform calc(var(--og-hp-header-reveal-ms) * 1ms) var(--og-hp-header-reveal-ease);
+}
+
+.og-hp-header.is-revealed:not(.is-intro-hidden) {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0);
+  pointer-events: none; /* children re-enable in header.css */
+}
+
+.og-hp-header.is-sticky {
+  position: fixed;
+  top: calc(var(--menu-edge, 16px) + var(--menu-pad, 12px));
+}
+
+.og-hp-page.is-skip-intro .og-hp-header {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0);
+  transition: none;
+}
+
+.og-hp-page.is-skip-intro .og-hp-header.is-sticky {
+  position: fixed;
+  top: calc(var(--menu-edge, 16px) + var(--menu-pad, 12px));
+}
+
+/* ——— Intro pin ——— */
+.og-hp-intro {
+  position: relative;
+  width: 100%;
+}
+
+/* In-flow 100vh slot so fixed lock never collapses the page */
+.og-hp-intro-pin-shell {
+  height: 100vh;
+  position: relative;
+}
+
+.og-hp-intro-pin {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #1a2228;
+  z-index: 2;
+}
+
+/* Force full-viewport cover until whiteout — survives sticky quirks */
+.og-hp-intro-pin.is-locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.og-hp-intro-spacer {
+  height: var(--og-hp-intro-scroll);
+  pointer-events: none;
+}
+
+.og-hp-whiteout {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--page-bg, #fff);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.og-hp-page.is-skip-intro .og-hp-intro {
+  display: none;
+}
+
+.og-hp-intro-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.1s var(--motion-easing-out-soft, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.og-hp-intro-media.is-ready {
+  opacity: 1;
+}
+
+.og-hp-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: none;
+  will-change: opacity, transform;
+}
+
+.og-hp-scene.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.og-hp-scene.is-leaving {
+  z-index: 2;
+}
+
+.og-hp-scene-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.og-hp-intro-logo {
+  position: absolute;
+  top: var(--og-hp-intro-logo-top, 3.54vw);
+  left: 50%;
+  z-index: 6;
+  width: var(--og-hp-intro-logo-width, 11.67vw);
+  max-width: var(--og-hp-intro-logo-max, 168px);
+  height: auto;
+  transform: translate3d(-50%, 0, 0);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Soft dark scrims — fade out with media as clouds cover (opacity set in JS) */
+.og-hp-intro-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.og-hp-intro-scrim--top {
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / var(--og-hp-scrim-top, 0.35)) 0%,
+    transparent 42%
+  );
+}
+
+.og-hp-intro-scrim--headline {
+  background: radial-gradient(
+    90% 70% at 18% 92%,
+    rgb(0 0 0 / var(--og-hp-scrim-headline, 0.35)) 0%,
+    rgb(0 0 0 / calc(var(--og-hp-scrim-headline, 0.35) * 0.45)) 38%,
+    transparent 70%
+  );
+}
+
+.og-hp-headline {
+  position: absolute;
+  left: var(--og-hp-headline-left);
+  bottom: var(--og-hp-headline-bottom);
+  top: auto;
+  z-index: 6;
+  margin: 0;
+  max-width: min(798px, var(--og-hp-headline-max-width));
+  width: max-content;
+  color: var(--color-OG-white);
+  font-family: var(--font-family-OG-primary);
+  font-size: clamp(
+    var(--og-hp-headline-size-min),
+    var(--og-hp-headline-size),
+    var(--og-hp-headline-size-max)
+  );
+  font-weight: 400;
+  line-height: var(--og-hp-headline-leading);
+  letter-spacing: var(--og-hp-headline-tracking);
+  text-align: left;
+  pointer-events: none;
+  will-change: transform, opacity;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.og-hp-headline[data-align="center"] {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.og-hp-headline-line {
+  display: block;
+  /* Keep line2 from jumping when line1 is empty mid type/erase */
+  min-height: calc(1em * var(--og-hp-headline-leading, 1.1));
+}
+
+.og-hp-headline-line:first-child {
+  /* Reserve one line even while the typewriter string is "" */
+  white-space: nowrap;
+}
+
+.og-hp-caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.85em;
+  margin-left: 0.08em;
+  vertical-align: baseline;
+  background: currentColor;
+  animation: og-hp-caret-blink 1s steps(1) infinite;
+}
+
+.og-hp-caret[hidden] {
+  display: none;
+}
+
+@keyframes og-hp-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Clouds over intro media */
+.og-hp-clouds {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.og-hp-cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: block;
+  width: 150vw;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translate3d(0, 110%, 0);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.og-hp-cloud[data-cloud="cloud-1"] {
+  z-index: 3;
+}
+
+.og-hp-cloud[data-cloud="cloud-gradient"] {
+  z-index: 4;
+}
+
+.og-hp-cloud[data-cloud="cloud-2"] {
+  z-index: 5;
+}
+
+.og-hp-cloud[hidden] {
+  display: none;
+}
+
+.og-hp-snow {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
+  will-change: opacity;
+}
+
+/* ——— Main / hero on white ——— */
+.og-hp-main {
+  position: relative;
+  z-index: 3;
+  background: var(--page-bg);
+  color: var(--color-text-primary);
+  padding: var(--og-hp-hero-copy-top) 0 0;
+  margin-top: -1px; /* seal against intro */
+}
+
+.og-hp-hero-copy {
+  max-width: min(787px, var(--og-hp-hero-copy-max-width));
+  margin: 0 0 var(--og-hp-hero-frame-gap-top);
+  margin-left: var(--og-hp-hero-copy-left);
+  padding: 0;
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s var(--motion-easing-out-soft, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.7s var(--motion-easing-out-soft, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.og-hp-hero-copy.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.og-hp-hero-copy h2 {
+  margin: 0 0 var(--og-hp-hero-title-body-gap);
+  max-width: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-OG-primary);
+  font-size: clamp(
+    var(--og-hp-hero-title-size-min),
+    var(--og-hp-hero-title-size),
+    var(--heading-2-size)
+  );
+  font-weight: 400;
+  line-height: var(--og-hp-hero-title-leading);
+  letter-spacing: var(--heading-2-letter-spacing);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.og-hp-hero-copy p {
+  margin: 0;
+  max-width: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-OG-secondary);
+  font-size: var(--og-hp-hero-body-size);
+  font-weight: 400;
+  line-height: var(--og-hp-hero-body-leading);
+  letter-spacing: var(--og-hp-hero-body-tracking);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  transition-delay: 0.12s;
+}
+
+.og-hp-hero-media-block {
+  position: relative;
+  width: calc(100% - (2 * var(--og-hp-hero-frame-inset)));
+  max-width: 1280px;
+  margin: 0 auto 4rem;
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.75s var(--motion-easing-out-soft, cubic-bezier(0.22, 1, 0.36, 1)) 0.08s,
+    transform 0.75s var(--motion-easing-out-soft, cubic-bezier(0.22, 1, 0.36, 1)) 0.08s;
+}
+
+.og-hp-hero-media-block.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.og-hp-page.is-skip-intro .og-hp-hero-copy,
+.og-hp-page.is-skip-intro .og-hp-hero-media-block {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.og-hp-hero-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: var(--og-hp-hero-frame-aspect);
+  border-radius: var(--radius-sm, 4px);
+  background: #2a333a;
+}
+
+.og-hp-hero-frame img,
+.og-hp-hero-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+/* Booking overlaps frame bottom like TD */
+.og-hp-booking-anchor {
+  position: relative;
+  z-index: 4;
+  height: var(--og-hp-booking-overlap-px);
+  padding-inline: 1rem;
+}
+
+.og-hp-booking-anchor .td-booking {
+  --booking-w: min(420px, 100%);
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--booking-w);
+  margin-left: calc(var(--booking-w) / -2);
+  transform: none;
+  z-index: 2;
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--color-OG-black, #000) 18%, transparent);
+}
+
+.og-hp-booking-anchor .td-booking-cats > button,
+.og-hp-booking-anchor .td-booking-pill {
+  width: 76px;
+}
+
+.og-hp-booking-anchor .td-booking-pill {
+  top: var(--space-md, 12px);
+  left: var(--space-lg, 16px);
+  height: 57px;
+}
+
+.og-hp-booking-anchor .td-booking-pane {
+  padding-bottom: var(--space-lg, 16px);
+}
+
+.og-hp-booking-anchor .td-field-group {
+  border: 1px solid var(--color-OG-neutral-subtlest, #e0dfde);
+  background: var(--color-OG-snow, #fff);
+}
+
+.og-hp-booking-anchor .td-booking-links a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.og-hp-booking-anchor .td-booking-search {
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .og-hp-booking-anchor .td-booking {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: none;
+    padding-bottom: 0;
+  }
+}
+
+/* .og-hp-next / .og-hp-cards / .og-hp-card / .og-hp-next-more removed — that
+   placeholder section was replaced by .og-hp-blocks (en-dag/just-nu/faq/
+   omraden). Its layout now lives in ./og-hp-blocks.css, tokens in
+   ./og-tokens.css. See sajtkoncept/beslut.md for the dated entry. */
+
+/* Simple debug (?debug=1) — header reveal controls */
+.og-hp-debug {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 80;
+  box-sizing: border-box;
+  width: min(280px, calc(100vw - 24px));
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, #1a2228 92%, transparent);
+  color: #f5f4f2;
+  font: 12px/1.35 "Radio Canada Big", system-ui, sans-serif;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.28);
+}
+
+.og-hp-debug-title {
+  margin: 0 0 0.55rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.og-hp-debug-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.og-hp-debug-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.og-hp-debug-name {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.og-hp-debug-hint {
+  font-size: 10px;
+  opacity: 0.55;
+}
+
+.og-hp-debug-range-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.og-hp-debug-range-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.og-hp-debug-value {
+  flex: none;
+  min-width: 2.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .og-hp-scene-media,
+  .og-hp-hero-copy,
+  .og-hp-hero-media-block,
+  .og-hp-header {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .og-hp-caret {
+    animation: none;
+  }
+}

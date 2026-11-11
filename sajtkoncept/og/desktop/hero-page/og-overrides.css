@@ -1,0 +1,132 @@
+/*
+ * OG-only overrides for the verbatim TD block port.
+ * Loaded last. Scoped to .theme-OG. Do not edit shared/.
+ */
+
+/*
+ * hero-page.css sets overflow-x:hidden on html/body, which browsers promote to
+ * overflow-y:auto — that scrollport kills position:sticky on .en-dag-pin.
+ * TD uses overflow-x:clip (keeps overflow-y:visible). Match that here.
+ */
+html.theme-OG,
+html.theme-OG body.og-hp-page {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* hero-page.css underlines all a:hover — TD cards have no underlines. */
+.theme-OG .og-hp-blocks a:hover,
+.theme-OG .fraga-layer a:hover {
+  text-decoration: none;
+}
+
+.theme-OG {
+  /* Figma correction — generated tokens still map cta to signal-orange. */
+  --color-cta-primary: #003e3a;
+  --color-accent: #e74011;
+  --contrast-on-cta: #ffffff;
+
+  /* Remap TD-named primitives used by startsida.css rules so OG colours/fonts win. */
+  --color-TD-night: var(--color-OG-night);
+  --color-TD-day: var(--color-OG-day);
+  --color-TD-snow: var(--color-OG-snow);
+  --color-TD-cta: var(--color-cta-primary);
+  --color-TD-accent: var(--color-accent);
+  --color-TD-neutral: var(--color-OG-neutral);
+  --color-TD-neutral-strong: var(--color-OG-neutral-strong);
+  --color-TD-neutral-muted: var(--color-OG-neutral-muted);
+  --color-TD-neutral-subtle: var(--color-OG-neutral-subtle);
+  --color-TD-neutral-light: var(--color-OG-neutral-light);
+  --color-TD-neutral-subtlest: var(--color-OG-neutral-subtlest);
+  --color-TD-neutral-highlight: var(--color-OG-neutral-highlight);
+  --color-TD-icon-highlight: var(--color-accent);
+  --color-TD-icon-on-dark: var(--color-OG-day);
+
+  --font-family-TD-primary: var(--font-family-OG-primary), "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-family-TD-secondary: var(--font-family-OG-secondary), "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-family-TD-primary-fallback: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+  /* Vars TD block CSS expects from the TD page chrome (no aktuellt/menu here). */
+  --aktuellt-endag-overlap: 64px;
+  --aktuellt-extra: 0px;
+  --aktuellt-shift: 0px;
+  --menu-edge: 16px;
+  --menu-pad: 12px;
+  --en-shift: 0px;
+  --color-season: var(--color-season-winter);
+  --eyebrow-xs-size: 12px;
+  --eyebrow-xs-line-height: 16px;
+  --eyebrow-xs-letter-spacing: 0.04em;
+  --font-leading-caption: 1.35;
+  --fraga-space-before: 128px;
+  --fraga-space-after: 128px;
+}
+
+/* No Aktuellt section above En dag on hero-page — drop TD's aktuellt-overlap margin. */
+.theme-OG .og-hp-blocks .en-dag {
+  margin-top: 0;
+}
+
+/* Blocks sit in normal flow under the hero; keep content width parity with TD page. */
+.theme-OG .og-hp-blocks-content {
+  width: min(1280px, 100%);
+  margin-inline: auto;
+  padding-inline: 16px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .theme-OG .og-hp-blocks-content {
+    padding-inline: 0;
+  }
+}
+
+/*
+ * Blocks sit on the OG base colour (Figma --color-bg-base #f5eee5), as TD's
+ * blocks sit on its day colour. Without this the white --page-bg shows through
+ * and white components (e.g. the Fråga input) lose contrast.
+ */
+.theme-OG .og-hp-blocks {
+  background: var(--color-bg-base);
+}
+
+/*
+ * Header glass: TD tints it with --color-TD-day, which this file remaps to the
+ * beige OG day. Keep the header bar white.
+ */
+.theme-OG .og-hp-header .top-glass {
+  background: color-mix(in srgb, var(--color-OG-snow) 70%, transparent);
+}
+
+/* TD's just-nu-data.css uses --font-size-40, which no token file defines.
+   Figma UI/figure-lg = 40px. */
+.theme-OG {
+  --font-size-40: 2.5rem;
+}
+
+/* Main menu: no underline and no accent colour on the big menu titles.
+   Underline is kept only on small text links (menu footer). */
+.theme-OG .og-hp-header .site-menu-title,
+.theme-OG .og-hp-header .site-menu-link:hover .site-menu-title,
+.theme-OG .og-hp-header .site-menu-link:focus-visible .site-menu-title {
+  text-decoration: none;
+}
+.theme-OG .og-hp-header .site-menu-link:hover .site-menu-title,
+.theme-OG .og-hp-header .site-menu-link:focus-visible .site-menu-title {
+  color: var(--color-cta-primary);
+}
+
+/* Fråga input: arrow button gets a filled circle (OG green, white arrow). */
+.theme-OG .td-fraga-falt-submit {
+  border-radius: var(--radius-full);
+  background: var(--color-cta-primary);
+  color: var(--contrast-on-cta, #fff);
+}
+
+/* Meny button: same shape as TD (small radius), not a pill.
+   The pill radius applies only to Fråga oss / Boka / account. */
+.theme-OG .og-hp-header .menu-control,
+.theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control {
+  border-radius: var(--radius-sm);
+  clip-path: inset(0 round var(--radius-sm));
+}

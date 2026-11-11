@@ -11,3 +11,7 @@ td/regression/td-diff-current/
 td/regression/td-before/
 td/regression/td-after/
 td/regression/td-diff/
+
+# Cursor leftovers and duplicates (kept locally, not tracked)
+*.old
+og/desktop/assets/img/hero-test.jpg

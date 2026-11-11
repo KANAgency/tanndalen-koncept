@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="sv" class="theme-OG" data-season="winter">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OG — Hero page</title>
+    <!-- Intro → cloud transition → hero. Force intro: ?intro=1 · skip: ?intro=0 -->
+    <link rel="preload" as="image" href="../assets/img/og-hero-winter.jpg" />
+    <link rel="preload" as="image" href="../assets/img/fog/cloud-1.png?v=1024" />
+    <link rel="preload" as="image" href="../assets/img/fog/cloud-2.png?v=1024" />
+    <link rel="preload" as="image" href="../assets/img/fog/cloud-gradient.png?v=1024g" />
+    <link rel="stylesheet" href="/ds/generated/tokens.css" />
+    <link rel="stylesheet" href="/ds/generated/fonts-og.css" />
+    <link rel="stylesheet" href="/ds/generated/typography-og.css" />
+    <link rel="stylesheet" href="/ds/components/button.css?v=graphic" />
+    <link rel="stylesheet" href="/ds/components/chip-tag.css" />
+    <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=plate1" />
+    <link rel="stylesheet" href="/ds/components/fraga-block.css?v=typo3" />
+    <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
+    <link rel="stylesheet" href="/ds/components/booking.css" />
+    <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
+    <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
+    <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
+    <link rel="stylesheet" href="/ds/components/just-nu-fraga.css" />
+    <link rel="stylesheet" href="/ds/components/just-nu-kamera.css?v=radius-sm" />
+    <link rel="stylesheet" href="/ds/components/just-nu-pagang.css" />
+    <link rel="stylesheet" href="/ds/components/just-nu-rapport.css" />
+    <link rel="stylesheet" href="/ds/components/just-nu-grid.css?v=segmented-inset" />
+    <link rel="stylesheet" href="/ds/components/textblock.css" />
+    <link rel="stylesheet" href="/ds/components/citat.css" />
+    <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
+    <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
+    <link rel="stylesheet" href="./hero-page.css" />
+    <link rel="stylesheet" href="./hero-page-header.css" />
+    <!-- Verbatim TD block port (en-dag / just-nu / faq / fraga modal / boende) -->
+    <link rel="stylesheet" href="./td-blocks.css" />
+    <link rel="stylesheet" href="./og-overrides.css" />
+  </head>
+  <body class="og-hp-page" data-og-hero-page>
+    <div class="og-hp-shell" data-og-hp-shell>
+
+      <header class="og-hp-header top is-intro-hidden" data-og-hp-header hidden inert aria-hidden="true">
+        <div class="top-glass" aria-hidden="true"><span class="top-progress" aria-hidden="true"></span></div>
+        <div class="top-start">
+          <button
+            class="menu-control"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-menu-panel"
+            aria-label="Öppna meny"
+            data-og-hp-menu-open
+          >
+            <span class="menu-control-label td-ui-cta"><span id="menu-current">Meny</span></span>
+            <span class="menu-control-icon">
+              <svg class="menu-icon-open" width="12" height="6.5" viewBox="0 0 12 6.5" aria-hidden="true">
+                <path class="menu-icon-line" d="M0 0.75H12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+                <path class="menu-icon-line" d="M0 5.75H12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+              </svg>
+              <svg class="menu-icon-close" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+              </svg>
+            </span>
+          </button>
+          <!-- Season dot kept for TD parity; hidden on desktop via CSS -->
+          <button class="site-season-dot" type="button" aria-label="Välj säsong" hidden>
+            <svg class="icon-vinter" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8 1.5v13M2.2 4.8l11.6 6.4M13.8 4.8L2.2 11.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- TODO: replace with the real OG menu structure and labels -->
+          <div class="site-menu" id="site-menu" data-og-hp-site-menu inert>
+            <div class="site-menu-panel" id="site-menu-panel" role="dialog" aria-modal="true" aria-label="Meny">
+              <ul class="site-menu-list">
+                <li class="site-menu-item" data-key="boende">
+                  <div class="site-menu-row">
+                    <a class="site-menu-link" href="#">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-boende.jpg" />
+                      <span class="site-menu-title td-heading-xs-regular">Boende</span>
+                    </a>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Boende">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a href="#">Ski Lodge</a></li>
+                        <li><a href="#">Områden</a></li>
+                        <li><a href="#">Erbjudanden</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="site-menu-item" data-key="skida">
+                  <div class="site-menu-row">
+                    <a class="site-menu-link" href="#">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-skidakning.png" />
+                      <span class="site-menu-title td-heading-xs-regular">Skidåkning</span>
+                    </a>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Skidåkning">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a class="td-ui-body" href="#">Liftkort</a></li>
+                        <li><a class="td-ui-body" href="#">Skidskola</a></li>
+                        <li><a class="td-ui-body" href="#">Skidhyra</a></li>
+                        <li><a href="#">Längdskidåkning</a></li>
+                        <li><a href="#">Hamra Syd</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="site-menu-item" data-key="aktiviteter">
+                  <div class="site-menu-row">
+                    <a class="site-menu-link" href="#">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-aktiviteter.jpg" />
+                      <span class="site-menu-title td-heading-xs-regular">Aktiviteter</span>
+                    </a>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Aktiviteter">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a href="#">För barn</a></li>
+                        <li><a href="#">Evenemang</a></li>
+                        <li><a href="#">Veckoprogram</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="site-menu-item" data-key="plats">
+                  <div class="site-menu-row">
+                    <a class="site-menu-link" href="#">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-pa-plats.jpg" />
+                      <span class="site-menu-title td-heading-xs-regular">På plats</span>
+                    </a>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för På plats">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a href="#">Liftstatus</a></li>
+                        <li><a href="#">Webbkameror</a></li>
+                        <li><a href="#">Mat, butiker och service</a></li>
+                        <li><a href="#">Kartor</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="site-menu-item" data-key="planera">
+                  <div class="site-menu-row">
+                    <a class="site-menu-link" href="#">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-planera.jpg" />
+                      <span class="site-menu-title td-heading-xs-regular">Planera resan</span>
+                    </a>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Planera resan">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a href="#">Hitta hit</a></li>
+                        <li><a href="#">Om Tänndalen</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="site-menu-item" data-key="fragor">
+                  <div class="site-menu-row">
+                    <span class="site-menu-link site-menu-link--static">
+                      <img class="site-menu-thumb" alt="" width="80" height="52" src="./assets/img/meny-fragor.jpg" />
+                      <span class="site-menu-title td-heading-xs-regular">Vanliga frågor</span>
+                    </span>
+                    <button class="site-menu-chevron" type="button" aria-expanded="false" aria-label="Visa undersidor för Vanliga frågor">
+                      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" /></svg>
+                    </button>
+                  </div>
+                  <div class="site-menu-sub">
+                    <div class="site-menu-sub-clip" inert>
+                      <ul class="site-menu-subs">
+                        <li><a class="td-ui-body" href="#">Ställ en fråga</a></li>
+                        <li><a class="td-ui-body" href="#">Boka och ändra</a></li>
+                        <li><a class="td-ui-body" href="#">Före ankomst</a></li>
+                        <li><a class="td-ui-body" href="#">I backen</a></li>
+                        <li><a class="td-ui-body" href="#">Kontakt</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <nav class="site-menu-foot" aria-label="Mer">
+                <a class="td-ui-body-sm" href="#">Konferens</a>
+                <a class="td-ui-body-sm" href="#">Jobba hos oss</a>
+                <a class="td-ui-body-sm" href="#">Kontakt</a>
+                <a class="td-ui-body-sm" href="#">English</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-center">
+          <a href="#hero">
+            <img class="logo logo--vertical" src="../assets/brand/logo-vertical-black.png" alt="Orsa Grönklitt" width="110" height="44" />
+          </a>
+        </div>
+
+        <div class="actions">
+          <!-- TODO: wire Fråga oss to OG help/search when available -->
+          <button class="td-button td-button-md td-button-secondary td-button-fill-winter td-ui-cta-sm" id="fraga-launch" type="button">
+            <span class="td-button-graphic" data-context="auto" aria-hidden="true">
+              <img data-graphic-light src="./assets/icons/chatt-24-light.svg" alt="" width="24" height="24" />
+              <img data-graphic-dark src="./assets/icons/chatt-24-dark.svg" alt="" width="24" height="24" />
+            </span>
+            <span class="help-long">Fråga oss</span><span class="help-short">Fråga</span>
+            <kbd class="fraga-kbd td-ui-nav" id="fraga-kbd">⌘K</kbd>
+          </button>
+          <div class="boka-menu" data-og-hp-boka>
+            <a class="td-button td-button-md td-button-primary td-ui-cta-sm" href="#" aria-expanded="false" data-og-hp-boka-toggle>
+              Boka
+              <svg class="boka-chevron" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3.2 6.2L8 11l4.8-4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" />
+              </svg>
+            </a>
+            <nav class="boka-panel" aria-label="Boka">
+              <!-- TODO: replace with real OG booking targets -->
+              <a class="boka-row td-heading-xxs-regular" href="#" aria-label="Boka boende">Boende <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 3.2L14 8l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" /></svg></a>
+              <a class="boka-row td-heading-xxs-regular" href="#" aria-label="Boka liftkort">Liftkort <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 3.2L14 8l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" /></svg></a>
+              <a class="boka-row td-heading-xxs-regular" href="#" aria-label="Boka skidhyra">Skidhyra <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 3.2L14 8l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" /></svg></a>
+              <a class="boka-row td-heading-xxs-regular" href="#" aria-label="Boka skidskola">Skidskola <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 3.2L14 8l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" /></svg></a>
+              <a class="boka-row td-heading-xxs-regular" href="#" aria-label="Boka paket">Paket <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 3.2L14 8l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel" /></svg></a>
+              <div class="boka-foot">
+                <a class="td-ui-body-sm" href="#">Kampanjkod</a>
+                <a class="td-ui-body-sm" href="#">Fråga oss om bokning</a>
+              </div>
+            </nav>
+          </div>
+          <div class="account-menu" data-og-hp-account>
+            <button class="account-user" id="account-user" type="button" aria-expanded="false" aria-controls="account-panel" aria-label="Min bokning" data-og-hp-account-toggle>
+              <span class="account-user-icon" data-account-icon aria-hidden="true">
+                <!-- Same path as ../assets/icons/user-20.svg; inlined so currentColor → --color-cta-primary -->
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M18.3091 16.4073C17.2382 14.5272 15.5661 13.0623 13.5618 12.2484C14.5585 11.5006 15.2948 10.4581 15.6662 9.26849C16.0377 8.0789 16.0256 6.80255 15.6316 5.62022C15.2376 4.4379 14.4818 3.40955 13.4711 2.68084C12.4604 1.95213 11.2461 1.56 10.0002 1.56C8.75436 1.56 7.54007 1.95213 6.52937 2.68084C5.51867 3.40955 4.7628 4.4379 4.36882 5.62022C3.97485 6.80255 3.96274 8.0789 4.33421 9.26849C4.70569 10.4581 5.44192 11.5006 6.43861 12.2484C4.43437 13.0623 2.76222 14.5272 1.69136 16.4073C1.62501 16.514 1.58078 16.633 1.56132 16.7572C1.54185 16.8813 1.54754 17.0082 1.57805 17.1301C1.60856 17.252 1.66326 17.3665 1.7389 17.4669C1.81455 17.5673 1.90959 17.6514 2.01839 17.7142C2.12718 17.7771 2.2475 17.8175 2.37219 17.8329C2.49689 17.8483 2.62341 17.8385 2.74424 17.8041C2.86507 17.7696 2.97774 17.7112 3.07555 17.6323C3.17336 17.5534 3.25432 17.4557 3.31361 17.3449C4.72888 14.8978 7.22826 13.4383 10.0002 13.4383C12.7722 13.4383 15.2716 14.8986 16.6868 17.3449C16.8153 17.5515 17.0191 17.7001 17.2552 17.7592C17.4912 17.8183 17.7409 17.7833 17.9516 17.6615C18.1623 17.5398 18.3174 17.3408 18.3841 17.1068C18.4508 16.8727 18.4239 16.6219 18.3091 16.4073ZM5.93874 7.50032C5.93874 6.69677 6.17694 5.91126 6.62322 5.24313C7.0695 4.57501 7.70382 4.05426 8.44596 3.74676C9.1881 3.43925 10.0047 3.3588 10.7926 3.51556C11.5804 3.67233 12.3041 4.05927 12.8721 4.62747C13.4401 5.19566 13.827 5.91959 13.9837 6.7077C14.1404 7.49581 14.0599 8.31271 13.7525 9.0551C13.4451 9.79748 12.9246 10.432 12.2567 10.8784C11.5888 11.3249 10.8035 11.5631 10.0002 11.5631C8.92343 11.5619 7.8911 11.1335 7.12969 10.3718C6.36828 9.61014 5.93998 8.57747 5.93874 7.50032Z" fill="currentColor" />
+                </svg>
+              </span>
+              <span class="account-user-initials td-ui-label" data-account-initials hidden>AB</span>
+              <span class="account-user-dot" aria-hidden="true"></span>
+            </button>
+            <div class="account-panel" id="account-panel" role="dialog" aria-label="Min bokning" hidden>
+              <div data-account-view="login">
+                <h2 class="td-heading-xxs-regular">Hitta din bokning</h2>
+                <p class="td-body-xs account-lead">Fyll i bokningsnummer och efternamn så visar vi din vistelse.</p>
+                <!-- TODO: wire to OG booking lookup -->
+                <form class="account-form" data-account-form>
+                  <label class="account-field">
+                    <span class="td-ui-label">Bokningsnummer</span>
+                    <input class="td-body-xs" name="booking-number" type="text" autocomplete="off" placeholder="Ange ditt bokningsnummer…" />
+                  </label>
+                  <label class="account-field">
+                    <span class="td-ui-label">Efternamn</span>
+                    <input class="td-body-xs" name="last-name" type="text" autocomplete="family-name" placeholder="Ange ditt efternamn…" />
+                  </label>
+                  <button class="td-button td-button-secondary td-button-md td-button-fill-spring" type="submit">Visa min bokning</button>
+                </form>
+                <hr class="account-divider" />
+                <div class="account-foot">
+                  <a class="td-ui-caption" href="#">Hittar inte numret?</a>
+                  <a class="td-ui-caption" href="#">Fråga oss om bokning</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- INTRO: fullscreen pinned stage + scroll spacer -->
+      <div class="og-hp-intro" data-og-hp-intro>
+        <div class="og-hp-intro-pin-shell" data-og-hp-intro-pin-shell aria-hidden="true">
+          <div class="og-hp-intro-pin" data-og-hp-intro-pin>
+            <div class="og-hp-intro-media" data-og-hp-intro-media aria-hidden="true">
+              <div class="og-hp-scene is-active" data-og-hp-scene="a"></div>
+              <div class="og-hp-scene" data-og-hp-scene="b"></div>
+            </div>
+            <div class="og-hp-intro-scrim og-hp-intro-scrim--top" data-og-hp-scrim-top aria-hidden="true"></div>
+            <div class="og-hp-intro-scrim og-hp-intro-scrim--headline" data-og-hp-scrim-headline aria-hidden="true"></div>
+            <canvas class="og-hp-snow" data-og-hp-snow aria-hidden="true"></canvas>
+            <div class="og-hp-clouds" data-og-hp-clouds aria-hidden="true"></div>
+            <div class="og-hp-whiteout" data-og-hp-whiteout aria-hidden="true"></div>
+            <img
+              class="og-hp-intro-logo"
+              data-og-hp-intro-logo
+              src="../assets/brand/logo-vertical-white.png"
+              alt="Orsa Grönklitt"
+              width="180"
+              height="72"
+            />
+            <h1 class="og-hp-headline" data-og-hp-headline data-align="center">
+              <span class="og-hp-headline-line">
+                <span data-og-hp-headline-l1></span><span class="og-hp-caret" data-og-hp-caret hidden aria-hidden="true"></span>
+              </span>
+              <span class="og-hp-headline-line" data-og-hp-headline-l2>i skidparadiset</span>
+            </h1>
+          </div>
+        </div>
+        <div class="og-hp-intro-spacer" data-og-hp-intro-spacer aria-hidden="true"></div>
+      </div>
+
+      <!-- HERO / page content on white -->
+      <main class="og-hp-main" data-og-hp-main id="hero">
+        <div class="og-hp-hero-copy" data-og-hp-hero-copy>
+          <h2 data-og-hp-hero-title>Ett skidparadis i Dalarna</h2>
+          <p data-og-hp-hero-body></p>
+        </div>
+
+        <div class="og-hp-hero-media-block" data-og-hp-hero-media-block>
+          <div class="og-hp-hero-frame" data-og-hp-hero-frame>
+            <img data-og-hp-hero-frame-img alt="" decoding="async" />
+          </div>
+          <div class="og-hp-booking-anchor" data-og-hp-booking-anchor>
+            <div class="td-booking" id="booking" data-og-hp-booking data-depth="front" role="search" aria-label="Boka">
+              <div class="td-booking-clip" id="booking-clip"></div>
+              <div class="td-booking-cats" id="booking-cats"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="og-hp-blocks page" data-og-hp-blocks>
+          <div class="og-hp-blocks-content">
+      <section class="en-dag" id="en-dag" aria-labelledby="en-dag-title">
+        <div class="en-dag-pin">
+          <div class="en-dag-skip-bar is-skip-gone" id="en-dag-skip-bar" aria-hidden="true">
+            <button type="button" class="td-button td-button-secondary td-en-dag-next" id="en-dag-next" aria-label="Nästa kort" tabindex="-1"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3.18 9.18 8 14l4.82-4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+            <button type="button" class="td-button td-button-secondary td-en-dag-skip" id="en-dag-skip" aria-label="Hoppa över" tabindex="-1">Hoppa över</button>
+          </div>
+          <div class="en-dag-intro">
+            <h2 class="en-dag-heading td-heading-xxl" id="en-dag-title" tabindex="-1">En dag i Orsa Grönklitt</h2>
+          </div>
+          <div class="en-dag-stack">
+          <div class="en-dag-stage">
+          <aside class="en-dag-sun" aria-hidden="true">
+            <div class="en-dag-sun-track">
+              <div class="en-dag-sun-line">
+                <div class="en-dag-sun-progress"></div>
+                <span class="en-dag-sun-cap en-dag-sun-cap-start" aria-hidden="true"></span>
+                <span class="en-dag-sun-cap en-dag-sun-cap-end" aria-hidden="true"></span>
+              </div>
+              <div class="en-dag-sun-events" id="en-dag-events"></div>
+              <div class="en-dag-sun-rise en-dag-sun-mark is-label-on" data-sun="rise">
+                <div class="en-dag-sun-label">
+                  <p class="en-dag-sun-time">--:--</p>
+                  <p class="en-dag-sun-name">Soluppgång</p>
+                </div>
+                <span class="en-dag-sun-icon-wrap">
+                  <img class="en-dag-sun-icon" src="../assets/icons/soluppgang-48.svg" width="48" height="48" alt="" />
+                </span>
+              </div>
+              <div class="en-dag-sun-set en-dag-sun-mark" data-sun="set">
+                <div class="en-dag-sun-label">
+                  <p class="en-dag-sun-time">--:--</p>
+                  <p class="en-dag-sun-name">Solnedgång</p>
+                </div>
+                <span class="en-dag-sun-icon-wrap">
+                  <img class="en-dag-sun-icon" src="../assets/icons/solnedgang-48.svg" width="48" height="48" alt="" />
+                </span>
+              </div>
+            </div>
+          </aside>
+          <article class="en-dag-slide" data-time="08:30" data-name="Första åket" data-summer-time="10:00" data-summer-name="Fjället på cykel" data-summer-title="Liften upp, cykeln med" data-summer-body="Ta liften upp på kalfjället och rulla ner med utsikt över hela fjällvärlden. Fjorton leder, och de flesta klarar hela familjen." data-summer-cta="Se Fjällcykelparken" data-summer-href="#cykling" data-summer-src="../assets/img/sommar-dag-01.jpg?v=4">
+            <div class="en-dag-media" data-depth="front">
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="../assets/img/endag-0830.jpg">
+                <source src="../assets/video/endag-0830.mp4" type="video/mp4" />
+              </video>
+              <img class="en-dag-season-photo" alt="Lift upp på kalfjället, med cykel och utsikt över fjällen" loading="lazy" hidden />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+              <button class="pause en-dag-pause" type="button" aria-pressed="false" aria-label="Pausa filmen">II</button>
+            </div>
+            <div class="en-dag-copy" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <h3 class="td-textblock-title td-heading-sm">Först i liften</h3>
+                <p class="td-textblock-body td-ui-body">Inget att stressa över. Kön är kort, pisterna är orörda, och hela fjället ligger framför er.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#liftkort" data-summer-href-todo="#cykling">Köp liftkort <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide" data-time="10:15" data-name="Backar för alla" data-summer-time="12:30" data-summer-name="Lunchpaus" data-summer-title="Pizza på Lodgen" data-summer-body="Efter en förmiddag i sadeln smakar det mesta bra. Jillie, med renkött och svamp, är fjällfavoriten." data-summer-cta="Se menyn" data-summer-href="#mat" data-summer-src="../assets/img/sommar-dag-02.jpg?v=3">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/img/endag-1015.jpg" alt="" />
+              <img class="en-dag-season-photo" alt="Pizza serverad på Lodgen" loading="lazy" hidden />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+            </div>
+            <div class="en-dag-copy" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <h3 class="td-textblock-title td-heading-sm">Barnen drar iväg själva</h3>
+                <p class="td-textblock-body td-ui-body">Efter två åk har de hittat sin favoritbacke och vill inte ha sällskap längre.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#barn" data-summer-href-todo="#mat">Se alla barnaktiviteter <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide" data-time="13:00" data-name="Våfflor i solen" data-summer-time="14:00" data-summer-name="Lämmelstigen" data-summer-title="Barnen tar över Lämmelstigen" data-summer-body="Få fart på vattenhjulet, smyg förbi räven och mät dig mot en myskoxe. Två kilometer för barn mellan 3 och 10 år." data-summer-cta="Läs mer om Lämmelstigen" data-summer-href="#barn" data-summer-src="../assets/img/sommar-dag-03.jpg?v=3">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/img/endag-1300.jpg?v=2" alt="Våfflor och kaffe på utomhusbordet med pist och röda stugor i bakgrunden" />
+              <img class="en-dag-season-photo" alt="Barn längs Lämmelstigen, med vattenhjul och labyrinter" loading="lazy" hidden />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+            </div>
+            <div class="en-dag-copy" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <h3 class="td-textblock-title td-heading-sm">Våfflor i solgropen</h3>
+                <p class="td-textblock-body td-ui-body">Skidorna i snön, ansiktet mot solen. Ingen har bråttom tillbaka upp.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#paus" data-summer-href-todo="#barn">Se var ni kan ta en paus <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide" data-time="15:00" data-name="Sista åket" data-summer-time="17:00" data-summer-name="Grillmiddag vid stugan" data-summer-title="Grilla vid stugan" data-summer-body="Tänd grillen på altanen. Solen går ner sent, så ingen behöver skynda sig med middagen." data-summer-cta="Handla mat här" data-summer-href="#handla" data-summer-src="../assets/img/sommar-dag-04.jpg?v=2">
+            <div class="en-dag-media" data-depth="front">
+              <video class="en-dag-video" muted playsinline loop preload="none" poster="../assets/img/endag-1530.jpg">
+                <source src="../assets/video/endag-1530.mp4" type="video/mp4" />
+              </video>
+              <img class="en-dag-season-photo" alt="Grillning vid en stuga i fjället" loading="lazy" hidden />
+              <div class="en-dag-dim" aria-hidden="true"></div>
+              <button class="pause en-dag-pause" type="button" aria-pressed="false" aria-label="Pausa filmen">II</button>
+            </div>
+            <div class="en-dag-copy" data-depth="mid" data-depth-own>
+              <article class="td-textblock td-textblock-right">
+                <h3 class="td-textblock-title td-heading-sm">Sista åket ner mot dalen</h3>
+                <p class="td-textblock-body td-ui-body">Ljuset blir lågt och snön mjuk. Ett åk till, säger alla, och menar det inte.</p>
+                <p class="td-textblock-actions"><a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#pistar" data-summer-href-todo="#handla">Se pistkartorna <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a></p>
+              </article>
+            </div>
+          </article>
+          <article class="en-dag-slide is-puff" data-time="16:00" data-name="Tillbaka i stugan" data-summer-time="19:00" data-summer-name="Musikkväll" data-summer-label="Musikkväll på Kalfjäll" data-summer-title="Njut av sommarkvällen" data-summer-cta="Hitta ert boende" data-summer-href="#boende" data-summer-src="../assets/img/sommar-dag-05.jpg?v=2">
+            <div class="en-dag-media" data-depth="front">
+              <img src="../assets/img/endag-1700.png" alt="" />
+              <img class="en-dag-season-photo" alt="Musikkväll på kalfjället i kvällsljus" loading="lazy" hidden />
+              <div class="en-dag-puff-shade" aria-hidden="true"></div>
+              <div class="en-dag-puff-copy">
+                <p class="td-ui-label">16:00 · Tillbaka i stugan</p>
+                <p class="td-heading-md">Samma tid i morgon?</p>
+                <a class="td-button td-button-secondary td-button-md" href="#boende" data-summer-href-todo="#boende">Hitta ert boende <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
+              </div>
+            </div>
+          </article>
+          </div>
+          </div>
+        </div>
+        <div class="en-dag-season">
+          <div data-season-banner></div>
+        </div>
+        <p class="visually-hidden" id="en-dag-live" aria-live="polite"></p>
+      </section>
+
+      <section class="just-nu" id="just-nu" aria-labelledby="just-nu-title">
+        <div class="just-nu-head" data-depth="mid">
+          <div>
+            <p class="td-status td-ui-label"><span class="td-status-dot" aria-hidden="true"></span>Uppdaterat: <span data-just-nu-updated>09:42</span></p>
+            <h2 class="td-heading-sm" id="just-nu-title">Just nu i Orsa Grönklitt</h2>
+          </div>
+          <div class="td-segmented" role="group" aria-label="Gren">
+            <button class="td-ui-cta" type="button" data-gren="alpint" aria-pressed="true">Alpint</button>
+            <button class="td-ui-cta" type="button" data-gren="langd" aria-pressed="false">Längd</button>
+          </div>
+        </div>
+        <div class="just-cols">
+          <div>
+            <section class="td-just-nu-stack" data-depth="front" data-gren-panel="alpint" aria-label="Just nu, alpint">
+              <div class="td-just-nu-stack-viewport">
+                <div class="td-just-nu-stack-track">
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">12</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">30</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">134</span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">71</span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/liftar.svg" alt=""></span><span class="td-ui-title">Öppet</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">41</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">14</span><span class="td-ui-figure-unit-md">/</span><span class="td-ui-figure-unit-md">17</span></div><span class="td-ui-body-sm td-just-nu-data-caption">liftar</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/nypreparerat.svg" alt=""></span><span class="td-ui-title">Preparerat i natt</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg">32</span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">54</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nedfarter i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg">Headstråket</span></div><span class="td-ui-body-sm td-just-nu-data-caption">bäst just nu</span></div></div></article>
+                  <article class="td-just-nu-data"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/vind-storm.svg" alt=""></span><span class="td-ui-title">Vind</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-wind">Hård vind</span></div><span class="td-ui-body-sm td-just-nu-data-caption">Stormliftarna går, resten står still</span></div></div></article>
+                </div>
+              </div>
+              <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
+            </section>
+            <section class="td-just-nu-stack" data-depth="front" data-gren-panel="langd" hidden aria-label="Just nu, längd">
+              <div class="td-just-nu-stack-viewport"><div class="td-just-nu-stack-track">
+                <article class="td-just-nu-data" data-status="spar"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/langdspar.svg" alt=""></span><span class="td-ui-title">Spår</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-status-unit></span><span class="td-ui-figure-unit-lg">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">km</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nypreparerat</span></div></div></article>
+                <article class="td-just-nu-data" data-status="valla"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/valla.svg" alt=""></span><span class="td-ui-title">Valla</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-wax-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-status-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">fästvalla</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">°C</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i spåret</span></div></div></article>
+                <article class="td-just-nu-data" data-status="nysno"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/nysno.svg" alt=""></span><span class="td-ui-title">Nysnö</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i natt</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">väntat fram till lördag</span></div></div></article>
+                <article class="td-just-nu-data" data-status="snodjup"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/snodjup.svg" alt=""></span><span class="td-ui-title">Snödjup</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-status-value></span><span class="td-ui-figure-unit-lg">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">uppe</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-status-value-2></span><span class="td-ui-figure-unit-md">cm</span></div><span class="td-ui-body-sm td-just-nu-data-caption">nere</span></div></div></article>
+              </div></div>
+              <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
+            </section>
+            <section class="td-just-nu-stack" data-depth="front" data-gren-panel="sommar" hidden aria-label="Just nu, sommar">
+              <div class="td-just-nu-stack-viewport"><div class="td-just-nu-stack-track">
+                <article class="td-just-nu-data" data-summer="temperatur"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/temperatur.svg" alt=""></span><span class="td-ui-title">Temperatur</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">på toppen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg" data-summer-degree>°</span></div><span class="td-ui-body-sm td-just-nu-data-caption">i sjön</span></div></div></article>
+                <!-- TODO: ingen moln- eller regnikon i ikonbiblioteket. -->
+                <article class="td-just-nu-data" data-summer="vader"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon" ><img src="../assets/icons/vader.svg" alt=""></span><span class="td-ui-title">Väder</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">%</span></div><span class="td-ui-body-sm td-just-nu-data-caption">risk för regn</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind i dalen</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-3></span><span class="td-ui-figure-unit-lg">m/s</span></div><span class="td-ui-body-sm td-just-nu-data-caption">vind på toppen</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="leder"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/leder.svg" alt=""></span><span class="td-ui-title">Lederna</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span><span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg" data-summer-unit></span></div><span class="td-ui-body-sm td-just-nu-data-caption">cykelleder öppna</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg is-word" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">lederna idag</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="lift"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/liftar.svg" alt=""></span><span class="td-ui-title">Liften</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-status-dot" data-summer-dot aria-hidden="true"></span><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">Hamra Komfort</span></div><div class="td-just-nu-data-value td-just-nu-data-value-secondary"><div class="td-just-nu-data-figure"><span class="td-ui-figure-unit-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption" data-summer-caption-2>dagens öppettider</span></div></div></article>
+                <article class="td-just-nu-data" data-summer="sol"><header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/soluppgang.svg" alt=""></span><span class="td-ui-title">Sol</span></div></header><div class="td-just-nu-data-values"><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value></span></div><span class="td-ui-body-sm td-just-nu-data-caption">soluppgång</span></div><div class="td-just-nu-data-value"><div class="td-just-nu-data-figure"><span class="td-ui-figure-lg" data-summer-value-2></span></div><span class="td-ui-body-sm td-just-nu-data-caption">solnedgång</span></div></div></article>
+              </div></div>
+              <ol class="td-just-nu-pager"><li><span class="td-just-nu-pager-dot" aria-current="true"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li><li><span class="td-just-nu-pager-dot"></span></li></ol>
+            </section>
+            <a class="td-fraga td-just-nu-card" id="fraga-card" data-depth="front" href="#fraga">
+              <header class="td-just-nu-header td-just-nu-header-sm"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img data-season-icon="light" src="/ds/components/icons/content/chatt-32-light.svg" alt="" width="32" height="32"><img data-season-icon="dark" src="/ds/components/icons/content/chatt-32-dark.svg" alt="" width="32" height="32"></span><span class="td-ui-cta-sm">Fråga oss</span></div><span class="td-corner-link" aria-label="Ställ frågan"><span class="td-corner-link-label td-ui-cta-sm">Ställ frågan</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
+              <div class="td-fraga-body"><p class="td-heading-sm" data-fraga-title>Det regnar, vad kan vi göra idag?</p><p class="td-ui-body" data-fraga-sub>Tre tips på saker att göra inomhus idag.</p></div>
+            </a>
+          </div>
+          <a class="td-rapport td-rapport-overlay" data-depth="front">
+            <img class="td-rapport-image" src="../assets/img/rapport-raw-1.png" alt="" loading="lazy">
+            <video class="td-rapport-image" data-langd-video hidden muted playsinline preload="none"></video>
+            <span class="td-rapport-shade"></span>
+            <div class="td-rapport-body">
+              <div class="td-rapport-top" data-rapport-top>
+                <p class="td-heading-xxxs" data-rapport-today hidden>Händer idag</p>
+                <p class="td-rapport-chip td-ui-caption" data-rapport-chip><span class="td-rapport-diff" aria-hidden="true"></span>Medelsvår · Headstråket</p>
+                <span class="td-corner-link" data-rapport-corner hidden><span class="td-corner-link-label td-ui-cta-sm" data-rapport-corner-label></span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span>
+              </div>
+              <div class="td-rapport-lower">
+                <p class="td-ui-kicker" data-rapport-caption>Från backen i morse · 07:40</p>
+                <div class="td-rapport-copy">
+                  <p class="td-heading-xs-regular" data-rapport-quote>”Fast och snabbt i morse. Solsidan mjuknar runt elva, skuggsidan håller hela dagen.”</p>
+                  <p class="td-heading-xs-regular" data-rapport-title hidden></p>
+                  <p class="td-ui-body-sm" data-rapport-excerpt hidden></p>
+                  <span class="td-ui-caption" data-rapport-more hidden>Läs mer →</span>
+                  <div class="td-rapport-footer">
+                    <p class="td-rapport-author"><img class="td-rapport-avatar" src="../assets/img/rapport-avatar.png" alt="" width="32" height="32"><span class="td-ui-caption" data-rapport-sign>Jonas Berg, pistförare</span></p>
+                    <p class="td-rapport-chip td-rapport-chip-line td-ui-caption" data-rapport-badge>Preparerad 05:30</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div>
+            <section class="td-pagang" data-depth="front">
+              <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="../assets/icons/kalender.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
+              <div class="td-pagang-groups">
+                <section><h3 class="td-pagang-group-name td-ui-nav">Snart</h3>
+                  <a class="td-pagang-row" href="#sportlovet"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">16 feb–8 mar</span><span class="td-ui-body">Sportlovet</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><hr class="td-pagang-divider"></a>
+                  <a class="td-pagang-row" href="#maj"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">28 apr–3 maj</span><span class="td-ui-body">1:a Maj Trofén</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+                </section>
+                <section><h3 class="td-pagang-group-name td-ui-nav">Längre fram</h3>
+                  <a class="td-pagang-row" href="#fjallturen"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">21–24 jul</span><span class="td-ui-body">Fjällturen</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><hr class="td-pagang-divider"></a>
+                  <a class="td-pagang-row" href="#musik"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">juli</span><span class="td-ui-body">Musikkväll på kalfjäll</span></span><svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+                </section>
+              </div>
+            </section>
+            <a class="td-kamera td-kamera-pan td-just-nu-card" data-depth="front" href="#kameror">
+              <img class="td-kamera-media" src="../assets/img/webbkamera.png" alt="" loading="lazy">
+              <span class="td-kamera-shade"></span>
+              <header class="td-just-nu-header td-just-nu-header-sm td-kamera-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8.4375 6.25C8.4375 5.94097 8.52914 5.63887 8.70083 5.38192C8.87252 5.12497 9.11655 4.9247 9.40206 4.80644C9.68757 4.68818 10.0017 4.65723 10.3048 4.71752C10.6079 4.77781 10.8863 4.92663 11.1049 5.14515C11.3234 5.36367 11.4722 5.64208 11.5325 5.94517C11.5928 6.24827 11.5618 6.56243 11.4436 6.84794C11.3253 7.13345 11.125 7.37748 10.8681 7.54917C10.6111 7.72086 10.309 7.8125 10 7.8125C9.5856 7.8125 9.18817 7.64788 8.89515 7.35485C8.60212 7.06183 8.4375 6.6644 8.4375 6.25ZM4.6875 6.25C4.6875 4.84104 5.24721 3.48978 6.2435 2.4935C7.23978 1.49721 8.59104 0.9375 10 0.9375C11.409 0.9375 12.7602 1.49721 13.7565 2.4935C14.7528 3.48978 15.3125 4.84104 15.3125 6.25C15.3125 11.1133 10.6633 13.8281 10.4648 13.9391C10.3233 14.0199 10.163 14.0624 10 14.0624C9.83696 14.0624 9.67674 14.0199 9.53516 13.9391C9.33672 13.8281 4.6875 11.1133 4.6875 6.25ZM6.5625 6.25C6.5625 9.23438 8.96172 11.2656 10 12.0031C11.032 11.2617 13.4375 9.21875 13.4375 6.25C13.4375 5.33832 13.0753 4.46398 12.4307 3.81932C11.786 3.17466 10.9117 2.8125 10 2.8125C9.08832 2.8125 8.21398 3.17466 7.56932 3.81932C6.92466 4.46398 6.5625 5.33832 6.5625 6.25ZM16.2945 11.375C16.1804 11.3266 16.0579 11.3013 15.9339 11.3005C15.81 11.2998 15.6871 11.3237 15.5724 11.3707C15.4578 11.4178 15.3536 11.4871 15.2659 11.5747C15.1782 11.6623 15.1087 11.7664 15.0615 11.881C15.0143 11.9956 14.9903 12.1184 14.9909 12.2424C14.9914 12.3663 15.0166 12.4889 15.0648 12.6031C15.1131 12.7172 15.1835 12.8207 15.272 12.9075C15.3605 12.9942 15.4654 13.0626 15.5805 13.1086C16.6844 13.5633 17.1875 14.0836 17.1875 14.375C17.1875 14.6875 16.6305 15.2398 15.4086 15.7094C13.9789 16.2563 12.0578 16.5625 10 16.5625C7.94219 16.5625 6.02109 16.2594 4.59141 15.7094C3.36875 15.2398 2.8125 14.6875 2.8125 14.375C2.8125 14.0836 3.31562 13.5633 4.41953 13.1086C4.53463 13.0626 4.63947 12.9942 4.72797 12.9075C4.81648 12.8207 4.8869 12.7172 4.93517 12.6031C4.98343 12.4889 5.00858 12.3663 5.00915 12.2424C5.00972 12.1184 4.98571 11.9956 4.9385 11.881C4.8913 11.7664 4.82183 11.6623 4.73413 11.5747C4.64643 11.4871 4.54223 11.4178 4.42756 11.3707C4.31289 11.3237 4.19003 11.2998 4.06608 11.3005C3.94214 11.3013 3.81957 11.3266 3.70547 11.375C2.44297 11.8945 0.9375 12.8367 0.9375 14.375C0.9375 17.0422 5.49687 18.4375 10 18.4375C12.2828 18.4375 14.4422 18.0906 16.082 17.4594C17.1953 17.0312 19.0625 16.0617 19.0625 14.375C19.0625 12.8367 17.557 11.8945 16.2945 11.375Z" fill="currentColor"/></svg></span><span class="td-ui-kicker" data-kamera-label>Webbkamera · Storvigeln</span></div><span class="td-corner-link"><span class="td-corner-link-label td-ui-cta-sm">Alla kameror</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></span></header>
+              <p class="td-kamera-status"><span class="td-kamera-live"><span class="td-kamera-dot"></span><span class="td-ui-label">Live</span></span><span class="td-ui-caption" data-kamera-line>Uppdaterad 09:42</span></p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="fragor" aria-labelledby="fragor-title">
+        <div class="td-fraga-block" data-fraga-context="Om: Startsida">
+          <div class="td-fraga-block-overrubrik">
+            <img class="td-fraga-block-overrubrik-icon" src="/ds/components/icons/content/chatt-48-light.svg" alt="" width="48" height="48">
+            <p class="td-fraga-block-overrubrik-label">Fråga oss</p>
+          </div>
+          <div class="td-fraga-block-innehall">
+            <div class="td-fraga-block-rubrikgrupp">
+              <h2 class="td-fraga-block-rubrik td-heading-lg" id="fragor-title">Vi svarar på dina frågor, stort som smått.</h2>
+              <p class="td-fraga-block-ingress td-lead-sm">Fråga om vad du vill, från avstånd till liften till vad man gör en regnig dag. Är det öppet i Hamra Syd? Behöver barnen hjälm? Skriv som du tänker.</p>
+            </div>
+            <form class="td-fraga-falt" data-fraga-falt>
+              <input class="td-fraga-falt-input td-lead-sm" type="text" name="fraga" maxlength="200" autocomplete="off" placeholder="Ställ en fråga" aria-label="Ställ en fråga">
+              <button class="td-button td-button-md td-button-secondary td-button-fill-winter td-fraga-falt-submit" type="submit" aria-label="Fråga"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </form>
+          </div>
+          <div class="td-fraga-fragelista">
+            <p class="td-fraga-fragelista-rubrik td-ui-kicker">Vanliga frågor</p>
+            <ul class="td-fraga-fragelista-platta">
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-fraga-title="Hur lång tid tar det hit?"><span class="td-fraga-fragelista-rad-text">Hur lång tid tar det hit?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Passar Orsa Grönklitt för nybörjare?"><span class="td-fraga-fragelista-rad-text">Passar Orsa Grönklitt för nybörjare?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Vad gör vi om det regnar?"><span class="td-fraga-fragelista-rad-text">Vad gör vi om det regnar?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Får jag ta med hund?"><span class="td-fraga-fragelista-rad-text">Får jag ta med hund?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Kan jag ändra min bokning?"><span class="td-fraga-fragelista-rad-text">Kan jag ändra min bokning?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+              <li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button" data-avdelare="ja" data-fraga-title="Hur bokar jag?"><span class="td-fraga-fragelista-rad-text">Hur bokar jag?</span><span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span></button></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <span id="omraden" class="visually-hidden" aria-hidden="true"></span>
+      <section class="boende" id="boende" aria-label="Boende i Orsa Grönklitt">
+        <div class="boende-frame">
+          <div class="boende-parallax" id="boende-parallax">
+            <div class="boende-media">
+              <div class="boende-poster"></div>
+              <video class="boende-video" muted playsinline preload="metadata" src="../assets/video/area1.mp4"></video>
+            </div>
+          </div>
+          <div class="boende-scrim" aria-hidden="true"></div>
+          <div class="boende-copy" id="boende-panel">
+            <p class="boende-kicker td-ui-kicker"></p>
+            <h2 class="boende-title td-heading-lg"></h2>
+            <p class="boende-body td-ui-body"></p>
+            <p class="boende-actions">
+              <a class="boende-search td-ui-cta-sm" href="#"></a>
+              <a class="boende-all td-ui-cta-sm" href="#"><span class="boende-link-label"></span> <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 12.8 14 8 9.2 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></a>
+            </p>
+          </div>
+          <article class="boende-card" aria-labelledby="boende-card-title"></article>
+          <div class="boende-controls">
+            <div class="boende-pill" role="tablist" aria-label="Boendeområden"></div>
+            <button type="button" class="boende-toggle" aria-label="Spela områdesbildspelet">
+              <svg class="boende-icon boende-icon-play" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+              <svg class="boende-icon boende-icon-pause" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
+              <svg class="boende-icon boende-icon-replay" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" hidden><path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="fraga-layer" id="fraga-layer" hidden>
+      <div class="fraga-dim" data-fraga-close></div>
+      <div class="fraga-panel" id="fraga-panel" role="dialog" aria-modal="true" aria-labelledby="fraga-dialog-title">
+        <h2 class="fraga-sr" id="fraga-dialog-title">Fråga eller sök</h2>
+        <div class="fraga-top">
+          <button class="fraga-x" type="button" data-fraga-close aria-label="Stäng">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+          </button>
+        </div>
+        <div class="fraga-mid">
+          <div class="fraga-view is-on" data-view="search">
+            <div class="td-fraga-fragelista">
+              <p class="td-fraga-fragelista-rubrik fraga-suggest-label td-ui-kicker">Andra brukar fråga</p>
+              <ul class="td-fraga-fragelista-platta fraga-suggest" id="fraga-suggest"></ul>
+            </div>
+          </div>
+          <div class="fraga-view" data-view="answer">
+            <h3 class="td-heading-sm" id="fraga-q"></h3>
+            <p class="fraga-think td-ui-caption" id="fraga-think" hidden>Tänker<span aria-hidden="true"><i></i><i></i><i></i></span></p>
+            <p class="td-body fraga-prose" id="fraga-answer"></p>
+            <p class="fraga-sr" id="fraga-answer-live" aria-live="polite"></p>
+            <p class="td-ui-kicker" id="fraga-now" hidden>Så ser det ut just nu</p>
+            <div class="fraga-tiles" id="fraga-tiles" hidden></div>
+            <p class="fraga-sources td-ui-caption" id="fraga-sources" hidden></p>
+            <div class="fraga-cards" id="fraga-cards"></div>
+            <div class="fraga-chips" id="fraga-chips"></div>
+            <p class="fraga-note td-ui-caption" id="fraga-note" hidden></p>
+            </div>
+            </div>
+        <div class="fraga-bottom">
+          <form class="fraga-follow" id="fraga-follow">
+            <img class="fraga-follow-icon" src="/ds/components/icons/content/chatt-24-light.svg" alt="" width="24" height="24" aria-hidden="true">
+            <input id="fraga-input" class="fraga-follow-input td-ui-body" type="text" placeholder="Fråga eller sök" autocomplete="off" enterkeyhint="search" aria-label="Fråga eller sök" />
+            <button class="fraga-new td-button td-button-text td-ui-cta-sm" type="button">Ny fråga</button>
+            <button class="fraga-send" type="submit" aria-label="Skicka">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+          <footer class="fraga-foot">
+            <div class="fraga-foot-live">
+              <span class="fraga-foot-dot" aria-hidden="true"></span>
+              <div class="fraga-foot-copy">
+                <p class="fraga-foot-title td-ui-cta-sm">Prata med en människa</p>
+                <p class="fraga-foot-meta td-ui-caption">Gästservice · öppet nu till 20:00 · svarar oftast inom 5 min</p>
+              </div>
+            </div>
+            <a class="td-button td-button-sm td-button-secondary fraga-foot-chat" href="#kontakt">Chatta</a>
+          </footer>
+          </div>
+        </div>
+      </div>
+
+    <script type="module" src="./hero-page.js"></script>
+  </body>
+</html>
