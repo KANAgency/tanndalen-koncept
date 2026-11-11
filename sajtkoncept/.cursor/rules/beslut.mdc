@@ -1,0 +1,14 @@
+---
+description: Läs och uppdatera beslut.md så resonemang överlever en ny chatt
+alwaysApply: true
+---
+
+# Beslut
+
+`beslut.md` i sajtkoncept-roten är minnet. Chatten är det inte.
+
+I början av en uppgift: läs `beslut.md`. Följ det som står. Fråga om något där krockar med uppgiften.
+
+När en uppgift är klar: lägg till en post utan att fråga. Fem till tio rader. Datum, vad som valdes, vad som ratades och varför, vad som är öppet. Inga mätvärden, ingen kod, inga fil-dumpar.
+
+Hoppa över rättstavning, format och sådant som redan syns i koden.

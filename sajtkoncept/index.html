@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv" class="theme-OG">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sajtkoncept — Tänndalen &amp; Orsa Grönklitt</title>
+    <link rel="stylesheet" href="/ds/generated/tokens.css" />
+    <link rel="stylesheet" href="/ds/generated/fonts-og.css" />
+    <link rel="stylesheet" href="/ds/generated/typography-og.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        padding: var(--space-3xl);
+        background: var(--color-OG-day);
+        color: var(--color-OG-orsa-black);
+        font-family: var(--font-family-OG-secondary);
+      }
+      main {
+        width: min(28rem, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2xl);
+      }
+      h1 {
+        margin: 0;
+        font-family: var(--font-family-OG-primary);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--font-leading-snug);
+      }
+      p {
+        margin: 0;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-leading-normal);
+        color: color-mix(in srgb, var(--color-OG-orsa-black) 72%, transparent);
+      }
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      a {
+        display: block;
+        padding: var(--space-lg) var(--space-xl);
+        border: var(--stroke-1) solid color-mix(in srgb, var(--color-OG-orsa-black) 18%, transparent);
+        color: inherit;
+        text-decoration: none;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-medium);
+      }
+      a:hover {
+        border-color: var(--color-OG-orsa-black);
+      }
+      a:focus-visible {
+        outline: var(--stroke-2) solid var(--color-OG-dark-green);
+        outline-offset: var(--space-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>Sajtkoncept</h1>
+        <p>Välj prototyp.</p>
+      </div>
+      <nav aria-label="Sajter">
+        <a href="/td/">Tänndalen</a>
+        <a href="/og/">Orsa Grönklitt</a>
+      </nav>
+    </main>
+  </body>
+</html>
