@@ -4,7 +4,7 @@ import {
   wifiOnsiteSignal,
   onsiteStorageKey as onsiteKeyFor,
   stayStorageKey as stayKeyFor
-} from "./shared/config/create-site.js";
+} from "/shared/config/create-site.js";
 
 export const SITE = createSite({
   id: "tanndalen",

@@ -3,7 +3,7 @@
 import {
   createSite,
   wifiOnsiteSignal
-} from "./shared/config/create-site.js";
+} from "/shared/config/create-site.js";
 
 export const SITE = createSite({
   id: "orsa",

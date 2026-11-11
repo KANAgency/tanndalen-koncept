@@ -11,10 +11,10 @@ const konceptRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = resolve(konceptRoot, "..");
 
 const PATHS = [
-  "tanndalen-koncept/koncept/sites/td/",
+  "tanndalen-koncept/td/",
   "tanndalen-koncept/koncept/shared/",
   "design-system/",
-  "tanndalen-koncept/tests/td-screenshots.spec.js",
+  "tanndalen-koncept/td/tests/td-screenshots.spec.js",
   "tanndalen-koncept/scripts/td-shot-diff.mjs",
   "tanndalen-koncept/scripts/td-promote.mjs",
   "tanndalen-koncept/scripts/td-if-changed.mjs",

@@ -6,8 +6,8 @@ playwright-report/
 *.bak*
 
 # TD visual regression working dirs (baseline is tracked)
-regression/td-current/
-regression/td-diff-current/
-regression/td-before/
-regression/td-after/
-regression/td-diff/
+td/regression/td-current/
+td/regression/td-diff-current/
+td/regression/td-before/
+td/regression/td-after/
+td/regression/td-diff/

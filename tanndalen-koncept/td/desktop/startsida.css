@@ -2675,8 +2675,8 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
     opacity var(--motion-duration-fast) var(--motion-easing-out-soft),
     transform var(--motion-duration-fast) var(--motion-easing-out-soft);
   pointer-events: none;
-  -webkit-mask: url("ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
-  mask: url("ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
+  -webkit-mask: url("/ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
+  mask: url("/ds/components/icons/utility/arrow-right.svg") center / 16px 16px no-repeat;
 }
 
 .site-menu-subs a:hover,

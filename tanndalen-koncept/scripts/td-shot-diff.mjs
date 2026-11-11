@@ -11,9 +11,9 @@ import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
 
 const root = resolve(fileURLToPath(import.meta.url), "../..");
-const beforeDir = resolve(root, process.env.TD_BEFORE || "regression/td-baseline");
-const afterDir = resolve(root, process.env.TD_AFTER || "regression/td-after");
-const diffDir = resolve(root, process.env.TD_DIFF || "regression/td-diff");
+const beforeDir = resolve(root, process.env.TD_BEFORE || "td/regression/td-baseline");
+const afterDir = resolve(root, process.env.TD_AFTER || "td/regression/td-after");
+const diffDir = resolve(root, process.env.TD_DIFF || "td/regression/td-diff");
 const baseURL = process.env.TD_DIFF_BASE_URL || "http://127.0.0.1:4173";
 
 const ALL_MODE_SHOTS = {

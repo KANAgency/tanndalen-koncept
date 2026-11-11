@@ -7,7 +7,7 @@ import {
 } from "./site-config.js";
 import * as stayApi from "./demo-stay.js";
 import { BOOKING_CALENDAR, modes } from "./modes-content.js";
-import { createModesEngine } from "./shared/js/modes-engine.js";
+import { createModesEngine } from "/shared/js/modes-engine.js";
 
 export { modes };
 

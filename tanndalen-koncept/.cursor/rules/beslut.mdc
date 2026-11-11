@@ -5,9 +5,9 @@ alwaysApply: true
 
 # Beslut
 
-`beslut.md` i repots rot är minnet. Chatten är det inte.
+`td/desktop/beslut.md` är minnet (flyttas till sajtkoncept-roten i etapp 4). Chatten är det inte.
 
-I början av en uppgift: läs `beslut.md`. Följ det som står. Fråga om något där krockar med uppgiften.
+I början av en uppgift: läs `td/desktop/beslut.md`. Följ det som står. Fråga om något där krockar med uppgiften.
 
 När en uppgift är klar: lägg till en post utan att fråga. Fem till tio rader. Datum, vad som valdes, vad som ratades och varför, vad som är öppet. Inga mätvärden, ingen kod, inga fil-dumpar.
 

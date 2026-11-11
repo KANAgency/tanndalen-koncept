@@ -1,1 +1,0 @@
-koncept/sites/td/desktop/intro.js

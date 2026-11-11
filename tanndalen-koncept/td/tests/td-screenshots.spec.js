@@ -4,10 +4,10 @@ import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "..");
+const ROOT = path.resolve(__dirname, "../..");
 const OUT = process.env.TD_SHOT_DIR
   ? path.resolve(process.env.TD_SHOT_DIR)
-  : path.resolve(ROOT, "regression/td-after");
+  : path.resolve(ROOT, "td/regression/td-after");
 
 const VIEWPORT = { width: 1440, height: 900 };
 const SHOT_TIMEOUT_MS = 60_000;

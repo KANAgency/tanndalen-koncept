@@ -5,15 +5,15 @@
   "scripts": {
     "build": "node scripts/build-dist.mjs",
     "preview": "node scripts/preview-dist.mjs",
-    "test:season": "playwright test tests/season-switch.spec.js",
-    "test:intro": "playwright test tests/intro-scroll.spec.js",
-    "test:init": "playwright test tests/page-init.spec.js",
-    "test:td:capture": "rm -rf regression/td-after && mkdir -p regression/td-after && TD_SHOT_DIR=regression/td-after playwright test tests/td-screenshots.spec.js --reporter=line",
-    "test:td:diff": "TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-after TD_DIFF=regression/td-diff node scripts/td-shot-diff.mjs",
+    "test:season": "playwright test td/tests/season-switch.spec.js",
+    "test:intro": "playwright test td/tests/intro-scroll.spec.js",
+    "test:init": "playwright test td/tests/page-init.spec.js",
+    "test:td:capture": "rm -rf td/regression/td-after && mkdir -p td/regression/td-after && TD_SHOT_DIR=td/regression/td-after playwright test td/tests/td-screenshots.spec.js --reporter=line",
+    "test:td:diff": "TD_BEFORE=td/regression/td-baseline TD_AFTER=td/regression/td-after TD_DIFF=td/regression/td-diff node scripts/td-shot-diff.mjs",
     "test:td:promote": "node scripts/td-promote.mjs",
     "test:td:if-changed": "node scripts/td-if-changed.mjs",
-    "test:td:smoke": "rm -rf regression/td-after regression/td-diff && mkdir -p regression/td-after regression/td-diff && TD_ONLY=mode-new-winter,mode-booking-summer,intro-start TD_SHOT_DIR=regression/td-after playwright test tests/td-screenshots.spec.js --reporter=line && TD_ONLY=mode-new-winter,mode-booking-summer,intro-start TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-after TD_DIFF=regression/td-diff node scripts/td-shot-diff.mjs",
-    "test:td": "rm -rf regression/td-after regression/td-diff && mkdir -p regression/td-after regression/td-diff && TD_SHOT_DIR=regression/td-after playwright test tests/td-screenshots.spec.js --reporter=line && TD_BEFORE=regression/td-baseline TD_AFTER=regression/td-after TD_DIFF=regression/td-diff node scripts/td-shot-diff.mjs"
+    "test:td:smoke": "rm -rf td/regression/td-after td/regression/td-diff && mkdir -p td/regression/td-after td/regression/td-diff && TD_ONLY=mode-new-winter,mode-booking-summer,intro-start TD_SHOT_DIR=td/regression/td-after playwright test td/tests/td-screenshots.spec.js --reporter=line && TD_ONLY=mode-new-winter,mode-booking-summer,intro-start TD_BEFORE=td/regression/td-baseline TD_AFTER=td/regression/td-after TD_DIFF=td/regression/td-diff node scripts/td-shot-diff.mjs",
+    "test:td": "rm -rf td/regression/td-after td/regression/td-diff && mkdir -p td/regression/td-after td/regression/td-diff && TD_SHOT_DIR=td/regression/td-after playwright test td/tests/td-screenshots.spec.js --reporter=line && TD_BEFORE=td/regression/td-baseline TD_AFTER=td/regression/td-after TD_DIFF=td/regression/td-diff node scripts/td-shot-diff.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0"

@@ -8,8 +8,8 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(import.meta.url), "../..");
-const afterDir = resolve(root, process.env.TD_AFTER || "regression/td-after");
-const baselineDir = resolve(root, "regression/td-baseline");
+const afterDir = resolve(root, process.env.TD_AFTER || "td/regression/td-after");
+const baselineDir = resolve(root, "td/regression/td-baseline");
 const confirmed =
   process.argv.includes("--confirm") || process.env.TD_PROMOTE_CONFIRM === "1";
 

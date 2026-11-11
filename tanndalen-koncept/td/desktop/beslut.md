@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-11 (etapp 2: td/og platta, inga site-symlänkar)
+
+TD/OG ligger i `td/desktop` och `og/desktop`. Tester+regression under `td/`. Rot-skyltar och site-`ds`/`shared`-symlänkar borta. HTML/JS använder `/ds` och `/shared` via dev-server. Absoluta `/assets/` i index → relativa `assets/`. Smoke grön utan promote. Ratades: behålla skylt-symlänkar. Öppet: etapp 3–4 (design-system in i shared/, byt namn till sajtkoncept).
+
 ## 2026-11-10 (OG brand + hero-media)
 
 BRAND_MARK pekar på horisontella SVG:er (vit över video, svart i topbar); text-wordmark bara vid load-fel. Vinterposter från första bildruta; sommar utan klipp/poster → Orsa-svart placeholder. Hero spelar `winter.web.mp4` (~8 MB, 1080p H.264, mute, faststart); original `winter.mp4` orörd. Ratades: sommarposter-fil; dela assets med TD. Öppet: sommarklipp + egen poster.

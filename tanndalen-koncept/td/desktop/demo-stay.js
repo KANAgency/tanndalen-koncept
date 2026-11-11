@@ -5,7 +5,7 @@ import {
   statusLabel as statusLabelCore,
   lookupStay as lookupStayCore,
   stayToStorage as stayToStorageCore
-} from "./shared/js/demo-stay.js";
+} from "/shared/js/demo-stay.js";
 
 export const DEMO_STAY = {
   title: "Ski Lodge Premium",

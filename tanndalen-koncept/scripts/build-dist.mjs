@@ -20,7 +20,7 @@ import { spawnSync } from "node:child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const DESKTOP = resolve(ROOT, "koncept/sites/td/desktop");
+const DESKTOP = resolve(ROOT, "td/desktop");
 const SHARED = resolve(ROOT, "koncept/shared");
 const OUT = join(ROOT, "dist");
 const DS = resolve(ROOT, "..", "design-system");
