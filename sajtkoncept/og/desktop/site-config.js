@@ -23,19 +23,19 @@ export const SEASON_TOGGLE = {
   switchLabel: "Byt säsong"
 };
 
-/** Season banner copy — mount options. TD wording as placeholder. */
+/** Season banner copy — mount options. OG placeholders. */
 export const SEASON_BANNER_COPY = {
   winter: {
-    title: "Tänndalen på sommaren",
+    title: "Orsa Grönklitt på sommaren",
     lead: "Se hur en dag ser ut när snön är borta.",
     action: "Se en sommardag",
-    live: "Visar en vinterdag i Tänndalen"
+    live: "Visar en vinterdag i Orsa Grönklitt"
   },
   summer: {
-    title: "Tänndalen på vintern",
+    title: "Orsa Grönklitt på vintern",
     lead: "Se hur en dag ser ut när snön ligger.",
     action: "Se en vinterdag",
-    live: "Visar en sommardag i Tänndalen"
+    live: "Visar en sommardag i Orsa Grönklitt"
   }
 };
 
