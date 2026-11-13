@@ -743,6 +743,7 @@
                 <li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vad gör vi om det regnar?"><span>Vad gör vi om det regnar?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li>
               </ul>
               <ul class="td-guide-lista" data-gren-panel="langd" hidden><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilka spår är nypreparerade?"><span>Vilka spår är nypreparerade?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilken valla ska jag använda idag?"><span>Vilken valla ska jag använda idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Var kan vi fika vid spåret?"><span>Var kan vi fika vid spåret?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li></ul>
+              <ul class="td-guide-lista" data-gren-panel="sommar" hidden><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilken led passar barnen idag?"><span>Vilken led passar barnen idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Var kan vi bada idag?"><span>Var kan vi bada idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Kan vi ta liften upp och gå ner?"><span>Kan vi ta liften upp och gå ner?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li></ul>
             </div>
           </div>
           <a class="td-rapport td-rapport-overlay" data-depth="front">
@@ -771,6 +772,15 @@
             </div>
           </a>
           <div>
+            <!-- TODO: demosiffror, samma som justNuData.sommar (14°/8°, 20 % regn, 9 m/s på toppen). -->
+            <article class="td-vader-block td-vader-sommar" data-depth="front" data-gren-panel="sommar" hidden aria-label="Väder i dalen">
+              <header class="td-vader-head"><span class="td-heading-xxs">Väder · I dalen</span></header>
+              <div class="td-vader-main">
+                <div class="td-vader-temp"><span class="td-ui-label td-vader-nu">Nu</span><span class="td-ui-figure-xl">14°</span></div>
+                <div class="td-vader-detalj td-ui-body-sm"><strong class="td-ui-label">Halvklart</strong><span>8° på toppen</span><span>Vind på toppen 9 m/s</span><span>Regnrisk 20 %</span></div>
+              </div>
+              <p class="td-vader-text td-ui-body">Uppehåll till eftermiddagen, en skur kan komma efter 16.<br>Svalt och blåsigt på toppen, ta med en extra tröja.</p>
+            </article>
             <section class="td-pagang" data-depth="front">
               <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/kalender.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
               <div class="td-pagang-groups">
@@ -4187,8 +4197,13 @@
         img.onerror = () => { img.removeAttribute("src"); missingHost.classList.add("is-missing"); };
         if (src) img.src = src;
       }
+      function setSummerSwap(summer) {
+        document.querySelector(".just-cols .td-pagang").hidden = summer;
+        document.querySelector(".just-cols-3 .td-vader-block").hidden = summer;
+      }
       function applyJustNu(gren) {
         justNuSwitch.style.display = "";
+        setSummerSwap(false);
         justNuGren = gren;
         document.querySelectorAll("[data-gren]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gren === gren)));
         document.querySelectorAll("[data-gren-panel]").forEach((panel) => { panel.hidden = panel.dataset.grenPanel !== gren; });
@@ -4335,6 +4350,7 @@
       function applySummer() {
         justNuSwitch.style.display = "none";
         document.querySelectorAll("[data-gren-panel]").forEach((panel) => { panel.hidden = panel.dataset.grenPanel !== "sommar"; });
+        setSummerSwap(true);
         const summer = justNuData.sommar;
         const stack = document.querySelector('[data-gren-panel="sommar"].td-just-nu-stack');
         const card = (key) => stack.querySelector(`[data-summer="${key}"]`);
@@ -4646,6 +4662,50 @@
             { kicker: "Plats", title: "Vindskyddet vid sjön", line: "Egen fika, eldstad", image: "assets/img/fraga-vindskydd.jpg" }
           ],
           chips: ["Tar de kort?", "Finns det toalett vid spåret?"]
+        };
+        /* Sommar: Fjällguiden på plats. Samma familj (två vuxna, barn 6 och 9, bor i Hamra). Siffror följer justNuData.sommar. */
+        QA["Vilken led passar barnen idag?"] = {
+          answer: "Det är torrt på lederna idag, så vanliga skor går bra. Med sexåringen är [Hamraslingan] bäst: 3 km runt sjön, nästan helt flack och start 400 meter från er stuga. Nioåringen klarar att gå upp till [Utsiktsstenen], 2 km och ungefär 150 höjdmeter, med utsikt över hela dalen.",
+          sources: `Källor: <a href="#just-nu">Lederna idag</a> · <a href="#boende">Ert boende</a>`,
+          cards: [
+            { kicker: "Led", title: "[Hamraslingan]", line: "3 km, flack, start nära er stuga" },
+            { kicker: "Led", title: "[Utsiktsstenen]", line: "2 km upp, ca 150 höjdmeter" },
+            { kicker: "Lift", title: "Hamra Komfort", line: "Öppen 10–17, upp utan att gå" }
+          ],
+          chips: ["Kan vi ta liften upp och gå ner?", "Behöver vi myggmedel?"]
+        };
+        QA["Var kan vi bada idag?"] = {
+          answer: "Svansjön håller 17° idag, svalt men skönt en solig eftermiddag. Badplatsen har sandbotten som är grund långt ut, så sexåringen kan vada själv. Vill ni ha varmare vatten är badet på hotellet öppet 10–20, och vid sjön kan ni hyra kanot eller kajak.",
+          sources: `Källor: <a href="#just-nu">Temperatur i sjön</a> · <a href="#aktiviteter">Aktiviteter</a>`,
+          cards: [
+            { kicker: "Plats", title: "Badplatsen vid Svansjön", line: "17° i vattnet, grunt långt ut" },
+            { kicker: "Aktivitet", title: "Kanot och kajak", line: "Hyr vid sjön" },
+            { kicker: "Aktivitet", title: "Bad och bastu", line: "Inomhus, öppet 10–20", image: "assets/img/fraga-bastu.jpg" }
+          ],
+          chips: ["Vilken led passar barnen idag?", "Hur blir vädret i kväll?"]
+        };
+        QA["Kan vi ta liften upp och gå ner?"] = {
+          answer: "Ja, Hamra Komfort går 10–17 idag och sista turen upp går en halvtimme före stängning. Gå ner längs [Fäbodstigen], ungefär 3 km och en dryg timme i barntakt. Det är 8° och 9 m/s på toppen, så ta jacka även om det är varmt i dalen.",
+          sources: `Källor: <a href="#just-nu">Liften</a> · <a href="#just-nu">Väder · I dalen</a>`,
+          cards: [
+            { kicker: "Lift", title: "Hamra Komfort", line: "Öppen 10–17, sista turen 16:30" },
+            { kicker: "Led", title: "[Fäbodstigen]", line: "3 km ner, ca 1 h i barntakt" }
+          ],
+          chips: ["Vilken led passar barnen idag?", "Behöver vi myggmedel?"]
+        };
+        QA["Behöver vi myggmedel?"] = {
+          answer: "I skogen och vid sjön, ja, särskilt på kvällen när det är vindstilla. Uppe på kalfjället blåser det idag och där håller myggen sig undan. Myggmedel finns i Hamra livs, öppet till 19.",
+          sources: `Källor: <a href="#service">Mat, butiker och service</a>`,
+          cards: [
+            { kicker: "Plats", title: "Hamra livs", line: "Öppet 09–19" }
+          ],
+          chips: ["Var kan vi bada idag?"]
+        };
+        QA["Hur blir vädret i kväll?"] = {
+          answer: "Det mulnar på efter 16 och en kort skur kan komma, sedan uppehåll. Runt 10° vid niotiden och solen går ner 21:48, så ta en tröja till kvällsdoppet eller grillen.",
+          sources: `Källor: <a href="#just-nu">Väder · I dalen</a>`,
+          cards: [],
+          chips: ["Kan vi ta liften upp och gå ner?"]
         };
         /* Svar på följdfrågorna. Deras egna följdfrågor pekar bara på frågor som redan har svar. */
         QA["Vad gör vi med barn under 4 år?"] = {

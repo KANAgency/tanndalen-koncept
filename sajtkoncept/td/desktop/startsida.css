@@ -5902,3 +5902,6 @@ html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season
 .fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
 @keyframes fg-live-blink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-open) 50%, transparent); } 50% { opacity: .45; box-shadow: 0 0 0 4px color-mix(in srgb, var(--status-open) 0%, transparent); } }
 @media (prefers-reduced-motion: reduce) { .fg-live { animation: none; } }
+/* Sommar: Väder ersätter På gång i högerkolumnen (vitt kort) */
+.just-cols .td-vader-sommar { height: auto; flex: none; background: var(--color-TD-snow); border-radius: var(--radius-sm); }
+.just-cols [hidden] { display: none !important; }
