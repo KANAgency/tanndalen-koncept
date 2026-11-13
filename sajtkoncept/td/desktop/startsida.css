@@ -5603,3 +5603,81 @@ html[data-mode="onsite"] #just-nu {
   margin-top: var(--space-3xl);
 }
 
+
+/* Fråga oss: säsongsfärgad platta i stället för glas; förgrund följer säsongens kontrastfärg */
+.td-fraga-block {
+  --fraga-fg: var(--contrast-on-season-winter);
+  background: var(--color-season-winter);
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--fraga-fg);
+}
+html[data-season="summer"] .td-fraga-block {
+  --fraga-fg: var(--contrast-on-season-summer);
+  background: var(--color-season-summer);
+}
+.td-fraga-block .td-fraga-block-overrubrik-label,
+.td-fraga-block .td-fraga-block-rubrik,
+.td-fraga-block .td-fraga-block-ingress,
+.td-fraga-block .td-fraga-fragelista-rubrik,
+.td-fraga-block .td-fraga-fragelista-rad > button,
+.td-fraga-block .td-fraga-fragelista-knapp { color: var(--fraga-fg); }
+.td-fraga-block .td-fraga-fragelista-platta {
+  border-color: color-mix(in srgb, var(--fraga-fg) 25%, transparent);
+}
+.td-fraga-block .td-fraga-fragelista-rad + .td-fraga-fragelista-rad {
+  border-top-color: color-mix(in srgb, var(--fraga-fg) 20%, transparent);
+}
+html[data-season="summer"] .td-fraga-block .td-fraga-block-overrubrik-icon { filter: invert(1) brightness(2); }
+
+/* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
+.en-dag .en-dag-season { display: none !important; }
+
+/* Just nu / Data: primär siffra 40 px. Token saknades i genererade tokens -> siffran föll tillbaka till ärvd storlek. */
+:root { --font-size-40: 2.5rem; }
+
+/* Pilar: nedtonade i vila, fulla + liten rörelse vid hover (2026-11-12).
+   ↗ = öppnas ovanpå (modal/helskärm), → = går till annan sida. På gång-raderna hade redan detta. */
+.td-corner-link-icon {
+  opacity: 1; /* hörnpilar: full opacitet (beslut 2026-11-12), bara radpilar tonas ner */
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-easing-out-soft),
+    transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.td-corner-link:hover .td-corner-link-icon,
+.td-corner-link:focus-visible .td-corner-link-icon,
+.td-just-nu-card:hover .td-corner-link-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  transition-duration: var(--motion-duration-normal);
+}
+.td-fraga-fragelista-rad-icon { opacity: 0.4; }
+.td-fraga-fragelista-rad > button:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-rad > button:focus-visible .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:focus-visible .td-fraga-fragelista-rad-icon { opacity: 1; }
+@media (hover: none) {
+  .td-fraga-fragelista-rad-icon { opacity: 0.7; }
+}
+
+/* Datakort-stack: en fast hörnpil per stack som ligger kvar medan korten byts (2026-11-12) */
+.td-just-nu-stack-corner {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  z-index: 3;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.td-just-nu-stack-dark .td-just-nu-stack-corner { color: var(--color-TD-snow); }
+.td-just-nu-stack .td-just-nu-stack-corner .td-corner-link-icon { opacity: 1; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner { gap: 8px; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-label { opacity: 1; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-icon { transform: translate(2px, -2px); }
+
