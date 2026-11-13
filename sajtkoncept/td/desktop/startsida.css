@@ -835,7 +835,7 @@ html.is-intro-done .page .place-labels .place-label {
   display: flex;
   width: 196px;
   height: var(--size-control-lg);
-  background: var(--color-TD-night);
+  background: var(--color-TD-neutral-strong);
 }
 
 .just-nu-head .td-segmented button {
@@ -5681,3 +5681,143 @@ html[data-season="summer"] .td-fraga-block .td-fraga-block-overrubrik-icon { fil
 .td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-label { opacity: 1; }
 .td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-icon { transform: translate(2px, -2px); }
 
+/* === Just nu-kort enligt Figma (2026-11) === */
+/* Pistförare: overlayn slutar ovanför "Från backen", 12px mellan backe och citat, vit tagg */
+a.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-shade {
+  inset: auto 0 0 0;
+  height: 340px;
+  background: linear-gradient(to top, rgb(36 38 41 / 1) 40%, rgb(36 38 41 / 0) 100%);
+}
+.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-lower { gap: var(--space-md); }
+.td-rapport-chip-line {
+  border-color: transparent;
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+/* På gång: vit */
+.just-cols .td-pagang { background: var(--color-TD-snow); }
+/* Pistkarta/webbkamera: svart text och pil */
+.page .td-kamera.is-karta .td-kamera-header,
+.page .td-kamera.is-karta .td-corner-link { color: var(--color-text-primary); }
+
+/* === Fjällguiden-kort === */
+.td-guide {
+  height: 262px;
+  flex: none;
+  justify-content: flex-start;
+  gap: var(--space-md);
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
+}
+html[data-season="summer"] .td-guide { background: var(--color-season-summer); color: var(--contrast-on-season-summer); }
+.td-guide-top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); }
+.td-guide-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
+.td-guide-ai { padding: 0 6px; border: 1px solid currentColor; border-radius: var(--radius-sm); line-height: 16px; }
+.td-guide-status { display: inline-flex; align-items: flex-start; gap: var(--space-xs); text-align: right; }
+.td-guide-status-dot { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; background: var(--status-open); }
+.td-guide-eyebrow { margin: var(--space-sm) 0 0; }
+.td-guide-lista { list-style: none; margin: 0; padding: 0; }
+.td-guide-rad + .td-guide-rad { border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.td-guide-fraga {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+  width: 100%; padding: 12px 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.td-guide-pil { display: inline-flex; opacity: 0.4; transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft), transform var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.td-guide-fraga:hover .td-guide-pil { opacity: 1; transform: translateX(3px); }
+@media (hover: none) { .td-guide-pil { opacity: 0.7; } }
+
+/* === Rättningar efter Figma-jämförelse === */
+/* Fjällguiden: knappens font ska komma från td-ui-body, namn i Superclarendon, versal eyebrow */
+.td-guide-fraga { font: inherit; }
+.td-guide-fraga.td-ui-body {
+  font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif;
+  font-size: 16px; font-weight: 400; line-height: 1.4;
+}
+.td-guide .td-guide-id > .td-ui-cta-sm {
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-size: 22px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+}
+.td-guide-ai { font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif; font-size: 12px; font-weight: 700; }
+.td-guide-status { font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif; font-size: 12px; line-height: 1.3; }
+.td-guide-status span:last-child { font-weight: 400; }
+.td-guide-status span:last-child::first-line { font-weight: 700; }
+.td-guide-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin-top: var(--space-md); }
+.td-guide-pil svg { display: none; }
+.td-guide-pil::before {
+  content: ""; width: 16px; height: 16px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 11.5 11.5 4.5M6.5 4.5h5v5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 11.5 11.5 4.5M6.5 4.5h5v5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.td-guide-fraga:hover .td-guide-pil { transform: translate(2px, -2px); }
+/* På gång: ingen hörnpil */
+.td-pagang .td-corner-link { display: none; }
+/* Pistförare: versal caption, mindre citat, ljus tagg */
+[data-rapport-caption] { text-transform: uppercase; letter-spacing: 0.02em; }
+.td-rapport:not(.is-activity):not(.is-langd) [data-rapport-quote] { font-size: 22px; line-height: 1.25; }
+.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-top .td-rapport-chip {
+  background: var(--color-TD-snow); color: var(--color-text-primary);
+}
+
+/* === Tredje raden: Pistkartor / Öppet nu / Väder === */
+.just-cols-3 {
+  display: grid;
+  grid-template-columns: 411px 410px 411px;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+  align-items: stretch;
+}
+.just-cols-3 > * { box-sizing: border-box; min-height: 226px; border-radius: var(--radius-sm); }
+.td-pistkarta {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: var(--space-xl); text-decoration: none; color: var(--color-text-primary);
+  background: linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
+}
+.td-pistkarta-head, .td-vader-head { display: flex; justify-content: space-between; align-items: center; }
+.td-pistkarta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+.td-button-glass-light { background: var(--color-TD-snow); color: var(--color-text-primary); }
+.td-oppet { padding: var(--space-xl); background: var(--color-TD-snow); display: flex; flex-direction: column; gap: var(--space-md); }
+.td-oppet-lista { list-style: none; margin: 0; padding: 0; }
+.td-oppet-rad { display: grid; grid-template-columns: 120px 1fr; padding: 10px 0; }
+.td-oppet-rad + .td-oppet-rad { border-top: 1px solid var(--color-TD-neutral-subtlest); }
+.td-vader-block { padding: var(--space-xl); display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); color: var(--color-text-primary); }
+.td-vader-main { display: flex; justify-content: space-between; align-items: flex-end; }
+.td-vader-temp { display: flex; flex-direction: column; }
+.td-vader-detalj { display: flex; flex-direction: column; text-align: right; gap: 2px; }
+.td-vader-text { margin: 0; }
+@media (max-width: 1023px) { .just-cols-3 { grid-template-columns: 1fr; } }
+.td-vader-head .td-heading-xxs { white-space: nowrap; font-size: 20px; }
+
+.td-guide-mark-halo { stroke: var(--color-season-winter); }
+html[data-season="summer"] .td-guide-mark-halo { stroke: var(--color-season-summer); }
+.td-guide-eyebrow { margin-top: var(--space-sm); }
+.td-guide-lista { margin-top: -6px; }
+.td-pistkarta {
+  background: url("assets/img/pistkarta.png") center / cover no-repeat, linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
+}
+
+/* Inga hörnlänkar på datakort (stack) och väderblock */
+.td-just-nu-stack-corner { display: none !important; }
+/* Tredje raden bara i "På plats"-läget */
+.just-cols-3 { display: none; }
+html[data-mode="onsite"] .just-cols-3 { display: grid; }
+@media (max-width: 1023px) { html[data-mode="onsite"] .just-cols-3 { grid-template-columns: 1fr; } }
+
+/* Fjällguiden: mått från Figma (411×262, pad 24/24/16/24, header 36, eyebrow→rader 4) */
+.td-guide { padding: 24px 24px 16px; gap: 0; justify-content: flex-start; box-sizing: border-box; }
+.td-guide-top { height: 36px; align-items: center; }
+.td-guide-id { gap: 9px; }
+.td-guide-mark { width: 36px; height: 36px; flex: none; }
+.td-guide .td-guide-id > .td-ui-cta-sm { font-size: 20px; line-height: 26px; }
+.td-guide-ai { height: 22px; padding: 3px 5px; box-sizing: border-box; line-height: 16px; display: inline-flex; align-items: center; }
+.td-guide-status { display: flex; flex-direction: column; align-items: flex-end; text-align: right; font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif; }
+.td-guide-status-rad { display: inline-flex; align-items: center; gap: 6px; height: 13px; }
+.td-guide-status-dot { width: 8px; height: 8px; margin: 0; flex: none; }
+.td-guide-status-text { font-size: 13px; line-height: 13px; font-weight: 700; }
+.td-guide-status-till { font-size: 13px; line-height: 18px; font-weight: 400; }
+.td-guide-eyebrow { margin: auto 0 0; height: 16px; line-height: 16px; font-size: 12px; }
+.td-guide-lista { margin: 4px 0 0; }
+.td-guide-fraga { padding: 8px 0; min-height: 44px; box-sizing: border-box; line-height: 26px; }
+.td-guide-fraga.td-ui-body { line-height: 26px; }
+.td-guide-pil { width: 16px; height: 16px; align-items: center; justify-content: center; }
+.td-guide .td-guide-eyebrow { margin: 31px 0 0; }
+.td-guide-ai { min-width: 26px; justify-content: center; }
