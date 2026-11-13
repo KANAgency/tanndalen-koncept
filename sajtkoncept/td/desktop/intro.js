@@ -1,6 +1,9 @@
 /* Start-page intro. One film: the hero card video, never moved. */
 
 const TANNDALEN_HOLD_MS = 1100; /* was HOLD_A 600; +500ms on the word, not the fade */
+const BLACK_MS = 300; /* ms fully black before the logo */
+const LOGO_FADE_MS = 450; /* ms quick logo fade-in */
+const LEAD_MS = BLACK_MS + LOGO_FADE_MS;
 const GROW = 900; /* ms symbol growth */
 const HOLD_B = 450; /* ms before typing */
 const ZOOM_START = 0.1; /* × viewport height */
@@ -38,6 +41,7 @@ function bezier([x1, y1, x2, y2]) {
 }
 
 const growEase = bezier(GROW_EASE);
+const fadeEase = bezier(FADE_EASE);
 
 function smootherstep(p) {
   const x = Math.min(1, Math.max(0, p));
@@ -348,6 +352,13 @@ export function init() {
       row.className = "intro-line";
       row.style.animationDelay = `${200 + index * 80}ms`;
       line.forEach((s) => row.append(s.textContent));
+      /* Drop the finished animation so the browser repaints the line as plain text.
+         Some lines otherwise stayed invisible (a gap) until the text was selected. */
+      row.addEventListener("animationend", () => {
+        row.style.animation = "none";
+        row.style.opacity = "1";
+        row.style.transform = "none";
+      }, { once: true });
       p.append(row);
     });
     lock.dataset.lines = String(lines.length);
@@ -428,6 +439,15 @@ export function init() {
     return Math.min(1, Math.max(0, (scrollY - start) / length));
   }
 
+  let logoShown = false;
+  function logoIn(o) {
+    if (logoShown) return;
+    const v = String(fadeEase(o));
+    fill.style.opacity = v;
+    word.style.opacity = v;
+    if (o >= 1) { logoShown = true; lock.classList.remove("is-black"); }
+  }
+
   let last = performance.now();
   function frame(now) {
     if (introDone) return;
@@ -435,16 +455,23 @@ export function init() {
     last = now;
     const elapsed = now - t0;
     if (phase < 1) {
-      if (scrollY > 0) finishText();
-      else if (elapsed < TANNDALEN_HOLD_MS) applyGrow(0, 0);
-      else if (elapsed < TANNDALEN_HOLD_MS + GROW) {
-        const t = (elapsed - TANNDALEN_HOLD_MS) / GROW;
+      const el = elapsed - LEAD_MS;
+      if (scrollY > 0) { finishText(); logoIn(1); }
+      else if (el < 0) {
+        applyGrow(0, 0);
+        logoIn(Math.min(1, Math.max(0, (elapsed - BLACK_MS) / LOGO_FADE_MS)));
+      }
+      else if (el < TANNDALEN_HOLD_MS) { logoIn(1); applyGrow(0, 0); }
+      else if (el < TANNDALEN_HOLD_MS + GROW) {
+        logoIn(1);
+        const t = (el - TANNDALEN_HOLD_MS) / GROW;
         applyGrow(growEase(t), t);
       } else if (!lock.dataset.held) {
         phase = 1;
         applyGrow(1, 1);
         lock.dataset.held = "1";
         lock.dataset.growEnd = String(Math.round(elapsed));
+        root.classList.add("is-skip-ready");
         setTimeout(() => {
           lock.dataset.typeStart = String(Math.round(performance.now() - t0));
           if (lock.dataset.typed !== "1") typeLine();
@@ -525,6 +552,8 @@ export function init() {
     layout(symbol, right);
     sizeRunway();
     applyGrow(0, 0);
+    lock.classList.add("is-black");
+    logoIn(0);
     addEventListener("resize", () => { layout(symbol, right); if (!introDone) sizeRunway(); });
     requestAnimationFrame(frame);
     root.classList.add("is-intro-ready");
