@@ -1280,8 +1280,10 @@ function initHeroPage() {
       if (p >= headerInP) revealHeaderAnimated();
       else if (p < headerOutP) hideHeaderAnimated();
 
-      const heroP = Math.max(config.heroRevealP ?? 0.78, whiteoutP);
-      const mediaP = Math.max(config.mediaRevealP ?? 0.85, whiteoutP);
+      /* Hero copy reveals together with the header, in the white of the rising clouds. */
+      const heroP = config.heroRevealP ?? config.headerRevealP ?? 0.35;
+      /* Image + booking bar reveal with the copy; the stagger is done in CSS. */
+      const mediaP = config.mediaRevealP ?? heroP;
 
       if (p >= heroP && !heroRevealed) {
         heroRevealed = true;

@@ -1,0 +1,187 @@
+/* Booking bar + inline calendar/guest pickers: verbatim from td/desktop/startsida.css
+   lines 342-526 (TD start page). '.hero ' scope replaced with '.og-hp-booking-anchor '. */
+.og-hp-booking-anchor .td-booking-search {
+  box-sizing: border-box;
+  background: var(--color-cta-primary);
+  color: var(--color-TD-snow);
+}
+
+.td-booking-pane.is-shown.is-swapped { display: none; }
+
+.td-booking .td-booking-view {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  box-sizing: border-box;
+  width: auto;
+  max-height: none;
+  margin: 0;
+  padding: 16px 33px;
+  border-radius: var(--radius-none);
+  background: transparent;
+  animation: td-booking-fade var(--motion-duration-normal) var(--motion-easing-out-soft);
+}
+
+.td-booking .td-booking-view.is-open {
+  display: flex;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: auto;
+  border-radius: var(--radius-none);
+}
+
+.td-booking .td-picker-head {
+  margin-bottom: 12px;
+}
+
+.td-booking .td-calendar-nav,
+.td-booking .td-calendar-month {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.td-booking .td-calendar-nav p {
+  margin: 0;
+  color: var(--color-TD-night);
+}
+
+.td-booking .td-calendar-weekdays,
+.td-booking .td-calendar-week {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.td-booking .td-calendar-week button {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 48px;
+  color: var(--color-text-primary);
+}
+
+.td-booking .td-calendar-week button[data-in-range="true"]::before,
+.td-booking .td-calendar-week button[data-edge]::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: var(--color-TD-day);
+  z-index: -1;
+}
+
+.td-booking .td-calendar-week button[data-edge="start"]::before {
+  left: 50%;
+}
+
+.td-booking .td-calendar-week button[data-edge="end"]::before {
+  right: 50%;
+}
+
+.td-booking .td-calendar-week button[data-round="left"]::before {
+  border-radius: var(--radius-lg) var(--radius-none) var(--radius-none) var(--radius-lg);
+}
+
+.td-booking .td-calendar-week button[data-round="right"]::before {
+  border-radius: var(--radius-none) var(--radius-lg) var(--radius-lg) var(--radius-none);
+}
+
+.td-booking .td-calendar-week button[data-round="both"]::before {
+  border-radius: var(--radius-lg);
+}
+
+.td-booking .td-calendar-week button[aria-pressed="true"]::after,
+.td-booking .td-calendar-week button[data-edge]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-cta-primary);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.td-booking .td-calendar-week button[aria-pressed="true"],
+.td-booking .td-calendar-week button[data-edge] {
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-TD-snow);
+}
+
+.td-booking .td-calendar-week button[data-in-range="true"] {
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.td-booking .td-calendar-foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0 0;
+}
+
+.td-booking .td-calendar-foot p {
+  margin: 0;
+  text-align: center;
+  color: var(--color-TD-night);
+}
+
+.td-booking .td-calendar-foot [data-clear] {
+  justify-self: start;
+}
+
+.td-booking .td-calendar-foot [data-done] {
+  justify-self: end;
+}
+
+.td-booking .td-field {
+  position: relative;
+  z-index: 0;
+}
+
+.td-booking .td-field:hover {
+  z-index: 1;
+}
+
+.td-booking .td-field:first-of-type:hover::after,
+.td-booking .td-field:last-of-type:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-booking-calendar-range);
+}
+
+.td-booking .td-field:first-of-type:hover::after { bottom: -2px; }
+.td-booking .td-field:last-of-type:hover::after { top: -2px; }
+
+.td-booking .td-guest-row p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  text-align: left;
+}
+
+.td-booking .td-guest-row .td-ui-title-sm {
+  color: var(--color-TD-night);
+}
+
+.td-booking .td-stepper output {
+  color: var(--color-TD-night);
+}
+
+.td-booking .td-stepper button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+

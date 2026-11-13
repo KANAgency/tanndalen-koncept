@@ -439,3 +439,6 @@ html.theme-OG .site-footer-legal {
   display: flex;
   gap: var(--space-lg);
 }
+
+/* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
+.en-dag .en-dag-season { display: none !important; }

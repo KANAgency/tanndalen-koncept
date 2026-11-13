@@ -95,7 +95,7 @@ html.theme-OG body.og-hp-page {
  * beige OG day. Keep the header bar white.
  */
 .theme-OG .og-hp-header .top-glass {
-  background: color-mix(in srgb, var(--color-OG-snow) 70%, transparent);
+  background: color-mix(in srgb, var(--color-OG-neutral-highlight) 85%, transparent);
 }
 
 /* TD's just-nu-data.css uses --font-size-40, which no token file defines.
@@ -112,8 +112,10 @@ html.theme-OG body.og-hp-page {
   text-decoration: none;
 }
 .theme-OG .og-hp-header .site-menu-link:hover .site-menu-title,
-.theme-OG .og-hp-header .site-menu-link:focus-visible .site-menu-title {
-  color: var(--color-cta-primary);
+.theme-OG .og-hp-header .site-menu-link:focus-visible .site-menu-title,
+.theme-OG .og-hp-header .site-menu-subs a:hover,
+.theme-OG .og-hp-header .site-menu-subs a:focus-visible {
+  color: var(--color-accent);
 }
 
 /* Fråga input: arrow button gets a filled circle (OG green, white arrow). */
@@ -130,3 +132,228 @@ html.theme-OG body.og-hp-page {
   border-radius: var(--radius-sm);
   clip-path: inset(0 round var(--radius-sm));
 }
+
+/* Secondary buttons: light tint of the OG taupe (palette mid-tone, ~15 % taupe in
+   off-white). Estimated from the palette screenshot; swap for the exact Figma value. */
+.theme-OG {
+  --color-OG-taupe-tint: #E1DBD0; /* Figma color/OG/taupe-tint: 15 % of color/OG/taupe #726D58 in off-white */
+  --color-OG-taupe-light: #EBEAE6; /* Figma color/OG/taupe-light: 14 % of taupe in white, lighter and greyer */
+  --color-season-winter: var(--color-OG-taupe-tint);
+  --contrast-on-season-winter: var(--color-text-primary);
+}
+.theme-OG .og-hp-header .menu-control,
+.theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
+.theme-OG .og-hp-header .td-button-fill-winter,
+.theme-OG .og-hp-header .account-user {
+  background: var(--color-OG-taupe-light);
+  color: var(--color-text-primary);
+}
+
+/* OG: buttons and interactive elements are regular, not bold (Figma OG UI/cta,
+   UI/cta-sm and UI/label are 400; generated typography-og and button.css still say 700).
+   Applies to the whole page: header, booking bar, all blocks, Fråga modal. */
+.theme-OG .td-button,
+.theme-OG .td-ui-cta,
+.theme-OG .td-ui-cta-sm,
+.theme-OG .td-ui-label,
+.theme-OG .menu-control-label,
+.theme-OG .boende .boende-search {
+  font-weight: var(--font-weight-regular, 400);
+}
+.theme-OG .td-button {
+  font-family: var(--font-family-OG-secondary), "Radio Canada Big", sans-serif;
+}
+
+/* En dag: secondary buttons (CTA, Hoppa över, Nästa) */
+/* TEST: En dag inverted, on Orsa svart. Contrast choices (on #3C3C3B):
+   text off-white #F5EEE5 (~10:1), labels/meta neutral-subtle #C3C2BD (~5.5:1),
+   timeline line/dots neutral-muted #A5A4A0, buttons off-white with dark text,
+   sun icon stays on a light disc so its dark strokes still read. */
+.theme-OG .og-hp-blocks .en-dag {
+  --en-dag-bg: #1E1D1B; /* warm near-black between OG black #000 and Orsa svart #3C3C3B */
+  --color-text-primary: #F5EEE5;
+  --color-TD-neutral: #C3C2BD;
+  --color-TD-neutral-muted: #A5A4A0;
+  --color-TD-neutral-subtlest: #4E4D49;
+  background: var(--en-dag-bg);
+  /* full-bleed band behind the 1280px content column */
+  box-shadow: 0 0 0 100vmax var(--en-dag-bg);
+  clip-path: inset(0 -100vmax);
+  color: var(--color-text-primary);
+}
+.theme-OG .en-dag .en-dag-sun-icon-wrap {
+  background: transparent;
+}
+/* Light-stroke sun icons on the dark band (orange accent kept). */
+.theme-OG .en-dag img.en-dag-sun-icon[src*="soluppgang-48"] {
+  content: url("../assets/icons/soluppgang-48-light.svg");
+}
+.theme-OG .en-dag img.en-dag-sun-icon[src*="solnedgang-48"] {
+  content: url("../assets/icons/solnedgang-48-light.svg");
+}
+.theme-OG .en-dag .td-button-secondary {
+  background: #F5EEE5;
+  color: #3C3C3B;
+}
+.theme-OG .en-dag a:focus-visible,
+.theme-OG .en-dag button:focus-visible {
+  outline-color: #F5EEE5;
+}
+
+/* OG neutral scale retinted to the taupe-light hue (Figma Neutral/*, same lightness
+   as the TD neutrals). Overrides the older cool greys from generated tokens. */
+.theme-OG {
+  --color-OG-neutral-highlight: #F5F4F0;
+  --color-OG-neutral-subtlest: #E0DFDB;
+  --color-OG-neutral-light: #D8D7D3;
+  --color-OG-neutral-subtle: #C3C2BD;
+  --color-OG-neutral-muted: #A5A4A0;
+  --color-OG-neutral: #696864;
+  --color-OG-neutral-strong: #4E4D49;
+}
+
+/* Booking bar (and its calendar) on the lightest OG neutral instead of white. */
+.theme-OG {
+  --color-booking-calendar-surface: var(--color-OG-neutral-highlight);
+}
+
+/* En dag on black: timeline text white; headings regular, not bold. */
+.theme-OG .en-dag .en-dag-sun-label,
+.theme-OG .en-dag .en-dag-sun-time,
+.theme-OG .en-dag .en-dag-sun-name,
+.theme-OG .en-dag .en-dag-sun-event-label,
+.theme-OG .en-dag .en-dag-sun-event-name,
+.theme-OG .en-dag .en-dag-sun-event-time {
+  color: #FFFFFF;
+}
+.theme-OG .en-dag h2,
+.theme-OG .en-dag h3,
+.theme-OG .en-dag [class*="td-heading"] {
+  font-weight: var(--font-weight-regular, 400);
+}
+/* Times in the timeline: light neutral (Muted), so they separate from the white names. */
+.theme-OG .en-dag .en-dag-sun-time,
+.theme-OG .en-dag .en-dag-sun-event-time {
+  color: var(--color-OG-neutral-muted, #A5A4A0);
+}
+/* TEST: timeline names in the primary font (Literata). */
+.theme-OG .en-dag .en-dag-sun-name,
+.theme-OG .en-dag .en-dag-sun-event-name {
+  font-family: var(--font-family-OG-primary), "Literata", Georgia, serif;
+  font-weight: var(--font-weight-regular, 400);
+}
+
+/* Brand element: kurbits ornament (asset: assets/brand/kurbits.svg, 882x259).
+   Drawn as a CSS mask so its colour comes from a token. */
+.theme-OG .og-hp-kurbits {
+  display: block;
+  width: 240px;
+  aspect-ratio: 882 / 259;
+  margin: 0 auto var(--space-xl, 24px);
+  background-color: var(--color-OG-taupe, #726D58);
+  -webkit-mask: url("./assets/brand/kurbits.svg") center / contain no-repeat;
+  mask: url("./assets/brand/kurbits.svg") center / contain no-repeat;
+}
+
+/* Hero copy centred, directly after the clouds (heroCopyTopPx 24 in config). */
+.theme-OG .og-hp-hero-copy {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Hero content rises into the white of the clouds, like White Desert:
+   main is pulled up so its copy sits ~60 % down the screen when the header
+   reveals (headerRevealP 0.35 of the intro runway), and main is transparent so
+   the clouds stay visible behind the text. Keep in sync with headerRevealP. */
+.theme-OG .og-hp-page:not(.is-skip-intro) .og-hp-main {
+  margin-top: calc(-40vh - var(--og-hp-intro-scroll, 200vh) * 0.65);
+  background: transparent;
+}
+
+/* Staggered reveal: kurbits, heading, body. */
+.theme-OG .og-hp-hero-copy {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.theme-OG .og-hp-hero-copy > * {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-OG .og-hp-hero-copy.is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.theme-OG .og-hp-hero-copy.is-revealed > :nth-child(2) { transition-delay: 0.15s; }
+.theme-OG .og-hp-hero-copy.is-revealed > :nth-child(3) { transition-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .theme-OG .og-hp-hero-copy > * { transition: none; transform: none; }
+}
+
+/* Booking bar: TD scopes these field rules to `.hero`, which the OG page doesn't have,
+   so the field icons rendered unsized (huge). Same values as td/desktop/startsida.css. */
+.theme-OG .og-hp-booking-anchor .td-booking-pane { padding-bottom: var(--space-lg); }
+.theme-OG .og-hp-booking-anchor .td-field-group {
+  border: 1px solid var(--color-TD-neutral-subtlest);
+  background: var(--color-TD-snow);
+}
+.theme-OG .og-hp-booking-anchor .td-field { color: var(--color-booking-calendar-muted); }
+.theme-OG .og-hp-booking-anchor .td-field-icon {
+  flex: none;
+  width: var(--space-lg);
+  height: var(--space-lg);
+}
+.theme-OG .og-hp-booking-anchor .td-booking-links a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.theme-OG .og-hp-booking-anchor .td-booking-teaser { margin: 0; }
+.theme-OG .og-hp-booking-anchor .td-booking-teaser > span {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Staggered reveal continues: image, then booking bar (after kurbits/heading/body). */
+.theme-OG .og-hp-hero-media-block {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.theme-OG .og-hp-hero-frame,
+.theme-OG .og-hp-booking-anchor {
+  opacity: 0;
+  translate: 0 24px;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-OG .og-hp-hero-media-block.is-revealed .og-hp-hero-frame {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.45s;
+}
+.theme-OG .og-hp-hero-media-block.is-revealed .og-hp-booking-anchor {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.6s;
+}
+.theme-OG .og-hp-page.is-skip-intro .og-hp-hero-copy > *,
+.theme-OG .og-hp-page.is-skip-intro .og-hp-hero-frame,
+.theme-OG .og-hp-page.is-skip-intro .og-hp-booking-anchor {
+  opacity: 1;
+  transform: none;
+  translate: none;
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-OG .og-hp-hero-frame,
+  .theme-OG .og-hp-booking-anchor { translate: none; transition: none; }
+}
+
+/* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
+.en-dag .en-dag-season { display: none !important; }

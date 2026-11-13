@@ -122,7 +122,7 @@ export const HERO_PAGE_CONFIG = {
 
   /* ——— Hero reveal (on white page) — only after whiteout ——— */
   /** When hero copy starts animating in. */
-  heroRevealP: 0.78,
+  heroRevealP: 0.35, /* same as headerRevealP: copy appears with the menu */
   /**
    * When TD header slides in (time-based, not scrubbed).
    * ~0.35 ≈ clouds covering the lower part of the viewport.
@@ -131,7 +131,7 @@ export const HERO_PAGE_CONFIG = {
   /** Header slide-in duration (ms). Fade is ~57% of this (200 @ 350). */
   headerRevealMs: 350,
   /** When framed media + booking start fading in. */
-  mediaRevealP: 0.85,
+  mediaRevealP: 0.35, /* with the copy; CSS staggers image then booking bar */
 
   /** Framed hero media (Figma 1280×707 @ 1440). */
   heroFrameSrc: "../assets/img/og-hero-winter.jpg",
@@ -141,7 +141,7 @@ export const HERO_PAGE_CONFIG = {
   bookingOverlapPx: 40.5,
 
   heroCopyLeftPx: 201,
-  heroCopyTopPx: 100,
+  heroCopyTopPx: 24,
   heroCopyMaxWidthPx: 787,
   heroTitleSizePx: 60,
   heroBodySizePx: 16,

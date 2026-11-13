@@ -11,8 +11,8 @@ export const INTRO_SEEN_KEY = "og-startsida-seen";
 export const BRAND_MARK = Object.freeze({
   label: "Orsa Grönklitt",
   src: Object.freeze({
-    light: "assets/brand/logo-vertical-white.png",
-    dark: "assets/brand/logo-vertical-black.png"
+    light: "assets/brand/logo-vertical-white.svg",
+    dark: "assets/brand/logo-vertical-black.svg"
   })
 });
 
