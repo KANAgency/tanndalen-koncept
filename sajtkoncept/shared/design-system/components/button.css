@@ -202,6 +202,11 @@ button.td-button.td-button-fill-summer {
   color: currentColor;
 }
 
+/* Ikon-sidan får mindre padding: Large 32→24, Medium 24→16, Small 12→8 */
+.td-button:has(> :is(svg, .td-button-icon, .td-button-graphic):first-child + *) { padding-inline-start: 24px; }
+.td-button-md:has(> :is(svg, .td-button-icon, .td-button-graphic):first-child + *) { padding-inline-start: 16px; }
+.td-button-sm:has(> :is(svg, .td-button-icon, .td-button-graphic):first-child + *) { padding-inline-start: 8px; }
+
 /* Graphic icon: 24@Medium / 32@Large. Gap 12 = button gap 8 + 4 på wrap.
    Context Light/Dark styrs av etikettens kontrast; Name överstyrbart via img src. */
 .td-button-graphic {

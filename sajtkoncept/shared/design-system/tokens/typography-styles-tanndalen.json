@@ -141,7 +141,7 @@
   },
   "ui-body": { "group": "UI", "family": "TD.secondary", "size": "base", "weight": "book", "leading": 1.5, "tracking": 0, "note": "Figma UI/body. 16/150 %." },
   "ui-body-sm": { "group": "UI", "family": "TD.secondary", "size": "sm", "weight": "book", "leading": 1.5, "tracking": 0, "note": "Figma UI/body-sm. 14/150 %." },
-  "ui-caption": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "book", "leading": 1.5, "tracking": 0 },
+  "ui-caption": { "group": "UI", "family": "TD.secondary", "size": "13", "weight": "book", "leading": 1.385, "tracking": 0, "note": "Figma UI/caption. 13/18 px (2026-11-12)." },
   "ui-kicker": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.333, "tracking": 0 },
   "ui-label": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.083, "tracking": 0 },
   "ui-nav": { "group": "UI", "family": "TD.secondary", "size": "sm", "weight": "book", "leading": 1.071, "tracking": 0 },

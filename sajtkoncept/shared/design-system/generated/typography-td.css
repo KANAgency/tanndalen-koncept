@@ -399,9 +399,9 @@
 
 .td-ui-caption {
   font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-13, 0.8125rem);
   font-weight: var(--font-weight-book);
-  line-height: 1.5;
+  line-height: 1.385; /* 18px, som i Figma */
   letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
@@ -469,6 +469,17 @@
   font-weight: var(--font-weight-bold);
   line-height: 1.111;
   letter-spacing: -0.022em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+.td-ui-figure-xl {
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-size: 6rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.04em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
