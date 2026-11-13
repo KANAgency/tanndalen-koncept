@@ -114,6 +114,14 @@
       "orange": { "value": "#F39200" },
       "red": { "value": "#E31E24" }
     },
+    "wax": {
+      "$figma": "Shared / Primitives wax/{green|blue|violet|red|yellow}. Vallafärger för hårdhetsskalan (Dagens vallatips). Scope FRAME_FILL + SHAPE_FILL — inte text.",
+      "green": { "value": "#3E7A5A" },
+      "blue": { "value": "#3B6EA5" },
+      "violet": { "value": "#6E4E91" },
+      "red": { "value": "#B5473A" },
+      "yellow": { "value": "#C9A227" }
+    },
     "shared": {
       "$note": "Systemfärger — identiska för OG och TD. Inte varumärkesfärger. Delade komponenter binder hit, inte till brand-hex.",
       "error": {

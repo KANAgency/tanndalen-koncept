@@ -67,6 +67,11 @@ html {
   --color-difficulty-green: #3A9A3A;
   --color-difficulty-orange: #F39200;
   --color-difficulty-red: #E31E24;
+  --color-wax-green: #3E7A5A;
+  --color-wax-blue: #3B6EA5;
+  --color-wax-violet: #6E4E91;
+  --color-wax-red: #B5473A;
+  --color-wax-yellow: #C9A227;
   --color-shared-error: #C42B2B;
   --color-shared-on-error: #FFFFFF;
   --color-status-success: #2E7D46;
@@ -76,12 +81,12 @@ html {
   --color-status-error-dark: #EF6B63;
 
   /* —— Primitives: font.size (px in JSON → rem in CSS) —— */
+  --font-size-13: 0.8125rem;
   --font-size-32: 2rem;
   --font-size-56: 3.5rem;
   --font-size-88: 5.5rem;
   --font-size-112: 7rem;
   --font-size-xs: 0.75rem;
-  --font-size-13: 0.8125rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-md: 1.125rem;
@@ -265,6 +270,13 @@ html {
   --difficulty-orange: var(--color-OG-difficulty-orange);
   --difficulty-orange-dark: var(--color-OG-difficulty-orange);
 
+  /* —— Wax: OG —— */
+  --wax-green: var(--color-wax-green);
+  --wax-blue: var(--color-wax-blue);
+  --wax-violet: var(--color-wax-violet);
+  --wax-red: var(--color-wax-red);
+  --wax-yellow: var(--color-wax-yellow);
+
   /* —— Spacing: OG (px) —— */
   --space-20: 20px;
   --space-48: 48px;
@@ -366,6 +378,13 @@ html {
   --difficulty-black-dark: var(--color-difficulty-black);
   --difficulty-orange: var(--color-difficulty-orange);
   --difficulty-orange-dark: var(--color-difficulty-orange);
+
+  /* —— Wax: TD —— */
+  --wax-green: var(--color-wax-green);
+  --wax-blue: var(--color-wax-blue);
+  --wax-violet: var(--color-wax-violet);
+  --wax-red: var(--color-wax-red);
+  --wax-yellow: var(--color-wax-yellow);
 
   /* —— Spacing: TD (px) —— */
   --space-20: 20px;

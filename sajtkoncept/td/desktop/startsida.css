@@ -5831,11 +5831,11 @@ html[data-mode="onsite"] .just-cols-3 { display: grid; }
 .td-valla-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: center; }
 .td-valla-seg { height: 10px; border-radius: 3px; opacity: .4; }
 .td-valla-seg[aria-current] { height: 20px; border-radius: 4px; opacity: 1; }
-.td-valla-seg[data-tone="gron"] { background: #3E7A5A; }
-.td-valla-seg[data-tone="bla"] { background: #3B6EA5; }
-.td-valla-seg[data-tone="violett"] { background: #6E4E91; }
-.td-valla-seg[data-tone="rod"] { background: #B5473A; }
-.td-valla-seg[data-tone="gul"] { background: #C9A227; }
+.td-valla-seg[data-tone="gron"] { background: var(--wax-green); }
+.td-valla-seg[data-tone="bla"] { background: var(--wax-blue); }
+.td-valla-seg[data-tone="violett"] { background: var(--wax-violet); }
+.td-valla-seg[data-tone="rod"] { background: var(--wax-red); }
+.td-valla-seg[data-tone="gul"] { background: var(--wax-yellow); }
 .td-valla-etiketter { display: flex; justify-content: space-between; opacity: .7; }
 .td-valla-val { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
 /* Status: samma storlek och vänsterkant på båda raderna (text, inte prick) */

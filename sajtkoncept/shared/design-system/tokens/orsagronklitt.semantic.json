@@ -86,6 +86,15 @@
     "orange-dark": { "ref": "color.OG.difficulty-orange" }
   },
 
+  "wax": {
+    "$figma": "Semantic COLOR wax-{green|blue|violet|red|yellow}. Alias till Shared / Primitives wax/* — CSS --wax-*. Ingen -dark: vallakortet renderas alltid på snow.",
+    "green": { "ref": "color.wax.green" },
+    "blue": { "ref": "color.wax.blue" },
+    "violet": { "ref": "color.wax.violet" },
+    "red": { "ref": "color.wax.red" },
+    "yellow": { "ref": "color.wax.yellow" }
+  },
+
   "status": {
     "$figma": "Semantic COLOR status-* — samma struktur som TD, OG-primitiver.",
     "open": { "ref": "color.status.success" },

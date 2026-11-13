@@ -286,6 +286,12 @@ function generate() {
       emitSemanticRefs(brandKey, semantic.difficulty, ["difficulty"], lines);
     }
 
+    if (semantic.wax) {
+      lines.push("");
+      lines.push(`  /* —— Wax: ${brandKey} —— */`);
+      emitSemanticRefs(brandKey, semantic.wax, ["wax"], lines);
+    }
+
     lines.push("");
     lines.push(`  /* —— Spacing: ${brandKey} (px) —— */`);
     for (const [key, token] of Object.entries(primitives.space ?? {})) {
