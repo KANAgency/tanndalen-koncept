@@ -1,0 +1,122 @@
+/* Varumärkessekvens: Lev. Andas. Tänndalen. – pinnad, scrollstyrd */
+.td-brand {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  height: 300vh;
+  margin: 80px 0 0;
+  transform: translateX(-50%);
+}
+.td-brand-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.td-brand-frame {
+  position: relative;
+  width: var(--brand-w, 80vw);
+  height: var(--brand-h, 60vh);
+  padding: var(--brand-pad, 46px);
+  box-sizing: content-box; /* färgramen läggs UTANPÅ bilden, bilden behåller sin storlek */
+  background: var(--brand-frame, #A1B5BA);
+  /* symmetrisk mörk ram utanpå säsongsramen, lika bred som den */
+  box-shadow: 0 0 0 calc(var(--brand-pad, 46px) / 2) var(--color-TD-night);
+}
+.td-brand-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.td-brand-img {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(var(--clip, 100%) 0 0 0);
+}
+.td-brand-img img {
+  position: absolute;
+  left: 0;
+  top: -6%;
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1));
+  will-change: transform;
+}
+.td-brand-img:first-child { --clip: 0%; }
+.td-brand-word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  color: #fff;
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: var(--font-weight-bold);
+  font-size: clamp(88px, 17vw, 320px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  z-index: 2;
+}
+.td-brand-word span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+}
+.td-brand-sign {
+  position: absolute;
+  left: 50%;
+  bottom: 9vh;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* 16 + 24 */
+  transform: translate(-50%, var(--sign-y, 24px));
+  opacity: var(--sign-o, 0);
+  color: #fff;
+  pointer-events: none;
+}
+.td-brand-sign.is-on { pointer-events: auto; }
+.td-brand-sign-word {
+  margin: 0;
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: var(--font-weight-bold);
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.td-brand .td-brand-glass.td-button,
+.td-brand .td-brand-glass.td-button * {
+  color: #fff !important;
+}
+.td-brand-glass.td-button {
+  height: 48px;
+  padding: 12px 32px;
+  font-size: 16px;
+  line-height: 1;
+  background: rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-decoration: none;
+}
+.td-brand-glass.td-button:hover { background: rgb(255 255 255 / 0.24); }
+
+@media (max-width: 767px) {
+  .td-brand { height: 240vh; }
+  .td-brand-word { font-size: 22vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td-brand { height: auto; padding: 80px 0; }
+  .td-brand-pin { position: static; height: auto; flex-direction: column; gap: 48px; }
+  .td-brand-word span { opacity: 1; transform: none; }
+}
