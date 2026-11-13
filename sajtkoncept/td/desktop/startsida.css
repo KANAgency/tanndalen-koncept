@@ -5696,9 +5696,6 @@ a.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-shade {
 }
 /* På gång: vit */
 .just-cols .td-pagang { background: var(--color-TD-snow); }
-/* Pistkarta/webbkamera: svart text och pil */
-.page .td-kamera.is-karta .td-kamera-header,
-.page .td-kamera.is-karta .td-corner-link { color: var(--color-text-primary); }
 
 /* === Fjällguiden-kort === */
 .td-guide {
@@ -5739,8 +5736,6 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 }
 .td-guide-ai { font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif; font-size: 12px; font-weight: 700; }
 .td-guide-status { font-family: "CircularXX", var(--font-family-TD-secondary), sans-serif; font-size: 12px; line-height: 1.3; }
-.td-guide-status span:last-child { font-weight: 400; }
-.td-guide-status span:last-child::first-line { font-weight: 700; }
 .td-guide-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin-top: var(--space-md); }
 .td-guide-pil svg { display: none; }
 .td-guide-pil::before {
@@ -5824,4 +5819,86 @@ html[data-mode="onsite"] .just-cols-3 { display: grid; }
 
 /* Längd: tredje raden utan Pistkartor – Väder tar två kolumner */
 .just-cols-3 [hidden], .td-guide [hidden] { display: none !important; }
-.just-cols-3:has(.td-pistkarta[hidden]) .td-vader-block { grid-column: span 2; }
+
+/* Dagens vallatips (Längd) */
+.td-valla { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); padding: var(--space-xl); background: var(--color-TD-snow); color: var(--color-text-primary); }
+.td-valla-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+.td-valla-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
+.td-valla-tid { opacity: .7; }
+.td-valla-sno, .td-valla-val > div { display: flex; flex-direction: column; gap: 2px; }
+.td-valla-sno .td-ui-kicker, .td-valla-val .td-ui-kicker { text-transform: uppercase; opacity: .7; }
+.td-valla-skala { display: flex; flex-direction: column; gap: var(--space-sm); }
+.td-valla-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: center; }
+.td-valla-seg { height: 10px; border-radius: 3px; opacity: .4; }
+.td-valla-seg[aria-current] { height: 20px; border-radius: 4px; opacity: 1; }
+.td-valla-seg[data-tone="gron"] { background: #3E7A5A; }
+.td-valla-seg[data-tone="bla"] { background: #3B6EA5; }
+.td-valla-seg[data-tone="violett"] { background: #6E4E91; }
+.td-valla-seg[data-tone="rod"] { background: #B5473A; }
+.td-valla-seg[data-tone="gul"] { background: #C9A227; }
+.td-valla-etiketter { display: flex; justify-content: space-between; opacity: .7; }
+.td-valla-val { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+/* Status: samma storlek och vänsterkant på båda raderna (text, inte prick) */
+.td-guide-status { align-items: flex-start; text-align: left; }
+.td-guide-status-text, .td-guide-status-till { font-size: 13px; line-height: 18px; }
+.td-guide-status-rad { height: 18px; }
+.td-guide-status-text { font-weight: 700; }
+.td-guide .td-guide-status .td-guide-status-till { font-weight: 400; padding-left: 14px; }
+.td-guide-status { gap: 0; }
+.td-guide-status-text, .td-guide-status-till { line-height: 15px; }
+.td-guide-status-rad { height: 15px; }
+/* "Händer idag" = samma rubrik som Väder (Heading/xxs 20px, 24px padding, centrerad mot pilen) */
+.td-rapport [data-rapport-today] { font-size: 20px; line-height: 26px; letter-spacing: -0.02em; }
+.td-rapport.is-activity .td-rapport-top { align-items: center; }
+/* Öppet nu: tid och namn på samma baslinje, listan mot botten som Fjällguiden */
+.td-oppet { justify-content: space-between; padding-bottom: 16px; }
+.td-oppet-rad { align-items: baseline; padding: 0; min-height: 44px; box-sizing: border-box; align-content: center; }
+.td-oppet-rad > * { line-height: 26px; }
+.td-oppet-rad { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; padding: 9px 0; }
+/* Spårkarta (Längd): spårikonen i stället för kartnålen */
+.td-kamera.is-karta .td-kamera-header .td-just-nu-header-icon svg { display: none; }
+.td-kamera.is-karta .td-kamera-header .td-just-nu-header-icon::before {
+  content: ""; display: block; width: 32px; height: 32px; background: currentColor;
+  -webkit-mask: url("assets/icons/langdspar.svg") center / contain no-repeat;
+          mask: url("assets/icons/langdspar.svg") center / contain no-repeat;
+}
+/* Hover-etikett vid hörnpilen: Händer idag och spårkarta */
+.td-kamera.is-karta .td-corner-link-label { display: inline; }
+a.td-rapport:hover .td-corner-link { gap: 8px; }
+a.td-rapport:hover .td-corner-link-label { opacity: 1; }
+.td-rapport.is-langd .td-rapport-top .td-corner-link { color: var(--color-TD-snow); }
+
+/* Fråga-modalens kort och följdfrågor i TD-stil, med hover */
+.fraga-card { text-decoration: none; color: var(--color-text-primary); background: var(--color-TD-day); transition: background var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-card-media { height: 140px; }
+.fraga-card-media img { transition: transform var(--motion-duration-slow, 600ms) var(--motion-easing-out-soft); }
+.fraga-card-media.is-empty { background: var(--color-TD-neutral-subtlest); }
+.fraga-card-copy { gap: 2px; padding: var(--space-md) var(--space-md) var(--space-lg); }
+.fraga-card .td-ui-kicker { text-transform: uppercase; color: var(--color-TD-neutral); }
+.fraga-card-title { margin-top: 2px; }
+.fraga-card-arrow { opacity: .4; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft), opacity var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-card:hover { background: var(--color-TD-neutral-subtlest); }
+.fraga-card:hover .fraga-card-media img { transform: scale(1.04); }
+.fraga-card:hover .fraga-card-arrow { opacity: 1; transform: translateX(3px); }
+.fraga-card:focus-visible { outline: 2px solid var(--color-TD-cta); outline-offset: 2px; }
+.fraga-chips button { transition: background var(--motion-duration-fast) var(--motion-easing-out-soft), color var(--motion-duration-fast) var(--motion-easing-out-soft), border-color var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-chips button:hover { background: var(--color-TD-night); border-color: var(--color-TD-night); color: var(--color-TD-snow); }
+@media (prefers-reduced-motion: reduce) { .fraga-card-media img, .fraga-card-arrow { transition: none; } }
+
+/* Fjällguiden-looken på Fråga oss (header-knapp + block) */
+#fraga-launch { gap: 8px; }
+#fraga-launch .fraga-launch-mark { width: 24px; height: 24px; flex: none; }
+#fraga-launch .fraga-launch-name { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+#fraga-launch .fraga-launch-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; }
+.fraga-block-name { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: 700; font-size: 24px; text-transform: none; letter-spacing: -0.02em; }
+.fraga-block-name .td-guide-ai { font-size: 12px; letter-spacing: 0; }
+.td-fraga-block-overrubrik-icon.td-guide-mark { width: 48px; height: 48px; }
+.td-fraga-block .td-guide-mark-halo, #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-winter); }
+html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season="summer"] #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-summer); }
+#fraga-launch .fraga-launch-name { font-size: 14px; }
+.td-fraga-block-overrubrik-icon.td-guide-mark { width: 60px; height: 60px; margin-bottom: -6px; transform: translateX(-4px); }
+.td-fraga-block-overrubrik { margin-bottom: 20px; }
+/* Live-plopp för Fjällguiden */
+.fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
+@keyframes fg-live-blink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-open) 50%, transparent); } 50% { opacity: .45; box-shadow: 0 0 0 4px color-mix(in srgb, var(--status-open) 0%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .fg-live { animation: none; } }
