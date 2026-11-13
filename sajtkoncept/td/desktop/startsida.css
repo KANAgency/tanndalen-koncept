@@ -5821,3 +5821,7 @@ html[data-mode="onsite"] .just-cols-3 { display: grid; }
 .td-guide-pil { width: 16px; height: 16px; align-items: center; justify-content: center; }
 .td-guide .td-guide-eyebrow { margin: 31px 0 0; }
 .td-guide-ai { min-width: 26px; justify-content: center; }
+
+/* Längd: tredje raden utan Pistkartor – Väder tar två kolumner */
+.just-cols-3 [hidden], .td-guide [hidden] { display: none !important; }
+.just-cols-3:has(.td-pistkarta[hidden]) .td-vader-block { grid-column: span 2; }
