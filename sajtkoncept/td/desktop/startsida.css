@@ -5943,3 +5943,10 @@ a.td-rapport.is-activity:hover .td-corner-link-label, a.td-rapport.is-activity:f
   .fraga-welcome-next { flex-direction: column; align-items: flex-start; }
 }
 .fraga-welcome .fraga-card { opacity: 1; transform: none; }
+
+/* Fjällguidens startvy: rubriken delar rad med stäng-knappen, mindre siffror i datarutorna (14 nov) */
+.fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-top { position: absolute; top: 41px; right: 32px; z-index: 2; }
+.fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-mid { margin-top: 24px; }
+.fraga-welcome-title { padding-right: 56px; }
+.fraga-welcome-tiles .td-ui-figure-lg { font-size: var(--font-size-2xl); line-height: 1.1; }
+.fraga-welcome-tiles .td-ui-figure-unit-lg { font-size: var(--font-size-md, 18px); }
