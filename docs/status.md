@@ -58,7 +58,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 
 ## Klart 14 nov: Aktuellt vinter – kort per läge
 - `data-lage` på vinterkorten: `bas` (läge 1/2), `booking` (läge 3), `onsite` (läge 4). Synlighet via `html[data-mode]` i `startsida.css`. Sommar har en uppsättning för alla lägen.
-- Läge 3: Liftkortet klart innan du kommer (vinter), Skidskola för barnen (glas), fråga "Hur tidigt kan vi checka in?" (vinter), Skidorna står klara (host), Det här händer veckan du kommer (glas-svart).
+- Läge 3: Fackelåkning nedför Hamra (glas-svart, event under besökarens vecka, chip "[Tor 18 feb] · under din vecka"), Skidskola för barnen (glas), fråga "Hur tidigt kan vi checka in?" (vinter), Skidorna står klara (host), Det här händer veckan du kommer (vinter). Liftkortskortet borttaget (John 14 nov: event först).
 - Läge 4: Middag på Toppstugan (glas-svart), Hamra Syd efter lunch (vinter), fråga "Var äter vi lunch i backen?" (vinter), Hundspann från Hamra (host), After ski och livemusik (glas).
 - Frågorna har befintliga QA-svar. Allt i [hakparentes] är platshållare; bilder återanvända. Ingen brådska i texterna (TD prisneutralt).
 - Verifierat: rätt 5–6 kort per läge (returning/booking/onsite), 6 sommarkort i booking och onsite, alla bilder laddar, glaskorten har suddig bild. Ej visuellt granskat av John.
