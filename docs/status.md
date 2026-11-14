@@ -49,9 +49,8 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
 ## Klart 14 nov: Aktuellt – svart glas
-- Ny plattvariant `data-platta="glas-svart"` i `shared/design-system/components/aktuellt-kort.css`: Natt `rgb(36 39 42 / 0.4)`, kant vit 0.2, blur 2 px, bildradie 2 px (speglar ljust glas). Hårdkodad tills glas-token finns; ej i Figma än.
-- Applicerad på "Skidsäsongen är igång!". Mätt: plattan rgba(36,39,42,0.4), kant rgba(255,255,255,0.2), blur(2px).
-- Öppet: Johns val av opacitet/kant (Claudes antagande).
+- Plattvariant `data-platta="glas-svart"` i `shared/design-system/components/aktuellt-kort.css` = samma svarta glas som boendekortet (`.boende-card`): Natt 60 % (color-mix), kant Snö 10 %, `radius-sm`, skugga 0 8 12 / 0.06, blur 14 px. Ingen egen stil. Ej i Figma än.
+- Applicerad på "Skidsäsongen är igång!". Mätt: alla fem värden identiska med boendekortet.
 
 ## Klart 14 nov: Väderkortet vinter = sommarns styling
 - Vinterkortet (`.just-cols-3 .td-vader-block`) har samma struktur som sommar: "Nu · Klart" på egen rad med prick, `td-vader-main-top`, detaljrader `td-vader-detalj-tight` i body 16 px, prognos `td-vader-text-lg` 18 px. Ingen CSS ändrad, bara klasser/markup.

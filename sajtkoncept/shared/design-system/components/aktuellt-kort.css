@@ -44,9 +44,9 @@
 }
 
 .td-aktuellt-kort[data-platta="glas-svart"] {
-  --td-aktuellt-plate: rgb(36 39 42 / 0.4); /* Natt 40 %, speglar ljust glas; hårdkodad tills glas-token finns */
+  /* Samma svarta glas som boendekortet (.boende-card i startsida.css). */
+  --td-aktuellt-plate: color-mix(in srgb, var(--color-TD-night) 60%, transparent);
   --td-aktuellt-on-plate: var(--color-TD-snow);
-  --td-aktuellt-img-radius: 2px;
   background: transparent;
 }
 
@@ -59,15 +59,20 @@
   background: var(--td-aktuellt-plate);
 }
 
-.td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta,
-.td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta {
+.td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta {
   border: 1px solid rgb(255 255 255 / 0.7);
   border-radius: 2px;
   backdrop-filter: blur(2px); /* Figma 4 → CSS 2 */
   -webkit-backdrop-filter: blur(2px);
 }
 
-.td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta { border-color: rgb(255 255 255 / 0.2); }
+.td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta {
+  border: 1px solid color-mix(in srgb, var(--color-TD-snow) 10%, transparent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 12px rgb(36 38 41 / 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
 .td-aktuellt-kort-bild {
   position: relative;
