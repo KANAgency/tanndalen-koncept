@@ -49,7 +49,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
 ## Klart 14 nov: Introt landar med menyn i startläge
-- `intro.js` `markSeen()`: hamnar scrollY mellan 0 och 60 % av viewporten när introt släpper → `scrollTo(0)` och wheel/touchmove sväljs i `LAND_SETTLE_MS` (450 ms) så trackpad-momentum inte skjuter ner sidan. Menyn (`is-scrolled` vid >4 px) står då i startläge. Scrollar man längre än 60 % vh behålls positionen. Cache-bust `intro.js?v=land0`.
+- `intro.js` `markSeen()`: när introt släpps genom scroll → alltid `scrollTo(0)` som Hoppa över (60 %-gränsen räckte inte, John 14 nov) och wheel/touchmove sväljs i `LAND_SETTLE_MS` (450 ms) så trackpad-momentum inte skjuter ner sidan. Menyn (`is-scrolled` vid >4 px) står då i startläge. Cache-bust `intro.js?v=land1`.
 - Ej verifierat live: introts rAF-loop körs inte i dold browserpanel. John testar i `?mode=new`.
 
 ## Klart 14 nov: Ingen "Tänndalen"-blixt vid sidladdning

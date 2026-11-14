@@ -104,7 +104,7 @@ export function init() {
     zoom.setAttribute("transform", `matrix(${scale} 0 0 ${scale} ${x} ${y})`);
   }
 
-  function markSeen() {
+  function markSeen(land = false) {
     if (introDone) return;
     const aktuellt = document.querySelector(".td-aktuellt");
     const before = aktuellt ? aktuellt.getBoundingClientRect().top : 0;
@@ -119,9 +119,9 @@ export function init() {
       const shift = before - aktuellt.getBoundingClientRect().top;
       if (shift > 1) scrollTo(0, Math.max(0, scrollY - shift));
     }
-    /* Landa på startsidan med menyn i startläge: nära toppen → hoppa till 0 och
+    /* Landa på startsidan med menyn i startläge (som Hoppa över): hoppa till 0 och
        svälj kvarvarande scrollmomentum en kort stund (annars hamnar menyn i glasläge). */
-    if (scrollY > 0 && scrollY < innerHeight * 0.6) {
+    if (land) {
       scrollTo({ top: 0, left: 0, behavior: "instant" });
       const swallow = (event) => event.preventDefault();
       addEventListener("wheel", swallow, { passive: false });
@@ -517,7 +517,7 @@ export function init() {
       reveal();
     }
     const release = Number(runway.dataset.release) || innerHeight;
-    if (scrollY >= release - 1) markSeen();
+    if (scrollY >= release - 1) markSeen(true);
     if (!introDone) requestAnimationFrame(frame);
   }
 
