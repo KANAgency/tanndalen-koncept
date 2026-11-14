@@ -51,6 +51,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 ## Klart 14 nov: Aktuellt – svart glas
 - Plattvariant `data-platta="glas-svart"` i `shared/design-system/components/aktuellt-kort.css` = samma svarta glas som boendekortet (`.boende-card`): Natt 60 % (color-mix), kant Snö 10 %, `radius-sm`, skugga 0 8 12 / 0.06, blur 14 px. Ingen egen stil. Ej i Figma än.
 - Applicerad på "Skidsäsongen är igång!". Mätt: alla fem värden identiska med boendekortet.
+- Över Dag-ytan blev glaset bara grått (inget motiv bakom). Nu ligger kortets egen bild suddig (blur 14 px, inset −40 px) i `::before` och Natt 60 % i `::after`. Bilden sätts som `--td-glas-bild` i JS med absolut URL (relativ URL löstes mot CSS-filens mapp). Verifierat att bilden laddas och syns i ramen; Johns visuella godkännande saknas.
 
 ## Klart 14 nov: Väderkortet vinter = sommarns styling
 - Vinterkortet (`.just-cols-3 .td-vader-block`) har samma struktur som sommar: "Nu · Klart" på egen rad med prick, `td-vader-main-top`, detaljrader `td-vader-detalj-tight` i body 16 px, prognos `td-vader-text-lg` 18 px. Ingen CSS ändrad, bara klasser/markup.

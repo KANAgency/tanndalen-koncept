@@ -66,12 +66,31 @@
   -webkit-backdrop-filter: blur(2px);
 }
 
+/* Glaset behöver ett motiv bakom sig: kortets egen bild (--td-glas-bild, sätts i JS)
+   ligger suddig under Natt 60 %, som boendekortet över fotot. */
 .td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: transparent;
   border: 1px solid color-mix(in srgb, var(--color-TD-snow) 10%, transparent);
   border-radius: var(--radius-sm);
   box-shadow: 0 8px 12px rgb(36 38 41 / 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+}
+.td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  background: var(--td-glas-bild) center / cover no-repeat;
+  filter: blur(14px) saturate(1.1);
+}
+.td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--td-aktuellt-plate);
 }
 
 .td-aktuellt-kort-bild {
