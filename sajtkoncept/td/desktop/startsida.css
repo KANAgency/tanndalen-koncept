@@ -6029,3 +6029,63 @@ html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-akt
 
 /* Aktuellt glasplatta något vitare: 0.28 → 0.4 (2026-11-14) */
 .td-aktuellt-kort[data-platta="glas"] { --td-aktuellt-plate: rgb(255 255 255 / 0.4); }
+
+/* Just nu: videokort ersätter Rapport i läge 1/2 (2026-11-14). Titel nere till vänster som Rapport, play centrerad. */
+.td-videokort { display: none; }
+html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-rapport { display: none; }
+html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort { display: flex; }
+.td-videokort {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 410px;
+  height: 500px;
+  padding: var(--space-xl);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  color: var(--color-text-primary-dark);
+  text-align: left;
+  cursor: pointer;
+}
+.td-videokort-media { position: absolute; inset: 0; pointer-events: none; }
+/* 16:9-video fyller 410×500: höjd styr, bredd 500*16/9 */
+.td-videokort-media iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: calc(500px * 16 / 9); height: 500px;
+  transform: translate(-50%, -50%) scale(1.02);
+  border: 0;
+}
+.td-videokort-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgb(36 38 41 / 0.85) 0%, rgb(36 38 41 / 0) 45%);
+}
+.td-videokort-play {
+  position: absolute; top: 50%; left: 50%;
+  display: grid; place-items: center;
+  width: 64px; height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-snow);
+  color: var(--color-TD-night);
+  transform: translate(-50%, -50%);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.td-videokort-play svg { margin-left: 3px; }
+.td-videokort:hover .td-videokort-play { transform: translate(-50%, -50%) scale(1.08); }
+.td-videokort:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+.td-videokort-body { position: relative; display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.td-videomodal {
+  width: min(1200px, 92vw);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.td-videomodal::backdrop { background: rgb(36 39 42 / 0.88); }
+.td-videomodal-frame { aspect-ratio: 16 / 9; border-radius: var(--radius-sm); overflow: hidden; background: #000; }
+.td-videomodal-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.td-videomodal-x { position: absolute; right: 0; bottom: calc(100% + var(--space-md)); }
+@media (max-width: 1023px) { .td-videokort { width: 100%; } }

@@ -790,6 +790,16 @@
               </div>
             </div>
           </a>
+          <!-- Videokort (läge 1/2) ersätter Rapport. Källa: tanndalen.com, YouTube NM2Rb1ShiwE. Byt mot egen mp4 när kunden levererar. -->
+          <button class="td-videokort" type="button" data-depth="front" data-yt="NM2Rb1ShiwE" aria-haspopup="dialog" aria-label="Spela filmen Vardag vs. Paradiset Tänndalen">
+            <span class="td-videokort-media" aria-hidden="true"></span>
+            <span class="td-videokort-shade" aria-hidden="true"></span>
+            <span class="td-videokort-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <span class="td-videokort-body">
+              <span class="td-ui-kicker">Film · 1 min</span>
+              <span class="td-heading-xs">Vardag vs. Paradiset Tänndalen</span>
+            </span>
+          </button>
           <div>
             <!-- TODO: demosiffror, samma som justNuData.sommar (14°/8°, 20 % regn, 9 m/s på toppen). -->
             <article class="td-vader-block td-vader-sommar" data-depth="front" data-gren-panel="sommar" hidden aria-label="Väder i dalen">
@@ -6299,5 +6309,39 @@
     if (enDag && faq) faq.after(enDag);
   })();
 </script>
+      <dialog class="td-videomodal" id="td-videomodal" aria-label="Vardag vs. Paradiset Tänndalen">
+        <button class="td-button td-button-secondary td-button-md td-videomodal-x" type="button" aria-label="Stäng">Stäng</button>
+        <div class="td-videomodal-frame"></div>
+      </dialog>
+      <script>
+      (() => {
+        const card = document.querySelector(".td-videokort");
+        const dlg = document.getElementById("td-videomodal");
+        if (!card || !dlg) return;
+        const id = card.dataset.yt;
+        const base = "https://www.youtube-nocookie.com/embed/" + id;
+        const media = card.querySelector(".td-videokort-media");
+        let bgOn = false;
+        const mountBg = () => {
+          if (bgOn || getComputedStyle(card).display === "none") return;
+          bgOn = true;
+          media.innerHTML = '<iframe tabindex="-1" title="" allow="autoplay; encrypted-media" src="' + base + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&start=20&end=40&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"></iframe>';
+        };
+        /* Ladda efter sidans load, och igen när läget byts (kortet syns bara i läge 1/2). */
+        if (document.readyState === "complete") setTimeout(mountBg, 300);
+        else addEventListener("load", () => setTimeout(mountBg, 300));
+        addEventListener("td-mode", () => setTimeout(mountBg, 50));
+        new MutationObserver(() => setTimeout(mountBg, 50)).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
+        const frame = dlg.querySelector(".td-videomodal-frame");
+        card.addEventListener("click", () => {
+          frame.innerHTML = '<iframe title="Vardag vs. Paradiset Tänndalen" allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="' + base + '?autoplay=1&playsinline=1&modestbranding=1&rel=0"></iframe>';
+          dlg.showModal();
+        });
+        const close = () => { frame.innerHTML = ""; dlg.close(); };
+        dlg.querySelector(".td-videomodal-x").addEventListener("click", close);
+        dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+        dlg.addEventListener("close", () => { frame.innerHTML = ""; card.focus(); });
+      })();
+      </script>
 </body>
 </html>
