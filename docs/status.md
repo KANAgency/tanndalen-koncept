@@ -48,6 +48,10 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Ny snowboardbild
+- `td/desktop/assets/img/snowboard.jpg` (genererad, Figma generate_image, 1536×1024, nod 2777:2353 på Concept – kan tas bort): åkare svänger i pist, kvällssol, björk och lift i bakgrunden. Ersätter `snow.jpg` i Snowboard-fliken (Vad gör man här) och i läge 3-kortet "Det här händer veckan du kommer". `snow.jpg` ligger kvar oanvänd.
+- Verifierat: båda laddar (1536 px, object-fit cover). Beskärningen i fliken ej visuellt granskad.
+
 ## Klart 14 nov: Aktuellt vinter – kort per läge
 - `data-lage` på vinterkorten: `bas` (läge 1/2), `booking` (läge 3), `onsite` (läge 4). Synlighet via `html[data-mode]` i `startsida.css`. Sommar har en uppsättning för alla lägen.
 - Läge 3: Liftkortet klart innan du kommer (vinter), Skidskola för barnen (glas), fråga "Hur tidigt kan vi checka in?" (vinter), Skidorna står klara (host), Det här händer veckan du kommer (glas-svart).
