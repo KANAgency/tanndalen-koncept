@@ -48,6 +48,10 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Lägesväljaren och liftkortstipset
+- Lägesväljaren (`shared/js/modes-engine.js` + `.mode-switch*` i startsida.css): demoraden "Demo: vistelse pågår nu" borttagen (handlern ligger kvar men hittar ingen knapp; `labels.demoToday` oanvänd). Ny stil: rubrik "VISNINGSLÄGE" 12 px, rader 40 px CircularXX 15 px, hover neutral-subtlest, valt läge Bold + bock, radie 8 px, tunn kant.
+- Liftkortstipset i läge 3 visas igen: regeln `html[data-mode="booking"] .mode-booking-tip { display:none !important }` (från e165d35, när Nästa steg-kortet skulle ersätta tipset) borttagen. Mätt: tipset centrerat över Liftkort (642 px = 642 px), 7 px ovanför ikonraden.
+
 ## Klart 14 nov: Glaskort – parallax i ramen
 - Den suddiga bildkopian (`::before`) flyttas med `--td-glas-px/py` (max ±24 px, motsatt kortets läge i viewporten) vid sidscroll, karusellscroll och resize. Av vid prefers-reduced-motion. Ryms i `inset: -40px`.
 - Verifierat: CSS-transformen följer variablerna (t.ex. −24 px för kortet längst ut). Kunde inte mätas live: rAF körs inte i dold browserpanel.
