@@ -469,7 +469,7 @@ export function initTdBlocks(root = document) {
         }
         /* 770×628 → 10 % större + 5 % bredare; landar högre under rubriken. */
         const cardH = Math.min(847, innerHeight - 220);
-        const cardW = cardH * ((628 / 770) * 1.05);
+        const cardW = cardH * ((628 / 770) * 1.05 * 1.08);
         const left = (innerWidth - cardW) / 2;
         enDag.querySelectorAll(".en-dag-slide").forEach((slide) => { slide.style.height = `${cardH}px`; });
         enDag.querySelectorAll(".en-dag-media").forEach((media) => {
@@ -489,7 +489,9 @@ export function initTdBlocks(root = document) {
           const sectionBox = enDag.getBoundingClientRect();
           placeSeasonBanner(sectionBox, left, cardW, null, false);
         }
-        const sectionH = puffArrives + hold + lockAt + exitRun + (seasonSlot ? seasonSlot.offsetHeight : 0);
+        /* Utan säsongsbanner (dold): håll pin tills puff + tidslinje är klara, släpp sen i naturlig scroll. */
+        const seasonH = seasonSlot ? seasonSlot.offsetHeight : 0;
+        const sectionH = puffArrives + hold + lockAt + (seasonH ? exitRun + seasonH : innerHeight);
         enDag.style.height = `${sectionH}px`;
         enPin.style.marginTop = "";
         placeAfterEnDag(sectionH);
@@ -586,7 +588,7 @@ export function initTdBlocks(root = document) {
         const pinTop = enPin.getBoundingClientRect().top;
         const n = enSlides.length;
         const cardH = Math.min(847, vh - 220);
-        const cardW = cardH * ((628 / 770) * 1.05);
+        const cardW = cardH * ((628 / 770) * 1.05 * 1.08);
         const cardLeft = (innerWidth - cardW) / 2;
         const front = 188; /* högre under rubriken (var 238) */
         const back = 131;
@@ -642,6 +644,11 @@ export function initTdBlocks(root = document) {
           media.style.left = `${cardLeft}px`;
           media.style.transformOrigin = "top center";
           media.style.transform = index === n - 1 ? "none" : `translateZ(0) scale(${scale})`;
+          /* Mjuk skugga: växer medan kortet lyfter in, krymper när det landar (2026-11-14). */
+          {
+            const lift = rising ? Math.pow(1 - clamp01(into), 2.5) : 0; /* tonar ned snabbt mot landning */
+            media.style.boxShadow = `0 ${Math.round(12 + 48 * lift)}px ${Math.round(36 + 104 * lift)}px rgb(36 39 42 / ${(0.16 + 0.22 * lift).toFixed(3)})`;
+          }
           if (copy) {
             const land = index * span;
             const since = scrolled - land;
@@ -654,7 +661,7 @@ export function initTdBlocks(root = document) {
             // Slide 0 saknar kort-arrival: fada in mot pin (lead→0) så 100 % syns tydligt.
             if (index === 0 && lead > 0) textOpacity *= clamp01(1 - lead / 200);
             const textW = 302;
-            const gap = 48;
+            const gap = 68;
             copy.style.left = `${cardLeft - textW - gap}px`;
             copy.style.width = `${textW}px`;
             copy.style.bottom = "auto";
@@ -690,9 +697,10 @@ export function initTdBlocks(root = document) {
           const labelToIcon = 12;
           const iconRadius = iconSize / 2;
           const cardToLabel = 96;
-          const lineX = cardLeft + cardW + cardToLabel + labelW + labelToIcon + iconRadius;
-          const leftSpan = labelW + labelToIcon + iconRadius;
-          const rightSpan = iconRadius;
+          /* Ikon vänster, text höger; linjen 150 px närmre korten (2026-11-14). */
+          const lineX = cardLeft + cardW + cardToLabel + labelW + labelToIcon + iconRadius - 150;
+          const leftSpan = iconRadius;
+          const rightSpan = iconRadius + labelToIcon + labelW;
           const sunW = leftSpan + rightSpan;
           const sunLeft = lineX - leftSpan;
           const lineXInSun = leftSpan;
@@ -707,6 +715,7 @@ export function initTdBlocks(root = document) {
           enSun.style.opacity = String(sunOpacity);
           enSun.style.visibility = sunOpacity <= 0 ? "hidden" : "visible";
           enSun.style.setProperty("--en-sun-line-x", `${lineXInSun}px`);
+          enSun.style.setProperty("--en-sun-label-w", `${labelW}px`);
           // Soluppgång ovanför linjen, solnedgång under. Kortens prickar ligger jämnt, oberoende av klockslag.
           const riseY = -(iconSize / 2);
           const setY = sunH + iconSize / 2;
@@ -898,7 +907,8 @@ export function initTdBlocks(root = document) {
             const from = scrollY;
             const t0 = performance.now();
             const duration = Math.max(1, ms);
-            const ease = enSnapMode() === "hard" ? enEaseSnapHard : easeOutSoft;
+            /* Mjuk start och landning i settle (mindre ryck än ease-out). */
+            const ease = enSnapMode() === "hard" ? enEaseSnapHard : (u) => 0.5 - 0.5 * Math.cos(Math.PI * u);
             enCancelSnap();
             enSnapping = true;
             enSnapArmed = true;
@@ -964,7 +974,14 @@ export function initTdBlocks(root = document) {
               if (d < bestD) { bestD = d; pick = a; }
             });
             if (!pick || bestD > span * threshold) {
-              return { allowed, pick: null, reason: "ingen (död zon eller bakåt)" };
+              /* Ingen död zon: stannar man mellan punkter, gå till närmaste (även bakåt). */
+              let near = null;
+              let nearD = Infinity;
+              points.forEach((p, i) => {
+                const d = Math.abs(p - scrollY);
+                if (d < nearD) { nearD = d; near = { i, p }; }
+              });
+              return { allowed, pick: near, reason: near ? `närmast →${near.i}` : "ingen" };
             }
             return { allowed, pick, reason: `→${pick.i}` };
           }

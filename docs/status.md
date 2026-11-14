@@ -1,6 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
-Senast uppdaterad: 2026-11-14 (efter `f76a8b9`). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
+Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
 
 ## Läge
 - TD startsida desktop: intro, header (Fjällguiden), Aktuellt, En dag, Just nu (Alpint + Längd, tredje raden i På plats), varumärkessektionen, Fjällguiden-blocket och svarsmodalen (15 frågor) är byggda. Allt innehåll i Just nu och modalen är hårdkodat/påhittat.
@@ -31,7 +31,16 @@ Senast uppdaterad: 2026-11-14 (efter `f76a8b9`). Detaljer om vad som är byggt f
 - Skarvarna: i På plats (En dag flyttas efter Fråga) centreras topo + text i glappet Fråga-blocket → En dag-rubriken och scrollar ut när En dag är i fokus. I övriga lägen (En dag före Fråga) ligger topon kvar på gamla platsen och texten mitt i glappet Just nu → Fråga, 170 px åt höger (+40 px uppmätt korrektion). Uppmätt i På plats och återkommande vid 1260 px; ny/bokning ej kontrollerade.
 - Topografierna: `neutral-light` på 80 % via `color-mix` (opacity skrivs över av introt). Aktuellt-korten utan bakgrund så topon inte klipps.
 - Öppet: ska En dag ligga efter Fråga även i andra lägen? (designbeslut)
-- Ocommittat från andra: En dag-snap/tidslinje/meny-tuck, OG-filer, Johns AI-tagg/FG-sökknapp i `startsida.css`.
+
+## Klart 14 nov: En dag – meny, layout, snap, skugga (TD + OG hero-page)
+- Menyn (`.top.is-tucked`) glider upp medan En dag och Lev/Andas fyller skärmen, tillbaka när sektionens botten < 1,25 vh eller man scrollar upp ur den. Göms inte när menyn är öppen/fokuserad. Bara TD. Verifierat vinter + sommar.
+- En dag-pin lyft `--en-dag-lift: 40px` (TD desktop): rubriken 48 px från toppen vid 1440×900. Hoppa över/nästa 32 px från botten (TD + OG hero-page).
+- Korten 8 % bredare (`* 1.08`), samma höjd. Text vänster om kortet +20 px (gap 68). Tidslinjen vänd: ikon vänster, text höger vänsterställd, linjen 150 px närmre korten.
+- Skugga på korten i JS: vila 0 12 36 / 16 %, lyft upp till 0 60 140 / 38 %, tonar ned med (1−into)^2,5 mot landning.
+- Snap (settle): delay 40 ms, tröskel 0,65, vel-max 2,0, duration 700 ms, cosinus-ease. Ingen död zon: utan kandidat framåt inom tröskeln går den till närmaste punkt. Testat med simulerade stopp i TD; känslan inte bedömd i riktig browser.
+- Bugg: sektionen släppte innan puffen landat när säsongsbannern är dold → höjden får `innerHeight` i stället för bannerhöjd. Tidslinjen når nu solnedgång före släpp.
+- OG-startsidan (`og/desktop/index.html`) har samma JS-ändringar men saknar En dag-CSS helt; ej verifierad.
+- Öppet: känsla på snap/skugga i riktig browser; ska OG få samma meny-tuck och lyft?
 
 ## Commit-historik (nyast först)
 

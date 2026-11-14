@@ -181,10 +181,10 @@
   width: 100%;
   height: auto;
   overflow: visible;
-  --snap-settle-delay: 90ms;
-  --snap-threshold: 0.30;
-  --snap-velocity-max: 1.2;
-  --snap-duration: 520ms;
+  --snap-settle-delay: 40ms;
+  --snap-threshold: 0.65;
+  --snap-velocity-max: 2.0;
+  --snap-duration: 700ms;
 }
 .en-dag-season {
   position: relative;
@@ -651,7 +651,7 @@
 .en-dag-skip-bar {
   position: fixed;
   left: 50%;
-  bottom: var(--space-xl);
+  bottom: 32px;
   z-index: 50;
   min-height: 44px;
   display: none;
@@ -1800,3 +1800,14 @@ html[data-mode="onsite"] #just-nu {
   order: -1;
   margin-top: var(--space-3xl);
 }
+
+/* Tidslinje vänd: ikon vänster, text höger (vänsterställd) – 2026-11-14 */
+.en-dag-sun-label,
+.en-dag-sun-event-label {
+  right: auto;
+  width: var(--en-sun-label-w, auto);
+  align-items: flex-start;
+  text-align: left;
+}
+.en-dag-sun-label { left: calc(var(--en-sun-line-x, 50%) + 36px); }
+.en-dag-sun-event-label { left: calc(var(--en-sun-line-x, 50%) + 19px); }
