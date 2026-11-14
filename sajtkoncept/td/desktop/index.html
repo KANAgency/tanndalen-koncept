@@ -572,7 +572,25 @@
               </div>
             </div>
           </article>
-          <article class="td-aktuellt-kort" data-sasong="sommar" data-typ="innehall" data-platta="glas">
+          <article class="td-aktuellt-kort" data-sasong="vinter" data-ga-till="sommar" data-typ="innehall" data-platta="sommar">
+            <div class="td-aktuellt-kort-platta">
+              <div class="td-aktuellt-kort-bild">
+                <img src="assets/img/banner-sommar.jpg" alt="Grön fjällsluttning i Tänndalen på sommaren" width="471" height="346" decoding="async" loading="lazy">
+              </div>
+            </div>
+            <div class="td-aktuellt-kort-body">
+              <div class="td-aktuellt-kort-text">
+                <div class="td-aktuellt-kort-rubrik-meta">
+                  <h3 class="td-aktuellt-kort-rubrik td-heading-sm">Sommaren kommer också</h3>
+                </div>
+                <p class="td-aktuellt-kort-beskrivning td-body-sm">Samma fjäll, fast med cykelleder, bad och ljusa nätter. Se vad som händer här i sommar.</p>
+              </div>
+              <div class="td-aktuellt-kort-handling">
+                <div class="td-aktuellt-kort-action"><button class="td-button td-button-secondary td-button-md" type="button" data-ga-till-sasong="summer">Gå till sommarsäsong</button></div>
+              </div>
+            </div>
+          </article>
+          <article class="td-aktuellt-kort" data-sasong="sommar" data-typ="innehall" data-platta="var">
             <div class="td-aktuellt-kort-platta">
               <div class="td-aktuellt-kort-bild">
                 <img src="assets/img/sommar-dag-01.jpg" alt="Fjällsluttning i midsommarljus" width="471" height="346" decoding="async" loading="lazy">
@@ -627,7 +645,7 @@
               <p class="td-aktuellt-kort-hint td-body-sm">Bastu, lekhall och turer som blir bättre i duggregn.</p>
             </div>
           </button>
-          <article class="td-aktuellt-kort" data-sasong="sommar" data-typ="innehall" data-platta="glas">
+          <article class="td-aktuellt-kort" data-sasong="sommar" data-typ="innehall" data-platta="host">
             <div class="td-aktuellt-kort-platta">
               <div class="td-aktuellt-kort-bild">
                 <img src="assets/img/meny-cykling-sommar.jpg" alt="Cyklist på grusväg i fjällen" width="471" height="346" decoding="async" loading="lazy">
@@ -681,7 +699,7 @@
                 <p class="td-aktuellt-kort-beskrivning td-body-sm">Liftkort och boende för nästa säsong. Säkra veckan du vill ha innan sommaren är slut.</p>
               </div>
               <div class="td-aktuellt-kort-handling">
-                <div class="td-aktuellt-kort-action"><a class="td-button td-button-secondary td-button-md" href="#boka">Se vintern</a></div>
+                <div class="td-aktuellt-kort-action"><button class="td-button td-button-secondary td-button-md" type="button" data-ga-till-sasong="winter">Gå till vintersäsong</button></div>
               </div>
             </div>
           </article>
@@ -6232,6 +6250,12 @@
           track.querySelectorAll('[data-platta="glas"], [data-platta="glas-svart"]').forEach((card) => {
             const img = card.querySelector(".td-aktuellt-kort-bild img");
             if (img) card.querySelector(".td-aktuellt-kort-platta").style.setProperty("--td-glas-bild", `url("${img.src}")`);
+          });
+          track.addEventListener("click", (event) => {
+            const btn = event.target.closest("[data-ga-till-sasong]");
+            if (!btn) return;
+            document.querySelector(`.td-season-toggle-option[data-season="${btn.dataset.gaTillSasong}"]`)?.click();
+            document.getElementById("aktuellt").scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
           });
           const visibleCards = () => [...track.querySelectorAll(".td-aktuellt-kort")].filter((c) => c.getClientRects().length);
           new MutationObserver(() => { track.scrollLeft = 0; requestAnimationFrame(() => { endGap(); syncButtons(); }); })

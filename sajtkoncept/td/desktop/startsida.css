@@ -6138,3 +6138,4 @@ html[data-mode="booking"] .td-guide .td-guide-lista:not(.td-guide-bokning),
 html[data-mode="booking"] .td-guide .td-guide-ej-bokning { display: none; }
 html[data-mode="booking"] .td-guide .td-guide-eyebrow.td-guide-bokning { display: block; }
 html[data-mode="booking"] .td-guide .td-guide-lista.td-guide-bokning:not([hidden]) { display: block; }
+html:not(:is([data-mode="new"], [data-mode="returning"])) .td-aktuellt-kort[data-ga-till="sommar"] { display: none; }

@@ -48,6 +48,13 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Aktuellt – säsongsbyte och plattor
+- Vitt glas: kanten vit 0.3 (var 0.7).
+- Sommarkorten matchar bilden i stället för glas: Midsommar `var`, Leden `sommar`, frågan `sommar`, Augusti `host`, Fjällnatt `glas`, Vintern kommer `vinter`. Blocket får använda alla säsongsfärger.
+- "Vintern kommer": knappen "Gå till vintersäsong" byter säsong (klickar säsongsväxlaren) och scrollar till Aktuellt. Nytt vinterkort sist i läge 1/2: "Sommaren kommer också" (sommarplatta, banner-sommar.jpg) med "Gå till sommarsäsong". Dolt i läge 3/4.
+- Verifierat: båda knapparna byter säsong (winter→summer→winter), nya kortet syns sist i läge 2 och är dolt i På plats, kantfärg rgba(255,255,255,0.3). Kunde inte mätas: slutläget i karusellen, eftersom smooth scroll står still i dold browserpanel.
+- Öppet: läge 3 (påbörjad bokning) och läge 4 (på plats) behöver egna kort och frågor i Aktuellt (John 14 nov).
+
 ## Klart 14 nov: Aktuellt – svart glas
 - Plattvariant `data-platta="glas-svart"` i `shared/design-system/components/aktuellt-kort.css` = samma svarta glas som boendekortet (`.boende-card`): Natt 60 % (color-mix), kant Snö 10 %, `radius-sm`, skugga 0 8 12 / 0.06, blur 14 px. Ingen egen stil. Ej i Figma än.
 - Applicerad på "Skidsäsongen är igång!". Mätt: alla fem värden identiska med boendekortet.
