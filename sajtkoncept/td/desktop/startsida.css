@@ -5629,7 +5629,7 @@ html[data-season="summer"] .td-fraga-block {
 .td-fraga-block .td-fraga-fragelista-rad + .td-fraga-fragelista-rad {
   border-top-color: color-mix(in srgb, var(--fraga-fg) 20%, transparent);
 }
-html[data-season="summer"] .td-fraga-block .td-fraga-block-overrubrik-icon { filter: invert(1) brightness(2); }
+html[data-season="summer"] .td-fraga-block .td-fraga-block-overrubrik-icon { color: var(--color-TD-snow); }
 
 /* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
 .en-dag .en-dag-season { display: none !important; }
@@ -5905,3 +5905,10 @@ html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season
 /* Sommar: Väder ersätter På gång i högerkolumnen (vitt kort) */
 .just-cols .td-vader-sommar { height: auto; flex: none; background: var(--color-TD-snow); border-radius: var(--radius-sm); }
 .just-cols [hidden] { display: none !important; }
+/* Meny: mörkare neutral på hover (token i stället för 8 % natt-overlay) */
+.menu-control { isolation: isolate; }
+.menu-control::before { z-index: -1; }
+.menu-control:hover::before, .menu-control:focus-visible::before { background: var(--color-TD-neutral-subtlest); opacity: 1; }
+.menu-control:active::before { background: var(--color-TD-neutral-light); opacity: 1; }
+/* Fjällguiden-blockets sökknapp: CTA-färg i alla säsonger (skiljer sig från blockets säsongsfärg) */
+.td-fraga-block .td-fraga-falt-submit { background: var(--color-cta-primary); color: var(--color-cta-on-dark); }

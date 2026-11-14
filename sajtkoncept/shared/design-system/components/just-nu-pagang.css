@@ -96,12 +96,12 @@
 }
 
 .td-pagang-row:hover::before {
-  opacity: 0.04;
+  opacity: 0;
   transition-duration: var(--motion-duration-normal);
 }
 
 .td-pagang-dark .td-pagang-row:hover::before {
-  opacity: 0.06;
+  opacity: 0;
 }
 
 .td-pagang-row:hover .td-pagang-row-arrow {

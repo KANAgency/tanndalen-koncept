@@ -835,24 +835,6 @@
         </div>
       </section>
 
-      <section class="td-brand" id="td-brand" aria-label="Lev. Andas. Tänndalen.">
-        <div class="td-brand-pin">
-          <div class="td-brand-frame">
-            <div class="td-brand-media">
-              <div class="td-brand-img"><img src="assets/img/brand/td-brand-1.png" alt="" loading="lazy" decoding="async"></div>
-              <div class="td-brand-img"><img src="assets/img/brand/td-brand-2.png" alt="" loading="lazy" decoding="async"></div>
-              <div class="td-brand-img"><img src="assets/img/brand/td-brand-3.jpg" alt="" loading="lazy" decoding="async"></div>
-            </div>
-            <p class="td-brand-word">Lev.</p>
-            <p class="td-brand-word">Andas.</p>
-          </div>
-          <div class="td-brand-sign">
-            <p class="td-brand-sign-word">Tänndalen.</p>
-            <a class="td-button td-button-secondary td-brand-glass" href="#boende">Hitta ditt boende</a>
-          </div>
-        </div>
-      </section>
-
       <section class="faq" id="fragor" aria-labelledby="fragor-title">
         <div class="td-fraga-block" data-fraga-context="Om: Startsida">
           <div class="td-fraga-block-overrubrik">
@@ -1040,6 +1022,24 @@
         </div>
       </section>
       <div id="hitta-end"></div>
+
+      <section class="td-brand" id="td-brand" aria-label="Lev. Andas. Tänndalen.">
+        <div class="td-brand-pin">
+          <div class="td-brand-frame">
+            <div class="td-brand-media">
+              <div class="td-brand-img"><img src="assets/img/brand/td-brand-1.png" alt="" loading="lazy" decoding="async"></div>
+              <div class="td-brand-img"><img src="assets/img/brand/td-brand-2.png" alt="" loading="lazy" decoding="async"></div>
+              <div class="td-brand-img"><img src="assets/img/brand/td-brand-3.jpg" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <p class="td-brand-word">Lev.</p>
+            <p class="td-brand-word">Andas.</p>
+          </div>
+          <div class="td-brand-sign">
+            <p class="td-brand-sign-word">Tänndalen.</p>
+            <a class="td-button td-button-secondary td-brand-glass" href="#boende">Hitta ditt boende</a>
+          </div>
+        </div>
+      </section>
       </main>
     </div>
     <footer class="site-footer">
@@ -1274,6 +1274,7 @@
         menuOpen ? closeMenu() : openMenu(false);
       });
       document.querySelector(".site-season-dot").addEventListener("click", () => openMenu(true));
+      menuPanel.querySelector("[data-onsite-toggle]")?.addEventListener("change", () => window.scrollTo({ top: 0, behavior: "instant" }));
       document.addEventListener("keydown", (event) => {
         if (!menuOpen) return;
         if (event.key === "Escape") {
@@ -4603,6 +4604,7 @@
         /* Demo: svaren utgår från att vi vet vem användaren är (familj, två vuxna, barn 6 och 9, bor i Hamra).
            Namn i [hakparentes] är platshållare. Kort utan image visar en tom bildyta med flit. */
         const QA = {};
+        const qaFor = (q) => { const e = QA[q]; return e && e.summer && document.documentElement.dataset.season === "summer" ? e.summer : e; };
         QA[RAIN] = QA["Vad gör vi om det regnar?"] = {
           answer: RAIN_ANSWER,
           sources: `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#service">Mat, butiker och service</a>`,
@@ -4638,7 +4640,7 @@
           sources: `Källor: <a href="#just-nu">Spårrapport 04:30</a> · <a href="#boende">Ert boende</a>`,
           cards: [
             { kicker: "Spår", title: "Belysta 5:an", line: "Flack, belyst till 21", image: "assets/img/langd.jpg" },
-            { kicker: "Spår", title: "[Fjällrundan] 10 km", line: "Nypreparerad 04:30, i skog" },
+            { kicker: "Spår", title: "[Fjällrundan] 10 km", line: "Nypreparerad 04:30, i skog", image: "assets/img/fraga-fjallrundan.jpg" },
             { kicker: "Plats", title: "Spårcentralen", line: "Start, toaletter och karta", image: "assets/img/fraga-sparcentral.jpg" }
           ],
           chips: ["Vilken valla ska jag använda idag?", "Var kan vi fika vid spåret?"]
@@ -4647,8 +4649,8 @@
           answer: "Ny och finkornig snö runt −1°. Vi vallar med en grundburk och några lager Viola extra, och violett paraffin för glid. Barnens hyrskidor är vallningsfria, så de behöver bara glid. Blir det varmare efter lunch, gå ett steg mjukare i fästet.",
           sources: `Källor: <a href="#just-nu">Dagens vallatips 21:20</a> · <a href="#boende">Er hyrbokning</a>`,
           cards: [
-            { kicker: "Fäste", title: "Viola extra", line: "Några lager på grundburk" },
-            { kicker: "Glid", title: "Violett paraffin", line: "På hela glidytan" },
+            { kicker: "Fäste", title: "Viola extra", line: "Några lager på grundburk", image: "assets/img/fraga-fastvalla.jpg" },
+            { kicker: "Glid", title: "Violett paraffin", line: "På hela glidytan", image: "assets/img/fraga-glidvalla.jpg" },
             { kicker: "Plats", title: "[Vallaboden]", line: "Hjälp med vallning 09–11", image: "assets/img/fraga-vallabod.jpg" }
           ],
           chips: ["Hur lägger man burkvalla?", "Vilka spår är nypreparerade?"]
@@ -4707,6 +4709,216 @@
           cards: [],
           chips: ["Kan vi ta liften upp och gå ner?"]
         };
+        /* Allmänna frågor (FAQ-blocket, "Andra brukar fråga", Aktuellt) och följdfrågor från Just nu-korten.
+           Samma familj. Siffror följer Just nu-datan. Osäkra fakta, priser och tider i [hakparentes].
+           Frågor som ställs året runt har en summer-variant som används när sajten är i sommarläge. */
+        const IMG = (name) => `assets/img/fraga-${name}.jpg`;
+        QA["Hur lång tid tar det hit?"] = QA["Hur tar vi oss dit från Stockholm?"] = {
+          answer: "Med bil från Stockholm tar det [ungefär 7 timmar], och sista biten från Funäsdalen går längs en fin dalgång upp till Hamra. Vill ni slippa köra kan ni ta [tåget till Östersund eller nattåget till Mora] och buss vidare, eller flyga till [Sveg]. Med två barn i baksätet brukar en paus i [Sveg] göra resten av resan lugnare.",
+          sources: `Källor: <a href="#hitta-hit">Hitta hit</a>`,
+          cards: [
+            { kicker: "Bil", title: "Från Stockholm", line: "[Ca 7 h], parkering vid stugan", image: IMG("bilvag") },
+            { kicker: "Kollektivt", title: "Tåg och buss", line: "[Via Östersund eller Mora]", image: "assets/img/sverigekarta-hitta-hit.svg" }
+          ],
+          chips: ["Passar Tänndalen för nybörjare?", "Hur bokar jag?"],
+          summer: {
+            answer: "Med bil från Stockholm tar det [ungefär 7 timmar], och sommartid är vägen fri hela vägen upp till Hamra. Vill ni slippa köra kan ni ta [tåget till Östersund] och buss vidare. Med två barn i baksätet brukar en paus i [Sveg] göra resten av resan lugnare.",
+            sources: `Källor: <a href="#hitta-hit">Hitta hit</a>`,
+            cards: [
+              { kicker: "Bil", title: "Från Stockholm", line: "[Ca 7 h], parkering vid stugan", image: IMG("hamraslingan") },
+              { kicker: "Kollektivt", title: "Tåg och buss", line: "[Via Östersund]", image: "assets/img/sverigekarta-hitta-hit.svg" }
+            ],
+            chips: ["Passar Tänndalen för nybörjare?", "Hur bokar jag?"]
+          }
+        };
+        QA["Passar Tänndalen för nybörjare?"] = {
+          answer: "Ja. Barnbacken i Hamra har rullband och ligger avskilt från de snabba åkarna, och flera av de gröna backarna går ända ner till byn. Skidskolan har drop-in för barn 4–7 år och kurser för vuxna som aldrig stått på skidor. Utrustning hyr ni på plats, så ni behöver inte köpa något innan.",
+          sources: `Källor: <a href="#pistar">Pistkarta</a> · <a href="#aktiviteter">Skidskola och hyra</a>`,
+          cards: [
+            { kicker: "Backe", title: "Barnbacken Hamra", line: "Grön med rullband", image: "assets/img/fraga-barnbacke.jpg" },
+            { kicker: "Aktivitet", title: "Skidskolan", line: "Drop-in 4–7 år, kurser för vuxna", image: IMG("skidskola") },
+            { kicker: "Plats", title: "[Skidhyran i Hamra]", line: "Skidor, pjäxor och hjälm", image: IMG("hyra") }
+          ],
+          chips: ["När stänger barnbacken?", "Var är pistkartan?"],
+          summer: {
+            answer: "Ja. Flera leder är flacka och korta, som [Hamraslingan] på 3 km runt sjön, och liften tar er upp utan att ni behöver gå. Cykelparken har [gröna nybörjarleder] och ni hyr cykel och hjälm på plats. Är det första gången på fjället, börja i dalen och ta liften upp när ni vill ha utsikt.",
+            sources: `Källor: <a href="#just-nu">Lederna idag</a> · <a href="#aktiviteter">Aktiviteter</a>`,
+            cards: [
+              { kicker: "Led", title: "[Hamraslingan]", line: "3 km, flack, runt sjön", image: IMG("hamraslingan") },
+              { kicker: "Lift", title: "Hamra Komfort", line: "Upp utan att gå, 10–17", image: IMG("lift-sommar") },
+              { kicker: "Plats", title: "[Cykeluthyrningen]", line: "Cyklar och hjälmar i alla storlekar", image: IMG("cykel") }
+            ],
+            chips: ["Vilken led passar barnen idag?", "Var hyr jag cykel?"]
+          }
+        };
+        QA["Får jag ta med hund?"] = {
+          answer: "Ja, i [utvalda stugor] är hund välkommen, och ni ser vilka när ni söker boende. I backarna och längdspåren får hunden inte följa med, men det finns [plogade promenadstråk] runt sjön och genom byn. Hunden ska vara kopplad i hela området.",
+          sources: `Källor: <a href="#boende">Boende</a> · <a href="#service">Praktisk info</a>`,
+          cards: [
+            { kicker: "Boende", title: "[Hundvänliga stugor]", line: "Filtrera på hund när du söker", image: IMG("hund-stuga") },
+            { kicker: "Plats", title: "[Promenadstråket vid sjön]", line: "Plogat, kopplad hund", image: IMG("hund-promenad") }
+          ],
+          chips: ["Hur bokar jag?", "Kan jag ändra min bokning?"],
+          summer: {
+            answer: "Ja, i [utvalda stugor] är hund välkommen, och ni ser vilka när ni söker boende. På sommaren får hunden följa med på lederna, men den ska vara kopplad eftersom det finns renar och fåglar som häckar. [I liften går det bra med hund i koppel.]",
+            sources: `Källor: <a href="#boende">Boende</a> · <a href="#just-nu">Lederna idag</a>`,
+            cards: [
+              { kicker: "Boende", title: "[Hundvänliga stugor]", line: "Filtrera på hund när du söker", image: IMG("hund-stuga") },
+              { kicker: "Led", title: "[Hamraslingan]", line: "Bra hundpromenad, 3 km", image: IMG("hamraslingan") }
+            ],
+            chips: ["Hur bokar jag?", "Behöver vi myggmedel?"]
+          }
+        };
+        QA["Kan jag ändra min bokning?"] = {
+          answer: "Ja. Logga in på Mina sidor så ser du er bokning och kan ändra datum, lägga till liftkort eller skidhyra. [Datum kan ändras fram till 30 dagar före ankomst.] Gäller det något annat, skriv till gästservice här nedanför, de svarar oftast inom fem minuter.",
+          sources: `Källor: <a href="#konto">Mina sidor</a> · <a href="#service">Bokningsvillkor</a>`,
+          cards: [
+            { kicker: "Konto", title: "Mina sidor", line: "Ändra datum och tillägg", image: "assets/img/teaser-boende-b.jpeg" },
+            { kicker: "Kontakt", title: "Gästservice", line: "Chatt, öppet till 20:00", image: "assets/img/meny-fragor.jpg" }
+          ],
+          chips: ["Hur bokar jag?"]
+        };
+        QA["Hur bokar jag?"] = {
+          answer: "Välj datum och antal personer i sökrutan högst upp, så ser ni lediga stugor med pris för hela vistelsen. Liftkort, skidhyra och skidskola lägger ni till i samma bokning, och allt samlas sedan på Mina sidor. Vill ni ha boende och liftkort i ett, finns färdiga paket.",
+          sources: `Källor: <a href="#boende">Boende</a> · <a href="#paket">Paket</a>`,
+          cards: [
+            { kicker: "Boka", title: "Boende", line: "Sök på datum och antal", image: "assets/img/teaser-boende-b.jpeg" },
+            { kicker: "Boka", title: "Liftkort", line: "Lägg till i samma bokning", image: "assets/img/fraga-lift.jpg" },
+            { kicker: "Boka", title: "Paket", line: "Boende och liftkort i ett", image: "assets/img/teaser-paket-b.png" }
+          ],
+          chips: ["Kan jag ändra min bokning?", "Vad kostar en skidvecka för två vuxna och två barn?"],
+          summer: {
+            answer: "Välj datum och antal personer i sökrutan högst upp, så ser ni lediga stugor med pris för hela vistelsen. Liftkort, cykelhyra och aktiviteter lägger ni till i samma bokning, och allt samlas sedan på Mina sidor.",
+            sources: `Källor: <a href="#boende">Boende</a> · <a href="#aktiviteter">Aktiviteter</a>`,
+            cards: [
+              { kicker: "Boka", title: "Boende", line: "Sök på datum och antal", image: "assets/img/teaser-boende-b.jpeg" },
+              { kicker: "Boka", title: "Liften", line: "Lägg till i samma bokning", image: IMG("lift-sommar") },
+              { kicker: "Boka", title: "Cykelhyra", line: "Per dag eller vecka", image: IMG("cykel") }
+            ],
+            chips: ["Kan jag ändra min bokning?", "Var hyr jag cykel?"]
+          }
+        };
+        QA["Vad kostar en skidvecka för två vuxna och två barn?"] = {
+          answer: "För två vuxna och två barn blir en vecka i stuga med liftkort för alla fyra fr. [X] kr. Det som ändrar priset mest är vecka, storlek på stugan och om ni bor i backen eller en bit bort. Skidhyra och skidskola lägger ni till per person. Sök på era datum så ser ni exakt pris.",
+          sources: `Källor: <a href="#boende">Boende</a> · <a href="#paket">Paket</a>`,
+          cards: [
+            { kicker: "Boende", title: "Stuga för fyra", line: "Fr. [X] kr per vecka", image: "assets/img/teaser-boende-b.jpeg" },
+            { kicker: "Liftkort", title: "6 dagar, familj", line: "Fr. [X] kr", image: "assets/img/fraga-lift.jpg" },
+            { kicker: "Paket", title: "Boende och liftkort", line: "Allt i en bokning", image: "assets/img/teaser-paket-b.png" }
+          ],
+          chips: ["Hur bokar jag?", "Passar Tänndalen för nybörjare?"]
+        };
+        QA["Är det mycket kö?"] = {
+          answer: "Sällan. Med 14 av 17 liftar igång idag sprids folket ut, och det blir mest kö vid [Hamraliften] mellan 10 och 11. Börja i Headstråket eller vänta till efter lunch, då är det i stort sett tomt.",
+          sources: `Källor: <a href="#just-nu">Just nu</a>`,
+          cards: [
+            { kicker: "Lift", title: "[Hamraliften]", line: "Kortast kö före kl. 10", image: "assets/img/fraga-lift.jpg" },
+            { kicker: "Backe", title: "Headstråket", line: "Blå, preparerad i natt", image: "assets/img/rapport-raw-1.png" }
+          ],
+          chips: ["Vilka backar är bäst just nu?", "Var är pistkartan?"],
+          summer: {
+            answer: "Nej, inte på sommaren. Liften Hamra Komfort går 10–17 och det blir som mest några minuters väntan vid tolvtiden. På lederna möter ni sällan mer än ett par andra sällskap.",
+            sources: `Källor: <a href="#just-nu">Liften</a>`,
+            cards: [
+              { kicker: "Lift", title: "Hamra Komfort", line: "Öppen 10–17", image: IMG("lift-sommar") },
+              { kicker: "Led", title: "[Utsiktsstenen]", line: "Lugnt även mitt på dagen", image: IMG("utsiktsstenen") }
+            ],
+            chips: ["Kan vi ta liften upp och gå ner?", "Vilken led passar barnen idag?"]
+          }
+        };
+        QA["Hur mycket snö är det?"] = QA["Hur mycket nysnö väntas?"] = {
+          answer: "Det kom 12 cm i natt och snödjupet är 134 cm uppe och 71 cm nere i dalen. Fram till lördag väntas ytterligare 30 cm, mest natten mot fredag. Det betyder fin pudersnö på skuggsidan i helgen.",
+          sources: `Källor: <a href="#just-nu">Snörapport</a> · <a href="#just-nu">Väder · Hamrafjället</a>`,
+          cards: [
+            { kicker: "Backe", title: "Headstråket", line: "Preparerad i natt", image: "assets/img/rapport-raw-1.png" },
+            { kicker: "Kamera", title: "Webbkamera Storvigeln", line: "Se snön live", image: "assets/img/webbkamera.png" }
+          ],
+          chips: ["Vilka backar är bäst just nu?", "Hur blir vädret i morgon?"],
+          summer: {
+            answer: "Ingen snö i dalen nu. Det kan ligga kvar några snöfläckar i nordsluttningarna högst upp, men lederna är torra. Säsongen börjar igen [i december], och snödjupet följer ni här från första snön.",
+            sources: `Källor: <a href="#just-nu">Lederna idag</a>`,
+            cards: [
+              { kicker: "Led", title: "[Utsiktsstenen]", line: "Torrt hela vägen upp", image: IMG("utsiktsstenen") }
+            ],
+            chips: ["Vilken led passar barnen idag?", "Hur blir vädret i kväll?"]
+          }
+        };
+        QA["Var är pistkartan?"] = {
+          answer: "Pistkartan ligger under Just nu, där ni också kan visa var ni är och var ni bor. Den visar vilka backar som är öppna och preparerade just nu. En papperskarta finns i liftkortskassan.",
+          sources: `Källor: <a href="#pistar">Pistkarta</a>`,
+          cards: [
+            { kicker: "Karta", title: "Pistkartan", line: "Öppna backar just nu", image: "assets/img/pistkarta.png" },
+            { kicker: "Kamera", title: "Webbkamera Storvigeln", line: "Se läget live", image: "assets/img/webbkamera.png" }
+          ],
+          chips: ["Vilka backar är bäst just nu?", "Är det mycket kö?"],
+          summer: {
+            answer: "På sommaren byts pistkartan mot en led- och cykelkarta. Den visar vilka av de 14 lederna som är öppna, hur långa de är och var liften går upp. En papperskarta finns i [Hamra livs].",
+            sources: `Källor: <a href="#just-nu">Lederna idag</a>`,
+            cards: [
+              { kicker: "Karta", title: "Led- och cykelkarta", line: "11 av 14 leder öppna", image: IMG("fabodstigen") },
+              { kicker: "Led", title: "[Hamraslingan]", line: "3 km, flack", image: IMG("hamraslingan") }
+            ],
+            chips: ["Vilken led passar barnen idag?", "Vilken led är torrast?"]
+          }
+        };
+        /* Följdfrågor från Just nu-kortet i sommarläge (fragaAnswerFor, leder). */
+        QA["Vilken led är torrast?"] = {
+          answer: "Lederna uppe på kalfjället torkar först, så [Utsiktsstenen] och [Fäbodstigen] är helt torra idag. Nere i skogen kan det finnas blöta partier efter regnet i början av veckan, mest runt bäckarna. Vanliga skor räcker uppe, kängor är skönare i skogen.",
+          sources: `Källor: <a href="#just-nu">Lederna idag</a>`,
+          cards: [
+            { kicker: "Led", title: "[Utsiktsstenen]", line: "Torr, kalfjäll", image: IMG("utsiktsstenen") },
+            { kicker: "Led", title: "[Fäbodstigen]", line: "Torr, 3 km ner", image: IMG("fabodstigen") }
+          ],
+          chips: ["Vilken led passar barnen idag?", "Kan vi ta liften upp och gå ner?"]
+        };
+        QA["Är liften öppen?"] = {
+          answer: "Ja, Hamra Komfort går 10–17 idag. Sista turen upp går en halvtimme före stängning, och barn under [7 år] åker gratis med en vuxen. Uppe är det 8° och 9 m/s, så ta en jacka.",
+          sources: `Källor: <a href="#just-nu">Liften</a>`,
+          cards: [
+            { kicker: "Lift", title: "Hamra Komfort", line: "Öppen 10–17", image: IMG("lift-sommar") },
+            { kicker: "Led", title: "[Fäbodstigen]", line: "Gå ner, ca 1 h", image: IMG("fabodstigen") }
+          ],
+          chips: ["Kan vi ta liften upp och gå ner?", "Var hyr jag cykel?"]
+        };
+        QA["Var hyr jag cykel?"] = {
+          answer: "[Cykeluthyrningen] ligger vid liftens fot och har öppet 09–17. Där finns barncyklar från [20 tum], hjälmar och cykelkärror. Ta med cykeln i liften och rulla ner på de gröna lederna i cykelparken.",
+          sources: `Källor: <a href="#aktiviteter">Aktiviteter</a>`,
+          cards: [
+            { kicker: "Plats", title: "[Cykeluthyrningen]", line: "Vid liften, 09–17", image: IMG("cykel") },
+            { kicker: "Lift", title: "Hamra Komfort", line: "Cykeln följer med upp", image: IMG("lift-sommar") }
+          ],
+          chips: ["Är liften öppen?", "Vilken led är torrast?"]
+        };
+        /* Följdfrågor från Just nu-kortet i längdläge (fragaAnswerFor, valla). */
+        QA["Hur är spårläget idag?"] = {
+          answer: "Bra. 64 km kördes i natt, bland annat belysta 5:an och [Fjällrundan] på 10 km. Spåren är fasta på förmiddagen och blir lite mjukare i solen efter lunch. I skogen är det i lä för vinden.",
+          sources: `Källor: <a href="#just-nu">Spårrapport 04:30</a>`,
+          cards: [
+            { kicker: "Spår", title: "Belysta 5:an", line: "Flack, belyst till 21", image: "assets/img/langd.jpg" },
+            { kicker: "Spår", title: "[Fjällrundan] 10 km", line: "Nypreparerad 04:30", image: IMG("fjallrundan") }
+          ],
+          chips: ["Vilken valla ska jag använda idag?", "Var hittar jag spårkartan?"]
+        };
+        QA["Var hittar jag spårkartan?"] = {
+          answer: "Spårkartan finns under Just nu när ni valt Längd, och visar vilka spår som är preparerade och när. Vid spårcentralen sitter en stor karta, och där kan ni också ta en papperskarta.",
+          sources: `Källor: <a href="#sparkarta">Spårkarta</a>`,
+          cards: [
+            { kicker: "Karta", title: "Spårkartan", line: "Preparerade spår just nu", image: "assets/img/just-nu/langd/sparkarta.png" },
+            { kicker: "Plats", title: "Spårcentralen", line: "Start, toaletter och karta", image: "assets/img/fraga-sparcentral.jpg" }
+          ],
+          chips: ["Hur är spårläget idag?", "Var kan vi fika vid spåret?"]
+        };
+        /* Sommarvarianter av vinterfrågor som också ställs på sommaren. */
+        QA[RAIN].summer = {
+          answer: "Regn är ingen katastrof här. Badet och bastun på hotellet är öppna 10–20, klätterväggen tar barn från 5 år, och i lekhallen kan ni fika medan barnen leker. Skurarna drar ofta förbi snabbt, och efter regnet är lederna i skogen som vackrast.",
+          sources: `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#service">Mat, butiker och service</a>`,
+          cards: [
+            { kicker: "Aktivitet", title: "Bad och bastu", line: "Öppet 10–20, hela familjen", image: IMG("bastu-sommar") },
+            { kicker: "Plats", title: "Lekhallen", line: "Inomhus, fika medan barnen leker", image: "assets/img/fraga-lekhall.jpg" },
+            { kicker: "Aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "assets/img/fraga-klatter.jpg" }
+          ],
+          chips: ["Vad gör vi med barn under 4 år?", "Hur blir vädret i kväll?"]
+        };
         /* Svar på följdfrågorna. Deras egna följdfrågor pekar bara på frågor som redan har svar. */
         QA["Vad gör vi med barn under 4 år?"] = {
           answer: "För de minsta är lekhallen bäst en regnig dag: mjuka klätterställningar, en egen småbarnshörna och kaffe till er vuxna bredvid. Badet har ett grunt barnbassäng med varmt vatten. Blir det uppehåll kan ni dra pulka i barnbacken, den är bara ett par hundra meter från er stuga.",
@@ -4717,6 +4929,16 @@
             { kicker: "Backe", title: "Pulka i barnbacken", line: "Nära er stuga, pulka finns att låna", image: "assets/img/fraga-barnbacke.jpg" }
           ],
           chips: ["Vad gör vi om det regnar?"]
+        };
+        QA["Vad gör vi med barn under 4 år?"].summer = {
+          answer: "För de minsta är lekhallen bäst en regnig dag: mjuka klätterställningar, en egen småbarnshörna och kaffe till er vuxna bredvid. Badet har en grund barnbassäng med varmt vatten. Blir det uppehåll är stranden vid Svansjön grund långt ut, och [Hamraslingan] går att köra med barnvagn.",
+          sources: `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#boende">Ert boende</a>`,
+          cards: [
+            { kicker: "Plats", title: "Lekhallen", line: "Småbarnshörna, fika för vuxna", image: "assets/img/fraga-lekhall.jpg" },
+            { kicker: "Aktivitet", title: "Barnbassängen", line: "Grunt och varmt, öppet 10–20", image: "assets/img/fraga-bastu-sommar.jpg" },
+            { kicker: "Plats", title: "Badplatsen vid Svansjön", line: "Grunt långt ut", image: "assets/img/fraga-badplats.jpg" }
+          ],
+          chips: ["Vad gör vi om det regnar?", "Var kan vi bada idag?"]
         };
         QA["Hur blir vädret i morgon?"] = {
           answer: "Regnet drar förbi under natten och i morgon blir det klart med −4° på morgonen. Det fryser på i backarna, så de är som bäst före lunch. Blåsigast på toppen efter 14, så planera längre turer till förmiddagen.",
@@ -4729,7 +4951,7 @@
           sources: `Källor: <a href="#just-nu">Öppet nu</a>`,
           cards: [
             { kicker: "Backe", title: "Barnbacken Hamra", line: "Öppet 09:00–16:00", image: "assets/img/fraga-barnbacke.jpg" },
-            { kicker: "Aktivitet", title: "Skidskolans drop-in", line: "4–7 år, till 15:30" }
+            { kicker: "Aktivitet", title: "Skidskolans drop-in", line: "4–7 år, till 15:30", image: "assets/img/fraga-skidskola.jpg" }
           ],
           chips: ["Var äter vi lunch i backen?"]
         };
@@ -4748,7 +4970,7 @@
           cards: [
             { kicker: "Plats", title: "[Restaurang vid liften]", line: "Glutenfri meny, separat fritös", image: "assets/img/fraga-restaurang.jpg" },
             { kicker: "Plats", title: "Toppstugan", line: "Glutenfritt på beställning", image: "assets/img/endag-1300.jpg?v=2" },
-            { kicker: "Plats", title: "[Livsbutiken i Hamra]", line: "Glutenfritt bröd och mellis" }
+            { kicker: "Plats", title: "[Livsbutiken i Hamra]", line: "Glutenfritt bröd och mellis", image: "assets/img/fraga-livs.jpg" }
           ],
           chips: ["Kan vi boka bord till fyra?"]
         };
@@ -4757,7 +4979,7 @@
           sources: `Källor: <a href="#just-nu">Dagens vallatips</a>`,
           cards: [
             { kicker: "Plats", title: "[Vallaboden]", line: "Vi visar hur, 09–11", image: "assets/img/fraga-vallabod.jpg" },
-            { kicker: "Fäste", title: "Viola extra", line: "Dagens fästvalla" }
+            { kicker: "Fäste", title: "Viola extra", line: "Dagens fästvalla", image: "assets/img/fraga-fastvalla.jpg" }
           ],
           chips: ["Vilken valla ska jag använda idag?"]
         };
@@ -4993,7 +5215,7 @@
           const config = window.fragaAnswerFor?.(question) || null;
           const fromCard = cardAnswer && question === cardQuestion;
           const rain = !config && !fromCard && !!QA[question];
-          const text = config?.answer || (fromCard ? cardAnswer : rain ? QA[question].answer : GENERIC);
+          const text = config?.answer || (fromCard ? cardAnswer : rain ? qaFor(question).answer : GENERIC);
           answerFull = text;
           if (reduced) {
             qEl.textContent = question;
@@ -5086,7 +5308,7 @@
             markOverflow();
             return;
           }
-          const qa = QA[questionFull] || QA[RAIN];
+          const qa = qaFor(questionFull) || qaFor(RAIN);
           sources.innerHTML = qa.sources;
           cards.innerHTML = qa.cards.map((item) => {
             const media = item.image ? `<img src="${item.image}" alt="" onerror="this.parentNode.classList.add('is-empty');this.remove()" />` : "";
