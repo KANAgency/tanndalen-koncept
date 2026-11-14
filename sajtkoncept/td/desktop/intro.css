@@ -79,6 +79,12 @@ html.is-intro-done .intro-word {
   transition: opacity 280ms linear;
 }
 
+/* Ingen blixt av "Tänndalen" överst innan intro.js har kört: ordet tonas in av JS (inline opacity),
+   och för återkommande tas hela låset bort av JS – dölj det redan i CSS. */
+.intro-word { opacity: 0; }
+html.is-returning .intro-lock,
+html.is-returning #intro-scroll { display: none; }
+
 #intro-scroll {
   position: fixed;
   left: 50%;

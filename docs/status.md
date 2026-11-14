@@ -48,6 +48,11 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Ingen "Tänndalen"-blixt vid sidladdning
+- Orsak: `.intro-word` (stor Superclarendon) syntes överst tills `intro.js` hann placera/tona in den, och för återkommande tills JS tog bort `#intro-lock`.
+- `intro.css`: `.intro-word { opacity: 0 }` (JS sätter inline opacity i introt) + `html.is-returning .intro-lock, #intro-scroll { display: none }` (klassen sätts i head-skriptet). Cache-bust `intro.css?v=noflash`.
+- Verifierat i iframe utan JS: ordet opacity 0, låset display none med is-returning. Introts intoning i läge 1 ej visuellt kontrollerad (rAF körs inte i dold panel).
+
 ## Klart 14 nov: Lägesväljaren och liftkortstipset
 - Lägesväljaren (`shared/js/modes-engine.js` + `.mode-switch*` i startsida.css): demoraden "Demo: vistelse pågår nu" borttagen (handlern ligger kvar men hittar ingen knapp; `labels.demoToday` oanvänd). Ny stil: rubrik "VISNINGSLÄGE" 12 px, rader 40 px CircularXX 15 px, hover neutral-subtlest, valt läge Bold + bock, radie 8 px, tunn kant.
 - Lägesmenyn: siffran i CTA-färgad cirkel 24 px (`.mode-switch-num`, Snö 13 px Bold), texten bredvid.
