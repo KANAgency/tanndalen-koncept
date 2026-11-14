@@ -42,6 +42,12 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - OG-startsidan (`og/desktop/index.html`) har samma JS-ändringar men saknar En dag-CSS helt; ej verifierad.
 - Öppet: känsla på snap/skugga i riktig browser; ska OG få samma meny-tuck och lyft?
 
+## Klart 14 nov: På plats sommar – väderkort, toppbar, Storvigeln
+- Väderkortet sommar: ingen bakgrundsplatta, rubrik "Väder i dalen", "Nu · Halvklart" på egen rad, detaljrader (body 16 px, tätare) toppalignade mot glyfftoppen på 14° (padding-top 13 px, mätt 0,2 px diff), 8 px under 14°, prognos i ett stycke 18 px. Vinterkortet orört.
+- Sommarläge: webbkameran ligger ovanför vädret (DOM-flytt i `setSummerSwap`, återställs vid vinter).
+- Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
+- Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
+
 ## Commit-historik (nyast först)
 
 | Hash | Innehåll |

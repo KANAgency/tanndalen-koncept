@@ -774,12 +774,13 @@
           <div>
             <!-- TODO: demosiffror, samma som justNuData.sommar (14°/8°, 20 % regn, 9 m/s på toppen). -->
             <article class="td-vader-block td-vader-sommar" data-depth="front" data-gren-panel="sommar" hidden aria-label="Väder i dalen">
-              <header class="td-vader-head"><span class="td-heading-xxs">Väder · I dalen</span></header>
-              <div class="td-vader-main">
-                <div class="td-vader-temp"><span class="td-ui-label td-vader-nu">Nu</span><span class="td-ui-figure-xl">14°</span></div>
-                <div class="td-vader-detalj td-ui-body-sm"><strong class="td-ui-label">Halvklart</strong><span>8° på toppen</span><span>Vind på toppen 9 m/s</span><span>Regnrisk 20 %</span></div>
+              <header class="td-vader-head"><span class="td-heading-xxs">Väder i dalen</span></header>
+              <span class="td-vader-nu-rad"><span class="td-ui-label td-vader-nu">Nu</span><span class="td-vader-dot" aria-hidden="true"></span><strong class="td-ui-label">Halvklart</strong></span>
+              <div class="td-vader-main td-vader-main-top">
+                <div class="td-vader-temp"><span class="td-ui-figure-xl">14°</span></div>
+                <div class="td-vader-detalj td-vader-detalj-tight td-ui-body"><span>8° på toppen</span><span>Vind på toppen 9 m/s</span><span>Regnrisk 20 %</span></div>
               </div>
-              <p class="td-vader-text td-ui-body">Uppehåll till eftermiddagen, en skur kan komma efter 16.<br>Svalt och blåsigt på toppen, ta med en extra tröja.</p>
+              <p class="td-vader-text td-vader-text-lg td-ui-body">Uppehåll till eftermiddagen, en skur kan komma efter 16. Svalt och blåsigt på toppen, ta med en extra tröja.</p>
             </article>
             <section class="td-pagang" data-depth="front">
               <header class="td-just-nu-header"><div class="td-just-nu-header-identity"><span class="td-just-nu-header-icon"><img src="assets/icons/kalender.svg" alt=""></span><span class="td-ui-title">På gång</span></div><a class="td-corner-link" href="#evenemang"><span class="td-corner-link-label td-ui-cta-sm">Alla evenemang</span><svg class="td-corner-link-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75742 12.2428L12.2427 3.75749M12.2429 10.5739L12.2427 3.75749L5.4263 3.75729" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" vector-effect="non-scaling-stroke"/></svg></a></header>
@@ -4255,9 +4256,26 @@
         img.onerror = () => { img.removeAttribute("src"); missingHost.classList.add("is-missing"); };
         if (src) img.src = src;
       }
+      const onsiteMetricEls = [...document.querySelectorAll("[data-onsite-metric]")];
+      const onsiteMetricsWinter = onsiteMetricEls.map((el) => el.innerHTML);
+      function setOnsiteMetrics(summer) {
+        if (!summer) { onsiteMetricEls.forEach((el, i) => { el.innerHTML = onsiteMetricsWinter[i]; }); return; }
+        const d = justNuData.sommar;
+        const rows = [
+          ["Öppet:", `${d.trails.open}/${d.trails.total} leder, liften ${d.lift.hours}`],
+          ["Väder:", `${d.temperature.valleyC}° i dalen, ${d.temperature.summitC}° på toppen, regnrisk ${d.weather.rainPercent} %`],
+          ["Lederna:", d.trails.condition.toLowerCase()]
+        ];
+        onsiteMetricEls.forEach((el, i) => { el.innerHTML = `<strong class="onsite-topbar-label">${rows[i][0]}</strong> ${rows[i][1]}`; });
+      }
       function setSummerSwap(summer) {
         document.querySelector(".just-cols .td-pagang").hidden = summer;
         document.querySelector(".just-cols-3 .td-vader-block").hidden = summer;
+        const kamera = document.querySelector(".just-cols .td-kamera");
+        const vaderSommar = document.querySelector(".td-vader-sommar");
+        if (summer) vaderSommar.before(kamera);
+        else document.querySelector(".just-cols .td-pagang").after(kamera);
+        setOnsiteMetrics(summer);
       }
       function applyJustNu(gren) {
         justNuSwitch.style.display = "";
