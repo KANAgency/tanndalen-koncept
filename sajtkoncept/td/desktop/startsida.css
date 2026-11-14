@@ -6089,3 +6089,9 @@ html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort {
 .td-videomodal-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .td-videomodal-x { position: absolute; right: 0; bottom: calc(100% + var(--space-md)); }
 @media (max-width: 1023px) { .td-videokort { width: 100%; } }
+/* Videokort: stillbild tills YouTube spelar; skala så titel/UI-kanter hamnar utanför kortet. Play 56 px, triangeln optiskt centrerad. */
+.td-videokort-media { background: var(--color-TD-night) center / cover no-repeat; }
+.td-videokort-media iframe { opacity: 0; transform: translate(-50%, -50%) scale(1.25); transition: opacity 400ms var(--motion-easing-out-soft); }
+.td-videokort-media.is-playing iframe { opacity: 1; }
+.td-videokort-play { width: 56px; height: 56px; }
+.td-videokort-play svg { margin-left: 0; transform: translateX(1px); }

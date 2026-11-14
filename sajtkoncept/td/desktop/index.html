@@ -794,7 +794,7 @@
           <button class="td-videokort" type="button" data-depth="front" data-yt="NM2Rb1ShiwE" aria-haspopup="dialog" aria-label="Spela filmen Vardag vs. Paradiset Tänndalen">
             <span class="td-videokort-media" aria-hidden="true"></span>
             <span class="td-videokort-shade" aria-hidden="true"></span>
-            <span class="td-videokort-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <span class="td-videokort-play" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
             <span class="td-videokort-body">
               <span class="td-ui-kicker">Film · 1 min</span>
               <span class="td-heading-xs">Vardag vs. Paradiset Tänndalen</span>
@@ -6325,7 +6325,20 @@
         const mountBg = () => {
           if (bgOn || getComputedStyle(card).display === "none") return;
           bgOn = true;
-          media.innerHTML = '<iframe tabindex="-1" title="" allow="autoplay; encrypted-media" src="' + base + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&start=20&end=40&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"></iframe>';
+          /* Stillbild tills spelaren rapporterar "playing" – annars syns YouTubes pausläge (titel, föregående/nästa). */
+          media.style.backgroundImage = "url(https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg)";
+          media.innerHTML = '<iframe tabindex="-1" title="" allow="autoplay; encrypted-media" src="' + base + '?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&start=20&end=40&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1&origin=' + encodeURIComponent(location.origin) + '"></iframe>';
+          const ifr = media.querySelector("iframe");
+          const cmd = (func, args = []) => ifr.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args }), "*");
+          ifr.addEventListener("load", () => ifr.contentWindow.postMessage(JSON.stringify({ event: "listening", id: "td-videokort" }), "*"));
+          addEventListener("message", (e) => {
+            if (e.source !== ifr.contentWindow) return;
+            let d; try { d = JSON.parse(e.data); } catch { return; }
+            const st = d.info?.playerState ?? (d.event === "onStateChange" ? d.info : undefined);
+            if (st === undefined) return;
+            media.classList.toggle("is-playing", st === 1);
+            if (st === 0) { cmd("seekTo", [20, true]); cmd("playVideo"); } /* egen loop 20–40 s, utan spellista */
+          });
         };
         /* Ladda efter sidans load, och igen när läget byts (kortet syns bara i läge 1/2). */
         if (document.readyState === "complete") setTimeout(mountBg, 300);
