@@ -1082,6 +1082,7 @@
                 <li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vad gör vi om det regnar?"><span>Vad gör vi om det regnar?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li>
               </ul>
               <ul class="td-guide-lista" data-gren-panel="langd" hidden><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilka spår är nypreparerade?"><span>Vilka spår är nypreparerade?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilken valla ska jag använda idag?"><span>Vilken valla ska jag använda idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Var kan vi fika vid spåret?"><span>Var kan vi fika vid spåret?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li></ul>
+              <ul class="td-guide-lista td-guide-bokning" data-gren-panel="sommar" hidden></ul>
               <ul class="td-guide-lista" data-gren-panel="sommar" hidden><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Vilken led passar barnen idag?"><span>Vilken led passar barnen idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Var kan vi bada idag?"><span>Var kan vi bada idag?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li><li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="Kan vi ta liften upp och gå ner?"><span>Kan vi ta liften upp och gå ner?</span><span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button></li></ul>
             </div>
           </div>
@@ -1277,20 +1278,20 @@
         <div class="utforsakning-stage">
           <div class="utforsakning-media">
             <div class="utforsakning-clips">
-              <video class="utforsakning-clip" data-tab="alpin" muted loop playsinline preload="metadata" src="assets/video/klipp-8.mp4"></video>
-              <img class="utforsakning-clip is-on" data-tab="langd" src="assets/img/langd.jpg" alt="Skidåkare i en vid fjällsluttning ovanför skogen" width="1063" height="732">
+              <video class="utforsakning-clip is-on" data-tab="alpin" muted loop playsinline preload="metadata" src="assets/video/klipp-8.mp4"></video>
+              <img class="utforsakning-clip" data-tab="langd" src="assets/img/langd.jpg" alt="Skidåkare i en vid fjällsluttning ovanför skogen" width="1063" height="732">
               <img class="utforsakning-clip" data-tab="snow" src="assets/img/snowboard.jpg" alt="Snowboardåkare svänger i en pist i kvällssol" width="1063" height="732">
             </div>
             <span class="utforsakning-doodle" data-depth="mitt" aria-hidden="true"><img src="assets/img/handske.svg" alt="" width="151" height="232"></span>
           </div>
           <div class="utforsakning-card">
             <div class="utforsakning-tabs" role="tablist" aria-label="Aktivitet">
-              <button class="utforsakning-tab td-ui-body" type="button" role="tab" id="utforsakning-tab-alpin" aria-selected="false" aria-controls="utforsakning-panel-alpin" tabindex="-1">Utförsåkning</button>
-              <button class="utforsakning-tab td-ui-cta" type="button" role="tab" id="utforsakning-tab-langd" aria-selected="true" aria-controls="utforsakning-panel-langd" tabindex="0">Längdåkning</button>
+              <button class="utforsakning-tab td-ui-cta" type="button" role="tab" id="utforsakning-tab-alpin" aria-selected="true" aria-controls="utforsakning-panel-alpin" tabindex="0">Utförsåkning</button>
+              <button class="utforsakning-tab td-ui-body" type="button" role="tab" id="utforsakning-tab-langd" aria-selected="false" aria-controls="utforsakning-panel-langd" tabindex="-1">Längdåkning</button>
               <button class="utforsakning-tab td-ui-body" type="button" role="tab" id="utforsakning-tab-snow" aria-selected="false" aria-controls="utforsakning-panel-snow" tabindex="-1">Snowboard</button>
             </div>
             <div class="utforsakning-panels">
-              <div class="utforsakning-panel" role="tabpanel" id="utforsakning-panel-alpin" aria-labelledby="utforsakning-tab-alpin" aria-hidden="true">
+              <div class="utforsakning-panel is-on" role="tabpanel" id="utforsakning-panel-alpin" aria-labelledby="utforsakning-tab-alpin" aria-hidden="false">
                 <div class="utforsakning-heading">
                   <p class="utforsakning-eyebrow">Älskat av skidåkare</p>
                   <h2 class="td-heading-4" id="utforsakning-title">Utförsåkning i Tänndalen</h2>
@@ -1298,7 +1299,7 @@
                 <p class="td-lead-sm">Tänndalens alpina värld är en gnistrande vit buffé full av delikatesser på höga och snösäkra höjder. Varje vinter singlar fyra-fem meter natursnö ner över skidområdet, som sträcker sig genom hela dalgången från Hamra i väster till Svansjön i öster.</p>
                 <a class="td-button td-button-secondary td-button-md" href="#hitta">Så tar du dig hit <span class="td-button-arrow"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.2 12.8 14 8 9.2 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
               </div>
-              <div class="utforsakning-panel is-on" role="tabpanel" id="utforsakning-panel-langd" aria-labelledby="utforsakning-tab-langd" data-draft="to be verified with Tänndalen" aria-hidden="false">
+              <div class="utforsakning-panel" role="tabpanel" id="utforsakning-panel-langd" aria-labelledby="utforsakning-tab-langd" data-draft="to be verified with Tänndalen" aria-hidden="true">
                 <div class="utforsakning-heading">
                   <p class="utforsakning-eyebrow">Spår för alla</p>
                   <h2 class="td-heading-4">Längdåkning i Tänndalen</h2>
@@ -5061,6 +5062,42 @@
         </div>
       </div>
     <script>
+      /* En källa för frågeförslag: huvudmenyn (Fjällguiden), Läget just nu (tre första) och Vanliga frågor-blocket.
+         Nyckel = läge (general | booking | onsite) + säsong (Summer). */
+      window.TD_FRAGOR = {
+        general: ["Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Vad kostar en skidvecka för två vuxna och två barn?", "Hur lång tid tar det hit?", "Får jag ta med hund?", "Hur bokar jag?"],
+        generalSummer: ["Kan vi ta liften upp och gå ner?", "Passar Tänndalen för nybörjare?", "Hur tar vi oss dit från Stockholm?", "Var hyr jag cykel?", "Får jag ta med hund?", "Hur bokar jag?"],
+        booking: ["Var hämtar vi skidhyran?", "Behöver barnen skidskola första dagen?", "Hur tar vi oss från boendet till liften?", "Hur tidigt kan vi checka in?", "Vilka liftkort behöver vi?", "Kan jag ändra min bokning?"],
+        bookingSummer: ["Vad finns att göra under vår vecka?", "Hur tidigt kan vi checka in?", "Var hyr jag cykel?", "Behöver vi myggmedel?", "Får jag ta med hund?", "Kan jag ändra min bokning?"],
+        onsite: ["Vilka backar är bäst just nu?", "Var äter vi lunch i backen?", "Vad händer för barn idag?", "Är det mycket kö?", "När stänger barnbacken?", "Vad gör vi om det blåser?"],
+        onsiteSummer: ["Vilken led passar barnen idag?", "Var kan vi bada idag?", "Är liften öppen?", "Vilken led är torrast?", "Behöver vi myggmedel?", "Vad gör vi om det regnar?"]
+      };
+      window.tdFragor = () => {
+        const d = document.documentElement.dataset;
+        const base = d.mode === "booking" || d.mode === "onsite" ? d.mode : "general";
+        return window.TD_FRAGOR[base + (d.season === "summer" ? "Summer" : "")];
+      };
+      (() => {
+        const esc = (t) => t.replace(/"/g, "&quot;");
+        const faqArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
+        const guideArrow = '<span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>';
+        const guideRows = (list) => list.slice(0, 3).map((q) => `<li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="${esc(q)}"><span>${q}</span>${guideArrow}</button></li>`).join("");
+        function render() {
+          const faq = document.querySelector("#fragor .td-fraga-fragelista-platta");
+          if (faq) faq.innerHTML = window.tdFragor().map((q, i) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button"${i ? ' data-avdelare="ja"' : ""} data-fraga-title="${esc(q)}"><span class="td-fraga-fragelista-rad-text">${q}</span>${faqArrow}</button></li>`).join("");
+          const F = window.TD_FRAGOR;
+          const set = (sel, list) => { const el = document.querySelector(sel); if (el) el.innerHTML = guideRows(list); };
+          set('.td-guide-lista.td-guide-bokning[data-gren-panel="alpint"]', F.booking);
+          set('.td-guide-lista:not(.td-guide-bokning)[data-gren-panel="alpint"]', F.onsite);
+          set('.td-guide-lista.td-guide-bokning[data-gren-panel="sommar"]', F.bookingSummer);
+          set('.td-guide-lista:not(.td-guide-bokning)[data-gren-panel="sommar"]', F.onsiteSummer);
+        }
+        render();
+        document.addEventListener("td-season", () => setTimeout(render, 0));
+        document.addEventListener("td-mode", () => setTimeout(render, 0));
+      })();
+    </script>
+    <script>
       (() => {
         const RAIN = "Det regnar, vad kan vi göra idag?";
         const RAIN_ANSWER = "Regn är ingen katastrof här. Det finns gott om saker att göra inomhus: simma och bada bastu på hotellet, klättra på klätterväggen, eller ta en lång fika inne medan barnen leker i lekhallen. Och blir det uppehåll är pisterna ofta tomma.";
@@ -5339,6 +5376,15 @@
             { kicker: "Paket", title: "Boende och liftkort", line: "Allt i en bokning", image: "assets/img/teaser-paket-b.png" }
           ],
           chips: ["Hur bokar jag?", "Passar Tänndalen för nybörjare?"]
+        };
+        QA["Vad gör vi om det blåser?"] = {
+          answer: "Håll er lågt. När det blåser över 15 m/s på toppen stänger [toppliftarna], men backarna i skogen nedanför är skyddade och ofta bäst en sådan dag. Barnbacken och [Hamra Syd] brukar gå som vanligt. Blir det för mycket: bad och bastu på hotellet eller lunch inne i [Toppstugan].",
+          sources: `Källor: <a href="#just-nu">Just nu</a>`,
+          cards: [
+            { kicker: "Backe", title: "[Skogsnedfarterna]", line: "I lä även när det blåser", image: "assets/img/rapport-raw-1.png" },
+            { kicker: "Inomhus", title: "Bad och bastu", line: "Öppet till 20:00", image: "assets/img/meny-fragor.jpg" }
+          ],
+          chips: ["Vilka backar är bäst just nu?", "Var äter vi lunch i backen?"]
         };
         QA["Är det mycket kö?"] = {
           answer: "Sällan. Med 14 av 17 liftar igång idag sprids folket ut, och det blir mest kö vid [Hamraliften] mellan 10 och 11. Börja i Headstråket eller vänta till efter lunch, då är det i stort sett tomt.",
@@ -5646,7 +5692,7 @@
             nowLabel: "Läget i Tänndalen just nu",
             tiles: "winter",
             label: "Andra brukar fråga",
-            questions: ["Hur mycket snö är det?", "Är det mycket kö?", "Passar Tänndalen för nybörjare?", "Hur lång tid tar det hit?", "Vad kostar en skidvecka för två vuxna och två barn?", "Vad gör vi om det regnar?"]
+            questions: window.TD_FRAGOR.general
           },
           summer: {
             title: "Vad undrar du?",
@@ -5654,14 +5700,14 @@
             nowLabel: "Läget i Tänndalen just nu",
             tiles: "summer",
             label: "Andra brukar fråga",
-            questions: SUGGEST_SUMMER
+            questions: window.TD_FRAGOR.generalSummer
           },
           booking: {
             title: "Hej [Anna]! Vad undrar ni inför resan?",
             lead: "Svaren utgår från er bokning, så fråga gärna om boendet, vad ni behöver ha med eller vad ni kan hitta på.",
             booking: true,
             label: "Om er resa",
-            questions: ["Kan vi ta med hund till Ski Lodge Premium?", "Hur tidigt kan vi checka in?", "Vilka liftkort behöver vi?", "Behöver barnen hjälm?", "Hur lång tid tar det hit?", "Kan jag ändra min bokning?"]
+            questions: window.TD_FRAGOR.booking
           },
           onsite: {
             title: "Hej [Anna], vad vill ni hitta på idag?",
@@ -5670,7 +5716,7 @@
             nowLabel: "Läget i backarna just nu",
             tiles: "winter",
             label: "Bra att veta idag",
-            questions: ["Vad händer för barn idag?", "Vilka backar är bäst just nu?", "Var äter vi lunch i backen?", "När stänger barnbacken?", "Är det mycket kö?", "Vad gör vi om det regnar?"]
+            questions: window.TD_FRAGOR.onsite
           }
         };
         const welcomeState = () => {
@@ -5698,7 +5744,7 @@
           if (w.tiles) html += `<p class="td-ui-kicker fraga-welcome-kicker">${w.nowLabel}</p><div class="fraga-welcome-tiles">${WELCOME_TILES[w.tiles].map(tileMarkup).join("")}</div>`;
           welcomeEl.innerHTML = html;
           suggestLabel.textContent = w.label;
-          return w.questions;
+          return window.tdFragor();
         }
         welcomeEl.addEventListener("click", (event) => {
           const target = event.target.closest("[data-ask]");
@@ -6080,8 +6126,9 @@
         };
         const faq = document.getElementById("fragor");
         if (faq) {
-          faq.querySelectorAll(".td-fraga-fragelista-knapp[data-fraga-title], .td-fraga-rad[data-fraga-title]").forEach((row) => {
-            row.addEventListener("click", () => open(row, true));
+          faq.addEventListener("click", (event) => {
+            const row = event.target.closest(".td-fraga-fragelista-knapp[data-fraga-title], .td-fraga-rad[data-fraga-title]");
+            if (row) open(row, true);
           });
           const faqForm = faq.querySelector("[data-fraga-falt]");
           if (faqForm) {
@@ -6756,6 +6803,30 @@
             next.focus();
           });
         });
+        /* Default per läge: Längdåkning i läge 3 (påbörjad bokning), annars Utförsåkning. Följer live-byte av läge. */
+        function setDefault() {
+          const key = document.documentElement.dataset.mode === "booking" ? "langd" : "alpin";
+          const index = tabs.findIndex((tab) => tab.id === `utforsakning-tab-${key}`);
+          if (index < 0) return;
+          if (heightAnim) heightAnim.cancel();
+          if (fadeOut) fadeOut.cancel();
+          panels.forEach(clearPanelMotion);
+          card.style.height = "";
+          card.style.overflow = "";
+          tabs.forEach((tab, i) => {
+            const on = i === index;
+            tab.setAttribute("aria-selected", on ? "true" : "false");
+            tab.tabIndex = on ? 0 : -1;
+            tab.classList.toggle("td-ui-cta", on);
+            tab.classList.toggle("td-ui-body", !on);
+            panels[i].classList.toggle("is-on", on);
+            panels[i].setAttribute("aria-hidden", on ? "false" : "true");
+          });
+          clips.forEach((clip) => clip.classList.toggle("is-on", clip.dataset.tab === key));
+          syncVideo();
+        }
+        setDefault();
+        new MutationObserver(setDefault).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
       })();
     </script>
     <script type="module">

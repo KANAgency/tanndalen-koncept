@@ -10,6 +10,13 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 14 nov: En källa för frågeförslag, midsommarbild, ledkortets copy
+- `window.TD_FRAGOR` i `td/desktop/index.html` styr huvudmenyn (Fjällguiden), Vanliga frågor-blocket (alla sex) och Läget just nu (tre första) per läge × säsong: general, booking, onsite + Summer-varianter. Ändra frågor bara där.
+- Nytt svar: "Vad gör vi om det blåser?" (På plats vinter, ersätter regn). Längdlistorna i Just nu är oförändrade och styrs inte av källan.
+- FAQ-blockets klick är delegerat (raderna renderas om vid td-mode/td-season).
+- Midsommarkortet: AI-genererad `assets/img/midsommar-fjallet.jpg` (Figma-nod 2780:2353). Ledkortet: "Pistgängets nya led".
+- Öppet: "genom fjällbjörkskogen" i ledkortet är ej verifierat. Platshållare i [hakparentes] i nya svaret.
+
 ## Klart 13 nov: vallafärger som tokens (`9b402c4`)
 - Figma: primitiver `wax/green|blue|violet|red|yellow` i `Shared / Primitives` (2691:2353/2355/2357/2359/2361, dolda), semantiska `wax-*` i `Semantic` (2691:2354/2356/2358/2360/2362) aliasade till primitiverna. Scopes FRAME_FILL + SHAPE_FILL, code syntax `var(--wax-*)` / `var(--color-wax-*)`. Verifierat med `get_variable_defs`.
 - Kod: `color.wax.*` i `primitives.json`, `wax`-grupp i båda `*.semantic.json`, generatorn emitterar `--wax-*` (TD + OG). `startsida.css` använder `var(--wax-*)`. Computed color identisk före/efter för alla fem, aktiv och inaktiv (40 %).
