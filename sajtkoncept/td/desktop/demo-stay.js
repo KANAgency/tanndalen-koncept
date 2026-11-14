@@ -11,7 +11,7 @@ export const DEMO_STAY = {
   title: "Ski Lodge Premium",
   checkIn: "2027-02-12",
   checkOut: "2027-02-19",
-  party: "2 vuxna, 1 barn",
+  party: "2 vuxna, 2 barn",
   checkInTime: "Från 15:00",
   rangeLabel: "12–19 feb 2027",
   initials: "AB"

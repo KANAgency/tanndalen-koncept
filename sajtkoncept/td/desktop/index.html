@@ -384,7 +384,7 @@
                   <h2 class="td-heading-xxs-regular" data-stay-title>Ski Lodge Premium</h2>
                 </div>
                 <div class="account-stay-rows td-body-sm">
-                  <div><span>Sällskap</span><span data-stay-party>2 vuxna, 1 barn</span></div>
+                  <div><span>Sällskap</span><span data-stay-party>2 vuxna, 2 barn</span></div>
                   <div><span>Incheckning</span><span data-stay-checkin>Från 15:00</span></div>
                 </div>
                 <a class="td-button td-button-secondary td-button-md td-button-fill-spring" href="#bokning" data-todo="r360">Se hela bokningen</a>
@@ -4550,6 +4550,7 @@
         </div>
         <div class="fraga-mid">
           <div class="fraga-view is-on" data-view="search">
+            <div class="fraga-welcome" id="fraga-welcome"></div>
             <div class="td-fraga-fragelista">
               <p class="td-fraga-fragelista-rubrik fraga-suggest-label td-ui-kicker">Andra brukar fråga</p>
               <ul class="td-fraga-fragelista-platta fraga-suggest" id="fraga-suggest"></ul>
@@ -4601,7 +4602,8 @@
         const GENERIC = "Det här är en demo – den här frågan har inget förinspelat svar än.";
         const FOLLOW = "Det här är en demo – fler svar kommer";
         const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
-        /* Demo: svaren utgår från att vi vet vem användaren är (familj, två vuxna, barn 6 och 9, bor i Hamra).
+        const SUGGEST_SUMMER = ["Vilken led passar barnen idag?", "Var kan vi bada idag?", "Kan vi ta liften upp och gå ner?", "Behöver vi myggmedel?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
+        /* Demo: svaren utgår från att vi vet vem användaren är (familj, två vuxna, barn 6 och 9, bor på Ski Lodge Premium enligt DEMO_STAY).
            Namn i [hakparentes] är platshållare. Kort utan image visar en tom bildyta med flit. */
         const QA = {};
         const qaFor = (q) => { const e = QA[q]; return e && e.summer && document.documentElement.dataset.season === "summer" ? e.summer : e; };
@@ -4616,11 +4618,11 @@
           chips: ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"]
         };
         QA["Vilka backar är bäst just nu?"] = {
-          answer: "Nattens 12 cm har lagt sig fint på skuggsidan. Börja där innan solen når över kanten runt elva, då är snön som bäst. Nioåringen klarar Headstråket som preparerades i natt, och sexåringen har barnbacken bara ett par hundra meter från er stuga i Hamra.",
+          answer: "Nattens 12 cm har lagt sig fint på skuggsidan. Börja där innan solen når över kanten runt elva, då är snön som bäst. Nioåringen klarar Headstråket som preparerades i natt, och sexåringen har barnbacken bara ett par hundra meter från Ski Lodge Premium.",
           sources: `Källor: <a href="#just-nu">Pistrapport 07:40</a> · <a href="#boende">Ert boende</a>`,
           cards: [
             { kicker: "Backe", title: "Headstråket", line: "Blå, preparerad i natt", image: "assets/img/rapport-raw-1.png" },
-            { kicker: "Backe", title: "Barnbacken Hamra", line: "Grön med rullband, nära er stuga", image: "assets/img/fraga-barnbacke.jpg" },
+            { kicker: "Backe", title: "Barnbacken Hamra", line: "Grön med rullband, nära Ski Lodge", image: "assets/img/fraga-barnbacke.jpg" },
             { kicker: "Lift", title: "[Hamraliften]", line: "Kortast kö före kl. 10", image: "assets/img/fraga-lift.jpg" }
           ],
           chips: ["Var äter vi lunch i backen?", "När stänger barnbacken?"]
@@ -4636,7 +4638,7 @@
           chips: ["Kan vi boka bord till fyra?", "Var finns glutenfritt?"]
         };
         QA["Vilka spår är nypreparerade?"] = {
-          answer: "64 km kördes i natt, bland annat belysta 5:an och [Fjällrundan] på 10 km. Med barnen är 5:an bäst: flack, belyst till 21 och start fem minuter från er stuga. Vill ni vuxna åka längre är 10:an i skogen i lä för vinden idag.",
+          answer: "64 km kördes i natt, bland annat belysta 5:an och [Fjällrundan] på 10 km. Med barnen är 5:an bäst: flack, belyst till 21 och start fem minuter från Ski Lodge. Vill ni vuxna åka längre är 10:an i skogen i lä för vinden idag.",
           sources: `Källor: <a href="#just-nu">Spårrapport 04:30</a> · <a href="#boende">Ert boende</a>`,
           cards: [
             { kicker: "Spår", title: "Belysta 5:an", line: "Flack, belyst till 21", image: "assets/img/langd.jpg" },
@@ -4656,7 +4658,7 @@
           chips: ["Hur lägger man burkvalla?", "Vilka spår är nypreparerade?"]
         };
         QA["Var kan vi fika vid spåret?"] = {
-          answer: "Ladan vid spårstarten har öppet 10–14, fem minuter från er stuga. Ute på 10:an finns [Raststugan] vid 6 km med våfflor och varm saft, lagom halvvägs för nioåringen. Vill ni ha egen fika har vindskyddet vid sjön en eldstad.",
+          answer: "Ladan vid spårstarten har öppet 10–14, fem minuter från Ski Lodge. Ute på 10:an finns [Raststugan] vid 6 km med våfflor och varm saft, lagom halvvägs för nioåringen. Vill ni ha egen fika har vindskyddet vid sjön en eldstad.",
           sources: `Källor: <a href="#service">Mat, butiker och service</a> · <a href="#just-nu">Spårkarta</a>`,
           cards: [
             { kicker: "Plats", title: "Fikat vid Ladan", line: "10–14, vid spårstarten", image: "assets/img/endag-1300.jpg?v=2" },
@@ -4667,10 +4669,10 @@
         };
         /* Sommar: Fjällguiden på plats. Samma familj (två vuxna, barn 6 och 9, bor i Hamra). Siffror följer justNuData.sommar. */
         QA["Vilken led passar barnen idag?"] = {
-          answer: "Det är torrt på lederna idag, så vanliga skor går bra. Med sexåringen är [Hamraslingan] bäst: 3 km runt sjön, nästan helt flack och start 400 meter från er stuga. Nioåringen klarar att gå upp till [Utsiktsstenen], 2 km och ungefär 150 höjdmeter, med utsikt över hela dalen.",
+          answer: "Det är torrt på lederna idag, så vanliga skor går bra. Med sexåringen är [Hamraslingan] bäst: 3 km runt sjön, nästan helt flack och start vid [parkeringen i Hamra]. Nioåringen klarar att gå upp till [Utsiktsstenen], 2 km och ungefär 150 höjdmeter, med utsikt över hela dalen.",
           sources: `Källor: <a href="#just-nu">Lederna idag</a> · <a href="#boende">Ert boende</a>`,
           cards: [
-            { kicker: "Led", title: "[Hamraslingan]", line: "3 km, flack, start nära er stuga", image: "assets/img/fraga-hamraslingan.jpg" },
+            { kicker: "Led", title: "[Hamraslingan]", line: "3 km, flack, start i Hamra", image: "assets/img/fraga-hamraslingan.jpg" },
             { kicker: "Led", title: "[Utsiktsstenen]", line: "2 km upp, ca 150 höjdmeter", image: "assets/img/fraga-utsiktsstenen.jpg" },
             { kicker: "Lift", title: "Hamra Komfort", line: "Öppen 10–17, upp utan att gå", image: "assets/img/fraga-lift-sommar.jpg" }
           ],
@@ -4919,14 +4921,72 @@
           ],
           chips: ["Vad gör vi med barn under 4 år?", "Hur blir vädret i kväll?"]
         };
+        /* Påbörjad bokning: frågor om det användaren har bokat (DEMO_STAY: Ski Lodge Premium, 12–19 feb 2027, 2 vuxna och 2 barn). */
+        QA["Kan vi ta med hund till Ski Lodge Premium?"] = {
+          answer: "Ja, Ski Lodge Premium har [fyra hundvänliga rum], men ert rum är inte ett av dem. Vill ni ta med hunden kan vi byta till ett hundrum samma vecka, [mot en städavgift]. I backen och spåren får hunden inte följa med, men promenadstråket vid sjön är plogat och går nästan från dörren.",
+          sources: `Källor: <a href="#bokning">Er bokning</a> · <a href="#boende">Ski Lodge Premium</a>`,
+          cards: [
+            { kicker: "Boende", title: "[Hundrum på Ski Lodge]", line: "Byt rum i er bokning", image: "assets/img/fraga-hund-stuga.jpg" },
+            { kicker: "Plats", title: "[Promenadstråket vid sjön]", line: "Plogat, kopplad hund", image: "assets/img/fraga-hund-promenad.jpg" }
+          ],
+          chips: ["Kan jag ändra min bokning?", "Hur tidigt kan vi checka in?"]
+        };
+        QA["Hur tidigt kan vi checka in?"] = {
+          answer: "Rummet på Ski Lodge Premium är klart från 15:00 fredag 12 februari. Kommer ni tidigare kan ni lämna bagaget i receptionen och gå direkt till backen, [omklädningsrum med förvaring finns]. Har ni lagt till skidhyra står utrustningen redo från 14:00.",
+          sources: `Källor: <a href="#bokning">Er bokning</a>`,
+          cards: [
+            { kicker: "Boende", title: "Ski Lodge Premium", line: "Incheckning från 15:00", image: "assets/img/teaser-boende-b.jpeg" },
+            { kicker: "Plats", title: "[Skidhyran]", line: "Utrustningen redo 14:00", image: "assets/img/fraga-hyra.jpg" }
+          ],
+          chips: ["Vilka liftkort behöver vi?", "Behöver barnen hjälm?"]
+        };
+        QA["Vilka liftkort behöver vi?"] = {
+          answer: "Ni bor sex nätter, så 6-dagarskort passar bäst för alla fyra. Sexåringen åker [gratis med en vuxen], och nioåringen behöver ett barnkort. Lägger ni till korten i bokningen hamnar de i telefonen och ni går direkt till liften första morgonen.",
+          sources: `Källor: <a href="#bokning">Er bokning</a> · <a href="#liftkort">Liftkort</a>`,
+          cards: [
+            { kicker: "Liftkort", title: "6 dagar, 2 vuxna", line: "Fr. [X] kr per person", image: "assets/img/fraga-lift.jpg" },
+            { kicker: "Liftkort", title: "6 dagar, barn 9 år", line: "Fr. [X] kr", image: "assets/img/fraga-barnbacke.jpg" },
+            { kicker: "Liftkort", title: "Barn 6 år", line: "[Gratis med en vuxen]", image: "assets/img/fraga-skidskola.jpg" }
+          ],
+          chips: ["Behöver barnen hjälm?", "Passar Tänndalen för nybörjare?"]
+        };
+        QA["Behöver barnen hjälm?"] = {
+          answer: "Ja, hjälm rekommenderas för alla barn i backen och är [krav i skidskolan]. Har ni ingen egen kan ni lägga till hjälm i skidhyran, den står då redo med skidorna när ni kommer. Tänk på att hjälmen ska sitta stadigt utan mössa under.",
+          sources: `Källor: <a href="#bokning">Er bokning</a> · <a href="#aktiviteter">Skidhyra</a>`,
+          cards: [
+            { kicker: "Hyra", title: "[Skidhyran]", line: "Hjälm i alla storlekar", image: "assets/img/fraga-hyra.jpg" },
+            { kicker: "Aktivitet", title: "Skidskolan", line: "Hjälm krävs", image: "assets/img/fraga-skidskola.jpg" }
+          ],
+          chips: ["Vilka liftkort behöver vi?", "Hur tidigt kan vi checka in?"]
+        };
+        QA["Vad finns att göra under vår vecka?"] = {
+          answer: "Under er vecka händer en del som passar barnen. Lördag 13 februari är det pond skim i Hamra, där de modiga försöker åka över en vattensamling. Söndag går hundspann från Hamra, från 4 år, och på kvällen serveras fondue i Fjällkåtan. Hundspannet och fonduen lägger ni till i bokningen.",
+          sources: `Källor: <a href="#bokning">Er kalender</a> · <a href="#evenemang">Evenemang</a>`,
+          cards: [
+            { kicker: "Lör 13 feb · 11:00", title: "Pond skim i Hamra", line: "Gratis att titta", image: "assets/img/fraga-pondskim.jpg" },
+            { kicker: "Sön 14 feb · 10:00", title: "Hundspann från Hamra", line: "Från 4 år", image: "assets/img/fraga-hundspann.jpg" },
+            { kicker: "Sön 14 feb · 19:00", title: "Fondue i Fjällkåtan", line: "Hela familjen", image: "assets/img/fraga-grillplats.jpg" }
+          ],
+          chips: ["Vilka liftkort behöver vi?", "Kan jag ändra min bokning?"]
+        };
+        /* På plats: dagens händelser för familjen. */
+        QA["Vad händer för barn idag?"] = {
+          answer: "Två saker passar er idag. Klockan 11 är det pond skim nedanför barnbacken i Hamra, där de modiga åker över en vattensamling och resten hejar. Klockan 14 går hundspann från Hamra, från 4 år, med filtar i släden. Hinner ni båda blir det en lugn lunch emellan vid liftens fot.",
+          sources: `Källor: <a href="#evenemang">Händer idag</a>`,
+          cards: [
+            { kicker: "Idag · 11:00", title: "Pond skim i Hamra", line: "Gratis att titta", image: "assets/img/fraga-pondskim.jpg" },
+            { kicker: "Idag · 14:00", title: "Hundspann från Hamra", line: "Från 4 år, boka på plats", image: "assets/img/fraga-hundspann.jpg" }
+          ],
+          chips: ["Var äter vi lunch i backen?", "När stänger barnbacken?"]
+        };
         /* Svar på följdfrågorna. Deras egna följdfrågor pekar bara på frågor som redan har svar. */
         QA["Vad gör vi med barn under 4 år?"] = {
-          answer: "För de minsta är lekhallen bäst en regnig dag: mjuka klätterställningar, en egen småbarnshörna och kaffe till er vuxna bredvid. Badet har ett grunt barnbassäng med varmt vatten. Blir det uppehåll kan ni dra pulka i barnbacken, den är bara ett par hundra meter från er stuga.",
+          answer: "För de minsta är lekhallen bäst en regnig dag: mjuka klätterställningar, en egen småbarnshörna och kaffe till er vuxna bredvid. Badet har ett grunt barnbassäng med varmt vatten. Blir det uppehåll kan ni dra pulka i barnbacken, den är bara ett par hundra meter från Ski Lodge.",
           sources: `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#boende">Ert boende</a>`,
           cards: [
             { kicker: "Plats", title: "Lekhallen", line: "Småbarnshörna, fika för vuxna", image: "assets/img/fraga-lekhall.jpg" },
             { kicker: "Aktivitet", title: "Barnbassängen", line: "Grunt och varmt, öppet 10–20", image: "assets/img/fraga-bastu.jpg" },
-            { kicker: "Backe", title: "Pulka i barnbacken", line: "Nära er stuga, pulka finns att låna", image: "assets/img/fraga-barnbacke.jpg" }
+            { kicker: "Backe", title: "Pulka i barnbacken", line: "Nära Ski Lodge, pulka finns att låna", image: "assets/img/fraga-barnbacke.jpg" }
           ],
           chips: ["Vad gör vi om det regnar?"]
         };
@@ -5033,7 +5093,89 @@
         let questionFull = "";
         kbd.textContent = /Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K";
         const suggestArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg class="fraga-suggest-arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
-        suggest.innerHTML = SUGGEST.map((text) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp fraga-suggest-row td-body-sm" type="button"><span class="td-fraga-fragelista-rad-text fraga-suggest-text">${text}</span>${suggestArrow}</button></li>`).join("");
+        /* Startvyn (ingen fråga ställd). Fyra varianter: vinter ny/återkommande, påbörjad bokning, på plats, sommar.
+           Sommar är en enda variant (återkommande). Bokningsdata speglar DEMO_STAY; [Anna] är platshållare. */
+        const welcomeEl = document.getElementById("fraga-welcome");
+        const suggestLabel = document.querySelector(".fraga-suggest-label");
+        const WELCOME_TILES = {
+          winter: [
+            { title: "Nysnö", number: "12", unit: "cm", caption: "i natt" },
+            { title: "Liftar", number: "14", slash: "17", caption: "i drift" },
+            { title: "Snödjup", number: "134", unit: "cm", caption: "uppe på fjället" }
+          ],
+          summer: [
+            { title: "Lederna", number: "11", slash: "14", caption: "öppna" },
+            { title: "Liften", number: "10–17", degree: true, caption: "öppen idag" },
+            { title: "Temperatur", number: "14°", degree: true, caption: "i dalen" }
+          ]
+        };
+        const WELCOME = {
+          general: {
+            title: "Vad undrar du?",
+            lead: "Fjällguiden svarar med det vi vet om backar, spår, väder och boende i Tänndalen. Personalen tar över när det behövs.",
+            nowLabel: "Så ser det ut just nu",
+            tiles: "winter",
+            label: "Andra brukar fråga",
+            questions: ["Hur mycket snö är det?", "Är det mycket kö?", "Passar Tänndalen för nybörjare?", "Hur lång tid tar det hit?", "Vad kostar en skidvecka för två vuxna och två barn?", "Vad gör vi om det regnar?"]
+          },
+          summer: {
+            title: "Vad undrar du?",
+            lead: "Fjällguiden svarar med det vi vet om leder, liften, bad och boende i Tänndalen. Personalen tar över när det behövs.",
+            nowLabel: "Så ser det ut just nu",
+            tiles: "summer",
+            label: "Andra brukar fråga",
+            questions: SUGGEST_SUMMER
+          },
+          booking: {
+            title: "Hej [Anna]! Vad undrar ni inför resan?",
+            lead: "Svaren utgår från er bokning, så fråga gärna om boendet, vad ni behöver ha med eller vad ni kan hitta på.",
+            booking: true,
+            label: "Om er resa",
+            questions: ["Kan vi ta med hund till Ski Lodge Premium?", "Hur tidigt kan vi checka in?", "Vilka liftkort behöver vi?", "Behöver barnen hjälm?", "Hur lång tid tar det hit?", "Kan jag ändra min bokning?"]
+          },
+          onsite: {
+            title: "Hej [Anna], vad vill ni hitta på idag?",
+            lead: "Ni är på plats, så svaren utgår från dagens läge och att ni är fyra med barn på 6 och 9 år.",
+            events: true,
+            nowLabel: "Så ser det ut just nu",
+            tiles: "winter",
+            label: "Bra att veta idag",
+            questions: ["Vad händer för barn idag?", "Vilka backar är bäst just nu?", "Var äter vi lunch i backen?", "När stänger barnbacken?", "Är det mycket kö?", "Vad gör vi om det regnar?"]
+          }
+        };
+        const welcomeState = () => {
+          if (document.documentElement.dataset.season === "summer") return "summer";
+          const mode = document.documentElement.dataset.mode;
+          return mode === "booking" || mode === "onsite" ? mode : "general";
+        };
+        const welcomeCard = (c) => `<button class="fraga-card fraga-welcome-card" type="button" data-ask="${c.ask}"><span class="fraga-card-media"><img src="${c.image}" alt="" /></span><span class="fraga-card-copy"><span class="td-ui-kicker">${c.kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${c.title}</span></span><span class="td-ui-body-sm">${c.line}</span></span></button>`;
+        function renderWelcome() {
+          const w = WELCOME[welcomeState()];
+          let html = `<h3 class="td-heading-sm fraga-welcome-title">${w.title}</h3><p class="td-body fraga-welcome-lead">${w.lead}</p>`;
+          if (w.booking) {
+            html += `<div class="fraga-welcome-booking"><div class="fraga-welcome-booking-head"><span class="td-ui-kicker">Er bokning</span><span class="td-ui-caption fraga-welcome-ok">Boende bokat</span></div><p class="td-ui-title">Ski Lodge Premium</p><p class="td-ui-body-sm">12–19 feb 2027 · 2 vuxna, 2 barn · Incheckning från 15:00</p><div class="fraga-welcome-next"><p class="td-ui-body-sm"><strong>Nästa steg: liftkort.</strong> Lägg till dem i bokningen så har ni dem i telefonen när ni kommer.</p><button class="td-ui-body-sm fraga-welcome-chip" type="button" data-ask="Vilka liftkort behöver vi?">Vilka liftkort behöver vi?</button></div></div>`;
+            html += `<p class="td-ui-kicker fraga-welcome-kicker">Under er vecka</p><div class="fraga-cards fraga-welcome-cards">${[
+              { kicker: "Lör 13 feb · 11:00", title: "Pond skim i Hamra", line: "Gratis att titta, barnen älskar det", image: "assets/img/fraga-pondskim.jpg", ask: "Vad finns att göra under vår vecka?" },
+              { kicker: "Sön 14 feb · 10:00", title: "Hundspann från Hamra", line: "Från 4 år, lägg till i bokningen", image: "assets/img/fraga-hundspann.jpg", ask: "Vad finns att göra under vår vecka?" }
+            ].map(welcomeCard).join("")}</div>`;
+          }
+          if (w.events) {
+            html += `<p class="td-ui-kicker fraga-welcome-kicker">Kul för hela familjen idag</p><div class="fraga-cards fraga-welcome-cards">${[
+              { kicker: "Idag · 11:00", title: "Pond skim i Hamra", line: "Barnen hejar, de modiga plaskar", image: "assets/img/fraga-pondskim.jpg", ask: "Vad händer för barn idag?" },
+              { kicker: "Idag · 14:00", title: "Hundspann från Hamra", line: "Från 4 år, filtar finns i släden", image: "assets/img/fraga-hundspann.jpg", ask: "Vad händer för barn idag?" }
+            ].map(welcomeCard).join("")}</div>`;
+          }
+          if (w.tiles) html += `<p class="td-ui-kicker fraga-welcome-kicker">${w.nowLabel}</p><div class="fraga-welcome-tiles">${WELCOME_TILES[w.tiles].map(tileMarkup).join("")}</div>`;
+          welcomeEl.innerHTML = html;
+          suggestLabel.textContent = w.label;
+          return w.questions;
+        }
+        welcomeEl.addEventListener("click", (event) => {
+          const target = event.target.closest("[data-ask]");
+          if (target) ask(target.getAttribute("data-ask"));
+        });
+        const renderSuggest = () => suggest.innerHTML = renderWelcome().map((text) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp fraga-suggest-row td-body-sm" type="button"><span class="td-fraga-fragelista-rad-text fraga-suggest-text">${text}</span>${suggestArrow}</button></li>`).join("");
+        renderSuggest();
         function later(ms, fn) {
           const id = setTimeout(fn, ms);
           timers.push(id);
@@ -5106,6 +5248,7 @@
           fragaOmContext = "";
         }
         function open(from, direct) {
+          renderSuggest();
           gen += 1;
           const token = gen;
           clearTimers();
@@ -5337,6 +5480,7 @@
           gen += 1;
           clearTimers();
           resetAnswer();
+          renderSuggest();
           show("search");
           input.value = "";
           input.focus();
