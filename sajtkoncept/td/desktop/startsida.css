@@ -6101,3 +6101,30 @@ html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort {
 html:not([data-season="summer"]) .td-aktuellt-kort[data-sasong="sommar"],
 html[data-season="summer"] .td-aktuellt-kort[data-sasong="vinter"] { display: none; }
 html[data-season="summer"] .td-aktuellt-track > .td-aktuellt-kort[data-sasong="sommar"] { order: 0; }
+
+/* Just nu: Nästa steg-kort ersätter Rapport i läge 3 (påbörjad bokning) – 2026-11-14. Ersätter även liftkortstipset. */
+.td-nastasteg { display: none; }
+html[data-mode="booking"] .just-cols > .td-rapport { display: none; }
+html[data-mode="booking"] .just-cols > .td-nastasteg:not([hidden]) { display: flex; }
+html[data-mode="booking"] .mode-booking-tip { display: none !important; }
+.td-nastasteg {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 410px;
+  height: 500px;
+  padding: var(--space-xl);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  color: var(--color-text-primary-dark);
+  text-decoration: none;
+}
+.td-nastasteg-bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--motion-easing-out-soft); }
+.td-nastasteg:hover .td-nastasteg-bild { transform: scale(1.03); }
+.td-nastasteg-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(36 38 41 / 1) 23%, rgb(36 38 41 / 0) 100%); }
+.td-nastasteg-body { position: relative; display: flex; flex-direction: column; gap: var(--space-sm); }
+.td-nastasteg-handling { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-top: var(--space-md); }
+.td-nastasteg:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+@media (max-width: 1023px) { .td-nastasteg { width: 100%; } }
