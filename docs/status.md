@@ -100,6 +100,14 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 
 - Fjällguiden i Just nu, läge 3: eyebrow "Inför er resa" + egna frågor. Alpint: Var hämtar vi skidhyran? / Behöver barnen skidskola första dagen? / Hur tar vi oss från boendet till liften? Längd: Var hyr vi längdskidor? / Vilket spår passar första dagen? / Kan vi köpa spårkort på plats? (`.td-guide-bokning`). Svar i `QA` (index.html) med kort och följdfrågor; påhittade namn/priser i [hakparentes]. Svarsvisningen ej sedd i browser (rAF i dold panel).
 
+## Klart 14 nov: Läge 3/4-ordning, Hoppa över, footer-scroll, rubriker
+- Påbörjad bokning (`data-mode="booking"`): Utförsåkning-flikarna, Fjällguiden och Just nu flyttas före En dag (skript i `index.html`, återställs vid lägesbyte via kommentarsmarkörer). Luft under Fjällguiden 144 px desktop / 48 px mobil i det läget (`startsida.css`); Fjällguiden → Just nu-rubriken mätt 251 px.
+- En dag: Hoppa över går till blocket som faktiskt följer En dag (Boende i läge 3). Pilen är aktiv även på sista steget och gör då samma sak som Hoppa över.
+- Scroll förbi footern: `#parallax-layer` translateras nedåt och stack ut ~2 500 px under footern. Höjden kapas nu varje bildruta mot `footer.site-footer` (`capLayerHeight`). Mätt: dokument = footerns nederkant. Plus `overscroll-behavior-y: none` på html/body.
+- Lev. Andas.-sekvensen: `calc(300vh - 1000px)` på desktop (test, John utvärderar). Mobil oförändrad.
+- Läge 4 (På plats vinter): frågekortet "Var äter vi lunch i backen?" och "Hamra Syd efter lunch" sist i Aktuellt, frågan först.
+- Rubriker: "Nytt i Tänndalen." → "Detta är på gång.", "Just nu i dalen" → "Läget just nu" (alla lägen).
+
 ## Commit-historik (nyast först)
 
 | Hash | Innehåll |
@@ -127,6 +135,8 @@ Medvetet ocommittad: `td/desktop/assets/img/brand/td-brand-3.png` (32 MB origina
 Commit-trailer som använts: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` + `Claude-Session: https://claude.ai/code/session_01TLNL3tB7DVfjayBHSWwd5v`.
 
 ## Öppna punkter
+- Lev. Andas.-sekvensens höjd `calc(300vh - 1000px)` är ett test: under ~500 px fönsterhöjd blir sektionen kortare än skärmen. Bestäm värde och skriv om robust.
+- Scrollanimationerna (Hoppa över/pil, parallaxtak) är verifierade med mätning, inte visuellt i synlig webbläsare.
 - [ ] **För många vita kort i Längd** (datakort, På gång, Vallatips, Öppet nu). Rekommendation: Öppet nu utan kort, som Väder. Inte beslutat.
 - [x] Vallafärger som tokens/variabler i designsystemet (`9b402c4`).
 - [ ] **Gul valla har kontrast 2,42 mot vit** (under 3:1 för grafiska element). Beslut: mörkare gul, eller räcker storleksskillnad + `aria-label`?

@@ -4695,6 +4695,13 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   }
 }
 
+/* Påbörjad bokning: Just nu direkt efter Frågeblocket. Just nu har egen padding-top (80 px desktop),
+   så efter-avståndet minskas för att rubriken ska landa ungefär lika långt ned som --fraga-space-before. */
+[data-mode="booking"] .faq { --fraga-space-after: 144px; }
+@media (max-width: 1023px) {
+  [data-mode="booking"] .faq { --fraga-space-after: 48px; }
+}
+
 /* Legacy .faq-grid / .faq-row behålls för ev. äldre referenser; demot använder .td-fraga-block. */
 .faq-grid { display: grid; gap: 32px; }
 
@@ -6142,3 +6149,6 @@ html[data-mode="booking"] .td-guide .td-guide-lista.td-guide-bokning:not([hidden
 html:is([data-mode="booking"], [data-mode="onsite"]) .td-aktuellt-kort[data-lage="bas"],
 html:not([data-mode="booking"]) .td-aktuellt-kort[data-lage="booking"],
 html:not([data-mode="onsite"]) .td-aktuellt-kort[data-lage="onsite"] { display: none; }
+
+/* Ingen gummibandsscroll förbi footern (eller ovanför toppen). */
+html, body { overscroll-behavior-y: none; }

@@ -3,7 +3,7 @@
   position: relative;
   left: 50%;
   width: 100vw;
-  height: 300vh;
+  height: calc(300vh - 1000px); /* 14 nov: kapat 1000 px på test (var 300vh) */
   margin: 80px 0 0;
   transform: translateX(-50%);
 }
