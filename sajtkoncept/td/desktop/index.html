@@ -6229,7 +6229,7 @@
           const prev = buttons[0];
           const next = buttons[1];
           const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-          track.querySelectorAll('[data-platta="glas-svart"]').forEach((card) => {
+          track.querySelectorAll('[data-platta="glas"], [data-platta="glas-svart"]').forEach((card) => {
             const img = card.querySelector(".td-aktuellt-kort-bild img");
             if (img) card.querySelector(".td-aktuellt-kort-platta").style.setProperty("--td-glas-bild", `url("${img.src}")`);
           });
