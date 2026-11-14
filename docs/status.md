@@ -48,6 +48,10 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Introt landar med menyn i startläge
+- `intro.js` `markSeen()`: hamnar scrollY mellan 0 och 60 % av viewporten när introt släpper → `scrollTo(0)` och wheel/touchmove sväljs i `LAND_SETTLE_MS` (450 ms) så trackpad-momentum inte skjuter ner sidan. Menyn (`is-scrolled` vid >4 px) står då i startläge. Scrollar man längre än 60 % vh behålls positionen. Cache-bust `intro.js?v=land0`.
+- Ej verifierat live: introts rAF-loop körs inte i dold browserpanel. John testar i `?mode=new`.
+
 ## Klart 14 nov: Ingen "Tänndalen"-blixt vid sidladdning
 - Orsak: `.intro-word` (stor Superclarendon) syntes överst tills `intro.js` hann placera/tona in den, och för återkommande tills JS tog bort `#intro-lock`.
 - `intro.css`: `.intro-word { opacity: 0 }` (JS sätter inline opacity i introt) + `html.is-returning .intro-lock, #intro-scroll { display: none }` (klassen sätts i head-skriptet). Cache-bust `intro.css?v=noflash`.

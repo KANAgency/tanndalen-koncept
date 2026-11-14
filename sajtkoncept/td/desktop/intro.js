@@ -1,5 +1,6 @@
 /* Start-page intro. One film: the hero card video, never moved. */
 
+const LAND_SETTLE_MS = 450; /* sväljer scrollmomentum efter introt så menyn landar i startläge */
 const TANNDALEN_HOLD_MS = 1100; /* was HOLD_A 600; +500ms on the word, not the fade */
 const BLACK_MS = 300; /* ms fully black before the logo */
 const LOGO_FADE_MS = 450; /* ms quick logo fade-in */
@@ -117,6 +118,18 @@ export function init() {
     if (aktuellt) {
       const shift = before - aktuellt.getBoundingClientRect().top;
       if (shift > 1) scrollTo(0, Math.max(0, scrollY - shift));
+    }
+    /* Landa på startsidan med menyn i startläge: nära toppen → hoppa till 0 och
+       svälj kvarvarande scrollmomentum en kort stund (annars hamnar menyn i glasläge). */
+    if (scrollY > 0 && scrollY < innerHeight * 0.6) {
+      scrollTo({ top: 0, left: 0, behavior: "instant" });
+      const swallow = (event) => event.preventDefault();
+      addEventListener("wheel", swallow, { passive: false });
+      addEventListener("touchmove", swallow, { passive: false });
+      setTimeout(() => {
+        removeEventListener("wheel", swallow);
+        removeEventListener("touchmove", swallow);
+      }, LAND_SETTLE_MS);
     }
     lock.style.visibility = "hidden";
     lock.style.display = "none";
