@@ -48,9 +48,10 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
-## Klart 14 nov: Introt landar med menyn i startläge
-- `intro.js` `markSeen()`: när introt släpps genom scroll → alltid `scrollTo(0)` som Hoppa över (60 %-gränsen räckte inte, John 14 nov) och wheel/touchmove sväljs och varje scroll knuffas tillbaka till 0 i `LAND_SETTLE_MS` (700 ms), `is-scrolled` tas bort direkt och efteråt så trackpad-momentum inte skjuter ner sidan. Menyn (`is-scrolled` vid >4 px) står då i startläge. Cache-bust `intro.js?v=land2`. (v1 räckte inte: menyn stod kvar i glasläge tills man scrollade upp.)
-- Ej verifierat live: introts rAF-loop körs inte i dold browserpanel. John testar i `?mode=new`.
+## Klart 14 nov: Menyn i startläge under introt
+- Orsak (Johns DevTools): när introt "landat" är man fortfarande i runwayn (`is-intro` utan `is-intro-done`, runway 2393 px), scrollad långt ner → `is-scrolled` → glaspanelen syns. Släppet (`markSeen`) kommer först vid data-release.
+- `intro.css`: `html.is-intro:not(.is-intro-done) .top-glass { opacity: 0 !important }`. De tre scrollTo(0)-försöken (260d110, b8fee60, a14563a) återställda; `intro.js` = 011b052. Cache-bust `intro.css/intro.js?v=glas0`.
+- Verifierat: under introt med is-scrolled → glas opacity 0; med is-intro-done → 1.
 
 ## Klart 14 nov: Ingen "Tänndalen"-blixt vid sidladdning
 - Orsak: `.intro-word` (stor Superclarendon) syntes överst tills `intro.js` hann placera/tona in den, och för återkommande tills JS tog bort `#intro-lock`.
