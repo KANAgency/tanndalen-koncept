@@ -89,6 +89,8 @@
   z-index: -1;
   background: var(--td-glas-bild) center / cover no-repeat;
   filter: blur(14px) saturate(1.1);
+  transform: translate3d(var(--td-glas-px, 0px), var(--td-glas-py, 0px), 0); /* parallax, sätts i JS */
+  will-change: transform;
 }
 .td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta::after,
 .td-aktuellt-kort[data-platta="glas-svart"] .td-aktuellt-kort-platta::after {

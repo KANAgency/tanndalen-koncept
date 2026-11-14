@@ -6444,6 +6444,28 @@
             document.querySelector(`.td-season-toggle-option[data-season="${btn.dataset.gaTillSasong}"]`)?.click();
             document.getElementById("aktuellt").scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
           });
+          /* Glaskort: den suddiga bildkopian i ramen rör sig motsatt kortets läge (max ±24 px). */
+          const glasPlattor = [...track.querySelectorAll('[data-platta="glas"] .td-aktuellt-kort-platta, [data-platta="glas-svart"] .td-aktuellt-kort-platta')];
+          if (!reduced && glasPlattor.length) {
+            let glasTick = false;
+            const glasParallax = () => {
+              glasTick = false;
+              const vw = innerWidth, vh = innerHeight;
+              glasPlattor.forEach((p) => {
+                const r = p.getBoundingClientRect();
+                if (!r.width || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) return;
+                const nx = Math.max(-1, Math.min(1, (r.left + r.width / 2 - vw / 2) / vw));
+                const ny = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
+                p.style.setProperty("--td-glas-px", `${(-nx * 24).toFixed(1)}px`);
+                p.style.setProperty("--td-glas-py", `${(-ny * 24).toFixed(1)}px`);
+              });
+            };
+            const glasQueue = () => { if (!glasTick) { glasTick = true; requestAnimationFrame(glasParallax); } };
+            addEventListener("scroll", glasQueue, { passive: true });
+            track.addEventListener("scroll", glasQueue, { passive: true });
+            addEventListener("resize", glasQueue);
+            glasQueue();
+          }
           const visibleCards = () => [...track.querySelectorAll(".td-aktuellt-kort")].filter((c) => c.getClientRects().length);
           new MutationObserver(() => { track.scrollLeft = 0; requestAnimationFrame(() => { endGap(); syncButtons(); }); })
             .observe(document.documentElement, { attributes: true, attributeFilter: ["data-season"] });
