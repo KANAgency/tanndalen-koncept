@@ -6008,3 +6008,17 @@ html .page > .top.is-tucked {
 }
 .en-dag-sun-label { left: calc(var(--en-sun-line-x, 50%) + 36px); }
 .en-dag-sun-event-label { left: calc(var(--en-sun-line-x, 50%) + 19px); }
+
+/* Frågekortet i Aktuellt: säsongsplatta (vinter/sommar) trots transparent-regeln ovan – 2026-11-14 */
+.td-aktuellt .td-aktuellt-kort[data-typ="fraga"] { background: var(--td-aktuellt-plate); }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] {
+  --td-aktuellt-plate: var(--color-season-summer);
+  --td-aktuellt-on-plate: var(--contrast-on-season-summer);
+}
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] .td-just-nu-header-icon img[data-graphic-light] { display: none; }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] .td-just-nu-header-icon img[data-graphic-dark] { display: block; }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"]::before { background: var(--color-TD-snow); }
+
+/* Läge 1/2 (ny/återkommande): frågekortet som tredje kort i Aktuellt – 2026-11-14 */
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort:nth-child(n+3) { order: 2; }
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort[data-typ="fraga"] { order: 1; }
