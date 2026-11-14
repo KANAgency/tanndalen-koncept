@@ -6096,3 +6096,8 @@ html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort {
 .td-videokort-play { width: 56px; height: 56px; }
 .td-videokort-play svg { margin-left: 0; transform: translateX(1px); }
 .td-videokort-play svg { width: 28px; height: 28px; transform: translateX(-1px); }
+
+/* Aktuellt: säsongens kort. Sommar = egen uppsättning i DOM-ordning. */
+html:not([data-season="summer"]) .td-aktuellt-kort[data-sasong="sommar"],
+html[data-season="summer"] .td-aktuellt-kort[data-sasong="vinter"] { display: none; }
+html[data-season="summer"] .td-aktuellt-track > .td-aktuellt-kort[data-sasong="sommar"] { order: 0; }
