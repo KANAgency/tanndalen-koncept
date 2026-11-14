@@ -51,7 +51,8 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 ## Klart 14 nov: Aktuellt – frågekortet
 - Frågekortet har säsongsplatta igen (vinter `#A1B5BA`, sommar `#1B4021` med ljus text/ikon), följer `html[data-season]`. Transparent-regeln för Aktuellt-kort gäller fortfarande övriga kort.
 - Läge 1/2 (ny/återkommande): frågekortet ligger som kort nr 3 via CSS `order`. Läge 3/4: sist som förut. Verifierat i alla 8 kombinationer läge × säsong.
-- Nytt kort 5 "Skidsäsongen är igång!" (vinterplatta, chip "Premiär 24 oktober", Läs mer + Boka boende i CTA). Bild `td/desktop/assets/img/skidsasongen.jpg` saknas – John lägger in. `.td-aktuellt-end` får `order` i läge 1/2 så den ligger sist.
+- Nytt kort 5 "Skidsäsongen är igång!" (vinterplatta, chip "Premiär 24 oktober", bara Boka boende, vit sekundärknapp). Bild `td/desktop/assets/img/skidsasongen.jpg` saknas – John lägger in. `.td-aktuellt-end` får `order` i läge 1/2 så den ligger sist.
+- Storvigeln-etiketten fadar redan bakom Aktuellt-pilarna (`.td-aktuellt-nav` tillagd i `LAYER_OCCLUDERS`). Ej visuellt verifierad: rAF gick inte att driva i dold browserpanel.
 
 ## Commit-historik (nyast först)
 
