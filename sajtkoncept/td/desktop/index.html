@@ -3747,7 +3747,7 @@
           const panelBottomAtSc = vh / 2 + panelH / 2;
           const T_label = panelTopAtSc + TOPO2_LAYOUT.PANEL_LABEL_Y - labelInY - parentDocTop + f * s_c;
           const T_quote = panelBottomAtSc + TOPO2_LAYOUT.PANEL_QUOTE_Y - quoteInY - parentDocTop + f * s_c;
-          const T = (T_label + T_quote) / 2;
+          let T = (T_label + T_quote) / 2;
           const L_label = panelDocLeft + TOPO2_LAYOUT.PANEL_LABEL_X - labelInX - parentDocLeft;
           const L_quote = panelDocLeft + TOPO2_LAYOUT.PANEL_QUOTE_X - quoteInX - parentDocLeft;
           const L = (L_label + L_quote) / 2;
@@ -3755,6 +3755,20 @@
             x: (L_label - L_quote) / 2,
             y: (T_label - T_quote) / 2
           };
+          /* 14 nov: topografin centreras i glappet Fråga-blocket → En dag-rubriken (alla lägen),
+             mätt när glappet är mitt i fönstret; scrollar sedan ut med parallax. */
+          let skarvarnaGapMid = null;
+          const enDagHead = document.getElementById("en-dag-title");
+          if (enDagHead) {
+            const headTopDoc = enDagHead.getBoundingClientRect().top + scrollY;
+            const panelBottomDoc = panelDocTop + panelH;
+            if (headTopDoc > panelBottomDoc) {
+              skarvarnaGapMid = (panelBottomDoc + headTopDoc) / 2;
+              const sGapT = Math.max(0, skarvarnaGapMid - vh / 2);
+              const shiftYT = parseFloat(getComputedStyle(skarvarna).getPropertyValue("--topo2-shift-y")) || 0;
+              T = vh / 2 - H / 2 - parentDocTop - shiftYT + f * sGapT;
+            }
+          }
           /* --topo2-shift-x/y appliceras via CSS transform, inte här. */
           skarvarna.style.left = `${L.toFixed(2)}px`;
           skarvarna.style.top = `${T.toFixed(2)}px`;
@@ -3766,18 +3780,27 @@
           const blockLeft = W + gapX;
           /* Info: till höger om topo, mitt i Just nu → Fråga-gapet. */
           if (label) {
-            const justEl = document.getElementById("just-nu");
-            const faqEl = document.querySelector(".faq");
-            if (justEl && faqEl) {
+            /* 14 nov: info mitt i glappet Fråga-blocket → En dag-rubriken (alla lägen). */
+            const headEl = document.getElementById("en-dag-title");
+            if (headEl && skarvarnaGapMid !== null) {
               const labelH = label.offsetHeight || 59;
-              const justBottomDoc = justEl.getBoundingClientRect().bottom + scrollY;
-              const faqTopDoc = faqEl.getBoundingClientRect().top + scrollY;
-              const gapMidDoc = (justBottomDoc + faqTopDoc) / 2;
+              const gapMidDoc = skarvarnaGapMid;
               const sGap = Math.max(0, gapMidDoc - vh / 2);
               const infoTop =
                 vh / 2 - labelH / 2 - parentDocTop - T - shiftY + f * sGap;
               label.style.left = `${blockLeft.toFixed(2)}px`;
               label.style.top = `${infoTop.toFixed(2)}px`;
+            } else {
+              /* En dag före Fråga (t.ex. återkommande): info mitt i Just nu → Fråga-glappet, 170 px åt höger. */
+              const jnEl = document.getElementById("just-nu");
+              if (jnEl) {
+                const labelH = label.offsetHeight || 59;
+                const gapMidDoc = (jnEl.getBoundingClientRect().bottom + scrollY + panelDocTop) / 2;
+                const sGap = Math.max(0, gapMidDoc - vh / 2);
+                const infoTop = vh / 2 - labelH / 2 - parentDocTop - T - shiftY + f * sGap + 40; /* +40 uppmätt korrektion */
+                label.style.left = `${(labelInX + 170).toFixed(2)}px`;
+                label.style.top = `${infoTop.toFixed(2)}px`;
+              }
             }
           }
           /* Anna-citat: till höger om topo, mitt i Fråga → Boende-gapet.
@@ -3816,7 +3839,10 @@
           hero.style.setProperty("--hero-topo-ty", "0px");
           hero.style.setProperty("--hero-label-ty", "0px");
           const label = hero.querySelector(".place-label-block");
-          const section = document.querySelector(hero.getAttribute("data-anchor") || "#statement");
+          /* På plats är #statement dold: ankra mot Just nu-huvudet i stället. */
+          const section = document.documentElement.dataset.mode === "onsite"
+            ? document.querySelector(".just-nu-head")
+            : document.querySelector(hero.getAttribute("data-anchor") || "#statement");
           if (!label || !section || !page) return;
           const f = activeFactor();
           const vh = innerHeight;
@@ -3845,6 +3871,20 @@
           const labelMidInHero = labelBox.top + labelBox.height / 2 - heroBox.top;
           const heroDocTop = labelMidTarget - labelMidInHero;
           hero.style.top = `${(heroDocTop - parentDocTop).toFixed(2)}px`;
+          /* På plats: etiketten mitt i glappet mellan Just nu och Aktuellt (följer layouten, behåller parallax). */
+          hero.style.removeProperty("--label-nudge-y");
+          if (document.documentElement.dataset.mode === "onsite") {
+            const jn = document.getElementById("just-nu");
+            const ak = document.querySelector(".td-aktuellt");
+            if (jn && ak) {
+              const gapMid = (jn.getBoundingClientRect().bottom + ak.getBoundingClientRect().top) / 2 + scrollY;
+              if (unit) unit.style.transform = "";
+              void hero.offsetHeight;
+              const lb = label.getBoundingClientRect();
+              const labelMidNow = lb.top + scrollY + lb.height / 2;
+              hero.style.setProperty("--label-nudge-y", `${(f * (gapMid - vh / 2) + vh / 2 - labelMidNow + 100).toFixed(2)}px`);
+            }
+          }
           if (unit) unit.style.transform = "";
           label.style.transform = "";
           void hero.offsetHeight;

@@ -665,7 +665,7 @@ html[data-season="summer"] .hero-sun {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-color: var(--color-TD-neutral-light);
+  background-color: color-mix(in srgb, var(--color-TD-neutral-light) 80%, transparent); /* 80 % (opacity styrs av introt) */
   -webkit-mask: url("assets/img/topografi.svg") center / contain no-repeat;
   mask: url("assets/img/topografi.svg") center / contain no-repeat;
   -webkit-mask-mode: alpha;
@@ -4305,7 +4305,7 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-color: var(--color-TD-neutral-light);
+  background-color: color-mix(in srgb, var(--color-TD-neutral-light) 80%, transparent);
   /* Samma mask-mönster som .hero-topo: shorthand + alpha (mörk SVG annars osynlig i luminance). */
   -webkit-mask: url("assets/img/topografi-skarvarna.svg") center / 100% 100% no-repeat;
   mask: url("assets/img/topografi-skarvarna.svg") center / 100% 100% no-repeat;
@@ -5950,3 +5950,11 @@ a.td-rapport.is-activity:hover .td-corner-link-label, a.td-rapport.is-activity:f
 .fraga-welcome-title { padding-right: 56px; }
 .fraga-welcome-tiles .td-ui-figure-lg { font-size: var(--font-size-2xl); line-height: 1.1; }
 .fraga-welcome-tiles .td-ui-figure-unit-lg { font-size: var(--font-size-md, 18px); }
+
+/* På plats: introtexten dold så Just nu kommer upp direkt (test 14 nov) */
+html[data-mode="onsite"] #statement { display: none; }
+/* På plats: topografin till höger om den låsta texten (topo-vänsterkant = textens högerkant + 32 px vid 1260 px) */
+html[data-mode="onsite"] .parallax-item--hero { --topo-shift-x: calc(28px + 7.7vw); --topo-shift-y: 800px; --label-nudge-x: 40px; }
+
+/* Aktuellt-korten: ingen bakgrund så topografin inte klipps (14 nov) */
+.td-aktuellt .td-aktuellt-kort { background: transparent; }
