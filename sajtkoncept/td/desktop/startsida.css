@@ -6128,3 +6128,6 @@ html[data-mode="booking"] .mode-booking-tip { display: none !important; }
 .td-nastasteg-handling { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-top: var(--space-md); }
 .td-nastasteg:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
 @media (max-width: 1023px) { .td-nastasteg { width: 100%; } }
+/* Nästa steg: vit text, lättare scrim (bara nedre delen) */
+.td-nastasteg, .td-nastasteg-body > span:not(.td-nastasteg-handling), .td-nastasteg-pris { color: var(--color-TD-snow); }
+.td-nastasteg-shade { background: linear-gradient(to top, rgb(36 38 41 / 0.75) 0%, rgb(36 38 41 / 0.35) 35%, rgb(36 38 41 / 0) 60%); }
