@@ -6095,7 +6095,7 @@ html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort {
 .td-videokort-media.is-playing iframe { opacity: 1; }
 .td-videokort-play { width: 56px; height: 56px; }
 .td-videokort-play svg { margin-left: 0; transform: translateX(1px); }
-.td-videokort-play svg { width: 28px; height: 28px; transform: translateX(-1px); }
+.td-videokort-play svg { width: 28px; height: 28px; transform: none; }
 
 /* Aktuellt: säsongens kort. Sommar = egen uppsättning i DOM-ordning. */
 html:not([data-season="summer"]) .td-aktuellt-kort[data-sasong="sommar"],
