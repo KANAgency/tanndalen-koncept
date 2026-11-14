@@ -6022,3 +6022,7 @@ html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"]::before { backgro
 /* Läge 1/2 (ny/återkommande): frågekortet som tredje kort i Aktuellt – 2026-11-14 */
 html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort:nth-child(n+3) { order: 2; }
 html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort[data-typ="fraga"] { order: 1; }
+
+/* Aktuellt: två knappar på rad (Premiär-kortet) – 2026-11-14 */
+.td-aktuellt-kort-action:has(.td-button + .td-button) { flex-direction: row; gap: var(--space-md); }
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-end { order: 3; }
