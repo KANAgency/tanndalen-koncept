@@ -48,6 +48,11 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Toppbaren På plats visar sommardata från `justNuData.sommar` (Öppet / Väder / Lederna); vintertext återställs vid växling. Rubrikerna är Claudes förslag.
 - Storvigeln-etiketten På plats sommar: `--label-nudge-x: -32px` (vinter 40 px).
 
+## Klart 14 nov: Aktuellt – svart glas
+- Ny plattvariant `data-platta="glas-svart"` i `shared/design-system/components/aktuellt-kort.css`: Natt `rgb(36 39 42 / 0.4)`, kant vit 0.2, blur 2 px, bildradie 2 px (speglar ljust glas). Hårdkodad tills glas-token finns; ej i Figma än.
+- Applicerad på "Skidsäsongen är igång!". Mätt: plattan rgba(36,39,42,0.4), kant rgba(255,255,255,0.2), blur(2px).
+- Öppet: Johns val av opacitet/kant (Claudes antagande).
+
 ## Klart 14 nov: Väderkortet vinter = sommarns styling
 - Vinterkortet (`.just-cols-3 .td-vader-block`) har samma struktur som sommar: "Nu · Klart" på egen rad med prick, `td-vader-main-top`, detaljrader `td-vader-detalj-tight` i body 16 px, prognos `td-vader-text-lg` 18 px. Ingen CSS ändrad, bara klasser/markup.
 - Mätt 1440×900 i `?mode=onsite`: Nu-raden 62 px från kortets topp, 4 px till 6°, detaljerna toppalignade (0 px), prognosen 20 px under siffran – identiskt med sommarkortet. Längdvarianten har samma markup, ej visuellt kontrollerad.
