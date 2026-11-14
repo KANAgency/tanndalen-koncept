@@ -24,6 +24,7 @@ Senast uppdaterad: 2026-11-14 (efter `f76a8b9`). Detaljer om vad som är byggt f
 
 ## Klart 14 nov: Fjällguidens startvy
 - Rubriken delar rad med stäng-knappen (mitt 57 px från panelens topp för båda), siffror i datarutor 30 px / enheter 18 px, kicker "Läget i Tänndalen just nu" (på plats: "Läget i backarna just nu"). Verifierat i sommarläge; vinter/på plats ej kontrollerat. X centreras mot en rad rubrik – tvåradig personaliserad rubrik hamnar i höjd med första raden.
+- Sommarens vanliga frågor 6 → 5 ("Behöver vi myggmedel?" borttagen): ingen scroll vid 1440×900, men scroll vid 810 px höjd. Vinter/på plats har kvar 6 frågor, ej kontrollerat.
 
 ## Commit-historik (nyast först)
 
