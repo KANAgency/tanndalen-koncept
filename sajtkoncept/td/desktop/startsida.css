@@ -6026,3 +6026,6 @@ html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-akt
 /* Aktuellt: två knappar på rad (Premiär-kortet) – 2026-11-14 */
 .td-aktuellt-kort-action:has(.td-button + .td-button) { flex-direction: row; gap: var(--space-md); }
 html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-end { order: 3; }
+
+/* Aktuellt glasplatta något vitare: 0.28 → 0.4 (2026-11-14) */
+.td-aktuellt-kort[data-platta="glas"] { --td-aktuellt-plate: rgb(255 255 255 / 0.4); }
