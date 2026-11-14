@@ -6131,3 +6131,10 @@ html[data-mode="booking"] .mode-booking-tip { display: none !important; }
 /* Nästa steg: vit text, lättare scrim (bara nedre delen) */
 .td-nastasteg, .td-nastasteg-body > span:not(.td-nastasteg-handling), .td-nastasteg-pris { color: var(--color-TD-snow); }
 .td-nastasteg-shade { background: linear-gradient(to top, rgb(36 38 41 / 0.75) 0%, rgb(36 38 41 / 0.35) 35%, rgb(36 38 41 / 0) 60%); }
+
+/* Fjällguiden i Just nu: egna frågor i läge 3 (påbörjad bokning) – 2026-11-14 */
+.td-guide-bokning { display: none; }
+html[data-mode="booking"] .td-guide .td-guide-lista:not(.td-guide-bokning),
+html[data-mode="booking"] .td-guide .td-guide-ej-bokning { display: none; }
+html[data-mode="booking"] .td-guide .td-guide-eyebrow.td-guide-bokning { display: block; }
+html[data-mode="booking"] .td-guide .td-guide-lista.td-guide-bokning:not([hidden]) { display: block; }

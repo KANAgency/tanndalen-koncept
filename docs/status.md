@@ -70,6 +70,8 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 
 - Just nu, läge 3 (påbörjad bokning): Rapport ersatt av Nästa steg-kort (`.td-nastasteg`, 410×500, per gren). Alpint: "Liftkort för hela veckan", 54 nedfarter/17 liftar, bild `fraga-lift.jpg`. Längd: "Spårkort för hela veckan", 145 km spår (demodata), bild `langd.jpg`. Kicker "Din resa · 12–19 feb", "fr. [X] kr" (platshållare), CTA-knapp, vit text, lätt scrim nedtill. Liftkortstipset (`.mode-booking-tip`) dolt i läge 3. Öppet: riktiga priser, länk till R360, logik för "första som saknas" är hårdkodad (liftkort/spårkort).
 
+- Fjällguiden i Just nu, läge 3: eyebrow "Inför er resa" + egna frågor. Alpint: Var hämtar vi skidhyran? / Behöver barnen skidskola första dagen? / Hur tar vi oss från boendet till liften? Längd: Var hyr vi längdskidor? / Vilket spår passar första dagen? / Kan vi köpa spårkort på plats? (`.td-guide-bokning`). Svar i Fjällguiden-panelen ej skrivna.
+
 ## Commit-historik (nyast först)
 
 | Hash | Innehåll |
