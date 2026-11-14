@@ -18,13 +18,12 @@ jobs:
         with:
           node-version: 22
 
-      # Playwright is only used for tests; build has no npm deps beyond that.
-      - name: Build TD dist
-        run: npm run build:td
+      # Hub: sidväljare på / plus /td/ och /og/ (samma URL:er som lokal dev-server).
+      - name: Build hub dist
+        run: npm run build
 
-      # Videos are not stored in git. Every file in the blob container that
-      # VIDEO_CONTAINER_SAS_URL points to is downloaded to dist/td/assets/video/.
-      # The SAS token needs read and list permissions (sp=rl).
+      # Videos are not stored in git. Blob names prefixed td/ or og/ land under
+      # that site; unprefixed names go to TD (legacy). SAS needs sp=rl.
       - name: Download videos
         env:
           VIDEO_SAS_URL: ${{ secrets.VIDEO_CONTAINER_SAS_URL }}
@@ -35,26 +34,28 @@ jobs:
           fi
           base="${VIDEO_SAS_URL%%\?*}"
           sas="${VIDEO_SAS_URL#*\?}"
-          mkdir -p dist/td/assets/video
+          mkdir -p dist/td/assets/video dist/og/assets/video
           names=$(curl -fsSL "$base?restype=container&comp=list&$sas" | grep -oP '(?<=<Name>)[^<]+')
           if [ -z "$names" ]; then
             echo "::warning::No videos found in the container."
             exit 0
           fi
           while IFS= read -r f; do
-            echo "Downloading $f"
-            mkdir -p "dist/td/assets/video/$(dirname "$f")"
-            curl -fsSL "$base/$f?$sas" -o "dist/td/assets/video/$f"
+            case "$f" in
+              td/*) dest="dist/td/assets/video/${f#td/}" ;;
+              og/*) dest="dist/og/assets/video/${f#og/}" ;;
+              *)    dest="dist/td/assets/video/$f" ;;
+            esac
+            echo "Downloading $f → $dest"
+            mkdir -p "$(dirname "$dest")"
+            curl -fsSL "$base/$f?$sas" -o "$dest"
           done <<< "$names"
-          du -sh dist/td dist/td/assets/video
-
-      - name: Add SWA config
-        run: cp staticwebapp.config.json dist/td/
+          du -sh dist dist/td/assets/video dist/og/assets/video 2>/dev/null || true
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: upload
-          app_location: sajtkoncept/dist/td
+          app_location: sajtkoncept/dist
           skip_app_build: true

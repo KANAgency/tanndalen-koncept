@@ -1,9 +1,11 @@
 /**
- * Build a self-contained static share folder.
+ * Build static share folders.
  * Usage:
- *   node scripts/build-dist.mjs              → dist/ (TD, legacy)
- *   node scripts/build-dist.mjs --site=td    → dist/td/
- *   node scripts/build-dist.mjs --site=og    → dist/og/
+ *   node scripts/build-dist.mjs              → dist/ hub (/ + /td/ + /og/ + /ds + /shared)
+ *   node scripts/build-dist.mjs --site=td    → dist/td/ (self-contained, for preview:td)
+ *   node scripts/build-dist.mjs --site=og    → dist/og/ (self-contained, for preview:og)
+ *
+ * Hub mirrors local URL:er (dev-server): absolute /ds and /shared stay at site root.
  */
 
 import {
@@ -26,13 +28,14 @@ const SHARED_CONFIG = resolve(ROOT, "shared/config");
 const DS = resolve(ROOT, "shared/design-system");
 
 const siteArg = (process.argv.find((a) => a.startsWith("--site=")) || "").slice(7);
-const SITE = siteArg === "og" || siteArg === "td" ? siteArg : "td";
-const DESKTOP = resolve(ROOT, SITE, "desktop");
-const OUT = siteArg ? join(ROOT, "dist", SITE) : join(ROOT, "dist");
+const HUB = siteArg !== "og" && siteArg !== "td";
+const SITE = HUB ? null : siteArg;
+const OUT = HUB ? join(ROOT, "dist") : join(ROOT, "dist", SITE);
 
 const SKIP_NAMES = new Set([
   ".git",
   ".cursor",
+  ".claude",
   ".DS_Store",
   "node_modules",
   "dist",
@@ -101,19 +104,7 @@ function refreshTokens() {
   if (result.status !== 0) die("tokens:css misslyckades");
 }
 
-function rewriteAbsoluteToRelative(filePath) {
-  if (!existsSync(filePath) || !filePath.endsWith(".html") && !filePath.endsWith(".js") && !filePath.endsWith(".css")) {
-    return;
-  }
-  // Dist is served as site root: /ds and /shared stay absolute and work.
-}
-
-function main() {
-  if (!existsSync(join(DESKTOP, "index.html"))) die(`Saknar index.html i ${DESKTOP}`);
-  if (!existsSync(DS)) die(`Saknar design-system: ${DS}`);
-
-  refreshTokens();
-
+function assertGenerated() {
   const generatedDir = join(DS, "generated");
   const fontsDir = join(DS, "fonts");
   const componentsDir = join(DS, "components");
@@ -124,33 +115,71 @@ function main() {
   }
   if (!existsSync(fontsDir)) die(`Saknar fonts/: ${fontsDir}`);
   if (!existsSync(componentsDir)) die(`Saknar components/: ${componentsDir}`);
+  return { generatedDir, fontsDir, componentsDir };
+}
 
-  if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
-  mkdirSync(OUT, { recursive: true });
-
-  copyTree(DESKTOP, OUT, { skipName: shouldSkipName });
-  if (existsSync(SHARED_JS)) copyTree(SHARED_JS, join(OUT, "shared/js"), { skipName: shouldSkipName });
+function materializeDsShared(outRoot, { generatedDir, fontsDir, componentsDir }) {
+  if (existsSync(SHARED_JS)) copyTree(SHARED_JS, join(outRoot, "shared/js"), { skipName: shouldSkipName });
   if (existsSync(SHARED_CONFIG)) {
-    copyTree(SHARED_CONFIG, join(OUT, "shared/config"), { skipName: shouldSkipName });
+    copyTree(SHARED_CONFIG, join(outRoot, "shared/config"), { skipName: shouldSkipName });
   }
 
-  const dsOut = join(OUT, "ds");
+  const dsOut = join(outRoot, "ds");
   mkdirSync(join(dsOut, "generated"), { recursive: true });
   for (const file of GENERATED_FILES) {
     copyFileSync(join(generatedDir, file), join(dsOut, "generated", file));
   }
   cpSync(fontsDir, join(dsOut, "fonts"), { recursive: true });
   copyTree(componentsDir, join(dsOut, "components"));
+}
 
-  // Site HTML uses absolute /ds and /shared — fine when dist is served at /.
-  void rewriteAbsoluteToRelative;
+function copySiteDesktop(site, dest) {
+  const desktop = resolve(ROOT, site, "desktop");
+  if (!existsSync(join(desktop, "index.html"))) die(`Saknar index.html i ${desktop}`);
+  copyTree(desktop, dest, { skipName: shouldSkipName });
+}
+
+function buildHub(paths) {
+  if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
+  mkdirSync(OUT, { recursive: true });
+
+  const selector = join(ROOT, "index.html");
+  if (!existsSync(selector)) die(`Saknar sidväljare: ${selector}`);
+  copyFileSync(selector, join(OUT, "index.html"));
+
+  const swa = join(ROOT, "staticwebapp.config.json");
+  if (existsSync(swa)) copyFileSync(swa, join(OUT, "staticwebapp.config.json"));
+
+  copySiteDesktop("td", join(OUT, "td"));
+  copySiteDesktop("og", join(OUT, "og"));
+  materializeDsShared(OUT, paths);
+
+  console.log(`dist klar → ${OUT} (hub: / /td/ /og/)`);
+  console.log("Förhandsvisa:  npm run preview  →  http://127.0.0.1:5180/");
+}
+
+function buildSite(paths) {
+  const desktop = resolve(ROOT, SITE, "desktop");
+  if (!existsSync(join(desktop, "index.html"))) die(`Saknar index.html i ${desktop}`);
+
+  if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
+  mkdirSync(OUT, { recursive: true });
+
+  copyTree(desktop, OUT, { skipName: shouldSkipName });
+  materializeDsShared(OUT, paths);
 
   console.log(`dist klar → ${OUT} (site=${SITE})`);
-  console.log(
-    siteArg
-      ? `Förhandsvisa:  npm run preview:${SITE}`
-      : "Förhandsvisa:  npm run preview  →  http://127.0.0.1:5180/"
-  );
+  console.log(`Förhandsvisa:  npm run preview:${SITE}`);
+}
+
+function main() {
+  if (!existsSync(DS)) die(`Saknar design-system: ${DS}`);
+
+  refreshTokens();
+  const paths = assertGenerated();
+
+  if (HUB) buildHub(paths);
+  else buildSite(paths);
 }
 
 main();

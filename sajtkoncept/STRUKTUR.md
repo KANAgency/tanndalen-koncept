@@ -47,14 +47,16 @@ python3 scripts/dev-server.py 4173
 ## Bygga och förhandsvisa
 
 ```bash
-npm run build:td    # → dist/td/  (fristående, med ds/ + shared/)
+npm run build       # → dist/ hub: / (sidväljare) + /td/ + /og/ + /ds + /shared
+npm run build:td    # → dist/td/  (fristående, för isolerad preview)
 npm run build:og    # → dist/og/
+npm run preview     # http://127.0.0.1:5180/  (hub, samma URL:er som live)
 npm run preview:td  # http://127.0.0.1:5181/
 npm run preview:og  # http://127.0.0.1:5182/
 npm run tokens:css  # regenerera tokens/typography i shared/design-system
 ```
 
-Varje dist är självbärande: ingen symlänk, ingen beroende av den andra siten.
+Hub-dist speglar lokal dev-server. `build:td` / `build:og` är självbärande för isolerad preview. Deploy (Azure SWA) publicerar hubben.
 
 ## Tester
 

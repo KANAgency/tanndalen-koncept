@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-14 (deploy hub: sidväljare + TD + OG)
+
+Live-deploy byggde bara `dist/td` som sajtrot — ingen sidväljare, ingen OG. Nu: `npm run build` → hub med `/`, `/td/`, `/og/` och gemensam `/ds`+`/shared` (samma URL:er som lokal :4173). Workflow deployar `sajtkoncept/dist`. Videor: blob-prefix `td/`/`og/`, utan prefix → TD (legacy). Ratades: behålla TD-only deploy. Öppet: lägga OG-videor i blob under `og/`.
+
 ## 2026-11-11 (hero-page header → OG theme)
 
 Header CSS slutade skugga tema med lokala TD-hex (#ae6113, #a1b5ba, #24272a, m.fl.) och egna font-stacks. Färger från `.theme-OG` + `og-overrides` (`--color-cta-primary`, `--color-text-primary`, `--color-OG-off-white`, …). Typ via befintliga `td-ui-cta` / `td-ui-cta-sm` / typography-og. Chatt-ikoner omfärgade #BF6A15→#003E3A. Layout/reveal/sticky oförändrat. Ratades: röra td/shared/intro/block. Öppet: om Fråga-fill ska vara något annat än season-winter.
