@@ -50,6 +50,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 
 ## Klart 14 nov: Lägesväljaren och liftkortstipset
 - Lägesväljaren (`shared/js/modes-engine.js` + `.mode-switch*` i startsida.css): demoraden "Demo: vistelse pågår nu" borttagen (handlern ligger kvar men hittar ingen knapp; `labels.demoToday` oanvänd). Ny stil: rubrik "VISNINGSLÄGE" 12 px, rader 40 px CircularXX 15 px, hover neutral-subtlest, valt läge Bold + bock, radie 8 px, tunn kant.
+- Lägesmenyn: siffran i CTA-färgad cirkel 24 px (`.mode-switch-num`, Snö 13 px Bold), texten bredvid.
 - Liftkortstipset i läge 3 visas igen: regeln `html[data-mode="booking"] .mode-booking-tip { display:none !important }` (från e165d35, när Nästa steg-kortet skulle ersätta tipset) borttagen. Mätt: tipset centrerat över Liftkort (642 px = 642 px), 7 px ovanför ikonraden.
 
 ## Klart 14 nov: Glaskort – parallax i ramen
@@ -92,7 +93,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 ## Klart 14 nov: Aktuellt – frågekortet
 - Frågekortet har säsongsplatta igen (vinter `#A1B5BA`, sommar `#1B4021` med ljus text/ikon), följer `html[data-season]`. Transparent-regeln för Aktuellt-kort gäller fortfarande övriga kort.
 - Läge 1/2 (ny/återkommande): frågekortet ligger som kort nr 3 via CSS `order`. Läge 3/4: sist som förut. Verifierat i alla 8 kombinationer läge × säsong.
-- Nytt kort 5 "Skidsäsongen är igång!" (vinterplatta, chip "Premiär 24 oktober", bara Boka boende, vit sekundärknapp). Bild `td/desktop/assets/img/skidsasongen.jpg` saknas – John lägger in. `.td-aktuellt-end` får `order` i läge 1/2 så den ligger sist.
+- Nytt kort 5 "Skidsäsongen är igång!" (vinterplatta, chip "Premiär 24 oktober", bara Boka boende, vit sekundärknapp). Bild `td/desktop/assets/img/skidsasongen.jpg` committad 14 nov. `.td-aktuellt-end` får `order` i läge 1/2 så den ligger sist.
 - Storvigeln-etiketten fadar redan bakom Aktuellt-pilarna (`.td-aktuellt-nav` tillagd i `LAYER_OCCLUDERS`). Ej visuellt verifierad: rAF gick inte att driva i dold browserpanel.
 - Glasplattan i Aktuellt: vit 0.4 i stället för frost-active 0.28 (lokal override, token orörd).
 - Frågekortet i Aktuellt: toppen visar Fjällguiden-märket + "Fjällguiden" + AI-badge i stället för chattikon + "Fråga oss".

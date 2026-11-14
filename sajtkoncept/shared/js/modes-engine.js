@@ -559,7 +559,9 @@ export function createModesEngine(deps) {
         const note = choice.note
           ? `<span class="mode-switch-note" hidden>${choice.note}</span>`
           : "";
-        return `<button type="button" role="radio" data-mode-choice="${choice.id}">${choice.label}${note}</button>`;
+        const m = /^(\d+)\s+(.*)$/.exec(choice.label);
+        const label = m ? `<span class="mode-switch-num" aria-hidden="true">${m[1]}</span><span>${m[2]}${note}</span>` : `${choice.label}${note}`;
+        return `<button type="button" role="radio" data-mode-choice="${choice.id}">${label}</button>`;
       })
       .join("");
     root.innerHTML = `<button class="mode-switch-button" type="button" aria-expanded="false" aria-haspopup="true" aria-label="${labels.modeSwitch}"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="mode-switch-menu" role="radiogroup" aria-label="${labels.modeSwitch}" hidden><p class="mode-switch-title">${labels.modeSwitch}</p>${choiceButtons}</div>`;

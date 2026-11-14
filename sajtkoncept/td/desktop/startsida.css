@@ -5065,6 +5065,20 @@ html[data-demo="0"] .mode-switch { display: none; }
 
 .mode-switch-note { color: var(--color-TD-neutral); font-weight: 450; }
 
+.mode-switch-num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-cta);
+  color: var(--color-TD-snow);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 html[data-mode="booking"][data-season="winter"] .td-booking {
   overflow: visible;
   border-radius: var(--radius-lg);
