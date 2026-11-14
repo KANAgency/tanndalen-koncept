@@ -4916,6 +4916,67 @@
           ],
           chips: ["Tar de kort?", "Finns det toalett vid spåret?"]
         };
+        /* Läge 3 (påbörjad bokning): frågor inför resan. Samma familj, Ski Lodge Premium 12–19 feb, skidhyra bokad. */
+        QA["Var hämtar vi skidhyran?"] = {
+          answer: "Er utrustning är klar fredag 14:00, två timmar efter incheckningen. Hämta den i [Skidhyran Hamra] vid liftens fot, tre minuter från Ski Lodge Premium. Ta med pjäxorna ni har hemma om de passar, annars provar vi ut nya på plats. Barnen behöver hjälm, och den ingår.",
+          sources: `Källor: <a href="#boende">Er bokning</a> · <a href="#service">Skidhyra</a>`,
+          cards: [
+            { kicker: "Plats", title: "[Skidhyran Hamra]", line: "Klar fre 14:00, vid liftens fot", image: "assets/img/fraga-hyra.jpg" },
+            { kicker: "Boende", title: "Ski Lodge Premium", line: "Incheckning fre 12:00", image: "assets/img/meny-boende.jpg" },
+            { kicker: "Backe", title: "Barnbacken Hamra", line: "Första åket, 200 m bort", image: "assets/img/fraga-barnbacke.jpg" }
+          ],
+          chips: ["Kan vi hämta skidorna kvällen innan?", "Behöver barnen skidskola första dagen?"]
+        };
+        QA["Behöver barnen skidskola första dagen?"] = {
+          answer: "Nioåringen klarar sig troligen med er i blå backar efter ett par åk. Sexåringen har mest nytta av skidskolan, särskilt första dagarna. Gruppen för 5–7 år går 10–12 i barnbacken, så ni hinner själva upp i Headstråket under tiden. Boka före resan, sportlovsveckan brukar bli full.",
+          sources: `Källor: <a href="#skidskola">Skidskola</a> · <a href="#boende">Er bokning</a>`,
+          cards: [
+            { kicker: "Skidskola", title: "Barngrupp 5–7 år", line: "[Lör–tis] 10–12, fr. [1 450] kr", image: "assets/img/fraga-skidskola.jpg" },
+            { kicker: "Backe", title: "Barnbacken Hamra", line: "Grön med rullband", image: "assets/img/fraga-barnbacke.jpg" },
+            { kicker: "Backe", title: "Headstråket", line: "Blå, för er två under tiden", image: "assets/img/rapport-raw-1.png" }
+          ],
+          chips: ["Finns privatlektion för en?", "Var hämtar vi skidhyran?"]
+        };
+        QA["Hur tar vi oss från boendet till liften?"] = {
+          answer: "Ni bor ski in ski out. Från Ski Lodge Premium glider ni ner till [Hamraliften] på två minuter, och barnbacken ligger 200 meter bort. Bilen kan stå på boendets parkering hela veckan. Ska ni till Skarvarna går skidbussen var 20:e minut.",
+          sources: `Källor: <a href="#boende">Ert boende</a> · <a href="#hitta-hit">Hitta hit</a>`,
+          cards: [
+            { kicker: "Boende", title: "Ski Lodge Premium", line: "Ski in ski out", image: "assets/img/meny-boende.jpg" },
+            { kicker: "Lift", title: "[Hamraliften]", line: "Två minuter på skidor", image: "assets/img/fraga-lift.jpg" },
+            { kicker: "Buss", title: "Skidbussen", line: "[Var 20:e min] till Skarvarna", image: "assets/img/fraga-bilvag.jpg" }
+          ],
+          chips: ["Var parkerar vi?", "Hur långt är det till affären?"]
+        };
+        QA["Var hyr vi längdskidor?"] = {
+          answer: "Hyr vid Spårcentralen, fem minuter från Ski Lodge Premium. Där finns vallningsfria skidor för barnen och klassiska eller skate för er. Hämtar ni fredag eftermiddag kan ni ta ett första varv på belysta 5:an samma kväll. Ni har redan alpin hyra bokad, så säg till om ni vill byta några dagar.",
+          sources: `Källor: <a href="#service">Skidhyra</a> · <a href="#boende">Er bokning</a>`,
+          cards: [
+            { kicker: "Plats", title: "Spårcentralen", line: "Hyra, start och karta", image: "assets/img/fraga-sparcentral.jpg" },
+            { kicker: "Hyra", title: "Längdpaket", line: "fr. [250] kr per dag", image: "assets/img/fraga-hyra.jpg" },
+            { kicker: "Spår", title: "Belysta 5:an", line: "Första kvällen, belyst till 21", image: "assets/img/langd.jpg" }
+          ],
+          chips: ["Klassiskt eller skate för nybörjare?", "Vilket spår passar första dagen?"]
+        };
+        QA["Vilket spår passar första dagen?"] = {
+          answer: "Belysta 5:an. Den är flack, går runt fem kilometer och har två genvägar tillbaka om sexåringen tröttnar. Starten ligger vid Spårcentralen, fem minuter från er. Känns det lätt kan ni vuxna fortsätta ut på [Fjällrundan] dag två.",
+          sources: `Källor: <a href="#just-nu">Spårkarta</a> · <a href="#boende">Ert boende</a>`,
+          cards: [
+            { kicker: "Spår", title: "Belysta 5:an", line: "Flack, två genvägar", image: "assets/img/langd.jpg" },
+            { kicker: "Spår", title: "[Fjällrundan] 10 km", line: "Dag två, i skog", image: "assets/img/fraga-fjallrundan.jpg" },
+            { kicker: "Plats", title: "Fikat vid Ladan", line: "Vid spårstarten", image: "assets/img/endag-1300.jpg?v=2" }
+          ],
+          chips: ["Var kan vi fika vid spåret?", "Kan vi köpa spårkort på plats?"]
+        };
+        QA["Kan vi köpa spårkort på plats?"] = {
+          answer: "Ja, i Spårcentralen eller i appen. Köper ni nu läggs det på er bokning och ni slipper kön fredag. Barn under [7] år åker gratis, så ni behöver kort för tre. Veckokortet gäller alla 145 km i dalen.",
+          sources: `Källor: <a href="#boka">Spårkort</a> · <a href="#boende">Er bokning</a>`,
+          cards: [
+            { kicker: "Spårkort", title: "Vecka", line: "fr. [495] kr per person", image: "assets/img/langd.jpg" },
+            { kicker: "Plats", title: "Spårcentralen", line: "Köp och hämta karta", image: "assets/img/fraga-sparcentral.jpg" },
+            { kicker: "Spår", title: "145 km i dalen", line: "Samma kort för alla spår", image: "assets/img/fraga-fjallrundan.jpg" }
+          ],
+          chips: ["Var hyr vi längdskidor?", "Vilket spår passar första dagen?"]
+        };
         /* Sommar: Fjällguiden på plats. Samma familj (två vuxna, barn 6 och 9, bor i Hamra). Siffror följer justNuData.sommar. */
         QA["Vilken led passar barnen idag?"] = {
           answer: "Det är torrt på lederna idag, så vanliga skor går bra. Med sexåringen är [Hamraslingan] bäst: 3 km runt sjön, nästan helt flack och start vid [parkeringen i Hamra]. Nioåringen klarar att gå upp till [Utsiktsstenen], 2 km och ungefär 150 höjdmeter, med utsikt över hela dalen.",
