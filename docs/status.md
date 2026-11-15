@@ -14,7 +14,10 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Fjällstugan Järven: 3 rum (allrum sväng höger → kamin drar ut → allrum framåt mot fönstret), Kling 2.5 1080p med start- och slutbild utskurna ur riktiga foton så att det som avslöjas är äkta. 6 klipp (9:16 + 1:1), 1 950 credits, Magnific-projektet "Tänndalen - Orsa Grönklitt - Sajt - Inledande fas - 09665".
 - Ihopklippt med ffmpeg (0,8 s toning, 13,6 s): `td/desktop/assets/video/boende-jarven-916.mp4` (Oura) och `-11.mp4` (Waabi), ca 4 MB styck. Videomappen är gitignorerad – råklipp och utsnitt ligger i `tanndalen-orsa/assets/boenden/fjallstugan-jarven/`.
 - JS: en video spelar per rad, hover/fokus byter, pausar utanför skärm och vid reducerad rörelse. Ingen hover-zoom på videokort.
-- Öppet: John bedömer resultatet; om det håller, samma recept på övriga 4 boenden. Kortformat och mobil fortfarande öppet.
+- Johns feedback (15 nov): rörelserna för stora, in-/utzoomningarna gigantiska och det känns som Ken Burns på ett foto, inte en riktig kamera. Sidoåkningen (allrum) bäst. Orsak troligen upplägget: start/slut är utsnitt ur samma foto, så modellen interpolerar bara beskärningen. Prompt vs modell ej utrett.
+- Regel framåt: ett videoformat (stående), kvadraten beskärs ur samma video – kör aldrig båda.
+- Regel framåt: boendets feature (Järven: kaminen eller balkongen) är den lilla detaljbilden och ska INTE vara med i videon.
+- Öppet: John funderar på nästa steg. Kortformat och mobil fortfarande öppet.
 
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
 - Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
