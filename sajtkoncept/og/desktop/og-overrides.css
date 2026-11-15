@@ -773,4 +773,9 @@ html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 
 /* En dag, sista kortet: textytan centrerad i hela bilden, tydligare tidsetikett (2026-11-15) */
 .en-dag-puff-copy { height: 100%; }
-.en-dag-puff-copy .td-ui-label { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); line-height: 1.3; }
+.en-dag-puff-copy .td-ui-label { font-size: var(--font-size-md); line-height: 1.3; }
+/* Rubriken ett steg över kortens rubriker (30→36 mobil, 32→40 desktop). Etiketten tätt mot rubriken, knappen lite längre ner. */
+.en-dag-puff-copy { gap: 0; }
+.en-dag-puff-copy .td-heading-md { margin-top: var(--space-sm); font-size: var(--font-size-3xl); }
+.en-dag-puff-copy .td-button { margin-top: var(--space-2xl); }
+@media (min-width: 1024px) { .en-dag-puff-copy .td-heading-md { font-size: var(--font-size-40); } }
