@@ -38,6 +38,10 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: Fjällstjärnan B i Waabi-raden, ny ordning
+- Ordning: Fjällöga 13 A, Fjällstjärnan B, Järven, Fjällsippan 4, Ski Lodge 203, Skarljus 7 A, Brunkullan 23.
+- Fjällstjärnan B (R360, grouppoollid 30243): "Hunden får följa med" (husdjur tillåtet), 900 m till liften, 10 bäddar, pris [X]. Huvudbild = exteriören beskuren kvadratiskt kring huset, detaljbild = `fraga-hund-stuga.jpg` (AI-genererad, inte boendet). Bilder i `tanndalen-orsa/assets/boenden/fjallstjarnan/`.
+
 ## Klart 15 nov: Fjällöga 13 A först i Waabi-raden, med video
 - Kort 1 i kvadratiska raden: "Sju meter till taket" (R360: 7 m takhöjd), 200 m till liften, 9 bäddar, pris [X]. Detaljbild = huset utifrån (R360-bild 23, `boende-fjalloga-13a-huset.jpg`).
 - Video: kök (höger) → allrum med loft (bakåt) → vardagsrum (vänster) → loftet ner mot fönstret (höger). Kling 2.5, 16:9 1080p, bara startbild (utsnitt 75 % mot rörelseriktningen), 1 300 credits. 17,6 s, 5,7 MB: `td/desktop/assets/video/boende-fjalloga-13a-rundtur.mp4` (gitignorerad). Råklipp i `tanndalen-orsa/assets/boenden/fjalloga/fjalloga-13-a/video/`.
