@@ -903,5 +903,25 @@
       sync();
     })();
     </script>
+    <script>
+    /* Göm menyn medan En dag fyller skärmen; tillbaka när man är på väg ut (som TD). */
+    (() => {
+      const top = document.querySelector("[data-og-hp-header]");
+      const sec = document.getElementById("en-dag");
+      if (!top || !sec) return;
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const r = sec.getBoundingClientRect();
+        const tuck = r.top <= innerHeight * 0.1 && r.bottom >= innerHeight * 1.25;
+        const busy = top.contains(document.activeElement) || top.querySelector(".site-menu.is-open");
+        top.classList.toggle("is-tucked", Boolean(tuck && !busy));
+      };
+      const req = () => { if (!raf) raf = requestAnimationFrame(update); };
+      addEventListener("scroll", req, { passive: true });
+      addEventListener("resize", req);
+      update();
+    })();
+    </script>
   </body>
 </html>

@@ -10,6 +10,10 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: OG – menyn göms på En dag
+- Som TD: headern (`.og-hp-header`) får `is-tucked` när En dag fyller skärmen (topp ≤ 10 vh, botten ≥ 125 vh), inte när menyn är öppen/fokuserad. Skript sist i `og/desktop/index.html`, CSS i `og-overrides.css` med `translate` så headerns egen transform (centrering/reveal) och dess övergångar lämnas orörda.
+- Verifierat: villkoret sant mitt i En dag (top −200, botten 5288 vid 900 px), klassen ger opacity 0 och translate uppåt, centreringen kvar. Rörelsen live kunde inte mätas (rAF i dold browserpanel).
+
 ## Klart 15 nov: OG En dag (steg 4 av TD→OG-synken, synken klar)
 - Hoppa över går till nästa synliga sektion efter En dag (följer blockordningen per läge): returning → Just nu, bokning/På plats → Boende. Uppmätt i DOM i alla tre lägena.
 - Nästa-pilen är aldrig avstängd; på sista steget fungerar den som Hoppa över (TD 2987–3010). Uppmätt: `disabled=false`. Själva scrollrörelsen kunde inte mätas (rAF i dold browserpanel).
