@@ -6293,6 +6293,8 @@
         ],
         video: "assets/video/boende-fjallbruden.mp4",
         poster: "assets/video/boende-fjallbruden-poster.jpg",
+        // Utsnitt uppe till vänster: rubriken mot himlen, husen mellan texten och faktakortet.
+        focus: "0% 0%",
         mirror: false,
         parallax: 0.2,
         placeholder: false
@@ -6405,6 +6407,7 @@
         return new Promise((resolve) => {
           window.setTimeout(() => {
             boendeMedia.classList.toggle("is-mirror", slide.mirror === true);
+            boendeVideo.style.objectPosition = slide.focus || "";
             boendePoster.style.backgroundImage = slide.poster ? `url("${slide.poster}")` : "";
             const mask = boendeMask(slide.scrim);
             boendeScrim.style.maskImage = mask;
@@ -6750,7 +6753,7 @@
           syncButtons();
         })();
       </script>
-      <script type="module" src="intro.js?v=glas0"></script>
+      <script type="module" src="intro.js?v=auto2"></script>
       <script src="brand-sequence.js" defer></script>
       <script>
       /* Göm menyn medan En dag / Lev Andas fyller skärmen; tillbaka när man är på väg ut */

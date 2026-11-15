@@ -19,6 +19,9 @@ const TEXT_LIFT = 80; /* px, #intro-copy higher than the previous build */
 const TEXT_DOWN = 28; /* px, extra drop of the typed line */
 const COPY_Y = { 1440: 577, 393: 546 }; /* measured in the previous build, state B */
 const SEEN = "td-startsida-seen";
+const AUTO_P = 0.4; /* from here the rest of the zoom plays by itself */
+const AUTO_MS = 800; /* ms for the automatic rest, whatever is left */
+const AUTO_EASE = [0.25, 0.6, 0.3, 1]; /* starts with the scroll's speed, lands soft */
 
 const GROW_EASE = [0.22, 1, 0.36, 1];
 const FADE_EASE = [0, 0, 0.58, 1];
@@ -42,6 +45,7 @@ function bezier([x1, y1, x2, y2]) {
 
 const growEase = bezier(GROW_EASE);
 const fadeEase = bezier(FADE_EASE);
+const autoEase = bezier(AUTO_EASE);
 
 function smootherstep(p) {
   const x = Math.min(1, Math.max(0, p));
@@ -433,6 +437,16 @@ export function init() {
     }
   }
 
+  let auto = null; /* { t, fromP, fromY, toY } once the user passes AUTO_P */
+  const blockAuto = (event) => { if (auto && !auto.done) event.preventDefault(); };
+  addEventListener("wheel", blockAuto, { passive: false });
+  addEventListener("touchmove", blockAuto, { passive: false });
+  function startAuto(now) {
+    const zoomEnd = innerHeight * (ZOOM_START + ZOOM_LEN);
+    auto = { t: now, fromP: displayed, fromY: scrollY, toY: zoomEnd, done: false };
+    lock.dataset.autoAt = String(Math.round(scrollY));
+  }
+
   function rawP() {
     const start = innerHeight * ZOOM_START;
     const length = innerHeight * ZOOM_LEN;
@@ -481,8 +495,16 @@ export function init() {
     const raw = phase >= 1 ? rawP() : 0;
     if (raw > 0 && lock.dataset.typed !== "1") finishText();
     const zoomEnd = innerHeight * (ZOOM_START + ZOOM_LEN);
-    if (scrollY >= zoomEnd) armGate();
-    if (scrollY >= zoomEnd - 1) displayed = 1;
+    if (!auto && !reduced && phase >= 1 && raw >= AUTO_P && raw < 1) startAuto(now);
+    if (auto && !auto.done) {
+      const k = Math.min(1, (now - auto.t) / AUTO_MS);
+      const e = autoEase(k);
+      displayed = auto.fromP + (1 - auto.fromP) * e;
+      scrollTo(0, auto.fromY + (auto.toY - auto.fromY) * e);
+      if (k >= 1) { auto.done = true; displayed = 1; armGate(); }
+    } else if (scrollY >= zoomEnd) armGate();
+    if (auto && !auto.done) { /* driven above */ }
+    else if (scrollY >= zoomEnd - 1) displayed = 1;
     else {
       const alpha = 1 - Math.exp(-(dt / 1000) / FOLLOW_TAU);
       displayed += (raw - displayed) * alpha;
@@ -515,7 +537,7 @@ export function init() {
     setTimeout(() => { skip.hidden = true; }, 200);
   }
   addEventListener("wheel", (event) => {
-    if (gateUsed || event.deltaY <= 0) return;
+    if (gateUsed || event.deltaY <= 0 || (auto && !auto.done)) return;
     const zoomEnd = innerHeight * (ZOOM_START + ZOOM_LEN);
     if (scrollY + event.deltaY < zoomEnd) return;
     event.preventDefault();

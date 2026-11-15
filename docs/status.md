@@ -10,6 +10,10 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: intro – resten av zoomen spelas automatiskt (TD)
+- När användaren scrollat 40 % av intro-zoomen (`AUTO_P`) spelas resten upp själv på 800 ms (`AUTO_MS`, easing `AUTO_EASE` [0.25, 0.6, 0.3, 1]) och sidan scrollas till zoomens slut. Hjul/touch blockeras under tiden. Av vid reduced motion. Konstanter överst i `intro.js`.
+- Öppet: ej testat med riktigt hjul/touchpad eller på mobil.
+
 ## Klart 15 nov: boendekort v3 (TD, Waabi-raden)
 - Lift-avstånd + bäddar i samma faktaruta (Natt-bakgrund, Snö-text). Den grå rutan ersatt av en ny bild från boendet (`boende-*-soffa/allrum/loft/kok/matbord.jpg`, 900 px).
 - Fjällsippan 4 saknar källbilder: lånar `boende-skarljus-7a-fonster.jpg` som platshållare. Byt mot riktig bild.
