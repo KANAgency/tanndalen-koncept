@@ -10,6 +10,9 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: OG – TD:s media bortplockad
+TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendeblocket (area1/2, klipp-8) är raderade ur `og/desktop/assets/` och ersatta av `assets/img/platshallare.svg` (index.html, td-blocks.js, orsa-guiden.js). Boendeblockets video är tom, bara poster. Hero-videor finns bara i TD. Verifierat: inga 404:or eller konsolfel på /og/. Öppet: John tar fram riktiga OG-exempel. Övriga TD-kopior i OG (meny-, teaser-, banner-, rapport- m.fl.) ligger kvar.
+
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 

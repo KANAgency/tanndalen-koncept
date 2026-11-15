@@ -2264,8 +2264,8 @@ export function initTdBlocks(root = document) {
             { label: "Passar för", value: "Barnfamiljer" },
             { label: "Bastu", value: "I alla" }
           ],
-          video: "./assets/video/area1.mp4",
-          poster: "./assets/img/meny-boende.jpg",
+          video: "",
+          poster: "./assets/img/platshallare.svg",
           mirror: true,
           parallax: 0.2,
           r360AreaId: "",
@@ -2290,7 +2290,7 @@ export function initTdBlocks(root = document) {
           { label: "Husdjur", value: "1 av 7" },
           { label: "Bastu", value: "I alla" }
         ],
-        video: "./assets/video/area2.mp4",
+        video: "",
         mirror: false,
         parallax: 0.2,
         placeholder: false

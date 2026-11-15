@@ -41,7 +41,7 @@ QA[RAIN] = QA["Vad gör vi om det regnar?"] = {
   sources: src(["#aktiviteter", "Aktiviteter"], ["#service", "Mat och service"]),
   cards: [
     card("Aktivitet", "[Grönklitt Äventyrsbad]", "[Öppet 10–20], bassäng och bastu", "fraga-bastu.jpg"),
-    card("Aktivitet", "Orsa Rovdjurspark", "Öppen i alla väder, [10 min] bort", "sommar-dag-03.jpg"),
+    card("Aktivitet", "Orsa Rovdjurspark", "Öppen i alla väder, [10 min] bort", "platshallare.svg"),
     card("Aktivitet", "[Klätterväggen]", "Från [5] år, boka på plats", "fraga-klatter.jpg")
   ],
   chips: ["Vad händer för barn idag?", "Är Rovdjursparken öppen idag?"],
@@ -49,8 +49,8 @@ QA[RAIN] = QA["Vad gör vi om det regnar?"] = {
     answer: "Ta Rovdjursparken, den är öppen i regn och björnarna bryr sig inte. [Orsa Bibliotek] har sagostund [lördagar 11], och i Orsa centrum finns [Kulturhuset] med utställning om Dalarnas historia. Uppehåll brukar komma efter lunch.",
     sources: src(["#aktiviteter", "Aktiviteter"]),
     cards: [
-      card("Aktivitet", "Orsa Rovdjurspark", "Björn, varg, lodjur och järv", "sommar-dag-03.jpg"),
-      card("Plats", "[Kulturhuset i Orsa]", "Dalarnas historia, [fri entré]", "sommar-dag-04.jpg"),
+      card("Aktivitet", "Orsa Rovdjurspark", "Björn, varg, lodjur och järv", "platshallare.svg"),
+      card("Plats", "[Kulturhuset i Orsa]", "Dalarnas historia, [fri entré]", "platshallare.svg"),
       card("Aktivitet", "[Grönklitt Äventyrsbad]", "Bassäng och bastu", "fraga-bastu.jpg")
     ],
     chips: ["Var kan vi bada idag?", "Vad gör vi med barnen idag?"]
@@ -72,15 +72,15 @@ QA["Passar Orsa Grönklitt för små barn?"] = {
   sources: src(["#skidskola", "Skidskola"], ["#aktiviteter", "För barn"]),
   cards: [
     card("Plats", "Barnområdet", "Knapplift och rullband, [10–15]", "teaser-skola-b.png"),
-    card("Aktivitet", "Skidskola för barn", "Från [4] år, [halvdag eller heldag]", "endag-1015.jpg")
+    card("Aktivitet", "Skidskola för barn", "Från [4] år, [halvdag eller heldag]", "platshallare.svg")
   ],
   chips: ["Hur funkar skidskolan för barnen?", "Vad finns att göra förutom skidåkning?"],
   summer: {
     answer: "Ja. På sommaren är det Rovdjursparken, bad i [Skattungen], [lekplatsen vid toppstugan] och korta leder i skogen som barnen orkar. Liften går upp till toppen [10–17] så de minsta slipper gå uppför.",
     sources: src(["#aktiviteter", "För barn"]),
     cards: [
-      card("Aktivitet", "Orsa Rovdjurspark", "[10 min] från stugorna", "sommar-dag-03.jpg"),
-      card("Plats", "[Skattungen]", "Badplats med grund strand", "sommar-dag-02.jpg")
+      card("Aktivitet", "Orsa Rovdjurspark", "[10 min] från stugorna", "platshallare.svg"),
+      card("Plats", "[Skattungen]", "Badplats med grund strand", "platshallare.svg")
     ],
     chips: ["Vad gör vi med barnen idag?", "Var kan vi bada idag?"]
   }
@@ -100,7 +100,7 @@ QA["Vad finns att göra förutom skidåkning?"] = {
   answer: "Mycket. Orsa Rovdjurspark ligger [tio minuter] bort, det finns [hundspann], [pulkabacke] och [skridskor på Orsasjön]. I Orsa och Mora kan ni se hur dalahästar och kurbits görs. Och kvällarna är för bastu.",
   sources: src(["#aktiviteter", "Aktiviteter"]),
   cards: [
-    card("Aktivitet", "Orsa Rovdjurspark", "Björn, varg, lodjur och järv", "sommar-dag-03.jpg"),
+    card("Aktivitet", "Orsa Rovdjurspark", "Björn, varg, lodjur och järv", "platshallare.svg"),
     card("Aktivitet", "[Hundspann]", "Från [4] år, boka i förväg", "snow.jpg"),
     card("Aktivitet", "Bastu", "[I stugbyn], öppen till [21]", "fraga-bastu.jpg")
   ],
@@ -142,7 +142,7 @@ QA["Hur funkar skidskolan för barnen?"] = {
   sources: src(["#skidskola", "Skidskola"]),
   cards: [
     card("Aktivitet", "Skidskola för barn", "[Mån–fre 10–12], från [4] år", "teaser-skola-b.png"),
-    card("Plats", "Barnområdet", "Samling vid [flaggan]", "endag-1015.jpg")
+    card("Plats", "Barnområdet", "Samling vid [flaggan]", "platshallare.svg")
   ],
   chips: ["När stänger barnbacken?", "Vilka liftkort behöver vi?"]
 };
@@ -179,7 +179,7 @@ QA["Vad finns att göra under vår vecka?"] = {
   answer: "Under er vecka finns [barnens skidskola måndag], [visning i Rovdjursparken onsdag 11:00] och [fackeltåg i barnbacken onsdag 18:00]. Längdspåren är tända varje kväll till [21].",
   sources: src(["#aktiviteter", "Veckoprogram"]),
   cards: [
-    card("[Ons 17 feb] · 11:00", "[Visning i Rovdjursparken]", "Djurvårdarna berättar", "sommar-dag-03.jpg"),
+    card("[Ons 17 feb] · 11:00", "[Visning i Rovdjursparken]", "Djurvårdarna berättar", "platshallare.svg"),
     card("[Ons 17 feb] · 18:00", "[Fackeltåg i barnbacken]", "Gratis, varm saft efteråt", "sprakande-nyar.jpg")
   ],
   chips: ["Vad händer för barn idag?", "Hur funkar skidskolan för barnen?"],
@@ -187,8 +187,8 @@ QA["Vad finns att göra under vår vecka?"] = {
     answer: "Under er vecka finns [guidad tur i Rovdjursparken tisdag], [cykelskola för barn onsdag] och [musik vid Skattungen fredag]. Liften går upp till toppen varje dag [10–17].",
     sources: src(["#aktiviteter", "Veckoprogram"]),
     cards: [
-      card("[Tis] · 10:00", "[Guidad tur i Rovdjursparken]", "Från [5] år", "sommar-dag-03.jpg"),
-      card("[Fre] · 19:00", "[Musik vid Skattungen]", "Ta med filt", "sommar-dag-05.jpg")
+      card("[Tis] · 10:00", "[Guidad tur i Rovdjursparken]", "Från [5] år", "platshallare.svg"),
+      card("[Fre] · 19:00", "[Musik vid Skattungen]", "Ta med filt", "platshallare.svg")
     ],
     chips: ["Kan vi cykla i backen?", "Var kan vi bada idag?"]
   }
@@ -198,7 +198,7 @@ QA["Vilka backar passar barnen idag?"] = {
   answer: "[Familjebacken] och [Björnbacken] är nypreparerade och mjuka i morse. Sexåringen trivs i barnområdet, niåringen klarar [Björnbacken] hela vägen från toppen. Solen ligger på västsidan efter lunch.",
   sources: src(["#just-nu", "Just nu"]),
   cards: [
-    card("Backe", "[Familjebacken]", "Grön, nypreparerad [05:30]", "endag-1015.jpg"),
+    card("Backe", "[Familjebacken]", "Grön, nypreparerad [05:30]", "platshallare.svg"),
     card("Backe", "[Björnbacken]", "Blå, från toppen", "og-hero-winter.jpg")
   ],
   chips: ["Var äter vi lunch i backen?", "När stänger barnbacken?"]
@@ -208,7 +208,7 @@ QA["Var äter vi lunch i backen?"] = {
   answer: "[Toppstugan] har [dagens lunch 11–14:30] och utsikt över Orsasjön. Vill ni sitta nere är [Grönklittsgården] närmast barnområdet. Egen matsäck går bra i [vindskyddet vid barnbacken].",
   sources: src(["#service", "Mat och service"]),
   cards: [
-    card("Plats", "[Toppstugan]", "[11–14:30], utsikt över Orsasjön", "endag-1300.jpg"),
+    card("Plats", "[Toppstugan]", "[11–14:30], utsikt över Orsasjön", "platshallare.svg"),
     card("Plats", "[Grönklittsgården]", "Vid barnområdet", "teaser-boende-b.jpeg")
   ],
   chips: ["Vad händer för barn idag?", "Vilka backar passar barnen idag?"]
@@ -218,8 +218,8 @@ QA["Vad händer för barn idag?"] = {
   answer: "[11:00] är det [björnjakt i barnbacken] med skattkarta, och [14:00] [pulkarace] vid stugbyn. Rovdjursparken har [matning av björnarna 13:00]. Allt utom parken är gratis.",
   sources: src(["#aktiviteter", "Veckoprogram"]),
   cards: [
-    card("Idag · [11:00]", "[Björnjakt i barnbacken]", "Skattkarta i receptionen", "endag-1015.jpg"),
-    card("Idag · [13:00]", "[Matning av björnarna]", "Orsa Rovdjurspark", "sommar-dag-03.jpg")
+    card("Idag · [11:00]", "[Björnjakt i barnbacken]", "Skattkarta i receptionen", "platshallare.svg"),
+    card("Idag · [13:00]", "[Matning av björnarna]", "Orsa Rovdjurspark", "platshallare.svg")
   ],
   chips: ["Var hyr vi pulka?", "När stänger barnbacken?"]
 };
@@ -260,7 +260,7 @@ QA["Var kan vi fika vid spåret?"] = {
   answer: "[Fiket vid spårstarten] har kaffe och bullar [10–15]. Ute i spåret finns [rastkojan vid 5 km] med eldstad, ta med egen termos dit.",
   sources: src(["#service", "Mat och service"]),
   cards: [
-    card("Plats", "[Fiket vid spårstarten]", "[10–15], kort och Swish", "endag-1300.jpg"),
+    card("Plats", "[Fiket vid spårstarten]", "[10–15], kort och Swish", "platshallare.svg"),
     card("Plats", "[Rastkojan]", "Eldstad vid [5 km]", "langd.jpg")
   ],
   chips: ["Vilka spår är nypreparerade?"]
@@ -292,9 +292,9 @@ QA["Vad gör vi med barnen idag?"] = {
   answer: "Börja i Rovdjursparken när den öppnar [10:00], björnarna är piggast då. Efter lunch: liften upp till toppen och [trollstigen] ner, [1,5 km]. Avsluta med bad i [Skattungen], vattnet är [19°].",
   sources: src(["#aktiviteter", "För barn"]),
   cards: [
-    card("Aktivitet", "Orsa Rovdjurspark", "[10–17] idag", "sommar-dag-03.jpg"),
-    card("Led", "[Trollstigen]", "[1,5 km] ner från toppen", "sommar-dag-01.jpg"),
-    card("Bad", "[Skattungen]", "Vattnet [19°]", "sommar-dag-02.jpg")
+    card("Aktivitet", "Orsa Rovdjurspark", "[10–17] idag", "platshallare.svg"),
+    card("Led", "[Trollstigen]", "[1,5 km] ner från toppen", "platshallare.svg"),
+    card("Bad", "[Skattungen]", "Vattnet [19°]", "platshallare.svg")
   ],
   chips: ["Är Rovdjursparken öppen idag?", "Var kan vi bada idag?"]
 };
@@ -302,7 +302,7 @@ QA["Vad gör vi med barnen idag?"] = {
 QA["Är Rovdjursparken öppen idag?"] = {
   answer: "Ja, [10–17] idag. [Matning av björnarna 13:00] och [guidad tur 11:00]. Entrén köper ni i receptionen eller i bokningen, barn under [3 år] går in gratis.",
   sources: src(["#aktiviteter", "Orsa Rovdjurspark"]),
-  cards: [card("Aktivitet", "Orsa Rovdjurspark", "[10–17], björn, varg, lodjur, järv", "sommar-dag-03.jpg")],
+  cards: [card("Aktivitet", "Orsa Rovdjurspark", "[10–17], björn, varg, lodjur, järv", "platshallare.svg")],
   chips: ["Vad gör vi med barnen idag?"]
 };
 
@@ -310,8 +310,8 @@ QA["Var kan vi bada idag?"] = {
   answer: "[Skattungen] är [19°] och har grund sandstrand, [15 minuter] med bil. Närmast är [tjärnen vid stugbyn], lite kallare men med brygga. Regnet kommer inte förrän efter [16].",
   sources: src(["#aktiviteter", "Bad"]),
   cards: [
-    card("Bad", "[Skattungen]", "[19°], sandstrand", "sommar-dag-02.jpg"),
-    card("Bad", "[Tjärnen vid stugbyn]", "Brygga, [5 min] promenad", "sommar-dag-05.jpg")
+    card("Bad", "[Skattungen]", "[19°], sandstrand", "platshallare.svg"),
+    card("Bad", "[Tjärnen vid stugbyn]", "Brygga, [5 min] promenad", "platshallare.svg")
   ],
   chips: ["Vad gör vi med barnen idag?", "Vad gör vi om det regnar?"]
 };
@@ -319,14 +319,14 @@ QA["Var kan vi bada idag?"] = {
 QA["Kan vi cykla i backen?"] = {
   answer: "Ja, [Grönklitt Bike Park] har [8 leder] och liften tar cyklar [10–17]. För barnen finns [en grön flowled] och cykelskola [onsdagar]. Cykel och hjälm hyr ni vid liften.",
   sources: src(["#aktiviteter", "Cykel"]),
-  cards: [card("Aktivitet", "[Grönklitt Bike Park]", "[8 leder], liften [10–17]", "sommar-dag-04.jpg")],
+  cards: [card("Aktivitet", "[Grönklitt Bike Park]", "[8 leder], liften [10–17]", "platshallare.svg")],
   chips: ["Vilken led passar barnen?"]
 };
 
 QA["Vilken led passar barnen?"] = {
   answer: "[Trollstigen] från toppen, [1,5 km] med utsiktsplats över Orsasjön halvvägs. Ta liften upp så går det bara nedför. Lederna är torra idag.",
   sources: src(["#aktiviteter", "Leder"]),
-  cards: [card("Led", "[Trollstigen]", "[1,5 km], utsikt över Orsasjön", "sommar-dag-01.jpg")],
+  cards: [card("Led", "[Trollstigen]", "[1,5 km], utsikt över Orsasjön", "platshallare.svg")],
   chips: ["Kan vi cykla i backen?", "Var kan vi bada idag?"]
 };
 QA["Är lederna blöta idag?"] = QA["Vilken led passar barnen?"];
@@ -389,12 +389,12 @@ export const WELCOME_BOOKING = {
   next: "<strong>Nästa steg: liftkort.</strong> Lägg till dem i bokningen så har ni dem i telefonen när ni kommer.",
   nextAsk: "Vilka liftkort behöver vi?",
   week: [
-    { kicker: "[Ons 17 feb] · 11:00", title: "[Visning i Rovdjursparken]", line: "Djurvårdarna berättar", image: IMG + "sommar-dag-03.jpg", ask: "Vad finns att göra under vår vecka?" },
+    { kicker: "[Ons 17 feb] · 11:00", title: "[Visning i Rovdjursparken]", line: "Djurvårdarna berättar", image: IMG + "platshallare.svg", ask: "Vad finns att göra under vår vecka?" },
     { kicker: "[Ons 17 feb] · 18:00", title: "[Fackeltåg i barnbacken]", line: "Gratis, varm saft efteråt", image: IMG + "sprakande-nyar.jpg", ask: "Vad finns att göra under vår vecka?" }
   ]
 };
 
 export const WELCOME_TODAY = [
-  { kicker: "Idag · [11:00]", title: "[Björnjakt i barnbacken]", line: "Skattkarta i receptionen", image: IMG + "endag-1015.jpg", ask: "Vad händer för barn idag?" },
-  { kicker: "Idag · [13:00]", title: "[Matning av björnarna]", line: "Orsa Rovdjurspark", image: IMG + "sommar-dag-03.jpg", ask: "Vad händer för barn idag?" }
+  { kicker: "Idag · [11:00]", title: "[Björnjakt i barnbacken]", line: "Skattkarta i receptionen", image: IMG + "platshallare.svg", ask: "Vad händer för barn idag?" },
+  { kicker: "Idag · [13:00]", title: "[Matning av björnarna]", line: "Orsa Rovdjurspark", image: IMG + "platshallare.svg", ask: "Vad händer för barn idag?" }
 ];
