@@ -740,9 +740,9 @@ export function initTdBlocks(root = document) {
           } else if (eventCount > 0) {
             if (scrolled <= 0) {
               progressTarget = eventYs[0];
-            } else if (scrolled >= lastEventScroll) {
-              const u = clamp01((scrolled - lastEventScroll) / sunHold);
-              progressTarget = eventYs[eventCount - 1] + (sunH - eventYs[eventCount - 1]) * u;
+            } else if (scrolled >= lastEventScroll - 1) {
+              /* Sista kortet nått: linjen animerar själv hela vägen till solnedgång. */
+              progressTarget = sunH;
             } else {
               const idx = Math.min(eventCount - 2, Math.floor(scrolled / span));
               const u = clamp01((scrolled - idx * span) / span);
@@ -754,14 +754,15 @@ export function initTdBlocks(root = document) {
             enSunProgressY = progressTarget;
             enSunSnap = false;
           } else {
-            enSunProgressY += (progressTarget - enSunProgressY) * (reduced ? 1 : 0.22);
+            const sunAuto = lead <= 0 && scrolled >= lastEventScroll - 1;
+            enSunProgressY += (progressTarget - enSunProgressY) * (reduced ? 1 : sunAuto ? 0.06 : 0.22);
             if (Math.abs(progressTarget - enSunProgressY) < 0.4) enSunProgressY = progressTarget;
           }
           const progressScale = sunH > 0 ? enSunProgressY / sunH : 0;
           enSun.style.setProperty("--en-sun-progress-scale", String(Math.round(progressScale * 10000) / 10000));
           // Sticky reach: event-ploppar (inkl. 16:00) tänds när sitt kort nås.
           // Solnedgång + ändplopp tänds först när linjen nått botten.
-          const sunLineReached = reduced || (lead <= 0 && scrolled >= sunArriveScroll - 0.5);
+          const sunLineReached = reduced || (lead <= 0 && scrolled >= lastEventScroll - 1 && enSunProgressY >= sunH - 0.5);
           enEventEls.forEach((el, index) => {
             const reached = reduced || (lead <= 0 && scrolled >= index * span - 0.5);
             el.classList.toggle("is-on", reached);
@@ -1011,7 +1012,8 @@ export function initTdBlocks(root = document) {
               }
               /* settle: utanför första/sista + tröskel → på väg ut, snappa inte */
               const edge = span * threshold;
-              if (scrollY < points[0] - edge || scrollY > points[points.length - 1] + edge) {
+              /* Förbi sista kortet: släpp, dra aldrig tillbaka (solnedgången animerar själv). */
+              if (scrollY < points[0] - edge || scrollY > points[points.length - 1] + 2) {
                 enDebugPick = "ingen (ut ur sektion)";
                 return;
               }
@@ -1173,7 +1175,9 @@ export function initTdBlocks(root = document) {
           }
           function syncEnDagSkip() {
             if (!enSkipBar || !enSkipBtn) return;
-            const show = enSnapZone();
+            /* På sista kortet (Tillbaka i stugan) behövs varken nästa-pil eller Hoppa över. */
+            const { points: skipPts } = enSnapMetrics();
+            const show = enSnapZone() && (!skipPts.length || scrollY < skipPts[skipPts.length - 1] - 24);
             const first = !enSkipReady;
             enSkipReady = true;
             if (first) enSkipBar.style.transition = "none";
@@ -1375,7 +1379,7 @@ export function initTdBlocks(root = document) {
         return String(tempC);
       }
       let justNuGren = "alpint";
-      const rowArrow = '<svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+      const rowArrow = '<svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.18 3.18 14 8l-4.82 4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg>';
       function pagangRow(line, href, divider) {
         const [when, name] = line.split(" · ");
         return `<a class="td-pagang-row" href="${href}"><span class="td-pagang-row-main"><span class="td-pagang-row-text"><span class="td-ui-figure-sm-regular">${when}</span><span class="td-ui-body">${name}</span></span>${rowArrow}</span>${divider ? '<hr class="td-pagang-divider">' : ""}</a>`;
@@ -1750,7 +1754,7 @@ export function initTdBlocks(root = document) {
   function renderFragor() {
     const esc = (t) => t.replace(/"/g, "&quot;");
     const faqArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
-    const guideArrow = '<span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>';
+    const guideArrow = '<span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.18 3.18 14 8l-4.82 4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span>';
     const guideRows = (list) => list.slice(0, 3).map((q) => `<li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="${esc(q)}"><span>${q}</span>${guideArrow}</button></li>`).join("");
     function render() {
       const faq = document.querySelector("#fragor .td-fraga-fragelista-platta");
@@ -2118,7 +2122,7 @@ export function initTdBlocks(root = document) {
           sources.innerHTML = qa.sources;
           cards.innerHTML = qa.cards.map((item) => {
             const media = item.image ? `<img src="${item.image}" alt="" onerror="this.parentNode.classList.add('is-empty');this.remove()" />` : "";
-            return `<a class="fraga-card" href="#"><span class="fraga-card-media${item.image ? "" : " is-empty"}">${media}</span><span class="fraga-card-copy"><span class="td-ui-kicker">${item.kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${item.title}</span><svg class="fraga-card-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="td-ui-body-sm">${item.line}</span></span></a>`;
+            return `<a class="fraga-card" href="#"><span class="fraga-card-media${item.image ? "" : " is-empty"}">${media}</span><span class="fraga-card-copy"><span class="td-ui-kicker">${item.kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${item.title}</span><svg class="fraga-card-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.18 3.18 14 8l-4.82 4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span><span class="td-ui-body-sm">${item.line}</span></span></a>`;
           }).join("");
           chips.innerHTML = qa.chips.map((text) => `<button class="td-ui-body-sm" type="button" data-fraga-follow="${text}">${text}</button>`).join("");
           [...cards.children].forEach((el) => { el.hidden = true; });

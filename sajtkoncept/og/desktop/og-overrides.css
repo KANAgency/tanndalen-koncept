@@ -770,3 +770,7 @@ html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 @media (prefers-reduced-motion: reduce) {
   .og-hp-header.is-revealed.is-tucked, .og-hp-header.is-tucked { translate: none; }
 }
+
+/* En dag, sista kortet: textytan centrerad i hela bilden, tydligare tidsetikett (2026-11-15) */
+.en-dag-puff-copy { height: 100%; }
+.en-dag-puff-copy .td-ui-label { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); line-height: 1.3; }
