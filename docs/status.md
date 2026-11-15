@@ -37,6 +37,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Regel framåt: boendets feature (Järven: kaminen eller balkongen) är den lilla detaljbilden och ska INTE vara med i videon.
 - Test 2 (bastun, Veo 3.1 Fast, bara startbild, 8 s, 800 credits, `assets/boenden/fjallstugan-jarven/video/veo-916-bastu.mp4`): riktig 3D-rörelse med parallax, men för stor – åker ut genom dörren och hittar på en panelvägg och glasdörr. Första ~3 s användbara.
 - John lutar åt kvadratiskt format (Waabi-raden) för korten – notering, inget beslut genomfört.
+- Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
