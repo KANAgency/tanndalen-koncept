@@ -6319,3 +6319,5 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-oura-rubrik { font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); line-height: 1.15; }
 .td-bo .td-bo-waabi-namn { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-regular); font-size: var(--font-size-lg); line-height: 1.2; letter-spacing: 0; }
 .td-bo .td-bo-waabi-namn { font-size: var(--font-size-md); }
+/* Tajtare överrad → rubrik i båda blocken (2026-11-15) */
+.utforsakning-heading, .td-bo .td-bo-head { gap: var(--space-xs); }
