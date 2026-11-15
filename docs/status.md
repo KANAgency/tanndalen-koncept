@@ -17,7 +17,9 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Johns feedback (15 nov): rörelserna för stora, in-/utzoomningarna gigantiska och det känns som Ken Burns på ett foto, inte en riktig kamera. Sidoåkningen (allrum) bäst. Orsak troligen upplägget: start/slut är utsnitt ur samma foto, så modellen interpolerar bara beskärningen. Prompt vs modell ej utrett.
 - Regel framåt: ett videoformat (stående), kvadraten beskärs ur samma video – kör aldrig båda.
 - Regel framåt: boendets feature (Järven: kaminen eller balkongen) är den lilla detaljbilden och ska INTE vara med i videon.
-- Öppet: John funderar på nästa steg. Kortformat och mobil fortfarande öppet.
+- Test 2 (bastun, Veo 3.1 Fast, bara startbild, 8 s, 800 credits, `assets/boenden/fjallstugan-jarven/video/veo-916-bastu.mp4`): riktig 3D-rörelse med parallax, men för stor – åker ut genom dörren och hittar på en panelvägg och glasdörr. Första ~3 s användbara.
+- John lutar åt kvadratiskt format (Waabi-raden) för korten – notering, inget beslut genomfört.
+- Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
 - Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
