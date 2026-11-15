@@ -6284,22 +6284,24 @@
           scrim: { maskFrom: 50, maskTo: 60 },
           placeholder: false
       };
-      const boendeHamra = {
+      // Fjällbruden: fakta från R360 (12 lägenheter). Lift 270 m och bastu anges bara för nr 9–12.
+      const boendeFjallbruden = {
         ...boendeFjalloga,
-        id: "hamra",
-        name: "Fjällviolen Mosippan",
-        title: "Mitt i Hamra, med söderläge.",
-        body: "Trivsamma lägenheter mitt i Hamra, med skidspåren utanför knuten och liften, restaurangen och skiduthyrningen precis över bron. Alla har balkong eller altan i söderläge med utsikt över Tännån och backarna.",
-        ctaLabel: "Sök boenden i Fjällviolen Mosippan",
+        id: "fjallbruden",
+        name: "Fjällbruden",
+        title: "Längdspåret går förbi balkongen.",
+        body: "Ljusa lägenheter med allt man behöver och inget man inte behöver. Längdspåret mot Funäsfjällens slingor passerar utanför, liften ligger några hundra meter bort. Balkong eller altan i söderläge, bastu, skidförråd och vallabod.",
+        ctaLabel: "Sök boenden i Fjällbruden",
         facts: [
-          { label: "Närmaste lift", value: "220 m" },
-          { label: "Boyta", value: "44–110 m²" },
-          { label: "Sovrum", value: "2–4" },
-          { label: "Bäddar", value: "5–10" },
-          { label: "Husdjur", value: "1 av 7" },
-          { label: "Bastu", value: "I alla" }
+          { label: "Närmaste lift", value: "270 m" },
+          { label: "Boyta", value: "45 m²" },
+          { label: "Sovrum", value: "2" },
+          { label: "Bäddar", value: "5" },
+          { label: "Husdjur", value: "Välkomna" },
+          { label: "Bastu", value: "Ja" }
         ],
-        video: "assets/video/area2.mp4",
+        video: "assets/video/boende-fjallbruden.mp4",
+        poster: "assets/video/boende-fjallbruden-poster.jpg",
         mirror: false,
         parallax: 0.2,
         placeholder: false
@@ -6326,7 +6328,7 @@
         parallax: 0.2,
         placeholder: true
       };
-      const boendeSlides = [boendeFjalloga, boendeHamra, boendeBrunkullan];
+      const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");
