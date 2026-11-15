@@ -108,6 +108,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Båda raderna är karuseller (pilar som Aktuellt, fullbredd, snap, tangentbord) med 5 kort: kort 4 och 5 är platshållare ([Boende 4], [Boende 5]).
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
+- En dag: solnedgången är ett eget snapstopp (sista kortet + max(120, span·0,35)). Hoppa över/pilen döljs när scrollY passerat solnedgångsstoppet (+24 px), dvs. när pinnen släpper.
 - Anna-citatet (Skarvarna) sitter i glappet mellan frågekortet (`.faq`, 288 px efter) och `#boenden-waabi` (160 px före `#boende`).
 - Skisser av 13 kortvarianter (en per inspo) i artefakten "TD boendekort".
 - Öppet: välj en av raderna (den andra tas bort), riktiga boenden och bilder, video i stora bilden, mobil ej granskad.

@@ -2631,6 +2631,8 @@
             const span = Math.max(1, innerHeight * 1.35 - EN_FRONT);
             const sectionDocTop = enDag.getBoundingClientRect().top + scrollY;
             const points = enSlides.map((_, i) => sectionDocTop - lockAt + i * span);
+            /* Solnedgången är ett eget stopp (slutet av hold), annars drar settle tillbaka till sista kortet. */
+            if (points.length) points.push(points[points.length - 1] + Math.max(120, span * 0.35));
             return { lockAt, span, points };
           }
           function enSnapZone() {
@@ -2950,7 +2952,9 @@
           }
           function syncEnDagSkip() {
             if (!enSkipBar || !enSkipBtn) return;
-            const show = enSnapZone();
+            /* Bara medan pinnen står still: efter solnedgången scrollar den iväg, då ska knapparna bort. */
+            const { points: skipPts } = enSnapMetrics();
+            const show = enSnapZone() && (!skipPts.length || scrollY <= skipPts[skipPts.length - 1] + 24);
             const first = !enSkipReady;
             enSkipReady = true;
             if (first) enSkipBar.style.transition = "none";
