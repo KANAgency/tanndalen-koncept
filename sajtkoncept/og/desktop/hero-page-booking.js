@@ -5,7 +5,7 @@
  */
 
 import { initBookingFields } from "/ds/components/booking.js";
-import { BOOKING_GUEST_CATEGORIES } from "../site-config.js";
+import { BOOKING_GUEST_CATEGORIES } from "./site-config.js";
 import { HERO_PAGE_BOOKING } from "./hero-page-config.js";
 
 const CAL_ICON = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3V6M10 3V6M4 8H12M4 5H12V13H4V5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -14,7 +14,7 @@ const SEARCH_ICON = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 10
 
 function iconHtml(tab) {
   if (tab.iconSvg) return `<span class="booking-icon-slot">${tab.iconSvg}</span>`;
-  const src = tab.iconSrc || `../assets/icons/${tab.id}.svg`;
+  const src = tab.iconSrc || `./assets/icons/${tab.id}.svg`;
   return `<span class="booking-icon-slot"><img alt="" src="${src}" /></span>`;
 }
 

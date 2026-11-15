@@ -5,7 +5,7 @@ import { initJustNuStack } from "/ds/components/just-nu-stack.js";
 import { initSegmented } from "/ds/components/segmented.js";
 import { initSeasonToggles, getSeason, setSeason, subscribeSeason } from "/ds/components/season-toggle.js";
 import { mountSeasonBanner } from "/ds/components/season-banner.js";
-import { SEASON_TOGGLE, SEASON_BANNER_COPY } from "../site-config.js";
+import { SEASON_TOGGLE, SEASON_BANNER_COPY } from "./site-config.js";
 
 const seasonBannerCopy = SEASON_BANNER_COPY;
 let tdBlocksReady = false;
@@ -55,8 +55,8 @@ export function initTdBlocks(root = document) {
         mode: dayView,
         copy: seasonBannerCopy,
         image: {
-          winter: "../assets/img/banner-sommar.jpg",
-          summer: "../assets/img/banner-vinter.jpg"
+          winter: "./assets/img/banner-sommar.jpg",
+          summer: "./assets/img/banner-vinter.jpg"
         },
         onSwitch() {
           const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1270,8 +1270,8 @@ export function initTdBlocks(root = document) {
             quote: "”Fast och snabbt i morse. Solsidan mjuknar runt elva, skuggsidan håller hela dagen.”",
             sign: "Jonas Berg, pistförare",
             badge: "Preparerad 05:30",
-            image: "../assets/img/rapport-raw-1.png",
-            avatar: "../assets/img/rapport-avatar.png"
+            image: "./assets/img/rapport-raw-1.png",
+            avatar: "./assets/img/rapport-avatar.png"
           }
         },
         langd: {
@@ -1296,9 +1296,9 @@ export function initTdBlocks(root = document) {
           },
           rapport: {
             /* TODO: byt ut när riktiga filer finns. */
-            image: "../assets/img/just-nu/langd/just-nu-01.jpg",
+            image: "./assets/img/just-nu/langd/just-nu-01.jpg",
             video: "/videos/langd/just-nu-01.mp4",
-            poster: "../assets/img/just-nu/langd/just-nu-01.jpg",
+            poster: "./assets/img/just-nu/langd/just-nu-01.jpg",
             alt: "Hamra Komfort-liften på kvällen, upplyst i lila, rosa och orange, sedd från backen."
           },
           calendar: {
@@ -1308,7 +1308,7 @@ export function initTdBlocks(root = document) {
           /* TODO: sidan för spårkartan är inte vald. Länken pekar på en platshållare. */
           karta: {
             label: "Spårkarta",
-            image: "../assets/img/just-nu/langd/sparkarta.png",
+            image: "./assets/img/just-nu/langd/sparkarta.png",
             alt: "Karta över Tänndalens längdspår.",
             line: "Se vilka spår som är öppna",
             href: "#sparkarta",
@@ -1339,7 +1339,7 @@ export function initTdBlocks(root = document) {
             link: "Hyr kanot eller kajak",
             /* TODO: uthyrningssidan är inte vald. Tom sträng faller tillbaka på #. */
             rentalHref: "",
-            image: "../assets/img/just-nu/sommar/svansjon.jpg?v=2",
+            image: "./assets/img/just-nu/sommar/svansjon.jpg?v=2",
             alt: "Två personer paddlar kanot på Svansjön, med gröna fjäll runt sjön."
           },
           calendar: {
@@ -1349,7 +1349,7 @@ export function initTdBlocks(root = document) {
           kamera: {
             label: "Webbkamera · Storvigeln",
             /* TODO: byt ut när en kamerabild finns. */
-            image: "../assets/img/just-nu/sommar/webbkamera.jpg",
+            image: "./assets/img/just-nu/sommar/webbkamera.jpg",
             alt: "Webbkamera vid Storvigeln"
           }
         }
@@ -1733,9 +1733,9 @@ export function initTdBlocks(root = document) {
         const FOLLOW = "Det här är en demo – fler svar kommer";
         const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
         const CARDS = [
-          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "../assets/img/fraga-bastu.jpg" },
-          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "../assets/img/endag-1300.jpg?v=2" },
-          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "../assets/img/fraga-klatter.jpg" }
+          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "./assets/img/fraga-bastu.jpg" },
+          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "./assets/img/endag-1300.jpg?v=2" },
+          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "./assets/img/fraga-klatter.jpg" }
         ];
         const CHIPS = ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"];
         const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -2192,8 +2192,8 @@ export function initTdBlocks(root = document) {
             { label: "Passar för", value: "Barnfamiljer" },
             { label: "Bastu", value: "I alla" }
           ],
-          video: "../assets/video/area1.mp4",
-          poster: "../assets/img/meny-boende.jpg",
+          video: "./assets/video/area1.mp4",
+          poster: "./assets/img/meny-boende.jpg",
           mirror: true,
           parallax: 0.2,
           r360AreaId: "",
@@ -2218,7 +2218,7 @@ export function initTdBlocks(root = document) {
           { label: "Husdjur", value: "1 av 7" },
           { label: "Bastu", value: "I alla" }
         ],
-        video: "../assets/video/area2.mp4",
+        video: "./assets/video/area2.mp4",
         mirror: false,
         parallax: 0.2,
         placeholder: false

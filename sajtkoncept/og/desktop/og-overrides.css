@@ -186,10 +186,10 @@ html.theme-OG body.og-hp-page {
 }
 /* Light-stroke sun icons on the dark band (orange accent kept). */
 .theme-OG .en-dag img.en-dag-sun-icon[src*="soluppgang-48"] {
-  content: url("../assets/icons/soluppgang-48-light.svg");
+  content: url("./assets/icons/soluppgang-48-light.svg");
 }
 .theme-OG .en-dag img.en-dag-sun-icon[src*="solnedgang-48"] {
-  content: url("../assets/icons/solnedgang-48-light.svg");
+  content: url("./assets/icons/solnedgang-48-light.svg");
 }
 .theme-OG .en-dag .td-button-secondary {
   background: #F5EEE5;

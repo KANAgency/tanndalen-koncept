@@ -58,10 +58,10 @@ export const HERO_PAGE_CONFIG = {
    */
   scenes: [
     /* advanceEarlySec = minimum early cut; JS also enforces clipDuration vs fade+hold+fade */
-    { image: "../assets/img/og-hero-winter.jpg", video: "../assets/video/intro/tystnad.mp4", line1: "Total tystnad", typeSpeed: 1, snow: true, clipDurationSec: 5, advanceEarlySec: 0.25 },
-    { image: "../assets/img/snow.jpg", video: "../assets/video/intro/kaffepaus.mp4", line1: "Kaffepaus", clipDurationSec: 5, advanceEarlySec: 0.6 },
-    { image: "../assets/img/og-hero-winter.jpg", video: "../assets/video/intro/vinterbad.mp4", line1: "Vinterbad", snow: true, clipDurationSec: 5, advanceEarlySec: 0.3 },
-    { image: "../assets/img/og-hero-winter.jpg", video: "../assets/video/intro/kvallsmys.mp4", line1: "Kvällsmys", clipDurationSec: 5, advanceEarlySec: 0.3 }
+    { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/tystnad.mp4", line1: "Total tystnad", typeSpeed: 1, snow: true, clipDurationSec: 5, advanceEarlySec: 0.25 },
+    { image: "./assets/img/snow.jpg", video: "./assets/video/intro/kaffepaus.mp4", line1: "Kaffepaus", clipDurationSec: 5, advanceEarlySec: 0.6 },
+    { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/vinterbad.mp4", line1: "Vinterbad", snow: true, clipDurationSec: 5, advanceEarlySec: 0.3 },
+    { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/kvallsmys.mp4", line1: "Kvällsmys", clipDurationSec: 5, advanceEarlySec: 0.3 }
   ],
 
   /** How long each scene holds before crossfade (seconds). */
@@ -134,7 +134,7 @@ export const HERO_PAGE_CONFIG = {
   mediaRevealP: 0.35, /* with the copy; CSS staggers image then booking bar */
 
   /** Framed hero media (Figma 1280×707 @ 1440). */
-  heroFrameSrc: "../assets/img/og-hero-winter.jpg",
+  heroFrameSrc: "./assets/img/og-hero-winter.jpg",
   heroFrameAspect: "1280 / 707",
   heroFrameInsetPx: 80,
   heroFrameGapTopPx: 61,
@@ -161,7 +161,7 @@ export const HERO_PAGE_CONFIG = {
   clouds: [
     {
       id: "cloud-1",
-      src: "../assets/img/fog/cloud-1.png?v=1024",
+      src: "./assets/img/fog/cloud-1.png?v=1024",
       widthVw: 160,
       leftVw: -40,
       flipX: false,
@@ -177,7 +177,7 @@ export const HERO_PAGE_CONFIG = {
     },
     {
       id: "cloud-2",
-      src: "../assets/img/fog/cloud-2.png?v=1024",
+      src: "./assets/img/fog/cloud-2.png?v=1024",
       widthVw: 200,
       leftVw: -40,
       flipX: true,
@@ -193,7 +193,7 @@ export const HERO_PAGE_CONFIG = {
     },
     {
       id: "cloud-gradient",
-      src: "../assets/img/fog/cloud-gradient.png?v=1024g",
+      src: "./assets/img/fog/cloud-gradient.png?v=1024g",
       widthVw: 180,
       leftVw: -35,
       flipX: false,
@@ -226,7 +226,7 @@ export const HERO_PAGE_BOOKING = {
     {
       id: "boende",
       label: "Boende",
-      iconSrc: "../assets/icons/boende.svg",
+      iconSrc: "./assets/icons/boende.svg",
       dateLabel: "Datum",
       dateValue: "Välj reseperiod",
       whoLabel: "Resesällskap",
@@ -234,12 +234,12 @@ export const HERO_PAGE_BOOKING = {
       searchLabel: "Sök boende",
       linksHtml:
         `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>` +
-        `<a class="td-booking-teaser" href="#omraden"><img src="../assets/img/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`
+        `<a class="td-booking-teaser" href="#omraden"><img src="./assets/img/teaser-boende-b.jpeg" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Var vill ni bo?</strong><span class="td-teaser-sub td-ui-caption">Från ski in/ski out till stugby i skogen</span></span></a>`
     },
     {
       id: "liftkort",
       label: "Liftkort",
-      iconSrc: "../assets/icons/liftkort.svg",
+      iconSrc: "./assets/icons/liftkort.svg",
       dateLabel: "Dag",
       dateValue: "Välj dag",
       whoLabel: "Antal",
@@ -251,7 +251,7 @@ export const HERO_PAGE_BOOKING = {
     {
       id: "skidhyra",
       label: "Skidhyra",
-      iconSrc: "../assets/icons/skidhyra.svg",
+      iconSrc: "./assets/icons/skidhyra.svg",
       dateLabel: "Datum",
       dateValue: "Välj dag eller period",
       whoLabel: "Antal",
@@ -263,7 +263,7 @@ export const HERO_PAGE_BOOKING = {
     {
       id: "skidskola",
       label: "Skidskola",
-      iconSrc: "../assets/icons/skidskola.svg",
+      iconSrc: "./assets/icons/skidskola.svg",
       dateLabel: "Datum",
       dateValue: "Välj dag eller period",
       whoLabel: "Antal",
@@ -271,12 +271,12 @@ export const HERO_PAGE_BOOKING = {
       searchLabel: "Sök skidskola",
       linksHtml:
         `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>` +
-        `<a class="td-booking-teaser" href="#kurser"><img src="../assets/img/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`
+        `<a class="td-booking-teaser" href="#kurser"><img src="./assets/img/teaser-skola-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Kurser och grupper</strong><span class="td-teaser-sub td-ui-caption">För barn från 4 år och vuxna</span></span></a>`
     },
     {
       id: "paket",
       label: "Paket",
-      iconSrc: "../assets/icons/paket.svg",
+      iconSrc: "./assets/icons/paket.svg",
       dateLabel: "Datum",
       dateValue: "Välj reseperiod",
       whoLabel: "Resesällskap",
@@ -284,7 +284,7 @@ export const HERO_PAGE_BOOKING = {
       searchLabel: "Sök paket",
       linksHtml:
         `<p class="td-booking-links"><a class="td-ui-cta-sm" href="#kod">Har du en kampanjkod?</a></p>` +
-        `<a class="td-booking-teaser" href="#paket"><img src="../assets/img/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`
+        `<a class="td-booking-teaser" href="#paket"><img src="./assets/img/teaser-paket-b.png" alt="" loading="lazy"><span><strong class="td-ui-title-sm">Alla paket</strong><span class="td-teaser-sub td-ui-caption">Boende och liftkort i ett, från 2 nätter</span></span></a>`
     }
   ]
 };
