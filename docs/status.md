@@ -1,6 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
-Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
+Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
 
 ## Läge
 - TD startsida desktop: intro, header (Fjällguiden), Aktuellt, En dag, Just nu (Alpint + Längd, tredje raden i På plats), varumärkessektionen, Fjällguiden-blocket och svarsmodalen (15 frågor) är byggda. Allt innehåll i Just nu och modalen är hårdkodat/påhittat.
@@ -9,6 +9,14 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Senaste HEAD: `f76a8b9` på `main`. Inte pushad.
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
+
+## Klart 15 nov: OG lägessystem (steg 1 av TD→OG-synken)
+- `og/desktop/modes.js`, `modes-content.js` (bokningskalender läge 3), `demo-stay.js` (demovistelse [Grönklitt Stugby] 15–22 feb 2027, 2 vuxna 2 barn) efter TD:s mönster, på `shared/js/modes-engine.js` + `MODES_UI` (og-mode/og-season). `td-blocks.js` skickar nu `og-season` bredvid `td-season`.
+- Head-skript i `og/desktop/index.html` sätter `data-mode` före render: `?mode`, `?intro=1` (= ny), `?intro=0` (aldrig ny), sparat `og-mode`, annars `og_intro_seen` → återkommande. `?plats=1` / sparat `og-onsite-orsa` → På plats.
+- `resolveIntroMode()` i `hero-page.js` läser `data-mode`: bara "ny" visar introt. Motorn laddar om med `?mode=new` vid byte till/från ny, så introt startar om rent. Verifierat: byte returning → new laddar om och introt spelar.
+- På plats-toppbar (platshållarmått i [hakparentes]), `[data-onsite-toggle]` i menyn, vistelsevy i kontopanelen. Kontopanelens öppna/stäng flyttad från `hero-page.js` till motorn. CSS portad från TD till `og-overrides.css` (TD-namn mappas redan till OG-färger). Headern flyttas ned med toppbarens höjd (`--og-topbar-offset`).
+- Blockordning per läge, live: bokning = Fråga, Just nu, En dag; På plats = Just nu, Fråga, En dag; övriga = En dag, Just nu, Fråga. Verifierat i alla fyra lägen × vinter/sommar, inga konsolfel.
+- Öppet: toppbarens sommartext (steg 2), visuell granskning av header + toppbar.
 
 ## Klart 15 nov: OG = hero-page på /og/
 - `og/desktop/hero-page/` flyttad till `og/desktop/` (`7a1b289`). Gamla OG-startsidan, hero-test och oanvända OG-filer borttagna (finns i git). Ospårade `.old`-filer i `src/backups/og-hero-page-old/`. Verifierat: /og/?intro=1 laddar utan 404 eller konsolfel, sektioner en-dag/just-nu/fragor/boende.

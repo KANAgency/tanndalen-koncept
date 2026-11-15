@@ -36,8 +36,72 @@
     <link rel="stylesheet" href="./td-blocks.css" />
     <link rel="stylesheet" href="./td-booking.css" />
     <link rel="stylesheet" href="./og-overrides.css" />
+    <script>
+      /* Läge före första render (samma modell som TD): ?mode, ?intro=1/0, sparat og-mode, annars sett intro → returning. modes.js tar över. */
+      try {
+        var ogSeason = localStorage.getItem("og-season");
+        if (ogSeason === "summer" || ogSeason === "sommar") document.documentElement.dataset.season = "summer";
+      } catch (e) {}
+      try {
+        var p = new URLSearchParams(location.search);
+        var mode = p.get("mode");
+        var intro = p.get("intro");
+        var base = mode;
+        var stored = null;
+        try { stored = localStorage.getItem("og-mode"); } catch (e) {}
+        var isBase = function (m) { return m === "new" || m === "returning" || m === "booking"; };
+        if (intro === "1") mode = base = "new";
+        else if (mode === "onsite") base = isBase(stored) ? stored : "returning";
+        else if (!isBase(mode)) {
+          mode = isBase(stored) ? stored : null;
+          if (!mode) {
+            var seen = false;
+            try { seen = localStorage.getItem("og_intro_seen") === "1"; } catch (e) {}
+            mode = seen ? "returning" : "new";
+          }
+          base = mode;
+        }
+        if (intro === "0" && mode === "new") mode = base = "returning";
+        try {
+          var raw = localStorage.getItem("og-onsite-orsa");
+          var on = raw ? JSON.parse(raw) : null;
+          if (on && typeof on.until === "number" && Date.now() > on.until) { localStorage.removeItem("og-onsite-orsa"); on = null; }
+          var manualOff = on && on.source === "manual" && on.value === false;
+          if (mode === "onsite" || (on && on.value === true) || (p.get("plats") === "1" && !manualOff)) mode = "onsite";
+        } catch (e) {}
+        document.documentElement.dataset.mode = mode;
+        document.documentElement.dataset.baseMode = base === "onsite" ? "returning" : base;
+        if (p.get("demo") === "0") document.documentElement.dataset.demo = "0";
+      } catch (e) {
+        document.documentElement.dataset.mode = "new";
+      }
+    </script>
   </head>
   <body class="og-hp-page" data-og-hero-page>
+    <div class="onsite-topbar" data-onsite-pill-row hidden>
+      <div class="onsite-topbar-status" data-onsite-status>
+        <div class="onsite-topbar-start">
+          <a class="onsite-topbar-title td-ui-body" href="#just-nu">På plats i Orsa Grönklitt</a>
+          <button class="onsite-topbar-leave td-ui-caption" type="button" data-onsite-leave>(inte på plats?)</button>
+        </div>
+        <p class="onsite-topbar-text td-ui-body" data-onsite-metrics>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Öppet:</strong> [12/14 nedfarter, 6/7 liftar]</span>
+          <span class="onsite-topbar-sep" data-onsite-metric-sep aria-hidden="true">·</span>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Spår:</strong> [62 km preparerat i natt]</span>
+          <span class="onsite-topbar-sep" data-onsite-metric-sep aria-hidden="true">·</span>
+          <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Idag:</strong> [Rovdjursparken öppen 10–15]</span>
+        </p>
+      </div>
+      <p class="onsite-topbar-suggest td-ui-body" data-onsite-suggest hidden>
+        <strong class="onsite-topbar-title">Du verkar vara i Orsa Grönklitt?</strong>
+        <span class="onsite-topbar-sep" aria-hidden="true">·</span>
+        <span class="onsite-topbar-suggest-actions">
+          <button class="onsite-topbar-leave" type="button" data-onsite-suggest-yes>Ja det stämmer</button>
+          <span class="onsite-topbar-suggest-pipe" aria-hidden="true"></span>
+          <button class="onsite-topbar-leave" type="button" data-onsite-suggest-no>Nej det stämmer inte</button>
+        </span>
+      </p>
+    </div>
     <div class="og-hp-shell" data-og-hp-shell>
 
       <header class="og-hp-header top is-intro-hidden" data-og-hp-header hidden inert aria-hidden="true">
@@ -198,6 +262,15 @@
                   </div>
                 </li>
               </ul>
+              <div class="onsite-toggle-field">
+                <label class="onsite-toggle td-ui-nav" for="onsite-toggle-input">
+                  <span>Jag är på plats i Orsa Grönklitt</span>
+                  <span class="onsite-switch">
+                    <input id="onsite-toggle-input" data-onsite-toggle type="checkbox" role="switch" aria-checked="false" />
+                    <span class="onsite-switch-track" aria-hidden="true"><span class="onsite-switch-thumb"></span></span>
+                  </span>
+                </label>
+              </div>
               <nav class="site-menu-foot" aria-label="Mer">
                 <a class="td-ui-body-sm" href="#">Konferens</a>
                 <a class="td-ui-body-sm" href="#">Jobba hos oss</a>
@@ -275,6 +348,20 @@
                 <div class="account-foot">
                   <a class="td-ui-caption" href="#">Hittar inte numret?</a>
                   <a class="td-ui-caption" href="#">Fråga oss om bokning</a>
+                </div>
+              </div>
+              <div data-account-view="stay" hidden>
+                <div class="account-stay-head">
+                  <p class="td-ui-kicker account-stay-status" data-stay-status data-status="upcoming"></p>
+                  <h2 class="td-heading-xxs-regular" data-stay-title>[Grönklitt Stugby]</h2>
+                </div>
+                <div class="account-stay-rows td-body-sm">
+                  <div><span>Sällskap</span><span data-stay-party>2 vuxna, 2 barn</span></div>
+                  <div><span>Incheckning</span><span data-stay-checkin>Från 15:00</span></div>
+                </div>
+                <a class="td-button td-button-secondary td-button-md td-button-fill-spring" href="#bokning" data-todo="r360">Se hela bokningen</a>
+                <div class="account-foot account-foot-center">
+                  <a class="td-ui-caption" href="#logga-ut" data-account-logout>Logga ut</a>
                 </div>
               </div>
             </div>
@@ -676,5 +763,51 @@
       </div>
 
     <script type="module" src="./hero-page.js"></script>
+    <script type="module">
+      import { init } from "./modes.js";
+      init();
+    </script>
+    <script>
+    /* Blockordning per läge (som TD): På plats → En dag efter Fråga-blocket. Påbörjad bokning → Fråga och Just nu före En dag.
+       Läget kan bytas live → återställ via markörer. Ingen Utförsåkning-sektion i OG. */
+    (() => {
+      const root = document.documentElement;
+      const enDag = document.getElementById("en-dag");
+      const faq = document.getElementById("fragor");
+      const justNu = document.getElementById("just-nu");
+      if (!enDag || !faq || !justNu) return;
+      const mark = document.createComment("plats:en-dag");
+      enDag.before(mark);
+      const marks = [faq, justNu].map((el) => { const m = document.createComment("plats:" + el.id); el.before(m); return m; });
+      let last = null;
+      const apply = () => {
+        const mode = root.dataset.mode;
+        if (mode === last) return;
+        last = mode;
+        mark.after(enDag);
+        [faq, justNu].forEach((el, i) => marks[i].after(el));
+        if (mode === "booking") [faq, justNu].forEach((el) => enDag.before(el));
+        else if (mode === "onsite") faq.after(enDag);
+        dispatchEvent(new Event("resize"));
+      };
+      apply();
+      new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-mode"] });
+    })();
+    /* På plats-toppbaren ligger i flödet; headern flyttas ned med toppbarens synliga del. */
+    (() => {
+      const bar = document.querySelector(".onsite-topbar");
+      if (!bar) return;
+      const sync = () => {
+        const header = document.querySelector("[data-og-hp-header]");
+        const sticky = header?.classList.contains("is-sticky");
+        const h = bar.hidden ? 0 : sticky ? Math.max(0, bar.getBoundingClientRect().bottom) : bar.offsetHeight;
+        document.documentElement.style.setProperty("--og-topbar-offset", h + "px");
+      };
+      addEventListener("scroll", sync, { passive: true });
+      addEventListener("resize", sync);
+      new MutationObserver(sync).observe(bar, { attributes: true, attributeFilter: ["hidden"] });
+      sync();
+    })();
+    </script>
   </body>
 </html>

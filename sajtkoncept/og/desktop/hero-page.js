@@ -133,6 +133,10 @@ function createCloudLayer(cloud) {
 }
 
 function resolveIntroMode() {
+  /* Läget sätts i index.html-head (?intro=1 → new, ?intro=0 → aldrig new). Bara läget "ny" visar introt.
+     modes-engine laddar om sidan med ?mode=new när man byter till/från "ny", så introt startas om rent. */
+  const mode = document.documentElement.dataset.mode;
+  if (mode) return mode === "new" ? "intro" : "skip";
   const params = new URLSearchParams(location.search);
   const forced = params.get("intro");
   if (forced === "1") return "intro";
@@ -470,28 +474,7 @@ function bindHeaderChrome() {
     });
   }
 
-  /* Account panel toggle — TODO: wire to real OG account lookup */
-  const accountMenu = document.querySelector("[data-og-hp-account]");
-  const accountBtn = document.querySelector("[data-og-hp-account-toggle]");
-  const accountPanel = document.getElementById("account-panel");
-  if (accountMenu && accountBtn && accountPanel) {
-    const setAccountOpen = (open) => {
-      accountBtn.setAttribute("aria-expanded", String(open));
-      accountPanel.hidden = !open;
-    };
-    accountBtn.addEventListener("click", () => {
-      setAccountOpen(accountBtn.getAttribute("aria-expanded") !== "true");
-    });
-    document.addEventListener("click", (event) => {
-      if (!accountMenu.contains(event.target)) setAccountOpen(false);
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setAccountOpen(false);
-    });
-    accountPanel.querySelector("[data-account-form]")?.addEventListener("submit", (event) => {
-      event.preventDefault();
-    });
-  }
+  /* Kontopanelen (öppna/stäng, inloggning, vistelse) sköts av modes-engine via modes.js. */
 
   /* Fråga oss — TODO: wire to OG help */
   document.getElementById("fraga-launch")?.addEventListener("click", (event) => {

@@ -111,6 +111,7 @@ export function initTdBlocks(root = document) {
       applyDayView(dayView);
       subscribeSeason((season) => {
         document.dispatchEvent(new CustomEvent("td-season", { detail: season }));
+        document.dispatchEvent(new CustomEvent("og-season", { detail: season }));
         const next = season === "summer" ? "summer" : "winter";
         if (next === dayView) return;
         dayView = next;
