@@ -6317,3 +6317,4 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-ruta { font-family: var(--font-family-TD-secondary), sans-serif; }
 .td-bo { font-family: var(--font-family-TD-secondary), sans-serif; }
 .td-bo .td-bo-oura-rubrik { font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); line-height: 1.15; }
+.td-bo .td-bo-waabi-namn { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-regular); font-size: var(--font-size-lg); line-height: 1.2; letter-spacing: 0; }
