@@ -127,7 +127,11 @@ def spara(it, namn, mapp, kriterier):
     for i, b in enumerate(bilder, 1):
         fil = mapp / f"{i:02d}-{b['hash'][:8]}.jpg"
         if not fil.exists():
-            urllib.request.urlretrieve(b["url"], fil)
+            try:
+                urllib.request.urlretrieve(b["url"], fil)
+            except Exception as e:  # noqa: BLE001 – enstaka bild saknas i R360
+                print(f"  saknas: {b['url']} ({e})", file=sys.stderr)
+                continue
         meta.append({"fil": fil.name, "alt": b["translations"].get("sv", {}).get("accessibility")})
     fakta = {
         "namn": namn,
