@@ -38,6 +38,12 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: Waabi-raden – Brunkullan bort, nya Rosa Byn och Skarljus
+- Ordning nu: Fjällöga 13 A, Fjällstjärnan B, Järven, Fjällsippan 4, Rosa Byn D32, Skarljus 4 C (6 kort).
+- Ski Lodge Premium 203 ersatt av Rosa Byn D32 (dåliga bilder i R360): "Backen rakt utanför fönstret", 230 m, 6 bäddar; huvud = allrum, detalj = utsikt mot stolliften.
+- Skarljus 7 A ersatt av Skarljus 4 C: "Hamrafjället i panoramafönstret" (R360: utsikt över Hamrafjället), 270 m, 8 bäddar; huvud = allrum med panoramafönster, detalj = fönsterbänk.
+- Bilder i `tanndalen-orsa/assets/boenden/rosa-byn/` och `skarljus/`. Oura-raden orörd.
+
 ## Klart 15 nov: Fjällstjärnan B i Waabi-raden, ny ordning
 - Ordning: Fjällöga 13 A, Fjällstjärnan B, Järven, Fjällsippan 4, Ski Lodge 203, Skarljus 7 A, Brunkullan 23.
 - Fjällstjärnan B (R360, grouppoollid 30243): "Hunden får följa med" (husdjur tillåtet), 900 m till liften, 10 bäddar, pris [X]. Huvudbild = exteriören beskuren kvadratiskt kring huset, detaljbild = `fraga-hund-stuga.jpg` (AI-genererad, inte boendet). Bilder i `tanndalen-orsa/assets/boenden/fjallstjarnan/`.
