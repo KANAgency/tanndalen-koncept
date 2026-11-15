@@ -6231,36 +6231,6 @@ html, body { overscroll-behavior-y: none; }
 }
 .td-bo-pris { margin: 0; font-weight: 700; font-size: 15px; }
 
-/* Oura: ett budskap, rubriken ovanpå bilden, detalj som rund närbild */
-.td-bo-oura-lank {
-  position: relative; display: block; aspect-ratio: 2 / 3;
-  border-radius: 16px; overflow: hidden; background: var(--color-bg-inverted);
-  color: #FFFFFF; text-decoration: none;
-}
-.td-bo-oura-bild {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.82;
-  transition: transform 9s ease-out;
-}
-.td-bo-oura-lank:hover .td-bo-oura-bild { transform: scale(1.08); }
-.td-bo-oura-lank::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.5) 100%);
-}
-.td-bo-oura-rubrik {
-  position: absolute; z-index: 1; top: 24px; left: 24px; right: 24px; margin: 0;
-  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
-  font-weight: 400; font-size: 36px; line-height: 1.05;
-}
-.td-bo-oura-detalj {
-  position: absolute; z-index: 1; right: 24px; bottom: 24px;
-  width: 112px; height: 112px; object-fit: cover; border-radius: 999px;
-  box-sizing: border-box; border: 3px solid #FFFFFF;
-}
-.td-bo-oura-meta {
-  position: absolute; z-index: 1; left: 24px; bottom: 24px;
-  display: flex; flex-direction: column; gap: 4px;
-}
-
 /* Waabi: stor bild plus rutnät med detalj och belägg */
 .td-bo-waabi-kort { display: flex; flex-direction: column; gap: 10px; }
 .td-bo-waabi-bildlank { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; }
@@ -6293,20 +6263,15 @@ html, body { overscroll-behavior-y: none; }
     gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
   }
   .td-bo-lista > li { scroll-snap-align: start; }
-  .td-bo-oura-rubrik { font-size: 30px; }
 }
-.faq:has(+ .td-bo) { --fraga-space-after: 160px; }
-.td-bo-waabi { margin-bottom: 288px; }
-.td-bo-oura-rubrik { text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
-.page .td-bo-oura-lank { color: #FFFFFF; }
-.page .td-bo-oura-lank .td-ui-caption { color: rgba(255,255,255,0.85); }
+.faq:has(+ .td-bo) { --fraga-space-after: 288px; }
 .page .td-bo-alla { color: var(--color-text-primary); }
 .page .td-bo-waabi-pil { color: #FFFFFF; }
 .td-bo .td-bo-head { gap: var(--space-md); }
 .td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
 .td-bo .td-bo-head h2 { margin: 0; }
 /* Typografi on brand + mindre radier (2026-11-15) */
-.td-bo .td-bo-oura-lank, .td-bo .td-bo-waabi-bildlank { border-radius: 4px; }
+.td-bo .td-bo-waabi-bildlank { border-radius: 4px; }
 .td-bo .td-bo-waabi-rutor > * { border-radius: 4px; }
 .td-bo .td-bo-pris { font-size: inherit; font-weight: inherit; }
 .td-bo .td-bo-ruta-tal { font-size: var(--font-size-md); }
@@ -6316,7 +6281,6 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-waabi-rutor { margin-bottom: 4px; }
 .td-bo .td-bo-ruta { font-family: var(--font-family-TD-secondary), sans-serif; }
 .td-bo { font-family: var(--font-family-TD-secondary), sans-serif; }
-.td-bo .td-bo-oura-rubrik { font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); line-height: 1.15; }
 .td-bo .td-bo-waabi-namn { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-regular); font-size: var(--font-size-lg); line-height: 1.2; letter-spacing: 0; }
 .td-bo .td-bo-waabi-namn { font-size: var(--font-size-md); }
 /* Tajtare överrad → rubrik i båda blocken (2026-11-15) */
@@ -6324,8 +6288,6 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-waabi-namn { margin-bottom: -4px; } .td-bo-waabi .td-bo-waabi-kort .td-bo-pris { margin-top: 4px; }
 .td-bo .td-bo-waabi-namn { letter-spacing: -0.02em; }
 /* Oura: ingen dimning av hela bilden, scrim bara där texten ligger */
-.td-bo .td-bo-oura-bild { opacity: 1; }
-.td-bo .td-bo-oura-lank::after { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.5) 100%); }
 /* Boendeslingorna som karusell (som Aktuellt) */
 .td-bo .td-bo-head { flex-direction: row; justify-content: space-between; align-items: flex-end; }
 .td-bo .td-bo-head > .utforsakning-eyebrow, .td-bo .td-bo-head > h2 { flex-basis: 100%; }

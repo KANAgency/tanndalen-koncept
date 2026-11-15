@@ -39,7 +39,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Regel framåt: ett videoformat (stående), kvadraten beskärs ur samma video – kör aldrig båda.
 - Regel framåt: boendets feature (Järven: kaminen eller balkongen) är den lilla detaljbilden och ska INTE vara med i videon.
 - Test 2 (bastun, Veo 3.1 Fast, bara startbild, 8 s, 800 credits, `assets/boenden/fjallstugan-jarven/video/veo-916-bastu.mp4`): riktig 3D-rörelse med parallax, men för stor – åker ut genom dörren och hittar på en panelvägg och glasdörr. Första ~3 s användbara.
-- John lutar åt kvadratiskt format (Waabi-raden) för korten – notering, inget beslut genomfört.
+- Beslut 2026-11-15: Oura-raden (`#boenden-oura`) borttagen ur TD. Waabi (kvadratiska kort) är kvar som enda boendevisning.
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
@@ -104,7 +104,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Båda raderna är karuseller (pilar som Aktuellt, fullbredd, snap, tangentbord) med 5 kort: kort 4 och 5 är platshållare ([Boende 4], [Boende 5]).
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
-- Citatet och topografin mellan Fjällguiden och `#boende` ankras nu efter `#boenden-waabi` (faller tillbaka på `.faq`).
+- Anna-citatet (Skarvarna) sitter i glappet mellan frågekortet (`.faq`, 288 px efter) och `#boenden-waabi` (160 px före `#boende`).
 - Skisser av 13 kortvarianter (en per inspo) i artefakten "TD boendekort".
 - Öppet: välj en av raderna (den andra tas bort), riktiga boenden och bilder, video i stora bilden, mobil ej granskad.
 
