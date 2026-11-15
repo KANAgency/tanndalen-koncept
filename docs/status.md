@@ -39,6 +39,7 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Kortens typografi via TD-klasser (namn `td-ui-caption` på egen rad, rubrik Superclarendon Bold 24, siffror `td-ui-figure`, pris `td-ui-title-sm`), radie 4 px på alla bilder och rutor.
 - Första kortet i båda raderna har riktiga Fjällsippan-bilder: `boende-fjallsippan-exterior.jpg` (stor) och `boende-fjallsippan-bastu.jpg` (feature). Rubrik "Egen bastu efter sista åket". Plan: stora bilden blir en film av stillbilder (exteriör, vardagsrum, kök, sovrum, skidspår), en spelar åt gången, hovring byter.
 - Kort 2 = Ski Lodge Premium 203 – backvy (r360: 46 m², 6 bäddar, 2 sovrum, söderbalkong mot backen, 25 m till lift och längdspår, handikappanpassad, våning 2). Bilder från R360: `boende-skilodge-203-allrum.jpg` (stor) och `boende-skilodge-203-balkong.jpg` (balkongdörren, beskuren). Ingen bild på utsikten finns. Pris okänt.
+- Båda raderna är karuseller (pilar som Aktuellt, fullbredd, snap, tangentbord) med 5 kort: kort 4 och 5 är platshållare ([Boende 4], [Boende 5]).
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
 - Citatet och topografin mellan Fjällguiden och `#boende` ankras nu efter `#boenden-waabi` (faller tillbaka på `.faq`).

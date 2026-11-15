@@ -6326,3 +6326,21 @@ html, body { overscroll-behavior-y: none; }
 /* Oura: ingen dimning av hela bilden, scrim bara där texten ligger */
 .td-bo .td-bo-oura-bild { opacity: 1; }
 .td-bo .td-bo-oura-lank::after { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.5) 100%); }
+/* Boendeslingorna som karusell (som Aktuellt) */
+.td-bo .td-bo-head { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+.td-bo .td-bo-head > .utforsakning-eyebrow, .td-bo .td-bo-head > h2 { flex-basis: 100%; }
+.td-bo .td-bo-head { flex-wrap: wrap; }
+.td-bo .td-bo-head .td-bo-nav { order: 3; margin-left: auto; }
+.td-bo .td-bo-lista {
+  display: flex; grid-template-columns: none; gap: 40px;
+  width: 100vw; margin-left: calc(50% - 50vw);
+  --bo-inline: max(var(--space-lg), (100vw - 1280px) / 2);
+  padding-inline: var(--bo-inline); scroll-padding-inline-start: var(--bo-inline);
+  box-sizing: border-box;
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+}
+.td-bo .td-bo-lista::-webkit-scrollbar { display: none; }
+.td-bo .td-bo-lista > li { flex: 0 0 calc((min(1280px, 100vw - var(--space-lg) * 2) - 80px) / 3); scroll-snap-align: start; }
+@media (max-width: 1023px) { .td-bo .td-bo-lista { gap: 16px; } .td-bo .td-bo-lista > li { flex-basis: 80%; } }
+@media (max-width: 767px) { .td-bo .td-bo-nav { display: none; } }

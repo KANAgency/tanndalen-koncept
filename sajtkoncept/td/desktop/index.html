@@ -1248,8 +1248,12 @@
         <header class="td-bo-head utforsakning-heading">
           <p class="utforsakning-eyebrow td-bo-eyebrow">Handplockade boenden</p>
           <h2 class="td-heading-4" id="boenden-oura-title">Här bor skidåkarna</h2>
+          <div class="td-aktuellt-nav td-bo-nav">
+            <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Föregående" aria-controls="boenden-oura-track" disabled><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+            <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Nästa" aria-controls="boenden-oura-track"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+          </div>
         </header>
-        <ul class="td-bo-lista">
+        <ul class="td-bo-lista" id="boenden-oura-track" tabindex="0" aria-label="Boenden">
           <li class="td-bo-oura-kort">
             <a class="td-bo-oura-lank" href="#">
               <img class="td-bo-oura-bild" src="assets/img/boende-fjallsippan-exterior.jpg" alt="Fjällsippan 4, trähus i snö med fjället bakom" loading="lazy" decoding="async">
@@ -1274,6 +1278,22 @@
               <span class="td-bo-oura-meta"><span class="td-ui-caption">Hamra Lodge 3 · Hamra</span><span class="td-ui-title-sm td-bo-pris">fr. [3 900] kr/natt</span></span>
             </a>
           </li>
+          <li class="td-bo-oura-kort">
+            <a class="td-bo-oura-lank" href="#">
+              <img class="td-bo-oura-bild" src="assets/img/meny-boende.jpg" alt="[Boende 4] i snö" loading="lazy" decoding="async">
+              <h3 class="td-bo-oura-rubrik">Kaminen är redan tänd när ni kommer</h3>
+              <img class="td-bo-oura-detalj" src="assets/img/fraga-restaurang.jpg" alt="Braskamin" loading="lazy" decoding="async">
+              <span class="td-bo-oura-meta"><span class="td-ui-caption">[Boende 4] · Tänndalen</span><span class="td-ui-title-sm td-bo-pris">fr. [X] kr/natt</span></span>
+            </a>
+          </li>
+          <li class="td-bo-oura-kort">
+            <a class="td-bo-oura-lank" href="#">
+              <img class="td-bo-oura-bild" src="assets/img/fraga-hund-stuga.jpg" alt="[Boende 5], stort vardagsrum" loading="lazy" decoding="async">
+              <h3 class="td-bo-oura-rubrik">Plats för två familjer</h3>
+              <img class="td-bo-oura-detalj" src="assets/img/fraga-hyra.jpg" alt="Skidförråd" loading="lazy" decoding="async">
+              <span class="td-bo-oura-meta"><span class="td-ui-caption">[Boende 5] · Hamra</span><span class="td-ui-title-sm td-bo-pris">fr. [X] kr/natt</span></span>
+            </a>
+          </li>
         </ul>
       </section>
 
@@ -1281,8 +1301,12 @@
         <header class="td-bo-head utforsakning-heading">
           <p class="utforsakning-eyebrow td-bo-eyebrow">Handplockade boenden</p>
           <h2 class="td-heading-4" id="boenden-waabi-title">Här bor skidåkarna</h2>
+          <div class="td-aktuellt-nav td-bo-nav">
+            <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Föregående" aria-controls="boenden-waabi-track" disabled><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+            <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Nästa" aria-controls="boenden-waabi-track"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
+          </div>
         </header>
-        <ul class="td-bo-lista">
+        <ul class="td-bo-lista" id="boenden-waabi-track" tabindex="0" aria-label="Boenden">
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällsippan 4, Egen bastu efter sista åket">
               <img class="td-bo-waabi-bild" src="assets/img/boende-fjallsippan-exterior.jpg" alt="Fjällsippan 4, trähus i snö med fjället bakom" loading="lazy" decoding="async">
@@ -1324,6 +1348,34 @@
             <p class="td-ui-caption td-bo-waabi-namn">Hamra Lodge 3</p>
             <h3 class="td-heading-xs td-bo-waabi-rubrik">Ut genom dörren, ner i backen</h3>
             <p class="td-ui-title-sm td-bo-pris">fr. [3 900] kr/natt</p>
+          </li>
+          <li class="td-bo-waabi-kort">
+            <a class="td-bo-waabi-bildlank" href="#" aria-label="[Boende 4], Kaminen är redan tänd när ni kommer">
+              <img class="td-bo-waabi-bild" src="assets/img/meny-boende.jpg" alt="[Boende 4] i snö" loading="lazy" decoding="async">
+              <span class="td-bo-waabi-pil" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            </a>
+            <div class="td-bo-waabi-rutor">
+              <img src="assets/img/fraga-restaurang.jpg" alt="Braskamin" loading="lazy" decoding="async">
+              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">600 m</span><span class="td-ui-caption">till liften</span></p>
+              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">8</span><span class="td-ui-caption">bäddar</span></p>
+            </div>
+            <p class="td-ui-caption td-bo-waabi-namn">[Boende 4]</p>
+            <h3 class="td-heading-xs td-bo-waabi-rubrik">Kaminen är redan tänd när ni kommer</h3>
+            <p class="td-ui-title-sm td-bo-pris">fr. [X] kr/natt</p>
+          </li>
+          <li class="td-bo-waabi-kort">
+            <a class="td-bo-waabi-bildlank" href="#" aria-label="[Boende 5], Plats för två familjer">
+              <img class="td-bo-waabi-bild" src="assets/img/fraga-hund-stuga.jpg" alt="[Boende 5], stort vardagsrum" loading="lazy" decoding="async">
+              <span class="td-bo-waabi-pil" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            </a>
+            <div class="td-bo-waabi-rutor">
+              <img src="assets/img/fraga-hyra.jpg" alt="Skidförråd" loading="lazy" decoding="async">
+              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">300 m</span><span class="td-ui-caption">till liften</span></p>
+              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">12</span><span class="td-ui-caption">bäddar</span></p>
+            </div>
+            <p class="td-ui-caption td-bo-waabi-namn">[Boende 5]</p>
+            <h3 class="td-heading-xs td-bo-waabi-rubrik">Plats för två familjer</h3>
+            <p class="td-ui-title-sm td-bo-pris">fr. [X] kr/natt</p>
           </li>
         </ul>
       </section>
@@ -6987,5 +7039,34 @@
         dlg.addEventListener("close", () => { frame.innerHTML = ""; card.focus(); });
       })();
       </script>
+    <script>
+      /* Boendeslingorna: karusell med pilar som i Aktuellt. */
+      document.querySelectorAll(".td-bo").forEach((section) => {
+        const track = section.querySelector(".td-bo-lista");
+        const [prev, next] = section.querySelectorAll(".td-bo-nav button");
+        if (!track || !prev || !next) return;
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const step = () => {
+          const card = track.querySelector("li");
+          const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+          return card ? card.getBoundingClientRect().width + gap : 0;
+        };
+        const sync = () => {
+          const atStart = track.scrollLeft <= 1;
+          const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+          prev.disabled = atStart; next.disabled = atEnd;
+        };
+        const go = (dir) => track.scrollBy({ left: dir * step(), behavior: reduced ? "auto" : "smooth" });
+        prev.addEventListener("click", () => go(-1));
+        next.addEventListener("click", () => go(1));
+        track.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+          if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+        });
+        track.addEventListener("scroll", sync, { passive: true });
+        addEventListener("resize", sync);
+        sync();
+      });
+    </script>
 </body>
 </html>
