@@ -6305,3 +6305,14 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-head { gap: var(--space-md); }
 .td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
 .td-bo .td-bo-head h2 { margin: 0; }
+/* Typografi on brand + mindre radier (2026-11-15) */
+.td-bo .td-bo-oura-lank, .td-bo .td-bo-waabi-bildlank { border-radius: 4px; }
+.td-bo .td-bo-waabi-rutor > * { border-radius: 4px; }
+.td-bo .td-bo-pris { font-size: inherit; font-weight: inherit; }
+.td-bo .td-bo-ruta-tal { font-size: var(--font-size-md); }
+.td-bo .td-bo-waabi-namn { margin: 8px 0 0; color: var(--color-TD-neutral); }
+.td-bo .td-bo-waabi-rubrik { margin: 0; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); line-height: 1.2; }
+.td-bo .td-bo-waabi-kort { gap: 8px; }
+.td-bo .td-bo-waabi-rutor { margin-bottom: 4px; }
+.td-bo .td-bo-ruta { font-family: var(--font-family-TD-secondary), sans-serif; }
+.td-bo { font-family: var(--font-family-TD-secondary), sans-serif; }

@@ -23,6 +23,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 
 ## Klart 15 nov: två testrader med boendekort under Fjällguiden
 - `#boenden-oura` och `#boenden-waabi` i `td/desktop/index.html`, CSS sist i `startsida.css` (`.td-bo-*`). Tre platshållarboenden med påhittad data och priser i [hakparentes], befintliga bilder.
+- Kortens typografi via TD-klasser (namn `td-ui-caption` på egen rad, rubrik Superclarendon Bold 24, siffror `td-ui-figure`, pris `td-ui-title-sm`), radie 4 px på alla bilder och rutor.
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
 - Citatet och topografin mellan Fjällguiden och `#boende` ankras nu efter `#boenden-waabi` (faller tillbaka på `.faq`).
