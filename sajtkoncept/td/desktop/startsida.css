@@ -6302,3 +6302,6 @@ html, body { overscroll-behavior-y: none; }
 .page .td-bo-oura-lank .td-ui-caption { color: rgba(255,255,255,0.85); }
 .page .td-bo-alla { color: var(--color-text-primary); }
 .page .td-bo-waabi-pil { color: #FFFFFF; }
+.td-bo .td-bo-head { gap: var(--space-md); }
+.td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
+.td-bo .td-bo-head h2 { margin: 0; }
