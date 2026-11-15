@@ -10,6 +10,10 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: ny bild för "Våfflor i solgropen" (TD En dag 13:00)
+Redigering av originalet i Magnific (Nano Banana Pro med bilden som referens, 2K 3:4, 3 varianter, 225 credits). Variant 3 vald: klarblå himmel och sol, stavarna i snövallen i stället för stående vid bordet, värmeljuset borttaget. Besticken står fortfarande upp. Original i `tanndalen-orsa/assets/magnific/endag-1300-vafflor-v3.png`. Används även i guidekorten (Toppstugan, Fikat vid Ladan).
+Bild 5 (endag-1700, stugan med badtunna): 3 omgenereringar (225 credits) blev nästan identiska med originalet, ingen förbättring. Inte inbytt.
+
 ## Klart 15 nov: ny bild för "Barnen drar iväg själva" (TD En dag 10:15)
 Nano Banana Pro i Magnific, 2K 4:5, 3 varianter (225 credits), variant 2 vald: barnen bakifrån, förälderns mobilperspektiv. Original (1856×2304) i `tanndalen-orsa/assets/magnific/endag-1015-barnen-v2.png` (utanför repot), sajtversion 824×1024. Öppet: barnen står still, nästa runda kan be om sväng/rörelse.
 
