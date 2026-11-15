@@ -10,6 +10,14 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: boendekort v3 (TD, Waabi-raden)
+- Lift-avstånd + bäddar i samma faktaruta (Natt-bakgrund, Snö-text). Den grå rutan ersatt av en ny bild från boendet (`boende-*-soffa/allrum/loft/kok/matbord.jpg`, 900 px).
+- Fjällsippan 4 saknar källbilder: lånar `boende-skarljus-7a-fonster.jpg` som platshållare. Byt mot riktig bild.
+- Namn + rubrik vita i bildens topp (scrim översta 45 %, 32 px inset, namn 14 px, rubrik 2xl/30 px). Bild 1:1.1. CTA-knappen borta; "Se tillgänglighet" (Small, 60 % vit, svart text) tonar in mitt i bilden vid hover, dold på touch.
+- "Här bor skidåkarna" td-heading-4 → td-heading-3. Sommarsolen i heron är Natt i stället för säsongsgrön.
+- Samma commit tar med parallellt arbete: hero-ram, skidhyra-rader i kontot, AB bara i läge 3/På plats (modes-engine).
+- Öppet: mobilvy av nya kortet ej granskad visuellt; långa rubriker (Järven) bryts på tre rader.
+
 ## Klart 15 nov: "Pågår nu" bara i platsläge
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).

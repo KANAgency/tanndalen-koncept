@@ -276,6 +276,39 @@ html[data-season="summer"] .boka-row:focus-visible {
   object-fit: cover;
 }
 
+/* Test: vinterfärgad ram runt herovideon (glasramen ratad 2026-11-15). Synkas med övriga block senare. */
+.hero-frame {
+  background: transparent;
+  border-radius: 2px; /* hardkodad som aktuellt-kortets bild tills radius-token finns */
+}
+/* Ramen: säsongsfärgad yta bakom videon som växer ut från videons kant (clip-path, ingen stroke = inget flimmer). */
+.hero-ram {
+  position: absolute;
+  inset: 0;
+  background: var(--color-season-winter);
+  clip-path: inset(0 round 2px);
+  pointer-events: none;
+}
+html[data-season="summer"] .hero-ram { background: var(--color-season-summer); }
+/* Ny besökare: dold bakom videon under maskvyn, växer fram direkt när masken släpper (före övriga inanimationer landar). */
+html.is-intro:not(.is-intro-reveal) .hero-ram { clip-path: inset(var(--space-xl) round 2px); }
+html.is-intro.is-intro-reveal .hero-ram {
+  animation: hero-ram-grow 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-ram-grow {
+  from { clip-path: inset(var(--space-xl) round 2px); }
+  to { clip-path: inset(0 round 2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.is-intro .hero-ram { animation: none; clip-path: inset(0 round 2px); }
+}
+.hero-frame .hero-media {
+  inset: var(--space-xl);
+  width: calc(100% - 2 * var(--space-xl));
+  height: calc(100% - 2 * var(--space-xl));
+  border-radius: 2px;
+}
+
 .hero .td-booking {
   --booking-w: min(420px, 100%);
   position: absolute;
@@ -560,7 +593,7 @@ html[data-season="summer"] .boka-row:focus-visible {
   width: 295px;
   height: 145px;
   z-index: 2;
-  background: var(--color-season-winter);
+  background: var(--color-TD-night); /* svart i vinter (test 2026-11-15), var säsongsblå */
   -webkit-mask: url("assets/img/goggles-doodle.png") -44px -109px / 388px 388px no-repeat;
   mask: url("assets/img/goggles-doodle.png") -44px -109px / 388px 388px no-repeat;
   -webkit-mask-mode: alpha;
@@ -623,7 +656,7 @@ html.is-intro-done[data-season="winter"] .hero-goggles {
 }
 
 html[data-season="summer"] .hero-sun {
-  background: var(--color-season-summer);
+  background: var(--color-TD-night); /* Natt även på sommar (2026-11-15), var säsongsgrön */
   object-fit: none;
   object-position: -9999px -9999px;
   -webkit-mask: url("assets/img/doodle-sol-black.svg") center / contain no-repeat;
@@ -6341,3 +6374,41 @@ html, body { overscroll-behavior-y: none; }
 .en-dag-puff-copy .td-heading-md { margin-top: var(--space-sm); font-size: var(--font-size-3xl); }
 .en-dag-puff-copy .td-button { margin-top: var(--space-2xl); }
 @media (min-width: 1024px) { .en-dag-puff-copy .td-heading-md { font-size: var(--font-size-40); } }
+
+/* Boendekort v3: lift-avstånd och bäddar i samma ruta, två bilder före (2026-11-15) */
+.td-bo .td-bo-ruta-fakta { justify-content: center; gap: 8px; }
+.td-bo-fakta-rad { display: flex; flex-direction: column; }
+.td-bo-waabi-rutor > .td-bo-ruta-fakta:nth-child(2) { grid-column: span 2; aspect-ratio: auto; }
+@media (max-width: 639px) {
+  .td-bo .td-bo-ruta-fakta { padding: 8px; gap: 4px; min-height: 0; }
+  .td-bo .td-bo-ruta-fakta .td-bo-ruta-tal { font-size: var(--font-size-sm, 14px); line-height: 1.1; }
+  .td-bo .td-bo-ruta-fakta .td-ui-caption { font-size: 11px; line-height: 1.2; }
+}
+/* Faktarutan: Natt-bakgrund, Snö-text */
+.td-bo .td-bo-ruta-fakta { background: var(--color-bg-inverted, #24272A); color: #FFFFFF; }
+.td-bo .td-bo-ruta-fakta .td-bo-ruta-tal { color: #FFFFFF; }
+/* Boendekort v4 (test): namn + rubrik vita i bildens topp med scrim, ~10 % högre än kvadrat, ingen CTA */
+.td-bo .td-bo-waabi-bildlank { aspect-ratio: 1 / 1.1; }
+.td-bo-waabi-bildlank::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 45%; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, rgb(36 39 42 / 0.55), rgb(36 39 42 / 0.25) 55%, rgb(36 39 42 / 0)); }
+.td-bo-overlay { position: absolute; top: var(--space-lg); left: var(--space-lg); right: var(--space-lg); z-index: 2; display: flex; flex-direction: column; gap: 2px; }
+.td-bo .td-bo-overlay .td-bo-waabi-namn, .td-bo .td-bo-overlay .td-bo-waabi-rubrik { color: #FFFFFF; margin: 0; }
+.td-bo .td-bo-waabi-kort .td-bo-overlay .td-bo-waabi-rubrik { margin-bottom: 0; }
+.td-bo-overlay { top: var(--space-2xl, 32px); left: var(--space-2xl, 32px); right: var(--space-2xl, 32px); }
+.td-bo .td-bo-overlay .td-bo-waabi-namn { font-size: var(--font-size-sm, 14px); }
+.td-bo .td-bo-overlay .td-bo-waabi-rubrik { font-size: var(--font-size-2xl); }
+/* Hover-CTA i boendebilden: uttonad vid hover på kortet, vit vid hover på knappen */
+.td-bo-hover-cta { position: absolute; left: var(--space-md); bottom: var(--space-md); z-index: 2;
+  background: rgb(255 255 255 / 0.6); color: var(--color-TD-night, #24272A);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity var(--motion-duration-fast, .2s) ease, transform var(--motion-duration-fast, .2s) ease, background-color var(--motion-duration-fast, .2s) ease; }
+.td-bo-waabi-bildlank:hover .td-bo-hover-cta,
+.td-bo-waabi-bildlank:focus-visible .td-bo-hover-cta { opacity: 1; transform: none; pointer-events: auto; }
+.td-bo-waabi-bildlank .td-bo-hover-cta:hover { background: #FFFFFF; }
+@media (hover: none) { .td-bo-hover-cta { display: none; } }
+/* Hover-CTA v2: mitt i bilden, Small, bara uttonat läge, svart text */
+.td-bo-hover-cta { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, calc(-50% + 4px)); color: #000000; pointer-events: none; }
+.td-bo-waabi-bildlank:hover .td-bo-hover-cta,
+.td-bo-waabi-bildlank:focus-visible .td-bo-hover-cta { transform: translate(-50%, -50%); pointer-events: none; }
+.td-bo-waabi-bildlank .td-bo-hover-cta:hover { background: rgb(255 255 255 / 0.6); }

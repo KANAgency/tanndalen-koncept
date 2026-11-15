@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/ds/components/citat.css" />
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=en-dag-lift40" />
+    <link rel="stylesheet" href="startsida.css?v=bo-hovercta49" />
     <link rel="stylesheet" href="brand-sequence.css" />
     <link rel="stylesheet" href="intro.css?v=glas0" />
     <script>
@@ -386,6 +386,8 @@
                 <div class="account-stay-rows td-body-sm">
                   <div><span>Sällskap</span><span data-stay-party>2 vuxna, 2 barn</span></div>
                   <div><span>Incheckning</span><span data-stay-checkin>Från 15:00</span></div>
+                  <div><span>Skidhyra alpint</span><span>1 vuxen, 1 barn</span></div>
+                  <div><span>Skidhyra längd</span><span>1 vuxen, 1 barn</span></div>
                 </div>
                 <a class="td-button td-button-secondary td-button-md td-button-fill-spring" href="#bokning" data-todo="r360">Se hela bokningen</a>
                 <div class="account-foot account-foot-center">
@@ -400,6 +402,7 @@
         <div class="intro-stage" id="stage">
       <section class="hero" id="hero-heading" tabindex="-1" aria-label="Tänndalen">
         <div class="hero-frame">
+        <div class="hero-ram" aria-hidden="true"></div>
         <video class="hero-media" data-depth="front" muted playsinline loop src="assets/video/hero-vinter.mov"></video>
         </div>
         <img class="hero-doodle hero-sun" data-depth="sun" src="assets/img/doodle-sol-black.svg" alt="" width="258" height="258" aria-hidden="true" />
@@ -1247,7 +1250,7 @@
       <section class="td-bo td-bo-waabi" id="boenden-waabi" aria-labelledby="boenden-waabi-title">
         <header class="td-bo-head utforsakning-heading">
           <p class="utforsakning-eyebrow td-bo-eyebrow">Handplockade boenden</p>
-          <h2 class="td-heading-4" id="boenden-waabi-title">Här bor skidåkarna</h2>
+          <h2 class="td-heading-3" id="boenden-waabi-title">Här bor skidåkarna</h2>
           <div class="td-aktuellt-nav td-bo-nav">
             <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Föregående" aria-controls="boenden-waabi-track" disabled><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
             <button class="td-button td-button-secondary td-aktuellt-arrow" type="button" aria-label="Nästa" aria-controls="boenden-waabi-track"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg></button>
@@ -1258,85 +1261,73 @@
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällöga 13 A, Sju meter till taket">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
               <video class="td-bo-waabi-bild td-bo-video" src="assets/video/boende-fjalloga-13a-rundtur.mp4" poster="assets/video/boende-fjalloga-13a-rundtur-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Fjällöga 13 A: kök, allrum med loft, vardagsrum och utsikt från loftet"></video>
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Fjällöga 13 A</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Sju meter till taket</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Fjällöga-huset med högt sadeltak i snön"><img src="assets/img/boende-fjalloga-13a-huset.jpg" alt="Fjällöga-huset med högt sadeltak i snön" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">200 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">9</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Fjällöga 13 A</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Sju meter till taket</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Allrummet i Fjällöga 13 A med lång bänksoffa"><img src="assets/img/boende-fjalloga-13a-soffa.jpg" alt="Allrummet i Fjällöga 13 A med lång bänksoffa" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">200 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">9</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällstjärnan B, Hunden får följa med">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
               <img class="td-bo-waabi-bild" src="assets/img/boende-fjallstjarnan-b-huset.jpg" alt="Fjällstjärnan, mörkt trähus i snön med fjället bakom" loading="lazy" decoding="async">
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Fjällstjärnan B</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Hunden får följa med</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Hund som vilar framför braskaminen"><img src="assets/img/fraga-hund-stuga.jpg" alt="Hund som vilar framför braskaminen" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">900 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">10</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Fjällstjärnan B</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Hunden får följa med</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Allrummet i Fjällstjärnan B med höga fönster"><img src="assets/img/boende-fjallstjarnan-b-allrum.jpg" alt="Allrummet i Fjällstjärnan B med höga fönster" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">900 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">10</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällstugan Järven, Braskamin och balkong i söderläge">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [11 600] kr/vecka</span>
               <video class="td-bo-waabi-bild td-bo-video" src="assets/video/boende-jarven-rundtur.mp4" poster="assets/video/boende-jarven-rundtur-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Fjällstugan Järven: allrum, bastu och kök"></video>
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Fjällstugan Järven</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Braskamin och balkong i söderläge</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Braskaminen i Fjällstugan Järven"><img src="assets/img/boende-jarven-kamin.jpg" alt="Braskaminen i Fjällstugan Järven" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">800 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">6</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Fjällstugan Järven</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Braskamin och balkong i söderläge</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Sovloftet under timmertaket i Fjällstugan Järven"><img src="assets/img/boende-jarven-loft.jpg" alt="Sovloftet under timmertaket i Fjällstugan Järven" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">800 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">6</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällsippan 4, Egen bastu efter sista åket">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
               <img class="td-bo-waabi-bild" src="assets/img/boende-fjallsippan-exterior.jpg" alt="Fjällsippan 4, trähus i snö med fjället bakom" loading="lazy" decoding="async">
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Fjällsippan 4</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Egen bastu efter sista åket</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Bastun i Fjällsippan 4"><img src="assets/img/boende-fjallsippan-bastu.jpg" alt="Bastun i Fjällsippan 4" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">200 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">8</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Fjällsippan 4</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Egen bastu efter sista åket</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Fönster mot snön"><img src="assets/img/boende-skarljus-7a-fonster.jpg" alt="Fönster mot snön" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">200 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">8</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Rosa Byn D32, Backen rakt utanför fönstret">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
               <img class="td-bo-waabi-bild" src="assets/img/boende-rosabyn-d32-allrum.jpg" alt="Allrummet i Rosa Byn D32 med skidor på väggen" loading="lazy" decoding="async">
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Rosa Byn D32</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Backen rakt utanför fönstret</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Stolliften och backen genom fönstret i Rosa Byn D32"><img src="assets/img/boende-rosabyn-d32-utsikt.jpg" alt="Stolliften och backen genom fönstret i Rosa Byn D32" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">230 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">6</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Rosa Byn D32</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Backen rakt utanför fönstret</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Matbordet i Rosa Byn D32"><img src="assets/img/boende-rosabyn-d32-matbord.jpg" alt="Matbordet i Rosa Byn D32" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">230 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">6</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Skarljus 4 C, Hamrafjället i panoramafönstret">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
               <img class="td-bo-waabi-bild" src="assets/img/boende-skarljus-4c-allrum.jpg" alt="Allrummet i Skarljus 4 C med stort fönster mot fjället" loading="lazy" decoding="async">
+              <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
+              <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Skarljus 4 C</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Hamrafjället i panoramafönstret</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Fönsterbänken mot snön i Skarljus 4 C"><img src="assets/img/boende-skarljus-4c-fonster.jpg" alt="Fönsterbänken mot snön i Skarljus 4 C" loading="lazy" decoding="async"></button>
-              <p class="td-bo-ruta td-bo-ruta-mork"><span class="td-ui-figure td-bo-ruta-tal">270 m</span><span class="td-ui-caption">till liften</span></p>
-              <p class="td-bo-ruta"><span class="td-ui-figure td-bo-ruta-tal">8</span><span class="td-ui-caption">bäddar</span></p>
-            </div>
-            <p class="td-ui-caption td-bo-waabi-namn">Skarljus 4 C</p>
-            <h3 class="td-heading-xs td-bo-waabi-rubrik">Hamrafjället i panoramafönstret</h3>
-            <a class="td-button td-button-fill-neutral td-button-md td-bo-cta" href="#">Se tillgänglighet</a>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Köket och matbordet i Skarljus 4 C"><img src="assets/img/boende-skarljus-4c-kok.jpg" alt="Köket och matbordet i Skarljus 4 C" loading="lazy" decoding="async"></button>
+              <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">270 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">8</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
         </ul>
       </section>

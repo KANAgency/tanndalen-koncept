@@ -439,7 +439,10 @@ export function createModesEngine(deps) {
   }
 
   function renderAccountUi() {
-    const stay = readStay();
+    /* AB (påbörjad bokning) visas bara i läge 3 och På plats, aldrig i läge 1/2. */
+    const mode = document.documentElement.dataset.mode;
+    const hasBooking = mode === "booking" || mode === "onsite";
+    const stay = hasBooking ? (readStay() || DEMO_STAY) : null;
     const loggedIn = Boolean(stay);
     /* Pågår nu (grön prick + etikett) visas bara i platsläge; annars ser bokningen kommande ut. */
     const rawStatus = stay ? stayStatus(stay) : null;
