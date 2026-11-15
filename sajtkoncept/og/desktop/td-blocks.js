@@ -1165,8 +1165,10 @@ export function initTdBlocks(root = document) {
             });
           });
           function enSkipTargetY() {
-            const justNu = document.getElementById("just-nu");
-            if (justNu) return justNu.getBoundingClientRect().top + scrollY - 24;
+            /* Blocket som faktiskt följer En dag (ordningen skiljer sig per läge). */
+            let after = enDag.nextElementSibling;
+            while (after && (after.tagName !== "SECTION" || after.offsetHeight === 0)) after = after.nextElementSibling;
+            if (after) return after.getBoundingClientRect().top + scrollY - 24;
             return enDag.getBoundingClientRect().bottom + scrollY - Math.round(innerHeight * 0.15);
           }
           function syncEnDagSkip() {
@@ -1204,9 +1206,9 @@ export function initTdBlocks(root = document) {
               setTab(true);
               const { points } = enSnapMetrics();
               if (enNextBtn && points.length) {
-                const onLast = scrollY >= points[points.length - 1] - 2;
-                enNextBtn.disabled = onLast;
-                enNextBtn.setAttribute("aria-disabled", onLast ? "true" : "false");
+                /* Sista steget: pilen fungerar som Hoppa över, aldrig avstängd. */
+                enNextBtn.disabled = false;
+                enNextBtn.setAttribute("aria-disabled", "false");
               }
             }
             if (first) {
@@ -1227,7 +1229,7 @@ export function initTdBlocks(root = document) {
             if (!points.length) return;
             const step = enAnchorStep(points, 1);
             const next = Math.min(points.length - 1, step + 1);
-            if (next === step) return;
+            if (next === step || scrollY >= points[points.length - 1] - 2) { enSmoothTo(enSkipTargetY(), 720); return; }
             enLastDirection = 1;
             enSmoothTo(points[next], enSnapCssNum("--snap-duration", 520));
           });

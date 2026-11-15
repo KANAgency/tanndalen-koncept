@@ -6,9 +6,15 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - TD startsida desktop: intro, header (Fjällguiden), Aktuellt, En dag, Just nu (Alpint + Längd, tredje raden i På plats), varumärkessektionen, Fjällguiden-blocket och svarsmodalen (15 frågor) är byggda. Allt innehåll i Just nu och modalen är hårdkodat/påhittat.
 - OG: hero-sida, booking och intro uppdaterade, En dag-växlare dold, nya SVG-logotyper. Ingen OG-motsvarighet till Fjällguiden, vallakort eller 13 px caption.
 - Prioritet: OG-prototypen (0 % klar) går före det som återstår för TD (mobil, mindre tweaks, lägesanpassningar).
-- Senaste HEAD: `f76a8b9` på `main`. Inte pushad.
+- Senaste HEAD: se `git log` på `main`. Inte pushad.
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
+
+## Klart 15 nov: OG En dag (steg 4 av TD→OG-synken, synken klar)
+- Hoppa över går till nästa synliga sektion efter En dag (följer blockordningen per läge): returning → Just nu, bokning/På plats → Boende. Uppmätt i DOM i alla tre lägena.
+- Nästa-pilen är aldrig avstängd; på sista steget fungerar den som Hoppa över (TD 2987–3010). Uppmätt: `disabled=false`. Själva scrollrörelsen kunde inte mätas (rAF i dold browserpanel).
+- Inga konsolfel på /og/ (vinter/sommar, alla lägen) och /td/ i ren flik. Inga filer under `td/` eller `shared/` ändrade i synken.
+- Öppet för John: granska påhittat OG-content (lista i sessionens slutrapport, källor `og/desktop/orsa-guiden.js`, `modes-content.js`, `demo-stay.js`, `justNuData` i `td-blocks.js`, Just nu-markup i `index.html`), längd före alpint i Just nu-växlaren (default är fortfarande Alpint), eget märke för Orsa-guiden, riktig OG-film till videokortet.
 
 ## Klart 15 nov: Orsa-guiden (steg 3 av TD→OG-synken)
 - Nytt `og/desktop/orsa-guiden.js`: en frågekälla `OG_FRAGOR` (general/booking/onsite + Summer, motsvarar `window.TD_FRAGOR`), 34 QA-svar med kort och följdfrågor, `qaFor` med sommarvarianter, startvyns data (`WELCOME`, `WELCOME_TILES`, bokning, dagens händelser). Allt påhittat, fakta i [hakparentes]. Ändra frågor och svar bara där.
