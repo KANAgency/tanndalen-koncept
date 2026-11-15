@@ -10,6 +10,10 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: "Pågår nu" bara i platsläge
+- Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
+- Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
+
 ## Klart 15 nov: Fjällbruden ersätter Fjällviolen Mosippan i boendeblocket (TD slide 2)
 - R360-bilden (2000 px) uppskalad i Magnific Creative 2x (NatureAndLandscapes, creativity -3, 90 credits). Kling 2.5, 10 s, 16:9, bara startbild (650 credits): kameran rör sig åt höger och sjunker lätt, skidåkarna försvinner ur bild efter cirka 4 s.
 - `assets/video/boende-fjallbruden.mp4` (1920×1080, 13,4 MB, crf 20) + poster. `mirror: false`. `area2.mp4` (Mosippan) ligger kvar men används inte.

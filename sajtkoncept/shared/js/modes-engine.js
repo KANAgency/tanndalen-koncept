@@ -441,7 +441,9 @@ export function createModesEngine(deps) {
   function renderAccountUi() {
     const stay = readStay();
     const loggedIn = Boolean(stay);
-    const status = stay ? stayStatus(stay) : null;
+    /* Pågår nu (grön prick + etikett) visas bara i platsläge; annars ser bokningen kommande ut. */
+    const rawStatus = stay ? stayStatus(stay) : null;
+    const status = rawStatus === "ongoing" && !isOnsiteActive() ? "upcoming" : rawStatus;
     const userBtn = document.querySelector(selectors.accountUser);
     const panel = document.querySelector(selectors.accountPanel);
     if (!userBtn || !panel) return;
