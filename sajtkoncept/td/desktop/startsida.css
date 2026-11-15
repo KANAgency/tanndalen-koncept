@@ -6202,3 +6202,100 @@ html:not([data-mode="onsite"]) .td-aktuellt-kort[data-lage="onsite"] { display: 
 
 /* Ingen gummibandsscroll förbi footern (eller ovanför toppen). */
 html, body { overscroll-behavior-y: none; }
+
+/* ── Boendekort: två testvarianter under Fjällguiden (Oura och Waabi, 2026-11-15) ── */
+.td-bo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 160px;
+  color: var(--color-text-primary);
+}
+.td-bo-head { display: flex; flex-direction: column; gap: 8px; }
+.td-bo-eyebrow { margin: 0; }
+.td-bo-titlerad { display: flex; align-items: center; gap: 16px; }
+.td-bo-titlerad h2 { margin: 0; }
+.td-bo-alla {
+  width: 44px; height: 44px; flex: 0 0 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: #FFFFFF; color: var(--color-text-primary);
+}
+.td-bo-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px;
+}
+.td-bo-pris { margin: 0; font-weight: 700; font-size: 15px; }
+
+/* Oura: ett budskap, rubriken ovanpå bilden, detalj som rund närbild */
+.td-bo-oura-lank {
+  position: relative; display: block; aspect-ratio: 2 / 3;
+  border-radius: 16px; overflow: hidden; background: var(--color-bg-inverted);
+  color: #FFFFFF; text-decoration: none;
+}
+.td-bo-oura-bild {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.82;
+  transition: transform 9s ease-out;
+}
+.td-bo-oura-lank:hover .td-bo-oura-bild { transform: scale(1.08); }
+.td-bo-oura-lank::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.5) 100%);
+}
+.td-bo-oura-rubrik {
+  position: absolute; z-index: 1; top: 24px; left: 24px; right: 24px; margin: 0;
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: 400; font-size: 36px; line-height: 1.05;
+}
+.td-bo-oura-detalj {
+  position: absolute; z-index: 1; right: 24px; bottom: 24px;
+  width: 112px; height: 112px; object-fit: cover; border-radius: 999px;
+  box-sizing: border-box; border: 3px solid #FFFFFF;
+}
+.td-bo-oura-meta {
+  position: absolute; z-index: 1; left: 24px; bottom: 24px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+/* Waabi: stor bild plus rutnät med detalj och belägg */
+.td-bo-waabi-kort { display: flex; flex-direction: column; gap: 10px; }
+.td-bo-waabi-bildlank { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; }
+.td-bo-waabi-bild { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 9s ease-out; }
+.td-bo-waabi-bildlank:hover .td-bo-waabi-bild { transform: scale(1.08); }
+.td-bo-waabi-pil {
+  position: absolute; right: 16px; bottom: 16px; width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: var(--color-cta-primary); color: #FFFFFF;
+}
+.td-bo-waabi-rutor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.td-bo-waabi-rutor > * { aspect-ratio: 1 / 1; border-radius: 12px; margin: 0; }
+.td-bo-waabi-rutor img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.td-bo-ruta {
+  box-sizing: border-box; padding: 12px; background: #FFFFFF;
+  display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px; color: #686868;
+}
+.td-bo-ruta-mork { background: var(--color-bg-inverted); color: rgba(255,255,255,0.75); }
+.td-bo-ruta-tal { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
+.td-bo-ruta-mork .td-bo-ruta-tal { color: #FFFFFF; }
+.td-bo-waabi-rubrik {
+  margin: 8px 0 0; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: 400; font-size: 24px; line-height: 1.2;
+}
+.td-bo-waabi-namn { color: #686868; }
+
+@media (max-width: 1023px) {
+  .td-bo-lista {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%;
+    gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+  }
+  .td-bo-lista > li { scroll-snap-align: start; }
+  .td-bo-oura-rubrik { font-size: 30px; }
+}
+.faq:has(+ .td-bo) { --fraga-space-after: 160px; }
+.td-bo-waabi { margin-bottom: 288px; }
+.td-bo-oura-rubrik { text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
+.page .td-bo-oura-lank { color: #FFFFFF; }
+.page .td-bo-oura-lank .td-ui-caption { color: rgba(255,255,255,0.85); }
+.page .td-bo-alla { color: var(--color-text-primary); }
+.page .td-bo-waabi-pil { color: #FFFFFF; }

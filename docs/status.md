@@ -13,6 +13,13 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 ## Klart 14 nov: Aktivitetsflikarnas default per läge
 - Utförsåkning är default i läge 1, 2 och 4, Längdåkning i läge 3 (booking). Följer live-byte av läge (`setDefault` i TD startsidans flikscript).
 
+## Klart 15 nov: två testrader med boendekort under Fjällguiden
+- `#boenden-oura` och `#boenden-waabi` i `td/desktop/index.html`, CSS sist i `startsida.css` (`.td-bo-*`). Tre platshållarboenden med påhittad data och priser i [hakparentes], befintliga bilder.
+- Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
+- Citatet och topografin mellan Fjällguiden och `#boende` ankras nu efter `#boenden-waabi` (faller tillbaka på `.faq`).
+- Skisser av 13 kortvarianter (en per inspo) i artefakten "TD boendekort".
+- Öppet: välj en av raderna (den andra tas bort), riktiga boenden och bilder, video i stora bilden, mobil ej granskad.
+
 ## Klart 14 nov: En källa för frågeförslag, midsommarbild, ledkortets copy
 - `window.TD_FRAGOR` i `td/desktop/index.html` styr huvudmenyn (Fjällguiden), Vanliga frågor-blocket (alla sex) och Läget just nu (tre första) per läge × säsong: general, booking, onsite + Summer-varianter. Ändra frågor bara där.
 - Nytt svar: "Vad gör vi om det blåser?" (På plats vinter, ersätter regn). Längdlistorna i Just nu är oförändrade och styrs inte av källan.
