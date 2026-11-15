@@ -3936,9 +3936,9 @@ body.fraga-open { overflow: hidden; }
   left: 50%;
   z-index: 1;
   width: 100vw;
-  height: 440px;
+  height: 640px;
   transform: translateX(-50%);
-  opacity: 0.5;
+  opacity: 0.7;
   background: linear-gradient(to bottom, color-mix(in srgb, var(--color-TD-night) 62%, transparent), transparent);
   transition: opacity 300ms var(--motion-easing-out-soft);
 }
