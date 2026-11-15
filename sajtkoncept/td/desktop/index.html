@@ -6339,9 +6339,29 @@
         parallax: 0.2,
         placeholder: false
       };
-      const boendeSlides = [boendeFjalloga, boendeHamra, boendeFjalloga, boendeHamra].map((slide, index) => (
-        index < 2 ? slide : { ...slide, id: `${slide.id}-2`, facts: slide.facts.map((fact) => ({ ...fact })) }
-      ));
+      // Brunkullan: fakta från R360 (Brunkullan 23). Värden i [ ] gäller en lägenhet, inte verifierat för hela området.
+      const boendeBrunkullan = {
+        ...boendeFjalloga,
+        id: "brunkullan",
+        name: "Brunkullan",
+        title: "Ski in, ski out, mitt i backen.",
+        body: "Lägenheter mitt i det alpina området, med balkong och utsikt över backarna. Liften ligger femtio meter bort och längdspåren börjar runt hörnet. Bastu, torkskåp och skidförråd finns i lägenheten.",
+        ctaLabel: "Sök boenden i Brunkullan",
+        facts: [
+          { label: "Närmaste lift", value: "50 m" },
+          { label: "Längdspår", value: "25 m" },
+          { label: "Sovrum", value: "[2]" },
+          { label: "Bäddar", value: "[5]" },
+          { label: "Boende", value: "Lägenheter" },
+          { label: "Bastu", value: "[I alla]" }
+        ],
+        video: "",
+        poster: "assets/img/platshallare.svg",
+        mirror: false,
+        parallax: 0.2,
+        placeholder: true
+      };
+      const boendeSlides = [boendeFjalloga, boendeHamra, boendeBrunkullan];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");
@@ -6395,7 +6415,8 @@
       }
       function boendeReadyVideo(slide) {
         const next = slide.video || "";
-        if (!next) return Promise.resolve();
+        if (!next) { boendeVideo.removeAttribute("src"); boendeVideo.load(); boendeVideo.style.visibility = "hidden"; return Promise.resolve(); }
+        boendeVideo.style.visibility = "";
         if (boendeVideo.getAttribute("src") === next) {
           try { boendeVideo.currentTime = 0; } catch (_) {}
           return Promise.resolve();
@@ -6475,7 +6496,7 @@
           boendeAuto = false;
           boendeIndex = index;
           boendeMode = "paused";
-          boendeVideo.pause();
+          boendePauseAll();
           boendeIcons("paused");
           boendePaint(index);
         });
@@ -6484,7 +6505,7 @@
       function boendeGo(next) {
         boendeIndex = (next + boendeSlides.length) % boendeSlides.length;
         boendeMode = "paused";
-        boendeVideo.pause();
+        boendePauseAll();
         boendeIcons(reduced ? "still" : "paused");
         const want = boendeIndex;
         boendePaint(want).then(() => {
@@ -6497,10 +6518,43 @@
         const visible = Math.max(0, Math.min(box.bottom, innerHeight) - Math.max(box.top, 0));
         return box.height > 0 && visible / box.height >= 0.5;
       }
+      // Kort utan video (platshållarbild): bildspelet går vidare på timer i stället för på videons "ended".
+      const BOENDE_STILL_MS = 6000;
+      let boendeStillTimer = 0;
+      let boendeStillAt = 0;
+      let boendeStillIndex = -1;
+      function boendePauseAll() {
+        boendeVideo.pause();
+        if (boendeStillTimer) { clearInterval(boendeStillTimer); boendeStillTimer = 0; }
+      }
+      function boendeAdvance() {
+        if (boendeIndex < boendeSlides.length - 1 && boendeAuto) boendeGo(boendeIndex + 1);
+        else { boendeMode = "end"; boendeIcons("end"); }
+      }
+      function boendeStillRun() {
+        if (boendeStillTimer) return;
+        if (boendeStillIndex !== boendeIndex) { boendeStillIndex = boendeIndex; boendeStillAt = 0; }
+        boendeMode = "playing";
+        boendeIcons("playing");
+        let last = Date.now();
+        boendeStillTimer = setInterval(() => {
+          const now = Date.now();
+          boendeStillAt += now - last;
+          last = now;
+          const tab = boendeList.querySelectorAll("[role=tab]")[boendeIndex];
+          const fill = tab && tab.querySelector(".boende-fill");
+          if (fill) fill.style.width = `${Math.min(100, boendeStillAt / BOENDE_STILL_MS * 100)}%`;
+          if (boendeStillAt < BOENDE_STILL_MS) return;
+          clearInterval(boendeStillTimer);
+          boendeStillTimer = 0;
+          boendeStillIndex = -1;
+          boendeAdvance();
+        }, 100);
+      }
       function boendeStart() {
         if (boendeVisible()) boendeSeen = true;
         if (reduced || !boendeAuto || !boendeSeen || boendeHold) return;
-        if (!boendeVideo.getAttribute("src")) { boendeMode = "paused"; boendeIcons("paused"); return; }
+        if (!boendeVideo.getAttribute("src")) { boendeStillRun(); return; }
         boendeMode = "playing";
         boendeIcons("playing");
         boendeVideo.play().then(() => { boendeMode = "playing"; boendeIcons("playing"); }).catch(() => { if (!boendeVideo.paused) return; boendeMode = "paused"; boendeIcons("paused"); });
@@ -6532,7 +6586,7 @@
           boendePaint(0).then(() => boendeStart());
           return;
         }
-        if (boendeMode === "playing") { boendeAuto = false; boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); return; }
+        if (boendeMode === "playing") { boendeAuto = false; boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); return; }
         boendeHold = false;
         boendeAuto = true;
         boendeStart();
@@ -6545,7 +6599,7 @@
         boendeGo(boendeIndex + delta);
         boendeList.querySelectorAll("[role=tab]")[boendeIndex].focus();
       });
-      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle")) return; boendeHold = true; if (boendeMode === "playing") { boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); } });
+      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle")) return; boendeHold = true; if (boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); } });
       boende.addEventListener("focusout", () => { if (boende.contains(document.activeElement)) return; boendeHold = false; if (boendeAuto && boendeSeen) boendeStart(); });
       function boendeActiveFactor() {
         if (boendeReduced || matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
@@ -6589,7 +6643,7 @@
           entries.forEach((entry) => {
             boendeSeen = entry.isIntersecting && entry.intersectionRatio >= 0.5;
             if (!reduced && boendeSeen && boendeAuto && !boendeHold) boendeStart();
-            else if (!boendeSeen && boendeMode === "playing") { boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); }
+            else if (!boendeSeen && boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); }
           });
         }, { threshold: [0, 0.5, 1] });
         watchPlay.observe(boende);

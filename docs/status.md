@@ -10,6 +10,12 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: tredje TD-området + tre OG-områden i boendeblocket
+- TD: Brunkullan tillagt (fakta från R360, Brunkullan 23; sovrum/bäddar/bastu i [ ] gäller en lägenhet). Dubbletterna av Fjällöga/Hamra borttagna, nu 3 flikar.
+- OG: [Stugbyn], [Toppen], [Skogsbyn] ersätter TD:s kopior. Allt påhittat i [ ] utom Orsasjön och Orsa Rovdjurspark.
+- Kort utan video visar `assets/img/platshallare.svg` och går vidare på 6 s timer med progress i fliken (`boendeStillRun`, båda sajterna). Verifierat: flikbyte, timer (50 % efter 3 s, byter kort efter 6 s), inga konsolfel.
+- Öppet: videor för Brunkullan och OG-områdena, riktiga OG-områdesnamn och fakta.
+
 ## Klart 15 nov: OG – TD:s media bortplockad
 TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendeblocket (area1/2, klipp-8) är raderade ur `og/desktop/assets/` och ersatta av `assets/img/platshallare.svg` (index.html, td-blocks.js, orsa-guiden.js). Boendeblockets video är tom, bara poster. Hero-videor finns bara i TD. Verifierat: inga 404:or eller konsolfel på /og/. Öppet: John tar fram riktiga OG-exempel. Övriga TD-kopior i OG (meny-, teaser-, banner-, rapport- m.fl.) ligger kvar.
 

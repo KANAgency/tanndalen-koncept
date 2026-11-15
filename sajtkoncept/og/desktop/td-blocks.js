@@ -2251,53 +2251,64 @@ export function initTdBlocks(root = document) {
       if (!document.getElementById("boende") || !document.getElementById("boende-parallax") || !document.querySelector("#boende .boende-video") || !document.querySelector("#boende .boende-pill") || !document.querySelector("#boende .boende-toggle")) return;
       const boendeReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const boendeLinks = { search: "", all: "" };
-      const boendeFjalloga = {
-          id: "fjalloga",
-          name: "Fjällöga",
-          title: "Allmoge, fast i fjällen.",
-          body: "En modern tolkning av svensk allmoge, med plats för hela familjen och lite till. Längdspåren börjar utanför dörren och liften ligger ett par hundra meter bort.",
+      // OG-områden: platshållare. Namn och fakta i [ ] är påhittade tills kunden levererar.
+      const boendeStugbyn = {
+          id: "stugbyn",
+          name: "[Stugbyn]",
+          title: "Egen stuga, nära backen.",
+          body: "Fristående stugor med plats för hela familjen och lite till. Barnbacken syns från fönstret och liften ligger [ett par hundra meter] bort. Eldstad, bastu och plats att torka kläderna efter en lång dag.",
           facts: [
-            { label: "Närmaste lift", value: "300 m" },
-            { label: "Boyta", value: "60–94 m²" },
-            { label: "Sovrum", value: "2–3" },
+            { label: "Närmaste lift", value: "[200 m]" },
+            { label: "Boyta", value: "[60–90 m²]" },
+            { label: "Sovrum", value: "[2–3]" },
             { label: "Boende", value: "Stugor" },
             { label: "Passar för", value: "Barnfamiljer" },
-            { label: "Bastu", value: "I alla" }
+            { label: "Bastu", value: "[I alla]" }
           ],
           video: "",
           poster: "./assets/img/platshallare.svg",
-          mirror: true,
+          mirror: false,
           parallax: 0.2,
           r360AreaId: "",
-          ctaLabel: "Sök boenden i Fjällöga",
+          ctaLabel: "Sök boenden i [Stugbyn]",
           cardTitle: "Kort om området",
           linkLabel: "Se alla boenden",
           scrim: { maskFrom: 50, maskTo: 60 },
-          placeholder: false
+          placeholder: true
       };
-      const boendeHamra = {
-        ...boendeFjalloga,
-        id: "hamra",
-        name: "Fjällviolen Mosippan",
-        title: "Mitt i Hamra, med söderläge.",
-        body: "Trivsamma lägenheter mitt i Hamra, med skidspåren utanför knuten och liften, restaurangen och skiduthyrningen precis över bron. Alla har balkong eller altan i söderläge med utsikt över Tännån och backarna.",
-        ctaLabel: "Sök boenden i Fjällviolen Mosippan",
+      const boendeToppen = {
+        ...boendeStugbyn,
+        id: "toppen",
+        name: "[Toppen]",
+        title: "Utsikt över Orsasjön.",
+        body: "Lägenheter högt upp på berget, med skidorna på redan i dörren. Härifrån ser ni ut över Orsasjön och skogarna. Restaurangen och skiduthyrningen ligger [i samma hus].",
+        ctaLabel: "Sök boenden i [Toppen]",
         facts: [
-          { label: "Närmaste lift", value: "220 m" },
-          { label: "Boyta", value: "44–110 m²" },
-          { label: "Sovrum", value: "2–4" },
-          { label: "Bäddar", value: "5–10" },
-          { label: "Husdjur", value: "1 av 7" },
-          { label: "Bastu", value: "I alla" }
-        ],
-        video: "",
-        mirror: false,
-        parallax: 0.2,
-        placeholder: false
+          { label: "Närmaste lift", value: "[50 m]" },
+          { label: "Boyta", value: "[40–70 m²]" },
+          { label: "Sovrum", value: "[1–3]" },
+          { label: "Boende", value: "Lägenheter" },
+          { label: "Utsikt", value: "Orsasjön" },
+          { label: "Bastu", value: "[I flera]" }
+        ]
       };
-      const boendeSlides = [boendeFjalloga, boendeHamra, boendeFjalloga, boendeHamra].map((slide, index) => (
-        index < 2 ? slide : { ...slide, id: `${slide.id}-2`, facts: slide.facts.map((fact) => ({ ...fact })) }
-      ));
+      const boendeSkogsbyn = {
+        ...boendeStugbyn,
+        id: "skogsbyn",
+        name: "[Skogsbyn]",
+        title: "Lugnt i skogen, nära björnarna.",
+        body: "Stugor en bit från backarna, där det är tyst på kvällen. Längdspåren börjar utanför knuten och Orsa Rovdjurspark ligger [några minuter] bort. Ett bra val för er som vill blanda backe med annat.",
+        ctaLabel: "Sök boenden i [Skogsbyn]",
+        facts: [
+          { label: "Närmaste lift", value: "[800 m]" },
+          { label: "Längdspår", value: "[50 m]" },
+          { label: "Sovrum", value: "[2–4]" },
+          { label: "Bäddar", value: "[6–10]" },
+          { label: "Husdjur", value: "[I vissa]" },
+          { label: "Bastu", value: "[I alla]" }
+        ]
+      };
+      const boendeSlides = [boendeStugbyn, boendeToppen, boendeSkogsbyn];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");
@@ -2351,7 +2362,8 @@ export function initTdBlocks(root = document) {
       }
       function boendeReadyVideo(slide) {
         const next = slide.video || "";
-        if (!next) return Promise.resolve();
+        if (!next) { boendeVideo.removeAttribute("src"); boendeVideo.load(); boendeVideo.style.visibility = "hidden"; return Promise.resolve(); }
+        boendeVideo.style.visibility = "";
         if (boendeVideo.getAttribute("src") === next) {
           try { boendeVideo.currentTime = 0; } catch (_) {}
           return Promise.resolve();
@@ -2431,7 +2443,7 @@ export function initTdBlocks(root = document) {
           boendeAuto = false;
           boendeIndex = index;
           boendeMode = "paused";
-          boendeVideo.pause();
+          boendePauseAll();
           boendeIcons("paused");
           boendePaint(index);
         });
@@ -2440,7 +2452,7 @@ export function initTdBlocks(root = document) {
       function boendeGo(next) {
         boendeIndex = (next + boendeSlides.length) % boendeSlides.length;
         boendeMode = "paused";
-        boendeVideo.pause();
+        boendePauseAll();
         boendeIcons(reduced ? "still" : "paused");
         const want = boendeIndex;
         boendePaint(want).then(() => {
@@ -2453,10 +2465,43 @@ export function initTdBlocks(root = document) {
         const visible = Math.max(0, Math.min(box.bottom, innerHeight) - Math.max(box.top, 0));
         return box.height > 0 && visible / box.height >= 0.5;
       }
+      // Kort utan video (platshållarbild): bildspelet går vidare på timer i stället för på videons "ended".
+      const BOENDE_STILL_MS = 6000;
+      let boendeStillTimer = 0;
+      let boendeStillAt = 0;
+      let boendeStillIndex = -1;
+      function boendePauseAll() {
+        boendeVideo.pause();
+        if (boendeStillTimer) { clearInterval(boendeStillTimer); boendeStillTimer = 0; }
+      }
+      function boendeAdvance() {
+        if (boendeIndex < boendeSlides.length - 1 && boendeAuto) boendeGo(boendeIndex + 1);
+        else { boendeMode = "end"; boendeIcons("end"); }
+      }
+      function boendeStillRun() {
+        if (boendeStillTimer) return;
+        if (boendeStillIndex !== boendeIndex) { boendeStillIndex = boendeIndex; boendeStillAt = 0; }
+        boendeMode = "playing";
+        boendeIcons("playing");
+        let last = Date.now();
+        boendeStillTimer = setInterval(() => {
+          const now = Date.now();
+          boendeStillAt += now - last;
+          last = now;
+          const tab = boendeList.querySelectorAll("[role=tab]")[boendeIndex];
+          const fill = tab && tab.querySelector(".boende-fill");
+          if (fill) fill.style.width = `${Math.min(100, boendeStillAt / BOENDE_STILL_MS * 100)}%`;
+          if (boendeStillAt < BOENDE_STILL_MS) return;
+          clearInterval(boendeStillTimer);
+          boendeStillTimer = 0;
+          boendeStillIndex = -1;
+          boendeAdvance();
+        }, 100);
+      }
       function boendeStart() {
         if (boendeVisible()) boendeSeen = true;
         if (reduced || !boendeAuto || !boendeSeen || boendeHold) return;
-        if (!boendeVideo.getAttribute("src")) { boendeMode = "paused"; boendeIcons("paused"); return; }
+        if (!boendeVideo.getAttribute("src")) { boendeStillRun(); return; }
         boendeMode = "playing";
         boendeIcons("playing");
         boendeVideo.play().then(() => { boendeMode = "playing"; boendeIcons("playing"); }).catch(() => { if (!boendeVideo.paused) return; boendeMode = "paused"; boendeIcons("paused"); });
@@ -2488,7 +2533,7 @@ export function initTdBlocks(root = document) {
           boendePaint(0).then(() => boendeStart());
           return;
         }
-        if (boendeMode === "playing") { boendeAuto = false; boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); return; }
+        if (boendeMode === "playing") { boendeAuto = false; boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); return; }
         boendeHold = false;
         boendeAuto = true;
         boendeStart();
@@ -2501,7 +2546,7 @@ export function initTdBlocks(root = document) {
         boendeGo(boendeIndex + delta);
         boendeList.querySelectorAll("[role=tab]")[boendeIndex].focus();
       });
-      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle")) return; boendeHold = true; if (boendeMode === "playing") { boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); } });
+      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle")) return; boendeHold = true; if (boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); } });
       boende.addEventListener("focusout", () => { if (boende.contains(document.activeElement)) return; boendeHold = false; if (boendeAuto && boendeSeen) boendeStart(); });
       function boendeActiveFactor() {
         if (boendeReduced || matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
@@ -2545,7 +2590,7 @@ export function initTdBlocks(root = document) {
           entries.forEach((entry) => {
             boendeSeen = entry.isIntersecting && entry.intersectionRatio >= 0.5;
             if (!reduced && boendeSeen && boendeAuto && !boendeHold) boendeStart();
-            else if (!boendeSeen && boendeMode === "playing") { boendeVideo.pause(); boendeMode = "paused"; boendeIcons("paused"); }
+            else if (!boendeSeen && boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); }
           });
         }, { threshold: [0, 0.5, 1] });
         watchPlay.observe(boende);
