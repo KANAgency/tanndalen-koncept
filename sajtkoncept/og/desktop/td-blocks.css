@@ -1811,3 +1811,549 @@ html[data-mode="onsite"] #just-nu {
 }
 .en-dag-sun-label { left: calc(var(--en-sun-line-x, 50%) + 36px); }
 .en-dag-sun-event-label { left: calc(var(--en-sun-line-x, 50%) + 19px); }
+
+/* ==== Port från td/desktop/startsida.css 5660–6215 (15 nov): Just nu (guidekort, tredje raden, videokort + modal, Nästa steg), Fråga-justeringar. TD-fonter/färger mappas till OG via og-overrides.css. ==== */
+
+
+/* Fråga oss: säsongsfärgad platta i stället för glas; förgrund följer säsongens kontrastfärg */
+.td-fraga-block {
+  --fraga-fg: var(--contrast-on-season-winter);
+  background: var(--color-season-winter);
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--fraga-fg);
+}
+html[data-season="summer"] .td-fraga-block {
+  --fraga-fg: var(--contrast-on-season-summer);
+  background: var(--color-season-summer);
+}
+.td-fraga-block .td-fraga-block-overrubrik-label,
+.td-fraga-block .td-fraga-block-rubrik,
+.td-fraga-block .td-fraga-block-ingress,
+.td-fraga-block .td-fraga-fragelista-rubrik,
+.td-fraga-block .td-fraga-fragelista-rad > button,
+.td-fraga-block .td-fraga-fragelista-knapp { color: var(--fraga-fg); }
+.td-fraga-block .td-fraga-fragelista-platta {
+  border-color: color-mix(in srgb, var(--fraga-fg) 25%, transparent);
+}
+.td-fraga-block .td-fraga-fragelista-rad + .td-fraga-fragelista-rad {
+  border-top-color: color-mix(in srgb, var(--fraga-fg) 20%, transparent);
+}
+html[data-season="summer"] .td-fraga-block .td-fraga-block-overrubrik-icon { color: var(--color-TD-snow); }
+
+/* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
+.en-dag .en-dag-season { display: none !important; }
+
+/* Just nu / Data: primär siffra 40 px. Token saknades i genererade tokens -> siffran föll tillbaka till ärvd storlek. */
+:root { --font-size-40: 2.5rem; }
+
+/* Pilar: nedtonade i vila, fulla + liten rörelse vid hover (2026-11-12).
+   ↗ = öppnas ovanpå (modal/helskärm), → = går till annan sida. På gång-raderna hade redan detta. */
+.td-corner-link-icon {
+  opacity: 1; /* hörnpilar: full opacitet (beslut 2026-11-12), bara radpilar tonas ner */
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-easing-out-soft),
+    transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.td-corner-link:hover .td-corner-link-icon,
+.td-corner-link:focus-visible .td-corner-link-icon,
+.td-just-nu-card:hover .td-corner-link-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  transition-duration: var(--motion-duration-normal);
+}
+.td-fraga-fragelista-rad-icon { opacity: 0.4; }
+.td-fraga-fragelista-rad > button:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-rad > button:focus-visible .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:hover .td-fraga-fragelista-rad-icon,
+.td-fraga-fragelista-knapp:focus-visible .td-fraga-fragelista-rad-icon { opacity: 1; }
+@media (hover: none) {
+  .td-fraga-fragelista-rad-icon { opacity: 0.7; }
+}
+
+/* Datakort-stack: en fast hörnpil per stack som ligger kvar medan korten byts (2026-11-12) */
+.td-just-nu-stack-corner {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  z-index: 3;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.td-just-nu-stack-dark .td-just-nu-stack-corner { color: var(--color-TD-snow); }
+.td-just-nu-stack .td-just-nu-stack-corner .td-corner-link-icon { opacity: 1; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner { gap: 8px; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-label { opacity: 1; }
+.td-just-nu-stack:hover .td-just-nu-stack-corner .td-corner-link-icon { transform: translate(2px, -2px); }
+
+/* === Just nu-kort enligt Figma (2026-11) === */
+/* Pistförare: overlayn slutar ovanför "Från backen", 12px mellan backe och citat, vit tagg */
+a.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-shade {
+  inset: auto 0 0 0;
+  height: 340px;
+  background: linear-gradient(to top, rgb(36 38 41 / 1) 40%, rgb(36 38 41 / 0) 100%);
+}
+.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-lower { gap: var(--space-md); }
+.td-rapport-chip-line {
+  border-color: transparent;
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+}
+/* På gång: vit */
+.just-cols .td-pagang { background: var(--color-TD-snow); }
+
+/* === Fjällguiden-kort === */
+.td-guide {
+  height: 262px;
+  flex: none;
+  justify-content: flex-start;
+  gap: var(--space-md);
+  background: var(--color-season-winter);
+  color: var(--contrast-on-season-winter);
+}
+html[data-season="summer"] .td-guide { background: var(--color-season-summer); color: var(--contrast-on-season-summer); }
+.td-guide-top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); }
+.td-guide-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
+.td-guide-ai { padding: 0 6px; border: 1px solid currentColor; border-radius: var(--radius-sm); line-height: 16px; }
+.td-guide-status { display: inline-flex; align-items: flex-start; gap: var(--space-xs); text-align: right; }
+.td-guide-status-dot { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; background: var(--status-open); }
+.td-guide-eyebrow { margin: var(--space-sm) 0 0; }
+.td-guide-lista { list-style: none; margin: 0; padding: 0; }
+.td-guide-rad + .td-guide-rad { border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.td-guide-fraga {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+  width: 100%; padding: 12px 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.td-guide-pil { display: inline-flex; opacity: 0.4; transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft), transform var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.td-guide-fraga:hover .td-guide-pil { opacity: 1; transform: translateX(3px); }
+@media (hover: none) { .td-guide-pil { opacity: 0.7; } }
+
+/* === Rättningar efter Figma-jämförelse === */
+/* Fjällguiden: knappens font ska komma från td-ui-body, namn i rubrikfonten, versal eyebrow */
+.td-guide-fraga { font: inherit; }
+.td-guide-fraga.td-ui-body {
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: 16px; font-weight: 400; line-height: 1.4;
+}
+.td-guide .td-guide-id > .td-ui-cta-sm {
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-size: 22px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+}
+.td-guide-ai { font-family: var(--font-family-TD-secondary), sans-serif; font-size: 12px; font-weight: 700; }
+.td-guide-status { font-family: var(--font-family-TD-secondary), sans-serif; font-size: 12px; line-height: 1.3; }
+.td-guide-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin-top: var(--space-md); }
+.td-guide-pil svg { display: none; }
+.td-guide-pil::before {
+  content: ""; width: 16px; height: 16px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 11.5 11.5 4.5M6.5 4.5h5v5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 11.5 11.5 4.5M6.5 4.5h5v5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.td-guide-fraga:hover .td-guide-pil { transform: translate(2px, -2px); }
+/* På gång: ingen hörnpil */
+.td-pagang .td-corner-link { display: none; }
+/* Pistförare: versal caption, mindre citat, ljus tagg */
+[data-rapport-caption] { text-transform: uppercase; letter-spacing: 0.02em; }
+.td-rapport:not(.is-activity):not(.is-langd) [data-rapport-quote] { font-size: 22px; line-height: 1.25; }
+.td-rapport:not(.is-activity):not(.is-langd) .td-rapport-top .td-rapport-chip {
+  background: var(--color-TD-snow); color: var(--color-text-primary);
+}
+
+/* === Tredje raden: Pistkartor / Öppet nu / Väder === */
+.just-cols-3 {
+  display: grid;
+  grid-template-columns: 411px 410px 411px;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+  align-items: stretch;
+}
+.just-cols-3 > * { box-sizing: border-box; min-height: 226px; border-radius: var(--radius-sm); }
+.td-pistkarta {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: var(--space-xl); text-decoration: none; color: var(--color-text-primary);
+  background: linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
+}
+.td-pistkarta-head, .td-vader-head { display: flex; justify-content: space-between; align-items: center; }
+.td-pistkarta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+.td-button-glass-light { background: var(--color-TD-snow); color: var(--color-text-primary); }
+.td-oppet { padding: var(--space-xl); background: var(--color-TD-snow); display: flex; flex-direction: column; gap: var(--space-md); }
+.td-oppet-lista { list-style: none; margin: 0; padding: 0; }
+.td-oppet-rad { display: grid; grid-template-columns: 120px 1fr; padding: 10px 0; }
+.td-oppet-rad + .td-oppet-rad { border-top: 1px solid var(--color-TD-neutral-subtlest); }
+.td-vader-block { padding: var(--space-xl); display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); color: var(--color-text-primary); }
+.td-vader-main { display: flex; justify-content: space-between; align-items: stretch; }
+.td-vader-temp { display: flex; flex-direction: column; }
+.td-vader-detalj { display: flex; flex-direction: column; text-align: right; gap: 2px; }
+.td-vader-detalj > strong + span { margin-top: auto; }
+.td-vader-text { margin: 0; }
+.td-vader-nu-rad { display: flex; align-items: center; gap: var(--space-sm); }
+.td-vader-dot { width: 4px; height: 4px; border-radius: var(--radius-full, 999px); background: currentColor; }
+.td-vader-detalj-tight { gap: 0; line-height: 1.3; padding-top: 13px; }
+.td-vader-main-top { align-items: flex-start; margin-bottom: 8px; margin-top: calc(-1 * var(--space-md) + 4px); }
+.td-vader-text-lg { font-size: var(--font-size-md); }
+@media (max-width: 1023px) { .just-cols-3 { grid-template-columns: 1fr; } }
+.td-vader-head .td-heading-xxs { white-space: nowrap; font-size: 20px; }
+
+.td-guide-mark-halo { stroke: var(--color-season-winter); }
+html[data-season="summer"] .td-guide-mark-halo { stroke: var(--color-season-summer); }
+.td-guide-eyebrow { margin-top: var(--space-sm); }
+.td-guide-lista { margin-top: -6px; }
+.td-pistkarta {
+  background: url("assets/img/pistkarta.png") center / cover no-repeat, linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
+}
+
+/* Inga hörnlänkar på datakort (stack) och väderblock */
+.td-just-nu-stack-corner { display: none !important; }
+/* Tredje raden bara i "På plats"-läget */
+.just-cols-3 { display: none; }
+html[data-mode="onsite"] .just-cols-3 { display: grid; }
+@media (max-width: 1023px) { html[data-mode="onsite"] .just-cols-3 { grid-template-columns: 1fr; } }
+
+/* Fjällguiden: mått från Figma (411×262, pad 24/24/16/24, header 36, eyebrow→rader 4) */
+.td-guide { padding: 24px 24px 16px; gap: 0; justify-content: flex-start; box-sizing: border-box; }
+.td-guide-top { height: 36px; align-items: center; }
+.td-guide-id { gap: 9px; }
+.td-guide-mark { width: 36px; height: 36px; flex: none; }
+.td-guide .td-guide-id > .td-ui-cta-sm { font-size: 20px; line-height: 26px; }
+.td-guide-ai { height: 22px; padding: 3px 5px; box-sizing: border-box; line-height: 16px; display: inline-flex; align-items: center; }
+.td-guide-status { display: flex; flex-direction: column; align-items: flex-end; text-align: right; font-family: var(--font-family-TD-secondary), sans-serif; }
+.td-guide-status-rad { display: inline-flex; align-items: center; gap: 6px; height: 13px; }
+.td-guide-status-dot { width: 8px; height: 8px; margin: 0; flex: none; }
+.td-guide-status-text { font-size: 13px; line-height: 13px; font-weight: 700; }
+.td-guide-status-till { font-size: 13px; line-height: 18px; font-weight: 400; }
+.td-guide-eyebrow { margin: auto 0 0; height: 16px; line-height: 16px; font-size: 12px; }
+.td-guide-lista { margin: 4px 0 0; }
+.td-guide-fraga { padding: 8px 0; min-height: 44px; box-sizing: border-box; line-height: 26px; }
+.td-guide-fraga.td-ui-body { line-height: 26px; }
+.td-guide-pil { width: 16px; height: 16px; align-items: center; justify-content: center; }
+.td-guide .td-guide-eyebrow { margin: 31px 0 0; }
+.td-guide-ai { min-width: 26px; justify-content: center; }
+
+/* Längd: tredje raden utan Pistkartor – Väder tar två kolumner */
+.just-cols-3 [hidden], .td-guide [hidden] { display: none !important; }
+
+/* Dagens vallatips (Längd) */
+.td-valla { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); padding: var(--space-xl); background: var(--color-TD-snow); color: var(--color-text-primary); }
+.td-valla-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+.td-valla-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
+.td-valla-tid { opacity: .7; }
+.td-valla-sno, .td-valla-val > div { display: flex; flex-direction: column; gap: 2px; }
+.td-valla-sno .td-ui-kicker, .td-valla-val .td-ui-kicker { text-transform: uppercase; opacity: .7; }
+.td-valla-skala { display: flex; flex-direction: column; gap: var(--space-sm); }
+.td-valla-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: center; }
+.td-valla-seg { height: 10px; border-radius: 3px; opacity: .4; }
+.td-valla-seg[aria-current] { height: 20px; border-radius: 4px; opacity: 1; }
+.td-valla-seg[data-tone="gron"] { background: var(--wax-green); }
+.td-valla-seg[data-tone="bla"] { background: var(--wax-blue); }
+.td-valla-seg[data-tone="violett"] { background: var(--wax-violet); }
+.td-valla-seg[data-tone="rod"] { background: var(--wax-red); }
+.td-valla-seg[data-tone="gul"] { background: var(--wax-yellow); }
+.td-valla-etiketter { display: flex; justify-content: space-between; opacity: .7; }
+.td-valla-val { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+/* Status: samma storlek och vänsterkant på båda raderna (text, inte prick) */
+.td-guide-status { align-items: flex-start; text-align: left; }
+.td-guide-status-text, .td-guide-status-till { font-size: 13px; line-height: 18px; }
+.td-guide-status-rad { height: 18px; }
+.td-guide-status-text { font-weight: 700; }
+.td-guide .td-guide-status .td-guide-status-till { font-weight: 400; padding-left: 14px; }
+.td-guide-status { gap: 0; }
+.td-guide-status-text, .td-guide-status-till { line-height: 15px; }
+.td-guide-status-rad { height: 15px; }
+/* "Händer idag" = samma rubrik som Väder (Heading/xxs 20px, 24px padding, centrerad mot pilen) */
+.td-rapport [data-rapport-today] { font-size: 20px; line-height: 26px; letter-spacing: -0.02em; }
+.td-rapport.is-activity .td-rapport-top { align-items: center; }
+/* Öppet nu: tid och namn på samma baslinje, listan mot botten som Fjällguiden */
+.td-oppet { justify-content: space-between; padding-bottom: 16px; }
+.td-oppet-rad { align-items: baseline; padding: 0; min-height: 44px; box-sizing: border-box; align-content: center; }
+.td-oppet-rad > * { line-height: 26px; }
+.td-oppet-rad { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; padding: 9px 0; }
+/* Spårkarta (Längd): spårikonen i stället för kartnålen */
+.td-kamera.is-karta .td-kamera-header .td-just-nu-header-icon svg { display: none; }
+.td-kamera.is-karta .td-kamera-header .td-just-nu-header-icon::before {
+  content: ""; display: block; width: 32px; height: 32px; background: currentColor;
+  -webkit-mask: url("assets/icons/langdspar.svg") center / contain no-repeat;
+          mask: url("assets/icons/langdspar.svg") center / contain no-repeat;
+}
+/* Hover-etikett vid hörnpilen: Händer idag och spårkarta */
+.td-kamera.is-karta .td-corner-link-label { display: inline; }
+a.td-rapport:hover .td-corner-link { gap: 8px; }
+a.td-rapport:hover .td-corner-link-label { opacity: 1; }
+.td-rapport.is-langd .td-rapport-top .td-corner-link { color: var(--color-TD-snow); }
+
+/* Fråga-modalens kort och följdfrågor i TD-stil, med hover */
+.fraga-card { text-decoration: none; color: var(--color-text-primary); background: var(--color-TD-day); transition: background var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-card-media { height: 140px; }
+.fraga-card-media img { transition: transform var(--motion-duration-slow, 600ms) var(--motion-easing-out-soft); }
+.fraga-card-media.is-empty { background: var(--color-TD-neutral-subtlest); }
+.fraga-card-copy { gap: 2px; padding: var(--space-md) var(--space-md) var(--space-lg); }
+.fraga-card .td-ui-kicker { text-transform: uppercase; color: var(--color-TD-neutral); }
+.fraga-card-title { margin-top: 2px; }
+.fraga-card-arrow { opacity: .4; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft), opacity var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-card:hover { background: var(--color-TD-neutral-subtlest); }
+.fraga-card:hover .fraga-card-media img { transform: scale(1.04); }
+.fraga-card:hover .fraga-card-arrow { opacity: 1; transform: translateX(3px); }
+.fraga-card:focus-visible { outline: 2px solid var(--color-TD-cta); outline-offset: 2px; }
+.fraga-chips button { transition: background var(--motion-duration-fast) var(--motion-easing-out-soft), color var(--motion-duration-fast) var(--motion-easing-out-soft), border-color var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.fraga-chips button:hover { background: var(--color-TD-night); border-color: var(--color-TD-night); color: var(--color-TD-snow); }
+@media (prefers-reduced-motion: reduce) { .fraga-card-media img, .fraga-card-arrow { transition: none; } }
+
+/* Fjällguiden-looken på Fråga oss (header-knapp + block) */
+#fraga-launch { gap: 8px; }
+#fraga-launch .fraga-launch-mark { width: 24px; height: 24px; flex: none; }
+#fraga-launch .fraga-launch-name { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+#fraga-launch .fraga-launch-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; }
+.fraga-block-name { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: 700; font-size: 24px; text-transform: none; letter-spacing: -0.02em; }
+.fraga-block-name .td-guide-ai { font-size: 12px; letter-spacing: 0; }
+.td-fraga-block-overrubrik-icon.td-guide-mark { width: 48px; height: 48px; }
+.td-fraga-block .td-guide-mark-halo, #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-winter); }
+html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season="summer"] #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-summer); }
+#fraga-launch .fraga-launch-name { font-size: 14px; }
+.td-fraga-block-overrubrik-icon.td-guide-mark { width: 60px; height: 60px; margin-bottom: -6px; transform: translateX(-4px); }
+.td-fraga-block-overrubrik { margin-bottom: 20px; }
+/* Live-plopp för Fjällguiden */
+.fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
+@keyframes fg-live-blink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-open) 50%, transparent); } 50% { opacity: .45; box-shadow: 0 0 0 4px color-mix(in srgb, var(--status-open) 0%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .fg-live { animation: none; } }
+.td-guide .td-guide-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; }
+/* AI-taggen mindre överallt */
+.td-guide .td-guide-ai { height: 16px; min-width: 20px; padding: 0 3px; font-size: 10px; line-height: 14px; border-radius: 3px; }
+#fraga-launch .fraga-launch-ai { height: 15px; min-width: 18px; padding: 0 3px; font-size: 9px; line-height: 13px; border-radius: 3px; }
+.fraga-block-name .td-guide-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.td-guide .td-guide-ai { height: 14px; min-width: 18px; padding: 0 3px; font-size: 9px; line-height: 12px; }
+#fraga-launch .fraga-launch-ai { height: 13px; min-width: 16px; padding: 0 2px; font-size: 8px; line-height: 11px; }
+.fraga-block-name .td-guide-ai { height: 16px; min-width: 20px; padding: 0 3px; font-size: 10px; line-height: 14px; }
+/* Sommar: Väder ersätter På gång i högerkolumnen (vitt kort) */
+.just-cols .td-vader-sommar { height: auto; flex: none; }
+.just-cols [hidden] { display: none !important; }
+/* Meny: mörkare neutral på hover (token i stället för 8 % natt-overlay) */
+.menu-control { isolation: isolate; }
+.menu-control::before { z-index: -1; }
+.menu-control:hover::before, .menu-control:focus-visible::before { background: var(--color-TD-neutral-subtlest); opacity: 1; }
+.menu-control:active::before { background: var(--color-TD-neutral-light); opacity: 1; }
+/* Fjällguiden-blockets sökknapp: CTA-färg i alla säsonger (skiljer sig från blockets säsongsfärg) */
+.td-fraga-block button.td-button.td-fraga-falt-submit { background: var(--color-cta-primary); color: var(--color-cta-on-dark); }
+.td-fraga-block button.td-button.td-fraga-falt-submit::before { background: var(--color-TD-night); }
+/* Aktivitetskortet (sommar): hörnlänkens text bara på hover, som övriga kort */
+.td-rapport.is-activity .td-corner-link-label { opacity: 0; }
+a.td-rapport.is-activity:hover .td-corner-link-label, a.td-rapport.is-activity:focus-visible .td-corner-link-label { opacity: 1; }
+/* Live-prickar (Fjällguiden-kortet, webbkameran) pulserar som .fg-live */
+.td-guide-status-dot, .td-kamera-dot { animation: fg-live-blink 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .td-guide-status-dot, .td-kamera-dot { animation: none; } }
+/* Fjällguiden: startvyn (ingen fråga ställd) */
+.fraga-welcome { display: flex; flex-direction: column; margin-bottom: var(--space-2xl); }
+.fraga-welcome:empty { display: none; }
+.fraga-welcome-title { margin: 0; }
+.fraga-welcome-lead { margin: var(--space-sm) 0 0; max-width: 60ch; color: var(--color-text-primary); }
+.fraga-welcome-kicker { margin: var(--space-xl) 0 0; }
+.fraga-welcome-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); margin-top: var(--space-md); }
+.fraga-welcome-tiles .fraga-tile { grid-row: auto; grid-template-rows: auto; gap: var(--space-xs); padding: var(--space-lg); }
+.fraga-welcome-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.fraga-welcome-card { border: 0; padding: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.fraga-welcome-card .fraga-card-media { height: 140px; }
+.fraga-welcome-booking { display: grid; gap: var(--space-xs); margin-top: var(--space-xl); padding: var(--space-xl); border-radius: var(--radius-sm); background: var(--color-TD-day); }
+.fraga-welcome-booking > p { margin: 0; }
+.fraga-welcome-booking-head { display: flex; justify-content: space-between; align-items: center; }
+.fraga-welcome-ok { display: inline-flex; align-items: center; gap: 6px; }
+.fraga-welcome-ok::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); }
+.fraga-welcome-next { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-TD-neutral-subtlest); }
+.fraga-welcome-next p { margin: 0; }
+.fraga-welcome-chip { flex: none; padding: 8px 14px; border: 1px solid var(--color-TD-neutral-subtle); border-radius: var(--radius-full); background: var(--color-TD-snow); color: var(--color-text-primary); cursor: pointer; }
+.fraga-welcome-chip:hover { border-color: var(--color-text-primary); }
+@media (max-width: 720px) {
+  .fraga-welcome-tiles, .fraga-welcome-cards { grid-template-columns: 1fr; }
+  .fraga-welcome-next { flex-direction: column; align-items: flex-start; }
+}
+.fraga-welcome .fraga-card { opacity: 1; transform: none; }
+
+/* Fjällguidens startvy: rubriken delar rad med stäng-knappen, mindre siffror i datarutorna (14 nov) */
+.fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-top { position: absolute; top: 41px; right: 32px; z-index: 2; }
+.fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-mid { margin-top: 24px; }
+.fraga-welcome-title { padding-right: 56px; }
+.fraga-welcome-tiles .td-ui-figure-lg { font-size: var(--font-size-2xl); line-height: 1.1; }
+.fraga-welcome-tiles .td-ui-figure-unit-lg { font-size: var(--font-size-md, 18px); }
+
+/* På plats: introtexten dold så Just nu kommer upp direkt (test 14 nov) */
+html[data-mode="onsite"] #statement { display: none; }
+/* På plats: topografin + Storvigeln-etiketten flyttas ned till ytan ovanför Alpint/Längd */
+/* På plats: topografin till höger om den låsta texten (topo-vänsterkant = textens högerkant + 32 px vid 1260 px) */
+html[data-mode="onsite"] .parallax-item--hero { --topo-shift-x: calc(28px + 7.7vw); --topo-shift-y: 800px; --label-nudge-x: 40px; }
+html[data-mode="onsite"][data-season="summer"] .parallax-item--hero { --label-nudge-x: -32px; }
+
+/* Menyn göms tillfälligt medan En dag och Lev/Andas visas (2026-11-14) */
+.top {
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out;
+}
+html .page > .top.is-tucked {
+  transform: translateY(calc(-100% - 2 * var(--menu-edge, 16px) - 2 * var(--menu-pad, 12px)));
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .top { transition: opacity 200ms linear; }
+  html .page > .top.is-tucked { transform: none; }
+}
+
+/* En dag lyft 72 px när menyn är gömd – rubriken landar 16 px från toppen (2026-11-14) */
+@media (min-width: 1024px) {
+  .en-dag { --en-dag-lift: 40px; }
+  .en-dag-pin { transform: translateY(calc(-1 * var(--en-dag-lift))); }
+}
+/* Hoppa över/nästa 32 px från viewportens botten. Pin är transformerad → fixed räknas mot pin, kompensera lyftet. */
+.en-dag-skip-bar { bottom: calc(32px - var(--en-dag-lift, 0px)); }
+
+/* Aktuellt-korten: ingen bakgrund så topografin inte klipps (14 nov) */
+.td-aktuellt .td-aktuellt-kort { background: transparent; }
+
+/* Tidslinje vänd: ikon vänster, text höger (vänsterställd) – 2026-11-14 */
+.en-dag-sun-label,
+.en-dag-sun-event-label {
+  right: auto;
+  width: var(--en-sun-label-w, auto);
+  align-items: flex-start;
+  text-align: left;
+}
+.en-dag-sun-label { left: calc(var(--en-sun-line-x, 50%) + 36px); }
+.en-dag-sun-event-label { left: calc(var(--en-sun-line-x, 50%) + 19px); }
+
+/* Frågekortet i Aktuellt: säsongsplatta (vinter/sommar) trots transparent-regeln ovan – 2026-11-14 */
+.td-aktuellt .td-aktuellt-kort[data-typ="fraga"] { background: var(--td-aktuellt-plate); }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] {
+  --td-aktuellt-plate: var(--color-season-summer);
+  --td-aktuellt-on-plate: var(--contrast-on-season-summer);
+}
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] .td-just-nu-header-icon img[data-graphic-light] { display: none; }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"] .td-just-nu-header-icon img[data-graphic-dark] { display: block; }
+html[data-season="summer"] .td-aktuellt-kort[data-typ="fraga"]::before { background: var(--color-TD-snow); }
+
+/* Läge 1/2 (ny/återkommande): frågekortet som tredje kort i Aktuellt – 2026-11-14 */
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort:nth-child(n+3) { order: 2; }
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-kort[data-typ="fraga"] { order: 1; }
+
+/* Aktuellt: två knappar på rad (Premiär-kortet) – 2026-11-14 */
+.td-aktuellt-kort-action:has(.td-button + .td-button) { flex-direction: row; gap: var(--space-md); }
+html:is([data-mode="new"], [data-mode="returning"]) .td-aktuellt-track > .td-aktuellt-end { order: 3; }
+
+/* Aktuellt glasplatta något vitare: 0.28 → 0.4 (2026-11-14) */
+.td-aktuellt-kort[data-platta="glas"] { --td-aktuellt-plate: rgb(255 255 255 / 0.4); }
+
+/* Just nu: videokort ersätter Rapport i läge 1/2 (2026-11-14). Titel nere till vänster som Rapport, play centrerad. */
+.td-videokort { display: none; }
+html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-rapport { display: none; }
+html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort { display: flex; }
+.td-videokort {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 410px;
+  height: 500px;
+  padding: var(--space-xl);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  color: var(--color-text-primary-dark);
+  text-align: left;
+  cursor: pointer;
+}
+.td-videokort-media { position: absolute; inset: 0; pointer-events: none; }
+/* 16:9-video fyller 410×500: höjd styr, bredd 500*16/9 */
+.td-videokort-media iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: calc(500px * 16 / 9); height: 500px;
+  transform: translate(-50%, -50%) scale(1.02);
+  border: 0;
+}
+.td-videokort-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgb(36 38 41 / 0.85) 0%, rgb(36 38 41 / 0) 45%);
+}
+.td-videokort-play {
+  position: absolute; top: 50%; left: 50%;
+  display: grid; place-items: center;
+  width: 64px; height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-TD-snow);
+  color: var(--color-TD-night);
+  transform: translate(-50%, -50%);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.td-videokort-play svg { margin-left: 3px; }
+.td-videokort:hover .td-videokort-play { transform: translate(-50%, -50%) scale(1.08); }
+.td-videokort:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+.td-videokort-body { position: relative; display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.td-videomodal {
+  width: min(1200px, 92vw);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.td-videomodal::backdrop { background: rgb(36 39 42 / 0.88); }
+.td-videomodal-frame { aspect-ratio: 16 / 9; border-radius: var(--radius-sm); overflow: hidden; background: #000; }
+.td-videomodal-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.td-videomodal-x { position: absolute; right: 0; bottom: calc(100% + var(--space-md)); }
+@media (max-width: 1023px) { .td-videokort { width: 100%; } }
+/* Videokort: stillbild tills YouTube spelar; skala så titel/UI-kanter hamnar utanför kortet. Play 56 px, triangeln optiskt centrerad. */
+.td-videokort-media { background: var(--color-TD-night) center / cover no-repeat; }
+.td-videokort-media iframe { opacity: 0; transform: translate(-50%, -50%) scale(1.25); transition: opacity 400ms var(--motion-easing-out-soft); }
+.td-videokort-media.is-playing iframe { opacity: 1; }
+.td-videokort-play { width: 56px; height: 56px; }
+.td-videokort-play svg { margin-left: 0; transform: translateX(1px); }
+.td-videokort-play svg { width: 28px; height: 28px; transform: none; }
+
+/* Aktuellt: säsongens kort. Sommar = egen uppsättning i DOM-ordning. */
+html:not([data-season="summer"]) .td-aktuellt-kort[data-sasong="sommar"],
+html[data-season="summer"] .td-aktuellt-kort[data-sasong="vinter"] { display: none; }
+html[data-season="summer"] .td-aktuellt-track > .td-aktuellt-kort[data-sasong="sommar"] { order: 0; }
+
+/* Just nu: Nästa steg-kort ersätter Rapport i läge 3 (påbörjad bokning) – 2026-11-14. Liftkortstipset visas igen (John 14 nov). */
+.td-nastasteg { display: none; }
+html[data-mode="booking"] .just-cols > .td-rapport { display: none; }
+html[data-mode="booking"] .just-cols > .td-nastasteg:not([hidden]) { display: flex; }
+.td-nastasteg {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 410px;
+  height: 500px;
+  padding: var(--space-xl);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-night);
+  color: var(--color-text-primary-dark);
+  text-decoration: none;
+}
+.td-nastasteg-bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--motion-easing-out-soft); }
+.td-nastasteg:hover .td-nastasteg-bild { transform: scale(1.03); }
+.td-nastasteg-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(36 38 41 / 1) 23%, rgb(36 38 41 / 0) 100%); }
+.td-nastasteg-body { position: relative; display: flex; flex-direction: column; gap: var(--space-sm); }
+.td-nastasteg-handling { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-top: var(--space-md); }
+.td-nastasteg:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+@media (max-width: 1023px) { .td-nastasteg { width: 100%; } }
+/* Nästa steg: vit text, lättare scrim (bara nedre delen) */
+.td-nastasteg, .td-nastasteg-body > span:not(.td-nastasteg-handling), .td-nastasteg-pris { color: var(--color-TD-snow); }
+.td-nastasteg-shade { background: linear-gradient(to top, rgb(36 38 41 / 0.75) 0%, rgb(36 38 41 / 0.35) 35%, rgb(36 38 41 / 0) 60%); }
+
+/* Fjällguiden i Just nu: egna frågor i läge 3 (påbörjad bokning) – 2026-11-14 */
+.td-guide-bokning { display: none; }
+html[data-mode="booking"] .td-guide .td-guide-lista:not(.td-guide-bokning),
+html[data-mode="booking"] .td-guide .td-guide-ej-bokning { display: none; }
+html[data-mode="booking"] .td-guide .td-guide-eyebrow.td-guide-bokning { display: block; }
+html[data-mode="booking"] .td-guide .td-guide-lista.td-guide-bokning:not([hidden]) { display: block; }
+/* Aktuellt vinter: egna kort per läge. bas = läge 1/2. */
+html:is([data-mode="booking"], [data-mode="onsite"]) .td-aktuellt-kort[data-lage="bas"],
+html:not([data-mode="booking"]) .td-aktuellt-kort[data-lage="booking"],
+html:not([data-mode="onsite"]) .td-aktuellt-kort[data-lage="onsite"] { display: none; }
+
+/* Ingen gummibandsscroll förbi footern (eller ovanför toppen). */
+html, body { overscroll-behavior-y: none; }
+
+/* ── Boendekort: två testvarianter under Fjällguiden (Oura och Waabi, 2026-11-15) ── */

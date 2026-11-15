@@ -739,3 +739,16 @@ html[data-season="summer"] .onsite-topbar {
 /* Toppbaren ligger i flödet ovanför sidan; headern (absolut/fixed) flyttas ned med dess synliga höjd. */
 .og-hp-header { margin-top: var(--og-topbar-offset, 0px); }
 .onsite-toggle-field { margin-top: var(--space-md); }
+
+/* Just nu (OG): videokortet spelar lokal mp4 i stället för YouTube. */
+.td-videokort-media video,
+.td-videomodal-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.td-videomodal-frame video { object-fit: contain; background: #000; }
+/* Orsa-guiden: chattikonen i stället för TD:s Fjällguiden-märke. */
+.td-guide .og-guide-mark { width: 32px; height: 32px; }
+/* Tredje raden: kolumner = antal synliga kort (ingen pistkarta i OG → två kort i Alpint). */
+html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+@media (max-width: 1023px) { html[data-mode="onsite"] .just-cols-3 { grid-auto-flow: row; } }
+.og-guide-mark-sommar { display: none; }
+html[data-season="summer"] .og-guide-mark-vinter { display: none; }
+html[data-season="summer"] .og-guide-mark-sommar { display: block; }

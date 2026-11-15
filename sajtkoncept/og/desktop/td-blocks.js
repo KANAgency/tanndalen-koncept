@@ -1264,12 +1264,12 @@ export function initTdBlocks(root = document) {
       /* TODO: demoinnehåll, inte riktiga fakta. */
       const justNuData = {
         alpint: {
-          fraga: { title: "Det regnar, vad kan vi göra idag?", sub: "Tre tips på saker att göra inomhus idag.", href: "#fraga" },
+          fraga: { title: "Det regnar, vad kan vi göra idag?", sub: "Tre tips för familjen inomhus idag.", href: "#fraga" },
           rapport: {
-            chip: "Medelsvår · Headstråket",
+            chip: "Lätt · [Familjebacken]",
             caption: "Från backen i morse · 07:40",
-            quote: "”Fast och snabbt i morse. Solsidan mjuknar runt elva, skuggsidan håller hela dagen.”",
-            sign: "Jonas Berg, pistförare",
+            quote: "”[Mjukt och fint i barnbacken. Ta första åket före tio, då är det tomt i liften.]”",
+            sign: "[Karin Ek], pistförare",
             badge: "Preparerad 05:30",
             image: "./assets/img/rapport-raw-1.png",
             avatar: "./assets/img/rapport-avatar.png"
@@ -1278,18 +1278,18 @@ export function initTdBlocks(root = document) {
         langd: {
           /* TODO: demosiffror från Just nu / Data. Byt mot ett riktigt spårflöde. */
           status: {
-            spar: { openKm: 98, totalKm: 145, groomedKm: 64 },
+            spar: { openKm: 142, totalKm: 180, groomedKm: 62 },
             valla: { wax: "Blå", trackTempC: -6 },
-            nysno: { cm: 12, forecastCm: 30 },
-            snodjup: { upperCm: 134, lowerCm: 71 }
+            nysno: { cm: 6, forecastCm: 15 },
+            snodjup: { upperCm: 78, lowerCm: 52 }
           },
-          /* TODO: Datum och tider ska komma från Tänndalens kvällsskidåkning. Tisdagar och fredagar utvalda veckor, 19:00–21:00, i Hamra. */
+          /* TODO: påhittat OG-event i [hakparentes]. Byt mot riktiga tider. */
           event: {
-            place: "Hamra",
+            place: "[Grönklittsbacken]",
             when: "Idag 19:00",
-            title: "Stämningsfull kvällsskidåkning i belysta backar",
-            name: "Discoåkning",
-            body: "Under dagtid är Hamra Komfort ”bara” en modern sexstolslift. Men när mörkret sakta lägger sig i Tänndalen byter hen skepnad och iklär sig sin discoskrud. Ur högtalarna ljuder musik och dalstationen lyser i regnbågens färger. Vem hade kunnat tro att liftåkning skulle vara roligare än utförsåkning?"
+            title: "[Kvällsåkning i belysta spår]",
+            name: "[Månskensturen]",
+            body: "[Tisdagar och torsdagar tänds elljusspåret vid Grönklitt till 21. Tre kilometer i skogen, lagom för barnen, och varm saft vid starten.]"
           },
           fraga: {
             sub: "Dagens vallatips.",
@@ -1300,25 +1300,26 @@ export function initTdBlocks(root = document) {
             image: "./assets/img/just-nu/langd/just-nu-01.jpg",
             video: "/videos/langd/just-nu-01.mp4",
             poster: "./assets/img/just-nu/langd/just-nu-01.jpg",
-            alt: "Hamra Komfort-liften på kvällen, upplyst i lila, rosa och orange, sedd från backen."
+            alt: "Upplysta skidspår i skogen på kvällen."
           },
           calendar: {
-            snart: ["16 feb–8 mar · Sportlovet"],
-            senare: ["28 apr–3 maj · 1:a Maj Trofén", "21–24 jul · Fjällturen"]
+            snart: ["[16 feb–8 mar] · Sportlov med barnaktiviteter"],
+            senare: ["[mars] · [Orsa Skidmaraton]", "[juli] · [Musik vid Skattungen]"]
           },
           /* TODO: sidan för spårkartan är inte vald. Länken pekar på en platshållare. */
           karta: {
             label: "Spårkarta",
             image: "./assets/img/just-nu/langd/sparkarta.png",
-            alt: "Karta över Tänndalens längdspår.",
+            alt: "Karta över längdspåren i Orsa Grönklitt.",
             line: "Se vilka spår som är öppna",
             href: "#sparkarta",
             name: "Öppna spårkartan"
           }
         },
-        /* TODO: demosiffror. Byt mot ett sommarflöde. Sjöns namn är inte bestämt. */
+        /* TODO: demosiffror och påhittat OG-innehåll i [hakparentes]. Byt mot ett sommarflöde. */
         sommar: {
-          temperature: { valleyC: 14, summitC: 8, lakeC: 17 },
+          temperature: { valleyC: 17, summitC: 13, lakeC: 19 },
+          lakeName: "[Skattungen]",
           weather: { rainPercent: 20, valleyMs: 4, summitMs: 9 },
           trails: {
             open: 11,
@@ -1330,28 +1331,28 @@ export function initTdBlocks(root = document) {
               "Torra": "Torrt på lederna. Vanliga skor går bra."
             }
           },
-          lift: { open: true, hours: "10–17", nextOpen: "10:00" },
-          sun: { rise: "04:12", set: "21:48" },
+          lift: { open: true, hours: "[10–17]", nextOpen: "10:00" },
+          sun: { rise: "03:52", set: "22:14" },
           tip: {
             label: "Aktiviteter",
-            pill: "Svansjön",
-            title: "Paddla 1 000 meter över havet",
-            excerpt: "Svansjön ligger stilla på fjällplatån ovanför skidområdet, med toppar i alla riktningar. Hyr kajak eller kanot.",
-            link: "Hyr kanot eller kajak",
+            pill: "Rovdjursparken",
+            title: "[Björnarna vaknar till sommaren]",
+            excerpt: "[Orsa Rovdjurspark ligger tio minuter från stugorna. Björn, varg, lodjur och järv, och en lekplats för de minsta.]",
+            link: "Se öppettider",
             /* TODO: uthyrningssidan är inte vald. Tom sträng faller tillbaka på #. */
             rentalHref: "",
             image: "./assets/img/just-nu/sommar/svansjon.jpg?v=2",
-            alt: "Två personer paddlar kanot på Svansjön, med gröna fjäll runt sjön."
+            alt: "Två personer paddlar kanot på en sjö omgiven av skog."
           },
           calendar: {
-            senare: ["30 jun–4 jul · Mountain Runners Week", "21–24 jul · Fjällturen"]
+            senare: ["[midsommar] · [Midsommar i Orsa]", "[juli] · [Musik vid Skattungen]"]
           },
-          fraga: { title: "Är lederna blöta idag?", href: "#fraga" },
+          fraga: { title: "Är Rovdjursparken öppen idag?", href: "#fraga" },
           kamera: {
-            label: "Webbkamera · Storvigeln",
+            label: "Webbkamera · [Grönklittstoppen]",
             /* TODO: byt ut när en kamerabild finns. */
             image: "./assets/img/just-nu/sommar/webbkamera.jpg",
-            alt: "Webbkamera vid Storvigeln"
+            alt: "Webbkamera vid Grönklittstoppen"
           }
         }
       };
@@ -1411,8 +1412,31 @@ export function initTdBlocks(root = document) {
         img.onerror = () => { img.removeAttribute("src"); missingHost.classList.add("is-missing"); };
         if (src) img.src = src;
       }
+      const onsiteMetricEls = [...document.querySelectorAll("[data-onsite-metric]")];
+      const onsiteMetricsWinter = onsiteMetricEls.map((el) => el.innerHTML);
+      function setOnsiteMetrics(summer) {
+        if (!summer) { onsiteMetricEls.forEach((el, i) => { el.innerHTML = onsiteMetricsWinter[i]; }); return; }
+        const d = justNuData.sommar;
+        const rows = [
+          ["Öppet:", `${d.trails.open}/${d.trails.total} leder, ${d.tip.pill} ${d.lift.hours}`],
+          ["Väder:", `${d.temperature.valleyC}°, regnrisk ${d.weather.rainPercent} %`],
+          ["Bad:", `${d.temperature.lakeC}° i ${d.lakeName}`]
+        ];
+        onsiteMetricEls.forEach((el, i) => { el.innerHTML = `<strong class="onsite-topbar-label">${rows[i][0]}</strong> ${rows[i][1]}`; });
+      }
+      function setSummerSwap(summer) {
+        document.querySelector(".just-cols .td-pagang").hidden = summer;
+        const vaderVinter = document.querySelector(".just-cols-3 .td-vader-block");
+        if (vaderVinter) vaderVinter.hidden = summer;
+        const kamera = document.querySelector(".just-cols .td-kamera");
+        const vaderSommar = document.querySelector(".td-vader-sommar");
+        if (summer && vaderSommar) vaderSommar.before(kamera);
+        else document.querySelector(".just-cols .td-pagang").after(kamera);
+        setOnsiteMetrics(summer);
+      }
       function applyJustNu(gren) {
         justNuSwitch.style.display = "";
+        setSummerSwap(false);
         justNuGren = gren;
         document.querySelectorAll("[data-gren]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gren === gren)));
         document.querySelectorAll("[data-gren-panel]").forEach((panel) => { panel.hidden = panel.dataset.grenPanel !== gren; });
@@ -1458,6 +1482,8 @@ export function initTdBlocks(root = document) {
           justNuRapport.querySelector("[data-rapport-top]").hidden = false;
           justNuRapport.querySelector("[data-rapport-chip]").hidden = false;
           clearActivityLink();
+          justNuRapport.querySelector("[data-rapport-corner]").hidden = false;
+          justNuRapport.querySelector("[data-rapport-corner-label]").textContent = "Läs mer";
           justNuRapport.querySelector("[data-rapport-excerpt]").hidden = true;
           justNuRapport.querySelector("[data-rapport-more]").hidden = true;
         } else {
@@ -1513,15 +1539,7 @@ export function initTdBlocks(root = document) {
           };
           fill("spar", String(status.spar.openKm), String(status.spar.groomedKm));
           stack.querySelector('[data-status="spar"] [data-status-unit]').textContent = String(status.spar.totalKm);
-          fill("valla", status.valla.wax, signed(status.valla.trackTempC));
-          const wax = String(status.valla.wax);
-          const waxEl = stack.querySelector('[data-status="valla"] [data-status-value]');
-          const waxShort = !/\s/.test(wax) && [...wax].length <= 6;
-          waxEl.classList.toggle("td-ui-figure-lg", waxShort);
-          waxEl.classList.toggle("td-ui-figure-unit-lg", !waxShort);
-          markWordPrimary(waxEl);
-          const waxTone = { "blå": "blue", "grön": "green", "röd": "red", "violett": "violet", "klister": "neutral", "special": "neutral" };
-          stack.querySelector("[data-wax-dot]").dataset.tone = waxTone[wax.toLowerCase()] || "neutral";
+          /* Valla har ett eget kort (Dagens vallatips) i tredje raden. */
           fill("nysno", String(status.nysno.cm), String(status.nysno.forecastCm));
           fill("snodjup", String(status.snodjup.upperCm), String(status.snodjup.lowerCm));
           stack.dispatchEvent(new Event("just-nu-label"));
@@ -1534,6 +1552,7 @@ export function initTdBlocks(root = document) {
           justNuKamera.href = karta.href;
           justNuKamera.setAttribute("aria-label", karta.name);
           justNuKameraLabel.textContent = karta.label;
+          justNuKamera.querySelector(".td-corner-link-label").textContent = "Öppna spårkartan";
           justNuKameraLine.textContent = karta.line;
           justNuKameraLive.hidden = true;
           armImage(justNuKamera.querySelector("img"), karta.image, karta.alt, justNuKamera);
@@ -1550,6 +1569,7 @@ export function initTdBlocks(root = document) {
           kameraImg.alt = justNuKameraAlpine.alt;
           kameraImg.src = justNuKameraAlpine.src;
           justNuKameraLabel.textContent = justNuKameraAlpine.label;
+          justNuKamera.querySelector(".td-corner-link-label").textContent = "Alla kameror";
         }
         document.querySelector(`[data-gren-panel="${gren}"].td-just-nu-stack`)?.dispatchEvent(new Event("just-nu-reset"));
       }
@@ -1563,6 +1583,7 @@ export function initTdBlocks(root = document) {
       function applySummer() {
         justNuSwitch.style.display = "none";
         document.querySelectorAll("[data-gren-panel]").forEach((panel) => { panel.hidden = panel.dataset.grenPanel !== "sommar"; });
+        setSummerSwap(true);
         const summer = justNuData.sommar;
         const stack = document.querySelector('[data-gren-panel="sommar"].td-just-nu-stack');
         const card = (key) => stack.querySelector(`[data-summer="${key}"]`);
@@ -2084,6 +2105,9 @@ export function initTdBlocks(root = document) {
         launch?.addEventListener("click", () => open(launch, false));
         card?.addEventListener("click", (event) => {
           event.preventDefault();
+          const row = event.target.closest(".td-guide-fraga");
+          if (row) { open(row, true); return; }
+          if (card.classList.contains("td-guide")) return;
           open(card, true);
         });
         layer.addEventListener("click", (event) => {
@@ -2509,7 +2533,48 @@ export function initTdBlocks(root = document) {
   }
 
   initStacks();
+  /* ---- videokort (läge 1/2) + modal (td index ~6943–7010, OG: lokal mp4 i stället för YouTube) ---- */
+  function initVideokort() {
+    try {
+      const card = document.querySelector(".td-videokort");
+      const dlg = document.getElementById("td-videomodal");
+      if (!card || !dlg) return;
+      const src = card.dataset.src;
+      const media = card.querySelector(".td-videokort-media");
+      const frame = dlg.querySelector(".td-videomodal-frame");
+      let bg = null;
+      const mountBg = () => {
+        if (bg || getComputedStyle(card).display === "none") return;
+        bg = document.createElement("video");
+        Object.assign(bg, { muted: true, loop: true, playsInline: true, autoplay: true, preload: "metadata", src });
+        bg.setAttribute("aria-hidden", "true");
+        media.append(bg);
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) bg.play().catch(() => {});
+      };
+      mountBg();
+      new MutationObserver(() => setTimeout(mountBg, 50)).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
+      card.addEventListener("click", () => {
+        frame.innerHTML = "";
+        const v = document.createElement("video");
+        Object.assign(v, { controls: true, autoplay: true, playsInline: true, src });
+        frame.append(v);
+        bg?.pause();
+        dlg.showModal();
+        v.play().catch(() => {});
+      });
+      const shut = () => { if (dlg.open) dlg.close(); };
+      dlg.querySelector(".td-videomodal-x").addEventListener("click", shut);
+      dlg.addEventListener("click", (event) => { if (event.target === dlg) shut(); });
+      dlg.addEventListener("close", () => {
+        frame.innerHTML = "";
+        bg?.play().catch(() => {});
+        card.focus();
+      });
+    } catch (error) { console.error("videokort", error); }
+  }
+
   initSeasonAndEnDag();
+  initVideokort();
   initJustNu();
   initFragaModal();
   initBoende();

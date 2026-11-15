@@ -10,6 +10,14 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: OG Just nu (steg 2 av TD→OG-synken)
+- Orsa-guiden-kort (platshållarnamn) med frågelistor per läge × gren (bokning: "Inför er resa"), OG:s chattikon (ljus/mörk per säsong) i stället för TD:s Fjällguiden-märke. Klick på en fråga öppnar svarsmodalen.
+- Läge 1/2: videokort med lokal `assets/video/winter.web.mp4` (loop i bakgrunden, `<dialog>` med ljud och kontroller), inte YouTube. Läge 3: Nästa steg (liftkort/spårkort, priser i [hakparentes]). Läge 4: Rapport + tredje raden utan pistkarta (Alpint: Öppet nu + Väder, Längd: Dagens vallatips + Öppet nu + Väder; kolumner = synliga kort).
+- Sommar: väderkort "Väder i Orsa", `setSummerSwap` (webbkamera ovanför vädret, På gång dolt), toppbarens sommartext (leder, väder, bad). Valla flyttad från längdstacken till tredje raden som i TD.
+- `justNuData`, Rapport och På gång omskrivna till OG (påhittat i [hakparentes]). CSS: TD `startsida.css` 5660–6215 portad sist i `td-blocks.css` utan CircularXX. `klocka.svg` kopierad till OG.
+- Verifierat 1440×900: rätt kort per läge (returning: videokort, booking: Nästa steg, onsite: Rapport + tredje raden) i Alpint och Längd, vinter och sommar. Inga konsolfel.
+- Öppet: bokning + sommar ger tom mittkolumn och tom guidelista (samma som TD, läge 3 är "endast vinter"). Boendeslidern och Fråga-förslagen nämner fortfarande Hamra/Tänndalen (steg 3 tar förslagen).
+
 ## Klart 15 nov: OG lägessystem (steg 1 av TD→OG-synken)
 - `og/desktop/modes.js`, `modes-content.js` (bokningskalender läge 3), `demo-stay.js` (demovistelse [Grönklitt Stugby] 15–22 feb 2027, 2 vuxna 2 barn) efter TD:s mönster, på `shared/js/modes-engine.js` + `MODES_UI` (og-mode/og-season). `td-blocks.js` skickar nu `og-season` bredvid `td-season`.
 - Head-skript i `og/desktop/index.html` sätter `data-mode` före render: `?mode`, `?intro=1` (= ny), `?intro=0` (aldrig ny), sparat `og-mode`, annars `og_intro_seen` → återkommande. `?plats=1` / sparat `og-onsite-orsa` → På plats.
