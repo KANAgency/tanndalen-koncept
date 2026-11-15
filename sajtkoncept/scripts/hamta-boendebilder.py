@@ -8,6 +8,7 @@ de namngivna boendena och laddar ner originalbilderna (_org.jpg).
 Körning (från sajtkoncept/):
     python3 scripts/hamta-boendebilder.py
     python3 scripts/hamta-boendebilder.py --ut ../../assets/boenden --veckor 20
+    python3 scripts/hamta-boendebilder.py --omrade 33295   # alla boenden i Fjällöga
 
 Utdata per boende: <ut>/<slug>/NN-<hash>.jpg + fakta.json (beskrivning,
 kriterier, alt-texter, pris för första lediga vecka).
@@ -60,6 +61,7 @@ def main():
     here = pathlib.Path(__file__).resolve()
     ap.add_argument("--ut", default=str(here.parents[3] / "assets" / "boenden"))
     ap.add_argument("--veckor", type=int, default=52, help="antal lördagar att söka i")
+    ap.add_argument("--omrade", type=int, help="grouppoollid: hämta ALLA boenden i området i stället för listan")
     a = ap.parse_args()
     ut = pathlib.Path(a.ut)
     kriterier = {k: v["title"] for k, v in get_json(f"{API}/criterias")["payload"].items()}
@@ -67,7 +69,25 @@ def main():
     # Sök-API:t visar bara lediga boenden, så vi provar en vecka i taget
     # per område tills boendet dyker upp.
     hittade = {}
-    for namn, grupp in BOENDEN:
+    if a.omrade:
+        enheter = {}
+        for start in lordagar(a.veckor):
+            slut = start + dt.timedelta(days=7)
+            url = (f"{API}/search?resvtype={RESVTYPE}&grouppoollid={a.omrade}"
+                   f"&startdate={start}&enddate={slut}&guests=2")
+            try:
+                groups = get_json(url)["payload"]["groups"]
+            except Exception:  # noqa: BLE001
+                continue
+            groups = groups.values() if isinstance(groups, dict) else groups
+            for g in groups:
+                for it in g["items"]:
+                    enheter.setdefault(it["unitlid"], it)
+            time.sleep(0.3)
+        for it in enheter.values():
+            spara(it, it["unitdesc4"], ut / slug(it["groupTitle"]) / slug(it["unitdesc4"]), kriterier)
+        print(f"{len(enheter)} boenden i området")
+    for namn, grupp in ([] if a.omrade else BOENDEN):
         if grupp is None:
             continue
         for start in lordagar(a.veckor):
@@ -87,36 +107,40 @@ def main():
                 print(f"hittade {traff[0]['unitdesc4']} ({start})")
                 break
 
+    if a.omrade:
+        return
     for namn, _ in BOENDEN:
         it = hittade.get(namn)
         if not it:
             print(f"hittades inte: {namn}")
             continue
-        mapp = ut / slug(namn)
-        mapp.mkdir(parents=True, exist_ok=True)
-        bilder = list(it.get("images") or [])
-        if it.get("image") and it["image"].get("hash") not in {b["hash"] for b in bilder}:
-            bilder.insert(0, it["image"])
-        bilder.sort(key=lambda b: int(b.get("sortIndex") or 0))
-        meta = []
-        for i, b in enumerate(bilder, 1):
-            fil = mapp / f"{i:02d}-{b['hash'][:8]}.jpg"
-            if not fil.exists():
-                urllib.request.urlretrieve(b["url"], fil)
-            meta.append({"fil": fil.name, "alt": b["translations"].get("sv", {}).get("accessibility")})
-        fakta = {
-            "namn": namn,
-            "omrade": it.get("groupTitle"),
-            "url": f"https://hamra.r360online.se/client/product/boende-{RESVTYPE}/{slug(it.get('groupTitle',''))}-{it.get('grouppoollid')}/{it.get('poollid')}/{slug(namn)}-{it.get('unitlid')}",
-            "vecka": [it.get("arrdate"), it.get("depdate")],
-            "pris_vecka_kr": it.get("aprice"),
-            "kriterier": {kriterier.get(k, k): v for k, v in it.get("crits", {}).items() if v not in (False, None)},
-            "beskrivning": it.get("weblong"),
-            "bilder": meta,
-        }
-        (mapp / "fakta.json").write_text(json.dumps(fakta, ensure_ascii=False, indent=2))
-        print(f"{namn}: {len(meta)} bilder → {mapp}")
+        spara(it, namn, ut / slug(namn), kriterier)
 
+
+def spara(it, namn, mapp, kriterier):
+    mapp.mkdir(parents=True, exist_ok=True)
+    bilder = list(it.get("images") or [])
+    if it.get("image") and it["image"].get("hash") not in {b["hash"] for b in bilder}:
+        bilder.insert(0, it["image"])
+    bilder.sort(key=lambda b: int(b.get("sortIndex") or 0))
+    meta = []
+    for i, b in enumerate(bilder, 1):
+        fil = mapp / f"{i:02d}-{b['hash'][:8]}.jpg"
+        if not fil.exists():
+            urllib.request.urlretrieve(b["url"], fil)
+        meta.append({"fil": fil.name, "alt": b["translations"].get("sv", {}).get("accessibility")})
+    fakta = {
+        "namn": namn,
+        "omrade": it.get("groupTitle"),
+        "url": f"https://hamra.r360online.se/client/product/boende-{RESVTYPE}/{slug(it.get('groupTitle',''))}-{it.get('grouppoollid')}/{it.get('poollid')}/{slug(namn)}-{it.get('unitlid')}",
+        "vecka": [it.get("arrdate"), it.get("depdate")],
+        "pris_vecka_kr": it.get("aprice"),
+        "kriterier": {kriterier.get(k, k): v for k, v in it.get("crits", {}).items() if v not in (False, None)},
+        "beskrivning": it.get("weblong"),
+        "bilder": meta,
+    }
+    (mapp / "fakta.json").write_text(json.dumps(fakta, ensure_ascii=False, indent=2))
+    print(f"{namn}: {len(meta)} bilder → {mapp}")
 
 if __name__ == "__main__":
     main()
