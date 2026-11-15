@@ -10,6 +10,12 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: AI-video i Järven-korten (test)
+- Fjällstugan Järven: 3 rum (allrum sväng höger → kamin drar ut → allrum framåt mot fönstret), Kling 2.5 1080p med start- och slutbild utskurna ur riktiga foton så att det som avslöjas är äkta. 6 klipp (9:16 + 1:1), 1 950 credits, Magnific-projektet "Tänndalen - Orsa Grönklitt - Sajt - Inledande fas - 09665".
+- Ihopklippt med ffmpeg (0,8 s toning, 13,6 s): `td/desktop/assets/video/boende-jarven-916.mp4` (Oura) och `-11.mp4` (Waabi), ca 4 MB styck. Videomappen är gitignorerad – råklipp och utsnitt ligger i `tanndalen-orsa/assets/boenden/fjallstugan-jarven/`.
+- JS: en video spelar per rad, hover/fokus byter, pausar utanför skärm och vid reducerad rörelse. Ingen hover-zoom på videokort.
+- Öppet: John bedömer resultatet; om det håller, samma recept på övriga 4 boenden. Kortformat och mobil fortfarande öppet.
+
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
 - Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
 - `sajtkoncept/scripts/hamta-boendebilder.py` hämtar alla originalbilder + `fakta.json` via R360:s publika sök-API till `tanndalen-orsa/assets/boenden/` (utanför repot). Fjällsippan 4 finns inte i R360.

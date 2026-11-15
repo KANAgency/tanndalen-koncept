@@ -1288,7 +1288,7 @@
           </li>
           <li class="td-bo-oura-kort">
             <a class="td-bo-oura-lank" href="#">
-              <img class="td-bo-oura-bild" src="assets/img/boende-jarven-allrum.jpg" alt="Allrummet i Fjällstugan Järven med fjällutsikt" loading="lazy" decoding="async">
+              <video class="td-bo-oura-bild td-bo-video" src="assets/video/boende-jarven-916.mp4" poster="assets/video/boende-jarven-916-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Fjällstugan Järven: allrum, braskamin och utsikt"></video>
               <h3 class="td-bo-oura-rubrik">Braskamin och balkong i söderläge</h3>
               <img class="td-bo-oura-detalj" src="assets/img/boende-jarven-kamin.jpg" alt="Braskaminen i Fjällstugan Järven" loading="lazy" decoding="async">
               <span class="td-bo-oura-meta"><span class="td-ui-caption">Fjällstugan Järven · Tänndalen</span><span class="td-ui-title-sm td-bo-pris">fr. [11 600] kr/vecka</span></span>
@@ -1365,7 +1365,7 @@
           </li>
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällstugan Järven, Braskamin och balkong i söderläge">
-              <img class="td-bo-waabi-bild" src="assets/img/boende-jarven-stuga.jpg" alt="Fjällstugan Järven i snö" loading="lazy" decoding="async">
+              <video class="td-bo-waabi-bild td-bo-video" src="assets/video/boende-jarven-11.mp4" poster="assets/video/boende-jarven-11-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Fjällstugan Järven: allrum, braskamin och utsikt"></video>
               <span class="td-bo-waabi-pil" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <div class="td-bo-waabi-rutor">
@@ -7068,5 +7068,28 @@
         sync();
       });
     </script>
+<script>
+/* Boendekort: en video spelar per rad; hover/fokus på ett kort byter. Pausar utanför skärm och vid reducerad rörelse. */
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  document.querySelectorAll(".td-bo").forEach((sec) => {
+    const vids = [...sec.querySelectorAll("video.td-bo-video")];
+    if (!vids.length) return;
+    let active = vids[0], visible = false;
+    const sync = () => vids.forEach((v) => {
+      if (visible && v === active && !reduce.matches) v.play().catch(() => {});
+      else v.pause();
+    });
+    vids.forEach((v) => {
+      const kort = v.closest("li");
+      const pick = () => { active = v; sync(); };
+      kort.addEventListener("pointerenter", pick);
+      kort.addEventListener("focusin", pick);
+    });
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }, { threshold: 0.25 }).observe(sec);
+    reduce.addEventListener("change", sync);
+  });
+})();
+</script>
 </body>
 </html>
