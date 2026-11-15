@@ -38,6 +38,12 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: boendekort – pristagg, CTA och bildmodal (test)
+- Priset flyttat från textrad till tagg uppe till vänster på bilden/videon (`td-chip-tag-solid td-chip-tag-dark`, Snö-bakgrund).
+- Ny CTA under varje kort: "Se tillgänglighet", `td-button-secondary td-button-md` (vit). Alternativ att testa: byt till `td-button-fill-neutral`. Knapparna linjerade i botten (margin-top:auto).
+- Detaljbilden är en knapp som öppnar `#td-bo-bildmodal` (dialog, stäng-knapp, klick på bakgrund, Esc).
+- Gäller bara kvadratiska raden (Waabi).
+
 ## Klart 15 nov: Waabi-raden – Brunkullan bort, nya Rosa Byn och Skarljus
 - Ordning nu: Fjällöga 13 A, Fjällstjärnan B, Järven, Fjällsippan 4, Rosa Byn D32, Skarljus 4 C (6 kort).
 - Ski Lodge Premium 203 ersatt av Rosa Byn D32 (dåliga bilder i R360): "Backen rakt utanför fönstret", 230 m, 6 bäddar; huvud = allrum, detalj = utsikt mot stolliften.

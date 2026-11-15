@@ -6314,3 +6314,15 @@ html, body { overscroll-behavior-y: none; }
 
 /* Boendekort med video: videon har egen kamerarörelse, ingen hover-zoom */
 .td-bo .td-bo-video, .td-bo a:hover .td-bo-video { transform: none; transition: none; }
+
+/* Boendekort (Waabi): pris som tagg på bilden, CTA, klickbar detaljbild + bildmodal */
+.td-bo-waabi-bildlank .td-bo-pristag { position: absolute; top: var(--space-md); left: var(--space-md); z-index: 2; }
+.td-bo-waabi-kort .td-bo-cta { align-self: flex-start; margin-top: auto; }
+.td-bo-waabi-kort .td-bo-waabi-rubrik { margin-bottom: var(--space-lg); }
+.td-bo-detalj { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px; }
+.td-bo-detalj img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.td-bo-detalj:hover img { transform: scale(1.04); }
+.td-bo-detalj:focus-visible { outline: 2px solid var(--color-text-primary); outline-offset: 2px; }
+.td-bildmodal { width: min(1100px, 92vw); padding: 0; border: 0; background: transparent; overflow: visible; }
+.td-bildmodal::backdrop { background: rgb(36 39 42 / 0.88); }
+.td-bildmodal-bild { display: block; width: 100%; max-height: 82vh; object-fit: contain; border-radius: var(--radius-sm); }
