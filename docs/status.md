@@ -12,7 +12,7 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 
 ## Klart 15 nov: ny bild för "Våfflor i solgropen" (TD En dag 13:00)
 Redigering av originalet i Magnific (Nano Banana Pro med bilden som referens, 2K 3:4, 3 varianter, 225 credits). Variant 3 vald: klarblå himmel och sol, stavarna i snövallen i stället för stående vid bordet, värmeljuset borttaget. Besticken står fortfarande upp. Original i `tanndalen-orsa/assets/magnific/endag-1300-vafflor-v3.png`. Används även i guidekorten (Toppstugan, Fikat vid Ladan).
-Bild 5 (endag-1700, stugan med badtunna): 3 omgenereringar (225 credits) blev nästan identiska med originalet, ingen förbättring. Inte inbytt.
+Bild 5 (endag-1700, stugan med badtunna): 3 omgenereringar (225 credits) blev kopior av originalet. I stället uppskalad med Magnific Precision (photo) 2x, 720→1440 px (90 credits), nu `endag-1700.jpg` (png borttagen). HDR-looken kvar. Original i `tanndalen-orsa/assets/magnific/endag-1700-uppskalad.png`.
 
 ## Klart 15 nov: ny bild för "Barnen drar iväg själva" (TD En dag 10:15)
 Nano Banana Pro i Magnific, 2K 4:5, 3 varianter (225 credits), variant 2 vald: barnen bakifrån, förälderns mobilperspektiv. Original (1856×2304) i `tanndalen-orsa/assets/magnific/endag-1015-barnen-v2.png` (utanför repot), sajtversion 824×1024. Öppet: barnen står still, nästa runda kan be om sväng/rörelse.
