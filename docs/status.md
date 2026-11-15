@@ -10,6 +10,11 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: OG = hero-page på /og/
+- `og/desktop/hero-page/` flyttad till `og/desktop/` (`7a1b289`). Gamla OG-startsidan, hero-test och oanvända OG-filer borttagna (finns i git). Ospårade `.old`-filer i `src/backups/og-hero-page-old/`. Verifierat: /og/?intro=1 laddar utan 404 eller konsolfel, sektioner en-dag/just-nu/fragor/boende.
+- Beslut (John 15 nov): OG får lägessystem som TD (eget content), Fjällguiden heter i OG platshållaren "Orsa-guiden", OG-content omskrivet (längd, familj, aktiviteter, sommar, Dalarna/historia, nära storstäderna), fakta i [hakparentes], ingen pistkarta, bilder senare.
+- Inventering TD→OG: En dag har allt utom Hoppa över till nästa synliga sektion och pil aktiv på sista steget. Saknas: Just nu (guidekort, videokort, Nästa steg, tredje raden, sommarväder), Fråga (en frågekälla, QA-tabell, startvy per läge, delegerade klick), lägessystem (modes.js/modes-content/demo-stay, På plats-toppbar, omordning per läge). Boende: inga generella ändringar.
+
 ## Klart 15 nov: TD-typografi synkad mot Figma
 - Ny `eyebrow-xs` (16/22) och `ui-figure-xl` (96/96) i `typography-styles-tanndalen.json`; storlekarna 40 och 96 i `primitives.json`. Eyebrows i `startsida.css` följer eyebrow-xs.
 - Rättat efter Figma: `quote` 30/38, `ui-figure-lg` 40/44 (var 48), tracking `heading-xxxl` −0.034em, `heading-xxl` −0.043em. Mobilvärden orörda.
