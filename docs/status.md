@@ -10,6 +10,11 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: TD-typografi synkad mot Figma
+- Ny `eyebrow-xs` (16/22) och `ui-figure-xl` (96/96) i `typography-styles-tanndalen.json`; storlekarna 40 och 96 i `primitives.json`. Eyebrows i `startsida.css` följer eyebrow-xs.
+- Rättat efter Figma: `quote` 30/38, `ui-figure-lg` 40/44 (var 48), tracking `heading-xxxl` −0.034em, `heading-xxl` −0.043em. Mobilvärden orörda.
+- `typography-td.css` saknar nu handpatchar, så hela filen kan genereras om med `npm run tokens:css`.
+
 ## Klart 14 nov: Aktivitetsflikarnas default per läge
 - Utförsåkning är default i läge 1, 2 och 4, Längdåkning i läge 3 (booking). Följer live-byte av läge (`setDefault` i TD startsidans flikscript).
 

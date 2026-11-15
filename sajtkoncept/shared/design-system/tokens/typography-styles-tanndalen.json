@@ -3,16 +3,16 @@
   "$description": "Text styles för Figma/CSS (TD). Speglad Figma TD 2026-10-21.",
   "$figma-groups": {
     "Heading": ["heading-xxxl", "heading-xxl", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "heading-xxs", "heading-xxxs"],
-    "Editorial": ["annotation", "body-xl", "body-lg", "body", "body-sm", "eyebrow", "eyebrow-sm", "quote", "quote-sm", "quote-xs", "statement"],
-    "UI": ["ui-title", "ui-title-lg", "ui-title-sm", "ui-body", "ui-body-sm", "ui-caption", "ui-kicker", "ui-label", "ui-nav", "ui-cta", "ui-cta-sm", "ui-figure", "ui-figure-lg", "ui-figure-md", "ui-figure-sm", "ui-figure-sm-regular", "ui-figure-unit", "ui-figure-unit-lg", "ui-figure-unit-md"]
+    "Editorial": ["annotation", "body-xl", "body-lg", "body", "body-sm", "eyebrow", "eyebrow-sm", "eyebrow-xs", "quote", "quote-sm", "quote-xs", "statement"],
+    "UI": ["ui-title", "ui-title-lg", "ui-title-sm", "ui-body", "ui-body-sm", "ui-caption", "ui-kicker", "ui-label", "ui-nav", "ui-cta", "ui-cta-sm", "ui-figure", "ui-figure-xl", "ui-figure-lg", "ui-figure-md", "ui-figure-sm", "ui-figure-sm-regular", "ui-figure-unit", "ui-figure-unit-lg", "ui-figure-unit-md"]
   },
   "$naming": "leading är enhetslös multiplikator när den är ett tal. tracking är em (px / fontstorlek, tre decimaler).",
   "$weights": "Regular=400. Book=450. Bold=700.",
 
-  "heading-xxxl": { "family": "TD.primary", "size": "112", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "5xl", "tracking": -0.04 } },
-  "heading-xxxl-regular": { "family": "TD.primary", "size": "112", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "5xl", "tracking": -0.04 } },
-  "heading-xxl": { "family": "TD.primary", "size": "88", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
-  "heading-xxl-regular": { "family": "TD.primary", "size": "88", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "4xl", "tracking": -0.021 } },
+  "heading-xxxl": { "family": "TD.primary", "size": "112", "weight": "bold", "leading": 1.1, "tracking": -0.034, "mobile": { "size": "5xl", "tracking": -0.04 } },
+  "heading-xxxl-regular": { "family": "TD.primary", "size": "112", "weight": "regular", "leading": 1.1, "tracking": -0.034, "mobile": { "size": "5xl", "tracking": -0.04 } },
+  "heading-xxl": { "family": "TD.primary", "size": "88", "weight": "bold", "leading": 1.1, "tracking": -0.043, "mobile": { "size": "4xl", "tracking": -0.021 } },
+  "heading-xxl-regular": { "family": "TD.primary", "size": "88", "weight": "regular", "leading": 1.1, "tracking": -0.043, "mobile": { "size": "4xl", "tracking": -0.021 } },
   "heading-xl": { "family": "TD.primary", "size": "5xl", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.019 } },
   "heading-xl-regular": { "family": "TD.primary", "size": "5xl", "weight": "regular", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.019 } },
   "heading-lg": { "family": "TD.primary", "size": "4xl", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "2xl", "tracking": -0.02 } },
@@ -59,6 +59,16 @@
     "tracking": "normal",
     "textCase": "uppercase"
   },
+  "eyebrow-xs": {
+    "group": "Editorial",
+    "family": "TD.secondary",
+    "size": "base",
+    "weight": "bold",
+    "leading": 1.375,
+    "tracking": "normal",
+    "textCase": "uppercase",
+    "note": "Figma Editorial/eyebrow-xs. 16/22 px (2026-11-15)."
+  },
   "annotation": {
     "family": "TD.primary",
     "size": "base",
@@ -96,10 +106,10 @@
     "family": "TD.primary",
     "size": "2xl",
     "weight": "regular",
-    "leading": 1.4,
+    "leading": 1.267,
     "tracking": -0.017,
     "mobile": { "size": "xl", "tracking": -0.017 },
-    "note": "Figma Editorial/quote är Superclarendon Regular."
+    "note": "Figma Editorial/quote 30/38 är Superclarendon Regular."
   },
   "quote-sm": {
     "family": "TD.primary",
@@ -148,7 +158,8 @@
   "ui-cta": { "group": "UI", "family": "TD.secondary", "size": "base", "weight": "bold", "leading": 1.1, "tracking": 0 },
   "ui-cta-sm": { "group": "UI", "family": "TD.secondary", "size": "sm", "weight": "bold", "leading": 1.071, "tracking": 0 },
   "ui-figure": { "group": "UI", "family": "TD.primary", "size": "md", "weight": "bold", "leading": 1.111, "tracking": -0.022 },
-  "ui-figure-lg": { "group": "UI", "family": "TD.primary", "size": "4xl", "weight": "bold", "leading": 1.083, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.017 } },
+  "ui-figure-xl": { "group": "UI", "family": "TD.primary", "size": "96", "weight": "bold", "leading": 1, "tracking": -0.04, "note": "Figma UI/figure-xl. 96/96 px." },
+  "ui-figure-lg": { "group": "UI", "family": "TD.primary", "size": "40", "weight": "bold", "leading": 1.1, "tracking": -0.04, "mobile": { "size": "3xl", "tracking": -0.017 } },
   "ui-figure-md": { "group": "UI", "family": "TD.primary", "size": "2xl", "weight": "bold", "leading": 1.1, "tracking": -0.02 },
   "ui-figure-sm": { "group": "UI", "family": "TD.primary", "size": "sm", "weight": "bold", "leading": 1.071, "tracking": -0.029 },
   "ui-figure-sm-regular": { "group": "UI", "family": "TD.primary", "size": "sm", "weight": "regular", "leading": 1.071, "tracking": 0 },
