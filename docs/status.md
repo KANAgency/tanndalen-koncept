@@ -33,7 +33,7 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - `assets/video/boende-fjallbruden.mp4` (8,5 MB) + poster, gitignorerade som övriga videor. `area2.mp4` (Mosippan) är oanvänd.
 - Fakta från R360: lift 270 m och bastu anges bara för nr 9–12. Rubrik och brödtext är KAN-text.
 - Boendeblocket (TD+OG): byte av slide pausar inte längre, bara pausknappen gör det.
-- Boendeblockets scrim (TD, alla slides) är längre och mörkare: 440→640 px, opacitet 0,5→0,7.
+- Boendeblockets scrim (TD, alla slides): diagonal gradient från övre vänstra hörnet (170°, transparent vid 72 %), 640 px hög, opacitet 0,7. Högersidan maskas ut mjukt (maskFrom 30 → maskTo 85).
 - Öppet: kontrollera mobil och andra bredder med `focus` 0% 0%.
 
 ## Klart 15 nov: ny sommarbild för "Grilla vid stugan" (TD En dag, sommar 17:00)
