@@ -6323,3 +6323,6 @@ html, body { overscroll-behavior-y: none; }
 .utforsakning-heading, .td-bo .td-bo-head { gap: var(--space-xs); }
 .td-bo .td-bo-waabi-namn { margin-bottom: -4px; } .td-bo-waabi .td-bo-waabi-kort .td-bo-pris { margin-top: 4px; }
 .td-bo .td-bo-waabi-namn { letter-spacing: -0.02em; }
+/* Oura: ingen dimning av hela bilden, scrim bara där texten ligger */
+.td-bo .td-bo-oura-bild { opacity: 1; }
+.td-bo .td-bo-oura-lank::after { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.5) 100%); }
