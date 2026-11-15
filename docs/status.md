@@ -13,6 +13,9 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 ## Klart 14 nov: Aktivitetsflikarnas default per läge
 - Utförsåkning är default i läge 1, 2 och 4, Längdåkning i läge 3 (booking). Följer live-byte av läge (`setDefault` i TD startsidans flikscript).
 
+## Klart 15 nov: geometricPrecision på all text
+- Global regel överst i `td/desktop/startsida.css`, `og/desktop/og-startsida.css` och `og/desktop/hero-page/hero-page.css`. Uppmätt: 0 textelement utan geometricPrecision på /td/, /og/ och /og/hero-page/.
+
 ## Klart 15 nov: två testrader med boendekort under Fjällguiden
 - `#boenden-oura` och `#boenden-waabi` i `td/desktop/index.html`, CSS sist i `startsida.css` (`.td-bo-*`). Tre platshållarboenden med påhittad data och priser i [hakparentes], befintliga bilder.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.

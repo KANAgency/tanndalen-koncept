@@ -1,3 +1,6 @@
+/* Alla texter renderas med geometricPrecision (beslut 2026-11-15). */
+html, body, button, input, select, textarea { text-rendering: geometricPrecision; }
+
 /* startsida-v2. Bara det som är läst i Desktop - 28.
    Innehållsytan är 1280 px centrerad, vilket ger 80 px sidmarginal vid 1440. */
 
@@ -4631,10 +4634,10 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   margin: 0;
   color: var(--color-TD-neutral-subtle);
   font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--eyebrow-xs-size);
+  font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
   font-weight: 700;
-  line-height: var(--eyebrow-xs-line-height);
-  letter-spacing: var(--eyebrow-xs-letter-spacing);
+  line-height: 1.375;
+  letter-spacing: var(--font-tracking-normal);
   text-transform: uppercase;
 }
 
@@ -4708,10 +4711,10 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 .faq-eyebrow {
   margin: 0 0 var(--space-md);
   font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--eyebrow-xs-size);
+  font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
   font-weight: var(--font-weight-bold);
-  line-height: var(--eyebrow-xs-line-height);
-  letter-spacing: var(--eyebrow-xs-letter-spacing);
+  line-height: 1.375;
+  letter-spacing: var(--font-tracking-normal);
   text-transform: uppercase;
   color: var(--color-TD-neutral-strong);
 }
@@ -4904,10 +4907,10 @@ button.faq-row:hover svg { transform: translate(2px, -2px); }
 .site-footer-nav h2 {
   margin: 0 0 var(--space-md);
   font-family: var(--font-family-TD-secondary), sans-serif;
-  font-size: var(--eyebrow-xs-size);
+  font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
   font-weight: var(--font-weight-bold);
-  line-height: var(--eyebrow-xs-line-height);
-  letter-spacing: var(--eyebrow-xs-letter-spacing);
+  line-height: 1.375;
+  letter-spacing: var(--font-tracking-normal);
   text-transform: uppercase;
   color: var(--color-TD-neutral-subtle);
 }
