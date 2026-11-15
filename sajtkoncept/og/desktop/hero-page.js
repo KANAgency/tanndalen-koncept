@@ -1437,4 +1437,23 @@ function mountHeaderRevealDebug(config, onChange) {
   };
 }
 
+/** Progress-streck i glasmenyn: fylls i säsongsfärg efter scrollad andel av sidan (som TD). */
+function initTopProgress() {
+  const bar = document.querySelector(".og-hp-header .top-progress");
+  if (!bar) return;
+  let frame = 0;
+  const paint = () => {
+    frame = 0;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const amount = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    bar.style.transform = `scaleX(${amount})`;
+  };
+  const queue = () => { if (!frame) frame = requestAnimationFrame(paint); };
+  addEventListener("scroll", queue, { passive: true });
+  addEventListener("resize", queue);
+  addEventListener("pageshow", queue);
+  paint();
+}
+
 initHeroPage();
+initTopProgress();

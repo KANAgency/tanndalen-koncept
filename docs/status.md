@@ -13,6 +13,9 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 ## Klart 15 nov: OG – TD:s media bortplockad
 TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendeblocket (area1/2, klipp-8) är raderade ur `og/desktop/assets/` och ersatta av `assets/img/platshallare.svg` (index.html, td-blocks.js, orsa-guiden.js). Boendeblockets video är tom, bara poster. Hero-videor finns bara i TD. Verifierat: inga 404:or eller konsolfel på /og/. Öppet: John tar fram riktiga OG-exempel. Övriga TD-kopior i OG (meny-, teaser-, banner-, rapport- m.fl.) ligger kvar.
 
+## Klart 15 nov: progress-strecket i glasmenyn (OG)
+- OG fyller strecket vid scroll (`initTopProgress()` i `hero-page.js`), sommarfärg via `data-season="summer"` i `hero-page-header.css`. Vinter = OG:s `--color-season-winter` (taupe `#E1DBD0`, override i `og-overrides.css`), sommar = `#1B4021`. Öppet: taupe syns svagt mot det ljusa glaset, OG:s vinterfärg är inte bekräftad.
+
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 

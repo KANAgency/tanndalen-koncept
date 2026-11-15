@@ -96,6 +96,11 @@
   pointer-events: none;
 }
 
+:root[data-season="summer"] .og-hp-header .top-progress,
+body[data-season="summer"] .og-hp-header .top-progress {
+  background: var(--color-season-summer);
+}
+
 .og-hp-header .top-start {
   position: relative;
   display: flex;
