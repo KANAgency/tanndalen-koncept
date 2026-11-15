@@ -10,6 +10,12 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: Orsa-guiden (steg 3 av TD→OG-synken)
+- Nytt `og/desktop/orsa-guiden.js`: en frågekälla `OG_FRAGOR` (general/booking/onsite + Summer, motsvarar `window.TD_FRAGOR`), 34 QA-svar med kort och följdfrågor, `qaFor` med sommarvarianter, startvyns data (`WELCOME`, `WELCOME_TILES`, bokning, dagens händelser). Allt påhittat, fakta i [hakparentes]. Ändra frågor och svar bara där.
+- `td-blocks.js`: Fråga-logiken ersatt med TD:s nuvarande (index.html 5777–6294): startvy per läge (`renderWelcome`), delegerade klick, svar via `qaFor`. `renderFragor()` fyller Vanliga frågor-blocket och Just nu-guiden från källan, ritas om vid säsong och läge (MutationObserver på `data-mode`, eftersom motorns `setMode` inte skickar `og-mode`).
+- Verifierat: startvyn i returning/booking/onsite (rätt rubrik, etikett, kort, rutor), sommarvarianterna, FAQ-blocket byter frågor per läge × säsong, alla 31 frågor i listorna + följdfrågor har svar, svar med bilder via frågevägen. Direktklick på en fråga kunde inte mätas (rAF går inte i dold browserpanel). Inga konsolfel på /og/ och /td/ (ren flik).
+- Även: menyns "Hamra Syd"/"Om Tänndalen" och Fråga-blockets ingress omskrivna för OG. Pistkarte-CSS borttagen ur OG-porten (404 på bilden).
+
 ## Klart 15 nov: OG Just nu (steg 2 av TD→OG-synken)
 - Orsa-guiden-kort (platshållarnamn) med frågelistor per läge × gren (bokning: "Inför er resa"), OG:s chattikon (ljus/mörk per säsong) i stället för TD:s Fjällguiden-märke. Klick på en fråga öppnar svarsmodalen.
 - Läge 1/2: videokort med lokal `assets/video/winter.web.mp4` (loop i bakgrunden, `<dialog>` med ljud och kontroller), inte YouTube. Läge 3: Nästa steg (liftkort/spårkort, priser i [hakparentes]). Läge 4: Rapport + tredje raden utan pistkarta (Alpint: Öppet nu + Väder, Längd: Dagens vallatips + Öppet nu + Väder; kolumner = synliga kort).

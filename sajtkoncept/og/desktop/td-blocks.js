@@ -5,6 +5,7 @@ import { initJustNuStack } from "/ds/components/just-nu-stack.js";
 import { initSegmented } from "/ds/components/segmented.js";
 import { initSeasonToggles, getSeason, setSeason, subscribeSeason } from "/ds/components/season-toggle.js";
 import { mountSeasonBanner } from "/ds/components/season-banner.js";
+import { OG_FRAGOR, ogFragor, QA, qaFor, RAIN, RAIN_ANSWER, GENERIC, FOLLOW, SUGGEST, WELCOME, WELCOME_TILES, WELCOME_BOOKING, WELCOME_TODAY } from "./orsa-guiden.js";
 import { SEASON_TOGGLE, SEASON_BANNER_COPY } from "./site-config.js";
 
 const seasonBannerCopy = SEASON_BANNER_COPY;
@@ -1347,7 +1348,7 @@ export function initTdBlocks(root = document) {
           calendar: {
             senare: ["[midsommar] · [Midsommar i Orsa]", "[juli] · [Musik vid Skattungen]"]
           },
-          fraga: { title: "Är Rovdjursparken öppen idag?", href: "#fraga" },
+          fraga: { title: "Är lederna blöta idag?", href: "#fraga" },
           kamera: {
             label: "Webbkamera · [Grönklittstoppen]",
             /* TODO: byt ut när en kamerabild finns. */
@@ -1743,24 +1744,36 @@ export function initTdBlocks(root = document) {
       } catch (error) { console.error("just nu", error); }
   }
 
+  /* ---- En frågekälla (OG_FRAGOR): Vanliga frågor-blocket och Orsa-guiden i Just nu, per läge × säsong (td TD_FRAGOR-render) ---- */
+  function renderFragor() {
+    const esc = (t) => t.replace(/"/g, "&quot;");
+    const faqArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
+    const guideArrow = '<span class="td-guide-pil"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>';
+    const guideRows = (list) => list.slice(0, 3).map((q) => `<li class="td-guide-rad"><button type="button" class="td-guide-fraga td-ui-body" data-fraga-title="${esc(q)}"><span>${q}</span>${guideArrow}</button></li>`).join("");
+    function render() {
+      const faq = document.querySelector("#fragor .td-fraga-fragelista-platta");
+      if (faq) faq.innerHTML = ogFragor().map((q, i) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp td-body-sm" type="button"${i ? ' data-avdelare="ja"' : ""} data-fraga-title="${esc(q)}"><span class="td-fraga-fragelista-rad-text">${q}</span>${faqArrow}</button></li>`).join("");
+      const F = OG_FRAGOR;
+      const set = (sel, list) => { const el = document.querySelector(sel); if (el) el.innerHTML = guideRows(list); };
+      set('.td-guide-lista.td-guide-bokning[data-gren-panel="alpint"]', F.booking);
+      set('.td-guide-lista:not(.td-guide-bokning)[data-gren-panel="alpint"]', F.onsite);
+      set('.td-guide-lista.td-guide-bokning[data-gren-panel="sommar"]', F.bookingSummer);
+      set('.td-guide-lista:not(.td-guide-bokning)[data-gren-panel="sommar"]', F.onsiteSummer);
+    }
+    render();
+    document.addEventListener("og-season", () => setTimeout(render, 0));
+    /* Motorns setMode skickar inget og-mode-event → lyssna på attributet. */
+    new MutationObserver(() => setTimeout(render, 0)).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
+  }
+
   /* ---- Fråga modal: open/close, focus trap, Escape, ask flow, FAQ wiring (td 4516–4962) ---- */
   function initFragaModal() {
-        const RAIN = "Det regnar, vad kan vi göra idag?";
-        const RAIN_ANSWER = "Regn är ingen katastrof här. Det finns gott om saker att göra inomhus: simma och bada bastu på hotellet, klättra på klätterväggen, eller ta en lång fika med våfflor medan barnen leker i lekhallen. Och blir det uppehåll är pisterna ofta tomma.";
+        /* Innehållet (frågekälla, svar, startvy) ligger i orsa-guiden.js. Logiken är TD:s (index.html 5777–6294, 15 nov). */
         const FRAGA_SLOW = 1.667;
         const REVEAL_SHORT = 600 * FRAGA_SLOW;
         const REVEAL_LONG = 900 * FRAGA_SLOW;
         const REVEAL_STAGGER = 100 * FRAGA_SLOW;
-        const GENERIC = "Det här är en demo – den här frågan har inget förinspelat svar än.";
-        const FOLLOW = "Det här är en demo – fler svar kommer";
-        const SUGGEST = ["Är det mycket kö?", "Hur mycket snö är det?", "Passar Tänndalen för nybörjare?", "Var är pistkartan?", "Hur tar vi oss dit från Stockholm?", "Vad gör vi om det regnar?"];
-        const CARDS = [
-          { type: "aktivitet", title: "Bad och bastu", line: "Öppet 10–20, passar hela familjen", image: "./assets/img/fraga-bastu.jpg" },
-          { type: "plats", title: "Våfflor i solgropen", line: "Fika med utsikt, öppet till 16", image: "./assets/img/endag-1300.jpg?v=2" },
-          { type: "aktivitet", title: "Klättervägg", line: "Från 5 år, boka på plats", image: "./assets/img/fraga-klatter.jpg" }
-        ];
-        const CHIPS = ["Vad gör vi med barn under 4 år?", "Hur blir vädret i morgon?"];
-        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        renderFragor();
         try {
         if (!document.getElementById("fraga-layer") || !document.getElementById("fraga-panel")) return;
         const mobileQ = matchMedia("(max-width: 1023px)");
@@ -1782,8 +1795,8 @@ export function initTdBlocks(root = document) {
         const chips = document.getElementById("fraga-chips");
         const note = document.getElementById("fraga-note");
         const follow = document.getElementById("fraga-follow");
+        const launch = document.getElementById("fraga-launch");
         const card = document.getElementById("fraga-card");
-        const launch = document.getElementById("fraga-launch") || card;
         const kbd = document.getElementById("fraga-kbd");
         let gen = 0;
         let timers = [];
@@ -1793,7 +1806,37 @@ export function initTdBlocks(root = document) {
         let questionFull = "";
         if (kbd) kbd.textContent = /Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K";
         const suggestArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg class="fraga-suggest-arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';
-        suggest.innerHTML = SUGGEST.map((text) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp fraga-suggest-row td-body-sm" type="button"><span class="td-fraga-fragelista-rad-text fraga-suggest-text">${text}</span>${suggestArrow}</button></li>`).join("");
+        /* Startvyn (ingen fråga ställd). Fyra varianter: vinter ny/återkommande, påbörjad bokning, på plats, sommar.
+           Sommar är en enda variant (återkommande). Bokningsdata speglar DEMO_STAY; [Anna] är platshållare. */
+        const welcomeEl = document.getElementById("fraga-welcome");
+        const suggestLabel = document.querySelector(".fraga-suggest-label");
+        const welcomeState = () => {
+          if (document.documentElement.dataset.season === "summer") return "summer";
+          const mode = document.documentElement.dataset.mode;
+          return mode === "booking" || mode === "onsite" ? mode : "general";
+        };
+        const welcomeCard = (c) => `<button class="fraga-card fraga-welcome-card" type="button" data-ask="${c.ask}"><span class="fraga-card-media"><img src="${c.image}" alt="" /></span><span class="fraga-card-copy"><span class="td-ui-kicker">${c.kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${c.title}</span></span><span class="td-ui-body-sm">${c.line}</span></span></button>`;
+        function renderWelcome() {
+          const w = WELCOME[welcomeState()];
+          let html = `<h3 class="td-heading-sm fraga-welcome-title">${w.title}</h3><p class="td-body fraga-welcome-lead">${w.lead}</p>`;
+          if (w.booking) {
+            html += `<div class="fraga-welcome-booking"><div class="fraga-welcome-booking-head"><span class="td-ui-kicker">Er bokning</span><span class="td-ui-caption fraga-welcome-ok">Boende bokat</span></div><p class="td-ui-title">${WELCOME_BOOKING.title}</p><p class="td-ui-body-sm">${WELCOME_BOOKING.line}</p><div class="fraga-welcome-next"><p class="td-ui-body-sm">${WELCOME_BOOKING.next}</p><button class="td-ui-body-sm fraga-welcome-chip" type="button" data-ask="${WELCOME_BOOKING.nextAsk}">${WELCOME_BOOKING.nextAsk}</button></div></div>`;
+            html += `<p class="td-ui-kicker fraga-welcome-kicker">Under er vecka</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_BOOKING.week.map(welcomeCard).join("")}</div>`;
+          }
+          if (w.events) {
+            html += `<p class="td-ui-kicker fraga-welcome-kicker">Kul för hela familjen idag</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_TODAY.map(welcomeCard).join("")}</div>`;
+          }
+          if (w.tiles) html += `<p class="td-ui-kicker fraga-welcome-kicker">${w.nowLabel}</p><div class="fraga-welcome-tiles">${WELCOME_TILES[w.tiles].map(tileMarkup).join("")}</div>`;
+          welcomeEl.innerHTML = html;
+          suggestLabel.textContent = w.label;
+          return ogFragor();
+        }
+        welcomeEl.addEventListener("click", (event) => {
+          const target = event.target.closest("[data-ask]");
+          if (target) ask(target.getAttribute("data-ask"));
+        });
+        const renderSuggest = () => suggest.innerHTML = renderWelcome().map((text) => `<li class="td-fraga-fragelista-rad"><button class="td-fraga-fragelista-knapp fraga-suggest-row td-body-sm" type="button"><span class="td-fraga-fragelista-rad-text fraga-suggest-text">${text}</span>${suggestArrow}</button></li>`).join("");
+        renderSuggest();
         function later(ms, fn) {
           const id = setTimeout(fn, ms);
           timers.push(id);
@@ -1866,6 +1909,7 @@ export function initTdBlocks(root = document) {
           fragaOmContext = "";
         }
         function open(from, direct) {
+          renderSuggest();
           gen += 1;
           const token = gen;
           clearTimers();
@@ -1974,8 +2018,8 @@ export function initTdBlocks(root = document) {
           const cardQuestion = card?.querySelector("[data-fraga-title]")?.textContent.trim() || "";
           const config = window.fragaAnswerFor?.(question) || null;
           const fromCard = cardAnswer && question === cardQuestion;
-          const rain = !config && !fromCard && (question === RAIN || question === "Vad gör vi om det regnar?");
-          const text = config?.answer || (fromCard ? cardAnswer : rain ? RAIN_ANSWER : GENERIC);
+          const rain = !config && !fromCard && !!QA[question];
+          const text = config?.answer || (fromCard ? cardAnswer : rain ? qaFor(question).answer : GENERIC);
           answerFull = text;
           if (reduced) {
             qEl.textContent = question;
@@ -1994,7 +2038,7 @@ export function initTdBlocks(root = document) {
           if (!typing || !answerFull) return;
           const card = document.getElementById("fraga-card");
           const fromCard = card?.getAttribute("data-fraga-answer") && questionFull === card.querySelector("[data-fraga-title]")?.textContent.trim();
-          const rain = !fromCard && (questionFull === RAIN || questionFull === "Vad gör vi om det regnar?");
+          const rain = !fromCard && !!QA[questionFull];
           clearTimers();
           qEl.textContent = questionFull;
           answer.textContent = answerFull;
@@ -2068,13 +2112,13 @@ export function initTdBlocks(root = document) {
             markOverflow();
             return;
           }
-          sources.innerHTML = `Källor: <a href="#aktiviteter">Aktiviteter</a> · <a href="#service">Mat, butiker och service</a>`;
-          cards.innerHTML = CARDS.map((item) => {
-            const media = item.image ? `<img src="${item.image}" alt="" />` : "";
-            const kicker = item.type === "plats" ? "Plats" : "Aktivitet";
-            return `<article class="fraga-card fraga-card-${item.type}"><span class="fraga-card-media">${media}</span><span class="fraga-card-copy"><span class="td-ui-kicker">${kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${item.title}</span><svg class="fraga-card-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="td-ui-body-sm">${item.line}</span></span></article>`;
+          const qa = qaFor(questionFull) || qaFor(RAIN);
+          sources.innerHTML = qa.sources;
+          cards.innerHTML = qa.cards.map((item) => {
+            const media = item.image ? `<img src="${item.image}" alt="" onerror="this.parentNode.classList.add('is-empty');this.remove()" />` : "";
+            return `<a class="fraga-card" href="#"><span class="fraga-card-media${item.image ? "" : " is-empty"}">${media}</span><span class="fraga-card-copy"><span class="td-ui-kicker">${item.kicker}</span><span class="fraga-card-title"><span class="td-ui-title-sm">${item.title}</span><svg class="fraga-card-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="td-ui-body-sm">${item.line}</span></span></a>`;
           }).join("");
-          chips.innerHTML = CHIPS.map((text) => `<button class="td-ui-body-sm" type="button">${text}</button>`).join("");
+          chips.innerHTML = qa.chips.map((text) => `<button class="td-ui-body-sm" type="button" data-fraga-follow="${text}">${text}</button>`).join("");
           [...cards.children].forEach((el) => { el.hidden = true; });
           chips.hidden = true;
           sources.hidden = true;
@@ -2097,13 +2141,14 @@ export function initTdBlocks(root = document) {
           gen += 1;
           clearTimers();
           resetAnswer();
+          renderSuggest();
           show("search");
           input.value = "";
           input.focus();
           markOverflow();
         });
-        launch?.addEventListener("click", () => open(launch, false));
-        card?.addEventListener("click", (event) => {
+        launch.addEventListener("click", () => open(launch, false));
+        card.addEventListener("click", (event) => {
           event.preventDefault();
           const row = event.target.closest(".td-guide-fraga");
           if (row) { open(row, true); return; }
@@ -2141,7 +2186,7 @@ export function initTdBlocks(root = document) {
         });
         addEventListener("keydown", (event) => {
           const hotkey = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
-          if (hotkey) { if (!launch) return; event.preventDefault(); if (layer.hidden) open(launch, false); else close(); return; }
+          if (hotkey) { event.preventDefault(); if (layer.hidden) open(launch, false); else close(); return; }
           if (layer.hidden) return;
           if (!event.metaKey && !event.ctrlKey && !event.altKey && typing && event.key !== "Escape" && event.key !== "Tab") {
             event.preventDefault();
@@ -2158,7 +2203,6 @@ export function initTdBlocks(root = document) {
           else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
         });
         window.tdFragaAsk = (question, from, context) => {
-          if (!(from || launch)) return;
           open(from || launch, false);
           if (context) setOmContext(from || launch, context);
           else if (from) setOmContext(from);
@@ -2167,8 +2211,9 @@ export function initTdBlocks(root = document) {
         };
         const faq = document.getElementById("fragor");
         if (faq) {
-          faq.querySelectorAll(".td-fraga-fragelista-knapp[data-fraga-title], .td-fraga-rad[data-fraga-title]").forEach((row) => {
-            row.addEventListener("click", () => open(row, true));
+          faq.addEventListener("click", (event) => {
+            const row = event.target.closest(".td-fraga-fragelista-knapp[data-fraga-title], .td-fraga-rad[data-fraga-title]");
+            if (row) open(row, true);
           });
           const faqForm = faq.querySelector("[data-fraga-falt]");
           if (faqForm) {

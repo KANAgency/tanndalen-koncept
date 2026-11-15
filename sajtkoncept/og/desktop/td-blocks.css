@@ -1973,13 +1973,7 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
   align-items: stretch;
 }
 .just-cols-3 > * { box-sizing: border-box; min-height: 226px; border-radius: var(--radius-sm); }
-.td-pistkarta {
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: var(--space-xl); text-decoration: none; color: var(--color-text-primary);
-  background: linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
-}
 .td-pistkarta-head, .td-vader-head { display: flex; justify-content: space-between; align-items: center; }
-.td-pistkarta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
 .td-button-glass-light { background: var(--color-TD-snow); color: var(--color-text-primary); }
 .td-oppet { padding: var(--space-xl); background: var(--color-TD-snow); display: flex; flex-direction: column; gap: var(--space-md); }
 .td-oppet-lista { list-style: none; margin: 0; padding: 0; }
@@ -2003,9 +1997,6 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 html[data-season="summer"] .td-guide-mark-halo { stroke: var(--color-season-summer); }
 .td-guide-eyebrow { margin-top: var(--space-sm); }
 .td-guide-lista { margin-top: -6px; }
-.td-pistkarta {
-  background: url("assets/img/pistkarta.png") center / cover no-repeat, linear-gradient(to bottom, #CFE3EE 0%, #EAF3F7 55%, #FFFFFF 100%);
-}
 
 /* Inga hörnlänkar på datakort (stack) och väderblock */
 .td-just-nu-stack-corner { display: none !important; }
