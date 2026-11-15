@@ -6321,3 +6321,4 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-waabi-namn { font-size: var(--font-size-md); }
 /* Tajtare överrad → rubrik i båda blocken (2026-11-15) */
 .utforsakning-heading, .td-bo .td-bo-head { gap: var(--space-xs); }
+.td-bo .td-bo-waabi-namn { margin-bottom: -4px; } .td-bo .td-bo-waabi .td-bo-pris { margin-top: 4px; }
