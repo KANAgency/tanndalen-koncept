@@ -6326,3 +6326,10 @@ html, body { overscroll-behavior-y: none; }
 .td-bildmodal { width: min(1100px, 92vw); padding: 0; border: 0; background: transparent; overflow: visible; }
 .td-bildmodal::backdrop { background: rgb(36 39 42 / 0.88); }
 .td-bildmodal-bild { display: block; width: 100%; max-height: 82vh; object-fit: contain; border-radius: var(--radius-sm); }
+
+/* Boendekort v2: pristagg nere till höger, CTA fast avstånd från rubriken, ljus neutral lift-ruta */
+.td-bo-waabi-bildlank .td-bo-pristag { top: auto; left: auto; bottom: var(--space-md); right: var(--space-md); }
+.td-bo-waabi-kort .td-bo-cta { margin-top: 0; }
+.td-bo-waabi-kort .td-bo-waabi-rubrik { margin-bottom: var(--space-lg); }
+.td-bo .td-bo-ruta-mork { background: var(--color-TD-neutral-subtle); color: var(--color-text-secondary, #4C4D4F); }
+.td-bo .td-bo-ruta-mork .td-bo-ruta-tal { color: var(--color-text-primary); }

@@ -38,6 +38,11 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: boendekort v2
+- CTA nu `td-button-fill-neutral` (#E0DFDE), fast 24 px under rubriken (inte bottenlinjerad).
+- Pristaggen nere till höger på bilden/videon (12 px från kanterna).
+- Lift-rutan: `--color-TD-neutral-subtle` (#C3C1C0) med mörk text i stället för svart.
+
 ## Klart 15 nov: boendekort – pristagg, CTA och bildmodal (test)
 - Priset flyttat från textrad till tagg uppe till vänster på bilden/videon (`td-chip-tag-solid td-chip-tag-dark`, Snö-bakgrund).
 - Ny CTA under varje kort: "Se tillgänglighet", `td-button-secondary td-button-md` (vit). Alternativ att testa: byt till `td-button-fill-neutral`. Knapparna linjerade i botten (margin-top:auto).
