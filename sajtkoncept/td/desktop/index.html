@@ -2531,9 +2531,9 @@
           } else if (eventCount > 0) {
             if (scrolled <= 0) {
               progressTarget = eventYs[0];
-            } else if (scrolled >= lastEventScroll) {
-              const u = clamp01((scrolled - lastEventScroll) / sunHold);
-              progressTarget = eventYs[eventCount - 1] + (sunH - eventYs[eventCount - 1]) * u;
+            } else if (scrolled >= lastEventScroll - 1) {
+              /* Sista kortet nått: linjen animerar själv hela vägen till solnedgång. */
+              progressTarget = sunH;
             } else {
               const idx = Math.min(eventCount - 2, Math.floor(scrolled / span));
               const u = clamp01((scrolled - idx * span) / span);
@@ -2545,14 +2545,15 @@
             enSunProgressY = progressTarget;
             enSunSnap = false;
           } else {
-            enSunProgressY += (progressTarget - enSunProgressY) * (reduced ? 1 : 0.22);
+            const sunAuto = lead <= 0 && scrolled >= lastEventScroll - 1;
+            enSunProgressY += (progressTarget - enSunProgressY) * (reduced ? 1 : sunAuto ? 0.06 : 0.22);
             if (Math.abs(progressTarget - enSunProgressY) < 0.4) enSunProgressY = progressTarget;
           }
           const progressScale = sunH > 0 ? enSunProgressY / sunH : 0;
           enSun.style.setProperty("--en-sun-progress-scale", String(Math.round(progressScale * 10000) / 10000));
           // Sticky reach: event-ploppar (inkl. 16:00) tänds när sitt kort nås.
           // Solnedgång + ändplopp tänds först när linjen nått botten.
-          const sunLineReached = reduced || (lead <= 0 && scrolled >= sunArriveScroll - 0.5);
+          const sunLineReached = reduced || (lead <= 0 && scrolled >= lastEventScroll - 1 && enSunProgressY >= sunH - 0.5);
           enEventEls.forEach((el, index) => {
             const reached = reduced || (lead <= 0 && scrolled >= index * span - 0.5);
             el.classList.toggle("is-on", reached);
@@ -2645,8 +2646,6 @@
             const span = Math.max(1, innerHeight * 1.35 - EN_FRONT);
             const sectionDocTop = enDag.getBoundingClientRect().top + scrollY;
             const points = enSlides.map((_, i) => sectionDocTop - lockAt + i * span);
-            /* Solnedgången är ett eget stopp (slutet av hold), annars drar settle tillbaka till sista kortet. */
-            if (points.length) points.push(points[points.length - 1] + Math.max(120, span * 0.35));
             return { lockAt, span, points };
           }
           function enSnapZone() {
@@ -2804,7 +2803,8 @@
               }
               /* settle: utanför första/sista + tröskel → på väg ut, snappa inte */
               const edge = span * threshold;
-              if (scrollY < points[0] - edge || scrollY > points[points.length - 1] + edge) {
+              /* Förbi sista kortet: släpp, dra aldrig tillbaka (solnedgången animerar själv). */
+              if (scrollY < points[0] - edge || scrollY > points[points.length - 1] + 2) {
                 enDebugPick = "ingen (ut ur sektion)";
                 return;
               }
@@ -2966,9 +2966,9 @@
           }
           function syncEnDagSkip() {
             if (!enSkipBar || !enSkipBtn) return;
-            /* Bara medan pinnen står still: efter solnedgången scrollar den iväg, då ska knapparna bort. */
+            /* På sista kortet (Tillbaka i stugan) behövs varken nästa-pil eller Hoppa över. */
             const { points: skipPts } = enSnapMetrics();
-            const show = enSnapZone() && (!skipPts.length || scrollY <= skipPts[skipPts.length - 1] + 24);
+            const show = enSnapZone() && (!skipPts.length || scrollY < skipPts[skipPts.length - 1] - 24);
             const first = !enSkipReady;
             enSkipReady = true;
             if (first) enSkipBar.style.transition = "none";
