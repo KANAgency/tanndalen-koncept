@@ -4297,7 +4297,7 @@
               const gapMidDoc = (faqBottomDoc + boendeTopDoc) / 2;
               const sGap = Math.max(0, gapMidDoc - vh / 2);
               const quoteTop =
-                vh / 2 - quoteH / 2 - parentDocTop - T - shiftY + f * sGap;
+                vh / 2 - quoteH / 2 - parentDocTop - T - shiftY + f * sGap - 70; /* −70: mer luft mot boendeblocket */
               quoteEl.style.left = `${(W + (TOPO2_LAYOUT.QUOTE_GAP_X || gapX)).toFixed(2)}px`;
               quoteEl.style.top = `${quoteTop.toFixed(2)}px`;
             }
