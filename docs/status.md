@@ -10,6 +10,11 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
+- Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
+- `sajtkoncept/scripts/hamta-boendebilder.py` hämtar alla originalbilder + `fakta.json` via R360:s publika sök-API till `tanndalen-orsa/assets/boenden/` (utanför repot). Fjällsippan 4 finns inte i R360.
+- Plan och prompter för AI-animering i Magnific: `docs/boenden-video.md`. Öppet: 2:3-kortet vs 4:3-regeln för boendevideo.
+
 ## Klart 15 nov: OG – menyn göms på En dag
 - Som TD: headern (`.og-hp-header`) får `is-tucked` när En dag fyller skärmen (topp ≤ 10 vh, botten ≥ 125 vh), inte när menyn är öppen/fokuserad. Skript sist i `og/desktop/index.html`, CSS i `og-overrides.css` med `translate` så headerns egen transform (centrering/reveal) och dess övergångar lämnas orörda.
 - Verifierat: villkoret sant mitt i En dag (top −200, botten 5288 vid 900 px), klassen ger opacity 0 och translate uppåt, centreringen kvar. Rörelsen live kunde inte mätas (rAF i dold browserpanel).
