@@ -38,6 +38,9 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: TD En dag – sista kortet som OG
+- Textytan centrerad i hela bilden, tidsetiketten 18 px Book (tunnare), tätt mot rubriken (8 px), rubriken 36/40 px, knappen 32 px ner. Samma regler som OG (`og-overrides.css`), här i `td/desktop/startsida.css`.
+
 ## Klart 15 nov: boendekort v2
 - CTA nu `td-button-fill-neutral` (#E0DFDE), fast 24 px under rubriken (inte bottenlinjerad).
 - Pristaggen nere till höger på bilden/videon (12 px från kanterna).
