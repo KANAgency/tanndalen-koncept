@@ -6460,12 +6460,11 @@
         tab.setAttribute("aria-label", slide.name);
         tab.innerHTML = '<span class="boende-pip"><span class="boende-fill"></span></span>';
         tab.addEventListener("click", () => {
-          boendeAuto = false;
-          boendeIndex = index;
-          boendeMode = "paused";
-          boendePauseAll();
-          boendeIcons("paused");
-          boendePaint(index);
+          // Byte av slide pausar inte: nya slidens video startar och bildspelet fortsätter.
+          boendeAuto = true;
+          boendeHold = false;
+          boendeSeen = true;
+          boendeGo(index);
         });
         boendeList.append(tab);
       });
@@ -6562,11 +6561,12 @@
         if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
         event.preventDefault();
         const delta = event.key === "ArrowRight" ? 1 : -1;
-        boendeAuto = false;
+        boendeAuto = true;
+        boendeSeen = true;
         boendeGo(boendeIndex + delta);
         boendeList.querySelectorAll("[role=tab]")[boendeIndex].focus();
       });
-      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle")) return; boendeHold = true; if (boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); } });
+      boende.addEventListener("focusin", (event) => { if (event.target.closest(".boende-toggle, [role=tab]")) return; boendeHold = true; if (boendeMode === "playing") { boendePauseAll(); boendeMode = "paused"; boendeIcons("paused"); } });
       boende.addEventListener("focusout", () => { if (boende.contains(document.activeElement)) return; boendeHold = false; if (boendeAuto && boendeSeen) boendeStart(); });
       function boendeActiveFactor() {
         if (boendeReduced || matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
