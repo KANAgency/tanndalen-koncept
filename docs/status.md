@@ -115,6 +115,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
 - En dag: solnedgången är ett eget snapstopp (sista kortet + max(120, span·0,35)). Hoppa över/pilen döljs när scrollY passerat solnedgångsstoppet (+24 px), dvs. när pinnen släpper.
+- OG En dag (vinter): riktiga bilder från kundens bildbank (`og/desktop/assets/img/en-dag/`, 1800 px, 1,2 MB) och nytt manus: 08:30 Först ner i ljuset, 10:00 Bärra i backen, 12:30 Ut i skogen (längd), 15:00 Pulka och kakao vid elden, 16:00 stugan i mörkret. Inga videor (kundens var dåliga). Härbret (Bärras stuga, AA103392) bortvalt för att behålla 4 kort + avslut så sommarvyn inte bryts. Öppet: verifiera med kund att Bärra/skidskolan och eldstaden finns som beskrivet. Urvalsark: `../assets/og/og-en-dag-urval.jpg`.
 - Anna-citatet (Skarvarna) sitter i glappet mellan frågekortet (`.faq`, 288 px efter) och `#boenden-waabi` (160 px före `#boende`).
 - Skisser av 13 kortvarianter (en per inspo) i artefakten "TD boendekort".
 - Öppet: välj en av raderna (den andra tas bort), riktiga boenden och bilder, video i stora bilden, mobil ej granskad.
