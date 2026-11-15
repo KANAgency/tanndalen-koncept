@@ -41,7 +41,6 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 - Fråga hellre en gång med tydliga alternativ än att gissa och skriva om.
 - Varna med en kort rad när kontexten blir stor (~30 verktygsanrop eller ~50 meddelanden) och erbjud att uppdatera `docs/status.md` inför en ny tråd.
 - Skriv aldrig `networkidle` i tester. Inga e2e-, Playwright- eller screenshotsviter. Kör enhetstester och `tsc --noEmit` när de finns.
-- Videor till boendeblocket görs i 4:3, inte 16:9.
 
 ## 5. Git
 - Repot `src/` har commit-historik (se `docs/status.md`). Du får committa på `main` med tydligt svenskt meddelande och trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.

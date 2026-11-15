@@ -13,7 +13,7 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
 - Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
 - `sajtkoncept/scripts/hamta-boendebilder.py` hämtar alla originalbilder + `fakta.json` via R360:s publika sök-API till `tanndalen-orsa/assets/boenden/` (utanför repot). Fjällsippan 4 finns inte i R360.
-- Plan och prompter för AI-animering i Magnific: `docs/boenden-video.md`. Öppet: 2:3-kortet vs 4:3-regeln för boendevideo.
+- Plan och prompter för AI-animering i Magnific: `docs/boenden-video.md`. Öppet: videoformat.
 
 ## Klart 15 nov: OG – menyn göms på En dag
 - Som TD: headern (`.og-hp-header`) får `is-tucked` när En dag fyller skärmen (topp ≤ 10 vh, botten ≥ 125 vh), inte när menyn är öppen/fokuserad. Skript sist i `og/desktop/index.html`, CSS i `og-overrides.css` med `translate` så headerns egen transform (centrering/reveal) och dess övergångar lämnas orörda.

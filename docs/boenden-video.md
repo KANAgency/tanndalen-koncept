@@ -23,7 +23,7 @@ Skriptet frågar R360:s publika sök-API vecka för vecka tills varje boende är
 
 1. **Uppskala först** (Upscaler, 2x, Creativity låg 0–2, Resemblance hög). R360-bilderna är ofta 1920 px och komprimerade, och videomodellerna blir skarpare med ren input.
 2. **Video → Image to video.** Välj den modell Magnific har som starkast "image fidelity" just nu. Testa en bild i två modeller innan du kör alla fem.
-3. **Format 4:3** (projektregel för boendevideo). Kortet på sajten beskärs med `object-fit: cover`, så håll motivet centrerat med luft runt.
+3. **Format:** ej bestämt, 2:3 rekommenderas (täcker båda raderna). Kortet på sajten beskärs med `object-fit: cover`, så håll motivet centrerat med luft runt.
 4. **Längd 5 s**, ingen ljud, kamerarörelse "subtle"/låg.
 5. Kör 2–3 varianter per bild och välj den där inget i rummet deformeras (stolar, fönsterspröjs och text är vanligast att glida).
 6. Exportera MP4. Konvertera sen till webb (se punkt 4).
@@ -60,5 +60,5 @@ Negativ prompt (om fältet finns): `people, faces, text, logos, warping furnitur
 
 ## Öppet
 
-- Oura-kortet är 2:3 stående, men projektregeln säger 4:3 för boendevideo. 4:3 beskärs hårt i 2:3. Bestäm format innan körning.
+- Videoformat ej bestämt (Oura-kortet 2:3, Waabi 1:1, mobil ej utredd). 2:3 täcker båda raderna.
 - Priser i korten är exempel från en ledig vecka i R360 (inom hakparentes) och ska ersättas med riktig "fr."-prislogik.
