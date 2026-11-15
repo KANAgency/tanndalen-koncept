@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
-"""Hämtar alla bilder och fakta för utvalda boenden ur R360 (hamra.r360online.se).
+"""Hämtar alla bilder och fakta för boenden ur R360 (hamra.r360online.se).
 
-Ingen webbläsare, inga AI-anrop: skriptet frågar R360:s publika sök-API
-(samma som bokningssidan använder) för ett antal ankomstveckor, plockar ut
-de namngivna boendena och laddar ner originalbilderna (_org.jpg).
+Ingen webbläsare, inga AI-anrop. Ett anrop mot R360:s publika katalogsökning
+(samma som bokningssidans områdessidor använder, checkavail=false) ger alla
+boenden oavsett om de är lediga, inklusive bilder och beskrivning.
+Därefter laddas originalbilderna (_org.jpg) ner.
 
 Körning (från sajtkoncept/):
-    python3 scripts/hamta-boendebilder.py
-    python3 scripts/hamta-boendebilder.py --ut ../../assets/boenden --veckor 20
-    python3 scripts/hamta-boendebilder.py --omrade 33295   # alla boenden i Fjällöga
+    python3 scripts/hamta-boendebilder.py                  # listan BOENDEN nedan
+    python3 scripts/hamta-boendebilder.py --omrade 33295   # alla boenden i ett område
+    python3 scripts/hamta-boendebilder.py --ut ../../assets/boenden
 
-Utdata per boende: <ut>/<slug>/NN-<hash>.jpg + fakta.json (beskrivning,
-kriterier, alt-texter, pris för första lediga vecka).
+Områdets nummer (grouppoollid) står i R360-adressen:
+    /client/product/boende-1007/<område>-<grouppoollid>
+
+Utdata per boende: <ut>/<område>/<boende>/NN-<hash>.jpg + fakta.json
+(beskrivning, kriterier, alt-texter, länk). Katalogen har inga priser.
 Boenden som inte finns i R360 (t.ex. privata som Fjällsippan 4) rapporteras
-som "hittades inte" – de bilderna kommer från kunden.
+som "hittades inte" – de bilderna kommer från kund.
 """
 import argparse
 import datetime as dt
@@ -21,26 +25,24 @@ import json
 import pathlib
 import re
 import sys
-import time
 import urllib.request
 
 API = "https://hamra.r360online.se/sv/v3/api"
 RESVTYPE = 1007  # Boende
 
-# (namn i R360 – början på unitdesc4, grouppoollid). Lägg till/ta bort här.
-# grouppoollid står i R360-URL:en: /client/product/boende-1007/<område>-<grouppoollid>
+# Början på boendets namn i R360 (unitdesc4). Lägg till/ta bort här.
 BOENDEN = [
-    ("Fjällsippan 4", None),  # privat, finns inte i R360 – bilder från kund
-    ("Ski Lodge Premium 203", 37332),
-    ("Skarljus 7 A", 37147),
-    ("Brunkullan 23", 19148),
-    ("Fjällstugan Järven", 31379),
+    "Fjällsippan 4",  # privat, finns inte i R360
+    "Ski Lodge Premium 203",
+    "Skarljus 7 A",
+    "Brunkullan 23",
+    "Fjällstugan Järven",
 ]
 
 
 def get_json(url):
     req = urllib.request.Request(url, headers={"User-Agent": "td-sajtkoncept/1.0"})
-    with urllib.request.urlopen(req, timeout=60) as r:
+    with urllib.request.urlopen(req, timeout=180) as r:
         return json.load(r)
 
 
@@ -49,75 +51,18 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
-def lordagar(n):
-    d = dt.date.today()
-    d += dt.timedelta(days=(5 - d.weekday()) % 7 or 7)
-    for i in range(n):
-        yield d + dt.timedelta(weeks=i)
+def katalog():
+    start = dt.date.today()
+    slut = start + dt.timedelta(days=365)
+    url = (f"{API}/search?resvtype={RESVTYPE}&startdate={start}&enddate={slut}"
+           f"&filterOnDays=true&checkprice=false&checkavail=false")
+    groups = get_json(url)["payload"]["groups"]
+    groups = groups.values() if isinstance(groups, dict) else groups
+    return [it for g in groups for it in g["items"]]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    here = pathlib.Path(__file__).resolve()
-    ap.add_argument("--ut", default=str(here.parents[3] / "assets" / "boenden"))
-    ap.add_argument("--veckor", type=int, default=52, help="antal lördagar att söka i")
-    ap.add_argument("--omrade", type=int, help="grouppoollid: hämta ALLA boenden i området i stället för listan")
-    a = ap.parse_args()
-    ut = pathlib.Path(a.ut)
-    kriterier = {k: v["title"] for k, v in get_json(f"{API}/criterias")["payload"].items()}
-
-    # Sök-API:t visar bara lediga boenden, så vi provar en vecka i taget
-    # per område tills boendet dyker upp.
-    hittade = {}
-    if a.omrade:
-        enheter = {}
-        for start in lordagar(a.veckor):
-            slut = start + dt.timedelta(days=7)
-            url = (f"{API}/search?resvtype={RESVTYPE}&grouppoollid={a.omrade}"
-                   f"&startdate={start}&enddate={slut}&guests=2")
-            try:
-                groups = get_json(url)["payload"]["groups"]
-            except Exception:  # noqa: BLE001
-                continue
-            groups = groups.values() if isinstance(groups, dict) else groups
-            for g in groups:
-                for it in g["items"]:
-                    enheter.setdefault(it["unitlid"], it)
-            time.sleep(0.3)
-        for it in enheter.values():
-            spara(it, it["unitdesc4"], ut / slug(it["groupTitle"]) / slug(it["unitdesc4"]), kriterier)
-        print(f"{len(enheter)} boenden i området")
-    for namn, grupp in ([] if a.omrade else BOENDEN):
-        if grupp is None:
-            continue
-        for start in lordagar(a.veckor):
-            slut = start + dt.timedelta(days=7)
-            url = (f"{API}/search?resvtype={RESVTYPE}&grouppoollid={grupp}"
-                   f"&startdate={start}&enddate={slut}&guests=2")
-            try:
-                groups = get_json(url)["payload"]["groups"]
-            except Exception:  # noqa: BLE001 – vecka utan bokningsbar period
-                continue
-            groups = groups.values() if isinstance(groups, dict) else groups
-            traff = [it for g in groups for it in g["items"]
-                     if (it.get("unitdesc4") or "").startswith(namn)]
-            time.sleep(0.3)
-            if traff:
-                hittade[namn] = traff[0]
-                print(f"hittade {traff[0]['unitdesc4']} ({start})")
-                break
-
-    if a.omrade:
-        return
-    for namn, _ in BOENDEN:
-        it = hittade.get(namn)
-        if not it:
-            print(f"hittades inte: {namn}")
-            continue
-        spara(it, namn, ut / slug(namn), kriterier)
-
-
-def spara(it, namn, mapp, kriterier):
+def spara(it, mapp, kriterier):
+    namn = it["unitdesc4"]
     mapp.mkdir(parents=True, exist_ok=True)
     bilder = list(it.get("images") or [])
     if it.get("image") and it["image"].get("hash") not in {b["hash"] for b in bilder}:
@@ -132,19 +77,46 @@ def spara(it, namn, mapp, kriterier):
             except Exception as e:  # noqa: BLE001 – enstaka bild saknas i R360
                 print(f"  saknas: {b['url']} ({e})", file=sys.stderr)
                 continue
-        meta.append({"fil": fil.name, "alt": b["translations"].get("sv", {}).get("accessibility")})
+        meta.append({"fil": fil.name, "alt": (b.get("translations") or {}).get("sv", {}).get("accessibility")})
     fakta = {
         "namn": namn,
         "omrade": it.get("groupTitle"),
-        "url": f"https://hamra.r360online.se/client/product/boende-{RESVTYPE}/{slug(it.get('groupTitle',''))}-{it.get('grouppoollid')}/{it.get('poollid')}/{slug(namn)}-{it.get('unitlid')}",
-        "vecka": [it.get("arrdate"), it.get("depdate")],
-        "pris_vecka_kr": it.get("aprice"),
-        "kriterier": {kriterier.get(k, k): v for k, v in it.get("crits", {}).items() if v not in (False, None)},
+        "url": (f"https://hamra.r360online.se/client/product/boende-{RESVTYPE}/"
+                f"{slug(it.get('groupTitle', ''))}-{it.get('grouppoollid')}/{it.get('poollid')}/"
+                f"{slug(namn)}-{it.get('unitlid')}"),
+        "kriterier": {kriterier.get(k, k): v for k, v in (it.get("crits") or {}).items() if v not in (False, None)},
         "beskrivning": it.get("weblong"),
         "bilder": meta,
     }
     (mapp / "fakta.json").write_text(json.dumps(fakta, ensure_ascii=False, indent=2))
     print(f"{namn}: {len(meta)} bilder → {mapp}")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    here = pathlib.Path(__file__).resolve()
+    ap.add_argument("--ut", default=str(here.parents[3] / "assets" / "boenden"))
+    ap.add_argument("--omrade", type=int, help="grouppoollid: hämta alla boenden i området")
+    a = ap.parse_args()
+    ut = pathlib.Path(a.ut)
+    kriterier = {k: v["title"] for k, v in get_json(f"{API}/criterias")["payload"].items()}
+    alla = katalog()
+    print(f"{len(alla)} boenden i R360-katalogen")
+
+    if a.omrade:
+        valda = [it for it in alla if it.get("grouppoollid") == a.omrade]
+    else:
+        valda = []
+        for namn in BOENDEN:
+            traff = [it for it in alla if (it.get("unitdesc4") or "").startswith(namn)]
+            if traff:
+                valda.append(traff[0])
+            else:
+                print(f"hittades inte: {namn}")
+
+    for it in valda:
+        spara(it, ut / slug(it["groupTitle"]) / slug(it["unitdesc4"]), kriterier)
+
 
 if __name__ == "__main__":
     main()
