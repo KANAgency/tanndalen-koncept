@@ -45,7 +45,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 ## 5. Git
 - Repot `src/` har commit-historik (se `docs/status.md`). Du får committa på `main` med tydligt svenskt meddelande och trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - **Pusha aldrig** utan Johns uttryckliga begäran. Skapa aldrig repos, lägg inte till remotes. Använd aldrig kan-agency-organisationen för privata projekt.
-- Inga personuppgifter eller exporter som spårade filer. `td/desktop/assets/img/brand/td-brand-3.png` (32 MB) är medvetet ocommittad; sajten använder `td-brand-3.jpg`.
+- Inga personuppgifter eller exporter som spårade filer.
 - Git kan behöva ta bort `.lock`-filer i `.git/`; be om behörighet om den saknas.
 - Det finns ingen versionshistorik utanför repot (`src/`). Föreslå aldrig git-återställning av annat. Använd lokala kopior/checkpoints.
 

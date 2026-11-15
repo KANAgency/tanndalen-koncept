@@ -228,7 +228,7 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 | `4ab8c14` | DS: knappars ikon-padding, figure-xl, 13 px caption |
 | `290854e` | (före chatten) OG: hero-page med intro, molnövergång, TD-header och TD-block |
 
-Medvetet ocommittad: `td/desktop/assets/img/brand/td-brand-3.png` (32 MB original; sajten använder `td-brand-3.jpg`).
+td-brand-3.png (32 MB original, oanvänd) borttagen 2026-11-15. Öppet: `td/desktop/assets/brand/` (logotyper) och `assets/img/brand/` (bilder) har förvirrande lika namn – föreslaget att döpa om den senare.
 
 Commit-trailer som använts: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` + `Claude-Session: https://claude.ai/code/session_01TLNL3tB7DVfjayBHSWwd5v`.
 
