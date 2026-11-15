@@ -27,10 +27,13 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
 ## Klart 15 nov: Fjällbruden ersätter Fjällviolen Mosippan i boendeblocket (TD slide 2)
-- R360-bilden (2000 px) uppskalad i Magnific Creative 2x (NatureAndLandscapes, creativity -3, 90 credits). Kling 2.5, 10 s, 16:9, bara startbild (650 credits): kameran rör sig åt höger och sjunker lätt, skidåkarna försvinner ur bild efter cirka 4 s.
-- `assets/video/boende-fjallbruden.mp4` (1920×1080, 13,4 MB, crf 20) + poster. `mirror: false`. `area2.mp4` (Mosippan) ligger kvar men används inte.
+- Första videon (uppskalat foto, Kling 2.5, 650 cr) underkändes: för inzoomad, texten låg på husen, skylten blev oläslig.
+- Lösning: originalet utvidgat med Magnific Expand (läget `magnific-expand`, 30 cr; BFL/auto ritade om scenen) till 2720×1520 med himmel och fjäll runt om. Ny Kling 2.5-video 10 s (650 cr) med långsam drift framåt och åt höger. Totalt cirka 1 680 credits.
+- Ny slide-egenskap `focus` (object-position för videon). Fjällbruden har `0% 0%`, så rubriken ligger mot himlen och husen hamnar mellan texten och faktakortet. Verifierat i 1440×900.
+- `assets/video/boende-fjallbruden.mp4` (8,5 MB) + poster, gitignorerade som övriga videor. `area2.mp4` (Mosippan) är oanvänd.
 - Fakta från R360: lift 270 m och bastu anges bara för nr 9–12. Rubrik och brödtext är KAN-text.
-- Öppet: skylten "FJÄLLBRUDEN" blir oläslig i slutet av klippet och Murklan-huset blir grått. Rubriken ligger över de livliga taken (kolla läsbarheten). Klippet är 10 s mot Fjällögas 12 s.
+- Boendeblocket (TD+OG): byte av slide pausar inte längre, bara pausknappen gör det.
+- Öppet: brödtexten ligger delvis mot mörk skog. Kontrollera mobil och andra bredder med `focus` 0% 0%.
 
 ## Klart 15 nov: ny sommarbild för "Grilla vid stugan" (TD En dag, sommar 17:00)
 Redigering av originalet i Magnific (Nano Banana Pro, bilden som referens, 2K 3:4, 3 varianter, 225 credits). Variant 1 vald: armen borttagen, familj på avstånd (grillare bakifrån, en bär tallrikar, barn på bänken), låg kvällssol. Original i `tanndalen-orsa/assets/magnific/sommar-dag-04-grill-v1.png`. Grillen syns dåligt bakom grillaren.
