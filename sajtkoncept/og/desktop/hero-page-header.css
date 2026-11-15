@@ -90,7 +90,7 @@
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: var(--color-season-winter);
+  background: var(--color-OG-season-winter); /* ljusblå, inte OG:s taupe-override */
   transform: scaleX(0);
   transform-origin: left center;
   pointer-events: none;
