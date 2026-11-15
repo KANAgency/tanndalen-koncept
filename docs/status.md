@@ -35,6 +35,12 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 ## Klart 15 nov: progress-strecket i glasmenyn (TD)
 - Strecket uppdateras vid scroll igen (`paintProgress()` anropas i `syncTopBar`). Anropet hade försvunnit i 341518d. Verifierat: halvvägs = scaleX(0.47), vinterfärg, 2 px.
 
+## Klart 15 nov: Fjällöga 13 A först i Waabi-raden, med video
+- Kort 1 i kvadratiska raden: "Sju meter till taket" (R360: 7 m takhöjd), 200 m till liften, 9 bäddar, pris [X]. Detaljbild = huset utifrån (R360-bild 23, `boende-fjalloga-13a-huset.jpg`).
+- Video: kök (höger) → allrum med loft (bakåt) → vardagsrum (vänster) → loftet ner mot fönstret (höger). Kling 2.5, 16:9 1080p, bara startbild (utsnitt 75 % mot rörelseriktningen), 1 300 credits. 17,6 s, 5,7 MB: `td/desktop/assets/video/boende-fjalloga-13a-rundtur.mp4` (gitignorerad). Råklipp i `tanndalen-orsa/assets/boenden/fjalloga/fjalloga-13-a/video/`.
+- Kända brister: Kling tände eld i kaminen i vardagsrumsklippet. Ej bekräftat att 13 A är ett eget hus (R360 kallar det "fjällägenhet på tre plan") – skriv inte "hela huset" i copy.
+- Alla 9 Fjällöga-boenden + bilder hämtade med `scripts/hamta-boendebilder.py --omrade 33295` (katalogsökning, checkavail=false).
+
 ## Klart 15 nov: AI-video i Järven-korten (test)
 - Fjällstugan Järven: 3 rum (allrum sväng höger → kamin drar ut → allrum framåt mot fönstret), Kling 2.5 1080p med start- och slutbild utskurna ur riktiga foton så att det som avslöjas är äkta. 6 klipp (9:16 + 1:1), 1 950 credits, Magnific-projektet "Tänndalen - Orsa Grönklitt - Sajt - Inledande fas - 09665".
 - Ihopklippt med ffmpeg (0,8 s toning, 13,6 s): `td/desktop/assets/video/boende-jarven-916.mp4` (Oura) och `-11.mp4` (Waabi), ca 4 MB styck. Videomappen är gitignorerad – råklipp och utsnitt ligger i `tanndalen-orsa/assets/boenden/fjallstugan-jarven/`.
