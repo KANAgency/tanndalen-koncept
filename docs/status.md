@@ -30,6 +30,7 @@ Senast uppdaterad: 2026-11-14 (En dag-justeringar). Detaljer om vad som är bygg
 - `#boenden-oura` och `#boenden-waabi` i `td/desktop/index.html`, CSS sist i `startsida.css` (`.td-bo-*`). Tre platshållarboenden med påhittad data och priser i [hakparentes], befintliga bilder.
 - Kortens typografi via TD-klasser (namn `td-ui-caption` på egen rad, rubrik Superclarendon Bold 24, siffror `td-ui-figure`, pris `td-ui-title-sm`), radie 4 px på alla bilder och rutor.
 - Första kortet i båda raderna har riktiga Fjällsippan-bilder: `boende-fjallsippan-exterior.jpg` (stor) och `boende-fjallsippan-bastu.jpg` (feature). Rubrik "Egen bastu efter sista åket". Plan: stora bilden blir en film av stillbilder (exteriör, vardagsrum, kök, sovrum, skidspår), en spelar åt gången, hovring byter.
+- Kort 2 = Ski Lodge Premium 203 – backvy (r360: 46 m², 6 bäddar, 2 sovrum, söderbalkong mot backen, 25 m till lift och längdspår, handikappanpassad, våning 2). Bilderna är fortfarande platshållare, pris okänt.
 - Rubrik i Utförsåkningsblockets stil (`utforsakning-eyebrow` "Handplockade boenden" + `td-heading-4`), ingen pilknapp.
 - Oura: rubriken ovanpå bilden, detaljen som rund närbild. Waabi: stor bild + tre rutor (detalj, avstånd till liften, bäddar), CTA-pil.
 - Citatet och topografin mellan Fjällguiden och `#boende` ankras nu efter `#boenden-waabi` (faller tillbaka på `.faq`).
