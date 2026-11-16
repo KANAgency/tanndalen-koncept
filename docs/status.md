@@ -67,6 +67,11 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
+## Klart 16 nov: Fjällöga-videon uppskalad (TD boende slide 1)
+- `area1.mp4` uppskalad med Magnific Precision (1920 px, 5 097 credits ≈ 12,70 EUR; förhandsvisning 497 credits). Kodad om för webb: 1920×1428, CRF 20, ingen ljudspår, 21 MB (förut 1668×1240, 34 MB).
+- Originalet sparat som `assets/video/area1-original.mp4` (gitignorerad mapp, ingen annan kopia). Ingen kodändring.
+- Verifierat: laddas i 1600 px utan fel, 4 rutor jämförda utan flimmer/förvrängning. Uppspelning i synligt läge inte kollad i hidden pane.
+
 ## Klart 15 nov: Fjällbruden ersätter Fjällviolen Mosippan i boendeblocket (TD slide 2)
 - Första videon (uppskalat foto, Kling 2.5, 650 cr) underkändes: för inzoomad, texten låg på husen, skylten blev oläslig.
 - Lösning: originalet utvidgat med Magnific Expand (läget `magnific-expand`, 30 cr; BFL/auto ritade om scenen) till 2720×1520 med himmel och fjäll runt om. Ny Kling 2.5-video 10 s (650 cr) med långsam drift framåt och åt höger. Totalt cirka 1 680 credits.
