@@ -8,6 +8,7 @@ Lokala videofiler för Orsa Grönklitt-skalet. Inte del av sajtens UI.
 - `summer.web.mp4` — webbversion av *Par 16x9  utan grafik 1080p.mp4* (1080p H.264 CRF 23, utan ljud, faststart, 15 s) i videokortet (sommar)
 
 ## Introscener (Kling 2.5)
+- `intro/kvallsdopp.mp4` — Kvällsdopp (sommar), från kundbilden AA107523 (Webb_sommar), 5 s. Inte inkopplad ännu
 - `intro/brasa.mp4` — Lägereld, från kundbilden AA104245 (Webb_vinter), 5 s
 
 ## Saknas

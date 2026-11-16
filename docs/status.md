@@ -12,6 +12,11 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: sommarintro OG – första scenen Kvällsdopp
+- Bildurval ur Webb_sommar (350 bilder): AA107523 (barn hoppar från brygga i motljus) vald och godkänd. AA106962 (cyklar, utsikt över Orsasjön) och AA109369 (axelridning på spången) föreslagna men John är osäker – inte körda.
+- `og/desktop/assets/video/intro/kvallsdopp.mp4`: Kling 2.5, 5 s, 1080p-körning (1760×1176), startbild AA107523, 325 credits. Webbversion utan ljud, 3,2 MB. John: "otroligt bra" trots att barnen landar på ytan 1,2–1,8 s. Gitignorerad: ladda upp till blob-containern före deploy.
+- Inte inkopplat: introt har bara en scenlista (vinter). Öppet: sommarscenlista per säsong, ersättare för fasta raden "i skidparadiset" i sommar, två scener till.
+
 ## Klart 16 nov: ny introscen i OG – Lägereld
 - `og/desktop/assets/video/intro/brasa.mp4`: Kling 2.5, 5 s, 1080p-körning (1760×1176), startbild kundens AA104245 (elden skarp, mamma och barn ur fokus). 325 credits. Webbversion utan ljud, 2,5 MB. Gitignorerad: ladda upp till blob-containern före deploy.
 - Scen 4 av 5 i `hero-page-config.js`: "Lägereld" (+ fasta raden "i skidparadiset"), mellan Vinterbad och Kvällsmys.
