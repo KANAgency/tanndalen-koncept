@@ -2644,10 +2644,29 @@ export function initTdBlocks(root = document) {
       const card = document.querySelector(".td-videokort");
       const dlg = document.getElementById("td-videomodal");
       if (!card || !dlg) return;
-      const src = card.dataset.src;
+      /* Vinter: familjefilmen. Sommar: kundens parfilm (Par 16x9 utan grafik), 15 s båda. */
+      const FILMS = {
+        winter: { src: card.dataset.src, title: "[En vinterdag i Orsa Grönklitt]" },
+        summer: { src: "./assets/video/summer.web.mp4", title: "[En sommardag i Orsa Grönklitt]" }
+      };
+      let src = card.dataset.src;
       const media = card.querySelector(".td-videokort-media");
       const frame = dlg.querySelector(".td-videomodal-frame");
+      const titleEl = card.querySelector(".td-heading-xs");
       let bg = null;
+      const applySeason = (season = document.documentElement.dataset.season) => {
+        const film = season === "summer" ? FILMS.summer : FILMS.winter;
+        if (titleEl) titleEl.textContent = film.title;
+        card.setAttribute("aria-label", `Spela filmen ${film.title}`);
+        if (film.src === src) return;
+        src = film.src;
+        if (bg) {
+          bg.src = src;
+          if (!matchMedia("(prefers-reduced-motion: reduce)").matches) bg.play().catch(() => {});
+        }
+      };
+      applySeason();
+      document.addEventListener("og-season", (event) => applySeason(event.detail));
       const mountBg = () => {
         if (bg || getComputedStyle(card).display === "none") return;
         bg = document.createElement("video");

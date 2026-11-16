@@ -16,7 +16,8 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Läge 3 och 4: Längd förvalt (även vid byte till På plats). Kalendern visas i båda grenarna i full höjd, webbkameran/spårkartan dold (CSS från TD `startsida.css` 5128–5150).
 - Läge 4: egen dagskalender `ONSITE_CALENDAR` i `og/desktop/modes-content.js` ("Er dag · [tis 16 feb]", I dag + I morgon, påhittat i [ ]). `modes.js` skickar `onsiteCalendar` + `calendarAllGren` till motorn.
 - Verifierat 1440×900: booking (Längd/Alpint → bokningskalender, kamera dold), onsite (Längd, dagskalender), returning (Alpint, På gång, kamera synlig). Inga konsolfel.
-- Inte portat: sommarvideon i videokortet (OG har ingen sommarfilm, kortet visar vinterfilmen i sommar). Mer-karusellerna (`#mer-resa`/`#mer-nu`) räknas som egna block, inte Just nu.
+- Sommarfilm i videokortet: kundens "Par 16x9  utan grafik 1080p.mp4" (`assets/og/bilder och videos/Video/Par/`) som `og/desktop/assets/video/summer.web.mp4` (H.264 CRF 23, utan ljud, faststart, 15 s, 10 MB). Byts med säsong i bakgrunden och i modalen, titel "[En sommardag i Orsa Grönklitt]". Kicker "Film · 15 s" för båda (uppmätt; var "[1 min]"). Videon är gitignorerad: måste laddas upp till blob-containern före deploy.
+- Inte portat: Mer-karusellerna (`#mer-resa`/`#mer-nu`) räknas som egna block, inte Just nu.
 
 ## Klart 16 nov: sommarjusteringar (TD)
 - Utförsåkningsblocket i sommar: knappen i sommarfärg (#1B4021, Snö-text), doodle = `doodle-sol.svg` (från assets/td/doodles). Bad- och vandringsbilden utvidgade med Magnific Expand (magnific-expand, 3:2, 2 × 30 credits): bad utzoomad med fjällen, vandring med skarp ängsull i förgrunden.
