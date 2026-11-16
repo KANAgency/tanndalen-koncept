@@ -12,6 +12,13 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: OG lägesmeny och blockordning som TD
+- Lägesmenyn i OG beter sig som TD: val laddar om i toppläget och visar modalen "Du är nu i / Läge N: …" (`announceSwitch` i `og/desktop/site-config.js`, CSS portad till `og-overrides.css`).
+- Blockordning per läge × säsong = TD:s, uppmätt i båda sajterna (tabell `ORDER` i skriptet i `og/desktop/index.html`, ersätter gamla omordningsskriptet). Block som saknas i OG visas som streckad platshållare "Finns i Tänndalen / <namn>": Aktuellt, Handplockade boenden, Älskat av skidåkare, Citat, Hitta hit, Lev. Andas. Tänndalen., Mer till er vecka (läge 3 vinter), Mer att hitta på i dag (läge 4 vinter), Footer.
+- Följer TD även i det som döljs: läge 3 och 4 visar inte En dag eller boendeblocket, Handplockade boenden visas bara i läge 1/2.
+- Verifierat 1440×900: alla 8 kombinationer läge × säsong matchar TD-ordningen, modalen visas efter byte till På plats, inga konsolfel. Mobil ej granskad.
+- Utanför listan: hero och TD:s introtext (`#statement`), som motsvaras av OG-heron. Läge 1 med `?intro=0` blir återkommande i OG (OG:s introregel), ordningen är densamma.
+
 ## Klart 16 nov: OG Just nu – läge 3/4-varianterna från TD
 - Läge 3 och 4: Längd förvalt (även vid byte till På plats). Kalendern visas i båda grenarna i full höjd, webbkameran/spårkartan dold (CSS från TD `startsida.css` 5128–5150).
 - Läge 4: egen dagskalender `ONSITE_CALENDAR` i `og/desktop/modes-content.js` ("Er dag · [tis 16 feb]", I dag + I morgon, påhittat i [ ]). `modes.js` skickar `onsiteCalendar` + `calendarAllGren` till motorn.

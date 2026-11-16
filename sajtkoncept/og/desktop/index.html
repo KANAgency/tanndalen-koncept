@@ -857,30 +857,64 @@
       init();
     </script>
     <script>
-    /* Blockordning per läge (som TD): På plats → En dag efter Fråga-blocket. Påbörjad bokning → Fråga och Just nu före En dag.
-       Läget kan bytas live → återställ via markörer. Ingen Utförsåkning-sektion i OG. */
+    /* Blockordning per läge × säsong = TD:s (uppmätt 16 nov, td/?mode=…). Block som bara finns i TD
+       visas som platshållare med TD-namnet. Hero och TD:s introtext (#statement) ligger utanför listan. */
     (() => {
       const root = document.documentElement;
-      const enDag = document.getElementById("en-dag");
-      const faq = document.getElementById("fragor");
-      const justNu = document.getElementById("just-nu");
-      if (!enDag || !faq || !justNu) return;
-      const mark = document.createComment("plats:en-dag");
-      enDag.before(mark);
-      const marks = [faq, justNu].map((el) => { const m = document.createComment("plats:" + el.id); el.before(m); return m; });
+      const host = document.querySelector(".og-hp-blocks-content");
+      if (!host) return;
+      const PLACEHOLDERS = {
+        aktuellt: "Aktuellt",
+        "boenden-waabi": "Handplockade boenden",
+        utforsakning: "Älskat av skidåkare (Utförsåkning / Längdåkning)",
+        "citat-band": "Citat",
+        hitta: "Hitta hit",
+        "td-brand": "Lev. Andas. Tänndalen.",
+        "mer-resa": "Mer till er vecka",
+        "mer-nu": "Mer att hitta på i dag",
+        footer: "Footer"
+      };
+      const VISIT = {
+        winter: ["aktuellt", "en-dag", "just-nu", "fragor", "boenden-waabi", "boende", "utforsakning", "citat-band", "hitta", "td-brand", "footer"],
+        summer: ["aktuellt", "en-dag", "boenden-waabi", "just-nu", "fragor", "utforsakning", "citat-band", "hitta", "td-brand", "footer"]
+      };
+      const ORDER = {
+        new: VISIT,
+        returning: VISIT,
+        booking: {
+          winter: ["aktuellt", "utforsakning", "fragor", "just-nu", "mer-resa", "citat-band", "td-brand", "footer"],
+          summer: ["aktuellt", "utforsakning", "fragor", "just-nu", "citat-band", "td-brand", "footer"]
+        },
+        onsite: {
+          winter: ["just-nu", "aktuellt", "fragor", "mer-nu", "citat-band", "td-brand", "footer"],
+          summer: ["just-nu", "aktuellt", "fragor", "citat-band", "td-brand", "footer"]
+        }
+      };
+      const blocks = {};
+      ["en-dag", "just-nu", "fragor", "boende"].forEach((id) => { const el = document.getElementById(id); if (el) blocks[id] = el; });
+      Object.entries(PLACEHOLDERS).forEach(([id, name]) => {
+        const el = document.createElement("section");
+        el.className = "og-td-placeholder";
+        el.dataset.tdBlock = id;
+        el.setAttribute("aria-label", `Platshållare: ${name}`);
+        el.innerHTML = `<p class="og-td-placeholder-kicker">Finns i Tänndalen</p><p class="og-td-placeholder-name">${name}</p>`;
+        blocks[id] = el;
+      });
+      const all = Object.values(blocks);
       let last = null;
       const apply = () => {
-        const mode = root.dataset.mode;
-        if (mode === last) return;
-        last = mode;
-        mark.after(enDag);
-        [faq, justNu].forEach((el, i) => marks[i].after(el));
-        if (mode === "booking") [faq, justNu].forEach((el) => enDag.before(el));
-        else if (mode === "onsite") faq.after(enDag);
+        const mode = ORDER[root.dataset.mode] ? root.dataset.mode : "returning";
+        const season = root.dataset.season === "summer" ? "summer" : "winter";
+        const key = mode + "/" + season;
+        if (key === last) return;
+        last = key;
+        const list = ORDER[mode][season];
+        list.forEach((id) => { blocks[id].hidden = false; host.append(blocks[id]); });
+        all.forEach((el) => { if (!list.includes(el.id || el.dataset.tdBlock)) el.hidden = true; });
         dispatchEvent(new Event("resize"));
       };
       apply();
-      new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-mode"] });
+      new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-mode", "data-season"] });
     })();
     /* På plats-toppbaren ligger i flödet; headern flyttas ned med toppbarens synliga del. */
     (() => {

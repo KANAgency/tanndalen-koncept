@@ -779,3 +779,50 @@ html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 .en-dag-puff-copy .td-heading-md { margin-top: var(--space-sm); font-size: var(--font-size-3xl); }
 .en-dag-puff-copy .td-button { margin-top: var(--space-2xl); }
 @media (min-width: 1024px) { .en-dag-puff-copy .td-heading-md { font-size: var(--font-size-40); } }
+
+/* Lägesbyte (demo), portat från TD startsida.css 16 nov. */
+.mode-announce {
+  box-sizing: border-box;
+  width: min(420px, calc(100vw - 32px));
+  padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+  text-align: center;
+  font-family: var(--font-family-TD-secondary), sans-serif;
+}
+.mode-announce::backdrop {
+  background: rgb(36 39 42 / 0.35);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.mode-announce-kicker { margin: 0 0 var(--space-sm); color: var(--color-TD-neutral); font-size: var(--font-size-md); }
+.mode-announce-title {
+  margin: 0 0 var(--space-2xl);
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-2xl);
+  line-height: 1.2;
+}
+.mode-announce-ok { min-width: 120px; justify-content: center; }
+.mode-announce-ok:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+
+/* Platshållare för block som finns i TD men inte i OG ännu (blockordning per läge i index.html). */
+.og-td-placeholder {
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  gap: var(--space-sm);
+  min-height: 320px;
+  margin-block: var(--space-4xl);
+  padding: var(--space-2xl);
+  border: 2px dashed var(--color-TD-neutral-light);
+  border-radius: var(--radius-md, 16px);
+  text-align: center;
+  color: var(--color-TD-neutral);
+}
+.og-td-placeholder[hidden] { display: none; }
+.og-td-placeholder-kicker { margin: 0; font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 0.08em; }
+.og-td-placeholder-name { margin: 0; font-size: var(--font-size-2xl); line-height: 1.2; color: var(--color-text-primary); }
+.og-hp-blocks-content > [hidden] { display: none !important; }
