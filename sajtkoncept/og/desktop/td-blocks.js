@@ -2487,7 +2487,7 @@ export function initTdBlocks(root = document) {
         if (boendeStillTimer) { clearInterval(boendeStillTimer); boendeStillTimer = 0; }
       }
       function boendeAdvance() {
-        if (boendeIndex < boendeSlides.length - 1 && boendeAuto) boendeGo(boendeIndex + 1);
+        if (boendeAuto) boendeGo((boendeIndex + 1) % boendeSlides.length); // loopar till första
         else { boendeMode = "end"; boendeIcons("end"); }
       }
       function boendeStillRun() {
@@ -2534,7 +2534,7 @@ export function initTdBlocks(root = document) {
         if (fill && boendeVideo.duration) fill.style.width = `${Math.min(100, boendeVideo.currentTime / boendeVideo.duration * 100)}%`;
       });
       boendeVideo.addEventListener("ended", () => {
-        if (boendeIndex < boendeSlides.length - 1 && boendeAuto) boendeGo(boendeIndex + 1);
+        if (boendeAuto) boendeGo((boendeIndex + 1) % boendeSlides.length); // loopar till första
         else { boendeMode = "end"; boendeIcons("end"); }
       });
       boendeToggle.addEventListener("click", () => {
