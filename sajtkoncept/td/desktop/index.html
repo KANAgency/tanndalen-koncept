@@ -7272,6 +7272,8 @@ window.tdScrollTrack = (track, delta, reduced) => {
       el.cta.firstChild.textContent = v.cta + " ";
       el.cta.setAttribute("href", v.href);
     });
+    const boTitle = document.getElementById("boenden-waabi-title");
+    if (boTitle) boTitle.textContent = summer ? "Här bor fjällvandrarna" : "Här bor skidåkarna";
     document.querySelectorAll("#td-brand img[data-src-sommar]").forEach((img) => {
       const want = summer ? img.dataset.srcSommar : img.dataset.srcVinter;
       if (img.getAttribute("src") !== want) img.setAttribute("src", want);
