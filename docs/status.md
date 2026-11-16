@@ -10,12 +10,15 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: genererade bilder + kraftigare scrim i Mer-karusellerna (TD läge 3–4)
+- 13 saknade motiv genererade i Magnific (Nano Banana Pro, 1:1, 2K, 13 × 75 = 975 credits, Personal-projektet): matkasse, middag i stugan, fondue i kåtan, eldstad, hundarna, utsikt från släden, liveband, publiken, snöbad, pulka, pulkor, termos, skoterguide. JPG 1024 px i `assets/img/mer/`. Inga platshållare kvar.
+- Scrim på `.td-mer`-korten: 65 % höjd, 0,72 → 0,45 → 0 (övriga boendekort orörda).
+
 ## Klart 16 nov: bilder och video i Mer till er vecka / Mer att hitta på i dag (TD läge 3–4)
 - Runda 1 (kundmaterial i `assets/td/bilder och video`): 2 videor, ljudlösa, 720p, i `assets/video/` (gitignorerad): `mer-liftkort.mp4` (Klipp_5, 2–10 s) och `mer-spar.mp4` (Klipp_4, 9–18 s). 6 foton nedskalade till 1000 px i `assets/img/mer/` (stollift, lift-ko, familj-backen, vafflor, terrass, fjallvy).
 - Runda 2: kort som saknade kundbild fick befintliga genererade bilder (fraga-skidskola/hundspann/bastu/fjallrundan/raststuga/barnbacke/livs/vindskydd/restaurang/sparcentral, langd, endag-1300/1700, meny-aktiviteter).
-- Fortfarande platshållare (motivet finns inte): matkasse, fondue i Fjällkåtan, musik på Lodgen, pulkabacken (huvudbilder) och 10 mindre rutor.
 - Videor: 2 i läge 3, 0 i läge 4. Toppstugans terrassklipp (Klipp_1) var bara ca 1,9 s långt och ersattes av foto.
-- Öppet: ljusa bilder (skidskola) ger svag kontrast för den vita rubriken. Mobilvy ej granskad.
+- Öppet: mobilvy ej granskad.
 
 ## Klart 16 nov: lägesjusteringar TD (läge 2–4), lägesmeny och scrollfix
 - Läge 1/2: första boendekortet (Fjällöga 13 A) heter "För det stora sällskapet" i stället för "Sju meter till taket".

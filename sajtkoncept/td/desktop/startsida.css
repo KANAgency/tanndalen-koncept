@@ -6465,3 +6465,6 @@ html[data-mode="onsite"]:not([data-season="summer"]) .td-mer[data-lage="onsite"]
 }
 .mode-announce-ok { min-width: 120px; justify-content: center; }
 .mode-announce-ok:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
+
+/* Mer-karusellerna: kraftigare scrim, bilderna är ofta ljusa snöbilder (John 16 nov). */
+.td-mer .td-bo-waabi-bildlank::before { height: 65%; background: linear-gradient(to bottom, rgb(36 39 42 / 0.72) 0%, rgb(36 39 42 / 0.45) 45%, rgb(36 39 42 / 0) 100%); }
