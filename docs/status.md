@@ -82,7 +82,7 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
 ## Klart 16 nov: Järven som slide 5
-- Ordning: Fjällöga, Brunkullan, Fjällbruden, Fjällstjärnan, Fjällstugan Järven.
+- Ordning: Fjällöga, Brunkullan, Fjällbruden, Fjällstugan Järven, Fjällstjärnan. Karusellkontrollen (`.boende-pill`) har nu auto-bredd – fasta 168 px klippte femte punkten.
 - Järvens drönarbild (scrapad 17) omrenderad i Magnific (Nano Banana 2.1, mulet nysnöljus, 2 varianter 4K = 290 credits ≈ 0,73 EUR). Variant B → `assets/img/boende-jarven-sno.jpg` (3600 px).
 - Context Light (svart text), parallax 0, förankrad nederkant. Rubrik "Timmerstuga i nysnön." (förslag). Fakta R360: lift 800 m, längdspår 600 m, 3 sovrum, 6 bäddar, 96 m², bastu. `r360AreaId` saknas för Järven och Fjällstjärnan.
 - Verifierat 1600×900. Ej kollat: 2000 px, mobil.
