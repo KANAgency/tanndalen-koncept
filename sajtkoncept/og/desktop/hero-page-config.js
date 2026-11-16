@@ -72,8 +72,12 @@ export const HERO_PAGE_CONFIG = {
    */
   summer: {
     headlineLine2: "med hela familjen",
+    /* Kling 2.5 från kundbilder i Webb_sommar (16 nov). */
     scenes: [
-      { image: "./assets/img/og-intro-kvallsdopp.jpg", video: "./assets/video/intro/kvallsdopp.mp4", line1: "Kvällsdopp", loop: true, clipDurationSec: 5, advanceEarlySec: 0.3 }
+      { image: "./assets/img/og-intro-kvallsdopp.jpg", video: "./assets/video/intro/kvallsdopp.mp4", line1: "Kvällsdopp", clipDurationSec: 5, advanceEarlySec: 0.3 },
+      { image: "./assets/img/og-intro-hoghojdsbana.jpg", video: "./assets/video/intro/hoghojdsbana.mp4", line1: "Höghöjdsbana", clipDurationSec: 5, advanceEarlySec: 0.3 },
+      { image: "./assets/img/og-intro-cykelbanan.jpg", video: "./assets/video/intro/cykelparken.mp4", line1: "Cykelbanan", clipDurationSec: 5, advanceEarlySec: 0.3 },
+      { image: "./assets/img/og-intro-bryggfika.jpg", video: "./assets/video/intro/bryggfika.mp4", line1: "Bryggfika", clipDurationSec: 5, advanceEarlySec: 0.3 }
     ],
     heroTitle: "Sommarlov i Dalarna"
   },
