@@ -10,6 +10,10 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: sommarjusteringar (TD)
+- Utförsåkningsblocket i sommar: knappen i sommarfärg (#1B4021, Snö-text), doodle = `doodle-sol.svg` (från assets/td/doodles). Bad- och vandringsbilden utvidgade med Magnific Expand (magnific-expand, 3:2, 2 × 30 credits): bad utzoomad med fjällen, vandring med skarp ängsull i förgrunden.
+- Sommar: Handplockade boenden flyttas till direkt efter En dag (före Just nu). Områdesblocket (#boende) är dolt. Rubriken är "Här bor fjällvandrarna". Järven heter "Braskamin och söderläge".
+
 ## Klart 16 nov: runda 3 – scrim, läge 3/4, karusellpilar, sommar (TD)
 - Mer-karusellernas scrim: kortare (48 %) och svart i stället för Natt, så mellangrått försvinner.
 - Läge 4: Musik på Lodgen och Belysta spåret först. Klockslag med fyra siffror och kolon (14:00, 21:00, 16:00–20:00). Toppstugan har inte längre två våffelbilder (stolliften ersätter endag-1300). Dolda i läge 4: Handplockade boenden, områdesvideon och utförsåkningsblocket ("Älskat av skidåkare"). Kalenderrubrik: "Idag, måndag 15 februari".

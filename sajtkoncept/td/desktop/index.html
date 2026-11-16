@@ -7272,6 +7272,14 @@ window.tdScrollTrack = (track, delta, reduced) => {
       el.cta.firstChild.textContent = v.cta + " ";
       el.cta.setAttribute("href", v.href);
     });
+    const doodle = document.querySelector(".utforsakning-doodle img");
+    if (doodle) { doodle.dataset.vinter ||= doodle.getAttribute("src"); doodle.setAttribute("src", summer ? "assets/img/doodle-sol.svg" : doodle.dataset.vinter); }
+    /* Sommar: Handplockade boenden mellan En dag och Just nu. */
+    const bo = document.getElementById("boenden-waabi"), jn = document.getElementById("en-dag");
+    if (bo && jn) {
+      if (!window.__boMark) { window.__boMark = document.createComment("plats:boenden-waabi"); bo.before(window.__boMark); }
+      if (summer) jn.after(bo); else window.__boMark.after(bo);
+    }
     const boTitle = document.getElementById("boenden-waabi-title");
     if (boTitle) boTitle.textContent = summer ? "Här bor fjällvandrarna" : "Här bor skidåkarna";
     document.querySelectorAll("#td-brand img[data-src-sommar]").forEach((img) => {
