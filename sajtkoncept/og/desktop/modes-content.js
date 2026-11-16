@@ -32,6 +32,30 @@ export const BOOKING_CALENDAR = {
   ]
 };
 
+/* Läge 4 (på plats): dagens program för familjen, som TD:s ONSITE_CALENDAR (16 nov). Allt i [ ] är påhittat. */
+export const ONSITE_CALENDAR = {
+  range: "Er dag · [tis 16 feb]",
+  groups: [
+    {
+      label: "I dag",
+      rows: [
+        { time: "09:30", title: "[Barnens skidskola i barnbacken]" },
+        { time: "12:00", title: "[Lunch på Grönklittsgården]" },
+        { time: "14:00", title: "Längd: [Elljusspåret, 2,5 km]", link: "Skidorna" },
+        { time: "18:00", title: "[Fackeltåg i barnbacken]" }
+      ]
+    },
+    {
+      label: "I morgon",
+      rows: [
+        { time: "09:00", title: "Första åket i nypreparerat" },
+        { time: "11:00", title: "[Visning i Orsa Rovdjurspark]" },
+        { time: "18:00", title: "[Familjetur i belysta spåret]" }
+      ]
+    }
+  ]
+};
+
 export function modes() {
-  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR }, onsite: {} };
+  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR }, onsite: { calendar: ONSITE_CALENDAR } };
 }

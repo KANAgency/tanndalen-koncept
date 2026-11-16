@@ -1777,23 +1777,23 @@ button.faq-row:hover svg { transform: translate(2px, -2px); }
   button.faq-row svg { transition: none; }
   .faq-ask.is-shake { animation: none; }
 }
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-nu .td-kamera {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-kamera {
   display: none;
 }
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-cols .td-pagang {
   flex: 1 1 auto;
   align-self: stretch;
   justify-content: flex-start;
 }
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang-groups {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-cols .td-pagang-groups {
   flex: none;
   gap: var(--space-xl);
 }
-html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-pagang-row-text {
   grid-template-columns: max-content minmax(0, 1fr);
   column-gap: var(--space-lg);
 }
-html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text .td-ui-body {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-pagang-row-text .td-ui-body {
   white-space: nowrap;
 }
 html[data-mode="onsite"] #just-nu {

@@ -1378,7 +1378,8 @@ export function initTdBlocks(root = document) {
         if (tempC < 0) return `minus ${Math.abs(tempC)}`;
         return String(tempC);
       }
-      let justNuGren = "alpint";
+      /* Läge 3 och 4: Längd förvalt (som TD, 16 nov). */
+      let justNuGren = /^(booking|onsite)$/.test(document.documentElement.dataset.mode) ? "langd" : "alpint";
       const rowArrow = '<svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9.18 3.18 14 8l-4.82 4.82" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="bevel"/></svg>';
       function pagangRow(line, href, divider) {
         const [when, name] = line.split(" · ");
@@ -1708,6 +1709,14 @@ export function initTdBlocks(root = document) {
         });
       });
       applyJustNu(justNuGren);
+      /* Byte till På plats: Längd förvalt. Motorn skickar inget og-mode → observera attributet. */
+      let lastMode = document.documentElement.dataset.mode;
+      new MutationObserver(() => {
+        const mode = document.documentElement.dataset.mode;
+        if (mode === lastMode) return;
+        lastMode = mode;
+        if (mode === "onsite" && justNuGren !== "langd" && document.documentElement.dataset.season !== "summer") applyJustNu("langd");
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
       try {
         const seasonKey = `${SEASON_TOGGLE.storagePrefix}-season`;
         if (localStorage.getItem(seasonKey) === "summer" || localStorage.getItem(seasonKey) === "sommar") applySummer();
