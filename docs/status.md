@@ -1,5 +1,7 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-16: Deploy-fix: TD importerade ds-JS relativt (`./ds/…`), vilket bara fungerade via dev-serverns mappning. I dist blev det /td/ds/… → 404 och sidan fastnade på introt. Nu `/ds/…`. Deploy-grenen ligger 20 commits efter main; behöver mergas och pushas (Johns beslut). Postrar/videor i deploy kommer från blob-containern, inte git.
+
 Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scrollfix). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
 
 ## Läge
