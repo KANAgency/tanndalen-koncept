@@ -12,6 +12,11 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: läge 1 i lägesmenyn utan modal (TD + OG)
+- Val av läge 1 (Ny besökare) visar ingen "Du är nu i"-modal, bara introt. Övriga lägen visar modalen som förut (`shared/js/modes-engine.js`).
+- Bugg rättad samtidigt: omladdningen efter val i menyn återanvände gamla URL:en och skrev över `?mode=new`, så byte till läge 1 hamnade kvar i förra läget. Nu sätts `mode` i URL:en.
+- Verifierat på /td/ och /og/: på plats → 1, återkommande → 1 (mode=new, ingen modal), på plats → 2 och 1 → 3 (rätt läge, modal).
+
 ## Klart 16 nov: OG lägesmeny och blockordning som TD
 - Lägesmenyn i OG beter sig som TD: val laddar om i toppläget och visar modalen "Du är nu i / Läge N: …" (`announceSwitch` i `og/desktop/site-config.js`, CSS portad till `og-overrides.css`).
 - Blockordning per läge × säsong = TD:s, uppmätt i båda sajterna (tabell `ORDER` i skriptet i `og/desktop/index.html`, ersätter gamla omordningsskriptet). Block som saknas i OG visas som streckad platshållare "Finns i Tänndalen / <namn>": Aktuellt, Handplockade boenden, Älskat av skidåkare, Citat, Hitta hit, Lev. Andas. Tänndalen., Mer till er vecka (läge 3 vinter), Mer att hitta på i dag (läge 4 vinter), Footer.

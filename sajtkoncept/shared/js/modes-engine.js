@@ -603,7 +603,8 @@ export function createModesEngine(deps) {
     button.addEventListener("click", () => { if (menu.hidden) open(); else close(false); });
     radios.forEach((radio, index) => {
       radio.addEventListener("click", () => {
-        if (labels.announceSwitch) {
+        /* Läge 1 (ny besökare) = introt, ingen modal (John 16 nov). */
+        if (labels.announceSwitch && radio.dataset.modeChoice !== "new") {
           const choice = labels.modeChoices.find((c) => c.id === radio.dataset.modeChoice);
           try { sessionStorage.setItem(ANNOUNCE_KEY, choice ? choice.label : ""); } catch (err) {}
         }
@@ -612,6 +613,7 @@ export function createModesEngine(deps) {
           /* Demo: ladda om i toppläget så det nya läget syns från början. */
           const url = new URL(location.href);
           url.hash = "";
+          url.searchParams.set("mode", radio.dataset.modeChoice);
           location.assign(url.pathname + url.search);
           return;
         }
