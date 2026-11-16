@@ -6491,3 +6491,7 @@ html[data-season="summer"] .utforsakning-card .td-button { background: var(--col
 html[data-season="summer"] .utforsakning-card .td-button:hover { filter: brightness(1.15); }
 html[data-season="summer"] #boende { display: none; }
 html[data-season="summer"] .utforsakning-doodle img { inset: 0; width: 100%; height: auto; transform: none; }
+
+/* Sommar: boenden mellan En dag och Just nu – jämn luft över och under. */
+html[data-season="summer"] #boenden-waabi { margin-top: 90px; margin-bottom: 56px; }
+html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utforsakning-doodle-y: -110px; }
