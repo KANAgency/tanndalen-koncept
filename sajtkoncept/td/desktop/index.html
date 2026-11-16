@@ -6441,7 +6441,8 @@
           { label: "Husdjur", value: "Välkomna" },
           { label: "Bastu", value: "Ja" }
         ],
-        video: "assets/video/boende-fjallbruden.mp4",
+        // Stillbild (16 nov): videon ersatt av startbilden. Videofilen ligger kvar.
+        video: "",
         poster: "assets/video/boende-fjallbruden-poster.jpg",
         // Utsnitt uppe till vänster: rubriken mot himlen, husen mellan texten och faktakortet.
         focus: "0% 0%",
@@ -6466,10 +6467,11 @@
           { label: "Bastu", value: "[I alla]" }
         ],
         video: "",
-        poster: "assets/img/platshallare.svg",
+        // R360-foto Brunkullan 23 mot backen, nedskalat till 2400 px.
+        poster: "assets/img/boende-brunkullan-23-backen-stor.jpg",
         mirror: false,
         parallax: 0.2,
-        placeholder: true
+        placeholder: false
       };
       const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan];
       const boende = document.getElementById("boende");

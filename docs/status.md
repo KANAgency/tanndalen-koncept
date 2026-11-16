@@ -67,6 +67,11 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
+## Klart 16 nov: Stillbilder på boende-slide 2 och 3
+- Fjällbruden: video avstängd (`video: ""`), visar startbilden `boende-fjallbruden-poster.jpg`. Videofilen ligger kvar.
+- Brunkullan: R360-foto 08 (Brunkullan 23 mot backen) som `assets/img/boende-brunkullan-23-backen-stor.jpg` (2400 px, 1 MB), placeholder av.
+- Öppet: Brunkullan i 1600×900 visar mest vit backe, huset skärs i nederkant och brödtexten ligger på ljus snö (läsbarhet). Behöver fokus/utsnitt eller starkare scrim.
+
 ## Klart 16 nov: Fjällöga-videon uppskalad (TD boende slide 1)
 - `area1.mp4` uppskalad med Magnific Precision (1920 px, 5 097 credits ≈ 12,70 EUR; förhandsvisning 497 credits). Kodad om för webb: 1920×1428, CRF 20, ingen ljudspår, 21 MB (förut 1668×1240, 34 MB).
 - Originalet sparat som `assets/video/area1-original.mp4` (gitignorerad mapp, ingen annan kopia). Ingen kodändring.
