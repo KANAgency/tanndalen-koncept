@@ -66,6 +66,18 @@ export const HERO_PAGE_CONFIG = {
     { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/kvallsmys.mp4", line1: "Kvällsmys", clipDurationSec: 5, advanceEarlySec: 0.3 }
   ],
 
+  /**
+   * Sommar (html[data-season="summer"] vid sidladdning): ersätter fälten ovan/nedan.
+   * Ett enda klipp i introt. Kling 2.5 från kundbilden AA107523 (Webb_sommar), 16 nov.
+   */
+  summer: {
+    headlineLine2: "med hela familjen",
+    scenes: [
+      { image: "./assets/img/og-intro-kvallsdopp.jpg", video: "./assets/video/intro/kvallsdopp.mp4", line1: "Kvällsdopp", loop: true, clipDurationSec: 5, advanceEarlySec: 0.3 }
+    ],
+    heroTitle: "Sommarlov i Dalarna"
+  },
+
   /** How long each scene holds before crossfade (seconds). */
   sceneDuration: 4,
   /** Crossfade length (seconds). */

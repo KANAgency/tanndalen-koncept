@@ -495,7 +495,7 @@ function fillSceneSlot(slot, scene, reduced) {
     const video = document.createElement("video");
     video.className = "og-hp-scene-media";
     video.muted = true;
-    video.loop = false;
+    video.loop = scene.loop === true; /* ensam scen (sommar): klippet loopar */
     video.playsInline = true;
     video.preload = "auto";
     video.setAttribute("playsinline", "");
@@ -822,6 +822,7 @@ function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) 
       kenBurnsT = clamp(holdElapsed / duration, 0, 1);
       applyKenBurns(currentSlot(), kenBurnsT);
       if (!reduced) tickText(dt * 1000);
+      if (scenes.length < 2) return; /* en scen: ingen övertoning, videon loopar själv */
       const early = videoHoldEarlySec(scenes[index], currentSlot(), duration, fade, config);
       if (holdElapsed >= duration - early) beginVisualTransition();
       return;
@@ -858,6 +859,10 @@ function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) 
 
 function initHeroPage() {
   const config = deepCloneConfig(HERO_PAGE_CONFIG);
+  /* Sommar: säsongen läses en gång vid laddning (sätts i index.html-head). */
+  if (document.documentElement.dataset.season === "summer" && config.summer) {
+    Object.assign(config, config.summer);
+  }
   const reduced = prefersReducedMotion();
   const mode = resolveIntroMode();
   const skipIntro = mode === "skip";

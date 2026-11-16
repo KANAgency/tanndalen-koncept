@@ -15,7 +15,8 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 ## Klart 16 nov: sommarintro OG – första scenen Kvällsdopp
 - Bildurval ur Webb_sommar (350 bilder): AA107523 (barn hoppar från brygga i motljus) vald och godkänd. AA106962 (cyklar, utsikt över Orsasjön) och AA109369 (axelridning på spången) föreslagna men John är osäker – inte körda.
 - `og/desktop/assets/video/intro/kvallsdopp.mp4`: Kling 2.5, 5 s, 1080p-körning (1760×1176), startbild AA107523, 325 credits. Webbversion utan ljud, 3,2 MB. John: "otroligt bra" trots att barnen landar på ytan 1,2–1,8 s. Gitignorerad: ladda upp till blob-containern före deploy.
-- Inte inkopplat: introt har bara en scenlista (vinter). Öppet: sommarscenlista per säsong, ersättare för fasta raden "i skidparadiset" i sommar, två scener till.
+- Inkopplat i sommarläge som enda klipp: `summer`-block i `hero-page-config.js` (rad 2 "med hela familjen", hero-rubrik "Sommarlov i Dalarna", poster `assets/img/og-intro-kvallsdopp.jpg`). Säsongen läses vid sidladdning. En scen = ingen övertoning, videon loopar (`scene.loop`). Verifierat: summer + mode=new laddar kvallsdopp.mp4, loopar 4,4 → 0,1 s, inga konsolfel. Rad 1 "Kvällsdopp" sågs i första körningen; efter loopfixen gick det inte att se eftersom rAF stod still i den dolda panelen.
+- Nya kandidater från John: AA109657 (picknick på bryggan), AA109801 (kvinna upp ur vattnet), drönarbild höghöjdsbana, AA109821–29 (pappa med dotter på ryggen upp ur vattnet).
 
 ## Klart 16 nov: ny introscen i OG – Lägereld
 - `og/desktop/assets/video/intro/brasa.mp4`: Kling 2.5, 5 s, 1080p-körning (1760×1176), startbild kundens AA104245 (elden skarp, mamma och barn ur fokus). 325 credits. Webbversion utan ljud, 2,5 MB. Gitignorerad: ladda upp till blob-containern före deploy.
