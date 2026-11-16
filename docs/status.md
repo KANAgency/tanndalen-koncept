@@ -16,6 +16,7 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmenyn i OG beter sig som TD: val laddar om i toppläget och visar modalen "Du är nu i / Läge N: …" (`announceSwitch` i `og/desktop/site-config.js`, CSS portad till `og-overrides.css`).
 - Blockordning per läge × säsong = TD:s, uppmätt i båda sajterna (tabell `ORDER` i skriptet i `og/desktop/index.html`, ersätter gamla omordningsskriptet). Block som saknas i OG visas som streckad platshållare "Finns i Tänndalen / <namn>": Aktuellt, Handplockade boenden, Älskat av skidåkare, Citat, Hitta hit, Lev. Andas. Tänndalen., Mer till er vecka (läge 3 vinter), Mer att hitta på i dag (läge 4 vinter), Footer.
 - Följer TD även i det som döljs: läge 3 och 4 visar inte En dag eller boendeblocket, Handplockade boenden visas bara i läge 1/2.
+- Fix: lägesväljaren låg i flödet längst ned (OG saknar aliaset `--space-m`, så right/bottom var ogiltiga). Nu `--space-md`, fast nere till höger.
 - Verifierat 1440×900: alla 8 kombinationer läge × säsong matchar TD-ordningen, modalen visas efter byte till På plats, inga konsolfel. Mobil ej granskad.
 - Utanför listan: hero och TD:s introtext (`#statement`), som motsvaras av OG-heron. Läge 1 med `?intro=0` blir återkommande i OG (OG:s introregel), ordningen är densamma.
 

@@ -361,8 +361,8 @@ html.theme-OG body.og-hp-page {
 /* ==== Lägessystem (port från td/desktop/startsida.css 15 nov): lägesväljare, På plats-toppbar, På plats-reglage, inloggad vistelse ==== */
 .mode-switch {
   position: fixed;
-  right: var(--space-m);
-  bottom: var(--space-m);
+  right: var(--space-md);
+  bottom: var(--space-md);
   z-index: 30;
 }
 
