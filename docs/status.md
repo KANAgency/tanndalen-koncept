@@ -12,6 +12,12 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: ny introscen i OG – Lägereld
+- `og/desktop/assets/video/intro/brasa.mp4`: Kling 2.5, 5 s, 1080p-körning (1760×1176), startbild kundens AA104245 (elden skarp, mamma och barn ur fokus). 325 credits. Webbversion utan ljud, 2,5 MB. Gitignorerad: ladda upp till blob-containern före deploy.
+- Scen 4 av 5 i `hero-page-config.js`: "Lägereld" (+ fasta raden "i skidparadiset"), mellan Vinterbad och Kvällsmys.
+- Verifierat: alla fem klippen spelas i ordning i läge 1, brasa.mp4 svarar 200, inga konsolfel. Texten på skärm inte fångad (rAF i dold panel).
+- Kvar i Webb_vinter för fler introscener: AA104292 (Orsa Grönklitt-kåsan som ångar, risk att logotypen förvrängs), AA104446 (vidbild, mamman vid elden).
+
 ## Klart 16 nov: läge 1 i lägesmenyn utan modal (TD + OG)
 - Val av läge 1 (Ny besökare) visar ingen "Du är nu i"-modal, bara introt. Övriga lägen visar modalen som förut (`shared/js/modes-engine.js`).
 - Bugg rättad samtidigt: omladdningen efter val i menyn återanvände gamla URL:en och skrev över `?mode=new`, så byte till läge 1 hamnade kvar i förra läget. Nu sätts `mode` i URL:en.
