@@ -10,6 +10,16 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
 
+## Klart 16 nov: runda 3 – scrim, läge 3/4, karusellpilar, sommar (TD)
+- Mer-karusellernas scrim: kortare (48 %) och svart i stället för Natt, så mellangrått försvinner.
+- Läge 4: Musik på Lodgen och Belysta spåret först. Klockslag med fyra siffror och kolon (14:00, 21:00, 16:00–20:00). Toppstugan har inte längre två våffelbilder (stolliften ersätter endag-1300). Dolda i läge 4: Handplockade boenden, områdesvideon och utförsåkningsblocket ("Älskat av skidåkare"). Kalenderrubrik: "Idag, måndag 15 februari".
+- Läge 3: 160 px luft mellan Just nu och Mer till er vecka (tidigare 0). Fondue i Fjällkåtan ligger som kort 3.
+- Karusellpilar (Aktuellt + alla .td-bo): egen rAF-animering `window.tdScrollTrack` (480 ms ease-out). Snap stängs av under rörelsen och upprepade klick bygger på målet. Ersätter native smooth scrollBy, som hackade med mus. Kunde inte mätas i dold browserpanel, så det behöver testas med riktig mus.
+- Sommar, Just nu: videokortet byter till "Sommarfjäll" (YouTube bSEN60fTL58, från tanndalen.com) i sommar, loop 5–25 s. Mittenkortet fanns, men visade vintervideon.
+- Sommar, utförsåkningsblocket: flikarna Vandring/Cykling/Bad med egen copy (Fäbodstigen, Fjällcykelparken med fjorton leder, badplats "[sjön]"). Bilder: `sommar-vandring.jpg` (projektets IMG_0114), `sommar-dag-01.jpg` (genererad), `sommar-bad.jpg` (181A9559). Kortet är inverterat (Snö, Natt-text).
+- Sommar, Lev. Andas. Tänndalen.: `td-brand-1/2/3-sommar.jpg` = människor vid en fjällsjö (181A9545), porträtt av Anna och vandrare i midnattssol (IMG_0141). Bytet sker med `data-src-sommar`.
+- Öppet: mobilvy. Mellan Fjällguiden och Mer att hitta på i dag är det 288 px i läge 4, mot 160 px på andra ställen. Sommarvideons längd är okänd.
+
 ## Klart 16 nov: genererade bilder + kraftigare scrim i Mer-karusellerna (TD läge 3–4)
 - 13 saknade motiv genererade i Magnific (Nano Banana Pro, 1:1, 2K, 13 × 75 = 975 credits, Personal-projektet): matkasse, middag i stugan, fondue i kåtan, eldstad, hundarna, utsikt från släden, liveband, publiken, snöbad, pulka, pulkor, termos, skoterguide. JPG 1024 px i `assets/img/mer/`. Inga platshållare kvar.
 - Scrim på `.td-mer`-korten: 65 % höjd, 0,72 → 0,45 → 0 (övriga boendekort orörda).

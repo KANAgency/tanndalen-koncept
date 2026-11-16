@@ -34,7 +34,7 @@ export const BOOKING_CALENDAR = {
 
 /* Läge 4 (på plats): dagens program för familjen. Har boende, liftkort, alpin- och längdutrustning. Tider och platser i [ ] är platshållare. */
 export const ONSITE_CALENDAR = {
-  range: "Er dag · mån 15 feb",
+  range: "Idag, måndag 15 februari",
   groups: [
     {
       label: "I dag",

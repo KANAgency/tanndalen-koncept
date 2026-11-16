@@ -6420,8 +6420,9 @@ html, body { overscroll-behavior-y: none; }
 
 html:is([data-mode="booking"], [data-mode="onsite"]) #en-dag,
 html:is([data-mode="booking"], [data-mode="onsite"]) #hitta,
-html[data-mode="booking"] #boenden-waabi,
-html[data-mode="booking"] #boende { display: none; }
+html:is([data-mode="booking"], [data-mode="onsite"]) #boenden-waabi,
+html:is([data-mode="booking"], [data-mode="onsite"]) #boende,
+html[data-mode="onsite"] #utforsakning { display: none; }
 
 .td-mer { display: none; }
 html[data-mode="booking"]:not([data-season="summer"]) .td-mer[data-lage="booking"],
@@ -6467,4 +6468,22 @@ html[data-mode="onsite"]:not([data-season="summer"]) .td-mer[data-lage="onsite"]
 .mode-announce-ok:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }
 
 /* Mer-karusellerna: kraftigare scrim, bilderna är ofta ljusa snöbilder (John 16 nov). */
-.td-mer .td-bo-waabi-bildlank::before { height: 65%; background: linear-gradient(to bottom, rgb(36 39 42 / 0.72) 0%, rgb(36 39 42 / 0.45) 45%, rgb(36 39 42 / 0) 100%); }
+.td-mer .td-bo-waabi-bildlank::before { height: 48%; background: linear-gradient(to bottom, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.4) 28%, rgb(0 0 0 / 0.14) 62%, rgb(0 0 0 / 0) 100%); }
+
+/* Utförsåkningsblocket i sommar: sommarklipp + kortet inverterat (Snö med Natt-text). */
+html:not([data-season="summer"]) .utforsakning-clip[data-sasong="sommar"],
+html[data-season="summer"] .utforsakning-clip:not([data-sasong="sommar"]) { display: none; }
+html[data-season="summer"] .utforsakning-card { background: var(--color-TD-snow); }
+html[data-season="summer"] .utforsakning-card .td-heading-4,
+html[data-season="summer"] .utforsakning-card .td-lead-sm { color: var(--color-TD-night); }
+html[data-season="summer"] .utforsakning-card .utforsakning-eyebrow { color: var(--color-TD-neutral); }
+html[data-season="summer"] .utforsakning-tabs { border-bottom-color: rgb(36 39 42 / 0.15); }
+html[data-season="summer"] .utforsakning-tab { color: var(--color-TD-neutral); }
+html[data-season="summer"] .utforsakning-tab[aria-selected="true"],
+html[data-season="summer"] .utforsakning-tab:hover { color: var(--color-TD-night); border-bottom-color: var(--color-TD-night); }
+html[data-season="summer"] .utforsakning-tab:focus-visible { outline-color: var(--color-TD-night); }
+.utforsakning-clip[data-sasong="sommar"][data-tab="alpin"] { object-position: center 18%; }
+.utforsakning-clip[data-sasong="sommar"][data-tab="snow"] { object-position: center 70%; }
+
+/* Läge 3: luft mellan Just nu och Mer till er vecka, samma som övriga block (160 px). */
+html[data-mode="booking"] .td-mer[data-lage="booking"] { margin-top: 160px; }
