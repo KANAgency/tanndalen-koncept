@@ -81,6 +81,12 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
+## Klart 16 nov: Boende – ordning, spegling och uppskalad Fjällbruden
+- Ordning: Fjällöga, Fjällbruden, Fjällstjärnan, Brunkullan.
+- Brunkullan spegelvänd (`mirror: true`), 175 % förankrad `100% 100%`, bild omexporterad till 3600 px (2 MB). Björkdungen ligger nu ovanför bild.
+- Fjällbruden: startbilden uppskalad i Magnific (Ultra Photo 2x, 180 credits ≈ 0,45 EUR) → `assets/img/boende-fjallbruden-still.jpg` (3000 px). Gamla postern ligger kvar i video/.
+- Verifierat 1600×900.
+
 ## Klart 16 nov: Boendeblocket – Context Light, utsnitt och fjärde område
 - Nya slide-fält: `context: "light"` (klass `.boende.is-light`: Natt-text, inverterad sökknapp, ingen scrim), `noScrim` (`.is-noscrim`), `posterSize`/`posterPosition` (utsnitt för stillbilder).
 - Fjällbruden: Context Light, parallax 0, bild 130 % förankrad i överkant – texten i den grå himlen ovanför åsen. Startbilden är bara 1924 px, något mjuk vid 2000 px.

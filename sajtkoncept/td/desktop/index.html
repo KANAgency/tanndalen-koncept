@@ -6443,7 +6443,8 @@
         ],
         // Stillbild (16 nov): videon ersatt av startbilden. Videofilen ligger kvar.
         video: "",
-        poster: "assets/video/boende-fjallbruden-poster.jpg",
+        // Startbilden uppskalad i Magnific (Ultra Photo 2x, 16 nov), nedskalad till 3000 px.
+        poster: "assets/img/boende-fjallbruden-still.jpg",
         // Utsnitt uppe till vänster: rubriken mot himlen, husen mellan texten och faktakortet.
         focus: "0% 0%",
         mirror: false,
@@ -6474,13 +6475,14 @@
         video: "",
         // R360-foto Brunkullan 23 mot backen, nedskalat till 2400 px.
         poster: "assets/img/boende-brunkullan-23-backen-stor.jpg",
-        mirror: false,
+        // Spegelvänd (John 16 nov).
+        mirror: true,
         // Ingen parallax: bilden förankras i nederkant så huset syns helt. Ljus bild: Context Light i stället för scrim.
         parallax: 0,
         context: "light",
-        // Inzoomat och förankrat nere till vänster: texten hamnar på öppen backe, björkdungen uppe till höger.
-        posterSize: "145%",
-        posterPosition: "0% 100%",
+        // Inzoomat 175 %, förankrat nere till höger i källbilden (= vänster efter spegling): björkdungen hamnar ovanför bild.
+        posterSize: "175%",
+        posterPosition: "100% 100%",
         placeholder: false
       };
       // Fjällstjärnan: fakta från R360 (Fjällstjärnan lgh A/B, parhus). Blå himmel: vit text i himlen, ingen scrim.
@@ -6508,7 +6510,7 @@
         noScrim: true,
         placeholder: false
       };
-      const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan, boendeFjallstjarnan];
+      const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeFjallstjarnan, boendeBrunkullan];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");
