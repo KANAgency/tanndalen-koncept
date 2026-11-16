@@ -81,6 +81,13 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
+## Klart 16 nov: Boendeblocket – Context Light, utsnitt och fjärde område
+- Nya slide-fält: `context: "light"` (klass `.boende.is-light`: Natt-text, inverterad sökknapp, ingen scrim), `noScrim` (`.is-noscrim`), `posterSize`/`posterPosition` (utsnitt för stillbilder).
+- Fjällbruden: Context Light, parallax 0, bild 130 % förankrad i överkant – texten i den grå himlen ovanför åsen. Startbilden är bara 1924 px, något mjuk vid 2000 px.
+- Brunkullan: Context Light, parallax 0, bild 145 % förankrad nere till vänster – texten på öppen backe, björkdungen till höger. Bild omexporterad till 3000 px.
+- Ny slide 4 Fjällstjärnan: R360-foto (lgh A, bild 01) med blå himmel, vit text utan scrim. Fakta från R360 lgh A/B: lift 900 m, längdspår 100 m, 3 sovrum, 10 bäddar, 124 m², bastu. `r360AreaId` saknas.
+- Verifierat 1600×900 och 2000×900. Mobil ej kollad. Den starka scrimvarianten (c23994f) är borttagen.
+
 ## Klart 16 nov: Stillbilder på boende-slide 2 och 3
 - Fjällbruden: video avstängd (`video: ""`), visar startbilden `boende-fjallbruden-poster.jpg`. Videofilen ligger kvar.
 - Brunkullan: R360-foto 08 (Brunkullan 23 mot backen) som `assets/img/boende-brunkullan-23-backen-stor.jpg` (2400 px, 1 MB), placeholder av.

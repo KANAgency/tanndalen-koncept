@@ -6447,7 +6447,12 @@
         // Utsnitt uppe till vänster: rubriken mot himlen, husen mellan texten och faktakortet.
         focus: "0% 0%",
         mirror: false,
-        parallax: 0.2,
+        // Ljus himmel: Context Light, bilden förankrad i överkant så texten ligger i himlen ovanför åsen.
+        parallax: 0,
+        context: "light",
+        // Inzoomat 130 % så åsen hamnar under brödtexten även vid 16:9-fönster.
+        posterSize: "130%",
+        posterPosition: "50% 0%",
         placeholder: false
       };
       // Brunkullan: fakta från R360 (Brunkullan 23). Värden i [ ] gäller en lägenhet, inte verifierat för hela området.
@@ -6470,13 +6475,40 @@
         // R360-foto Brunkullan 23 mot backen, nedskalat till 2400 px.
         poster: "assets/img/boende-brunkullan-23-backen-stor.jpg",
         mirror: false,
-        // Ingen parallax: bilden förankras i nederkant så huset syns helt. Starkare scrim för texten på ljus snö.
+        // Ingen parallax: bilden förankras i nederkant så huset syns helt. Ljus bild: Context Light i stället för scrim.
         parallax: 0,
-        scrimOpacity: 1,
-        scrimStrong: true,
+        context: "light",
+        // Inzoomat och förankrat nere till vänster: texten hamnar på öppen backe, björkdungen uppe till höger.
+        posterSize: "145%",
+        posterPosition: "0% 100%",
         placeholder: false
       };
-      const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan];
+      // Fjällstjärnan: fakta från R360 (Fjällstjärnan lgh A/B, parhus). Blå himmel: vit text i himlen, ingen scrim.
+      const boendeFjallstjarnan = {
+        ...boendeFjalloga,
+        id: "fjallstjarnan",
+        name: "Fjällstjärnan",
+        title: "Tio bäddar och två öppna spisar.",
+        body: "Fristående parhus i två plan, 124 kvadratmeter med balkong och utsikt över fjället. Längdspåret ligger hundra meter bort. Bastu, torkskåp och laddbox för elbil ingår.",
+        ctaLabel: "Sök boenden i Fjällstjärnan",
+        facts: [
+          { label: "Närmaste lift", value: "900 m" },
+          { label: "Längdspår", value: "100 m" },
+          { label: "Sovrum", value: "3" },
+          { label: "Bäddar", value: "10" },
+          { label: "Storlek", value: "124 m²" },
+          { label: "Bastu", value: "Ja" }
+        ],
+        video: "",
+        poster: "assets/img/boende-fjallstjarnan-himmel.jpg",
+        mirror: false,
+        parallax: 0,
+        posterPosition: "50% 0%",
+        scrim: null,
+        noScrim: true,
+        placeholder: false
+      };
+      const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan, boendeFjallstjarnan];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");
@@ -6564,11 +6596,15 @@
             boendeMedia.classList.toggle("is-mirror", slide.mirror === true);
             boendeVideo.style.objectPosition = slide.focus || "";
             boendePoster.style.backgroundImage = slide.poster ? `url("${slide.poster}")` : "";
+            // Per-slide utsnitt för stillbilder (zoom + förankring), t.ex. för att flytta textytan bort från skog.
+            boendePoster.style.backgroundSize = slide.posterSize || "";
+            boendePoster.style.backgroundPosition = slide.posterPosition || "";
             const mask = boendeMask(slide.scrim);
             boendeScrim.style.maskImage = mask;
             boendeScrim.style.webkitMaskImage = mask;
-            boendeScrim.style.opacity = slide.scrimOpacity != null ? String(slide.scrimOpacity) : "";
-            boendeScrim.classList.toggle("is-strong", slide.scrimStrong === true);
+            // Context Light: mörk text direkt på ljus bild, ingen scrim.
+            boende.classList.toggle("is-light", slide.context === "light");
+            boende.classList.toggle("is-noscrim", slide.noScrim === true);
             boendeCacheParallax();
             boendePaintParallax(true);
             boende.querySelector(".boende-kicker").textContent = slide.name;
