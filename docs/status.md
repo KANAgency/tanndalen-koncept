@@ -1,6 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
-Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
+Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scrollfix). Detaljer om vad som är byggt finns i `startsida-td.md` (Del 2).
 
 ## Läge
 - TD startsida desktop: intro, header (Fjällguiden), Aktuellt, En dag, Just nu (Alpint + Längd, tredje raden i På plats), varumärkessektionen, Fjällguiden-blocket och svarsmodalen (15 frågor) är byggda. Allt innehåll i Just nu och modalen är hårdkodat/påhittat.
@@ -9,6 +9,15 @@ Senast uppdaterad: 2026-11-15 (OG lägessystem, Just nu, Orsa-guiden, En dag). D
 - Senaste HEAD: se `git log` på `main`. Inte pushad.
 - Lägesmodell (beslut 14 nov): vinter är master för alla lägen (ny besökare, återkommande, påbörjad bokning, på plats). Sommar är EN variant = återkommande besökare. Ny besökare skiljer sig bara genom att introt visas. Samma logik ska gälla OG (andra introregler).
 - Demopersona: [Anna] (platshållare), 2 vuxna + 2 barn (6 och 9 år), bokat Ski Lodge Premium 12–19 feb 2027 (`td/desktop/demo-stay.js`). Boende bokat, liftkort inte (nästa steg).
+
+## Klart 16 nov: lägesjusteringar TD (läge 2–4), lägesmeny och scrollfix
+- Läge 1/2: första boendekortet (Fjällöga 13 A) heter "För det stora sällskapet" i stället för "Sju meter till taket".
+- Scroll förbi footern (alla lägen): `#parallax-layer` flyttas med `translateY` och drog ut dokumentet varje gång man scrollade (1440×900: 18 166 → 21 726 px). Fix: `.page { overflow-y: clip }`. Verifierat: scrollHeight = footerns botten (18 268 px i läge 2).
+- Läge 3: Just nu förvalt på Längd. Bokningskalendern 12–19 feb visas i båda grenarna, och spårkartan/webbkameran är dolda så kalendern får full höjd. Dolda: En dag, Handplockade boenden, områdesblocket (Fjällöga/Allmoge), Hitta hit-kartan.
+- Ny karusell `.td-mer` (samma grid som boendekorten, bilder är grå platshållare med text "Bild: …"). Läge 3 `#mer-resa` "Mer till er vecka": liftkort, spårkort, skidskola, hundspann, matkasse, bord i Fjällkåtan. Läge 4 `#mer-nu` "Mer att hitta på i dag": Toppstugan, hundspann, musik på Lodgen, belysta spåret, bastu, pulkabacken, skotersafari. Påhittat innehåll står i [ ].
+- Läge 4: Längd förvalt, egen dagskalender för familjen (`ONSITE_CALENDAR` i `modes-content.js`, "Er dag · mån 15 feb", I dag + I morgon, alpint + längd) i full höjd. Dolda: En dag, Hitta hit-kartan. Bokningsbaren bockar av Boende, Liftkort och Skidhyra, utan tooltip. Handplockade boenden och områdesblocket ligger kvar i läge 4 (inte nämnt i feedbacken).
+- Lägesmenyn (TD): val laddar om sidan i toppläget och visar en modal med suddig bakgrund, "Du är nu i / Läge N: …" + OK. Opt-in via `MODES_UI.labels.announceSwitch`, så OG påverkas inte. Motorn (`shared/js/modes-engine.js`) har nya valfria `onsiteCalendar` och `calendarAllGren` (bara TD skickar in dem).
+- Verifierat i 1440×900: alla fyra lägesbyten via menyn (modal, scrollY 0), sektionsordning/visning per läge, bockar, inga konsolfel. Öppet: mobilvyn av den nya karusellen och kalendern har inte granskats. Riktiga bilder och innehåll till karusellerna saknas.
 
 ## Klart 15 nov: intro – resten av zoomen spelas automatiskt (TD)
 - När användaren scrollat 40 % av intro-zoomen (`AUTO_P`) spelas resten upp själv på 800 ms (`AUTO_MS`, easing `AUTO_EASE` [0.25, 0.6, 0.3, 1]) och sidan scrollas till zoomens slut. Hjul/touch blockeras under tiden. Av vid reduced motion. Konstanter överst i `intro.js`.

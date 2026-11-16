@@ -20,6 +20,8 @@ export function createModesEngine(deps) {
     wifiOnsiteSignal,
     stayApi,
     bookingCalendar,
+    onsiteCalendar = null,
+    calendarAllGren = false,
     ui
   } = deps;
 
@@ -190,9 +192,13 @@ export function createModesEngine(deps) {
     }
   }
 
-  function calendarHtml() {
+  function onsiteWinter() {
+    return document.documentElement.dataset.mode === "onsite" && document.documentElement.dataset.season !== "summer";
+  }
+
+  function calendarHtml(calendar) {
     const arrow = `<svg class="td-pagang-row-arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12M9 4l5 4-5 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
-    return bookingCalendar.groups.map((group) => {
+    return calendar.groups.map((group) => {
       const name = group.date ? weekdayLabel(group.date) : group.label;
       const rows = group.rows.map((row, i) => {
         const divider = i < group.rows.length - 1 ? `<hr class="td-pagang-divider">` : "";
@@ -255,13 +261,15 @@ export function createModesEngine(deps) {
     const lift = catButton(cats.liftkort);
     const pill = document.querySelector(selectors.bookingPill);
     const tipEl = ensureTooltip();
-    markDone(boende, on);
-    markDone(catButton(cats.skidhyra), on);
+    const onsite = onsiteWinter();
+    markDone(boende, on || onsite);
+    markDone(catButton(cats.skidhyra), on || onsite);
+    markDone(lift, onsite);
     if (tipEl) {
       if (!on) tipClosed = false;
       tipEl.hidden = !on || tipClosed;
     }
-    if (pill && !on && lift?.getAttribute("aria-pressed") !== "true") {
+    if (pill && !on && !onsite && lift?.getAttribute("aria-pressed") !== "true") {
       const pressed = document.querySelector(`${selectors.bookingCats} > button[aria-pressed='true']`);
       if (!pressed) pill.hidden = true;
     }
@@ -271,10 +279,11 @@ export function createModesEngine(deps) {
       baseGroups = groups.innerHTML;
       baseTitle = title ? title.textContent : "";
     }
-    const showCalendar = on && alpineOn();
+    const calendar = on ? bookingCalendar : onsite ? onsiteCalendar : null;
+    const showCalendar = calendar && (calendarAllGren || alpineOn());
     if (groups && title && showCalendar) {
-      title.textContent = bookingCalendar.range;
-      groups.innerHTML = calendarHtml();
+      title.textContent = calendar.range;
+      groups.innerHTML = calendarHtml(calendar);
       groups.dataset.modeCalendar = "booking";
     } else if (groups?.dataset.modeCalendar === "booking") {
       groups.innerHTML = baseGroups;
@@ -594,7 +603,18 @@ export function createModesEngine(deps) {
     button.addEventListener("click", () => { if (menu.hidden) open(); else close(false); });
     radios.forEach((radio, index) => {
       radio.addEventListener("click", () => {
+        if (labels.announceSwitch) {
+          const choice = labels.modeChoices.find((c) => c.id === radio.dataset.modeChoice);
+          try { sessionStorage.setItem(ANNOUNCE_KEY, choice ? choice.label : ""); } catch (err) {}
+        }
         setMode(radio.dataset.modeChoice, false);
+        if (labels.announceSwitch) {
+          /* Demo: ladda om i toppläget så det nya läget syns från början. */
+          const url = new URL(location.href);
+          url.hash = "";
+          location.assign(url.pathname + url.search);
+          return;
+        }
         sync();
         close(true);
       });
@@ -631,8 +651,33 @@ export function createModesEngine(deps) {
     sync();
   }
 
+  const ANNOUNCE_KEY = `${modeStorageKey}-announce`;
+
+  function showSwitchAnnounce() {
+    let label = null;
+    try {
+      label = sessionStorage.getItem(ANNOUNCE_KEY);
+      sessionStorage.removeItem(ANNOUNCE_KEY);
+    } catch (err) {}
+    if (label === null) return;
+    scrollTo(0, 0);
+    const m = /^(\d+)\s+(.*)$/.exec(label);
+    const name = m ? `Läge ${m[1]}: ${m[2]}` : label;
+    const dlg = document.createElement("dialog");
+    dlg.className = "mode-announce";
+    dlg.setAttribute("aria-labelledby", "mode-announce-title");
+    dlg.innerHTML = `<p class="mode-announce-kicker">${labels.announceSwitch}</p><p class="mode-announce-title" id="mode-announce-title">${name}</p><button class="mode-announce-ok td-button td-button-primary td-ui-cta" type="button">OK</button>`;
+    document.body.append(dlg);
+    const done = () => { dlg.close(); dlg.remove(); };
+    dlg.querySelector(".mode-announce-ok").addEventListener("click", done);
+    dlg.addEventListener("cancel", (event) => { event.preventDefault(); done(); });
+    dlg.showModal();
+    requestAnimationFrame(() => scrollTo(0, 0));
+  }
+
   function init() {
     loadTodayOverride();
+    if (labels.announceSwitch) showSwitchAnnounce();
     const params = new URLSearchParams(location.search);
     let modeParam = params.get("mode");
     const current = document.documentElement.dataset.mode;

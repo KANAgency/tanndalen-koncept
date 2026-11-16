@@ -32,6 +32,30 @@ export const BOOKING_CALENDAR = {
   ]
 };
 
+/* Läge 4 (på plats): dagens program för familjen. Har boende, liftkort, alpin- och längdutrustning. Tider och platser i [ ] är platshållare. */
+export const ONSITE_CALENDAR = {
+  range: "Er dag · mån 15 feb",
+  groups: [
+    {
+      label: "I dag",
+      rows: [
+        { time: "09:30", title: "Skidskola för barnen, [Hamra]" },
+        { time: "12:00", title: "Våfflor i Toppstugan" },
+        { time: "14:00", title: "Längd: [Fjällbjörksslingan]", link: "Skidorna" },
+        { time: "19:00", title: "Fondue i Fjällkåtan" }
+      ]
+    },
+    {
+      label: "I morgon",
+      rows: [
+        { time: "09:00", title: "Första åket i nypreparerat" },
+        { time: "10:00", title: "Hundspann från Hamra" },
+        { time: "18:00", title: "Familjetur i belysta spåret" }
+      ]
+    }
+  ]
+};
+
 export function modes() {
-  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR }, onsite: {} };
+  return { new: {}, returning: {}, booking: { calendar: BOOKING_CALENDAR }, onsite: { calendar: ONSITE_CALENDAR } };
 }

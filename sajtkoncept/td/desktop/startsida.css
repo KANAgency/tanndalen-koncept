@@ -5116,49 +5116,49 @@ html[data-demo="0"] .mode-switch { display: none; }
   line-height: 1;
 }
 
-html[data-mode="booking"][data-season="winter"] .td-booking {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .td-booking {
   overflow: visible;
   border-radius: var(--radius-lg);
 }
 
-html[data-mode="booking"][data-season="winter"] #booking-cats button.is-done img {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] #booking-cats button.is-done img {
   opacity: 0.45;
 }
 
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-nu .td-kamera {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-kamera {
   display: none;
 }
 
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-cols .td-pagang {
   flex: 1 1 auto;
   align-self: stretch;
   justify-content: flex-start;
 }
 
-html[data-mode="booking"][data-season="winter"]:has([data-gren="alpint"][aria-pressed="true"]) .just-cols .td-pagang-groups {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-cols .td-pagang-groups {
   flex: none;
   gap: var(--space-xl);
 }
 
-html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-pagang-row-text {
   grid-template-columns: max-content minmax(0, 1fr);
   column-gap: var(--space-lg);
 }
 
-html[data-mode="booking"][data-season="winter"] .just-nu .td-pagang-row-text .td-ui-body {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .just-nu .td-pagang-row-text .td-ui-body {
   white-space: nowrap;
 }
 
-html[data-mode="booking"][data-season="winter"] .mode-booking-where {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .mode-booking-where {
   margin-left: var(--space-sm);
   color: var(--color-cta-primary);
   font-size: var(--font-size-sm);
   text-decoration: underline;
 }
 
-html[data-mode="booking"][data-season="winter"] .booking-icon-slot { position: relative; }
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .booking-icon-slot { position: relative; }
 
-html[data-mode="booking"][data-season="winter"] button.is-done .mode-booking-check {
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] button.is-done .mode-booking-check {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5170,7 +5170,7 @@ html[data-mode="booking"][data-season="winter"] button.is-done .mode-booking-che
   transform: translate(-50%, -50%);
 }
 
-html[data-mode="booking"][data-season="winter"] .mode-booking-check svg { width: 18px; height: 18px; }
+html:is([data-mode="booking"], [data-mode="onsite"])[data-season="winter"] .mode-booking-check svg { width: 18px; height: 18px; }
 
 html[data-mode="booking"][data-season="winter"] .mode-booking-tip {
   --tooltip-w: 270px;
@@ -6413,3 +6413,55 @@ html, body { overscroll-behavior-y: none; }
 .td-bo-waabi-bildlank:hover .td-bo-hover-cta,
 .td-bo-waabi-bildlank:focus-visible .td-bo-hover-cta { transform: translate(-50%, -50%); pointer-events: none; }
 .td-bo-waabi-bildlank .td-bo-hover-cta:hover { background: rgb(255 255 255 / 0.6); }
+
+/* —— Läge 3 och 4: dolda block och Mer till resan-karusellen (John 16 nov) —— */
+/* Parallaxlagret flyttas med translateY och drog ut dokumentet förbi footern. Klipp vid .page. */
+.page { overflow-y: clip; }
+
+html:is([data-mode="booking"], [data-mode="onsite"]) #en-dag,
+html:is([data-mode="booking"], [data-mode="onsite"]) #hitta,
+html[data-mode="booking"] #boenden-waabi,
+html[data-mode="booking"] #boende { display: none; }
+
+.td-mer { display: none; }
+html[data-mode="booking"]:not([data-season="summer"]) .td-mer[data-lage="booking"],
+html[data-mode="onsite"]:not([data-season="summer"]) .td-mer[data-lage="onsite"] { display: flex; }
+
+.td-mer-plats {
+  display: grid;
+  place-items: end start;
+  box-sizing: border-box;
+  padding: var(--space-md);
+  background: #CFCAC4;
+  color: var(--color-TD-neutral);
+}
+.td-mer-bildlank .td-mer-plats { background: #8F8A85; color: var(--color-TD-snow); place-items: center; padding: var(--space-lg); }
+.td-mer-bildlank:hover .td-mer-plats { transform: none; }
+
+/* Lägesbyte (demo): modal som säger vilket läge man bytt till. */
+.mode-announce {
+  box-sizing: border-box;
+  width: min(420px, calc(100vw - 32px));
+  padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-TD-snow);
+  color: var(--color-text-primary);
+  text-align: center;
+  font-family: var(--font-family-TD-secondary), sans-serif;
+}
+.mode-announce::backdrop {
+  background: rgb(36 39 42 / 0.35);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.mode-announce-kicker { margin: 0 0 var(--space-sm); color: var(--color-TD-neutral); font-size: var(--font-size-md); }
+.mode-announce-title {
+  margin: 0 0 var(--space-2xl);
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-2xl);
+  line-height: 1.2;
+}
+.mode-announce-ok { min-width: 120px; justify-content: center; }
+.mode-announce-ok:focus-visible { outline: 2px solid var(--color-TD-night); outline-offset: 2px; }

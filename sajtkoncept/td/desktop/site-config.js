@@ -69,6 +69,7 @@ export const MODES_UI = {
     accountStay: "Din vistelse",
     accountBooking: "Min bokning",
     modeSwitch: "Visningsläge",
+    announceSwitch: "Du är nu i",
     demoToday: "Demo: vistelse pågår nu",
     modeChoices: [
       { id: "new", label: "1 Ny besökare" },

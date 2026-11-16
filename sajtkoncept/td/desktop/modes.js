@@ -6,7 +6,7 @@ import {
   MODES_UI
 } from "./site-config.js";
 import * as stayApi from "./demo-stay.js";
-import { BOOKING_CALENDAR, modes } from "./modes-content.js";
+import { BOOKING_CALENDAR, ONSITE_CALENDAR, modes } from "./modes-content.js";
 import { createModesEngine } from "/shared/js/modes-engine.js";
 
 export { modes };
@@ -17,6 +17,8 @@ const engine = createModesEngine({
   wifiOnsiteSignal,
   stayApi,
   bookingCalendar: BOOKING_CALENDAR,
+  onsiteCalendar: ONSITE_CALENDAR,
+  calendarAllGren: true,
   ui: MODES_UI
 });
 
