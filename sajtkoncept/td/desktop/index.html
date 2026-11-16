@@ -6510,7 +6510,31 @@
         noScrim: true,
         placeholder: false
       };
-      const boendeSlides = [boendeFjalloga, boendeBrunkullan, boendeFjallbruden, boendeFjallstjarnan];
+      // Fjällstugan Järven: fakta från R360 (Fjällstugan Järven). Bild omrenderad i Magnific (mulet nysnöljus, variant B, 16 nov). Context Light.
+      const boendeJarven = {
+        ...boendeFjalloga,
+        id: "jarven",
+        name: "Fjällstugan Järven",
+        title: "Timmerstuga i nysnön.",
+        body: "Fristående stugor på 96 kvadratmeter med tre sovrum, två badrum och altan mot fjället. Butiken ligger fem minuter bort och liften 800 meter. Städning ingår.",
+        ctaLabel: "Sök boenden i Järven",
+        facts: [
+          { label: "Närmaste lift", value: "800 m" },
+          { label: "Längdspår", value: "600 m" },
+          { label: "Sovrum", value: "3" },
+          { label: "Bäddar", value: "6" },
+          { label: "Storlek", value: "96 m²" },
+          { label: "Bastu", value: "Ja" }
+        ],
+        video: "",
+        poster: "assets/img/boende-jarven-sno.jpg",
+        mirror: false,
+        parallax: 0,
+        context: "light",
+        posterPosition: "50% 100%",
+        placeholder: false
+      };
+      const boendeSlides = [boendeFjalloga, boendeBrunkullan, boendeFjallbruden, boendeFjallstjarnan, boendeJarven];
       const boende = document.getElementById("boende");
       const boendeParallax = document.getElementById("boende-parallax");
       const boendeMedia = boende.querySelector(".boende-media");

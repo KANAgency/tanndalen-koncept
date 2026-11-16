@@ -81,6 +81,12 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 - Grön prick på AB-avataren och "PÅGÅR NU" i kontopanelen visas bara när platsläge är aktivt. Utanför platsläge visas en pågående vistelse som "Kommande · datum" (grå prick). Ändring i `shared/js/modes-engine.js` (`renderAccountUi`), gäller TD och OG.
 - Verifierat i TD (today-override 2027-02-15, inloggad): platsläge → `is-ongoing`, "Pågår nu"; returning → ingen prick, "Kommande". OG inloggat läge: could not measure (samma kodväg).
 
+## Klart 16 nov: Järven som slide 5
+- Ordning: Fjällöga, Brunkullan, Fjällbruden, Fjällstjärnan, Fjällstugan Järven.
+- Järvens drönarbild (scrapad 17) omrenderad i Magnific (Nano Banana 2.1, mulet nysnöljus, 2 varianter 4K = 290 credits ≈ 0,73 EUR). Variant B → `assets/img/boende-jarven-sno.jpg` (3600 px).
+- Context Light (svart text), parallax 0, förankrad nederkant. Rubrik "Timmerstuga i nysnön." (förslag). Fakta R360: lift 800 m, längdspår 600 m, 3 sovrum, 6 bäddar, 96 m², bastu. `r360AreaId` saknas för Järven och Fjällstjärnan.
+- Verifierat 1600×900. Ej kollat: 2000 px, mobil.
+
 ## Klart 16 nov: Fjällbruden med blå himmel
 - Startbilden omrenderad i Magnific (Nano Banana 2.1, ref Fjällstjärnan-fotot, 2 varianter 4K = 290 credits ≈ 0,73 EUR). Variant A vald → `assets/img/boende-fjallbruden-sol.jpg` (3600 px). Röda taksaker borta, dalen något bredare – accepterat.
 - Slide: vit text utan scrim (`noScrim`), 155 % förankrad `40% 0%`. Verifierat 1600×900.
