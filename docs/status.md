@@ -70,7 +70,7 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 ## Klart 16 nov: Stillbilder på boende-slide 2 och 3
 - Fjällbruden: video avstängd (`video: ""`), visar startbilden `boende-fjallbruden-poster.jpg`. Videofilen ligger kvar.
 - Brunkullan: R360-foto 08 (Brunkullan 23 mot backen) som `assets/img/boende-brunkullan-23-backen-stor.jpg` (2400 px, 1 MB), placeholder av.
-- Öppet: Brunkullan i 1600×900 visar mest vit backe, huset skärs i nederkant och brödtexten ligger på ljus snö (läsbarhet). Behöver fokus/utsnitt eller starkare scrim.
+- Brunkullan: `parallax: 0` (bilden = sektionens höjd, huset syns helt), `scrimOpacity: 1` och `scrimStrong: true` (`.boende-scrim.is-strong`, 760 px, mörkare). Nya slide-fält, övriga slides opåverkade. Verifierat 1600×900.
 
 ## Klart 16 nov: Fjällöga-videon uppskalad (TD boende slide 1)
 - `area1.mp4` uppskalad med Magnific Precision (1920 px, 5 097 credits ≈ 12,70 EUR; förhandsvisning 497 credits). Kodad om för webb: 1920×1428, CRF 20, ingen ljudspår, 21 MB (förut 1668×1240, 34 MB).

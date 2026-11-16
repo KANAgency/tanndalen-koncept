@@ -3944,6 +3944,12 @@ body.fraga-open { overflow: hidden; }
   transition: opacity 300ms var(--motion-easing-out-soft);
 }
 
+/* Starkare variant för ljusa bilder (t.ex. Brunkullan): mörkare och längre ned. */
+.boende-scrim.is-strong {
+  height: 760px;
+  background: linear-gradient(170deg, color-mix(in srgb, var(--color-TD-night) 85%, transparent) 0%, color-mix(in srgb, var(--color-TD-night) 65%, transparent) 40%, transparent 78%);
+}
+
 .boende-copy,
 .boende-card,
 .boende-controls { z-index: 2; }

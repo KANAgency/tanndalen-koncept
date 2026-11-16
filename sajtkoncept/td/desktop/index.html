@@ -6470,7 +6470,10 @@
         // R360-foto Brunkullan 23 mot backen, nedskalat till 2400 px.
         poster: "assets/img/boende-brunkullan-23-backen-stor.jpg",
         mirror: false,
-        parallax: 0.2,
+        // Ingen parallax: bilden förankras i nederkant så huset syns helt. Starkare scrim för texten på ljus snö.
+        parallax: 0,
+        scrimOpacity: 1,
+        scrimStrong: true,
         placeholder: false
       };
       const boendeSlides = [boendeFjalloga, boendeFjallbruden, boendeBrunkullan];
@@ -6564,6 +6567,8 @@
             const mask = boendeMask(slide.scrim);
             boendeScrim.style.maskImage = mask;
             boendeScrim.style.webkitMaskImage = mask;
+            boendeScrim.style.opacity = slide.scrimOpacity != null ? String(slide.scrimOpacity) : "";
+            boendeScrim.classList.toggle("is-strong", slide.scrimStrong === true);
             boendeCacheParallax();
             boendePaintParallax(true);
             boende.querySelector(".boende-kicker").textContent = slide.name;
