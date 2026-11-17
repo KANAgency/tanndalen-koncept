@@ -16,6 +16,9 @@ import {
   readdirSync,
   lstatSync,
   copyFileSync,
+  statSync,
+  readFileSync,
+  writeFileSync,
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -139,6 +142,26 @@ function copySiteDesktop(site, dest) {
   copyTree(desktop, dest, { skipName: shouldSkipName });
 }
 
+// Videor ligger i Cloudflare R2 (för stora för Static Web Apps). Med TD_VIDEO_BASE satt
+// skrivs "assets/video/" om till R2-adressen i TD:s html/js/css och lokala videor tas bort.
+function pointVideosToRemote(siteDir, base) {
+  if (!base) return;
+  const prefix = base.replace(/\/$/, "") + "/td/";
+  const walk = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) { walk(p); continue; }
+      if (!/\.(html|js|css)$/.test(name)) continue;
+      const txt = readFileSync(p, "utf8");
+      const out = txt.replace(/(\.\/)?assets\/video\//g, prefix);
+      if (out !== txt) writeFileSync(p, out);
+    }
+  };
+  walk(siteDir);
+  rmSync(join(siteDir, "assets/video"), { recursive: true, force: true });
+  console.log(`Videor → ${prefix}`);
+}
+
 function buildHub(paths) {
   if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
   mkdirSync(OUT, { recursive: true });
@@ -151,6 +174,7 @@ function buildHub(paths) {
   if (existsSync(swa)) copyFileSync(swa, join(OUT, "staticwebapp.config.json"));
 
   copySiteDesktop("td", join(OUT, "td"));
+  pointVideosToRemote(join(OUT, "td"), process.env.TD_VIDEO_BASE);
   copySiteDesktop("og", join(OUT, "og"));
   materializeDsShared(OUT, paths);
 

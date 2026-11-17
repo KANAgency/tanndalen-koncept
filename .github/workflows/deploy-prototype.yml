@@ -19,38 +19,11 @@ jobs:
           node-version: 22
 
       # Hub: sidväljare på / plus /td/ och /og/ (samma URL:er som lokal dev-server).
+      # TD-videor ligger i Cloudflare R2 (bucket td-video, prefix td/); bygget pekar om assets/video/ dit.
       - name: Build hub dist
-        run: npm run build
-
-      # Videos are not stored in git. Blob names prefixed td/ or og/ land under
-      # that site; unprefixed names go to TD (legacy). SAS needs sp=rl.
-      - name: Download videos
         env:
-          VIDEO_SAS_URL: ${{ secrets.VIDEO_CONTAINER_SAS_URL }}
-        run: |
-          if [ -z "$VIDEO_SAS_URL" ]; then
-            echo "::warning::VIDEO_CONTAINER_SAS_URL is not set, deploying without videos."
-            exit 0
-          fi
-          base="${VIDEO_SAS_URL%%\?*}"
-          sas="${VIDEO_SAS_URL#*\?}"
-          mkdir -p dist/td/assets/video dist/og/assets/video
-          names=$(curl -fsSL "$base?restype=container&comp=list&$sas" | grep -oP '(?<=<Name>)[^<]+')
-          if [ -z "$names" ]; then
-            echo "::warning::No videos found in the container."
-            exit 0
-          fi
-          while IFS= read -r f; do
-            case "$f" in
-              td/*) dest="dist/td/assets/video/${f#td/}" ;;
-              og/*) dest="dist/og/assets/video/${f#og/}" ;;
-              *)    dest="dist/td/assets/video/$f" ;;
-            esac
-            echo "Downloading $f → $dest"
-            mkdir -p "$(dirname "$dest")"
-            curl -fsSL "$base/$f?$sas" -o "$dest"
-          done <<< "$names"
-          du -sh dist dist/td/assets/video dist/og/assets/video 2>/dev/null || true
+          TD_VIDEO_BASE: https://pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev
+        run: npm run build
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
