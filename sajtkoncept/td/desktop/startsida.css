@@ -6571,3 +6571,13 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .site-menu.is-open { top: 0; z-index: -1; }
   .site-menu-panel { padding-top: 96px; }
 }
+
+/* Mobilhero (2026-11-17). Figma iPhone 16 - 1: media 948:2254, 345×440 (≈ 4:5), x 24, radie 4, 16 px under headern.
+   Bara filmen: ingen säsongsram, inga doodles (solen är dold i skissen). Ingen krympning/parallax (startsida-td.md). */
+@media (max-width: 1023px) {
+  .hero { width: calc(100vw - 48px); margin-left: 8px; margin-top: 16px; }
+  .hero-frame { aspect-ratio: 345 / 440; border-radius: var(--radius-sm); }
+  .hero-ram { display: none; }
+  .hero-frame .hero-media { inset: 0; width: 100%; height: 100%; border-radius: var(--radius-sm); }
+  .hero-doodle { display: none; }
+}
