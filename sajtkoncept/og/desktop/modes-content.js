@@ -6,7 +6,7 @@ export const BOOKING_CALENDAR = {
     {
       date: "2027-02-15",
       rows: [
-        { time: "15:00", title: "Checka in i [Grönklitt Stugby]" },
+        { time: "16:00", title: "Checka in i [Grönklitt Stugby]" },
         { time: "16:00", title: "Hyrskidor redo", link: "Se var" }
       ]
     },
@@ -41,7 +41,7 @@ export const ONSITE_CALENDAR = {
       rows: [
         { time: "09:30", title: "[Barnens skidskola i barnbacken]" },
         { time: "12:00", title: "[Lunch på Grönklittsgården]" },
-        { time: "14:00", title: "Längd: [Elljusspåret, 2,5 km]", link: "Skidorna" },
+        { time: "14:00", title: "Längd: Elljusspåret, 4,2 km", link: "Skidorna" },
         { time: "18:00", title: "[Fackeltåg i barnbacken]" }
       ]
     },

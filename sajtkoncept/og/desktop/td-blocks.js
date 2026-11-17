@@ -1273,7 +1273,7 @@ export function initTdBlocks(root = document) {
         alpint: {
           fraga: { title: "Det regnar, vad kan vi göra idag?", sub: "Tre tips för familjen inomhus idag.", href: "#fraga" },
           rapport: {
-            chip: "Lätt · [Familjebacken]",
+            chip: "Lätt · Barnbacken",
             caption: "Från backen i morse · 07:40",
             quote: "”[Mjukt och fint i barnbacken. Ta första åket före tio, då är det tomt i liften.]”",
             sign: "[Karin Ek], pistförare",
@@ -1285,7 +1285,7 @@ export function initTdBlocks(root = document) {
         langd: {
           /* TODO: demosiffror från Just nu / Data. Byt mot ett riktigt spårflöde. */
           status: {
-            spar: { openKm: 142, totalKm: 180, groomedKm: 62 },
+            spar: { openKm: 120, totalKm: 145, groomedKm: 62 },
             valla: { wax: "Blå", trackTempC: -6 },
             nysno: { cm: 6, forecastCm: 15 },
             snodjup: { upperCm: 78, lowerCm: 52 }
@@ -1296,7 +1296,7 @@ export function initTdBlocks(root = document) {
             when: "Idag 19:00",
             title: "[Kvällsåkning i belysta spår]",
             name: "[Månskensturen]",
-            body: "[Tisdagar och torsdagar tänds elljusspåret vid Grönklitt till 21. Tre kilometer i skogen, lagom för barnen, och varm saft vid starten.]"
+            body: "[Tisdagar och torsdagar tänds elljusspåret vid Grönklitt till 21. Fyra kilometer i skogen, lagom för barnen, och varm saft vid starten.]"
           },
           fraga: {
             sub: "Dagens vallatips.",
@@ -1310,8 +1310,8 @@ export function initTdBlocks(root = document) {
             alt: "Upplysta skidspår i skogen på kvällen."
           },
           calendar: {
-            snart: ["[16 feb–8 mar] · Sportlov med barnaktiviteter"],
-            senare: ["[mars] · [Orsa Skidmaraton]", "[juli] · [Musik vid Skattungen]"]
+            snart: ["[14 feb–7 mar] · Sportlov med barnaktiviteter"],
+            senare: ["[6 feb] · Orsa Grönklitt Ski Marathon", "[31 jul] · Grönklitt Trail"]
           },
           /* TODO: sidan för spårkartan är inte vald. Länken pekar på en platshållare. */
           karta: {
@@ -1326,7 +1326,7 @@ export function initTdBlocks(root = document) {
         /* TODO: demosiffror och påhittat OG-innehåll i [hakparentes]. Byt mot ett sommarflöde. */
         sommar: {
           temperature: { valleyC: 17, summitC: 13, lakeC: 19 },
-          lakeName: "[Skattungen]",
+          lakeName: "Rädsjön",
           weather: { rainPercent: 20, valleyMs: 4, summitMs: 9 },
           trails: {
             open: 11,
@@ -1334,11 +1334,11 @@ export function initTdBlocks(root = document) {
             condition: "Torra",
             answers: {
               "Blöta": "Mycket regn i natt. Ta vattentäta kängor.",
-              "Delvis blöta": "Blött i skogen, torrare på kalfjället.",
+              "Delvis blöta": "Blött i skogen, torrare högre upp.",
               "Torra": "Torrt på lederna. Vanliga skor går bra."
             }
           },
-          lift: { open: true, hours: "[10–17]", nextOpen: "10:00" },
+          lift: { open: true, hours: "[10–14]", nextOpen: "10:00" },
           sun: { rise: "03:52", set: "22:14" },
           tip: {
             label: "Aktiviteter",
@@ -1352,14 +1352,14 @@ export function initTdBlocks(root = document) {
             alt: "Två personer paddlar kanot på en sjö omgiven av skog."
           },
           calendar: {
-            senare: ["[midsommar] · [Midsommar i Orsa]", "[juli] · [Musik vid Skattungen]"]
+            senare: ["[10 jul] · Orsa GRVL", "[31 jul] · Grönklitt Trail"]
           },
           fraga: { title: "Är lederna blöta idag?", href: "#fraga" },
           kamera: {
-            label: "Webbkamera · [Grönklittstoppen]",
+            label: "Webbkamera · Södra skidområdet",
             /* TODO: byt ut när en kamerabild finns. */
             image: "./assets/img/just-nu/sommar/webbkamera.jpg",
-            alt: "Webbkamera vid Grönklittstoppen"
+            alt: "Webbkamera vid södra skidområdet"
           }
         }
       };
@@ -2292,10 +2292,10 @@ export function initTdBlocks(root = document) {
       const boendeToppen = {
         ...boendeStugbyn,
         id: "toppen",
-        name: "[Toppen]",
+        name: "Toppbyn",
         title: "Utsikt över Orsasjön.",
         body: "Lägenheter högt upp på berget, med skidorna på redan i dörren. Härifrån ser ni ut över Orsasjön och skogarna. Restaurangen och skiduthyrningen ligger [i samma hus].",
-        ctaLabel: "Sök boenden i [Toppen]",
+        ctaLabel: "Sök boenden i Toppbyn",
         facts: [
           { label: "Närmaste lift", value: "[50 m]" },
           { label: "Boyta", value: "[40–70 m²]" },
@@ -2308,10 +2308,10 @@ export function initTdBlocks(root = document) {
       const boendeSkogsbyn = {
         ...boendeStugbyn,
         id: "skogsbyn",
-        name: "[Skogsbyn]",
+        name: "Skogsbyn",
         title: "Lugnt i skogen, nära björnarna.",
-        body: "Stugor en bit från backarna, där det är tyst på kvällen. Längdspåren börjar utanför knuten och Orsa Rovdjurspark ligger [några minuter] bort. Ett bra val för er som vill blanda backe med annat.",
-        ctaLabel: "Sök boenden i [Skogsbyn]",
+        body: "Stugor en bit från backarna, där det är tyst på kvällen. Skogsbyn ligger vid Råtjärn och längdspåren börjar [utanför knuten]. Ett bra val för er som vill blanda backe med annat.",
+        ctaLabel: "Sök boenden i Skogsbyn",
         facts: [
           { label: "Närmaste lift", value: "[800 m]" },
           { label: "Längdspår", value: "[50 m]" },

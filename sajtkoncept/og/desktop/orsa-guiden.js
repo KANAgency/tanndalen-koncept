@@ -58,29 +58,29 @@ QA[RAIN] = QA["Vad gör vi om det regnar?"] = {
 };
 
 QA["Hur mycket snö är det?"] = {
-  answer: "[78 cm] uppe på toppen och [52 cm] nere vid stugorna. Det kom [6 cm] i natt och [15 cm] till är utlovat fram till helgen. Alla [14] nedfarter och [142 av 180 km] längdspår är öppna.",
+  answer: "[78 cm] uppe på toppen och [52 cm] nere vid stugorna. Det kom [6 cm] i natt och [15 cm] till är utlovat fram till helgen. Alla 24 nedfarter och [120 av 145 km] längdspår är öppna.",
   sources: src(["#just-nu", "Just nu"]),
   cards: [
-    card("Just nu", "Längdspåren", "[142 av 180 km] preparerade", "langd.jpg"),
+    card("Just nu", "Längdspåren", "[120 av 145 km] preparerade", "langd.jpg"),
     card("Just nu", "Backarna", "[14 av 14] nedfarter öppna", "og-hero-winter.jpg")
   ],
   chips: ["Hur långa är längdspåren?", "Passar Orsa Grönklitt för små barn?"]
 };
 
 QA["Passar Orsa Grönklitt för små barn?"] = {
-  answer: "Ja, det är det vi är bäst på. Barnområdet ligger [vid stugbyn] med egen knapplift och rullband, skidskolan tar barn från [4 år], och de flesta backar är gröna och blå. De som inte vill åka skidor kan träffa björnarna i Rovdjursparken.",
+  answer: "Ja, det är det vi är bäst på. Barnområdet ligger [vid stugbyn] med egen knapplift och rullband, skidskolan tar barn från 3–4 år, och de flesta backar är gröna och blå. De som inte vill åka skidor kan träffa björnarna i Rovdjursparken.",
   sources: src(["#skidskola", "Skidskola"], ["#aktiviteter", "För barn"]),
   cards: [
     card("Plats", "Barnområdet", "Knapplift och rullband, [10–15]", "teaser-skola-b.png"),
-    card("Aktivitet", "Skidskola för barn", "Från [4] år, [halvdag eller heldag]", "platshallare.svg")
+    card("Aktivitet", "Skidskola för barn", "Från 3–4 år, [halvdag eller heldag]", "platshallare.svg")
   ],
   chips: ["Hur funkar skidskolan för barnen?", "Vad finns att göra förutom skidåkning?"],
   summer: {
-    answer: "Ja. På sommaren är det Rovdjursparken, bad i [Skattungen], [lekplatsen vid toppstugan] och korta leder i skogen som barnen orkar. Liften går upp till toppen [10–17] så de minsta slipper gå uppför.",
+    answer: "Ja. På sommaren är det Rovdjursparken, bad i Rädsjön, [lekplatsen vid toppstugan] och korta leder i skogen som barnen orkar. Liften går upp till toppen [tis, tor och fre 10–14] så de minsta slipper gå uppför.",
     sources: src(["#aktiviteter", "För barn"]),
     cards: [
       card("Aktivitet", "Orsa Rovdjurspark", "[10 min] från stugorna", "platshallare.svg"),
-      card("Plats", "[Skattungen]", "Badplats med grund strand", "platshallare.svg")
+      card("Plats", "Rädsjön", "Sandstrand, brygga och bastuflotte", "platshallare.svg")
     ],
     chips: ["Vad gör vi med barnen idag?", "Var kan vi bada idag?"]
   }
@@ -108,22 +108,22 @@ QA["Vad finns att göra förutom skidåkning?"] = {
 };
 
 QA["Hur långa är längdspåren?"] = {
-  answer: "Totalt [180 km], från [2,5 km] barnslinga vid stugbyn till [långturen mot Fryksås]. [62 km] preparerades i natt och elljusspåret är tänt till [21]. Längdåkningen är det vi gör mest av här.",
+  answer: "Upp till 145 km i högsäsong, med start vid Längdcentrum vid skidstadion. [62 km] preparerades i natt och elljusspåret, 4,2 km, är tänt till 21. Längdåkningen är det vi gör mest av här.",
   sources: src(["#just-nu", "Spårkarta"]),
   cards: [
     card("Spår", "[Barnslingan]", "[2,5 km], flackt och upplyst", "langd.jpg"),
-    card("Spår", "[Fryksåsturen]", "[25 km], för vana åkare", "og-hero-winter.jpg")
+    card("Spår", "Elljusspåret", "4,2 km, tänt till 21", "og-hero-winter.jpg")
   ],
   chips: ["Vilka spår är nypreparerade?", "Var hyr vi längdskidor?"]
 };
 
 QA["Hur bokar jag?"] = {
-  answer: "Välj datum och boende i sökrutan högst upp. Liftkort, skidhyra och skidskola lägger du till i samma bokning, nu eller senare. Vill du hellre prata med någon svarar gästservice [08–20].",
+  answer: "Välj datum och boende i sökrutan högst upp. Liftkort, skidhyra och skidskola lägger du till i samma bokning, nu eller senare. Vill du hellre prata med någon svarar receptionen [08:30–16:00].",
   sources: src(["#booking", "Boka"]),
   cards: [card("Boka", "Boende", "Stugor och lägenheter", "meny-boende.jpg")],
   chips: ["Kan jag ändra min bokning?", "Vilka liftkort behöver vi?"],
   summer: {
-    answer: "Välj datum och boende i sökrutan högst upp. Aktiviteter som Rovdjursparken och cykelhyra lägger du till i samma bokning. Vill du hellre prata med någon svarar gästservice [08–20].",
+    answer: "Välj datum och boende i sökrutan högst upp. Aktiviteter som Rovdjursparken och cykelhyra lägger du till i samma bokning. Vill du hellre prata med någon svarar receptionen [08:30–16:00].",
     sources: src(["#booking", "Boka"]),
     cards: [card("Boka", "Boende", "Stugor och lägenheter", "meny-boende.jpg")],
     chips: ["Kan jag ändra min bokning?", "Vad gör vi med barnen idag?"]
@@ -131,17 +131,17 @@ QA["Hur bokar jag?"] = {
 };
 
 QA["Var hämtar vi hyrskidorna?"] = {
-  answer: "I [skiduthyrningen vid liftstationen], [50 m] från er stuga. Utrustningen är förberedd i era storlekar från [16:00] på ankomstdagen, så ni kan hämta direkt efter incheckning.",
+  answer: "I Skiduthyrningen och Sportbutiken, bakom receptionen mot skidområdet. Utrustningen är förberedd i era storlekar från [16:00] på ankomstdagen, så ni kan hämta direkt efter incheckning.",
   sources: src(["#skidhyra", "Skidhyra"], ["#bokning", "Din bokning"]),
   cards: [card("Plats", "[Skiduthyrningen]", "Öppet [09–17], redo från [16:00]", "teaser-paket-b.png")],
   chips: ["Hur långt är det från stugan till backen?", "Hur funkar skidskolan för barnen?"]
 };
 
 QA["Hur funkar skidskolan för barnen?"] = {
-  answer: "Barn från [4 år] kan gå i [Grönklitts skidskola]. Första passet är [måndag 10:00] vid barnområdet, [två timmar] med paus för varm choklad. För era barn på 6 och 9 år passar [Blå grupp] respektive [Röd grupp] om de åkt förut.",
+  answer: "Barn från 3–4 år kan gå i skidskolan. Första passet är [måndag 10:00] vid barnområdet, [två timmar] med paus för varm choklad. För era barn på 6 och 9 år passar [Blå grupp] respektive [Röd grupp] om de åkt förut.",
   sources: src(["#skidskola", "Skidskola"]),
   cards: [
-    card("Aktivitet", "Skidskola för barn", "[Mån–fre 10–12], från [4] år", "teaser-skola-b.png"),
+    card("Aktivitet", "Skidskola för barn", "[Mån–fre 10–12], från 3–4 år", "teaser-skola-b.png"),
     card("Plats", "Barnområdet", "Samling vid [flaggan]", "platshallare.svg")
   ],
   chips: ["När stänger barnbacken?", "Vilka liftkort behöver vi?"]
@@ -155,9 +155,9 @@ QA["Hur långt är det från stugan till backen?"] = {
 };
 
 QA["Hur tidigt kan vi checka in?"] = {
-  answer: "Stugan är klar från [15:00]. Kommer ni tidigare kan ni hämta nyckeln i [receptionen] från [12:00] och åka direkt, bagaget kan stå kvar där. Utcheckning är [11:00].",
+  answer: "Stugan är klar från 16:00, då hämtar ni nyckelkuvertet vid en av incheckningspunkterna. Utcheckning är 11:00, eller 10:00 om ni bokat avresestädning.",
   sources: src(["#bokning", "Din bokning"]),
-  cards: [card("Plats", "[Receptionen]", "Öppet [08–20]", "teaser-boende-b.jpeg")],
+  cards: [card("Plats", "[Receptionen]", "Öppet 08:30–16:00", "teaser-boende-b.jpeg")],
   chips: ["Var hämtar vi hyrskidorna?", "Kan jag ändra min bokning?"]
 };
 
@@ -184,7 +184,7 @@ QA["Vad finns att göra under vår vecka?"] = {
   ],
   chips: ["Vad händer för barn idag?", "Hur funkar skidskolan för barnen?"],
   summer: {
-    answer: "Under er vecka finns [guidad tur i Rovdjursparken tisdag], [cykelskola för barn onsdag] och [musik vid Skattungen fredag]. Liften går upp till toppen varje dag [10–17].",
+    answer: "Under er vecka finns [guidad tur i Rovdjursparken tisdag], [cykelskola för barn onsdag] och [Grönklitt Trail lördag]. Liften går upp till toppen [tis, tor och fre 10–14].",
     sources: src(["#aktiviteter", "Veckoprogram"]),
     cards: [
       card("[Tis] · 10:00", "[Guidad tur i Rovdjursparken]", "Från [5] år", "platshallare.svg"),
@@ -195,10 +195,10 @@ QA["Vad finns att göra under vår vecka?"] = {
 };
 
 QA["Vilka backar passar barnen idag?"] = {
-  answer: "[Familjebacken] och [Björnbacken] är nypreparerade och mjuka i morse. Sexåringen trivs i barnområdet, niåringen klarar [Björnbacken] hela vägen från toppen. Solen ligger på västsidan efter lunch.",
+  answer: "Barnbacken och [Söderbacken] är nypreparerade och mjuka i morse. Sexåringen trivs i barnområdet, niåringen klarar [Björnbacken] hela vägen från toppen. Solen ligger på västsidan efter lunch.",
   sources: src(["#just-nu", "Just nu"]),
   cards: [
-    card("Backe", "[Familjebacken]", "Grön, nypreparerad [05:30]", "platshallare.svg"),
+    card("Backe", "Barnbacken", "Grön, nypreparerad [05:30]", "platshallare.svg"),
     card("Backe", "[Björnbacken]", "Blå, från toppen", "og-hero-winter.jpg")
   ],
   chips: ["Var äter vi lunch i backen?", "När stänger barnbacken?"]
@@ -232,18 +232,18 @@ QA["När stänger barnbacken?"] = {
 };
 
 QA["Var hyr vi pulka?"] = {
-  answer: "Pulkor och snörejsare lånas [gratis] i [receptionen] mot [legitimation]. Pulkabacken ligger [bakom stugbyn], belyst till [20].",
+  answer: "Pulkor och snörejsare lånas [gratis] i [receptionen] mot [legitimation]. Pulkabacken ligger i barnområdet.",
   sources: src(["#aktiviteter", "För barn"]),
   cards: [card("Plats", "[Pulkabacken]", "Belyst till [20]", "snow.jpg")],
   chips: ["Vad händer för barn idag?"]
 };
 
 QA["Vilka spår är nypreparerade?"] = {
-  answer: "[62 km] preparerades i natt: [barnslingan], [5 km-slingan] och [Fryksåsturen]. Skatespåret på [Grönklittsrundan] kördes [04:30]. Elljusspåret är tänt till [21].",
+  answer: "[62 km] preparerades i natt: [barnslingan], [5 km-slingan] och elljusspåret. Skatespåret på [Grönklittsrundan] kördes [04:30]. Elljusspåret är tänt till [21].",
   sources: src(["#just-nu", "Spårkarta"]),
   cards: [
     card("Spår", "[Barnslingan]", "[2,5 km], preparerad [04:30]", "langd.jpg"),
-    card("Spår", "[Fryksåsturen]", "[25 km], preparerad [05:00]", "og-hero-winter.jpg")
+    card("Spår", "Elljusspåret", "4,2 km, preparerad [05:00]", "og-hero-winter.jpg")
   ],
   chips: ["Vilken valla ska vi ha idag?", "Var kan vi fika vid spåret?"]
 };
@@ -289,12 +289,12 @@ QA["Kan vi köpa spårkort på plats?"] = {
 
 /* Sommar */
 QA["Vad gör vi med barnen idag?"] = {
-  answer: "Börja i Rovdjursparken när den öppnar [10:00], björnarna är piggast då. Efter lunch: liften upp till toppen och [trollstigen] ner, [1,5 km]. Avsluta med bad i [Skattungen], vattnet är [19°].",
+  answer: "Börja i Rovdjursparken när den öppnar [10:00], björnarna är piggast då. Efter lunch: liften upp till toppen och [trollstigen] ner, [1,5 km]. Avsluta med bad i Rädsjön, vattnet är [19°].",
   sources: src(["#aktiviteter", "För barn"]),
   cards: [
     card("Aktivitet", "Orsa Rovdjurspark", "[10–17] idag", "platshallare.svg"),
     card("Led", "[Trollstigen]", "[1,5 km] ner från toppen", "platshallare.svg"),
-    card("Bad", "[Skattungen]", "Vattnet [19°]", "platshallare.svg")
+    card("Bad", "Rädsjön", "Vattnet [19°]", "platshallare.svg")
   ],
   chips: ["Är Rovdjursparken öppen idag?", "Var kan vi bada idag?"]
 };
@@ -307,19 +307,19 @@ QA["Är Rovdjursparken öppen idag?"] = {
 };
 
 QA["Var kan vi bada idag?"] = {
-  answer: "[Skattungen] är [19°] och har grund sandstrand, [15 minuter] med bil. Närmast är [tjärnen vid stugbyn], lite kallare men med brygga. Regnet kommer inte förrän efter [16].",
+  answer: "Rädsjön är [19°] och har sandstrand, brygga och bastuflotte, [15 minuter] med bil. Närmast är [tjärnen vid stugbyn], lite kallare men med brygga. Regnet kommer inte förrän efter [16].",
   sources: src(["#aktiviteter", "Bad"]),
   cards: [
-    card("Bad", "[Skattungen]", "[19°], sandstrand", "platshallare.svg"),
+    card("Bad", "Rädsjön", "[19°], sandstrand", "platshallare.svg"),
     card("Bad", "[Tjärnen vid stugbyn]", "Brygga, [5 min] promenad", "platshallare.svg")
   ],
   chips: ["Vad gör vi med barnen idag?", "Vad gör vi om det regnar?"]
 };
 
 QA["Kan vi cykla i backen?"] = {
-  answer: "Ja, [Grönklitt Bike Park] har [8 leder] och liften tar cyklar [10–17]. För barnen finns [en grön flowled] och cykelskola [onsdagar]. Cykel och hjälm hyr ni vid liften.",
+  answer: "Ja, över 50 km leder i grönt, blått och rött, med flowtrail och skills trail. Liften tar cyklar [tis, tor och fre 10–14] på högsommaren. För barnen finns gröna leder. Cykel och hjälm hyr ni på Längdcentrum.",
   sources: src(["#aktiviteter", "Cykel"]),
-  cards: [card("Aktivitet", "[Grönklitt Bike Park]", "[8 leder], liften [10–17]", "platshallare.svg")],
+  cards: [card("Aktivitet", "Cykla i Grönklitt", "50+ km leder, liften [10–14]", "platshallare.svg")],
   chips: ["Vilken led passar barnen?"]
 };
 
@@ -385,7 +385,7 @@ export const WELCOME = {
 
 export const WELCOME_BOOKING = {
   title: "[Grönklitt Stugby]",
-  line: "[15–22 feb 2027] · 2 vuxna, 2 barn · Incheckning från 15:00",
+  line: "[15–22 feb 2027] · 2 vuxna, 2 barn · Incheckning från 16:00",
   next: "<strong>Nästa steg: liftkort.</strong> Lägg till dem i bokningen så har ni dem i telefonen när ni kommer.",
   nextAsk: "Vilka liftkort behöver vi?",
   week: [
