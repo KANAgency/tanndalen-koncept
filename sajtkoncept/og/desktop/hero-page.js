@@ -566,7 +566,7 @@ function jitteredMs(base, jitter) {
 }
 
 function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) {
-  const scenes = config.scenes || [];
+  let scenes = config.scenes || [];
   let index = 0;
   let active = "a";
   let frozen = false;
@@ -842,9 +842,20 @@ function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) 
     if (fadeT >= 1) finishTransition();
   }
 
+  /** Säsongsbyte: nya scener, övergå direkt till den nya säsongens första klipp. */
+  function setScenes(next) {
+    if (!next || !next.length) return;
+    scenes = next;
+    index = scenes.length - 1;
+    if (phase === "transition") finishTransition();
+    holdElapsed = 0;
+    beginVisualTransition();
+  }
+
   return {
     tick,
     nextScene,
+    setScenes,
     setPaused,
     setFrozen,
     setTabHidden,
@@ -859,7 +870,7 @@ function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) 
 
 function initHeroPage() {
   const config = deepCloneConfig(HERO_PAGE_CONFIG);
-  /* Sommar: säsongen läses en gång vid laddning (sätts i index.html-head). */
+  /* Sommar: säsongen sätts i index.html-head vid laddning och byts live via og-season-eventet. */
   if (document.documentElement.dataset.season === "summer" && config.summer) {
     Object.assign(config, config.summer);
   }
@@ -1026,6 +1037,16 @@ function initHeroPage() {
       introMedia?.classList.add("is-ready");
     });
   }
+
+  document.addEventListener("og-season", (event) => {
+    const fresh = deepCloneConfig(HERO_PAGE_CONFIG);
+    if (event.detail === "summer" && fresh.summer) Object.assign(fresh, fresh.summer);
+    Object.assign(config, fresh);
+    if (line2) line2.textContent = config.headlineLine2;
+    if (heroTitle) heroTitle.textContent = config.heroTitle;
+    if (heroBody) heroBody.textContent = config.heroBody;
+    introLoop?.setScenes(config.scenes);
+  });
 
   if (skipIntro) {
     page.classList.add("is-skip-intro");

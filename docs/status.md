@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: OG-intro byter säsong live (og-season-event → `setScenes` i `hero-page.js`), byter direkt till säsongens första klipp, rubrikrad 2 och herotitel. Tidigare krävdes omladdning.
 - 2026-11-17: TD-videor hostas i Cloudflare R2 (Johns KAN-konto, bucket `td-video`, prefix `td/` och `og/`, publik r2.dev-URL). `build-dist.mjs` skriver om `assets/video/` till R2 när `TD_VIDEO_BASE` är satt (görs i deploy-workflow). Lokal dev oförändrad. Nya/ändrade videor: `npx wrangler r2 object put td-video/<td|og>/<fil> --file <fil> --remote`.
 - 2026-11-16: Deploy-fix: TD importerade ds-JS relativt (`./ds/…`), vilket bara fungerade via dev-serverns mappning. I dist blev det /td/ds/… → 404 och sidan fastnade på introt. Nu `/ds/…`. Deploy-grenen ligger 20 commits efter main; behöver mergas och pushas (Johns beslut). Postrar/videor i deploy kommer från blob-containern, inte git.
 
