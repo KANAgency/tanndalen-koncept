@@ -1,5 +1,7 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: Kartläggning av mobilvärden för alla TD-textstilar i `docs/typografi-mobil.md`. Fynd: mobiltrappan för rubriker är inte monoton (md 24 < sm 30, lg = sm = 30), 30 stilar saknar mobilvärde, heading-2-hero är flytande och oanvänd, Aktuellt-eyebrow motsvarar eyebrow-sm. Fem beslut väntar på John. Ingen kod ändrad.
+
 - 2026-11-17: OG-intro sommar: rad 2 är "i skidparadiset" som på vinter (var "med hela familjen", `hero-page-config.js`). Verifierat vid sidladdning och live säsongsbyte.
 - 2026-11-17: TD mobil runda 4: topografin ~1 skärmhöjd utanför flödet, ingress → Aktuellt 112 px, Aktuellt-kort med tunnare ram (16), peek, snap och rätt slut (bugg: oändlig spacer på mobil). Verifierat 393 och 1440. Öppet: fontskalning – mobilstorlekar finns för 33 textstilar (generator, brytpunkt 1023), men UI/kicker saknar mobilvärde och 82 regler i startsida.css sätter font-size direkt.
 
