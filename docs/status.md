@@ -265,6 +265,13 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
+## Klart 17 nov: OG-boenden hämtade ur R360 (8 st, olika stil)
+- `hamta-boendebilder.py` har nu `--sajt td|og`. OG: `orsagronklitt.r360online.se`, boende = resvtype 1000 (1002 = skidhyra, 1007 = längdskidåkning). Listan `BOENDEN_OG` i skriptet; exakt namnträff går före prefixträff.
+- Katalogen: 574 enheter, 347 utan camping/ställplatser, 340 unika bildset. Alla granskades på kontaktark; valda på foto och inredning, spridda över byarna och stilarna:
+  Limbygården (lodge, 32 bilder), Lönnstigen 6 (Skogsbyn, nybyggt/stora fönster, 24), Aspstigen 2B (Skogsbyn, stylat skandinaviskt, 17), Rönnbärsstigen 1 (Blåbärsbyn, timmerstuga, 21), Norra Stugvägen 10 (Centrumbyn, klassisk furustuga, kvällsbild, 10), Illerstigen 4B (Toppbyn, rustik/vintage, 10), Hallonstigen 9B (Blåbärsbyn, varm retro, 14), Uttern 7 (Rovdjursbyn, röd stuga, mörk/mysig, 13).
+- 141 originalbilder + `fakta.json` (beskrivning, kriterier, R360-länk), 276 MB i `tanndalen-orsa/assets/boenden/orsa/<by>/<boende>/` (utanför repot). Reserv om något ska bytas: Aspstigen 2A, Örnen 13, Tallstigen 9, Granstigen 1.
+- Öppet: inte inlagda på OG-sajten än. Katalogen har inga priser.
+
 ## Klart 15 nov: riktiga R360-boenden i karusellerna + bildskript
 - Platshållarna ersatta med Skarljus 7 A (Hamra), Brunkullan 23 och Fjällstugan Järven (Tänndalen). Fakta (lift, bäddar) från R360, priser = en ledig vecka i R360 inom hakparentes, nu "kr/vecka" på alla kort.
 - `sajtkoncept/scripts/hamta-boendebilder.py` hämtar alla originalbilder + `fakta.json` via R360:s publika sök-API till `tanndalen-orsa/assets/boenden/` (utanför repot). Fjällsippan 4 finns inte i R360.

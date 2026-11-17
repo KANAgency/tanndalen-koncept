@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hämtar alla bilder och fakta för boenden ur R360 (hamra.r360online.se).
+"""Hämtar alla bilder och fakta för boenden ur R360 (TD: hamra, OG: orsagronklitt).
 
 Ingen webbläsare, inga AI-anrop. Ett anrop mot R360:s publika katalogsökning
 (samma som bokningssidans områdessidor använder, checkavail=false) ger alla
@@ -10,6 +10,7 @@ Körning (från sajtkoncept/):
     python3 scripts/hamta-boendebilder.py                  # listan BOENDEN nedan
     python3 scripts/hamta-boendebilder.py --omrade 33295   # alla boenden i ett område
     python3 scripts/hamta-boendebilder.py --ut ../../assets/boenden
+    python3 scripts/hamta-boendebilder.py --sajt og --ut ../../assets/boenden/orsa   # listan BOENDEN_OG
 
 Områdets nummer (grouppoollid) står i R360-adressen:
     /client/product/boende-1007/<område>-<grouppoollid>
@@ -27,8 +28,13 @@ import re
 import sys
 import urllib.request
 
-API = "https://hamra.r360online.se/sv/v3/api"
-RESVTYPE = 1007  # Boende
+# R360-värd och bokningstyp för boende per sajt (OG: 1000, TD: 1007).
+SAJTER = {
+    "td": ("https://hamra.r360online.se", 1007),
+    "og": ("https://orsagronklitt.r360online.se", 1000),
+}
+HOST, RESVTYPE = SAJTER["td"]
+API = f"{HOST}/sv/v3/api"
 
 # Början på boendets namn i R360 (unitdesc4). Lägg till/ta bort här.
 BOENDEN = [
@@ -37,6 +43,18 @@ BOENDEN = [
     "Skarljus 7 A",
     "Brunkullan 23",
     "Fjällstugan Järven",
+]
+
+# OG: 8 boenden i olika stil, valda på bild och inredning (nov 2026).
+BOENDEN_OG = [
+    "Limbygården",            # gård/lodge, stenspis, grön panel
+    "Lönnstigen 6",           # Skogsbyn, nybyggt, stora fönster, blå köksö
+    "Aspstigen 2B",           # Skogsbyn, skandinaviskt stylat, braskamin, tapet
+    "Rönnbärsstigen 1",       # Blåbärsbyn, timmerstuga i snö
+    "Norra Stugvägen 10",     # Centrumbyn, klassisk furustuga, kvällsbild
+    "Illerstigen 4B",         # Toppbyn, liten rustik stuga, vintage
+    "Hallonstigen 9B",        # Blåbärsbyn, varm retro, rutig tapet
+    "Uttern 7",               # Rovdjursbyn, röd stuga, mörk och mysig
 ]
 
 
@@ -81,7 +99,7 @@ def spara(it, mapp, kriterier):
     fakta = {
         "namn": namn,
         "omrade": it.get("groupTitle"),
-        "url": (f"https://hamra.r360online.se/client/product/boende-{RESVTYPE}/"
+        "url": (f"{HOST}/client/product/boende-{RESVTYPE}/"
                 f"{slug(it.get('groupTitle', ''))}-{it.get('grouppoollid')}/{it.get('poollid')}/"
                 f"{slug(namn)}-{it.get('unitlid')}"),
         "kriterier": {kriterier.get(k, k): v for k, v in (it.get("crits") or {}).items() if v not in (False, None)},
@@ -96,8 +114,12 @@ def main():
     ap = argparse.ArgumentParser()
     here = pathlib.Path(__file__).resolve()
     ap.add_argument("--ut", default=str(here.parents[3] / "assets" / "boenden"))
+    ap.add_argument("--sajt", choices=SAJTER, default="td")
     ap.add_argument("--omrade", type=int, help="grouppoollid: hämta alla boenden i området")
     a = ap.parse_args()
+    global HOST, RESVTYPE, API
+    HOST, RESVTYPE = SAJTER[a.sajt]
+    API = f"{HOST}/sv/v3/api"
     ut = pathlib.Path(a.ut)
     kriterier = {k: v["title"] for k, v in get_json(f"{API}/criterias")["payload"].items()}
     alla = katalog()
@@ -107,8 +129,9 @@ def main():
         valda = [it for it in alla if it.get("grouppoollid") == a.omrade]
     else:
         valda = []
-        for namn in BOENDEN:
-            traff = [it for it in alla if (it.get("unitdesc4") or "").startswith(namn)]
+        for namn in (BOENDEN_OG if a.sajt == "og" else BOENDEN):
+            exakt = [it for it in alla if (it.get("unitdesc4") or "") == namn]
+            traff = exakt or [it for it in alla if (it.get("unitdesc4") or "").startswith(namn)]
             if traff:
                 valda.append(traff[0])
             else:
