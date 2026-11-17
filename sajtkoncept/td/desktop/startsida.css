@@ -6529,9 +6529,20 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     padding: 0 var(--space-lg) 0 20px;
     gap: var(--space-sm);
     border-radius: var(--radius-md);
-    background: var(--color-TD-snow);
+    background: transparent;
   }
-  .top-glass { inset: 0; border-radius: inherit; }
+  /* Samma glas som desktopmenyn (Dag 65 %, blur 28), men synligt även i vila eftersom listen finns i Figma. */
+  .top-glass,
+  html.is-scrolled .top-glass,
+  .top.is-scrolled .top-glass { inset: 0; border-radius: inherit; opacity: 1; }
+
+  /* Ingen egen säsongsknapp (finns inte på desktop heller, säsong byts i menyn). John 2026-11-17. */
+  .site-season-dot,
+  .top:has(.site-menu.is-open) .site-season-dot { display: none; }
+
+  /* Allt 32 px högre (John 2026-11-17): sidan 40 → 8 px från toppen, sticky header på samma avstånd. */
+  .page { margin-top: 8px; --stage-top: 72px; }
+  .top { top: 8px; }
 
   .brand-center { order: 0; align-items: flex-start; }
   .actions { order: 1; margin-left: auto; gap: var(--space-sm); }
@@ -6573,11 +6584,10 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 }
 
 /* Mobilhero (2026-11-17). Figma iPhone 16 - 1: media 948:2254, 345×440 (≈ 4:5), x 24, radie 4, 16 px under headern.
-   Bara filmen: ingen säsongsram, inga doodles (solen är dold i skissen). Ingen krympning/parallax (startsida-td.md). */
+   Säsongsramen som på desktop (John 2026-11-17), 8 px bred på mobil. Inga doodles. Ingen krympning/parallax. */
 @media (max-width: 1023px) {
   .hero { width: calc(100vw - 48px); margin-left: 8px; margin-top: 16px; }
   .hero-frame { aspect-ratio: 345 / 440; border-radius: var(--radius-sm); }
-  .hero-ram { display: none; }
-  .hero-frame .hero-media { inset: 0; width: 100%; height: 100%; border-radius: var(--radius-sm); }
+  .hero-frame .hero-media { inset: var(--space-sm); width: calc(100% - 2 * var(--space-sm)); height: calc(100% - 2 * var(--space-sm)); border-radius: 2px; }
   .hero-doodle { display: none; }
 }

@@ -110,8 +110,13 @@ html.is-skip-gone #intro-scroll {
 }
 
 @media (max-width: 1023px) {
-  .intro-word,
-  .intro-copy { font-size: var(--font-size-3xl); }
+  /* John 2026-11-17: startloggan och ordet större, maskade symbolen ~3× (26 → 80vw), payoffen nära symbolen på två rader. */
+  :root {
+    --intro-a-symbol-w: 19vw;
+    --intro-b-symbol-w: 80vw;
+  }
+  .intro-word { font-size: var(--font-size-4xl); }
+  .intro-copy { font-size: var(--font-size-3xl); white-space: pre; }
 }
 
 html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .page > .top,

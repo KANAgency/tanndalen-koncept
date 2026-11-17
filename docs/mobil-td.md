@@ -16,6 +16,12 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
   - Lägesknappen: dold under 1024 px.
   - Desktop 1440 oförändrad: meny 260, Fjällguiden 208, logga 206, konto synligt, bokningsrad 420.
 - 2026-11-17 Hero (steg II/III): enligt Figma media 948:2254. Filmen är 345×440 (≈ 4:5) vid x 24, 16 px under headern, radie 4. Ingen säsongsram och inga doodles på mobil, eftersom solen är dold i skissen. Ingen krympning eller parallax. Ingressen börjar 28 px under filmen (y 572, inte jämfört med Figma). Verifierat: 393 i läge 2 och nybesökarintrot landar på 4:5-filmen utan konsolfel (övergångens timing är inte mätt). Desktop 1440 är oförändrad (ram 1392×685, sol synlig). Storvigeln-topografin under ingressen ligger kvar som innan.
+- 2026-11-17 Johns feedback, runda 1 (intro och header):
+  - Intro mobil: startsymbolen 15 → 19vw (88 px), "Tänndalen" 36 → 48 px, maskade symbolen 26 → 80vw (102 → 314 px, ≈ 3,1×). Payoffen 16 px under symbolen och alltid på två rader ("Älskat av" / "skidåkare."). "fjällvandrare." mätt till 291 px och ryms.
+  - Header: den egna säsongsknappen borttagen (säsong byts i menyn, som på desktop). Listen har samma glas som desktopmenyn (Dag 65 %, blur 28) i stället för helvit. Loggan är samma fil som på desktop (`logo-horizontal-black.svg`, symbol + text).
+  - Allt 32 px högre: header 8 px från toppen (även sticky), filmen på y 72 både under och efter introt.
+  - Hero: säsongsramen tillbaka, 8 px bred.
+  - Bugg: introt kunde fastna svart om första bildrutan kom sent (dold flik eller appbyte). `logoIn(1)` körs nu även i hold-grenen.
 
 ## Block för block (i visningsordning)
 
@@ -46,7 +52,7 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
 
 ## Beslut som behövs från John
 1. ~~Header~~ – beslutat 17 nov (se Klart).
-2. ~~Hero~~ – byggt enligt Figma-skissen (bara filmen). Säg till om ramen eller solen ska tillbaka.
+2. ~~Hero~~ – filmen 4:5 med säsongsram, ingen sol.
 3. En dag: stapel eller swipe-karusell?
 4. Områdesblocket: behålla bildkarusellen eller en bild?
 5. Hitta hit: med i mobil v1 eller dold?

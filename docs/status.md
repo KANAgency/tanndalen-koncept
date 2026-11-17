@@ -1,5 +1,7 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD mobil, Johns feedback runda 1: introsymbolerna större (maskad 80vw), payoff på två rader nära symbolen, säsongsknapp borttagen, headerglas som desktop, allt 32 px högre, säsongsram på heron. Bugg rättad: intro kunde fastna svart vid sen första bildruta (gäller även desktop). Verifierat 393 och 1440. Detaljer i `docs/mobil-td.md`.
+
 - 2026-11-17: TD Lev. Andas. Tänndalen., sommar: slutbilden var oskarp (1333 px bred porträttfil uppskalad till helskärm, ~2× vid DPR 2). Ny export `brand/td-brand-3-sommar-skarp.jpg` 3000 × 4500 från originalet `../assets/td/bilder och video/sommar/IMG_0141.jpg`, samma komposition, 660 kB. Gamla `td-brand-3-sommar.jpg` ligger kvar oanvänd.
 - 2026-11-17: Dev-servern har `--lan` (lyssnar på 0.0.0.0, skriver ut LAN-URL) för test i iPhone på samma Wi-Fi. Verifierat: 200 via 192.168.68.56 med `--lan`, inte nåbar via IP utan. Instruktion i `sajtkoncept/STRUKTUR.md`.
 

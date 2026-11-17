@@ -52,10 +52,13 @@ function smootherstep(p) {
   return x * x * x * (x * (x * 6 - 15) + 10);
 }
 
+const MOBILE = matchMedia("(max-width: 1023px)");
+const MOBILE_COPY_GAP = 16; /* px, typed line under the masked symbol on mobile (John 2026-11-17: much closer) */
+
+/* Mobile: always two lines ("Älskat av" / "skidåkare."), see .intro-copy white-space in intro.css. */
 function seasonLine() {
-  return document.documentElement.dataset.season === "summer"
-    ? "Älskat av fjällvandrare."
-    : "Älskat av skidåkare.";
+  const who = document.documentElement.dataset.season === "summer" ? "fjällvandrare." : "skidåkare.";
+  return `Älskat av${MOBILE.matches ? "\n" : " "}${who}`;
 }
 
 export function init() {
@@ -286,25 +289,27 @@ export function init() {
     const key = innerWidth <= 500 ? 393 : 1440;
     const wanted = (COPY_Y[key] || 577) - TEXT_LIFT;
     const minTop = sym.bottom + gap;
-    copy.style.top = `${Math.max(wanted, minTop) + TEXT_DOWN}px`;
+    copy.style.top = MOBILE.matches
+      ? `${sym.bottom + MOBILE_COPY_GAP}px`
+      : `${Math.max(wanted, minTop) + TEXT_DOWN}px`;
   }
 
   function finishText() {
     phase = 1;
     applyGrow(1, 1);
     copy.textContent = seasonLine();
-    copy.setAttribute("aria-label", `Tänndalen. ${seasonLine()}`);
+    copy.setAttribute("aria-label", `Tänndalen. ${seasonLine().replace("\n", " ")}`);
     lock.dataset.typed = "1";
   }
 
   function typeLine() {
     const text = seasonLine();
     copy.textContent = "";
-    copy.setAttribute("aria-label", `Tänndalen. ${text}`);
+    copy.setAttribute("aria-label", `Tänndalen. ${text.replace("\n", " ")}`);
     const gaps = [];
     for (let i = 0; i < text.length; i++) {
       let wait = 25 + Math.floor(Math.random() * 61);
-      if (i > 0 && text[i - 1] === " ") wait += 80 + Math.floor(Math.random() * 91);
+      if (i > 0 && (text[i - 1] === " " || text[i - 1] === "\n")) wait += 80 + Math.floor(Math.random() * 91);
       if (text[i] === ".") wait += 150;
       gaps.push(Math.max(1, Math.round(wait * 0.8))); /* 20% faster than the base gaps */
     }
@@ -481,6 +486,7 @@ export function init() {
         const t = (el - TANNDALEN_HOLD_MS) / GROW;
         applyGrow(growEase(t), t);
       } else if (!lock.dataset.held) {
+        logoIn(1); /* a stalled first frame (hidden tab, app switch) can land here directly: drop the black plate anyway */
         phase = 1;
         applyGrow(1, 1);
         lock.dataset.held = "1";
