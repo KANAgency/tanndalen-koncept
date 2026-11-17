@@ -53,7 +53,7 @@ function smootherstep(p) {
 }
 
 const MOBILE = matchMedia("(max-width: 1023px)");
-const MOBILE_COPY_GAP = 16; /* px, typed line under the masked symbol on mobile (John 2026-11-17: much closer) */
+const MOBILE_COPY_GAP = 28; /* px, typed line under the masked symbol on mobile (John 2026-11-17: much closer) */
 
 /* Mobile: always two lines ("Älskat av" / "skidåkare."), see .intro-copy white-space in intro.css. */
 function seasonLine() {
@@ -69,6 +69,7 @@ export function init() {
   const plate = document.getElementById("intro-plate");
   const platePath = document.getElementById("intro-plate-path");
   const fill = document.getElementById("intro-fill");
+  const wordmark = document.getElementById("intro-wordmark");
   const zoom = document.getElementById("intro-zoom");
   const word = document.getElementById("intro-word");
   const copy = document.getElementById("intro-copy");
@@ -98,6 +99,7 @@ export function init() {
   let logoCenter = [innerWidth / 2, innerHeight / 2];
   let sMax = 8;
   let symbolPath = null;
+  let wordmarkD = "";
   let phase = 0;
   let displayed = 0;
   let warned = false;
@@ -149,9 +151,25 @@ export function init() {
     const text = await fetch("assets/brand/logo-vertical-black.svg").then((r) => r.text());
     const d = new DOMParser().parseFromString(text, "image/svg+xml").querySelector("path").getAttribute("d");
     const parts = subpaths(d);
-    const symbol = parts.filter((p) => p.maxY < 60);
+    /* Classify by real geometry: the number-pair bbox in subpaths() misreads H/V commands (wordmark letters). */
+    const ns = "http://www.w3.org/2000/svg";
+    const probe = document.createElementNS(ns, "svg");
+    probe.setAttribute("aria-hidden", "true");
+    probe.style.cssText = "position:absolute;width:0;height:0;visibility:hidden;pointer-events:none";
+    lock.append(probe);
+    parts.forEach((p) => {
+      const el = document.createElementNS(ns, "path");
+      el.setAttribute("d", p.d);
+      probe.append(el);
+      const box = el.getBBox();
+      p.isSymbol = box.y + box.height < 60;
+    });
+    probe.remove();
+    const symbol = parts.filter((p) => p.isSymbol);
     const right = symbol.slice().sort((a, b) => b.minX - a.minX)[0];
     symbolPath = symbol.map((p) => p.d).join("");
+    /* The wordmark of the same file: state A is the real vertical logo, not live text (John 2026-11-17). */
+    wordmarkD = parts.filter((p) => !p.isSymbol).map((p) => p.d).join("");
     return { d, symbol: symbolPath, right };
   }
 
@@ -189,6 +207,10 @@ export function init() {
     const plateTop = cy - h * 3.5;
     platePath.setAttribute("d", `M${plateLeft.toFixed(2)} ${plateTop.toFixed(2)}H${(cx + w * 3.5).toFixed(2)}V${(cy + h * 3.5).toFixed(2)}H${plateLeft.toFixed(2)}Z${drawn}`);
     fill.setAttribute("d", drawn);
+    /* Wordmark keeps its curves: same uniform map as the symbol, as an SVG transform. */
+    const k = bW / sw;
+    wordmark.setAttribute("d", wordmarkD);
+    wordmark.setAttribute("transform", `matrix(${k} 0 0 ${k} ${left - minX * k} ${top - minY * k})`);
     if (!layout.checker) {
       const probe = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       probe.setAttribute("aria-hidden", "true");
@@ -280,6 +302,7 @@ export function init() {
     placeZoom(scale, logoCenter[0], logoCenter[1], gx, gy);
     const fade = Math.min(1, t / 0.25);
     word.style.opacity = t <= 0 ? "1" : t >= 0.25 ? "0" : String(1 - fade);
+    wordmark.style.opacity = word.style.opacity;
     if (!lock.dataset.wordAt100 && t >= 100 / GROW) lock.dataset.wordAt100 = word.style.opacity;
     fill.style.opacity = t <= 0.3 ? "1" : t >= 0.8 ? "0" : String(1 - (t - 0.3) / 0.5);
     lock.dataset.growT = String(t);
@@ -464,6 +487,7 @@ export function init() {
     const v = String(fadeEase(o));
     fill.style.opacity = v;
     word.style.opacity = v;
+    wordmark.style.opacity = v;
     if (o >= 1) { logoShown = true; lock.classList.remove("is-black"); }
   }
 

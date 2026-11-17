@@ -82,6 +82,8 @@ html.is-intro-done .intro-word {
 /* Ingen blixt av "Tänndalen" överst innan intro.js har kört: ordet tonas in av JS (inline opacity),
    och för återkommande tas hela låset bort av JS – dölj det redan i CSS. */
 .intro-word { opacity: 0; }
+/* State A is the real vertical logo (#intro-wordmark, paths from logo-vertical-black.svg). The live text stays out. */
+.intro-word { display: none; }
 html.is-returning .intro-lock,
 html.is-returning #intro-scroll { display: none; }
 
@@ -111,12 +113,13 @@ html.is-skip-gone #intro-scroll {
 
 @media (max-width: 1023px) {
   /* John 2026-11-17: startloggan och ordet större, maskade symbolen ~3× (26 → 80vw), payoffen nära symbolen på två rader. */
+  /* Runda 2: startloggan 24vw symbol ≈ 60vw ordmärke. Payoffen ~1,3× så raderna matchar symbolens bredd (80vw). */
   :root {
-    --intro-a-symbol-w: 19vw;
+    --intro-a-symbol-w: 24vw;
     --intro-b-symbol-w: 80vw;
   }
-  .intro-word { font-size: var(--font-size-4xl); }
-  .intro-copy { font-size: var(--font-size-3xl); white-space: pre; }
+  .intro-copy { font-size: var(--font-size-4xl); white-space: pre; }
+  html[data-season="summer"] .intro-copy { font-size: 2.5rem; } /* "fjällvandrare." är längre: 40 px ≈ symbolbredden */
 }
 
 html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .page > .top,

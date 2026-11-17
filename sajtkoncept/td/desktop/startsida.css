@@ -6559,11 +6559,11 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 
   .account-menu { display: none; }
 
-  /* Fjällguiden: bara ikonen, rund 40 px */
+  /* Fjällguiden: bara ikonen, rund 32 px (John 2026-11-17: 40 kändes för hög bredvid menyn) */
   #fraga-launch {
-    width: 40px;
-    min-width: 40px;
-    height: 40px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
     padding: 0;
     justify-content: center;
     border-radius: var(--radius-full);
@@ -6571,6 +6571,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   #fraga-launch .fraga-launch-name,
   #fraga-launch .fraga-launch-ai,
   #fraga-launch .fg-live { display: none; }
+  #fraga-launch .fraga-launch-mark { width: 20px; height: 20px; }
 
   /* Meny: 40 px, ingen fyllning, samma storlek öppen som stängd */
   .menu-control,
@@ -6592,8 +6593,9 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 /* Mobilhero (2026-11-17). Figma iPhone 16 - 1: media 948:2254, 345×440 (≈ 4:5), x 24, radie 4, 16 px under headern.
    Säsongsramen som på desktop (John 2026-11-17), 8 px bred på mobil. Inga doodles. Ingen krympning/parallax. */
 @media (max-width: 1023px) {
-  .hero { width: calc(100vw - 48px); margin-left: 8px; margin-top: 16px; }
-  .hero-frame { aspect-ratio: 345 / 440; border-radius: var(--radius-sm); }
-  .hero-frame .hero-media { inset: var(--space-sm); width: calc(100% - 2 * var(--space-sm)); height: calc(100% - 2 * var(--space-sm)); border-radius: 2px; }
+  /* Runda 2: ramen ut till statement-kanterna (16 px), videon kvar på 329×424. */
+  .hero { width: calc(100vw - 32px); margin-left: 0; margin-top: 16px; }
+  .hero-frame { aspect-ratio: 361 / 456; border-radius: var(--radius-sm); }
+  .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: 2px; }
   .hero-doodle { display: none; }
 }

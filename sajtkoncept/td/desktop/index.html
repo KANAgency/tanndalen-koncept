@@ -26,9 +26,9 @@
     <link rel="stylesheet" href="/ds/components/citat.css" />
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=mob2" />
+    <link rel="stylesheet" href="startsida.css?v=mob3" />
     <link rel="stylesheet" href="brand-sequence.css" />
-    <link rel="stylesheet" href="intro.css?v=mob1" />
+    <link rel="stylesheet" href="intro.css?v=mob3" />
     <script>
       /* Skarvarna — etikett/citat/källa i enheter av ritningens bredd W_b (mot bbox-origo). */
       var TOPO2_LAYOUT = {
@@ -126,7 +126,7 @@
       document.body.classList.add(document.documentElement.classList.contains("is-returning") ? "is-returning" : "is-intro");
     </script>
     <div class="intro-lock is-black" id="intro-lock">
-      <svg class="intro-plate" id="intro-plate" aria-hidden="true" overflow="visible"><g id="intro-zoom"><path id="intro-plate-path" fill="currentColor" fill-rule="evenodd"></path><path id="intro-fill" fill="var(--color-bg-base)"></path></g></svg>
+      <svg class="intro-plate" id="intro-plate" aria-hidden="true" overflow="visible"><g id="intro-zoom"><path id="intro-plate-path" fill="currentColor" fill-rule="evenodd"></path><path id="intro-fill" fill="var(--color-bg-base)"></path><path id="intro-wordmark" fill="var(--color-bg-base)"></path></g></svg>
       <p class="intro-word" id="intro-word">Tänndalen</p>
       
       <p class="intro-copy" id="intro-copy" aria-live="off"></p>
@@ -7040,7 +7040,7 @@ window.tdScrollTrack = (track, delta, reduced) => {
           syncButtons();
         })();
       </script>
-      <script type="module" src="intro.js?v=mob2"></script>
+      <script type="module" src="intro.js?v=mob4"></script>
       <script src="brand-sequence.js" defer></script>
       <script>
       /* Göm menyn medan En dag / Lev Andas fyller skärmen; tillbaka när man är på väg ut */

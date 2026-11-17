@@ -22,6 +22,11 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
   - Allt 32 px högre: header 8 px från toppen (även sticky), filmen på y 72 både under och efter introt.
   - Hero: säsongsramen tillbaka, 8 px bred.
   - Bugg: introt kunde fastna svart om första bildrutan kom sent (dold flik eller appbyte). `logoIn(1)` körs nu även i hold-grenen.
+- 2026-11-17 Johns feedback, runda 2:
+  - Introts startläge är nu den riktiga vertikala loggan på mobil och desktop. Ordmärket ritas från `logo-vertical-black.svg` (15 delar, kurvorna bevarade, samma skala som symbolen) i stället för live-text i Superclarendon. Loggdelarna klassas efter verklig geometri (getBBox), eftersom den gamla parsern läste H/V fel och tappade 4 delar. Mobil: symbolen 94 px, ordmärket 237 px. Desktop: symbolen 216 px, ordmärket 543 px (= 37,7vw).
+  - Payoff mobil 36 → 48 px (sommar 40 px, eftersom "fjällvandrare." är längre). Raderna är 259 och 299 px mot symbolens 315. Avståndet till symbolen 16 → 28 px.
+  - Heroramen ut till ingressens kanter (16–377). Videon är oförändrad (329×424), så ramen blir 16 px bred.
+  - Fjällguiden-cirkeln 40 → 32 px, ikonen 20 px.
 
 ## Block för block (i visningsordning)
 
