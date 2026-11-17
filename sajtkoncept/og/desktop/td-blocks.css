@@ -2354,3 +2354,207 @@ html:not([data-mode="onsite"]) .td-aktuellt-kort[data-lage="onsite"] { display: 
 html, body { overscroll-behavior-y: none; }
 
 /* ── Boendekort: två testvarianter under Fjällguiden (Oura och Waabi, 2026-11-15) ── */
+
+
+/* ── Handplockade boenden (#boenden-waabi), port från td/desktop/startsida.css 2026-11-17 ── */
+.td-aktuellt-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.td-aktuellt-arrow {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: var(--color-TD-snow);
+}
+
+.td-aktuellt-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.td-aktuellt-arrow:first-child svg { transform: scaleX(-1); }
+@media (max-width: 767px) { .td-aktuellt-nav { display: none; } }
+.utforsakning-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.utforsakning-eyebrow {
+  margin: 0;
+  color: var(--color-TD-neutral-subtle);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
+  font-weight: 700;
+  line-height: 1.375;
+  letter-spacing: var(--font-tracking-normal);
+  text-transform: uppercase;
+}
+.td-videomodal-x { position: absolute; right: 0; bottom: calc(100% + var(--space-md)); }
+/* ── Boendekort: två testvarianter under Fjällguiden (Oura och Waabi, 2026-11-15) ── */
+.td-bo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 160px;
+  color: var(--color-text-primary);
+}
+.td-bo-head { display: flex; flex-direction: column; gap: 8px; }
+.td-bo-eyebrow { margin: 0; }
+.td-bo-titlerad { display: flex; align-items: center; gap: 16px; }
+.td-bo-titlerad h2 { margin: 0; }
+.td-bo-alla {
+  width: 44px; height: 44px; flex: 0 0 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: #FFFFFF; color: var(--color-text-primary);
+}
+.td-bo-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px;
+}
+.td-bo-pris { margin: 0; font-weight: 700; font-size: 15px; }
+
+/* Waabi: stor bild plus rutnät med detalj och belägg */
+.td-bo-waabi-kort { display: flex; flex-direction: column; gap: 10px; }
+.td-bo-waabi-bildlank { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; }
+.td-bo-waabi-bild { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 9s ease-out; }
+.td-bo-waabi-bildlank:hover .td-bo-waabi-bild { transform: scale(1.08); }
+.td-bo-waabi-pil {
+  position: absolute; right: 16px; bottom: 16px; width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: var(--color-cta-primary); color: #FFFFFF;
+}
+.td-bo-waabi-rutor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.td-bo-waabi-rutor > * { aspect-ratio: 1 / 1; border-radius: 12px; margin: 0; }
+.td-bo-waabi-rutor img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.td-bo-ruta {
+  box-sizing: border-box; padding: 12px; background: #FFFFFF;
+  display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px; color: #686868;
+}
+.td-bo-ruta-mork { background: var(--color-bg-inverted); color: rgba(255,255,255,0.75); }
+.td-bo-ruta-tal { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
+.td-bo-ruta-mork .td-bo-ruta-tal { color: #FFFFFF; }
+.td-bo-waabi-rubrik {
+  margin: 8px 0 0; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-weight: 400; font-size: 24px; line-height: 1.2;
+}
+.td-bo-waabi-namn { color: #686868; }
+
+@media (max-width: 1023px) {
+  .td-bo-lista {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%;
+    gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+  }
+  .td-bo-lista > li { scroll-snap-align: start; }
+}
+.faq:has(+ .td-bo) { --fraga-space-after: 288px; }
+.page .td-bo-alla { color: var(--color-text-primary); }
+.page .td-bo-waabi-pil { color: #FFFFFF; }
+.td-bo .td-bo-head { gap: var(--space-md); }
+.td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
+.td-bo .td-bo-head h2 { margin: 0; }
+/* Typografi on brand + mindre radier (2026-11-15) */
+.td-bo .td-bo-waabi-bildlank { border-radius: 4px; }
+.td-bo .td-bo-waabi-rutor > * { border-radius: 4px; }
+.td-bo .td-bo-pris { font-size: inherit; font-weight: inherit; }
+.td-bo .td-bo-ruta-tal { font-size: var(--font-size-md); }
+.td-bo .td-bo-waabi-namn { margin: 8px 0 0; color: var(--color-TD-neutral); }
+.td-bo .td-bo-waabi-rubrik { margin: 0; font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); line-height: 1.2; }
+.td-bo .td-bo-waabi-kort { gap: 8px; }
+.td-bo .td-bo-waabi-rutor { margin-bottom: 4px; }
+.td-bo .td-bo-ruta { font-family: var(--font-family-TD-secondary), sans-serif; }
+.td-bo { font-family: var(--font-family-TD-secondary), sans-serif; }
+.td-bo .td-bo-waabi-namn { font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif; font-weight: var(--font-weight-regular); font-size: var(--font-size-lg); line-height: 1.2; letter-spacing: 0; }
+.td-bo .td-bo-waabi-namn { font-size: var(--font-size-md); }
+/* Tajtare överrad → rubrik i båda blocken (2026-11-15) */
+.utforsakning-heading, .td-bo .td-bo-head { gap: var(--space-xs); }
+.td-bo .td-bo-waabi-namn { margin-bottom: -4px; } .td-bo-waabi .td-bo-waabi-kort .td-bo-pris { margin-top: 4px; }
+.td-bo .td-bo-waabi-namn { letter-spacing: -0.02em; }
+/* Oura: ingen dimning av hela bilden, scrim bara där texten ligger */
+/* Boendeslingorna som karusell (som Aktuellt) */
+.td-bo .td-bo-head { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+.td-bo .td-bo-head > .utforsakning-eyebrow, .td-bo .td-bo-head > h2 { flex-basis: 100%; }
+.td-bo .td-bo-head { flex-wrap: wrap; }
+.td-bo .td-bo-head .td-bo-nav { order: 3; margin-left: auto; }
+.td-bo .td-bo-lista {
+  display: flex; grid-template-columns: none; gap: 40px;
+  width: 100vw; margin-left: calc(50% - 50vw);
+  --bo-inline: max(var(--space-lg), (100vw - 1280px) / 2);
+  padding-inline: var(--bo-inline); scroll-padding-inline-start: var(--bo-inline);
+  box-sizing: border-box;
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+}
+.td-bo .td-bo-lista::-webkit-scrollbar { display: none; }
+.td-bo .td-bo-lista > li { flex: 0 0 calc((min(1280px, 100vw - var(--space-lg) * 2) - 80px) / 3); scroll-snap-align: start; }
+@media (max-width: 1023px) { .td-bo .td-bo-lista { gap: 16px; } .td-bo .td-bo-lista > li { flex-basis: 80%; } }
+@media (max-width: 767px) { .td-bo .td-bo-nav { display: none; } }
+/* Pilarna på samma rad som rubriken */
+.td-bo .td-bo-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; row-gap: var(--space-xs); align-items: end; }
+.td-bo .td-bo-head > .utforsakning-eyebrow { grid-column: 1; grid-row: 1; }
+.td-bo .td-bo-head > h2 { grid-column: 1; grid-row: 2; }
+.td-bo .td-bo-head > .td-bo-nav { grid-column: 2; grid-row: 1 / 3; align-self: end; margin: 0; }
+
+/* Boendekort med video: videon har egen kamerarörelse, ingen hover-zoom */
+.td-bo .td-bo-video, .td-bo a:hover .td-bo-video { transform: none; transition: none; }
+
+/* Boendekort (Waabi): pris som tagg på bilden, CTA, klickbar detaljbild + bildmodal */
+.td-bo-waabi-bildlank .td-bo-pristag { position: absolute; top: var(--space-md); left: var(--space-md); z-index: 2; }
+.td-bo-waabi-kort .td-bo-cta { align-self: flex-start; margin-top: auto; }
+.td-bo-waabi-kort .td-bo-waabi-rubrik { margin-bottom: var(--space-lg); }
+.td-bo-detalj { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px; }
+.td-bo-detalj img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft); }
+.td-bo-detalj:hover img { transform: scale(1.04); }
+.td-bo-detalj:focus-visible { outline: 2px solid var(--color-text-primary); outline-offset: 2px; }
+.td-bildmodal { width: min(1100px, 92vw); padding: 0; border: 0; background: transparent; overflow: visible; }
+.td-bildmodal::backdrop { background: rgb(36 39 42 / 0.88); }
+.td-bildmodal-bild { display: block; width: 100%; max-height: 82vh; object-fit: contain; border-radius: var(--radius-sm); }
+
+/* Boendekort v2: pristagg nere till höger, CTA fast avstånd från rubriken, ljus neutral lift-ruta */
+.td-bo-waabi-bildlank .td-bo-pristag { top: auto; left: auto; bottom: var(--space-md); right: var(--space-md); }
+.td-bo-waabi-kort .td-bo-cta { margin-top: 0; }
+.td-bo-waabi-kort .td-bo-waabi-rubrik { margin-bottom: var(--space-lg); }
+.td-bo .td-bo-ruta-mork { background: var(--color-TD-neutral-subtle); color: var(--color-text-secondary, #4C4D4F); }
+.td-bo .td-bo-ruta-mork .td-bo-ruta-tal { color: var(--color-text-primary); }
+
+/* Boendekort v3: lift-avstånd och bäddar i samma ruta, två bilder före (2026-11-15) */
+.td-bo .td-bo-ruta-fakta { justify-content: center; gap: 8px; }
+.td-bo-fakta-rad { display: flex; flex-direction: column; }
+.td-bo-waabi-rutor > .td-bo-ruta-fakta:nth-child(2) { grid-column: span 2; aspect-ratio: auto; }
+@media (max-width: 639px) {
+  .td-bo .td-bo-ruta-fakta { padding: 8px; gap: 4px; min-height: 0; }
+  .td-bo .td-bo-ruta-fakta .td-bo-ruta-tal { font-size: var(--font-size-sm, 14px); line-height: 1.1; }
+  .td-bo .td-bo-ruta-fakta .td-ui-caption { font-size: 11px; line-height: 1.2; }
+}
+/* Faktarutan: Natt-bakgrund, Snö-text */
+.td-bo .td-bo-ruta-fakta { background: var(--color-bg-inverted, #24272A); color: #FFFFFF; }
+.td-bo .td-bo-ruta-fakta .td-bo-ruta-tal { color: #FFFFFF; }
+/* Boendekort v4 (test): namn + rubrik vita i bildens topp med scrim, ~10 % högre än kvadrat, ingen CTA */
+.td-bo .td-bo-waabi-bildlank { aspect-ratio: 1 / 1.1; }
+.td-bo-waabi-bildlank::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 45%; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, rgb(36 39 42 / 0.55), rgb(36 39 42 / 0.25) 55%, rgb(36 39 42 / 0)); }
+.td-bo-overlay { position: absolute; top: var(--space-lg); left: var(--space-lg); right: var(--space-lg); z-index: 2; display: flex; flex-direction: column; gap: 2px; }
+.td-bo .td-bo-overlay .td-bo-waabi-namn, .td-bo .td-bo-overlay .td-bo-waabi-rubrik { color: #FFFFFF; margin: 0; }
+.td-bo .td-bo-waabi-kort .td-bo-overlay .td-bo-waabi-rubrik { margin-bottom: 0; }
+.td-bo-overlay { top: var(--space-2xl, 32px); left: var(--space-2xl, 32px); right: var(--space-2xl, 32px); }
+.td-bo .td-bo-overlay .td-bo-waabi-namn { font-size: var(--font-size-sm, 14px); }
+.td-bo .td-bo-overlay .td-bo-waabi-rubrik { font-size: var(--font-size-2xl); }
+/* Hover-CTA i boendebilden: uttonad vid hover på kortet, vit vid hover på knappen */
+.td-bo-hover-cta { position: absolute; left: var(--space-md); bottom: var(--space-md); z-index: 2;
+  background: rgb(255 255 255 / 0.6); color: var(--color-TD-night, #24272A);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity var(--motion-duration-fast, .2s) ease, transform var(--motion-duration-fast, .2s) ease, background-color var(--motion-duration-fast, .2s) ease; }
+.td-bo-waabi-bildlank:hover .td-bo-hover-cta,
+.td-bo-waabi-bildlank:focus-visible .td-bo-hover-cta { opacity: 1; transform: none; pointer-events: auto; }
+.td-bo-waabi-bildlank .td-bo-hover-cta:hover { background: #FFFFFF; }
+@media (hover: none) { .td-bo-hover-cta { display: none; } }
+/* Hover-CTA v2: mitt i bilden, Small, bara uttonat läge, svart text */
+.td-bo-hover-cta { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, calc(-50% + 4px)); color: #000000; pointer-events: none; }
+.td-bo-waabi-bildlank:hover .td-bo-hover-cta,
+.td-bo-waabi-bildlank:focus-visible .td-bo-hover-cta { transform: translate(-50%, -50%); pointer-events: none; }
+.td-bo-waabi-bildlank .td-bo-hover-cta:hover { background: rgb(255 255 255 / 0.6); }

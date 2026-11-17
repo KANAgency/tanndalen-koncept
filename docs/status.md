@@ -265,6 +265,14 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
+## Klart 17 nov: OG – Handplockade boenden (karusell med riktiga R360-boenden)
+- TD:s `#boenden-waabi` portad till OG och ersätter platshållaren "Handplockade boenden" i blockordningen (vinter: efter Frågor, före Boende; sommar: efter En dag). Dold i Påbörjad bokning och På plats som i TD.
+- 8 kort: huvudbild + 2 stödbilder (klickbara, öppnas i bildmodal) + faktaruta med boyta och bäddar (ur R360). Rubrik "Här bor familjerna" (mitt förslag, ej beslutat). Kortrubrikerna bygger på R360-beskrivningen (t.ex. Lönnstigen 6: matplats för 12, Norra Stugvägen 10: husdjur tillåtet).
+- Bildval (nr i `assets/boenden/orsa/…`, huvud/stöd/stöd): Limbygården 04/01/07, Lönnstigen 6 24/01/05, Aspstigen 2B 04/01/06, Rönnbärsstigen 1 05/01/07, Norra Stugvägen 10 01/05/03, Illerstigen 4B 06/01/08, Hallonstigen 9B 04/01/06, Uttern 7 05/01/06. Webbversioner (max 1400 px, q82, 5,0 MB totalt) i `og/desktop/assets/img/boenden/<slug>-huvud|stod-1|stod-2.jpg`.
+- Kod: sektion + bildmodal i `og/desktop/index.html`, CSS verbatim från TD sist i `og/desktop/td-blocks.css`, karusellpilar/`tdScrollTrack`/modal-JS sist i `og/desktop/index.html`. Typsnitt följer OG via `--font-family-TD-*`-mappningen.
+- Verifierat (1440 och 1024 px): 24/24 bilder laddar, kort 400 px vid 1440, vänsterkant 80 px = rubriken, Nästa-pil scrollar 440 px, modal öppnar, ingen horisontell overflow, inga konsolfel. Mobil inte kontrollerad.
+- Öppet: pris `fr. [X] kr/vecka` (R360 gav inga priser för dessa veckan 9–16 jan 2027). Nästa steg: boendevideor för huvudbilden (behöver fler bilder per boende). Figma: blocket finns inte i OG-Figma (Figma-skuld).
+
 ## Klart 17 nov: OG-boenden hämtade ur R360 (8 st, olika stil)
 - `hamta-boendebilder.py` har nu `--sajt td|og`. OG: `orsagronklitt.r360online.se`, boende = resvtype 1000 (1002 = skidhyra, 1007 = längdskidåkning). Listan `BOENDEN_OG` i skriptet; exakt namnträff går före prefixträff.
 - Katalogen: 574 enheter, 347 utan camping/ställplatser, 340 unika bildset. Alla granskades på kontaktark; valda på foto och inredning, spridda över byarna och stilarna:
