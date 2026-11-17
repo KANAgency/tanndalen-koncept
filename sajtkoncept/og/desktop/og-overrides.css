@@ -157,9 +157,11 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Orsa-guiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: OG ljusblå #A1B5BA. Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
+   Vinter: sjöblå #9DC7CB (oklch 0.80 0.045 205; mellan mörkgrön och orangens komplement,
+   egen OG-färg i stället för TD:s #A1B5BA). Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
 .theme-OG {
-  --color-OG-guide: var(--color-OG-season-winter);
+  --color-OG-guide-winter: #9DC7CB;
+  --color-OG-guide: var(--color-OG-guide-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
 }
 html.theme-OG[data-season="summer"] { --color-OG-guide: var(--color-OG-season-spring); }
