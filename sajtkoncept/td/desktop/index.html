@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=plate1" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=typo3" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
-    <link rel="stylesheet" href="/ds/components/booking.css?v=cykel-nudge" />
+    <link rel="stylesheet" href="/ds/components/booking.css?v=mob4" />
     <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
@@ -26,9 +26,9 @@
     <link rel="stylesheet" href="/ds/components/citat.css" />
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=mob3" />
+    <link rel="stylesheet" href="startsida.css?v=mob4" />
     <link rel="stylesheet" href="brand-sequence.css" />
-    <link rel="stylesheet" href="intro.css?v=mob3" />
+    <link rel="stylesheet" href="intro.css?v=mob4" />
     <script>
       /* Skarvarna — etikett/citat/källa i enheter av ritningens bredd W_b (mot bbox-origo). */
       var TOPO2_LAYOUT = {
@@ -1989,7 +1989,12 @@
           pill.hidden = same;
           if (!same) {
             button.setAttribute("aria-pressed", "true");
-            pill.style.transform = `translateX(${index * 78}px)`;
+            /* Pill follows the real button box (mobile buttons are flex, not 76 + 2 px). */
+            pill.style.top = "0px";
+            pill.style.left = "0px";
+            pill.style.width = `${button.offsetWidth}px`;
+            pill.style.height = `${button.offsetHeight}px`;
+            pill.style.transform = `translate(${button.offsetLeft}px, ${button.offsetTop}px)`;
           }
           clip.querySelectorAll(".td-booking-pane").forEach((pane) => pane.classList.toggle("is-shown", !same && pane.dataset.cat === id));
           const shown = clip.querySelector(".is-shown");

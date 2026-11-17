@@ -6584,10 +6584,38 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   }
   .top:has(.site-menu.is-open) .menu-control-label { display: none; }
 
-  /* Menypanelen under headerns knappar: fylls från toppen, headern ligger ovanpå */
+  /* Menypanelen under headerns knappar, hela skärmen topp till botten (John 2026-11-17).
+     Första raden 8 px under listen (8 + 48 + 8 = 64). Sidpadding 20 (var 24). */
   .site-menu,
-  .site-menu.is-open { top: 0; z-index: -1; }
-  .site-menu-panel { padding-top: 96px; }
+  .site-menu.is-open { top: 0; bottom: 0; z-index: -1; }
+  .site-menu.is-open { height: 100dvh; max-height: none; }
+  .site-menu-panel {
+    box-sizing: border-box;
+    min-height: 100%;
+    max-height: 100dvh;
+    overflow-y: auto;
+    padding: 64px 20px calc(20px + env(safe-area-inset-bottom));
+  }
+  /* Raden ryms i bredden: länken tar resten, chevronen linjerar med högerkanten. Ingen hovercirkel på mobil. */
+  .site-menu-link { flex: 1 1 auto; width: auto; }
+  .site-menu-chevron { justify-content: flex-end; }
+  .site-menu-chevron:hover,
+  .site-menu-chevron:focus-visible { background: transparent; }
+
+  /* Kompakt bokningsrad efter scroll. Figma Booking / Bar Mode=Compact (1446:30064):
+     ikon 24, ikonyta 28, knapp 45 (≥ 44). Startformen har kvar 32 px-ikonerna. */
+  .td-booking-cats .booking-icon-slot,
+  .td-booking-cats .booking-icon-slot img,
+  .td-booking-cats .booking-icon-slot svg {
+    transition:
+      height var(--motion-duration-normal) var(--motion-easing-out-soft),
+      width var(--motion-duration-normal) var(--motion-easing-out-soft);
+  }
+  html.is-scrolled .td-booking-cats > button { min-height: 44px; }
+  html.is-scrolled .td-booking-cats .booking-icon-slot { height: 28px; }
+  html.is-scrolled .td-booking-cats .booking-icon-slot img,
+  html.is-scrolled .td-booking-cats .booking-icon-slot svg { width: 24px; height: 24px; }
+  html.is-scrolled .td-booking-cats .booking-icon-slot--cykel svg { width: 30px; height: 30px; }
 }
 
 /* Mobilhero (2026-11-17). Figma iPhone 16 - 1: media 948:2254, 345×440 (≈ 4:5), x 24, radie 4, 16 px under headern.
@@ -6598,4 +6626,11 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .hero-frame { aspect-ratio: 361 / 456; border-radius: var(--radius-sm); }
   .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: 2px; }
   .hero-doodle { display: none; }
+}
+
+/* Mobil: Storvigeln-topografin syns till höger strax under ingressen (John 2026-11-17).
+   Desktopens fasta förskjutning (--topo-shift-y 600 px) flyttade den ned bakom Aktuellt. Etiketten väntar. */
+@media (max-width: 1023px) {
+  .parallax-item--hero,
+  html[data-mode] .parallax-item--hero { --topo-shift-x: 0px; --topo-shift-y: 0px; }
 }

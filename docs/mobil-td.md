@@ -27,6 +27,11 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
   - Payoff mobil 36 → 48 px (sommar 40 px, eftersom "fjällvandrare." är längre). Raderna är 259 och 299 px mot symbolens 315. Avståndet till symbolen 16 → 28 px.
   - Heroramen ut till ingressens kanter (16–377). Videon är oförändrad (329×424), så ramen blir 16 px bred.
   - Fjällguiden-cirkeln 40 → 32 px, ikonen 20 px.
+- 2026-11-17 Johns feedback, runda 3:
+  - Payoffen 48 → 44 px (sommar 37 px).
+  - Bokningsraden i startform 81 → 61 px: padding 6, ikonytan 32 (ikonerna fortfarande 32 px), knappen 49 px (≥ 44). Kompaktläge vid scroll (`html.is-scrolled`) enligt Figma Mode=Compact (1446:30064): ikon 24, ikonyta 28, knapp 45, raden 57 px. Pillen (vald kategori) följer nu knappens verkliga mått i stället för fasta 76 + 2 px. Desktop är oförändrad (pillen ligger exakt på knappen, 76×57).
+  - Storvigeln-topografin syns till höger strax under ingressen (y 824, 280×120). Desktopens förskjutning på 600 px är nollad på mobil. Etiketten är inte placerad än.
+  - Menyn: hela skärmen (393×852), första raden 64 px från toppen (var 96), sidpadding 20 (var 24). Chevronerna linjerar med högerkanten (svg-kant x 373), och hovercirkeln är borttagen på mobil.
 
 ## Block för block (i visningsordning)
 

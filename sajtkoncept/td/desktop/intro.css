@@ -118,8 +118,8 @@ html.is-skip-gone #intro-scroll {
     --intro-a-symbol-w: 24vw;
     --intro-b-symbol-w: 80vw;
   }
-  .intro-copy { font-size: var(--font-size-4xl); white-space: pre; }
-  html[data-season="summer"] .intro-copy { font-size: 2.5rem; } /* "fjällvandrare." är längre: 40 px ≈ symbolbredden */
+  .intro-copy { font-size: 2.75rem; white-space: pre; } /* 44 px (John: något mindre än 48) */
+  html[data-season="summer"] .intro-copy { font-size: 2.3rem; } /* "fjällvandrare." är längre: 40 px ≈ symbolbredden */
 }
 
 html.is-intro:not(.is-intro-reveal):not(.is-intro-done) .page > .top,

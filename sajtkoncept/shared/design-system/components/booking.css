@@ -82,6 +82,17 @@
     width: auto;
     min-width: 0;
   }
+
+  /* Lägre rad (John 2026-11-17): 81 → 61 px. Ikonerna oförändrade 32 px, träffytan ≥ 44 px (49). */
+  .td-booking-cats {
+    height: auto;
+    padding-block: 6px;
+  }
+  .td-booking-cats > button {
+    height: auto;
+    min-height: 44px;
+  }
+  .td-booking-cats .booking-icon-slot { height: 32px; }
 }
 
 .td-booking-clip {
