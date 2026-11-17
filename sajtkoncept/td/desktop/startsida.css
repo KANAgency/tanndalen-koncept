@@ -5236,6 +5236,9 @@ html[data-mode="booking"][data-season="winter"] .mode-booking-tip-arrow {
 /* Booking calendar row styles are not applied. The list needs 501px and the card is 316px. */
 
 /* —— På plats (onsite) —— */
+/* Läge 4: Anna-citatet vid Skarvarna visas inte (beslut 17 nov). visibility i stället för display så parallax-mätningen inte ändras. */
+html[data-mode="onsite"] .parallax-item--skarvarna .quote { visibility: hidden !important; }
+
 .brand-center {
   display: flex;
   flex-direction: column;
