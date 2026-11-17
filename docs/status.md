@@ -1,5 +1,7 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD intro: ordmärket ligger utanför zoomgruppen (#intro-wordmark direkt i #intro-plate), så bara symbolen växer. Ordmärket står still och tonar ut. Verifierat: startlägets position oförändrad (mobil 237 px, desktop 543 px), ordmärket har samma storlek efter tillväxten.
+
 - 2026-11-17: TD intro startar nu med riktiga vertikala loggan (ordmärket från SVG:n, inte live-text), både mobil och desktop. Mobil: payoff 48 px, 28 px under symbolen. Heroramen till ingressens kanter, Fjällguiden-cirkeln 32 px. Verifierat 393 och 1440.
 
 - 2026-11-17: Fjällguiden/Orsaguiden, datakorten i startvyn (TD + OG): kortrubriken (Nysnö, Liftar …) är nu `td-ui-body` (16 px, Book/Regular) i stället för `td-ui-title` (18 px bold). OG-siffrorna: alla `.td-ui-figure*` i `generated/typography-og.css` har `letter-spacing: 0em` (var TD:s Superclarendon-värden −0,017 till −0,04em, handkopierade, inte från Figma; påverkar också OG:s Just nu-block). "Andra brukar fråga" vänsterställd när välkomstvyn visas (gäller i praktiken alla lägen, välkomstvyn är aldrig tom). Öppet: OG-sifferstilar saknas i Figma.

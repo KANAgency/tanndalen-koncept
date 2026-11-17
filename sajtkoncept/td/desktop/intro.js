@@ -207,10 +207,16 @@ export function init() {
     const plateTop = cy - h * 3.5;
     platePath.setAttribute("d", `M${plateLeft.toFixed(2)} ${plateTop.toFixed(2)}H${(cx + w * 3.5).toFixed(2)}V${(cy + h * 3.5).toFixed(2)}H${plateLeft.toFixed(2)}Z${drawn}`);
     fill.setAttribute("d", drawn);
-    /* Wordmark keeps its curves: same uniform map as the symbol, as an SVG transform. */
+    /* Wordmark keeps its curves. It sits outside #intro-zoom so it never grows with the symbol (John 2026-11-17):
+       placed once where the symbol's state-A zoom would put it, then only fades. */
     const k = bW / sw;
+    const a = aW / bW;
+    const gy0 = h * 0.48 - cy; /* same state-A offset as applyGrow (gx is 0: cx is the viewport centre) */
+    const ka = k * a;
+    const tx = a * (left - minX * k) + cx * (1 - a);
+    const ty = a * (top - minY * k) + cy * (1 - a) + gy0;
     wordmark.setAttribute("d", wordmarkD);
-    wordmark.setAttribute("transform", `matrix(${k} 0 0 ${k} ${left - minX * k} ${top - minY * k})`);
+    wordmark.setAttribute("transform", `matrix(${ka} 0 0 ${ka} ${tx} ${ty})`);
     if (!layout.checker) {
       const probe = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       probe.setAttribute("aria-hidden", "true");
