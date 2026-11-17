@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD läge 4 (På plats), Just nu-kalendern: länken "Skidorna" på raden 14:00 Längd borttagen (gäller både Alpint och Längd, samma data i `modes-content.js`).
 - 2026-11-17: TD: alla siffer-platshållare (`[X]`, `[60]`, `[1 690]`, tider, datum) ersatta med rimliga exempelvärden utan hakparentes (68 ställen i `td/desktop/index.html`). Beslut (John): [] bara för textplatshållare ([Artist], [plats], [Namn]); siffror är exempel och ska se ut som riktigt innehåll. Värdena är påhittade och ska bytas mot R360/kunddata före skarp lansering. Obs: kortet "23 dagar kvar" är en nedräkning, vilket strider mot prisneutralitetsregeln.
 - 2026-11-17: OG-intro byter säsong live (og-season-event → `setScenes` i `hero-page.js`), byter direkt till säsongens första klipp, rubrikrad 2 och herotitel. Tidigare krävdes omladdning.
 - 2026-11-17: TD-videor hostas i Cloudflare R2 (Johns KAN-konto, bucket `td-video`, prefix `td/` och `og/`, publik r2.dev-URL). `build-dist.mjs` skriver om `assets/video/` till R2 när `TD_VIDEO_BASE` är satt (görs i deploy-workflow). Lokal dev oförändrad. Nya/ändrade videor: `npx wrangler r2 object put td-video/<td|og>/<fil> --file <fil> --remote`.

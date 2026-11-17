@@ -41,7 +41,7 @@ export const ONSITE_CALENDAR = {
       rows: [
         { time: "09:30", title: "Skidskola för barnen, [Hamra]" },
         { time: "12:00", title: "Våfflor i Toppstugan" },
-        { time: "14:00", title: "Längd: [Fjällbjörksslingan]", link: "Skidorna" },
+        { time: "14:00", title: "Längd: [Fjällbjörksslingan]" },
         { time: "19:00", title: "Fondue i Fjällkåtan" }
       ]
     },
