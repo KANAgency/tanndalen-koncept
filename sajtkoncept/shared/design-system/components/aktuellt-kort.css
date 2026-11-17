@@ -311,11 +311,17 @@
     min-width: 0;
   }
 
+  /* Nästa kort skymtar (~28 px): kortet 337 px på 393, glipan 12 (sätts i startsida.css). John 2026-11-17. */
   .td-aktuellt-track .td-aktuellt-kort {
-    flex-basis: 361px;
-    width: min(361px, calc(100vw - 32px));
+    flex: 0 0 calc(100vw - 56px);
+    width: calc(100vw - 56px);
     min-width: 0;
+    scroll-snap-align: start;
   }
+
+  /* Tunnare ram: 24 → 16 px (−33 %). Brödtexten följer bildens kant. */
+  .td-aktuellt-kort-platta { padding: var(--space-lg); }
+  .td-aktuellt-kort-body { padding-inline: var(--space-lg); }
 
   .td-aktuellt-kort-bild {
     height: 209px;
@@ -323,7 +329,7 @@
 
   .td-aktuellt-kort[data-typ="fraga"] {
     min-height: 400px;
-    padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+    padding: var(--space-lg) var(--space-lg) var(--space-2xl);
   }
 
   .td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-fraga.td-heading-md {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/ds/generated/typography-td.css" />
     <link rel="stylesheet" href="/ds/components/button.css?v=graphic" />
     <link rel="stylesheet" href="/ds/components/chip-tag.css" />
-    <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=plate1" />
+    <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=mob5" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=typo3" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
     <link rel="stylesheet" href="/ds/components/booking.css?v=mob4" />
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/ds/components/citat.css" />
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=mob4" />
+    <link rel="stylesheet" href="startsida.css?v=mob7" />
     <link rel="stylesheet" href="brand-sequence.css" />
     <link rel="stylesheet" href="intro.css?v=mob4" />
     <script>
@@ -6995,6 +6995,12 @@ window.tdScrollTrack = (track, delta, reduced) => {
                ingen spacer och sista kortet klipps av vid track-slut. */
             const target = last.querySelector(".td-aktuellt-kort-bild") || last;
             let spacer = track.querySelector(".td-aktuellt-end");
+            /* Mobil: pilarna är dolda (rect 0) och gav en spacer lika bred som hela spåret, så det
+               scrollade vidare i all oändlighet. Utan pilar slutar spåret vid sista kortet. */
+            if (!next.offsetParent) {
+              if (spacer) spacer.style.flex = "0 0 0px";
+              return 0;
+            }
             if (!spacer) {
               spacer = document.createElement("div");
               spacer.className = "td-aktuellt-end";

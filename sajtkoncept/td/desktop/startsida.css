@@ -4309,6 +4309,12 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
   }
 
   .td-aktuellt-nav { display: none; }
+
+  /* Mobil (John 2026-11-17): eyebrow ett steg mindre (18 → 16), kort som snäpper i fasta lägen,
+     mindre glipa så att nästa kort skymtar. Sista kortet är sista läget (spacern nollas i JS). */
+  .td-aktuellt-eyebrow { font-size: var(--font-size-base); }
+  .td-aktuellt { --aktuellt-gap: 12px; margin-top: calc(32px + var(--aktuellt-shift, 0px)); } /* ingress → Aktuellt 213 → ~112 px */
+  .td-aktuellt-track { box-sizing: border-box; scroll-snap-type: x mandatory; } /* border-box: annars 393 + 32 px padding och sista kortet klipps */
 }
 
 /* Parallax-lager: dokumentkoordinater, en gemensam transform. */
@@ -6633,4 +6639,16 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 @media (max-width: 1023px) {
   .parallax-item--hero,
   html[data-mode] .parallax-item--hero { --topo-shift-x: 0px; --topo-shift-y: 0px; }
+
+  /* Runda 4: ungefär en skärmhöjd (SVG 812×962), till höger och ur flödet så den inte trycker ned
+     Aktuellt. Startläge att flytta från: vänsterkant x 120, resten klipps i högerkanten. */
+  .parallax-item--hero {
+    width: calc(100svh * 812 / 962);
+    height: 100svh;
+    margin: 8px 0 calc(-100svh - 8px) 104px;
+  }
+  .parallax-item--hero .hero-topo {
+    -webkit-mask: url("assets/img/topografi.svg") left top / contain no-repeat;
+    mask: url("assets/img/topografi.svg") left top / contain no-repeat;
+  }
 }

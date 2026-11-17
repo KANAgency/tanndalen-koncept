@@ -32,6 +32,10 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
   - Bokningsraden i startform 81 → 61 px: padding 6, ikonytan 32 (ikonerna fortfarande 32 px), knappen 49 px (≥ 44). Kompaktläge vid scroll (`html.is-scrolled`) enligt Figma Mode=Compact (1446:30064): ikon 24, ikonyta 28, knapp 45, raden 57 px. Pillen (vald kategori) följer nu knappens verkliga mått i stället för fasta 76 + 2 px. Desktop är oförändrad (pillen ligger exakt på knappen, 76×57).
   - Storvigeln-topografin syns till höger strax under ingressen (y 824, 280×120). Desktopens förskjutning på 600 px är nollad på mobil. Etiketten är inte placerad än.
   - Menyn: hela skärmen (393×852), första raden 64 px från toppen (var 96), sidpadding 20 (var 24). Chevronerna linjerar med högerkanten (svg-kant x 373), och hovercirkeln är borttagen på mobil.
+- 2026-11-17 Johns feedback, runda 4:
+  - Topografin är ungefär en skärmhöjd (719×852, SVG 812×962, mask `left top / contain`), vänsterkant x 120, högerdelen klipps. Den ligger utanför flödet (negativ marginal), så den trycker inte ned Aktuellt. John flyttar den själv.
+  - Luften mellan ingressen och Aktuellt är 112 px (var 213).
+  - Aktuellt: eyebrow 18 → 16 px. Ramen på korten 24 → 16 px (−33 %, token `space-lg`), och brödtexten följer. Korten är 337 px med 12 px glipa, så nästa kort skymtar ~28 px. Snap i fasta lägen (`x mandatory`, `start`). Sista kortet är sista läget: slut-spacern räknades mot den dolda pilknappen och blev oändlig, så den är nu 0 utan pilar. Spåret är border-box, eftersom sista kortet annars klipptes 32 px. Desktop oförändrad (ram 24, glipa 24, ingen snap, spacern 112).
 
 ## Block för block (i visningsordning)
 
