@@ -6638,7 +6638,11 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
    Desktopens fasta förskjutning (--topo-shift-y 600 px) flyttade den ned bakom Aktuellt. Etiketten väntar. */
 @media (max-width: 1023px) {
   .parallax-item--hero,
-  html[data-mode] .parallax-item--hero { --topo-shift-x: 0px; --topo-shift-y: 0px; }
+  html[data-mode] .parallax-item--hero { --topo-shift-x: 200px; --topo-shift-y: -250px; } /* Runda 5: 250 upp, 200 höger (John 2026-11-17) */
+
+  /* Runda 5: ett steg mörkare i mobilen (neutral-light → neutral-subtle), båda topografierna. */
+  .parallax-item--hero .hero-topo,
+  .td-topo2 { background-color: color-mix(in srgb, var(--color-TD-neutral-subtle) 80%, transparent); }
 
   /* Runda 4: ungefär en skärmhöjd (SVG 812×962), till höger och ur flödet så den inte trycker ned
      Aktuellt. Startläge att flytta från: vänsterkant x 120, resten klipps i högerkanten. */
