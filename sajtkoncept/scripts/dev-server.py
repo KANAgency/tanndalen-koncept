@@ -9,6 +9,8 @@
 """
 from __future__ import annotations
 
+import os
+import re
 import socket
 import sys
 from pathlib import Path
@@ -36,7 +38,62 @@ class Handler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-cache")
+        self.send_header("Accept-Ranges", "bytes")
         super().end_headers()
+
+    # iOS Safari spelar bara video om servern svarar 206 på Range-anrop.
+    def send_head(self):
+        rng = self.headers.get("Range")
+        m = re.fullmatch(r"bytes=(\d*)-(\d*)", rng.strip()) if rng else None
+        if not m:
+            return super().send_head()
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            return super().send_head()
+        try:
+            f = open(path, "rb")
+        except OSError:
+            self.send_error(404, "File not found")
+            return None
+        size = os.fstat(f.fileno()).st_size
+        a, b = m.groups()
+        if a == "":
+            start, end = max(0, size - int(b or 0)), size - 1
+        else:
+            start, end = int(a), min(int(b) if b else size - 1, size - 1)
+        if start >= size or start > end:
+            f.close()
+            self.send_response(416)
+            self.send_header("Content-Range", f"bytes */{size}")
+            self.end_headers()
+            return None
+        self.send_response(206)
+        self.send_header("Content-Type", self.guess_type(path))
+        self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.send_header("Content-Length", str(end - start + 1))
+        self.end_headers()
+        f.seek(start)
+        self._range_left = end - start + 1
+        return f
+
+    def copyfile(self, source, outputfile):
+        left = getattr(self, "_range_left", None)
+        if left is None:
+            return super().copyfile(source, outputfile)
+        self._range_left = None
+        while left > 0:
+            chunk = source.read(min(64 * 1024, left))
+            if not chunk:
+                break
+            outputfile.write(chunk)
+            left -= len(chunk)
+
+    # Webbläsaren avbryter videoladdningar hela tiden: inget att logga.
+    def handle(self):
+        try:
+            super().handle()
+        except (BrokenPipeError, ConnectionResetError):
+            pass
 
     def translate_path(self, path: str) -> str:
         raw = unquote(urlparse(path).path)
