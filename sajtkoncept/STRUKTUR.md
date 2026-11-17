@@ -36,6 +36,8 @@ python3 scripts/dev-server.py 4173
 # eller via Playwright webServer (npm run test:td)
 ```
 
+**Testa i telefonen:** `python3 scripts/dev-server.py 4173 --lan` lyssnar på nätverket och skriver ut LAN-adressen (t.ex. `http://192.168.68.56:4173/td/?mode=new`). iPhone och Mac måste vara på samma Wi-Fi. Godkänn Python i brandväggen om macOS frågar. Utan `--lan` nås servern bara från Macen. Felsökning: på iPhonen Settings → Apps → Safari → Advanced → Web Inspector, på Macen Safari → Develop → [iPhone].
+
 | URL | Innehåll |
 |---|---|
 | `/` | Sidväljare (`?mobil=td` / `?mobil=og` = sajten i 393 px telefonram) |

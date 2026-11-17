@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import socket
 import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -61,14 +62,31 @@ class Handler(SimpleHTTPRequestHandler):
         return super().translate_path(path)
 
 
+def _lan_ip() -> str:
+    """Macens adress på det lokala nätet (inget skickas: UDP-connect väljer bara gränssnitt)."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(("10.255.255.255", 1))
+        return s.getsockname()[0]
+    except OSError:
+        return "127.0.0.1"
+    finally:
+        s.close()
+
+
 def main() -> None:
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 4173
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    lan = "--lan" in sys.argv[1:]
+    port = int(args[0]) if args else 4173
+    host = "0.0.0.0" if lan else "127.0.0.1"
     print(f"Serving {ROOT} on http://127.0.0.1:{port}/")
+    if lan:
+        print(f"  LAN (telefon på samma Wi-Fi): http://{_lan_ip()}:{port}/td/?mode=new")
     print(f"  /td/ → {TD}")
     print(f"  /og/ → {OG}")
     print(f"  /ds/ → {DS}")
     print(f"  /shared/ → {SHARED}")
-    ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()
+    ThreadingHTTPServer((host, port), Handler).serve_forever()
 
 
 if __name__ == "__main__":
