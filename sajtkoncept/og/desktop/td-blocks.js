@@ -2279,7 +2279,7 @@ export function initTdBlocks(root = document) {
             { label: "Bastu", value: "[I alla]" }
           ],
           video: "",
-          poster: "./assets/img/platshallare.svg",
+          poster: "./assets/img/boende-stugbyn.jpg",
           mirror: false,
           parallax: 0.2,
           r360AreaId: "",
