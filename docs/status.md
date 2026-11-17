@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD Hitta hit har sommarcopy: ingressen ("Kör på morgonen, vandra i kvällssol …") och de tre stopptexterna (Stockholm/Orsa/Tänndalen) byts med säsongen via `data-summer` + `HITTA_STOP_BODIES`/`syncHittaCopy` i `td/desktop/index.html`. Gäller både standardkartan och `?hitta=pin`. Rubrik, knapp och faktakort är oförändrade. Öppet: verifiera att bussen Östersund–Tänndalen går sommartid. Känt sedan tidigare: `?hitta=pin` kastar `mobileQ is not defined` i `placeHittaFrame`.
 - 2026-11-17: TD mobil påbörjad: triage av nybesökarläget i 393 px finns i `docs/mobil-td.md` (A 8, B 3, C 4 block + Hitta hit). Lägesväljaren skippas i v1. Öppet: Johns fem beslut (header, hero-porträtt/sol, En dag, områdesblockets karusell, Hitta hit), sedan bygge enligt ordningen i filen. Ingen kod ändrad.
 
 - 2026-11-17: TD områdesblocket, Järven: `posterSize: auto max(138%, 56vw)` + `posterPosition: 50% 0%` (zoom relativt blockhöjden; första versionen 76vw zoomade för mycket i breda/låga fönster). Förra lösningen (50% 65%) gjorde inget på skärmar nära 16:9 eftersom bilden (1,79:1) inte var högre än blocket. Verifierat i 2000×860 och 1600×900: text och CTA i snön ovanför trädlinjen, stugan syns. Stugans nederkant hamnar bakom karusellkontrollen.

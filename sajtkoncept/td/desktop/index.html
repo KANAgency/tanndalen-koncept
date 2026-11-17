@@ -1588,13 +1588,13 @@
         </div>
         <div class="td-hitta-copy">
           <h2 class="td-heading-lg" data-depth="mid">En dag på vägen. En vecka på fjället.</h2>
-          <p class="td-hitta-ingress" data-depth="mid">Kör på morgonen, åk skidor dagen efter. Eller ta tåget till Östersund och bussen sista biten.</p>
+          <p class="td-hitta-ingress" data-depth="mid" data-summer="Kör på morgonen, vandra i kvällssol. Eller ta tåget till Östersund och bussen sista biten.">Kör på morgonen, åk skidor dagen efter. Eller ta tåget till Östersund och bussen sista biten.</p>
           <a class="td-button td-button-secondary td-button-md td-button-fill-winter" href="#vag">Så tar du dig hit <span class="td-button-arrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.00023H14M9.18022 12.8203L14 8.00023L9.18022 3.18018" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span></a>
         </div>
         <ol class="hitta-tid">
-          <li><span class="hitta-tid-klocka td-ui-label">07:00</span><span class="td-ui-body">Stockholm</span><span class="hitta-tid-note td-ui-body-sm">Skidorna på taket, kaffe i muggen, fjället väntar!</span></li>
-          <li><span class="hitta-tid-klocka td-ui-label">10:30</span><span class="td-ui-body">Orsa</span><span class="hitta-tid-note td-ui-body-sm">Fikapaus vid Siljan. Halva vägen, hela kanelbullen.</span></li>
-          <li><span class="hitta-tid-klocka td-ui-label">14:00</span><span class="td-ui-body">Tänndalen</span><span class="hitta-tid-note td-ui-body-sm">Framme med tid över för resans första åk.</span></li>
+          <li><span class="hitta-tid-klocka td-ui-label">07:00</span><span class="td-ui-body">Stockholm</span><span class="hitta-tid-note td-ui-body-sm" data-summer="Cykeln på taket, kängorna i bagaget, fjället väntar!">Skidorna på taket, kaffe i muggen, fjället väntar!</span></li>
+          <li><span class="hitta-tid-klocka td-ui-label">10:30</span><span class="td-ui-body">Orsa</span><span class="hitta-tid-note td-ui-body-sm" data-summer="Glass vid Siljan. Halva vägen, hela struten.">Fikapaus vid Siljan. Halva vägen, hela kanelbullen.</span></li>
+          <li><span class="hitta-tid-klocka td-ui-label">14:00</span><span class="td-ui-body">Tänndalen</span><span class="hitta-tid-note td-ui-body-sm" data-summer="Framme med en hel ljus kväll framför er.">Framme med tid över för resans första åk.</span></li>
         </ol>
         <article class="td-faktakort td-faktakort-frost" data-depth="front">
           <div class="td-faktakort-main">
@@ -3192,6 +3192,28 @@
       } catch (error) { console.error("season", error); }
       try {
       const hittaPan = new URLSearchParams(location.search).get("hitta") !== "pin";
+      // Säsongscopy för Hitta hit: ingress och stopptexter (listan + kartans stopprutor).
+      const HITTA_STOP_BODIES = {
+        winter: [
+          "Skidorna på taket, kaffe i muggen, fjället väntar!",
+          "Fikapaus vid Siljan. Halva vägen, hela kanelbullen.",
+          "Framme med tid över för resans första åk."
+        ],
+        summer: [
+          "Cykeln på taket, kängorna i bagaget, fjället väntar!",
+          "Glass vid Siljan. Halva vägen, hela struten.",
+          "Framme med en hel ljus kväll framför er."
+        ]
+      };
+      function syncHittaCopy() {
+        const summer = document.documentElement.dataset.season === "summer";
+        document.querySelectorAll("#hitta .td-hitta-ingress[data-summer], #hitta .hitta-tid-note[data-summer]").forEach((el) => {
+          if (el.dataset.winter == null) el.dataset.winter = el.textContent;
+          el.textContent = summer ? el.dataset.summer : el.dataset.winter;
+        });
+      }
+      syncHittaCopy();
+      document.addEventListener("td-season", syncHittaCopy);
       /* Resevägen: raka stycken och rundade knyckar från hitta-route.js. */
       function buildHittaRoute() {
         const host = document.getElementById("hitta");
@@ -3369,6 +3391,16 @@
         ["10:30 · Orsa", "Fikapaus vid Siljan. Halva vägen, hela kanelbullen.", "3,5 av 7 h"],
         ["14:00 · Tänndalen", "Framme med tid över för resans första åk.", "7 av 7 h"]
       ];
+      function syncHittaSeason() {
+        const summer = document.documentElement.dataset.season === "summer";
+        stops.forEach((stop, index) => { stop[1] = HITTA_STOP_BODIES[summer ? "summer" : "winter"][index]; });
+        hitta.querySelectorAll(".td-hitta-stop[data-stop]").forEach((card) => {
+          const body = card.querySelector("#hitta-stop-body, .td-ui-body-sm");
+          if (body) body.textContent = stops[Number(card.dataset.stop)][1];
+        });
+      }
+      syncHittaSeason();
+      document.addEventListener("td-season", syncHittaSeason);
       const pins = [...hitta.querySelectorAll(".td-hitta-pin")].map((pin) => {
         const left = parseFloat(pin.style.left);
         const top = parseFloat(pin.style.top);
@@ -3442,6 +3474,7 @@
       }
       function fillCard(index) {
         const [title, body, hours] = stops[index];
+        stopEl.dataset.stop = index;
         document.getElementById("hitta-stop-title").textContent = title;
         document.getElementById("hitta-stop-body").textContent = body;
         document.getElementById("hitta-stop-hours").textContent = hours;
@@ -3599,6 +3632,7 @@
           card.style.left = `${p.x + 32}px`;
           card.style.top = `${p.y + 8}px`;
           card.classList.add("is-shown");
+          card.dataset.stop = index;
           card.querySelector("#hitta-stop-title, strong").textContent = stops[index][0];
           card.querySelector("#hitta-stop-body, .td-ui-body-sm").textContent = stops[index][1];
           card.querySelector("#hitta-stop-hours, .td-hitta-meter-hours").textContent = stops[index][2];
@@ -3712,6 +3746,12 @@
           world.append(el);
           return el;
         });
+        function syncPanStops() {
+          const bodies = HITTA_STOP_BODIES[document.documentElement.dataset.season === "summer" ? "summer" : "winter"];
+          cards.forEach((card, index) => { card.querySelector("span").textContent = bodies[index]; });
+        }
+        syncPanStops();
+        document.addEventListener("td-season", syncPanStops);
         const length = line.getTotalLength();
         const stopT = pins.map((pin) => {
           let best = 0;
