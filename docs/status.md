@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD: alla siffer-platshållare (`[X]`, `[60]`, `[1 690]`, tider, datum) ersatta med rimliga exempelvärden utan hakparentes (68 ställen i `td/desktop/index.html`). Beslut (John): [] bara för textplatshållare ([Artist], [plats], [Namn]); siffror är exempel och ska se ut som riktigt innehåll. Värdena är påhittade och ska bytas mot R360/kunddata före skarp lansering. Obs: kortet "23 dagar kvar" är en nedräkning, vilket strider mot prisneutralitetsregeln.
 - 2026-11-17: OG-intro byter säsong live (og-season-event → `setScenes` i `hero-page.js`), byter direkt till säsongens första klipp, rubrikrad 2 och herotitel. Tidigare krävdes omladdning.
 - 2026-11-17: TD-videor hostas i Cloudflare R2 (Johns KAN-konto, bucket `td-video`, prefix `td/` och `og/`, publik r2.dev-URL). `build-dist.mjs` skriver om `assets/video/` till R2 när `TD_VIDEO_BASE` är satt (görs i deploy-workflow). Lokal dev oförändrad. Nya/ändrade videor: `npx wrangler r2 object put td-video/<td|og>/<fil> --file <fil> --remote`.
 - 2026-11-16: Deploy-fix: TD importerade ds-JS relativt (`./ds/…`), vilket bara fungerade via dev-serverns mappning. I dist blev det /td/ds/… → 404 och sidan fastnade på introt. Nu `/ds/…`. Deploy-grenen ligger 20 commits efter main; behöver mergas och pushas (Johns beslut). Postrar/videor i deploy kommer från blob-containern, inte git.
@@ -443,7 +444,7 @@ Commit-trailer som använts: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic
 - [ ] Modal för datakort (hörnknapparna på stacken gör inget och är dolda).
 - [ ] OG: motsvarande ändringar (13 px caption, Fjällguiden m.m.) ej gjorda.
 - [ ] Sommarsvaren i Just nu förutsätter känd familj ("sexåringen", "nioåringen") trots att sommar = återkommande besökare. Beslut: ta bort barnen ur sommarsvaren?
-- [ ] Platshållare att ersätta: [Anna], restid [ca 7 h], priser fr. [X] kr, hund-/ombokningsregler, hundrum Ski Lodge, liftkortsregler barn, hjälmkrav skidskola, [Hamraslingan]/[Utsiktsstenen]/[Fäbodstigen], [Cykeluthyrningen] m.fl. Sjönamnet Svansjön är inte bestämt.
+- [ ] Platshållare att ersätta: [Anna], exempelpriser/tider (utan [] sedan 17 nov), hund-/ombokningsregler, hundrum Ski Lodge, liftkortsregler barn, hjälmkrav skidskola, [Hamraslingan]/[Utsiktsstenen]/[Fäbodstigen], [Cykeluthyrningen] m.fl. Sjönamnet Svansjön är inte bestämt.
 - [ ] Bokningsvyn i Fjällguiden är lång (~1000 px i 760 px panel, scrollar).
 - [ ] Ocommittat i `td/desktop/startsida.css` som inte är Claudes: AI-taggens storlek (8 rader) och skärpt selektor + `::before` på FG-sökknappen. John avgör.
 - [ ] Push av `main` (John, på begäran).
