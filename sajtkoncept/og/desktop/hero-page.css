@@ -68,7 +68,7 @@ html.theme-OG {
   --og-hp-hero-frame-aspect: 1280 / 707;
   --og-hp-booking-overlap-px: 40.5px;
   --og-hp-booking-cats-h: 81px;
-  --color-cta-primary: var(--color-OG-dark-green, #003e3a);
+  --color-cta-primary: var(--color-OG-cta);
 }
 
 html.theme-OG {

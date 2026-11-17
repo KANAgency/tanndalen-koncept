@@ -1759,7 +1759,7 @@ export function initTdBlocks(root = document) {
       } catch (error) { console.error("just nu", error); }
   }
 
-  /* ---- En frågekälla (OG_FRAGOR): Vanliga frågor-blocket och Orsa-guiden i Just nu, per läge × säsong (td TD_FRAGOR-render) ---- */
+  /* ---- En frågekälla (OG_FRAGOR): Vanliga frågor-blocket och Orsaguiden i Just nu, per läge × säsong (td TD_FRAGOR-render) ---- */
   function renderFragor() {
     const esc = (t) => t.replace(/"/g, "&quot;");
     const faqArrow = '<span class="td-fraga-fragelista-rad-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6.5 4.5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>';

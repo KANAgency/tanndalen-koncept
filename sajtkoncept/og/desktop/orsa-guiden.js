@@ -1,4 +1,4 @@
-/* Orsa-guiden (platshållarnamn, motsvarar TD:s Fjällguiden): frågekälla, svar och startvy.
+/* Orsaguiden (platshållarnamn, motsvarar TD:s Fjällguiden): frågekälla, svar och startvy.
    ALLT innehåll här är påhittat demoinnehåll. Fakta, tider, priser och namn i [hakparentes] ska bytas mot riktiga uppgifter.
    Svaren utgår från demovistelsen i demo-stay.js: [Anna], 2 vuxna + 2 barn (6 och 9 år), [Grönklitt Stugby] 15–22 feb 2027. */
 
@@ -355,14 +355,14 @@ export const WELCOME_TILES = {
 export const WELCOME = {
   general: {
     title: "Vad undrar du?",
-    lead: "Orsa-guiden svarar med det vi vet om spår, backar, aktiviteter och boende i Orsa Grönklitt. Personalen tar över när det behövs.",
+    lead: "Orsaguiden svarar med det vi vet om spår, backar, aktiviteter och boende i Orsa Grönklitt. Personalen tar över när det behövs.",
     nowLabel: "Läget i Orsa Grönklitt just nu",
     tiles: "winter",
     label: "Andra brukar fråga"
   },
   summer: {
     title: "Vad undrar du?",
-    lead: "Orsa-guiden svarar med det vi vet om leder, bad, Rovdjursparken och boende i Orsa Grönklitt. Personalen tar över när det behövs.",
+    lead: "Orsaguiden svarar med det vi vet om leder, bad, Rovdjursparken och boende i Orsa Grönklitt. Personalen tar över när det behövs.",
     nowLabel: "Läget i Orsa Grönklitt just nu",
     tiles: "summer",
     label: "Andra brukar fråga"

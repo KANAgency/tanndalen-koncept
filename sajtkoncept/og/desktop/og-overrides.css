@@ -21,9 +21,8 @@ html.theme-OG body.og-hp-page {
 }
 
 .theme-OG {
-  /* Figma correction — generated tokens still map cta to signal-orange. */
-  --color-cta-primary: #003e3a;
-  --color-accent: #e74011;
+  /* CTA-regel (2026-11-17): cta = mörkgrön (fyllning/bakgrund), accent = signalorange (förgrund).
+     Värdena kommer från generated/tokens.css (color/OG/cta, color/OG/accent). */
   --contrast-on-cta: #ffffff;
 
   /* Remap TD-named primitives used by startsida.css rules so OG colours/fonts win. */
@@ -156,12 +155,10 @@ html.theme-OG body.og-hp-page {
   background: var(--color-OG-neutral-subtlest);
 }
 
-/* Orsa-guiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: sjöblå #9DC7CB (oklch 0.80 0.045 205; mellan mörkgrön och orangens komplement,
-   egen OG-färg i stället för TD:s #A1B5BA). Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
+/* Orsaguiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
+   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
 .theme-OG {
-  --color-OG-guide-winter: #9DC7CB;
-  --color-OG-guide: var(--color-OG-guide-winter);
+  --color-OG-guide: var(--color-OG-season-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
 }
 html.theme-OG[data-season="summer"] { --color-OG-guide: var(--color-OG-season-spring); }
@@ -777,7 +774,7 @@ html[data-season="summer"] .onsite-topbar {
 .td-videokort-media video,
 .td-videomodal-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .td-videomodal-frame video { object-fit: contain; background: #000; }
-/* Orsa-guiden: chattikonen i stället för TD:s Fjällguiden-märke. */
+/* Orsaguiden: chattikonen i stället för TD:s Fjällguiden-märke. */
 .td-guide .og-guide-mark { width: 32px; height: 32px; }
 /* Tredje raden: kolumner = antal synliga kort (ingen pistkarta i OG → två kort i Alpint). */
 html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
@@ -859,3 +856,11 @@ html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 .og-td-placeholder-kicker { margin: 0; font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 0.08em; }
 .og-td-placeholder-name { margin: 0; font-size: var(--font-size-2xl); line-height: 1.2; color: var(--color-text-primary); }
 .og-hp-blocks-content > [hidden] { display: none !important; }
+
+/* Säsongsväljaren (menyn m.fl.): vintertummen i OG:s egna vinterfärg (sjöblå), inte taupe-overriden
+   av --color-season-winter som gäller sekundärknapparna. Sommar oförändrad. 2026-11-17 */
+.theme-OG .td-season-toggle-thumb { background: var(--color-OG-season-winter); }
+
+/* Utfälld huvudmeny: luft mellan bilden och underrutan (8 px), något mindre än
+   underrutans 14 px ned till nästa bild. 2026-11-17 */
+.theme-OG .og-hp-header .site-menu-sub.is-open { margin-top: 6px; }

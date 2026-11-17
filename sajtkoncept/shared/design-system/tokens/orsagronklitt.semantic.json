@@ -26,12 +26,12 @@
     },
     "text-primary": { "ref": "color.OG.night" },
     "text-inverted": { "ref": "color.OG.snow" },
-    "cta-primary": { "ref": "color.OG.cta", "note": "cta = signal-orange." },
+    "cta-primary": { "ref": "color.OG.cta", "note": "cta = dark-green (beslut 2026-11-17). Fyllning på primära knappar och CTA-ytor; text på den = snow." },
     "cta-on-dark": {
       "ref": "color.OG.snow",
       "note": "Samma aliasmönster som TD (cta-on-dark → snow). Primitiven color.OG.cta-on-dark är fortfarande PLACEHOLDER."
     },
-    "accent": { "ref": "color.OG.accent", "note": "accent = signal-orange." },
+    "accent": { "ref": "color.OG.accent", "note": "accent = signal-orange. Förgrund: text, länk-hover, ikonaccent." },
     "error": { "ref": "color.shared.error", "note": "Systemfärg, identisk med TD." },
     "on-error": { "ref": "color.shared.on-error", "note": "Text på error. Identisk med TD." },
     "season-spring": { "ref": "color.OG.season-spring" },
@@ -39,7 +39,7 @@
     "season-autumn": { "ref": "color.OG.season-autumn" },
     "season-winter": {
       "ref": "color.OG.season-winter",
-      "note": "OG = TD-värde tills vidare."
+      "note": "Sjöblå #9DC7CB (beslut 2026-11-17)."
     },
     "bg-surface": { "ref": "color.OG.snow" },
     "bg-base-dark": { "ref": "color.OG.night" },

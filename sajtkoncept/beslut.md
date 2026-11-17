@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-17 (OG: CTA-roller, vinterfärg, Orsaguiden)
+
+CTA-regel OG: mörkgrön #003E3A = `color/OG/cta` = primär CTA och fyllning/bakgrund (Boka, Sök, primärknappar, kalenderval). Signalorange #E74011 = `color/OG/accent` = förgrund (text- och länk-hover, ikonaccent som pricken i guidemärket), aldrig fyllning bakom text. Ersätter beslutet 2026-11-10 (cta = signalorange). Koden följde redan regeln via en hårdkodad "Figma correction" i `og-overrides.css`; den är borttagen och värdet kommer nu från `primitives.json` → `generated/tokens.css`. OG vinterfärg = sjöblå #9DC7CB (`color/OG/season-winter`, ersätter TD:s #A1B5BA). Guiden heter Orsaguiden (utan bindestreck). Ratades: kurbitsblå #83ABC3, isblå #BCDAE4. Öppet: OG-Figmafilens variabler (filnyckel saknas), `cta-on-dark` #F59678 är fortfarande PLACEHOLDER, `.theme-OG --color-season-winter` är fortfarande överstyrd till taupe-tint för sekundärknapparna (bör bli en egen variabel).
+
 ## 2026-11-14 (deploy hub: sidväljare + TD + OG)
 
 Live-deploy byggde bara `dist/td` som sajtrot — ingen sidväljare, ingen OG. Nu: `npm run build` → hub med `/`, `/td/`, `/og/` och gemensam `/ds`+`/shared` (samma URL:er som lokal :4173). Workflow deployar `sajtkoncept/dist`. Videor: blob-prefix `td/`/`og/`, utan prefix → TD (legacy). Ratades: behålla TD-only deploy. Öppet: lägga OG-videor i blob under `og/`.
