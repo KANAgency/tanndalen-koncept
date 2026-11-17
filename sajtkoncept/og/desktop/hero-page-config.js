@@ -62,7 +62,7 @@ export const HERO_PAGE_CONFIG = {
     { image: "./assets/img/snow.jpg", video: "./assets/video/intro/kaffepaus.mp4", line1: "Kaffepaus", clipDurationSec: 5, advanceEarlySec: 0.6 },
     { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/vinterbad.mp4", line1: "Vinterbad", snow: true, clipDurationSec: 5, advanceEarlySec: 0.3 },
     /* Kling 2.5 från kundbilden AA104245 (16 nov). */
-    { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/brasa.mp4", line1: "Lägereld", clipDurationSec: 5, advanceEarlySec: 0.3 },
+    { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/brasa.mp4", line1: "Lägereld", snow: true, clipDurationSec: 5, advanceEarlySec: 0.3 },
     { image: "./assets/img/og-hero-winter.jpg", video: "./assets/video/intro/kvallsmys.mp4", line1: "Kvällsmys", clipDurationSec: 5, advanceEarlySec: 0.3 }
   ],
 
