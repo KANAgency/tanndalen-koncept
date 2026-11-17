@@ -483,7 +483,7 @@
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   line-height: 1.111;
-  letter-spacing: -0.022em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -494,7 +494,7 @@
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   line-height: 1.083;
-  letter-spacing: -0.04em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -505,7 +505,7 @@
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -516,7 +516,7 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   line-height: 1.071;
-  letter-spacing: -0.029em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -538,7 +538,7 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
   line-height: 1.083;
-  letter-spacing: -0.017em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -549,7 +549,7 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: 1.083;
-  letter-spacing: -0.021em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -560,7 +560,7 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   line-height: 1.125;
-  letter-spacing: -0.019em;
+  letter-spacing: 0em;
   font-style: normal;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -682,17 +682,17 @@
 
   .td-ui-figure-lg {
     font-size: var(--font-size-3xl);
-    letter-spacing: -0.017em;
+    letter-spacing: 0em;
   }
 
   .td-ui-figure-unit-lg {
     font-size: var(--font-size-lg);
-    letter-spacing: -0.015em;
+    letter-spacing: 0em;
   }
 
   .td-ui-figure-unit-md {
     font-size: var(--font-size-sm);
-    letter-spacing: -0.021em;
+    letter-spacing: 0em;
   }
 
 }

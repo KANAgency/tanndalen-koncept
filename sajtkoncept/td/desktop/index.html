@@ -6269,7 +6269,7 @@
               ? `<span class="td-ui-figure-lg">${tile.number}</span>`
               : `<span class="td-ui-figure-lg">${tile.number}</span>${tile.slash ? `<span class="td-ui-figure-unit-lg">/</span><span class="td-ui-figure-unit-lg">${tile.slash}</span>` : ""}${tile.unit ? `<span class="td-ui-figure-unit-lg">${tile.unit}</span>` : ""}`;
           const note = tile.note ? `<p class="td-ui-body-sm td-just-nu-data-caption">${tile.note}</p>` : "";
-          return `<article class="fraga-tile"><h3 class="td-ui-title">${tile.title}</h3><div class="td-just-nu-data-figure">${figure}</div><p class="td-ui-body-sm td-just-nu-data-caption">${tile.caption}</p>${note}</article>`;
+          return `<article class="fraga-tile"><h3 class="td-ui-body fraga-tile-title">${tile.title}</h3><div class="td-just-nu-data-figure">${figure}</div><p class="td-ui-body-sm td-just-nu-data-caption">${tile.caption}</p>${note}</article>`;
         }
         function showConfig(config) {
           const time = document.querySelector("[data-just-nu-updated]")?.textContent.trim() || "";

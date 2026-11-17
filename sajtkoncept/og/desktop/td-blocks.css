@@ -1100,6 +1100,12 @@ body.fraga-open { overflow: hidden; }
 .fraga-view[data-view="search"] .td-fraga-fragelista-rubrik {
   padding-top: 0;
 }
+/* Återkommande besökare: välkomstvyn är vänsterställd, så frågelistans rubrik följer med (John 17 nov) */
+.fraga-welcome:not(:empty) + .td-fraga-fragelista { align-items: stretch; }
+.fraga-welcome:not(:empty) + .td-fraga-fragelista .td-fraga-fragelista-rubrik {
+  justify-content: flex-start;
+  text-align: left;
+}
 .fraga-foot {
   display: flex;
   align-items: center;
