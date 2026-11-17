@@ -38,7 +38,7 @@ python3 scripts/dev-server.py 4173
 
 | URL | Innehåll |
 |---|---|
-| `/` | Sidväljare |
+| `/` | Sidväljare (`?mobil=td` / `?mobil=og` = sajten i 393 px telefonram) |
 | `/td/` | Tänndalen (`td/desktop/`) |
 | `/og/` | Orsa Grönklitt (`og/desktop/`) |
 | `/ds/` | `shared/design-system/` |

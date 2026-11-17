@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: Sajtväljaren (`sajtkoncept/index.html`, `/`) omgjord: mörk sida med två bildkort (TD stjärnhimmel, OG vinterskog) med logga, payoff och knapparna Desktop/Mobil. Mobil = `/?mobil=td|og` visar sajten i iframe 393 × 852 i telefonram (skalas för att få plats, växla sajt, ladda om, öppna i nytt fönster; övriga parametrar som `?plats=1` skickas vidare). På en riktig telefon öppnar Mobil sajten direkt. Fristående sida, inga nya filer; `npm run build` verifierad (bilder/loggor finns i dist).
 - 2026-11-17: TD Hitta hit har sommarcopy: ingressen ("Kör på morgonen, vandra i kvällssol …") och de tre stopptexterna (Stockholm/Orsa/Tänndalen) byts med säsongen via `data-summer` + `HITTA_STOP_BODIES`/`syncHittaCopy` i `td/desktop/index.html`. Gäller både standardkartan och `?hitta=pin`. Rubrik, knapp och faktakort är oförändrade. Öppet: verifiera att bussen Östersund–Tänndalen går sommartid. Känt sedan tidigare: `?hitta=pin` kastar `mobileQ is not defined` i `placeHittaFrame`.
 - 2026-11-17: TD mobil påbörjad: triage av nybesökarläget i 393 px finns i `docs/mobil-td.md` (A 8, B 3, C 4 block + Hitta hit). Lägesväljaren skippas i v1. Öppet: Johns fem beslut (header, hero-porträtt/sol, En dag, områdesblockets karusell, Hitta hit), sedan bygge enligt ordningen i filen. Ingen kod ändrad.
 
