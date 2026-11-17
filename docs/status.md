@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD Lev. Andas. Tänndalen., sommar: slutbilden var oskarp (1333 px bred porträttfil uppskalad till helskärm, ~2× vid DPR 2). Ny export `brand/td-brand-3-sommar-skarp.jpg` 3000 × 4500 från originalet `../assets/td/bilder och video/sommar/IMG_0141.jpg`, samma komposition, 660 kB. Gamla `td-brand-3-sommar.jpg` ligger kvar oanvänd.
 - 2026-11-17: Dev-servern har `--lan` (lyssnar på 0.0.0.0, skriver ut LAN-URL) för test i iPhone på samma Wi-Fi. Verifierat: 200 via 192.168.68.56 med `--lan`, inte nåbar via IP utan. Instruktion i `sajtkoncept/STRUKTUR.md`.
 
 - 2026-11-17: TD Lev. Andas. Tänndalen., sommar: Andas-bilden är nu porträttet av Sofie med cykelhjälm (`brand/td-brand-2-sommar-sofie.jpg`, 2000 × 1333, beskuren tätt på ansiktet som vinterbilden, källa `../assets/td/bilder och video/porträtt/sofie_tanndalen_portratt.jpg`). Regel: Andas ska alltid vara ett porträtt. Annas porträtt (`td-brand-2-sommar.jpg`) ratat av John, ligger kvar oanvänt. Sofie är det enda sommarporträttet i bildbanken; vill John ha annat tas det från varumärkesmanualen.
