@@ -172,6 +172,19 @@ html.theme-OG #fraga-launch .td-guide-mark-halo,
 html.theme-OG[data-season] #fraga-launch .td-guide-mark-halo { stroke: var(--color-OG-guide); }
 .theme-OG #fraga-launch .fraga-launch-name { font-family: var(--font-family-OG-primary), "Literata", serif; font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
 .theme-OG .og-hp-header #fraga-launch .help-long { display: inline; }
+/* Orsaguiden överallt (header, Just nu-kortet i alla lägen, Fråga-blocket): samma märke, namn och guidefärg.
+   [data-season] i selektorn slår td-blocks.css sommarregler (season-summer). */
+html.theme-OG[data-season] .td-guide,
+html.theme-OG[data-season] .td-fraga-block {
+  --fraga-fg: var(--contrast-on-OG-guide);
+  background: var(--color-OG-guide);
+  color: var(--contrast-on-OG-guide);
+}
+html.theme-OG[data-season] .td-fraga-block .td-fraga-block-overrubrik-icon { color: var(--contrast-on-OG-guide); }
+html.theme-OG[data-season] .td-guide .td-guide-mark-halo,
+html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--color-OG-guide); }
+.theme-OG .td-guide .td-guide-id > .td-ui-cta-sm,
+.theme-OG .fraga-block-name { font-family: var(--font-family-OG-primary), "Literata", serif; font-weight: 700; letter-spacing: -0.01em; }
 /* Smalt: bara märket, som TD:s Fjällguiden i mobil. */
 @media (max-width: 1023px) {
   .theme-OG .og-hp-header #fraga-launch { width: 40px; min-width: 40px; padding: 0; justify-content: center; }
@@ -419,6 +432,8 @@ html[data-demo="0"] .mode-switch { display: none; }
   display: flex;
   flex-direction: column;
   gap: 2px;
+  /* Bred nog för "Återkommande besökare" på en rad (John 17 nov). */
+  width: max-content;
   min-width: 248px;
   margin: 0;
   padding: var(--space-sm);
@@ -430,6 +445,7 @@ html[data-demo="0"] .mode-switch { display: none; }
 }
 
 .mode-switch-menu[hidden] { display: none; }
+.mode-switch-menu button { white-space: nowrap; }
 
 .mode-switch-title {
   margin: 0;
@@ -775,14 +791,9 @@ html[data-season="summer"] .onsite-topbar {
 .td-videokort-media video,
 .td-videomodal-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .td-videomodal-frame video { object-fit: contain; background: #000; }
-/* Orsaguiden: chattikonen i stället för TD:s Fjällguiden-märke. */
-.td-guide .og-guide-mark { width: 32px; height: 32px; }
 /* Tredje raden: kolumner = antal synliga kort (ingen pistkarta i OG → två kort i Alpint). */
 html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
 @media (max-width: 1023px) { html[data-mode="onsite"] .just-cols-3 { grid-auto-flow: row; } }
-.og-guide-mark-sommar { display: none; }
-html[data-season="summer"] .og-guide-mark-vinter { display: none; }
-html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 
 /* Menyn göms medan En dag fyller skärmen (som TD .top.is-tucked). `translate` så headerns transform (centrering/reveal) lämnas orörd. */
 .og-hp-header {

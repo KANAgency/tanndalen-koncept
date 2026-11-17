@@ -71,7 +71,7 @@ export const MODES_UI = {
     modeChoices: [
       { id: "new", label: "1 Ny besökare" },
       { id: "returning", label: "2 Återkommande besökare" },
-      { id: "booking", label: "3 Påbörjad bokning", note: " (endast vinter)" },
+      { id: "booking", label: "3 Påbörjad bokning" },
       { id: "onsite", label: "4 På plats" }
     ]
   },
