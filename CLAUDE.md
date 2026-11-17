@@ -50,6 +50,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 - Det finns ingen versionshistorik utanför repot (`src/`). Föreslå aldrig git-återställning av annat. Använd lokala kopior/checkpoints.
 
 ## 6. Figma-regler
+- **Håll Figma i takt med koden (John 17 nov).** När ett designbeslut landar i kod, uppdatera Figma i samma uppgift på systemnivå: variabler, textstilar, komponentvarianter och deras egenskaper (padding, radie, fyllning, typografi). Hela sidlayouter/skärmar ritas inte om för varje kodjustering; skriv dem i stället som Figma-skuld i `docs/status.md`. Rapportera vad som ändrats i Figma (nod-id + länk) och vad som återstår. TEST-värden som John inte har godkänt förs inte in i Figma.
 - Läs noden först (typ, storlek, layout, komponentegenskaper), ändra sedan, verifiera med screenshot. Hellre `get_screenshot` än `get_design_context` på stora noder.
 - Ladda skillen `figma-use` före första `use_figma` (och `figma-generate-library` vid variabler/komponenter).
 - Variabler, inga lösa hex. Semantiska roller bara som variabler (inte paint styles). Sätt `scopes` explicit.
