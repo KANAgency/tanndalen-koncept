@@ -4725,6 +4725,8 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 
 /* Efter-avstånd styrs av --fraga-space-after; nollställ citat-driven Boende-marginal. */
 .boende { margin-top: 0 !important; }
+/* Områdesblocket ligger efter utförsåkning (17 nov): samma luft som före utförsåkning. */
+.utforsakning + .boende { margin-top: 120px !important; }
 
 @media (max-width: 1023px) {
   .faq {
@@ -5021,6 +5023,9 @@ button.faq-row:hover svg { transform: translate(2px, -2px); }
 }
 
 html[data-demo="0"] .mode-switch { display: none; }
+
+/* Mobil v1: ingen lägesväljare (beslut 2026-11-17). Läge styrs med ?mode= i URL:en. */
+@media (max-width: 1023px) { .mode-switch { display: none; } }
 
 .mode-switch-button {
   display: grid;
