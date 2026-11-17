@@ -19,7 +19,7 @@ export const BOOKING_CALENDAR = {
     {
       date: "2027-02-17",
       rows: [
-        { time: "11:00", title: "[Visning i Orsa Rovdjurspark]" },
+        { time: "11:00", title: "[Bärra i barnbacken]" },
         { time: "18:00", title: "[Fackeltåg i barnbacken]" }
       ]
     },
@@ -49,7 +49,7 @@ export const ONSITE_CALENDAR = {
       label: "I morgon",
       rows: [
         { time: "09:00", title: "Första åket i nypreparerat" },
-        { time: "11:00", title: "[Visning i Orsa Rovdjurspark]" },
+        { time: "11:00", title: "[Bärra i barnbacken]" },
         { time: "18:00", title: "[Familjetur i belysta spåret]" }
       ]
     }

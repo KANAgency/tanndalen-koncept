@@ -1342,9 +1342,9 @@ export function initTdBlocks(root = document) {
           sun: { rise: "03:52", set: "22:14" },
           tip: {
             label: "Aktiviteter",
-            pill: "Rovdjursparken",
-            title: "[Björnarna vaknar till sommaren]",
-            excerpt: "[Orsa Rovdjurspark ligger tio minuter från stugorna. Björn, varg, lodjur och järv, och en lekplats för de minsta.]",
+            pill: "Rädsjön",
+            title: "[Bastuflotte och SUP på Rädsjön]",
+            excerpt: "Sandstrand, brygga och bastuflotte [en kort promenad] från stugorna. Hyr en SUP och paddla ut i kvällssolen.",
             link: "Se öppettider",
             /* TODO: uthyrningssidan är inte vald. Tom sträng faller tillbaka på #. */
             rentalHref: "",
@@ -2309,7 +2309,7 @@ export function initTdBlocks(root = document) {
         ...boendeStugbyn,
         id: "skogsbyn",
         name: "Skogsbyn",
-        title: "Lugnt i skogen, nära björnarna.",
+        title: "Lugnt i skogen, vid Råtjärn.",
         body: "Stugor en bit från backarna, där det är tyst på kvällen. Skogsbyn ligger vid Råtjärn och längdspåren börjar [utanför knuten]. Ett bra val för er som vill blanda backe med annat.",
         ctaLabel: "Sök boenden i Skogsbyn",
         facts: [
