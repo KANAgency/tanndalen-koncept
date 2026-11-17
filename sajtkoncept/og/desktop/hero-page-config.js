@@ -71,7 +71,7 @@ export const HERO_PAGE_CONFIG = {
    * Ett enda klipp i introt. Kling 2.5 från kundbilden AA107523 (Webb_sommar), 16 nov.
    */
   summer: {
-    headlineLine2: "med hela familjen",
+    headlineLine2: "i skidparadiset", /* samma som vinter (John 17 nov) */
     /* Kling 2.5 från kundbilder i Webb_sommar (16 nov). */
     scenes: [
       { image: "./assets/img/og-intro-kvallsdopp.jpg", video: "./assets/video/intro/kvallsdopp.mp4", line1: "Kvällsdopp", clipDurationSec: 5, advanceEarlySec: 0.3 },
