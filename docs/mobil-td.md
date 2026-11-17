@@ -9,6 +9,13 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
 
 **Nuläge totalt:** sidhöjd 15 040 px (≈ 17,7 skärmhöjder). Ingen horisontell scroll på sidnivå (`scrollWidth` 393). Utanför skärmen ligger bara karuseller, som är avsiktliga, och parallaxlagret med topografi och citat, som ligger vid x −322.
 
+## Klart
+- 2026-11-17 G1–G3 (grunden), mätt mot Figma `iPhone 16 - 1` (935:1511), verifierat 393×852 och 1440×900:
+  - Header: vit list 361×48, radie 8, padding 0/16/0/20, logga vänster 136×21 (x 36). Höger: Fjällguiden som rund ikon 40 px (öppnar panelen, som glider ut till 361 px), säsongsväxlaren 32 px bredvid menyn (Johns beslut: samma plats som på desktop), meny 40 px ytterst (x 321–361). Kontot dolt på mobil. Menypanelen ligger under headern (z −1, padding-top 96), och knappen öppnar och stänger. Skissens "Frågor?"-pill ersattes med ikonen (Johns beslut).
+  - Bokningsraden: kolumner 71 px (Figma 70,4), padding 16, inget klipps. Boende-panelen öppnas.
+  - Lägesknappen: dold under 1024 px.
+  - Desktop 1440 oförändrad: meny 260, Fjällguiden 208, logga 206, konto synligt, bokningsrad 420.
+
 ## Block för block (i visningsordning)
 
 | # | Block | Klass | Vad som händer i dag (393 px) | Förslag |
@@ -37,7 +44,7 @@ Genomgång 2026-11-17, `/td/?mode=new`, 393×852 i appens webbläsarpanel (inte 
 - **C (4):** header, hero steg II/III, En dag, områdesblocket. Hitta hit hänger på ett ja/nej-beslut.
 
 ## Beslut som behövs från John
-1. Header: vart tar säsongsväxlaren och kontot vägen på mobil?
+1. ~~Header~~ – beslutat 17 nov (se Klart).
 2. Hero: porträtt och sol på mobil, eller bara filmen i 4:5?
 3. En dag: stapel eller swipe-karusell?
 4. Områdesblocket: behålla bildkarusellen eller en bild?

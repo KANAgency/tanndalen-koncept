@@ -74,6 +74,14 @@
     transform: translateX(-50%);
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  /* Fem kategorier på 393 px: 5 × 72 + gap + 2 × 16 = 400 > 393. Figma (Booking / Bar · mobil 1700:1707):
+     padding 16, kolumner 70,4 px, gap 2 – kolumnerna delar bredden lika. */
+  .td-booking-cats > button {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
 }
 
 .td-booking-clip {

@@ -6518,3 +6518,56 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 
 /* Vit text direkt i blå himmel (t.ex. Fjällstjärnan): ingen scrim. */
 .boende.is-noscrim .boende-scrim { visibility: hidden; }
+
+/* Mobilheader (2026-11-17). Figma: iPhone 16 - 1 (935:1511), nav-bar 935:1592.
+   Vit list 361×48, radie 8, padding 0/16/0/20. Logga vänster (136×21). Höger: Fjällguiden som ikon,
+   säsongsväxlaren bredvid menyn (som på desktop), meny ytterst. Kontot visas inte på mobil (v1). */
+@media (max-width: 1023px) {
+  .top {
+    box-sizing: border-box;
+    height: 48px;
+    padding: 0 var(--space-lg) 0 20px;
+    gap: var(--space-sm);
+    border-radius: var(--radius-md);
+    background: var(--color-TD-snow);
+  }
+  .top-glass { inset: 0; border-radius: inherit; }
+
+  .brand-center { order: 0; align-items: flex-start; }
+  .actions { order: 1; margin-left: auto; gap: var(--space-sm); }
+  .top-start { order: 2; flex-direction: row-reverse; gap: var(--space-sm); }
+
+  .brand-center .logo,
+  .logo { width: 136px; height: 21px; transform: none; }
+
+  .account-menu { display: none; }
+
+  /* Fjällguiden: bara ikonen, rund 40 px */
+  #fraga-launch {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: var(--radius-full);
+  }
+  #fraga-launch .fraga-launch-name,
+  #fraga-launch .fraga-launch-ai,
+  #fraga-launch .fg-live { display: none; }
+
+  /* Meny: 40 px, ingen fyllning, samma storlek öppen som stängd */
+  .menu-control,
+  .top:has(.site-menu.is-open) .menu-control {
+    width: 40px;
+    min-width: 40px;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+  }
+  .top:has(.site-menu.is-open) .menu-control-label { display: none; }
+
+  /* Menypanelen under headerns knappar: fylls från toppen, headern ligger ovanpå */
+  .site-menu,
+  .site-menu.is-open { top: 0; z-index: -1; }
+  .site-menu-panel { padding-top: 96px; }
+}
