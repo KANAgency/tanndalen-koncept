@@ -12,6 +12,9 @@ html {
   --color-OG-black: #000000;
   --color-OG-white: #FFFFFF;
   --color-OG-dark-green: #003E3A;
+  --color-OG-taupe: #726D58;
+  --color-OG-taupe-tint: #E1DBD0;
+  --color-OG-taupe-light: #EBEAE6;
   --color-OG-night: #3C3C3B;
   --color-OG-day: #F5EEE5;
   --color-OG-snow: #FFFFFF;
@@ -27,7 +30,7 @@ html {
   --color-OG-season-spring: #F6E0A2;
   --color-OG-season-summer: #1B4021;
   --color-OG-season-autumn: #3C1F17;
-  --color-OG-season-winter: #9DC7CB;
+  --color-OG-season-winter: #A1B5BA;
   --color-OG-difficulty-green: #3A9A3A;
   --color-OG-difficulty-blue: #1F67A6;
   --color-OG-difficulty-red: #E31E24;
@@ -201,6 +204,7 @@ html {
   --color-cta-primary: var(--color-OG-cta);
   --color-cta-on-dark: var(--color-OG-snow);
   --color-accent: var(--color-OG-accent);
+  --color-cta-secondary: var(--color-OG-taupe-tint);
   --color-error: var(--color-shared-error);
   --color-on-error: var(--color-shared-on-error);
   --color-season-spring: var(--color-OG-season-spring);

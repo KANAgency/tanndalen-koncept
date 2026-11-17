@@ -118,7 +118,7 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Fråga input: arrow button gets a filled circle (OG green, white arrow). */
-.theme-OG .td-fraga-falt-submit {
+.theme-OG .td-button.td-fraga-falt-submit {
   border-radius: var(--radius-full);
   background: var(--color-cta-primary);
   color: var(--contrast-on-cta, #fff);
@@ -132,13 +132,14 @@ html.theme-OG body.og-hp-page {
   clip-path: inset(0 round var(--radius-sm));
 }
 
-/* Secondary buttons: light tint of the OG taupe (palette mid-tone, ~15 % taupe in
-   off-white). Estimated from the palette screenshot; swap for the exact Figma value. */
-.theme-OG {
-  --color-OG-taupe-tint: #E1DBD0; /* Figma color/OG/taupe-tint: 15 % of color/OG/taupe #726D58 in off-white */
-  --color-OG-taupe-light: #EBEAE6; /* Figma color/OG/taupe-light: 14 % of taupe in white, lighter and greyer */
-  --color-season-winter: var(--color-OG-taupe-tint);
-  --contrast-on-season-winter: var(--color-text-primary);
+/* Sekundär CTA = taupe-tint (--color-cta-secondary, Figma color/cta-secondary), skild från
+   vinterfärgen (2026-11-17). Taupe-värdena kommer från tokens (color/OG/taupe*).
+   --color-season-winter är OG:s riktiga vinterfärg (sjöblå) och används för säsongsytor. */
+.theme-OG .td-button-fill-winter,
+.theme-OG .fraga-send,
+.theme-OG .fraga-follow-icon {
+  background: var(--color-cta-secondary);
+  color: var(--color-text-primary);
 }
 .theme-OG .og-hp-header .menu-control,
 .theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
@@ -856,10 +857,6 @@ html[data-season="summer"] .og-guide-mark-sommar { display: block; }
 .og-td-placeholder-kicker { margin: 0; font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 0.08em; }
 .og-td-placeholder-name { margin: 0; font-size: var(--font-size-2xl); line-height: 1.2; color: var(--color-text-primary); }
 .og-hp-blocks-content > [hidden] { display: none !important; }
-
-/* Säsongsväljaren (menyn m.fl.): vintertummen i OG:s egna vinterfärg (sjöblå), inte taupe-overriden
-   av --color-season-winter som gäller sekundärknapparna. Sommar oförändrad. 2026-11-17 */
-.theme-OG .td-season-toggle-thumb { background: var(--color-OG-season-winter); }
 
 /* Utfälld huvudmeny: luft mellan bilden och underrutan (8 px), något mindre än
    underrutans 14 px ned till nästa bild. 2026-11-17 */

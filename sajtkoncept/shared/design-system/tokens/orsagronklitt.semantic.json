@@ -32,6 +32,7 @@
       "note": "Samma aliasmönster som TD (cta-on-dark → snow). Primitiven color.OG.cta-on-dark är fortfarande PLACEHOLDER."
     },
     "accent": { "ref": "color.OG.accent", "note": "accent = signal-orange. Förgrund: text, länk-hover, ikonaccent." },
+    "cta-secondary": { "ref": "color.OG.taupe-tint", "note": "Sekundär CTA-fyllning (Figma color/cta-secondary). Text: text-primary. Skild från season-winter." },
     "error": { "ref": "color.shared.error", "note": "Systemfärg, identisk med TD." },
     "on-error": { "ref": "color.shared.on-error", "note": "Text på error. Identisk med TD." },
     "season-spring": { "ref": "color.OG.season-spring" },
@@ -39,7 +40,7 @@
     "season-autumn": { "ref": "color.OG.season-autumn" },
     "season-winter": {
       "ref": "color.OG.season-winter",
-      "note": "Sjöblå #9DC7CB (beslut 2026-11-17)."
+      "note": "TEST: TD:s vinter #A1B5BA (sjöblå ratad 2026-11-17). Säsongsytor, inte sekundär CTA."
     },
     "bg-surface": { "ref": "color.OG.snow" },
     "bg-base-dark": { "ref": "color.OG.night" },
