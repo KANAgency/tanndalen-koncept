@@ -6531,8 +6531,10 @@
         mirror: false,
         parallax: 0,
         context: "light",
-        // Lite nedflyttad (John 16 nov) så brödtexten hamnar i den ljusa snön ovanför frostträden.
-        posterPosition: "50% 65%",
+        // Text i snön ovanför frostträden (John 16–17 nov). Bilden (1,79:1) har nästan samma format som blocket,
+        // så enbart position flyttar inget – zooma så bilden blir högre än blocket och förankra i överkant.
+        posterSize: "auto max(100%, 76vw)",
+        posterPosition: "50% 0%",
         placeholder: false
       };
       const boendeSlides = [boendeFjalloga, boendeJarven, boendeFjallbruden, boendeBrunkullan, boendeFjallstjarnan];

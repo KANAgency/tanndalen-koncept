@@ -1,5 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
+- 2026-11-17: TD områdesblocket, Järven: `posterSize: auto max(100%, 76vw)` + `posterPosition: 50% 0%`. Förra lösningen (50% 65%) gjorde inget på skärmar nära 16:9 eftersom bilden (1,79:1) inte var högre än blocket. Verifierat i 1600×884: brödtext och CTA i snön ovanför trädlinjen. Bildens sidor beskärs mer, och stugans nederkant hamnar bakom karusellkontrollen.
 - 2026-11-17: TD läge 1–2 (vinter): utförsåkningsblocket (`#utforsakning`) ligger nu före områdesblocket (`#boende`), ordningen är bytt i DOM:en. I läge 3, läge 4 och sommar är `#boende` dolt, så där påverkas inget. Rasmus-citatet (`#citat-band`) kommer nu efter områdesblocket.
 - 2026-11-17: TD: Aktuellt-kortet "Vintern kommer" utan nedräkning – kicker "Vinter 27/28" (var "23 dagar kvar"), brödtext utan brådska. Anna-citatet vid Skarvarna dolt i läge 4 (`visibility: hidden` i `startsida.css`, övriga lägen oförändrade).
 - 2026-11-17: TD läge 4 (På plats), Just nu-kalendern: länken "Skidorna" på raden 14:00 Längd borttagen (gäller både Alpint och Längd, samma data i `modes-content.js`).
@@ -104,7 +105,7 @@ Senast uppdaterad: 2026-11-16 (TD lägesjusteringar läge 2–4, lägesmeny, scr
 ## Klart 16 nov: Järven som slide 5
 - Ordning: Fjällöga, Fjällstugan Järven, Fjällbruden, Brunkullan, Fjällstjärnan. Bildspelet loopar (efter slide 5 → slide 1). OG loopar också (td-blocks.js). Karusellkontrollen (`.boende-pill`) har nu auto-bredd – fasta 168 px klippte femte punkten.
 - Järvens drönarbild (scrapad 17) omrenderad i Magnific (Nano Banana 2.1, mulet nysnöljus, 2 varianter 4K = 290 credits ≈ 0,73 EUR). Variant B → `assets/img/boende-jarven-sno.jpg` (3600 px).
-- Context Light (svart text), parallax 0, förankrad `50% 65%` (lite nedflyttad, verkar bara när fönstret är bredare än 16:9). Rubrik "Timmerstuga i nysnön." (förslag). Fakta R360: lift 800 m, längdspår 600 m, 3 sovrum, 6 bäddar, 96 m², bastu. `r360AreaId` saknas för Järven och Fjällstjärnan.
+- Context Light (svart text), parallax 0, förankrad i överkant med zoom (se 17 nov). Rubrik "Timmerstuga i nysnön." (förslag). Fakta R360: lift 800 m, längdspår 600 m, 3 sovrum, 6 bäddar, 96 m², bastu. `r360AreaId` saknas för Järven och Fjällstjärnan.
 - Verifierat 1600×900. Ej kollat: 2000 px, mobil.
 
 ## Klart 16 nov: Fjällbruden med blå himmel
