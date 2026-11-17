@@ -845,9 +845,9 @@ function createIntroLoop({ config, sceneA, sceneB, line1El, caretEl, reduced }) 
   /** Säsongsbyte: nya scener, övergå direkt till den nya säsongens första klipp. */
   function setScenes(next) {
     if (!next || !next.length) return;
+    if (phase === "transition") finishTransition();
     scenes = next;
     index = scenes.length - 1;
-    if (phase === "transition") finishTransition();
     holdElapsed = 0;
     beginVisualTransition();
   }
