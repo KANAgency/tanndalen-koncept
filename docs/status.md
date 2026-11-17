@@ -1,6 +1,6 @@
 # Status (uppdatera i slutet av varje uppgift)
 
-- 2026-11-17: TD områdesblocket, Järven: `posterSize: auto max(100%, 76vw)` + `posterPosition: 50% 0%`. Förra lösningen (50% 65%) gjorde inget på skärmar nära 16:9 eftersom bilden (1,79:1) inte var högre än blocket. Verifierat i 1600×884: brödtext och CTA i snön ovanför trädlinjen. Bildens sidor beskärs mer, och stugans nederkant hamnar bakom karusellkontrollen.
+- 2026-11-17: TD områdesblocket, Järven: `posterSize: auto max(138%, 56vw)` + `posterPosition: 50% 0%` (zoom relativt blockhöjden; första versionen 76vw zoomade för mycket i breda/låga fönster). Förra lösningen (50% 65%) gjorde inget på skärmar nära 16:9 eftersom bilden (1,79:1) inte var högre än blocket. Verifierat i 2000×860 och 1600×900: text och CTA i snön ovanför trädlinjen, stugan syns. Stugans nederkant hamnar bakom karusellkontrollen.
 - 2026-11-17: TD läge 1–2 (vinter): utförsåkningsblocket (`#utforsakning`) ligger nu före områdesblocket (`#boende`), ordningen är bytt i DOM:en. I läge 3, läge 4 och sommar är `#boende` dolt, så där påverkas inget. Rasmus-citatet (`#citat-band`) kommer nu efter områdesblocket.
 - 2026-11-17: TD: Aktuellt-kortet "Vintern kommer" utan nedräkning – kicker "Vinter 27/28" (var "23 dagar kvar"), brödtext utan brådska. Anna-citatet vid Skarvarna dolt i läge 4 (`visibility: hidden` i `startsida.css`, övriga lägen oförändrade).
 - 2026-11-17: TD läge 4 (På plats), Just nu-kalendern: länken "Skidorna" på raden 14:00 Längd borttagen (gäller både Alpint och Längd, samma data i `modes-content.js`).
