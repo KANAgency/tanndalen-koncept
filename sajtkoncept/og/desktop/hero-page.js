@@ -938,19 +938,6 @@ function initHeroPage() {
     });
   }
 
-  /** Slide back out when p falls below headerRevealP − hysteresis. */
-  function hideHeaderAnimated() {
-    if (!header || !headerRevealed) return;
-    headerRevealed = false;
-    header.classList.remove("is-revealed");
-    if (headerHideTimer) clearTimeout(headerHideTimer);
-    const outMs = (config.headerRevealMs ?? 350) + 40;
-    headerHideTimer = window.setTimeout(() => {
-      headerHideTimer = 0;
-      if (!headerRevealed) setHeaderIntroHidden(true);
-    }, outMs);
-  }
-
   function syncHeaderRevealTiming() {
     const slideMs = clamp(Number(config.headerRevealMs) || 350, 150, 800);
     const fadeMs = Math.max(80, Math.round(slideMs * (200 / 350)));
@@ -1175,7 +1162,7 @@ function initHeroPage() {
 
   function runSelfChecks(p) {
     const headerInP = config.headerRevealP ?? 0.35;
-    const headerShouldBeHidden = !skipIntro && p < headerInP - 0.02;
+    const headerShouldBeHidden = !skipIntro && !headerRevealed && p < headerInP - 0.02;
     if (headerShouldBeHidden && headerIsVisibleOrFocusable()) {
       if (!warnedHeader) {
         console.warn("header visible or focusable before headerRevealP");
@@ -1238,11 +1225,12 @@ function initHeroPage() {
     syncCssVars();
 
     if (!skipIntro) {
-      /* Logo leaves fast upward */
+      /* Logo leaves fast upward. När menyn väl har kommit in ersätter den loggan:
+         scrollar man tillbaka till introt visas inte den stora loggan igen. */
       if (logo) {
         const logoY = -(config.logoSpeed ?? 1.5) * scrollY;
         logo.style.transform = `translate3d(-50%, ${logoY}px, 0)`;
-        logo.style.opacity = String(clamp(1 - p * 1.8, 0, 1));
+        logo.style.opacity = headerRevealed ? "0" : String(clamp(1 - p * 1.8, 0, 1));
       }
 
       /* Headline parallax up + fade */
@@ -1283,11 +1271,10 @@ function initHeroPage() {
 
       introLoop?.setFrozen(p > (config.loopFreezeP ?? 0.3));
 
-      /* Header: independent of whiteout — slides in mid-cloud cover (~0.5). */
+      /* Header: independent of whiteout — slides in mid-cloud cover (~0.5).
+         Ligger sedan kvar även när man scrollar tillbaka upp i introt (ersätter stora loggan). */
       const headerInP = config.headerRevealP ?? 0.35;
-      const headerOutP = headerInP - 0.05;
       if (p >= headerInP) revealHeaderAnimated();
-      else if (p < headerOutP) hideHeaderAnimated();
 
       /* Hero copy reveals together with the header, in the white of the rising clouds. */
       const heroP = config.heroRevealP ?? config.headerRevealP ?? 0.35;

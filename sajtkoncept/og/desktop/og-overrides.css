@@ -148,6 +148,37 @@ html.theme-OG body.og-hp-page {
   background: var(--color-OG-taupe-light);
   color: var(--color-text-primary);
 }
+/* TEST 2026-11-17: menyknapp och konto ett steg mörkare (neutral-subtlest #E0DFDB)
+   så de skiljer sig från menypanelens glas (neutral-highlight #F5F4F0 85 %). */
+.theme-OG .og-hp-header .menu-control,
+.theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
+.theme-OG .og-hp-header .account-user {
+  background: var(--color-OG-neutral-subtlest);
+}
+
+/* Orsa-guiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
+   Vinter: OG ljusblå #A1B5BA. Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
+.theme-OG {
+  --color-OG-guide: var(--color-OG-season-winter);
+  --contrast-on-OG-guide: var(--color-OG-orsa-black);
+}
+html.theme-OG[data-season="summer"] { --color-OG-guide: var(--color-OG-season-spring); }
+.theme-OG .og-hp-header #fraga-launch {
+  gap: 8px;
+  background: var(--color-OG-guide);
+  color: var(--contrast-on-OG-guide);
+}
+html.theme-OG #fraga-launch .td-guide-mark-halo,
+html.theme-OG[data-season] #fraga-launch .td-guide-mark-halo { stroke: var(--color-OG-guide); }
+.theme-OG #fraga-launch .fraga-launch-name { font-family: var(--font-family-OG-primary), "Literata", serif; font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+.theme-OG .og-hp-header #fraga-launch .help-long { display: inline; }
+/* Smalt: bara märket, som TD:s Fjällguiden i mobil. */
+@media (max-width: 1023px) {
+  .theme-OG .og-hp-header #fraga-launch { width: 40px; min-width: 40px; padding: 0; justify-content: center; }
+  .theme-OG .og-hp-header #fraga-launch .fraga-launch-name,
+  .theme-OG .og-hp-header #fraga-launch .fraga-launch-ai,
+  .theme-OG .og-hp-header #fraga-launch .fg-live { display: none; }
+}
 
 /* OG: buttons and interactive elements are regular, not bold (Figma OG UI/cta,
    UI/cta-sm and UI/label are 400; generated typography-og and button.css still say 700).
