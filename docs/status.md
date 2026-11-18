@@ -267,6 +267,12 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
+## Öppet 18 nov: OG-boendevideorna ej uppladdade till R2
+- Uppladdning stoppad: wrangler är inloggad med Johns privata Cloudflare-konto (gmail), R2-anropet går mot KAN-kontot (1593f55b…) → "Authentication error 10000". John behöver köra `npx wrangler login` med KAN-kontot.
+- Sedan, från `sajtkoncept/og/desktop/assets/video/` (fyra filer, postrar också eftersom dist tar bort hela `assets/video/`):
+  `for f in boende-lonnstigen-6-rundtur.mp4 boende-lonnstigen-6-rundtur-poster.jpg boende-limbygarden-rundtur.mp4 boende-limbygarden-rundtur-poster.jpg; do npx wrangler r2 object put td-video/og/$f --file $f --remote; done`
+- Kontroll: `curl -I https://pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev/og/boende-limbygarden-rundtur.mp4` ska ge 200 (befintliga `og/winter.web.mp4` ger 200).
+
 ## Klart 18 nov: OG – rundturvideo i Limbygården-kortet
 - Kling 2.5, 4 × 5 s, 16:9 1080p, bara startbild, 1 300 credits ≈ 3,25 EUR. Bara breda rumsbilder (Johns regel: inga närbilder). Klipp: a allrum mot glasdörrarna (glid höger, bild 02, vänstra 75 %) → b genom spröjsdörrarna in i matsalen (framåt, 06) → c köket (lätt framåt, 10) → d glasverandan med utsikt (glid vänster, 26).
 - Granskat: inga deformerade möbler, ingen eld. b hittar på ett fönster, en taklampa och en rund matta till vänster; d en pall/soffkant i vänster förgrund. Startbilderna är sommarbilder (Lönnstigen är vinter).
