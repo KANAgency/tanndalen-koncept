@@ -7457,7 +7457,6 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .page .en-dag .en-dag-media { border-radius: 2px; overflow: hidden; }
 }
 @media (max-width: 1023px) {
-  /* 14-3 (John 2026-11-18). Utförsåkning: bildens/filmens nedre hörn 0 → 2 px (regel 8 gjorde dem raka när texten
-     låg kloss under; sedan runda 9 är texten ett eget block). Övre hörnen oförändrade. */
-  .utforsakning .utforsakning-media { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; }
+  /* 14-3 (John 2026-11-18). Utförsåkning: bilden/filmen 2 px runt om i mobil (var 4 uppe, 0 nere sedan regel 8). */
+  .utforsakning .utforsakning-media { border-radius: 2px; }
 }
