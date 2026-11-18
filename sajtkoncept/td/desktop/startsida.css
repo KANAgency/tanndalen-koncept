@@ -7491,3 +7491,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     transition: none;
   }
 }
+@media (max-width: 1023px) {
+  /* 14-6 (John 2026-11-18). Vandringskortet (Utförsåkning i sommar): solen 40 % större, 88 → 123. Högerkanten och
+     mittpunkten (på bildens överkant) behålls. */
+  html[data-season="summer"] .utforsakning-doodle { top: -62px; width: 123px; height: 123px; }
+}
