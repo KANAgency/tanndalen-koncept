@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="./td-booking.css" />
     <link rel="stylesheet" href="/ds/components/site-footer.css" />
     <link rel="stylesheet" href="./og-overrides.css?v=radie1" />
+    <!-- KONCEPT 18 nov: OG-unika block (#familjen, #helgen) -->
+    <link rel="stylesheet" href="./og-koncept.css?v=1" />
     <script>
       /* Läge före första render (samma modell som TD): ?mode, ?intro=1/0, sparat og-mode, annars sett intro → returning. modes.js tar över. */
       try {
@@ -1632,6 +1634,63 @@
       </section>
       <span id="omraden" class="visually-hidden" aria-hidden="true"></span>
       <!-- Handplockade boenden (port av TD:s #boenden-waabi, 17 nov). Riktiga R360-boenden, bilder ur R360. Pris saknas i R360-katalogen: [X]. -->
+      <!-- KONCEPT (18 nov): två OG-unika block. Innehåll per säsong och logik i og-koncept.js, stil i og-koncept.css. -->
+      <section class="og-koncept og-familj" id="familjen" aria-labelledby="familjen-title">
+        <p class="og-koncept-tag" title="Konceptblock för OG, inte godkänt. Text i [hakparentes] är overifierad.">Koncept</p>
+        <header class="og-familj-head">
+          <div class="og-familj-titlar">
+            <p class="utforsakning-eyebrow">Familjen</p>
+            <h2 class="td-heading-3" id="familjen-title">Hur gamla är barnen?</h2>
+          </div>
+          <p class="td-ui-body og-familj-ingress" data-familj-ingress>Dra barnen längs linjen eller lägg till fler. Ni får förslag för just deras ålder, från Blåbärslyan till toppen av Norrbacken.</p>
+        </header>
+        <div class="og-familj-linjal">
+          <div class="og-familj-band" data-familj-band>
+            <div class="og-familj-zoner" data-familj-zoner></div>
+          </div>
+          <div class="og-familj-skala" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div>
+          <div class="og-familj-linjal-fot">
+            <p class="td-ui-caption og-familj-hint">Klicka på linjen för att lägga till ett barn. Valen sparas till nästa besök.</p>
+            <button class="td-button td-button-sm td-button-secondary og-familj-add" type="button" data-familj-add>+ Lägg till barn</button>
+          </div>
+          <p class="visually-hidden" aria-live="polite" data-familj-status></p>
+        </div>
+        <div class="og-familj-grid" data-familj-grid></div>
+      </section>
+
+      <section class="og-koncept og-mix" id="helgen" aria-labelledby="helgen-title">
+        <p class="og-koncept-tag" title="Konceptblock för OG, inte godkänt. Text i [hakparentes] är overifierad.">Koncept</p>
+        <div class="og-mix-panel">
+          <div class="og-mix-vanster">
+            <div class="og-mix-titlar">
+              <p class="utforsakning-eyebrow og-mix-eyebrow">Helgen · 4 h från Stockholm</p>
+              <h2 class="td-heading-3" id="helgen-title">Bästa mixen i skidparadiset.</h2>
+            </div>
+            <p class="td-ui-body og-mix-ingress">Fredag efter jobbet till söndag förmiddag. Dra i reglaget och bestäm själva hur mycket ni laddar upp och hur mycket ni kopplar av.</p>
+            <div class="og-mix-reglage">
+              <div class="og-mix-etiketter">
+                <span class="og-mix-pol"><svg class="og-pikto" viewBox="0 0 32 32" aria-hidden="true"><path class="accent" d="M16 3.5c4 5 7 8 7 12.5a7 7 0 0 1-14 0c0-3.5 2-5.5 3.5-7.5.5 2.5 1.5 4 3 4.5-.5-3.5-.5-6.5.5-9.5z"/><path class="linje" d="m5 27 22-4M5 23l22 4"/></svg>Koppla av</span>
+                <output class="og-mix-namn" data-mix-namn for="helgen-mix">Halva-halva</output>
+                <span class="og-mix-pol">Ladda upp<svg class="og-pikto" viewBox="0 0 32 32" aria-hidden="true"><path class="linje" d="M3 23 22 7.5c1.6-1.3 3.6.2 2.7 2M6.5 27.5l19-15.5c1.6-1.3 3.6.2 2.7 2"/><circle class="accent" cx="8.5" cy="8.5" r="3.5"/></svg></span>
+              </div>
+              <input class="og-mix-range" id="helgen-mix" type="range" min="0" max="100" step="1" value="50" data-mix-range aria-label="Helgens mix, från koppla av till ladda upp" />
+            </div>
+            <dl class="og-mix-tal">
+              <div><dt class="td-ui-caption">från Stockholm</dt><dd class="td-ui-figure-lg">4 h</dd></div>
+              <div><dt class="td-ui-caption" data-mix-km-etikett>i spåret</dt><dd class="td-ui-figure-lg" data-mix-km>29 km</dd></div>
+              <div><dt class="td-ui-caption">att bara vara</dt><dd class="td-ui-figure-lg" data-mix-h>6,5 h</dd></div>
+            </dl>
+            <div class="og-mix-korg">
+              <p class="td-ui-caption og-mix-korg-rubrik">Följer med in i bokningen</p>
+              <ul class="og-mix-korg-lista" data-mix-korg></ul>
+            </div>
+            <a class="td-button td-button-secondary og-mix-cta" href="#">Boka helgen</a>
+          </div>
+          <ol class="og-mix-schema" data-mix-schema aria-label="Helgens schema"></ol>
+          <div class="og-mix-kurbits" aria-hidden="true"></div>
+        </div>
+      </section>
+
       <section class="td-bo td-bo-waabi" id="boenden-waabi" aria-labelledby="boenden-waabi-title">
         <header class="td-bo-head utforsakning-heading">
           <p class="utforsakning-eyebrow td-bo-eyebrow">Handplockade boenden</p>
@@ -1846,6 +1905,7 @@
       </div>
 
     <script type="module" src="./hero-page.js?v=season-live2"></script>
+    <script src="./og-koncept.js?v=1" defer></script>
     <script type="module">
       import { init } from "./modes.js";
       init();
@@ -1863,9 +1923,10 @@
         hitta: "Hitta hit",
         "td-brand": "Lev. Andas. Tänndalen."
       };
+      /* KONCEPT 18 nov: #familjen efter En dag, #helgen efter boendeblocken (bara Ny besökare och Återkommande). */
       const VISIT = {
-        winter: ["aktuellt", "en-dag", "just-nu", "fragor", "boenden-waabi", "boende", "utforsakning", "citat-band", "hitta", "td-brand"],
-        summer: ["aktuellt", "en-dag", "boenden-waabi", "just-nu", "fragor", "utforsakning", "citat-band", "hitta", "td-brand"]
+        winter: ["aktuellt", "en-dag", "familjen", "just-nu", "fragor", "boenden-waabi", "boende", "helgen", "utforsakning", "citat-band", "hitta", "td-brand"],
+        summer: ["aktuellt", "en-dag", "familjen", "boenden-waabi", "helgen", "just-nu", "fragor", "utforsakning", "citat-band", "hitta", "td-brand"]
       };
       const ORDER = {
         new: VISIT,
@@ -1880,7 +1941,7 @@
         }
       };
       const blocks = {};
-      ["aktuellt", "en-dag", "just-nu", "fragor", "boenden-waabi", "boende", "mer-resa", "mer-resa-sommar", "mer-nu", "mer-nu-sommar"].forEach((id) => { const el = document.getElementById(id); if (el) blocks[id] = el; });
+      ["aktuellt", "en-dag", "familjen", "just-nu", "fragor", "boenden-waabi", "boende", "helgen", "mer-resa", "mer-resa-sommar", "mer-nu", "mer-nu-sommar"].forEach((id) => { const el = document.getElementById(id); if (el) blocks[id] = el; });
       Object.entries(PLACEHOLDERS).forEach(([id, name]) => {
         const el = document.createElement("section");
         el.className = "og-td-placeholder";

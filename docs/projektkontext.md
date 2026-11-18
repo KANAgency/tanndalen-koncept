@@ -46,7 +46,7 @@ Bakgrund för design- och kodarbete. Källor: projektsammanställning 21 sep 202
 2. Vilket TD-koncept gäller formellt (se ovan)?
 3. Norska för TD? Kan `tdidag.com` hämtas hem? Kan `shop.orsagronklitt.se` konsolideras in i R360?
 4. **R360-parametrar** utöver kategori-ID, och API för liftdata.
-5. OG: CTA-färg (mörkgrön), familj vs längdåkande citysinglar som prioritet, hur mycket urgency som överlever.
+5. OG: CTA-färg (mörkgrön), familj vs längdåkande citysinglar som prioritet (OG-manualen s. 7 prioriterar "längdåkare med stora plånböcker"), hur mycket urgency som överlever.
 6. Portföljroller OG/TD och korsförsäljningsasymmetri (ingen portföljarkitektur finns).
 7. Verifiera mot Tänndalen: Hamrafjället 1 137 m / 295 m, väderstation "på toppen", webbkamera "Storvigeln", pistnamn "Headstråket", antal pister (54 mot 57), footerlänkar, platshållartider.
 8. Vem skriver morgonrapporten, från vilken enhet? Rättigheter till porträtt och doodles.

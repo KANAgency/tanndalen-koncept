@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-18 (OG: konceptblock Familjen och Helgen, ej beslutat)
+
+Två OG-unika block byggda som koncept med röd "Koncept"-tagg: `#familjen` (åldersstickan, "Hur gamla är barnen?") och `#helgen` ("Bästa mixen i skidparadiset.", reglage koppla av ↔ ladda upp). Valt för att de bär var sin halva av OG:s positionering: familjen (persona 1, Bärra, gratis liftkort t.o.m. 6 år) och närhet + längd-DNA (4 h från Stockholm, elitspår, manualens prioriterade "längdåkare med stora plånböcker"). Ratat: OG-version av Hitta hit (TD har redan kartblocket), byakarta med piktogram (för tunt underlag om byarnas lägen), Vasaloppsnedräkning (för smal). Öppet: John bedömer; målgruppskrocken familj vs längdåkare (manualen s. 7 mot projektkontexten).
+
 ## 2026-11-18 (TD: stora block utan radie)
 
 Heron (ram + film, desktop + mobil), En dags bilder och Fjällguiden-blocket har `radius-none`, som Lev. Andas-blocket. Övriga kort (Aktuellt, Just nu, boenden, utförsåkning, faktakortet i Hitta hit) har kvar `sm`; de hade det redan. Praxis för nästlade radier: inre = yttre − avstånd. Ratades: samma radie (4/4) på ram och film i heron. Öppet: Aktuellt-kortets bild (`sm`) inuti plattan (`sm`) bryter mot den nästlade regeln; ej ändrad (John: låt övriga vara). OG:s Fråga-block behåller 8 via `og-overrides.css`.

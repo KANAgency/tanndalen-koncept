@@ -47,3 +47,10 @@ Källa: orsagronklitt.se om inget annat anges. Säker = står på OG-sajten. Tro
 ## Övrigt
 - Hundspann (North of The Lake Dalarna), start vid stora parkeringen.
 - Skridskor på Orsasjön: ca 15 km plogad bana Orsa Camping–Kråkberg enligt Visit Dalarna, beroende på is. (Trolig)
+
+## Från OG-manualen (jan 2025, kundens underlag; sidnummer i manualen)
+- "Bara 4 timmar från Stockholm och 30 minuter från Mora" (s. 18).
+- Elitspår på 5 och 10 km (s. 80).
+- Konceptet "Skidparadiset" bär kommunikationen året runt; rubrikformeln "[X] i skidparadiset" och dubbelheten "Ladda upp och koppla av" / "Bästa mixen i skidparadiset" (s. 83–88).
+- Prioriterad målgrupp: "längdåkare med 'stora plånböcker'" (s. 7). Löfte: småskalig kvalitetsupplevelse med guldkant (s. 8).
+- Kurbits: sparsamt, nedtonad dekoration, aldrig blickfång (s. 71); svart, off-white eller mörkgrön (Designguide s. 83).

@@ -1,0 +1,513 @@
+/*
+ * KONCEPT (2026-11-18): två OG-unika block, inte godkända av John eller kund.
+ *  - #familjen  "Hur gamla är barnen?"   åldersstickan med dragbara barn → förslag per barn
+ *  - #helgen    "Bästa mixen i skidparadiset"  reglage koppla av ↔ ladda upp → helgschema
+ * Data och logik: og-koncept.js. Bara tokens från designsystemet; inga lösa hex.
+ * Allt ligger under .og-koncept så det går att plocka bort i ett svep.
+ */
+
+/* ── Gemensamt ─────────────────────────────────────────────── */
+.theme-OG .og-koncept {
+  position: relative;
+  margin-block: var(--space-7xl);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+}
+.theme-OG .og-koncept[hidden] { display: none; }
+
+.og-koncept .og-koncept-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-lg);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-xs);
+  background: var(--color-OG-difficulty-red);
+  color: var(--color-OG-snow);
+  font-family: var(--font-family-TD-secondary), sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.333;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: help;
+}
+.og-koncept-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.og-koncept .utforsakning-eyebrow { color: var(--color-OG-neutral); }
+.og-koncept h2,
+.og-koncept h3,
+.og-koncept p,
+.og-koncept ul,
+.og-koncept ol,
+.og-koncept dl,
+.og-koncept dd { margin: 0; }
+.og-koncept ul,
+.og-koncept ol { padding: 0; list-style: none; }
+
+/* Piktogram (32-raster, 2 px linje + en accentform, samma logik som Icons / Content) */
+.og-pikto { width: 32px; height: 32px; flex: 0 0 auto; color: currentColor; }
+.og-pikto .linje { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.og-pikto .accent { fill: var(--color-accent); }
+
+/* ── Block 1: Familjen ────────────────────────────────────── */
+.og-familj-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  column-gap: var(--space-3xl);
+  align-items: end;
+  margin-bottom: var(--space-3xl);
+}
+.og-familj-titlar { display: flex; flex-direction: column; gap: var(--space-xs); }
+.og-familj-ingress { color: var(--color-OG-neutral-strong); }
+
+/* Åldersstickan */
+.og-familj-linjal {
+  padding: var(--space-xl) var(--space-2xl) var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+}
+.og-familj-band {
+  position: relative;
+  height: 184px;
+  border-radius: var(--radius-xs);
+  cursor: copy;
+  touch-action: pan-y;
+  user-select: none;
+}
+.og-familj-zoner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 3fr 4fr 6fr 5fr; /* 0–2, 3–6, 7–12, 13–17 år = 18 steg */
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+}
+.og-familj-band.is-full { cursor: default; }
+.og-familj-zon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-lg) 0;
+  border-right: 1px solid color-mix(in srgb, var(--color-OG-snow) 70%, transparent);
+  transition: background-color var(--motion-duration-normal) var(--motion-easing-out-soft);
+}
+.og-familj-zon:last-child { border-right: 0; }
+.og-familj-zon .og-pikto { margin-bottom: var(--space-xs); }
+.og-familj-zon-namn {
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.og-familj-zon-alder { color: var(--color-OG-neutral-strong); }
+.og-familj-zon-chip {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-xs);
+  background: var(--color-OG-snow);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.5;
+}
+.og-familj-zon.is-tom .og-familj-zon-namn,
+.og-familj-zon.is-tom .og-pikto { opacity: 0.55; }
+
+/* Zonfärger: säsongsfärgen i stigande styrka, från de minsta till hela berget */
+[data-season="winter"] .og-familj-zon:nth-child(1) { background: color-mix(in srgb, var(--color-season-winter) 22%, var(--color-OG-snow)); }
+[data-season="winter"] .og-familj-zon:nth-child(2) { background: color-mix(in srgb, var(--color-season-winter) 42%, var(--color-OG-snow)); }
+[data-season="winter"] .og-familj-zon:nth-child(3) { background: color-mix(in srgb, var(--color-season-winter) 66%, var(--color-OG-snow)); }
+[data-season="winter"] .og-familj-zon:nth-child(4) { background: var(--color-season-winter); }
+[data-season="summer"] .og-familj-zon:nth-child(1) { background: color-mix(in srgb, var(--color-season-spring) 25%, var(--color-OG-snow)); }
+[data-season="summer"] .og-familj-zon:nth-child(2) { background: color-mix(in srgb, var(--color-season-spring) 48%, var(--color-OG-snow)); }
+[data-season="summer"] .og-familj-zon:nth-child(3) { background: color-mix(in srgb, var(--color-season-spring) 74%, var(--color-OG-snow)); }
+[data-season="summer"] .og-familj-zon:nth-child(4) { background: var(--color-season-spring); }
+
+/* Barnen på stickan */
+.og-familj-barn {
+  --stapel: 0;
+  position: absolute;
+  bottom: calc(var(--space-lg) + var(--stapel) * 52px);
+  left: calc((var(--alder) + 0.5) / 18 * 100%);
+  z-index: 2;
+  transform: translateX(-50%);
+  transition: left var(--motion-duration-normal) var(--motion-easing-out-soft), bottom var(--motion-duration-normal) var(--motion-easing-out-soft);
+}
+.og-familj-barn.is-drar { transition: none; z-index: 3; }
+.og-familj-markor {
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-OG-snow);
+  border-radius: var(--radius-full);
+  background: var(--color-cta-primary);
+  color: var(--contrast-on-cta);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+  touch-action: none;
+  text-align: center;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.og-familj-markor:hover { transform: scale(1.06); }
+.og-familj-barn.is-drar .og-familj-markor { cursor: grabbing; transform: scale(1.14); }
+.og-familj-markor:focus-visible { outline: 2px solid var(--color-text-primary); outline-offset: 3px; }
+.og-familj-markor-tal {
+  font-family: var(--font-family-TD-primary), var(--font-family-TD-primary-fallback), serif;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: 1;
+}
+.og-familj-markor-enhet { font-size: 10px; font-weight: 700; line-height: 1.1; opacity: 0.8; }
+.og-familj-ta-bort {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: grid;
+  place-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-OG-snow);
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  font: 700 12px/1 var(--font-family-TD-secondary), sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.og-familj-barn:hover .og-familj-ta-bort,
+.og-familj-barn:focus-within .og-familj-ta-bort { opacity: 1; }
+.og-familj-barn.is-ensam .og-familj-ta-bort { display: none; }
+
+.og-familj-skala {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+  margin-top: var(--space-sm);
+  color: var(--color-OG-neutral);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  text-align: center;
+}
+.og-familj-skala span:last-child::after { content: " år"; }
+.og-familj-linjal-fot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-OG-neutral-subtlest);
+}
+.og-familj-hint { color: var(--color-OG-neutral); }
+.og-familj-add {
+  border: 1px solid var(--color-OG-neutral-light);
+}
+.og-familj-add:disabled { opacity: 0.4; cursor: default; }
+
+/* Korten */
+.og-familj-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2xl) var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+.og-familj-kort { display: flex; flex-direction: column; min-width: 0; }
+.og-familj-kort-bild {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--space-lg);
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--color-OG-neutral-subtlest);
+}
+.og-familj-kort-bild img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--motion-duration-slow) var(--motion-easing-out-soft);
+}
+.og-familj-kort:hover .og-familj-kort-bild img { transform: scale(1.03); }
+.og-familj-kort-bild .td-chip-tag { position: absolute; top: var(--space-md); left: var(--space-md); height: 28px; }
+.og-familj-kort-zon { color: var(--color-OG-neutral); margin-bottom: 2px; }
+.og-familj-kort h3 { margin-bottom: var(--space-md); }
+.og-familj-lista { display: flex; flex-direction: column; gap: var(--space-md); }
+.og-familj-lista li {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  column-gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-OG-neutral-subtlest);
+}
+.og-familj-lista li::before {
+  content: "";
+  grid-row: 1 / 3;
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-season-winter);
+}
+[data-season="summer"] .og-familj-lista li::before { background: var(--color-season-summer); }
+.og-familj-lista-titel { font-weight: 700; }
+.og-familj-lista .td-ui-caption { color: var(--color-OG-neutral-strong); font-size: var(--font-size-sm); }
+
+/* Tillsammans-kortet: mörkgrön yta, spänner över resten av raden */
+.og-familj-ihop {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--color-cta-primary);
+  color: var(--contrast-on-cta);
+}
+.og-familj-ihop.is-bred { flex-direction: row; }
+.og-familj-ihop-bild { position: relative; flex: 0 0 auto; aspect-ratio: 4 / 3; overflow: hidden; }
+.og-familj-ihop.is-bred .og-familj-ihop-bild { flex: 1 1 50%; aspect-ratio: auto; min-height: 100%; }
+.og-familj-ihop-bild img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.og-familj-ihop-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+}
+.og-familj-ihop.is-bred .og-familj-ihop-text { flex: 1 1 50%; padding: var(--space-2xl); }
+.og-familj-ihop .td-ui-caption { color: color-mix(in srgb, var(--color-OG-snow) 72%, transparent); }
+.og-familj-ihop-lista { display: flex; flex-direction: column; gap: var(--space-sm); }
+.og-familj-ihop-lista li { display: flex; flex-direction: column; }
+.og-familj-ihop-lista strong { font-weight: 700; }
+.og-familj-summa {
+  margin-top: var(--space-xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid color-mix(in srgb, var(--color-OG-snow) 22%, transparent);
+}
+.og-familj-summa strong { font-family: var(--font-family-TD-primary), serif; font-size: var(--font-size-lg); }
+.og-familj-ctas { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: auto; padding-top: var(--space-md); }
+.og-familj-ctas .td-button-text-ljus {
+  background: transparent;
+  color: var(--color-OG-snow);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-OG-snow) 45%, transparent);
+}
+.og-familj-ctas .td-button-text-ljus::before { background: var(--color-OG-snow); }
+
+/* ── Block 2: Bästa mixen ─────────────────────────────────── */
+.og-mix { --mix-lugn: var(--color-season-winter); }
+[data-season="summer"] .og-mix { --mix-lugn: var(--color-season-spring); }
+.og-mix-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: var(--space-5xl);
+  padding: var(--space-5xl) var(--space-5xl) calc(var(--space-5xl) + 40px);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-cta-primary);
+  color: var(--color-OG-day);
+}
+.og-mix-vanster { display: flex; flex-direction: column; gap: var(--space-xl); align-self: start; }
+.og-mix .og-mix-eyebrow { color: color-mix(in srgb, var(--color-OG-day) 64%, transparent); }
+.og-mix-titlar { display: flex; flex-direction: column; gap: var(--space-xs); }
+.og-mix-ingress { color: color-mix(in srgb, var(--color-OG-day) 86%, transparent); max-width: 440px; }
+
+/* Reglaget */
+.og-mix-reglage { display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-lg) 0 var(--space-xs); }
+.og-mix-etiketter { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+.og-mix-pol { display: inline-flex; align-items: center; gap: var(--space-sm); font-weight: 700; font-size: var(--font-size-sm); }
+.og-mix-pol .og-pikto { width: 28px; height: 28px; }
+.og-mix-pol .og-pikto .accent { fill: var(--color-OG-cta-on-dark); }
+.og-mix-namn {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--color-OG-day) 12%, transparent);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.og-mix-range {
+  --fyll: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.og-mix-range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to right, var(--mix-lugn) 0 var(--fyll), var(--color-OG-cta-on-dark) var(--fyll) 100%);
+}
+.og-mix-range::-moz-range-track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to right, var(--mix-lugn) 0 var(--fyll), var(--color-OG-cta-on-dark) var(--fyll) 100%);
+}
+.og-mix-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 32px;
+  height: 32px;
+  margin-top: -12px;
+  border: 3px solid var(--color-cta-primary);
+  border-radius: var(--radius-full);
+  background: var(--color-OG-day);
+  box-shadow: 0 0 0 2px var(--color-OG-day), 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft);
+}
+.og-mix-range::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--color-cta-primary);
+  border-radius: var(--radius-full);
+  background: var(--color-OG-day);
+  box-shadow: 0 0 0 2px var(--color-OG-day), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.og-mix-range:active::-webkit-slider-thumb { transform: scale(1.12); }
+.og-mix-range:focus-visible { outline: 2px solid var(--color-OG-day); outline-offset: 6px; border-radius: var(--radius-full); }
+
+/* Tal */
+.og-mix-tal {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+  padding-block: var(--space-xl);
+  border-block: 1px solid color-mix(in srgb, var(--color-OG-day) 18%, transparent);
+}
+.og-mix-tal > div { display: flex; flex-direction: column-reverse; gap: var(--space-xs); }
+.og-mix-tal dd { font-size: var(--font-size-40); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.og-mix-tal dt { color: color-mix(in srgb, var(--color-OG-day) 70%, transparent); }
+
+/* Bokningskorgen */
+.og-mix-korg { display: flex; flex-direction: column; gap: var(--space-sm); }
+.og-mix-korg-rubrik { color: color-mix(in srgb, var(--color-OG-day) 70%, transparent); }
+.og-mix-korg-lista { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.og-mix-korg-lista li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 28px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--color-OG-day) 12%, transparent);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  animation: og-mix-in var(--motion-duration-normal) var(--motion-easing-out-soft);
+}
+.og-mix-korg-lista li::before { content: "+"; font-weight: 700; color: var(--color-OG-cta-on-dark); }
+.og-mix-cta { align-self: flex-start; }
+
+/* Schemat */
+.og-mix-schema { position: relative; display: flex; flex-direction: column; }
+.og-mix-schema::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 5px;
+  width: 1px;
+  background: color-mix(in srgb, var(--color-OG-day) 22%, transparent);
+}
+.og-mix-rad {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px 128px minmax(0, 1fr);
+  column-gap: var(--space-xl);
+  align-items: center;
+  padding: var(--space-md) 0 var(--space-md) var(--space-xl);
+}
+.og-mix-rad + .og-mix-rad { border-top: 1px solid color-mix(in srgb, var(--color-OG-day) 10%, transparent); }
+.og-mix-rad::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin-top: -5.5px;
+  border-radius: var(--radius-full);
+  background: var(--color-cta-primary);
+  box-shadow: inset 0 0 0 2px var(--mix-lugn);
+  transition: box-shadow var(--motion-duration-normal) var(--motion-easing-out-soft), background-color var(--motion-duration-normal);
+}
+.og-mix-rad[data-lage="aktiv"]::before { background: var(--color-OG-cta-on-dark); box-shadow: inset 0 0 0 2px var(--color-OG-cta-on-dark); }
+.og-mix-rad.is-fast::before { background: var(--color-OG-day); box-shadow: none; }
+.og-mix-tid { font-weight: 700; font-size: var(--font-size-sm); line-height: 1.3; color: color-mix(in srgb, var(--color-OG-day) 80%, transparent); }
+.og-mix-tid span { display: block; font-weight: 400; color: color-mix(in srgb, var(--color-OG-day) 60%, transparent); }
+.og-mix-bild {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--color-OG-day) 10%, transparent);
+}
+.og-mix-bild img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.og-mix-rad.is-fast .og-mix-bild { display: grid; place-content: center; aspect-ratio: auto; height: 48px; background: none; justify-content: start; }
+.og-mix-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.og-mix-tagg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mix-lugn);
+}
+.og-mix-rad[data-lage="aktiv"] .og-mix-tagg { color: var(--color-OG-cta-on-dark); }
+.og-mix-rad.is-fast .og-mix-tagg { color: color-mix(in srgb, var(--color-OG-day) 60%, transparent); }
+.og-mix-text .td-ui-title { color: var(--color-OG-day); }
+.og-mix-text .td-ui-caption { font-size: var(--font-size-sm); color: color-mix(in srgb, var(--color-OG-day) 72%, transparent); }
+
+/* Kurbitsbård: nedtonad dekoration i underkant (manualen M71/G85: sparsamt, aldrig blickfång) */
+.og-mix-kurbits {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-xl);
+  height: 34px;
+  background: var(--color-OG-day);
+  opacity: 0.14;
+  -webkit-mask: url("./assets/brand/kurbits.svg") center / auto 34px repeat-x;
+  mask: url("./assets/brand/kurbits.svg") center / auto 34px repeat-x;
+  -webkit-mask-repeat: space no-repeat;
+  mask-repeat: space no-repeat;
+  pointer-events: none;
+}
+
+@keyframes og-mix-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Mindre skärmar: blocken staplas (desktop är målet för konceptet) ── */
+@media (max-width: 1023px) {
+  .og-familj-head { grid-template-columns: 1fr; row-gap: var(--space-md); }
+  .og-familj-linjal { padding: var(--space-lg); overflow-x: auto; }
+  .og-familj-band, .og-familj-skala { min-width: 720px; }
+  .og-familj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .og-familj-ihop.is-bred { flex-direction: column; }
+  .og-mix-panel { grid-template-columns: 1fr; row-gap: var(--space-3xl); padding: var(--space-2xl) var(--space-lg) calc(var(--space-2xl) + 40px); }
+  .og-mix-rad { grid-template-columns: 64px 96px minmax(0, 1fr); column-gap: var(--space-md); }
+}
+@media (max-width: 600px) {
+  .og-familj-grid { grid-template-columns: 1fr; }
+  .og-familj-ihop { grid-column: auto !important; }
+  .og-mix-rad { grid-template-columns: 56px minmax(0, 1fr); }
+  .og-mix-bild { display: none; }
+  .og-mix-tal dd { font-size: var(--font-size-2xl); }
+}
