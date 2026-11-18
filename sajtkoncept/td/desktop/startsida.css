@@ -7496,3 +7496,64 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
      mittpunkten (på bildens överkant) behålls. */
   html[data-season="summer"] .utforsakning-doodle { top: -62px; width: 123px; height: 123px; }
 }
+
+/* Mobilrunda 15, 2026-11-18 (John): På plats (läge 4) i mobil med vanliga mobilvyns principer. Bara mobil utom 15-1a. */
+/* 15-1a. Toppbarens lämna-länk har en mobiltext ("Inte på plats?"); desktop visar "(inte på plats?)" som förut. */
+.onsite-leave-mobile { display: none; }
+@media (max-width: 1023px) {
+  /* 15-1. Toppbaren: en rad, 40 px. "På plats i Tänndalen" vänster, "Inte på plats?" höger, text 24 px från kant
+     (som övrig text direkt på yta). Mätvärdena (Öppet/Nysnö/Snödjup) visas inte: Läget just nu ligger direkt under heron.
+     Förslagsvarianten ("Du verkar vara i Tänndalen?") får bryta till två rader. */
+  html.theme-TD .onsite-topbar { padding: var(--space-sm) var(--space-xl); }
+  html.theme-TD .onsite-topbar-status,
+  html.theme-TD .onsite-topbar-status.is-metrics-tight { display: flex; }
+  html.theme-TD .onsite-topbar-start {
+    flex: 1 1 auto;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-inline-start: 0;
+  }
+  html.theme-TD .onsite-topbar-text { display: none; }
+  html.theme-TD .onsite-leave-desktop { display: none; }
+  html.theme-TD .onsite-leave-mobile { display: inline; }
+  html.theme-TD .onsite-topbar-suggest { justify-content: center; row-gap: 0; }
+  html.theme-TD .onsite-topbar-suggest > .onsite-topbar-sep { display: none; }
+
+  /* 15-2. Hero → Läget just nu: luckan rymmer Storvigeln-etiketten (51 px) med 8 px luft. Vinter: under glasögonen,
+     som sticker ned 28 px (28 + 8 + 51 + 8 = 95). Sommar: solen sitter upptill, så 8 + 51 + 8 = 67.
+     Avståndet räknas till "Uppdaterat" (Just nu har 16 px padding-top). Etikettens läge sätts i JS
+     (placeHeroLabelOnsiteMobile). */
+  html[data-mode="onsite"] #just-nu { margin-top: calc(95px - var(--space-lg)); }
+  html[data-mode="onsite"][data-season="summer"] #just-nu { margin-top: calc(67px - var(--space-lg)); }
+
+  /* 15-3. Händer idag (rapportkortet, ersätter filmen i På plats): innehållsbredd i stället för desktopens 410 px,
+     4:5 som heron (361 × 451 vid 393). */
+  html[data-mode="onsite"] .just-cols > .td-rapport {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    box-sizing: border-box;
+  }
+
+  /* 15-4. Tredje raden (Dagens vallatips, Öppet nu, Väder): samma kortregler som övriga Just nu-kort i mobil –
+     16 px mellan alla kort och ytterradie 2. Vädrets temperatur 96 → 88 som sommarväderkortet (14-4). */
+  html[data-mode="onsite"] .just-cols-3 { margin-top: var(--space-lg); gap: var(--space-lg); }
+  /* Sommar: tredje raden är tom (vädret ligger i första rutnätet), så ingen marginal – annars 64 i stället för 48 till Aktuellt. */
+  html[data-mode="onsite"][data-season="summer"] .just-cols-3 { margin-top: 0; }
+  html[data-mode="onsite"] .just-cols-3 > * { border-radius: var(--radius-xs); }
+  html[data-mode="onsite"] .just-cols-3 .td-vader-temp .td-ui-figure-xl { font-size: var(--font-size-88); line-height: 1; }
+
+  /* 15-5. Läget just nu → Aktuellt: 48 px från sista kortet till AKTUELLT (som mobilens övriga sektionsglapp).
+     main är flex i På plats, så marginalerna kollapsar inte. Aktuellt-rubrikens box börjar 18 px ovanför sektionen. */
+  html[data-mode="onsite"] #aktuellt { margin-top: calc(48px + 18px); }
+
+  /* 15-6. Fjällguiden-blocket → Nära dig just nu: 220 med Skarvarna-etiketten i luckan (12-2, som Frågeblocket →
+     Här bor skidåkarna). Gäller även sommar, där luckan följs av citatet och Lev. Andas. */
+  html[data-mode="onsite"] .faq { --fraga-space-after: 220px; }
+
+  /* 15-7. Nära dig just nu: korten som Här bor skidåkarna i mobil (rubrik 30 → 24, namn 14 → 13). Gäller även
+     Mer till er vecka (Påbörjad bokning), samma kort. Rasmus-citatet i sin 260-lucka direkt efter, sedan Lev. Andas. */
+  .td-mer .td-bo-overlay .td-bo-waabi-rubrik { font-size: var(--font-size-xl); }
+  .td-mer .td-bo-overlay .td-bo-waabi-namn { font-size: var(--font-size-13); }
+  html[data-mode="onsite"] #mer-nu { margin-bottom: 0; }
+}

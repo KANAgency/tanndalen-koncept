@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/ds/components/citat.css" />
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
-    <link rel="stylesheet" href="startsida.css?v=meny16" />
+    <link rel="stylesheet" href="startsida.css?v=plats1" />
     <link rel="stylesheet" href="/ds/components/site-footer.css" />
     <link rel="stylesheet" href="brand-sequence.css?v=mob2" />
     <link rel="stylesheet" href="intro.css?v=mob5" />
@@ -137,7 +137,7 @@
       <div class="onsite-topbar-status" data-onsite-status>
         <div class="onsite-topbar-start">
           <a class="onsite-topbar-title td-ui-body" href="#just-nu">På plats i Tänndalen</a>
-          <button class="onsite-topbar-leave td-ui-caption" type="button" data-onsite-leave>(inte på plats?)</button>
+          <button class="onsite-topbar-leave td-ui-caption" type="button" data-onsite-leave><span class="onsite-leave-desktop">(inte på plats?)</span><span class="onsite-leave-mobile">Inte på plats?</span></button>
         </div>
         <p class="onsite-topbar-text td-ui-body" data-onsite-metrics>
           <span class="onsite-topbar-metric" data-onsite-metric><strong class="onsite-topbar-label">Öppet:</strong> 41/54 nedfarter, 14/17 liftar</span>
@@ -4743,8 +4743,24 @@
             skarvarna.style.left = `${(unitLeftDoc - parentDocLeft).toFixed(2)}px`;
             /* Mobilrunda 9B: förankrad i Frågeblocket i stället för fast dokument-y (6217 px), så topografin
                inte hamnar ~1 560 px fel när En dag blev en kort karusell. 874 = 6217 − blockets dåvarande topp (5343). */
-            const LOCK_DOC_TOP = panel.getBoundingClientRect().top + scrollY + 874.4;
+            const panelBox = panel.getBoundingClientRect();
+            const LOCK_DOC_TOP = panelBox.top + scrollY + 874.4;
             skarvarna.style.top = `${(LOCK_DOC_TOP - parentDocTop).toFixed(2)}px`;
+            /* På plats (John 2026-11-18): blocket ligger ~700 px högre och är lägre, så det fasta avståndet ovan landar
+               fel när parallaxen räknas in (lagret flyttas (1 − f) × scroll). Etiketten placeras i stället så att den
+               står 24 px under blocket när luckan Frågeblocket → nästa block är mitt på skärmen – samma läge som
+               etiketten får i Återkommande (uppmätt 24 px). Gäller vinter och sommar. */
+            if (label && document.documentElement.dataset.mode === "onsite") {
+              const faq = panel.closest(".faq") || panel;
+              const gapTopDoc = panelBox.bottom + scrollY;
+              const gapH = parseFloat(getComputedStyle(faq).marginBottom) || 0;
+              const sStar = Math.max(0, gapTopDoc + gapH / 2 - innerHeight / 2 - runwayAdjust());
+              const off = (1 - activeFactor()) * sStar;
+              void skarvarna.offsetHeight;
+              const labelRestDoc = label.getBoundingClientRect().top + scrollY;
+              const lock = LOCK_DOC_TOP + (gapTopDoc + 24 - off - labelRestDoc);
+              skarvarna.style.top = `${(lock - parentDocTop).toFixed(2)}px`;
+            }
             skarvarnaSc = 0;
             skarvarna.dataset.topo2Placed = "1";
             return;
@@ -4851,9 +4867,39 @@
           const vh = innerHeight;
           return Math.max(vh, f * (docH - vh) + vh + 200);
         }
+        /* På plats mobil (John 2026-11-18): ingressen är dold och Läget just nu kommer direkt efter heron, så
+           Storvigeln-etiketten står i luckan hero → Just nu: 8 px under heron, eller 8 px under doodlen när den
+           sticker ned bakom etiketten (vinterns glasögon, 28 px). Målet gäller vid scroll 0; därefter följer
+           etiketten topografins parallax som i vanliga mobilvyn. Övriga lägen: CSS-värdena (Mobilrunda 11). */
+        function placeHeroLabelOnsiteMobile(hero) {
+          hero.style.removeProperty("--label-nudge-y");
+          if (document.documentElement.dataset.mode !== "onsite") return;
+          const label = hero.querySelector(".place-label-block");
+          const frame = document.getElementById("hero-heading");
+          const unit = hero.querySelector(".hero-topo-unit");
+          if (!label || !frame) return;
+          void hero.offsetHeight;
+          const frameBox = frame.getBoundingClientRect();
+          const lb = label.getBoundingClientRect();
+          let floor = frameBox.bottom;
+          document.querySelectorAll("#hero-heading .hero-doodle").forEach((d) => {
+            const cs = getComputedStyle(d);
+            if (cs.display === "none" || cs.visibility === "hidden") return;
+            const db = d.getBoundingClientRect();
+            if (db.right <= lb.left || db.left >= lb.right) return;
+            const below = -(parseFloat(cs.bottom) || 0);
+            if (below > 0) floor = Math.max(floor, frameBox.bottom + below);
+          });
+          const targetTopDoc = floor + scrollY + 8;
+          const unitTy = unit ? parseFloat((getComputedStyle(unit).translate || "0 0").split(" ")[1]) || 0 : 0;
+          const restTopDoc = lb.top + scrollY - unitTy;
+          const nudge = parseFloat(getComputedStyle(hero).getPropertyValue("--label-nudge-y")) || 0;
+          hero.style.setProperty("--label-nudge-y", `${(nudge + targetTopDoc - restTopDoc).toFixed(2)}px`);
+        }
         function placeHeroStorvigeln() {
           const hero = document.querySelector(".parallax-item--hero");
-          if (!hero || mobileQ.matches) return;
+          if (hero && mobileQ.matches) { placeHeroLabelOnsiteMobile(hero); return; }
+          if (!hero) return;
           const nameEl = hero.querySelector(".place-storvigeln strong") || hero.querySelector(".place-storvigeln");
           const factEl = hero.querySelector(".place-hojd");
           const nameFs = parseFloat(getComputedStyle(nameEl).fontSize) || 16;
@@ -5024,7 +5070,10 @@
           ].filter(Boolean);
           if (!targets.length) return;
           /* Mobil (runda 11): Storvigeln tonas även bakom Aktuellt-rubriken ("Detta är på gång"). */
-          const occluders = (mobileQ.matches ? [...LAYER_OCCLUDERS, ".td-aktuellt-titles"] : LAYER_OCCLUDERS)
+          /* På plats mobil: etiketten står ovanför Läget just nu och tonas på samma sätt om parallaxen för in den i huvudet. */
+          const mobileOccluders = document.documentElement.dataset.mode === "onsite"
+            ? [".td-aktuellt-titles", ".just-nu-head"] : [".td-aktuellt-titles"];
+          const occluders = (mobileQ.matches ? [...LAYER_OCCLUDERS, ...mobileOccluders] : LAYER_OCCLUDERS)
             .map((sel) => document.querySelector(sel)).filter(Boolean);
           const vh = innerHeight;
           for (const el of targets) {
