@@ -272,7 +272,8 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
 ## Öppet 18 nov: OG-boendevideorna ej uppladdade till R2
-- Uppladdning stoppad: wrangler är inloggad med Johns privata Cloudflare-konto (gmail), R2-anropet går mot KAN-kontot (1593f55b…) → "Authentication error 10000". John behöver köra `npx wrangler login` med KAN-kontot.
+- Uppladdning stoppad: wrangler är inloggad med Johns privata Cloudflare-konto (gmail), R2-anropet går mot KAN-kontot (1593f55b…) → "Authentication error 10000".
+- Lösning (18 nov): kontot per mapp via `sajtkoncept/.env` (gitignorerad, mall i `.env.example`, beskrivet i `STRUKTUR.md`). Väntar på att John skapar en KAN-token (R2 Edit) och klistrar in den i `.env`. Kör sedan uppladdningen från `sajtkoncept/` (sökvägar `og/desktop/assets/video/<fil>`).
 - Sedan, från `sajtkoncept/og/desktop/assets/video/` (fyra filer, postrar också eftersom dist tar bort hela `assets/video/`):
   `for f in boende-lonnstigen-6-rundtur.mp4 boende-lonnstigen-6-rundtur-poster.jpg boende-limbygarden-rundtur.mp4 boende-limbygarden-rundtur-poster.jpg; do npx wrangler r2 object put td-video/og/$f --file $f --remote; done`
 - Kontroll: `curl -I https://pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev/og/boende-limbygarden-rundtur.mp4` ska ge 200 (befintliga `og/winter.web.mp4` ger 200).

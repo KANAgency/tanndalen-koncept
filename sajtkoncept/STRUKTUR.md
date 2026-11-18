@@ -68,3 +68,18 @@ npm run test:td         # hela TD-regressionen
 ```
 
 Baseline ligger i `td/regression/td-baseline/`. Promote bara med `npm run test:td:promote -- --confirm`.
+
+## Cloudflare-konto (R2-videor)
+
+Videorna ligger i R2 på **KAN:s** Cloudflare-konto (bucket `td-video`, prefix `td/` och `og/`, publik adress `https://pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev`). `wrangler login` är global för hela datorn och används för privata projekt, så den här mappen pekar ut KAN-kontot själv:
+
+1. Kopiera `.env.example` till `.env` (ignoreras av git) och fyll i `CLOUDFLARE_API_TOKEN` med en KAN-token (rättighet "Workers R2 Storage: Edit", bara KAN-kontot).
+2. Wrangler läser `.env` i mappen den körs från och använder då tokenen i stället för inloggningen (verifierat 2026-11-18). Kör därför wrangler från `sajtkoncept/`.
+
+Ladda upp en video (och dess poster – bygget tar bort hela `assets/video/`):
+
+```bash
+npx wrangler r2 object put td-video/og/<fil> --file og/desktop/assets/video/<fil> --remote
+```
+
+Kontroll: `curl -I https://pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev/og/<fil>` ska ge 200. Cloud-sessioner och GitHub Actions: samma två variabler som hemligheter i miljön/repot.

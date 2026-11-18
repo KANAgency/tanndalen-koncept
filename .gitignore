@@ -16,3 +16,8 @@ sajtkoncept/dist/
 assets/video/
 **/assets/video/
 backups/
+
+# Cloudflare-konto per projekt (token + konto-id), aldrig i git
+.env
+.env.*
+!.env.example
