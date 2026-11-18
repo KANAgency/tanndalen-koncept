@@ -7442,3 +7442,22 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
      nu samma rytm som vinterns En dag → Just nu: 48 px ovanför, Just nu:s egna 48 + 16 under. */
   html[data-season="summer"] #boenden-waabi { margin-top: 48px; margin-bottom: 0; }
 }
+
+/* Mobilrunda 14, 2026-11-18 (John): sista En dag-kortet får en brödtext under "Samma tid i morgon?" så knappen
+   linjerar med övriga korts knappar. Bara mobil och vinter; dold på desktop och i sommar. */
+.en-dag-puff-body { display: none; }
+@media (max-width: 1023px) {
+  html:not([data-season="summer"]) .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy .en-dag-puff-body { display: block; padding-top: var(--space-md); }
+  /* Samma mått som övriga korts textblock: rubriken direkt under namnet, 12 px till brödtexten, 24 px till knappen. */
+  html:not([data-season="summer"]) .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy .td-heading-md { margin-top: 0; }
+  html:not([data-season="summer"]) .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy .td-button { margin-top: var(--space-xl); }
+}
+@media (max-width: 1023px) {
+  /* 14-2 (John 2026-11-18). En dags bilder och filmer får 2 px radie i mobil, som Just nu-korten. Desktop behåller 0. */
+  .page .en-dag .en-dag-media { border-radius: 2px; overflow: hidden; }
+}
+@media (max-width: 1023px) {
+  /* 14-3 (John 2026-11-18). Utförsåkning: bildens/filmens nedre hörn 0 → 2 px (regel 8 gjorde dem raka när texten
+     låg kloss under; sedan runda 9 är texten ett eget block). Övre hörnen oförändrade. */
+  .utforsakning .utforsakning-media { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; }
+}
