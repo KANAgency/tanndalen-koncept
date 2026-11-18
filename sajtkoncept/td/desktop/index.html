@@ -2133,9 +2133,11 @@
       let enSunTimes = tanddalenSunTimes();
       function applySunClock() {
         const summer = document.getElementById("en-dag")?.dataset.dayView === "summer";
-        /* Högsommar i Tänndalen. Dagens datum (höst/vinter) ger solnedgång mitt i kvällsprogrammet. */
+        /* Fasta datum så solen alltid ramar in dagens kort (08:30–16:00). Sommar: högsommar (15 juli).
+           Vinter (John 2026-11-18): 20 februari, sportlov → ca 07:44 / 17:06. Dagens datum gav i november
+           soluppgång efter första kortet och solnedgång före sista. */
         const { y } = stockholmCivilDate();
-        const date = summer ? new Date(Date.UTC(y, 6, 15, 12, 0, 0)) : new Date();
+        const date = summer ? new Date(Date.UTC(y, 6, 15, 12, 0, 0)) : new Date(Date.UTC(y, 1, 20, 12, 0, 0));
         enSunTimes = tanddalenSunTimes(date);
         if (enRise) {
           enRise.dataset.time = enSunTimes.rise;
