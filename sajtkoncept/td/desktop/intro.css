@@ -211,3 +211,22 @@ html.is-intro-done .intro-line {
 /* Under introt är sidan scrollad långt ner i runwayn (is-scrolled sätts), men visuellt står man
    på startsidan: menyn ska stå i startläge tills introt släpper. */
 html.is-intro:not(.is-intro-done) .top-glass { opacity: 0 !important; }
+
+/* Skip: desktop shows the label, mobile a round down-arrow button (John 2026-11-18). */
+.intro-scroll-arrow { display: none; }
+@media (max-width: 1023px) {
+  #intro-scroll {
+    box-sizing: border-box;
+    justify-content: center;
+    width: var(--size-control-lg);
+    height: var(--size-control-lg);
+    min-width: var(--size-control-lg);
+    padding: 0;
+    border-radius: var(--radius-full);
+    /* Mobil: det vita tonas ned så knappen inte tar över bilden. */
+    background: rgb(255 255 255 / 0.55);
+    border-color: transparent;
+  }
+  .intro-scroll-text { display: none; }
+  .intro-scroll-arrow { display: block; width: 16px; height: 16px; }
+}
