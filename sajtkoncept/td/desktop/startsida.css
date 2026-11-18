@@ -7475,3 +7475,19 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
      (från 52,5 px in från ramens högerkant / 12,5 px ovanför underkanten till 44,5 / 36,5). */
   .hero-sun { right: -40px; bottom: -48px; width: 168px; height: 168px; }
 }
+@media (max-width: 1023px) {
+  /* 14-3. Menyknappen i mobil (John 2026-11-18): ingen hover (iOS lät rutan stå kvar efter tryck på krysset).
+     Rutan (neutral-subtlest, radie 4) visas i stället alltid när menyn är öppen, så krysset syns tydligt. */
+  .menu-control { -webkit-tap-highlight-color: transparent; }
+  .menu-control::before { transition: none; } /* annars tonar en mörk ruta ut när menyn stängs */
+  .menu-control:hover::before,
+  .menu-control:focus-visible::before,
+  .menu-control:active::before { opacity: 0; }
+  .menu-control:hover .menu-icon-line,
+  .menu-control:focus-visible .menu-icon-line { transform: none; }
+  .top:has(.site-menu.is-open) .menu-control::before {
+    background: var(--color-TD-neutral-subtlest);
+    opacity: 1;
+    transition: none;
+  }
+}
