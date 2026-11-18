@@ -267,6 +267,14 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
+## Klart 18 nov: OG – rundturvideo i Lönnstigen 6-kortet
+- Samma form som TD (Fjällöga/Järven): Kling 2.5, 4 × 5 s, 16:9 1080p, bara startbild (16:9-utsnitt, 75 % av bredden bort från rörelsen; vardagsrummet helbild för rak push), negativ prompt mot folk/eld/nya objekt. 4 × 325 = 1 300 credits ≈ 3,25 EUR. Magnific-projektet "Tänndalen - Orsa Grönklitt - Sajt - Inledande fas - 09665".
+- Klipp: a översikt med loftgång (dolly bakåt, bild 07) → b köksö (glid höger, 06) → c vardagsrum (framåt, 09) → d loftsoffan (drift vänster, 22). Kontrollerat bildruta för bildruta: inga deformerade möbler, ingen eld. d hittar på en trappöppning med två rottingstolar bakom räcket (trovärdigt, men inte verkligt).
+- Ihopklippt med 0,8 s toning: `og/desktop/assets/video/boende-lonnstigen-6-rundtur.mp4` (17,6 s, 1920×1080, 2,6 Mbit/s, 5,7 MB, utan ljud) + poster. Råklipp och startbilder i `tanndalen-orsa/assets/boenden/orsa/skogsbyn/lonnstigen-6/video*/`. Videomappen är gitignorerad: ladda upp till R2 (`og/`) före deploy.
+- Kortet: videon ersätter huvudbilden; stödbild 2 bytt från köket (finns nu i videon) till braskaminen under takfönstren (bild 24, featuren). Video-JS från TD (en video per rad, hover byter, paus utanför skärm, reducerad rörelse → poster).
+- Verifierat 1440 px: videon spelar (400×440, cover), stödbilden laddar, inga konsolfel.
+- Nästa: Limbygården (02 allrum → 06 genom spröjsdörrarna → 10 kök → 26 glasverandan; stödbild 2 byts till stenspisen 04).
+
 ## Klart 17 nov: OG – Handplockade boenden (karusell med riktiga R360-boenden)
 - TD:s `#boenden-waabi` portad till OG och ersätter platshållaren "Handplockade boenden" i blockordningen (vinter: efter Frågor, före Boende; sommar: efter En dag). Dold i Påbörjad bokning och På plats som i TD.
 - 8 kort: huvudbild + 2 stödbilder (klickbara, öppnas i bildmodal) + faktaruta med boyta och bäddar (ur R360). Rubrik "Här bor familjerna" (mitt förslag, ej beslutat). Kortrubrikerna bygger på R360-beskrivningen (t.ex. Lönnstigen 6: matplats för 12, Norra Stugvägen 10: husdjur tillåtet).

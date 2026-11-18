@@ -788,13 +788,13 @@
           <li class="td-bo-waabi-kort">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Lönnstigen 6, Långbord för tolv vid köksön">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. [X] kr/vecka</span>
-              <img class="td-bo-waabi-bild" src="./assets/img/boenden/lonnstigen-6-huvud.jpg" alt="Allrummet i Lönnstigen 6 med höga fönster och braskamin" loading="lazy" decoding="async">
+              <video class="td-bo-waabi-bild td-bo-video" src="./assets/video/boende-lonnstigen-6-rundtur.mp4" poster="./assets/video/boende-lonnstigen-6-rundtur-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Lönnstigen 6: allrum med loftgång, köksö, vardagsrum och loftet"></video>
               <span class="td-button td-button-sm td-bo-hover-cta" aria-hidden="true">Se tillgänglighet</span>
               <span class="td-bo-overlay"><span class="td-ui-caption td-bo-waabi-namn">Lönnstigen 6</span><h3 class="td-heading-xs td-bo-waabi-rubrik">Långbord för tolv vid köksön</h3></span>
             </a>
             <div class="td-bo-waabi-rutor">
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Lönnstigen 6, nybyggt hus i snön"><img src="./assets/img/boenden/lonnstigen-6-stod-1.jpg" alt="Lönnstigen 6, nybyggt hus i snön" loading="lazy" decoding="async"></button>
-              <button class="td-bo-detalj" type="button" aria-label="Visa större: Köket i Lönnstigen 6 med blå köksö"><img src="./assets/img/boenden/lonnstigen-6-stod-2.jpg" alt="Köket i Lönnstigen 6 med blå köksö" loading="lazy" decoding="async"></button>
+              <button class="td-bo-detalj" type="button" aria-label="Visa större: Braskaminen under takfönstren i Lönnstigen 6"><img src="./assets/img/boenden/lonnstigen-6-stod-2.jpg" alt="Braskaminen under takfönstren i Lönnstigen 6" loading="lazy" decoding="async"></button>
               <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">170 kvm</span><span class="td-ui-caption">boyta</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">9</span><span class="td-ui-caption">bäddar</span></span></p>
             </div>
           </li>
@@ -1135,6 +1135,29 @@ window.tdScrollTrack ||= (track, delta, reduced) => {
   }));
   dlg.querySelector(".td-videomodal-x").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+})();
+</script>
+<script>
+/* Boendekort: en video spelar per rad; hover/fokus på ett kort byter. Pausar utanför skärm och vid reducerad rörelse. */
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  document.querySelectorAll(".td-bo").forEach((sec) => {
+    const vids = [...sec.querySelectorAll("video.td-bo-video")];
+    if (!vids.length) return;
+    let active = vids[0], visible = false;
+    const sync = () => vids.forEach((v) => {
+      if (visible && v === active && !reduce.matches) v.play().catch(() => {});
+      else v.pause();
+    });
+    vids.forEach((v) => {
+      const kort = v.closest("li");
+      const pick = () => { active = v; sync(); };
+      kort.addEventListener("pointerenter", pick);
+      kort.addEventListener("focusin", pick);
+    });
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }, { threshold: 0.25 }).observe(sec);
+    reduce.addEventListener("change", sync);
+  });
 })();
 </script>
 </body>
