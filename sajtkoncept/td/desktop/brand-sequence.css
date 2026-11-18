@@ -118,6 +118,8 @@
 /* Mobil (John 18 nov): stående kort, toppställt – höjd och ramar sätts i brand-sequence.js. */
 @media (max-width: 1023px) {
   .td-brand-pin { align-items: flex-start; box-sizing: border-box; }
+  /* John 18 nov: 80 px närmare Hitta hit (faktakortet → kortets ram 199 → 119 px vid 375×812). */
+  .td-brand { margin-top: 0; }
   /* Vinterbild 1 (liggande): behåll vänsterkanten där skidåkarna går. */
   html:not([data-season="summer"]) .td-brand-img:first-child img { object-position: 0% 50%; }
 }

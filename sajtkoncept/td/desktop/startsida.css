@@ -6614,6 +6614,17 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .site-menu-chevron { justify-content: flex-end; }
   .site-menu-chevron:hover,
   .site-menu-chevron:focus-visible { background: transparent; }
+  /* John 18 nov: ingen cirkel alls runt expandpilen på mobil – varken tryckmarkering (iOS ritar den med knappens
+     fulla radie) eller fokusring efter tryck. */
+  .site-menu-chevron { -webkit-tap-highlight-color: transparent; border-radius: 0; }
+  .site-menu-chevron:focus,
+  .site-menu-chevron:focus-visible { outline: none; box-shadow: none; }
+
+  /* John 18 nov: byt säsong, Jag är på plats, linjen och länkarna i botten av fullhöjdsmenyn. */
+  .site-menu-panel > [data-season-toggle] { margin-top: auto; }
+
+  /* John 18 nov: Fjällguiden-knappen döljs medan huvudmenyn är öppen (visibility, så headern inte flyttar sig). */
+  .top:has(.site-menu.is-open) #fraga-launch { visibility: hidden; }
 
   /* Kompakt bokningsrad efter scroll. Figma Booking / Bar Mode=Compact (1446:30064):
      ikon 24, ikonyta 28, knapp 45 (≥ 44). Startformen har kvar 32 px-ikonerna. */

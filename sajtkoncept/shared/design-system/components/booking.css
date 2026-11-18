@@ -308,6 +308,10 @@
 .td-stepper output {
   width: 24px;
   text-align: center;
+  /* John 18 nov: siffran i secondary (CircularXX på TD, Radio Canada Big på OG), ungefär lika stor som förra
+     primary-siffran (UI/figure 18 px) – UI/title-sm i 18 px, jämnbreda siffror så knapparna inte rycker. */
+  font-size: var(--font-size-md);
+  font-variant-numeric: tabular-nums;
 }
 
 .td-calendar {

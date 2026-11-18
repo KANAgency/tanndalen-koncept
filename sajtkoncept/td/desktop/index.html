@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=radie1" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=radie2" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
-    <link rel="stylesheet" href="/ds/components/booking.css?v=mob4" />
+    <link rel="stylesheet" href="/ds/components/booking.css?v=mob5" />
     <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
     <link rel="stylesheet" href="startsida.css?v=radie2" />
     <link rel="stylesheet" href="/ds/components/site-footer.css" />
-    <link rel="stylesheet" href="brand-sequence.css" />
+    <link rel="stylesheet" href="brand-sequence.css?v=mob2" />
     <link rel="stylesheet" href="intro.css?v=mob4" />
     <script>
       /* Skarvarna — etikett/citat/källa i enheter av ritningens bredd W_b (mot bbox-origo). */
@@ -1424,7 +1424,7 @@
               <button class="td-bo-detalj" type="button" aria-label="Visa större: Allrummet i Fjällstjärnan B med höga fönster"><img src="assets/img/boende-fjallstjarnan-b-allrum.jpg" alt="Allrummet i Fjällstjärnan B med höga fönster" loading="lazy" decoding="async"></button>
               <p class="td-bo-ruta td-bo-ruta-fakta"><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">900 m</span><span class="td-ui-caption">till liften</span></span><span class="td-bo-fakta-rad"><span class="td-ui-figure td-bo-ruta-tal">10</span><span class="td-ui-caption">bäddar</span></span></p>            </div>
           </li>
-          <li class="td-bo-waabi-kort">
+          <li class="td-bo-waabi-kort" data-mobil-plats="2">
             <a class="td-bo-waabi-bildlank" href="#" aria-label="Fjällstugan Järven, Braskamin och söderläge">
               <span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark td-bo-pristag">fr. 11 600 kr/vecka</span>
               <video class="td-bo-waabi-bild td-bo-video" src="assets/video/boende-jarven-rundtur.mp4" poster="assets/video/boende-jarven-rundtur-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rundtur i Fjällstugan Järven: allrum, bastu och kök"></video>
@@ -1684,7 +1684,7 @@
       } catch (error) { console.error("boka", error); }
     </script>
     <script type="module">
-      import { initBookingFields } from "/ds/components/booking.js?v=rebind-panes";
+      import { initBookingFields } from "/ds/components/booking.js?v=stepper-font";
       import { initJustNuStack } from "/ds/components/just-nu-stack.js?v=langd-data";
       import { initSegmented } from "/ds/components/segmented.js?v=inset5";
       import { initSeasonToggles, getSeason, setSeason, subscribeSeason } from "/ds/components/season-toggle.js?v=1";
@@ -7201,7 +7201,7 @@ window.tdScrollTrack = (track, delta, reduced) => {
         })();
       </script>
       <script type="module" src="intro.js?v=mob5"></script>
-      <script src="brand-sequence.js" defer></script>
+      <script src="brand-sequence.js?v=mob2" defer></script>
       <script>
       /* Göm menyn medan En dag / Lev Andas fyller skärmen; tillbaka när man är på väg ut */
       (function () {
@@ -7595,25 +7595,61 @@ window.tdScrollTrack = (track, delta, reduced) => {
       });
     </script>
 <script>
-/* Boendekort: en video spelar per rad; hover/fokus på ett kort byter. Pausar utanför skärm och vid reducerad rörelse. */
+/* Boendekort: en video spelar per rad; hover/fokus på ett kort byter. Pausar utanför skärm och vid reducerad rörelse.
+   Mobil (John 18 nov): ingen hover – kortet som står i bild (snappat mot vänsterkanten) spelar sin video, om det har en. */
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const mobileQ = matchMedia("(max-width: 1023px)");
+  /* Mobil (John 18 nov): kort med data-mobil-plats flyttas till den platsen i karusellen (Järven som nummer 2). */
+  const flyttade = [...document.querySelectorAll(".td-bo-lista > li[data-mobil-plats]")].map((li) => ({
+    li, list: li.parentElement, hem: li.nextElementSibling, plats: Number(li.dataset.mobilPlats) - 1
+  }));
+  function placeraKort() {
+    flyttade.forEach(({ li, list, hem, plats }) => {
+      if (mobileQ.matches) {
+        const ref = [...list.children].filter((el) => el !== li)[plats] || null;
+        if (li.nextElementSibling !== ref) list.insertBefore(li, ref);
+      } else if (li.nextElementSibling !== hem) list.insertBefore(li, hem);
+      list.scrollLeft = 0;
+    });
+  }
+  placeraKort();
+  mobileQ.addEventListener("change", placeraKort);
   document.querySelectorAll(".td-bo").forEach((sec) => {
     const vids = [...sec.querySelectorAll("video.td-bo-video")];
     if (!vids.length) return;
+    const track = sec.querySelector(".td-bo-lista");
     let active = vids[0], visible = false;
     const sync = () => vids.forEach((v) => {
       if (visible && v === active && !reduce.matches) v.play().catch(() => {});
       else v.pause();
     });
+    /* Mobil: kortet närmast spårets vänsterkant är aktivt; saknar det video spelar ingen. */
+    function pickInView() {
+      if (!mobileQ.matches || !track) return;
+      const left = track.getBoundingClientRect().left + (parseFloat(getComputedStyle(track).paddingLeft) || 0);
+      let best = null, bestD = Infinity;
+      [...track.children].forEach((li) => {
+        const d = Math.abs(li.getBoundingClientRect().left - left);
+        if (d < bestD) { bestD = d; best = li; }
+      });
+      const v = best ? best.querySelector("video.td-bo-video") : null;
+      if (v !== active) { active = v; sync(); }
+    }
+    let raf = 0;
+    track?.addEventListener("scroll", () => {
+      if (!raf) raf = requestAnimationFrame(() => { raf = 0; pickInView(); });
+    }, { passive: true });
+    mobileQ.addEventListener("change", () => { active = mobileQ.matches ? null : vids[0]; pickInView(); sync(); });
     vids.forEach((v) => {
       const kort = v.closest("li");
-      const pick = () => { active = v; sync(); };
+      const pick = () => { if (mobileQ.matches) return; active = v; sync(); };
       kort.addEventListener("pointerenter", pick);
       kort.addEventListener("focusin", pick);
     });
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }, { threshold: 0.25 }).observe(sec);
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; pickInView(); sync(); }, { threshold: 0.25 }).observe(sec);
     reduce.addEventListener("change", sync);
+    pickInView();
   });
 })();
 </script>

@@ -158,7 +158,7 @@ export function initBookingFields(root, options = {}) {
         <p><span class="td-ui-title-sm">${label}</span><span class="td-guest-hint td-ui-body-sm">${hint}</span></p>
         <div class="td-stepper">
           <button type="button" data-step="${key}" data-dir="-1" aria-label="Minska ${label.toLowerCase()}" ${count[key] <= 0 ? "disabled" : ""}>${ICON_MINUS}</button>
-          <output class="td-ui-figure">${count[key]}</output>
+          <output class="td-ui-title-sm">${count[key]}</output>
           <button type="button" data-step="${key}" data-dir="1" aria-label="Öka ${label.toLowerCase()}">${ICON_PLUS}</button>
         </div>
       </div>`).join("") + `<button type="button" class="td-button td-button-primary td-ui-cta" data-done>Klar</button>`;
