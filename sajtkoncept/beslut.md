@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-18 (TD: stora block utan radie)
+
+Heron (ram + film, desktop + mobil), En dags bilder och Fjällguiden-blocket har `radius-none`, som Lev. Andas-blocket. Övriga kort (Aktuellt, Just nu, boenden, utförsåkning, faktakortet i Hitta hit) har kvar `sm`; de hade det redan. Praxis för nästlade radier: inre = yttre − avstånd. Ratades: samma radie (4/4) på ram och film i heron. Öppet: Aktuellt-kortets bild (`sm`) inuti plattan (`sm`) bryter mot den nästlade regeln; ej ändrad (John: låt övriga vara). OG:s Fråga-block behåller 8 via `og-overrides.css`.
+
 ## 2026-11-18 (TD: radieregler)
 
 Fem regler för radie i TD (finns i `docs/startsida-td.md` §3): innehåll = `sm`, svävande chrome = `md`, stora utfällda ytor = `lg`, allt klickbart och markörer = `full`, anslutande kant = `none`. 2 px försvinner igen (hero-filmen desktop/mobil, aktuellt-kortets glasplatta och bild, bokningspanelens bilder i Figma). Fråga-blocket och aktuellt-kortet Typ=Fråga går från `md` till `sm`. AI-taggen och vallasegmenten (3 px) blir `sm`. `50%`/`999px` blir `full`. Waabi-kortens döda 16/12 px togs bort. Ratades: återinföra `radius/xs` 2 px för nästlade bilder (skillnaden mot 4 syns knappt, beslutet 2026-11-04 gäller). Öppet: OG behåller sina gamla värden via `og-overrides.css` tills OG:s radier är beslutade; Figma `Form / Dropdown` (6) och `Calendar / October` (12) är orörda.

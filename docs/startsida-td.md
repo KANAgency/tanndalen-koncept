@@ -55,7 +55,9 @@ Rubrik "Just nu i dalen", "Uppdaterat 09:42", växel Alpint | Längd (förval Al
 
 ### Radier – regler (John 2026-11-18)
 Bara tokens: `none` 0, `sm` 4, `md` 8, `lg` 16, `full`. Inga hårdkodade px, inga `50%`/`999px`.
-1. **Innehåll på sidan = `sm`**: kort, bilder, video, bildrutor, plattor, fältgrupper, block, banners, chip-taggar. Även bild inuti ram eller platta (hero-filmen, aktuellt-kortets bild) – ingen 2 px.
+0. **Stora block = `none`** (John 2026-11-18): heron (ram och film, desktop och mobil), En dags bilder (vinter och sommar), Fjällguiden-blocket (`.td-fraga-block`), Lev. Andas-blocket. Sidbreda, bildbärande ytor, inte kort.
+1. **Kort och innehåll = `sm`**: Aktuellt-korten, Just nu-korten, boendekorten (handplockade, aktiviteter), utförsåkning, längd, faktakortet i Hitta hit, bilder, plattor, fältgrupper, banners, chip-taggar. Ingen 2 px.
+- **Nästlade radier:** inre radie = yttre radie − avståndet mellan dem (koncentriska hörn). Med `sm` ute och ≥ 4 px luft blir den inre radien 0. Samma radie inne och ute ser fel ut.
 2. **Chrome som svävar över sidan = `md`**: header, menypanel, lägesmeny, kontopanel, bokningspanel, kartpanel.
 3. **Stora utfällda ytor = `lg`**: kalender, gästväljare, Fråga-panelen, bokningen i expanderat läge.
 4. **Allt man trycker på och markörer = `full`**: knappar, piller, sökfält, toggles, segmented, prickar, avatarer, pins.

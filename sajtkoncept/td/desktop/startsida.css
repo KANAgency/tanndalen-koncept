@@ -262,7 +262,7 @@ html[data-season="summer"] .boka-row:focus-visible {
   width: 100%;
   overflow: hidden;
   aspect-ratio: 1280 / 630;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-none); /* Stora block = none (John 2026-11-18) */
   background: var(--color-TD-night);
   transform: translateZ(0);
 }
@@ -279,34 +279,33 @@ html[data-season="summer"] .boka-row:focus-visible {
 /* Test: vinterfärgad ram runt herovideon (glasramen ratad 2026-11-15). Synkas med övriga block senare. */
 .hero-frame {
   background: transparent;
-  border-radius: var(--radius-sm);
 }
 /* Ramen: säsongsfärgad yta bakom videon som växer ut från videons kant (clip-path, ingen stroke = inget flimmer). */
 .hero-ram {
   position: absolute;
   inset: 0;
   background: var(--color-season-winter);
-  clip-path: inset(0 round 2px);
+  clip-path: inset(0);
   pointer-events: none;
 }
 html[data-season="summer"] .hero-ram { background: var(--color-season-summer); }
 /* Ny besökare: dold bakom videon under maskvyn, växer fram direkt när masken släpper (före övriga inanimationer landar). */
-html.is-intro:not(.is-intro-reveal) .hero-ram { clip-path: inset(var(--space-xl) round 2px); }
+html.is-intro:not(.is-intro-reveal) .hero-ram { clip-path: inset(var(--space-xl)); }
 html.is-intro.is-intro-reveal .hero-ram {
   animation: hero-ram-grow 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes hero-ram-grow {
-  from { clip-path: inset(var(--space-xl) round 2px); }
-  to { clip-path: inset(0 round 2px); }
+  from { clip-path: inset(var(--space-xl)); }
+  to { clip-path: inset(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  html.is-intro .hero-ram { animation: none; clip-path: inset(0 round 2px); }
+  html.is-intro .hero-ram { animation: none; clip-path: inset(0); }
 }
 .hero-frame .hero-media {
   inset: var(--space-xl);
   width: calc(100% - 2 * var(--space-xl));
   height: calc(100% - 2 * var(--space-xl));
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-none);
 }
 
 .hero .td-booking {
@@ -1252,7 +1251,7 @@ html.is-intro-done .page .place-labels .place-label {
 .en-dag-media {
   position: absolute;
   top: 0;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-none); /* Stora block = none (John 2026-11-18) */
   overflow: hidden;
   /* Undvik mörk 1px-kant vid subpixel under transform — ingen nattbakgrund som lyser igenom. */
   background: transparent;
@@ -6574,8 +6573,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 @media (max-width: 1023px) {
   /* Runda 2: ramen ut till statement-kanterna (16 px), videon kvar på 329×424. */
   .hero { width: calc(100vw - 32px); margin-left: 0; margin-top: 16px; }
-  .hero-frame { aspect-ratio: 361 / 456; border-radius: var(--radius-sm); }
-  .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: var(--radius-sm); }
+  .hero-frame { aspect-ratio: 361 / 456; }
+  .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: var(--radius-none); }
   /* John 2026-11-18: doodlen tillbaka nere till höger, ungefär halva desktopstorleken. */
   .hero-sun { top: auto; right: -12px; bottom: -52px; width: 129px; height: 129px; }
   .hero-goggles {
