@@ -7460,3 +7460,13 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   /* 14-3 (John 2026-11-18). Utförsåkning: bilden/filmen 2 px runt om i mobil (var 4 uppe, 0 nere sedan regel 8). */
   .utforsakning .utforsakning-media { border-radius: 2px; }
 }
+@media (max-width: 1023px) {
+  /* 14-2. Huvudmenyn högst upp på sidan (John 2026-11-18): iOS Safari färgar ytan ovanför sidan (statusfältet) efter
+     sidans bakgrund när man står i toppen, Dag mot den vita menyn såg ut som ett glapp. Snö medan menyn är öppen. */
+  html:has(body.menu-open),
+  body.menu-open { background-color: var(--color-TD-snow); }
+}
+@media (max-width: 1023px) {
+  /* 14-4 (John 2026-11-18). Sommarväderkortet i Läget just nu: temperaturen marginellt mindre, 96 → 88 (token). */
+  .td-vader-sommar .td-vader-temp .td-ui-figure-xl { font-size: var(--font-size-88); line-height: 1; }
+}
