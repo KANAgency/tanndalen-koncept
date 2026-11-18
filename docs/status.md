@@ -273,6 +273,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ihopklippt med 0,8 s toning: `og/desktop/assets/video/boende-lonnstigen-6-rundtur.mp4` (17,6 s, 1920×1080, 2,6 Mbit/s, 5,7 MB, utan ljud) + poster. Råklipp och startbilder i `tanndalen-orsa/assets/boenden/orsa/skogsbyn/lonnstigen-6/video*/`. Videomappen är gitignorerad: ladda upp till R2 (`og/`) före deploy.
 - Kortet: videon ersätter huvudbilden; stödbild 2 bytt från köket (finns nu i videon) till braskaminen under takfönstren (bild 24, featuren). Video-JS från TD (en video per rad, hover byter, paus utanför skärm, reducerad rörelse → poster).
 - Verifierat 1440 px: videon spelar (400×440, cover), stödbilden laddar, inga konsolfel.
+- 18 nov, John: loftklippet (närbild på brun soffa) borttaget. Videon är nu 3 klipp, 13,5 s, 4,4 MB. Regel: inga närbilder i rundturerna, bara breda rumsbilder.
 - Nästa: Limbygården (02 allrum → 06 genom spröjsdörrarna → 10 kök → 26 glasverandan; stödbild 2 byts till stenspisen 04).
 
 ## Klart 17 nov: OG – Handplockade boenden (karusell med riktiga R360-boenden)
