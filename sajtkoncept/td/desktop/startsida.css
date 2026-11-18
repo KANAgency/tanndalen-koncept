@@ -6739,3 +6739,126 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     }
   }
 }
+
+/* Mobilrunda 8, 2026-11-18 (John). Bara mobil. */
+@media (max-width: 1023px) {
+  /* 1. Statement: 32 → 34 px (6 → 7 rader), 4 px indrag per sida mot hero-blocket. */
+  .statement.td-statement { font-size: calc(var(--font-size-32) + 2px); padding-inline: var(--space-xs); }
+
+  /* 2. Storvigeln-etiketten: ett steg mindre (16 → 14, 14 → 13) och ett steg ljusare (neutral → neutral-muted). */
+  .parallax-item--hero .place-label { color: var(--color-TD-neutral-muted); }
+  .parallax-item--hero .place-label strong { font-size: var(--font-size-sm); line-height: 1.5; }
+  .parallax-item--hero .place-label.td-ui-nav { font-size: var(--font-size-13); line-height: 1.154; }
+  /* Ned bredvid AKTUELLT-eyebrown (sista raden i höjd med den, blocket ~20 px högre), högerkant x 359. */
+  .parallax-item--hero { --label-nudge-y: -194px; }
+
+  /* 3. Aktuellt: frågekortet följer fortfarande det högsta kortet (min-height 100 % i spåret), men alla kort
+     blir ~29 px lägre: bilden 10:9 i stället för 1:1 (289 → 260 px hög vid 375). */
+  .td-aktuellt-track .td-aktuellt-kort-bild { aspect-ratio: 10 / 9; }
+  /* Frågekortet: inre padding 14 → 20 (botten 32 → 40). */
+  .td-aktuellt-track .td-aktuellt-kort[data-typ="fraga"] { padding: calc(var(--space-lg) + var(--space-xs)) calc(var(--space-lg) + var(--space-xs)) var(--space-3xl); }
+  /* Ingen hover på mobil: "Ställ frågan" syns från början. */
+  .td-aktuellt-kort[data-typ="fraga"] .td-corner-link { gap: var(--space-sm); }
+  .td-aktuellt-kort[data-typ="fraga"] .td-corner-link-label { opacity: 1; }
+
+  /* 4a. Läget just nu, rubriken: "Uppdaterat" + "Läget just nu" får hela bredden på en rad var,
+     Alpint/Längd blir en fullbredds segmentrad under (x 16–359, två lika halvor) som linjerar med korten. */
+  .just-nu-head { flex-direction: column; align-items: stretch; gap: var(--space-lg); }
+  .just-nu-head .td-status { margin: 0 0 var(--space-xs); }
+  .just-nu-head .td-heading-sm { margin: 0; }
+  .just-nu-head .td-segmented { width: 100%; box-sizing: border-box; }
+
+  /* 4d. Samma lodräta avstånd (16) mellan alla kort: kolumn-wrappern för På gång/kamera löses upp i rutnätet. */
+  .just-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+  .just-cols > *,
+  .just-cols > div:has(> .td-pagang) > * { grid-column: 1 / -1; gap: var(--space-lg); }
+  .just-cols > div:has(> .td-pagang) { display: contents; }
+  .just-cols > div:has(> .td-just-nu-stack) { order: 1; }
+  .just-cols > .td-videokort,
+  .just-cols > .td-rapport,
+  .just-cols > .td-nastasteg { order: 2; }
+  .just-cols .td-kamera { order: 3; }
+  .just-cols .td-vader-sommar { order: 4; }
+  .just-cols .td-pagang { order: 5; }
+
+  /* 4b. På gång ryms i innehållsytan. */
+  .just-cols .td-pagang,
+  .just-cols .td-vader-sommar,
+  .just-cols .td-kamera { width: 100%; min-width: 0; box-sizing: border-box; }
+  .just-cols .td-pagang { padding-inline: calc(var(--space-lg) + var(--space-xs)); }
+
+  /* 4e. Fjällguiden: sidopadding 24 → 28. */
+  .just-cols .td-fraga.td-guide { padding-inline: calc(var(--space-xl) + var(--space-xs)); }
+
+  /* 4c. Film + webbkamera: två stående kort (3:4) bredvid varandra, delar bredden med 16 px glipa. */
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort { grid-column: 1; }
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera { grid-column: 2; }
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols > .td-videokort,
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+    padding: var(--space-lg);
+  }
+  /* Filmen: play som liten rund knapp uppe till vänster, text nere – inget överlapp. */
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort-play,
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort:hover .td-videokort-play {
+    top: var(--space-lg);
+    left: var(--space-lg);
+    width: var(--size-control-md, 40px);
+    height: var(--size-control-md, 40px);
+    transform: none;
+  }
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort-play svg { width: 20px; height: 20px; }
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort-body { gap: var(--space-xs); }
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort-body .td-heading-xs { font-size: var(--font-size-md); line-height: 1.2; }
+  html:is([data-mode="new"], [data-mode="returning"]) .td-videokort-shade { background: linear-gradient(to top, rgb(36 38 41 / 0.85) 0%, rgb(36 38 41 / 0) 60%); }
+  /* Kameran: rubriken får bryta, hörnpilen tar bara ikonens plats, statusraden får bryta. */
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera .td-corner-link { min-width: 0; }
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera .td-corner-link-label { display: none; }
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera .td-just-nu-header { align-items: flex-start; }
+  html:is([data-mode="new"], [data-mode="returning"]) .just-cols .td-kamera-status { flex-wrap: wrap; row-gap: var(--space-xs); }
+
+  /* 5. Frågeblocket: botten 40 → 28; luften till Här bor skidåkarna 288 → 120 (= utförsåkning → områdesblocket). */
+  .faq .td-fraga-block { padding-bottom: calc(var(--space-3xl) - var(--space-md)); }
+  .faq:has(+ .td-bo) { --fraga-space-after: 120px; }
+
+  /* 6. Skarvarna-topografin 230 px upp (−300 → −530, doc-topp 5917 → 5687): linjerna syns i luckan Frågeblocket →
+     Här bor skidåkarna och bakom rubriken. */
+  .td-topo2-layer,
+  .parallax-item--skarvarna { --topo2-shift-y: -530px; }
+  /* Etiketten (Skarvarna · fakta) skulle då ligga under Frågeblockets kant: 96 ned, mitt i luckan (~30 px luft upp/ned). */
+  .parallax-item--skarvarna .td-topo2-label { margin-top: 96px; }
+
+  /* 7. Här bor skidåkarna: rubriken i kortet 30 → 24, boendenamnet 14 → 13. */
+  .td-bo-waabi .td-bo-overlay .td-bo-waabi-rubrik { font-size: var(--font-size-xl); }
+  .td-bo-waabi .td-bo-overlay .td-bo-waabi-namn { font-size: var(--font-size-13); }
+
+  /* 8. Utförsåkning: bilden stående 4:5 (343 × 429), textblocket i full innehållsbredd direkt under,
+     utan överlapp och utan rundade hörn; bildens nederkant rak så de blir ett block. */
+  .utforsakning-media {
+    aspect-ratio: 4 / 5;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .utforsakning-card {
+    margin-top: 0;
+    gap: var(--space-xl);
+    padding: var(--space-xl) calc(var(--space-lg) + var(--space-xs)) var(--space-2xl);
+    border-radius: 0;
+  }
+  .utforsakning-tabs { gap: var(--space-md); }
+
+  /* 9. Doodlen (handske/sol): liten, sticker upp över bildens övre högra hörn in i luften ovanför –
+     täcker varken text eller flikar. */
+  .utforsakning-doodle {
+    top: -56px;
+    right: -4px;
+    bottom: auto;
+    left: auto;
+    width: 88px;
+    height: 135px;
+  }
+  .utforsakning-doodle img { inset: 0; width: 100%; height: 100%; }
+  html[data-season="summer"] .utforsakning-doodle { top: -44px; height: 88px; }
+}
