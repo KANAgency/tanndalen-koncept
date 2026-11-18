@@ -6860,7 +6860,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     padding: var(--space-xl) calc(var(--space-lg) + var(--space-xs)) var(--space-2xl);
     border-radius: 0;
   }
-  .utforsakning-tabs { gap: var(--space-md); }
+  /* 12 → 24 (John 2026-11-18: för tajt). Krymper mot 12 under 375 px så de tre flikarna (279 px text) ryms i 360. */
+  .utforsakning-tabs { gap: clamp(var(--space-md), (100vw - 327px) / 2, var(--space-xl)); }
 
   /* 9. Doodlen (handske/sol): liten, sticker upp över bildens övre högra hörn in i luften ovanför –
      täcker varken text eller flikar. */
@@ -7301,8 +7302,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 }
 /* 12-1. En vinterdag, mobil tidslinje (vågrät, mellan rubriken och korten). Spåret är lika långt som karusellen och
    flyttas 1:1 med den (JS sätter left per tid, linjens start/bredd, markör och transform). Runda 3 (John 2026-11-18):
-   tiderna högerställda mot sitt korts högerkant (.is-right), soluppgången och sista tiden vänsterställda (.is-left),
-   solnedgången högerställd mot sista kortets högerkant. Solikonerna 32 px med horisonten på linjens höjd och 8 px luft
+   tiderna högerställda mot sitt korts högerkant (.is-right), pricken centrerad över klockslaget (runda 4), soluppgången
+   vänsterställd (.is-left), solnedgången högerställd mot sista kortets högerkant och 16:00 strax före den. Solikonerna 32 px med horisonten på linjens höjd och 8 px luft
    till linjen. Dold över 1024. */
 .en-dag-tl { display: none; }
 @media (max-width: 1023px) {
@@ -7356,9 +7357,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     top: calc(var(--tl-y) - 10px);
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 9px;
-    min-width: 44px;
     padding: 8px 0;
     border: 0;
     background: none;
@@ -7369,6 +7369,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   }
   .en-dag-tl-time.is-right { transform: translateX(-100%); }
   .en-dag-tl-time.is-left { align-items: flex-start; }
+  .en-dag-tl-sun.is-right { align-items: flex-end; }
   .en-dag-tl-dot {
     width: 5px;
     height: 5px;
@@ -7389,7 +7390,6 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .en-dag-tl-sun {
     top: calc(var(--tl-y) - 22px);
     gap: 0;
-    min-width: 0;
     padding: 0;
     cursor: default;
   }

@@ -2454,9 +2454,10 @@
         block.prepend(when);
       });
       /* Mobil tidslinje (John 2026-11-18): vågrät mellan rubriken och korten. Spåret är lika långt som karusellen och
-         flyttas 1:1 med dess scroll. Runda 3: klockslagen högerställda mot sitt korts högerkant; soluppgången
-         vänsterställd mot första kortets vänsterkant. Sista kortet är undantaget: tiden vänsterställd mot kortets
-         vänsterkant och solnedgången högerställd mot dess högerkant. Linjen börjar/slutar en bit från solikonerna.
+         flyttas 1:1 med dess scroll. Runda 3–4: klockslagen högerställda mot sitt korts högerkant, pricken centrerad
+         över klockslaget; soluppgången vänsterställd mot första kortets vänsterkant. Sista kortet: solnedgången
+         högerställd mot kortets högerkant och tiden högerställd strax före den (EN_TL_LAST_GAP). Linjen börjar/slutar
+         en bit från solikonerna.
          Markören och fyllningen följer scrollen mellan tiderna. Tryck på en tid scrollar till kortet. */
       const enTlStage = enDag.querySelector(".en-dag-stage");
       const enTl = document.createElement("div");
@@ -2470,7 +2471,7 @@
       const enTlTimes = enTl.querySelector(".en-dag-tl-times");
       const EN_TL_SUN = 32; /* solikonens bredd */
       const EN_TL_GAP = 8; /* luft mellan solikonen och linjen */
-      const EN_TL_DOT = 2.5; /* halv tidsprick: prickens mitt ligger så här långt in från kortkanten */
+      const EN_TL_LAST_GAP = 20; /* luft mellan sista tiden (16:00) och solnedgångens ikon */
       let enTlBtns = [];
       let enTlActive = -1;
       let enTlSnapCache = [];
@@ -2500,15 +2501,15 @@
         const set = items[items.length - 1];
         rise.style.left = `${left[0]}px`;
         rise.classList.add("is-left");
+        const edge = enTlBtns.map((btn, i) => (i === n && n > 0 ? right[i] - EN_TL_SUN - EN_TL_LAST_GAP : right[i]));
         enTlBtns.forEach((btn, i) => {
-          const last = i === n && n > 0;
-          btn.classList.toggle("is-left", last);
-          btn.classList.toggle("is-right", !last);
-          btn.style.left = `${last ? left[i] : right[i]}px`;
+          btn.classList.add("is-right");
+          btn.style.left = `${edge[i]}px`;
         });
         set.style.left = `${right[n]}px`;
         set.classList.add("is-right");
-        enTlPts = enTlBtns.map((btn, i) => (i === n && n > 0 ? left[i] + EN_TL_DOT : right[i] - EN_TL_DOT));
+        /* Pricken sitter mitt över klockslaget: högerkant minus halva knappens bredd. */
+        enTlPts = enTlBtns.map((btn, i) => edge[i] - btn.offsetWidth / 2);
         enTlLineStart = left[0] + EN_TL_SUN + EN_TL_GAP;
         const lineEnd = right[n] - EN_TL_SUN - EN_TL_GAP;
         enTlLine.style.left = `${enTlLineStart}px`;
