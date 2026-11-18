@@ -455,7 +455,7 @@
               </blockquote>
             </div>
           </div>
-          <div class="parallax-item parallax-item--citat" data-anchor="#citat-band" data-parallax-item="rasmus">
+          <div class="parallax-item parallax-item--citat" data-anchor="#citat-band" data-anchor-mobile="#citat-anchor-mobile" data-parallax-item="rasmus">
             <figure class="td-citat td-citat--text">
               <div class="td-citat-copy">
                 <blockquote class="td-citat-quote">
@@ -1475,6 +1475,8 @@
         </ul>
       </section>
 
+      <!-- Mobil (runda 13): Rasmus-citatet förankras här, mellan Här bor skidåkarna och Utförsåkning. Dold på desktop. -->
+      <div class="citat-anchor-mobile" id="citat-anchor-mobile" aria-hidden="true"></div>
       <section class="utforsakning" id="utforsakning" aria-labelledby="utforsakning-title">
         <div class="utforsakning-stage">
           <div class="utforsakning-media">
@@ -4922,7 +4924,7 @@
           placeSkarvarnaHorizontal();
           placeQuoteLayout();
           document.querySelectorAll(".parallax-item[data-anchor]").forEach((item) => {
-            const sel = item.getAttribute("data-anchor");
+            const sel = (mobileQ.matches && item.getAttribute("data-anchor-mobile")) || item.getAttribute("data-anchor");
             const section = sel ? document.querySelector(sel) : null;
             if (!section) return;
             if (item.classList.contains("parallax-item--hero")) return;
@@ -6259,7 +6261,7 @@
           winter: [
             { title: "Nysnö", number: "12", unit: "cm", caption: "i natt" },
             { title: "Liftar", number: "14", slash: "17", caption: "i drift" },
-            { title: "Snödjup", number: "134", unit: "cm", caption: "uppe på fjället" }
+            { title: "Snödjup", number: "134", unit: "cm", caption: "på toppen" }
           ],
           summer: [
             { title: "Lederna", number: "11", slash: "14", caption: "öppna" },

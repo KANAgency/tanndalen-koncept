@@ -7416,3 +7416,24 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     object-fit: cover;
   }
 }
+
+/* Mobilrunda 13, 2026-11-18 (John). Bara mobil. */
+@media (max-width: 1023px) {
+  /* 13-1. En vinterdag → Läget just nu: mindre luft (Just nu padding-top 80 → 16, −64 px). */
+  .just-nu { padding-top: var(--space-lg); }
+  /* 13-2. Områdesblocket, Context Light (Järven = slide 2, Brunkullan = slide 4): "Se alla" behåller vit text
+     på den mörka sekundärknappen (desktopens mörka textfärg för ljusa slides gällde även knappen). */
+  .boende.is-light .boende-all { color: var(--color-TD-snow); }
+  /* 13-3. Kort om området: 2 rader × 3 kolumner i stället för 3 × 2. */
+  .boende .boende-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg) var(--space-lg); }
+  .boende .boende-fact { width: auto; }
+  /* 13-4. Rasmus-citatet flyttat upp: ligger mellan Här bor skidåkarna och Utförsåkning (ankare #citat-anchor-mobile),
+     det gamla ankaret efter områdesblocket tas bort. Luften däremellan (160) ersätts av ankarets 260 (vanten i Utförsåkning sticker upp 110). */
+  .citat-band { display: none; }
+  .citat-anchor-mobile { display: block; height: 260px; pointer-events: none; }
+  #boenden-waabi:has(+ .citat-anchor-mobile) { margin-bottom: 0; }
+  .citat-anchor-mobile + .utforsakning { margin-top: 0; }
+  /* 13-5. Fjällguiden: avdelarlinje under "Andra brukar fråga" (samma linje som mellan frågorna). */
+  .fraga-view[data-view="search"] .td-fraga-fragelista-platta { border-top: 1px solid var(--color-TD-neutral-light); }
+}
+@media (min-width: 1024px) { .citat-anchor-mobile { display: none; } }
