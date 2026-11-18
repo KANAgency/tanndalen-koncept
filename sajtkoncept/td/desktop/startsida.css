@@ -7189,3 +7189,107 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
      gav bara 348/396 px höga bilder i den 727 px höga mobilytan. */
   .boende .boende-poster { background-size: cover !important; }
 }
+
+/* Mobilrunda 11, 2026-11-18 (John). Bara mobil. */
+@media (max-width: 1023px) {
+  /* 11-1. Fjällguiden-panelen: nästan hela höjden (JS dock: topp 40, 8 px kant), mindre luft ovan och i sidled
+     (padding 16/32 → 8/20), rubriken ett steg mindre (30 → 24). Frågefältet blir bredare av sidopaddingen. */
+  .fraga-panel { padding: var(--space-sm) var(--space-xl) 0; }
+  .fraga-bottom { margin-inline: calc(-1 * var(--space-xl)); }
+  .fraga-bottom .fraga-follow { margin-inline: var(--space-lg); }
+  .fraga-panel .fraga-foot { padding-inline: var(--space-xl); }
+  .fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-top { top: 14px; right: var(--space-md); }
+  .fraga-panel:has(.fraga-view.is-on .fraga-welcome:not(:empty)) .fraga-mid { margin-top: var(--space-md); }
+  .fraga-welcome-title { padding-right: 44px; font-size: var(--font-size-xl); line-height: 1.15; }
+  .fraga-welcome-kicker { margin-top: var(--space-lg); }
+  /* 11-2. Läget i Tänndalen just nu: tre rutor i bredd (≈ 108 px), mindre padding och siffror. */
+  .fraga-welcome-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); }
+  .fraga-welcome-tiles .fraga-tile { padding: var(--space-md); gap: 2px; }
+  .fraga-welcome-tiles .fraga-tile-title { font-size: var(--font-size-13); line-height: 1.2; }
+  .fraga-welcome-tiles .td-ui-figure-lg { font-size: var(--font-size-xl); }
+  .fraga-welcome-tiles .td-ui-figure-unit-lg { font-size: var(--font-size-sm); }
+  .fraga-welcome-tiles .td-just-nu-data-caption { font-size: var(--font-size-13); line-height: 1.2; }
+  /* 11-3. Andra brukar fråga: ingen ram, raderna i hela innehållsbredden. */
+  .fraga-panel .td-fraga-fragelista-platta { padding: 0; border: 0; border-radius: 0; }
+}
+/* 11-4. En vinterdag: tid · namn ovanför rubriken i alla kort (som sista kortet), bara mobil. */
+.en-dag-when { display: none; }
+@media (max-width: 1023px) {
+  .page .en-dag .en-dag-when {
+    display: block;
+    margin: 0 0 var(--space-xs);
+    font-family: var(--font-family-TD-secondary), sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-book, 450);
+    line-height: 1.3;
+    color: var(--color-text-primary);
+  }
+  /* 11-5. Korten 10 % lägre: bilden 4:5 → 8:9 (433 → 389 px vid 402). */
+  .page .en-dag .en-dag-media { aspect-ratio: 8 / 9; }
+  /* 11-6. Knapparna vita som i sista kortet (vinterfyllningen bort). */
+  .page .en-dag .en-dag-copy .td-button:is(.td-button-fill-winter, .td-button-fill-summer) {
+    background-color: var(--color-TD-snow);
+    color: var(--color-TD-night);
+  }
+  /* 11-7. Detta är på gång → En vinterdag: 64 px mindre (112 → 48). */
+  .page .en-dag { margin-top: 48px; }
+}
+@media (max-width: 767px) {
+  /* 11-8. Aktuellt-frågekortet: höjden sätts i JS efter grannkortet (ångrar 3:4 från 9A-3). */
+  .td-aktuellt-track .td-aktuellt-kort[data-typ="fraga"] { aspect-ratio: auto; }
+}
+@media (max-width: 1023px) {
+  /* 11-9. Läget just nu, datakortet: bläddrar lodrätt som pagineringen antyder (remsan kolumn, JS läser riktningen). */
+  .just-cols .td-just-nu-stack-track { flex-direction: column; gap: var(--space-lg); }
+}
+@media (max-width: 1023px) {
+  /* 11-10. Storvigeln följer topografin (mot-animationen bort) och startar 70 upp och 20 vänster
+     (nudge −30/−92 → −50/−162). Bakom Aktuellt (även rubriken "Detta är på gång") tonas den till 12 % i stället för 30 %. */
+  .parallax-item--hero,
+  html[data-mode] .parallax-item--hero { --label-nudge-x: -50px; --label-nudge-y: -162px; }
+  .parallax-item--hero .place-labels { animation: none !important; translate: none; }
+  .parallax-item--hero .place-label-block.is-covered { opacity: 0.12; }
+}
+@media (max-width: 1023px) {
+  /* 11-11. Skarvarna: topografin spegelvänd till höger kant (lagrets vänsterkant x 40 → x 200, synlig del x 200–402),
+     etiketten högerställd till vänster om den (högerkant 12 px före topografin) och upp i luckan Frågeblocket → Här bor skidåkarna (792 → 116). */
+  .td-topo2-layer.parallax-item--skarvarna { --topo2-shift-x: 480px; }
+  .parallax-item--skarvarna .td-topo2 { transform: scaleX(-1); }
+  .parallax-item--skarvarna .td-topo2-label {
+    left: auto !important;
+    right: calc(100% + var(--space-md));
+    align-items: flex-end;
+    margin: 116px 0 0;
+    text-align: right;
+  }
+  .parallax-item--skarvarna .td-topo2-facts { align-items: flex-end; }
+}
+@media (max-width: 1023px) {
+  /* 11-12. Utförsåkning → områdesblocket kloss i kloss (120 → 0). */
+  .utforsakning + .boende { margin-top: 0 !important; } /* rad 4856 sätter 120 !important */
+  /* 11-13. "Se alla": nedtonad mörk sekundärknapp (Natt 55 % + blur, vit text), samma höjd och form som sökknappen.
+     Finns inte i designsystemet än – kandidat till ny variant. */
+  .boende .boende-all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    height: 40px;
+    padding: 0 var(--space-lg);
+    border-radius: var(--radius-full);
+    background: rgb(36 39 42 / 0.55);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: var(--color-TD-snow);
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 1023px) {
+  /* 11-14. Brunkullan i mobilen: ospeglad, utsnittet 15 % in från vänster i källbilden. Texten (y 56–330) hamnar på
+     ren pistsnö i stället för över björkdungen, huset syns nere till höger. Desktop oförändrat (speglad, 175 %). */
+  .boende[data-slide="brunkullan"] .boende-media.is-mirror { transform: none; }
+  .boende[data-slide="brunkullan"] .boende-poster { background-position: 15% 100% !important; }
+}
+@media (max-width: 1023px) {
+  /* 11-15. Rasmus Bent-citatet ett steg mindre (24 → 20). */
+  .parallax-item--citat .td-citat--text .td-citat-quote { font-size: var(--font-size-lg); }
+}

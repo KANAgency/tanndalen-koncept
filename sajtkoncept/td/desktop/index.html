@@ -2213,6 +2213,8 @@
           const puff = slide.classList.contains("is-puff");
           slide.dataset.time = summer ? slide.dataset.summerTime || slide.dataset.winterTime : slide.dataset.winterTime;
           slide.dataset.name = summer ? slide.dataset.summerName || slide.dataset.winterName : slide.dataset.winterName;
+          const when = slide.querySelector(".en-dag-when");
+          if (when) when.textContent = `${slide.dataset.time} · ${slide.dataset.name}`;
           const title = slide.querySelector(puff ? ".td-heading-md" : ".td-textblock-title");
           const body = slide.querySelector(".td-textblock-body");
           const label = slide.querySelector(".td-ui-label");
@@ -2411,6 +2413,41 @@
         sync();
         enMobile.addEventListener("change", sync);
       })();
+      /* Mobilrunda 11 (John 2026-11-18): Aktuellt-frågekortet i mobilen (≤ 767) lika högt som kortet till höger
+         (Fjälltagen), från toppen till under dess knapp. Följer kortens höjd via ResizeObserver. */
+      (() => {
+        const narrow = matchMedia("(max-width: 767px)");
+        const cards = [...document.querySelectorAll(".td-aktuellt-track .td-aktuellt-kort")];
+        const fit = () => {
+          document.querySelectorAll(".td-aktuellt-track").forEach((track) => {
+            const shown = [...track.querySelectorAll(".td-aktuellt-kort")].filter((card) => card.offsetParent);
+            shown.filter((card) => card.dataset.typ === "fraga").forEach((card) => {
+              card.style.height = "";
+              if (!narrow.matches) return;
+              const x = card.offsetLeft;
+              const others = shown.filter((o) => o.dataset.typ !== "fraga");
+              const right = others.filter((o) => o.offsetLeft > x).sort((a, b) => a.offsetLeft - b.offsetLeft)[0];
+              const left = others.filter((o) => o.offsetLeft < x).sort((a, b) => b.offsetLeft - a.offsetLeft)[0];
+              const match = right || left;
+              if (match) card.style.height = `${match.offsetHeight}px`;
+            });
+          });
+        };
+        if (!cards.length) return;
+        const ro = new ResizeObserver(fit);
+        cards.filter((card) => card.dataset.typ !== "fraga").forEach((card) => ro.observe(card));
+        narrow.addEventListener("change", fit);
+        fit();
+      })();
+      /* Mobilrunda 11 (John 2026-11-18): tidslinjen syns inte i mobilen, så varje kort får tid och namn ovanför rubriken
+         ("08:30 · Första åket"), som sista kortet. Döljs över 1024 i CSS. Texten följer säsongen i syncEnDagContent. */
+      enDag.querySelectorAll(".en-dag-slide:not(.is-puff) .en-dag-copy .td-textblock").forEach((block) => {
+        const slide = block.closest(".en-dag-slide");
+        const when = document.createElement("p");
+        when.className = "en-dag-when";
+        when.textContent = `${slide.dataset.time} · ${slide.dataset.name}`;
+        block.prepend(when);
+      });
       function easeOutSoft(u) {
         const x1 = 0.22;
         const y1 = 1;
@@ -3782,6 +3819,8 @@
         }
         done.style.strokeDasharray = "0 9";
         done.style.strokeDashoffset = "0";
+        const revealGroup = document.getElementById("hitta-route-reveal");
+        let lastDots = -1;
         const stock = pins[0];
         const goal = pins[2];
         const span = Math.hypot(stock.x - goal.x, stock.y - goal.y) || 1;
@@ -4155,10 +4194,27 @@
           }
           // Prickmönstret ligger stilla i kartan — bara masken avslöjar. d/dasharray sätts en gång ovan.
           const tipLen = length * Math.max(0, Math.min(1, t));
-          if (maskPath) {
-            // Reveal bakom markören (≥ en markörradie) — ingen prick framför.
-            const revealed = canTravel ? Math.max(0, tipLen - MASK_REVEAL_LAG) : 0;
-            maskPath.style.strokeDashoffset = `${length - revealed}`;
+          // Reveal bakom markören (≥ en markörradie) — ingen prick framför.
+          const revealed = canTravel ? Math.max(0, tipLen - MASK_REVEAL_LAG) : 0;
+          if (panMobileQ.matches) {
+            /* Mobil (runda 11, prestanda i iPhone): ingen SVG-mask (Safari räknar om den i mjukvara varje scrollbild).
+               Prickarna avslöjas i stället med en uträknad streckning: n prickar à 9, sedan ett gap längre än sträckan.
+               Ritas bara om när antalet prickar ändras. */
+            if (revealGroup && revealGroup.hasAttribute("mask")) revealGroup.removeAttribute("mask");
+            const dots = revealed > 0 ? Math.floor(revealed / 9) + 1 : 0;
+            if (dots !== lastDots) {
+              lastDots = dots;
+              done.style.visibility = dots ? "" : "hidden";
+              if (dots) done.style.strokeDasharray = `${"0 9 ".repeat(dots - 1)}0 ${Math.ceil(length + 50)}`;
+            }
+          } else {
+            if (revealGroup && !revealGroup.hasAttribute("mask")) {
+              revealGroup.setAttribute("mask", "url(#hitta-route-mask)");
+              done.style.strokeDasharray = "0 9";
+              done.style.visibility = "";
+              lastDots = -1;
+            }
+            if (maskPath) maskPath.style.strokeDashoffset = `${length - revealed}`;
           }
           let standing = t <= 0.001 ? 0 : t >= 0.999 ? pins.length - 1 : -1;
           if (standing < 0) {
@@ -4181,8 +4237,10 @@
             if (reduced || introDone) pop = 1;
             else pop = easeOutBack((performance.now() - introStartedAt) / INTRO_MS);
           }
-          point.style.transformOrigin = `${pos.x}px ${pos.y}px`;
-          point.style.transform = `scale(${inv * pop})`;
+          const pointOrigin = `${pos.x}px ${pos.y}px`;
+          const pointTransform = `scale(${inv * pop})`;
+          if (point.style.transformOrigin !== pointOrigin) point.style.transformOrigin = pointOrigin;
+          if (point.style.transform !== pointTransform) point.style.transform = pointTransform;
           let current = standing >= 0 ? standing : 0;
           cards.forEach((el, index) => {
             placeStopInMap(index, inv);
@@ -4831,7 +4889,9 @@
             document.querySelector(".parallax-item--citat .td-citat")
           ].filter(Boolean);
           if (!targets.length) return;
-          const occluders = LAYER_OCCLUDERS.map((sel) => document.querySelector(sel)).filter(Boolean);
+          /* Mobil (runda 11): Storvigeln tonas även bakom Aktuellt-rubriken ("Detta är på gång"). */
+          const occluders = (mobileQ.matches ? [...LAYER_OCCLUDERS, ".td-aktuellt-titles"] : LAYER_OCCLUDERS)
+            .map((sel) => document.querySelector(sel)).filter(Boolean);
           const vh = innerHeight;
           for (const el of targets) {
             const r = el.getBoundingClientRect();
@@ -6200,6 +6260,11 @@
           panel.classList.toggle("is-answer", name === "answer");
         }
         function dock() {
+          /* Mobil (runda 11): 40 px från toppen, 8 px kant på sidor och botten, så panelen tar nästan hela höjden. */
+          if (innerWidth < 1024) {
+            const w = Math.min(720, innerWidth - 16);
+            return { top: 40, left: (innerWidth - w) / 2, width: w, height: innerHeight - 48 };
+          }
           const w = Math.min(720, innerWidth - 32);
           const h = Math.min(760, innerHeight - 160);
           return { top: 96, left: (innerWidth - w) / 2, width: w, height: h };
@@ -6814,6 +6879,7 @@
         return new Promise((resolve) => {
           window.setTimeout(() => {
             boendeMedia.classList.toggle("is-mirror", slide.mirror === true);
+            boende.dataset.slide = slide.id || "";
             boendeVideo.style.objectPosition = slide.focus || "";
             boendePoster.style.backgroundImage = slide.poster ? `url("${slide.poster}")` : "";
             // Per-slide utsnitt för stillbilder (zoom + förankring), t.ex. för att flytta textytan bort från skog.

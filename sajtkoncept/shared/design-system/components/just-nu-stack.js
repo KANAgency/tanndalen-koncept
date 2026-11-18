@@ -28,8 +28,13 @@ export function initJustNuStack(root) {
     moving = true;
     const first = cards()[0];
     const count = cards().length;
-    const horizontal = window.matchMedia("(max-width: 1023px)").matches;
-    const delta = horizontal ? first.getBoundingClientRect().width + 16 : STEP;
+    /* Riktningen följer remsans flex-direction (TD mobil är lodrät sedan 2026-11-18, OG mobil vågrät). */
+    const trackStyle = getComputedStyle(track);
+    const horizontal = trackStyle.flexDirection.startsWith("row");
+    const gap = parseFloat(horizontal ? trackStyle.columnGap : trackStyle.rowGap) || 0;
+    const delta = window.matchMedia("(max-width: 1023px)").matches
+      ? (horizontal ? first.getBoundingClientRect().width : first.getBoundingClientRect().height) + gap
+      : STEP;
     const axis = horizontal ? "X" : "Y";
     track.classList.remove("is-instant");
     track.style.transform = `translate${axis}(-${delta}px)`;
