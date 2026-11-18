@@ -2397,6 +2397,20 @@
           el.style.zIndex = "";
         });
       }
+      /* Mobilrunda 10 (John 2026-11-18): sista kortets text ("Samma tid i morgon?") ligger under bilden i mobilen,
+         som övriga korts text. Flyttas ut ur .en-dag-media under 1024 och tillbaka över 1024. */
+      (() => {
+        const puff = enDag.querySelector(".en-dag-slide.is-puff");
+        const media = puff && puff.querySelector(".en-dag-media");
+        const copy = puff && puff.querySelector(".en-dag-puff-copy");
+        if (!media || !copy) return;
+        const sync = () => {
+          if (enMobile.matches) { if (copy.parentElement !== puff) puff.appendChild(copy); }
+          else if (copy.parentElement !== media) media.appendChild(copy);
+        };
+        sync();
+        enMobile.addEventListener("change", sync);
+      })();
       function easeOutSoft(u) {
         const x1 = 0.22;
         const y1 = 1;
@@ -4730,7 +4744,8 @@
           const topoTy = reducedMotion || cssPar ? 0 : (1 - fTopo) * y;
           if (hero) {
             setVar(hero, "--hero-topo-ty", `${topoTy.toFixed(2)}px`);
-            const parEnd = cssPar ? `${((1 - fTopo) * Math.max(0, document.documentElement.scrollHeight - innerHeight)).toFixed(0)}px` : "0px";
+            /* Fast spann 20 000 px (animation-range i startsida.css, Mobilrunda 10): oberoende av viewporthöjden. */
+            const parEnd = cssPar ? `${((1 - fTopo) * 20000).toFixed(0)}px` : "0px";
             if (hero.dataset.parEnd !== parEnd) { hero.dataset.parEnd = parEnd; hero.style.setProperty("--hero-topo-par-end", parEnd); }
             /* Etikett-delta bara desktop; mobil delta = 0 via labelDelta(). */
             setVar(hero, "--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
@@ -6820,7 +6835,10 @@
             search.replaceChildren(document.createRange().createContextualFragment('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.2 10.2 13.5 13.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>'), document.createTextNode(" " + slide.ctaLabel));
             const all = boende.querySelector(".boende-all");
             all.href = boendeHref("all", slide.r360AreaId);
-            boende.querySelector(".boende-link-label").textContent = slide.linkLabel;
+            /* Mobilrunda 10: "Se alla" i mobilen så sökknappen och länken ryms på en rad; hela texten som aria-label. */
+            const shortLink = matchMedia("(max-width: 1023px)").matches;
+            boende.querySelector(".boende-link-label").textContent = shortLink ? "Se alla" : slide.linkLabel;
+            if (shortLink) all.setAttribute("aria-label", slide.linkLabel); else all.removeAttribute("aria-label");
             boendeCard.replaceChildren();
             const cardTitle = document.createElement("h3");
             cardTitle.id = "boende-card-title";

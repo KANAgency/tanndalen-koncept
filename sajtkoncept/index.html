@@ -146,7 +146,7 @@
         --ip-top: 62px;       /* säker zon topp */
         --ip-bar-h: 48px;     /* fältets knappar/adressfält, utfällt */
         --ip-bar-bottom: 30px;/* från skärmens underkant till fältet */
-        --ip-gap: 8px;        /* luft mellan viewportens underkant och fältet */
+        --ip-gap: 7px;        /* luft mellan viewportens underkant och fältet (8 → 7: John såg en tom pixel ovanför fältet) */
         position: relative;
         width: var(--phone-w); height: var(--phone-h);
         border-radius: 55px; overflow: hidden;
@@ -212,31 +212,6 @@
         position: absolute; left: 50%; bottom: 8px; z-index: 3; transform: translateX(-50%);
         width: 139px; height: 5px; border-radius: 3px; background: var(--ip-ink-b); pointer-events: none;
       }
-      /* Desktopscen: sajten fyller hela bredden (minst 1440) i 100 %, höjden följer fönstret.
-         Smalare än 1440 → 1440-layouten skalas ned med gul etikett. */
-      body.is-desktop .pv-stage { display: flex; justify-content: center; align-items: flex-start; }
-      body.is-desktop .pv { grid-template-rows: 1fr; }
-      body.is-desktop .pv-bar { display: none; }
-      .pv-home { display: none; }
-      body.is-desktop .pv-home {
-        position: absolute; top: 8px; left: 8px; z-index: 2;
-        display: grid; place-items: center;
-        width: 28px; height: 28px; border-radius: 50%;
-        background: rgba(214, 214, 214, .85); color: #24272a;
-        box-shadow: 0 1px 4px rgba(0,0,0,.18);
-        opacity: .7; transition: opacity 160ms;
-      }
-      body.is-desktop .pv-home:hover, body.is-desktop .pv-home:focus-visible { opacity: 1; }
-      body.is-desktop .pv-home:focus-visible { outline: 2px solid #24272a; outline-offset: 2px; }
-      .pv-home svg { width: 14px; height: 14px; }
-      .pv-screen { display: none; }
-      body.is-desktop .pv-device { display: none; }
-      body.is-desktop .pv-screen {
-        display: block; flex: none; width: 1440px;
-        transform-origin: top center;
-      }
-      .pv-screen iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
-      .pv-scaled { color: #f6e0a2 !important; }
       .pv-tools svg { display: block; width: 16px; height: 16px; }
       .pv-fs .fs-exit, :fullscreen .pv-fs .fs-enter { display: none; }
       :fullscreen .pv-fs .fs-exit { display: block; }
@@ -260,7 +235,7 @@
           <div class="sv-body">
             <p class="sv-tagline">Älskat av skidåkare.</p>
             <div class="sv-actions">
-              <a class="sv-btn sv-btn-primary" href="?desktop=td" data-desktop="td">
+              <a class="sv-btn sv-btn-primary" href="/td/?mode=new" data-desktop="td">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
                 Desktop
               </a>
@@ -278,7 +253,7 @@
           <div class="sv-body">
             <p class="sv-tagline">Familjeresmålet fyra timmar från Stockholm.</p>
             <div class="sv-actions">
-              <a class="sv-btn sv-btn-primary" href="?desktop=og" data-desktop="og">
+              <a class="sv-btn sv-btn-primary" href="/og/?mode=new" data-desktop="og">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
                 Desktop
               </a>
@@ -337,10 +312,6 @@
             <span class="ip-home" aria-hidden="true"></span>
           </div>
         </div>
-        <div class="pv-screen" id="pv-screen"><iframe id="pv-dframe" title="Desktopvy"></iframe></div>
-        <a class="pv-home" href="./" aria-label="Till sajtväljaren" title="Till sajtväljaren">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H2M6.5 3.5 2 8l4.5 4.5"/></svg>
-        </a>
       </div>
     </section>
 
@@ -349,12 +320,17 @@
         const SITES = { td: "/td/", og: "/og/" };
         const phoneLike = () => matchMedia("(max-width: 640px) and (pointer: coarse)").matches;
 
-        // På en riktig telefon: Mobil/Desktop = öppna sajten direkt, ingen ram.
-        document.querySelectorAll("[data-mobile], [data-desktop]").forEach((link) => {
+        const clearOnsite = (site) => { try { localStorage.removeItem(site === "td" ? "td-onsite-tanndalen" : "og-onsite-orsa"); } catch (err) {} };
+        // Desktop = sajten direkt i fönstret (ingen ram, beslut John 18 nov), startar som Ny besökare.
+        document.querySelectorAll("[data-desktop]").forEach((link) => {
+          link.addEventListener("click", () => clearOnsite(link.dataset.desktop));
+        });
+        // På en riktig telefon: Mobil = öppna sajten direkt, ingen ram.
+        document.querySelectorAll("[data-mobile]").forEach((link) => {
           link.addEventListener("click", (event) => {
             if (!phoneLike()) return;
             event.preventDefault();
-            location.href = SITES[link.dataset.mobile || link.dataset.desktop];
+            location.href = SITES[link.dataset.mobile];
           });
         });
 
@@ -370,16 +346,15 @@
         // (sparat läge och sparat På plats skulle annars ta över).
         if (!["mode", "plats", "visit", "intro"].some((k) => extra.has(k))) {
           extra.set("mode", "new");
-          try { localStorage.removeItem(site === "td" ? "td-onsite-tanndalen" : "og-onsite-orsa"); } catch (err) {}
+          clearOnsite(site);
         }
         const query = extra.toString();
         const src = SITES[site] + (query ? `?${query}` : "");
-        const isDesktop = mode === "desktop";
+        // Gamla länkar ?desktop=td|og går direkt till sajten (desktopramen borttagen 18 nov).
+        if (mode === "desktop") { location.replace(src); return; }
         document.body.classList.add("is-preview");
-        if (isDesktop) document.body.classList.add("is-desktop");
-        document.querySelector(".pv").setAttribute("aria-label", isDesktop ? "Desktopförhandsvisning" : "Mobilförhandsvisning");
-        document.title = `${isDesktop ? "Desktop" : "Mobil"} · ${site === "td" ? "Tänndalen" : "Orsa Grönklitt"} — Sajtkoncept`;
-        const frame = document.getElementById(isDesktop ? "pv-dframe" : "pv-frame");
+        document.title = `Mobil · ${site === "td" ? "Tänndalen" : "Orsa Grönklitt"} — Sajtkoncept`;
+        const frame = document.getElementById("pv-frame");
         frame.src = src;
         document.querySelectorAll(".pv-seg a").forEach((a) => {
           if (a.dataset.site === site) a.setAttribute("aria-current", "page");
@@ -389,28 +364,11 @@
 
         const stage = document.getElementById("pv-stage");
         const device = document.getElementById("pv-device");
-        const screen = document.getElementById("pv-screen");
         const size = document.querySelector(".pv-size");
-        function fitDesktop() {
-          const W = Math.max(1440, stage.clientWidth);
-          const s = Math.min(1, stage.clientWidth / W);
-          const h = Math.round(stage.clientHeight / s);
-          screen.style.width = `${W}px`;
-          screen.style.height = `${h}px`;
-          screen.style.transform = s < 1 ? `scale(${s})` : "";
-          const pct = Math.round(s * 100);
-          size.textContent = s < 1 ? `${W} × ${h} · skalad ${pct} %` : `${W} × ${h} · 100 %`;
-          size.classList.toggle("pv-scaled", s < 1);
-        }
         document.getElementById("pv-fs").addEventListener("click", () => {
           if (document.fullscreenElement) document.exitFullscreen();
           else document.documentElement.requestFullscreen?.();
         });
-        if (isDesktop) {
-          fitDesktop();
-          addEventListener("resize", fitDesktop);
-          return;
-        }
         function fit() {
           // Verklig storlek: en iPhone-punkt är 0,166 mm, en CSS-pixel på Mac ca 0,2 mm → 0,83.
           // Telefonen blir då ca 150 mm hög på skärmen, som en riktig 16 Pro. Mindre om fönstret inte räcker.
@@ -435,6 +393,11 @@
             // SVG-former (t.ex. introns täckande ytor) har färgen i fill, inte i background.
             const c = el instanceof doc.defaultView.SVGGeometryElement && cs.fill.startsWith("rgb") ? cs.fill : cs.backgroundColor;
             const [r, g, b, a = 1] = parse(c);
+            if (a >= 0.6) return [r, g, b];
+          }
+          // Inget täckande element under punkten: sidans bakgrund (body, sedan html), som Safari. Var vitt.
+          for (const el of [doc.body, doc.documentElement]) {
+            const [r, g, b, a = 1] = parse(getComputedStyle(el).backgroundColor);
             if (a >= 0.6) return [r, g, b];
           }
           return [255, 255, 255];

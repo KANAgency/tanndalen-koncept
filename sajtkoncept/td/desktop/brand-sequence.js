@@ -51,18 +51,24 @@
       /* Mobil (John 18 nov): stående kort i full innehållsbredd (16 px kant), tunnare ramar –
          färg 16, svart 10 (färgramen fortfarande tjockare). Kortet fyller höjden mellan skärmens
          topp (menyn är undanstoppad här) och bokningsraden, så öppningen till helskärm blir kort. */
-      const PAD = 16, BLACK = 10, GUT = 16;
+      /* Mobilrunda 10 (John 18 nov): bredare (sidmarginal 16 → 8) och lägre – bilden 2:3 i stället för att fylla
+         höjden (291 × 667 vid 375 × 812 visade bara mittersta 29 % av porträtten, ögonen hamnade i kanten; 2:3 visar
+         ca 45 %). Kortet centreras lodrätt mellan skärmens topp och bokningsraden och är oberoende av skärmhöjden
+         så länge det ryms. */
+      const PAD = 16, BLACK = 10, GUT = 16, SIDE = 8;
       const bar = document.querySelector(".td-booking");
       const barH = bar && getComputedStyle(bar).position === "fixed" ? bar.offsetHeight : 0;
       const ring = 2 * (PAD + BLACK);
-      const w0 = vw - 2 * GUT - ring;
-      const h0 = vh - GUT - (barH + GUT) - ring;
+      const w0 = vw - 2 * SIDE - ring;
+      const hAvail = vh - GUT - (barH + GUT) - ring;
+      const h0 = Math.min(hAvail, Math.round(w0 * 1.5));
+      const extra = Math.max(0, (hAvail - h0) / 2);
       frame.style.setProperty("--brand-w", `${w0 + (vw - w0) * open}px`);
       frame.style.setProperty("--brand-h", `${h0 + (vh - h0) * open}px`);
       frame.style.setProperty("--brand-pad", `${PAD * (1 - open)}px`);
       frame.style.setProperty("--brand-black", `${BLACK * (1 - open)}px`);
       /* kortet toppställt (GUT + svart ram), glider till 0 när det öppnas */
-      pin.style.paddingTop = `${(GUT + BLACK) * (1 - open)}px`;
+      pin.style.paddingTop = `${(GUT + BLACK + extra) * (1 - open)}px`;
     } else {
       /* bildens storlek; ramarna (46 färg + 23 svart per sida) läggs utanpå */
       const R = 46 * 1.5 * 2;

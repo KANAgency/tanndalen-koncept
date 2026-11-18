@@ -7100,3 +7100,81 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .boende .boende-card.is-light .boende-card-title,
   .boende .boende-card.is-light .boende-fact .td-ui-title-sm { color: var(--contrast-on-night); }
 }
+
+/* Mobilrunda 10, 2026-11-18 (John). Bara mobil. */
+@media (max-width: 1023px) {
+  /* 10-1. Fjällguiden-pillen i headern: 4 px mer på varje sida (vänster 6 → 10, höger 10 → 14). */
+  #fraga-launch { padding: 0 14px 0 10px; }
+
+  /* 10-2. Storvigeln: etiketten 20 upp och 20 vänster (nudge −10/−72 → −30/−92), sedan topografin och etiketten
+     50 höger tillsammans (--topo-shift-x 50 → 100; etiketten sitter i .hero-topo-unit och följer med). */
+  .parallax-item--hero,
+  html[data-mode] .parallax-item--hero { --topo-shift-x: 100px; --label-nudge-x: -30px; --label-nudge-y: -92px; }
+
+  /* 10-3. Topografin följer inte längre skärmens höjd (100svh): fast 740 px (≈ svh på iPhone 16 Pro i Safari),
+     så topografi och etikett står still när Safaris verktygsfält fälls ihop/ut. */
+  .parallax-item--hero {
+    width: calc(740px * 812 / 962);
+    height: 740px;
+    margin: 8px 0 -748px 104px;
+  }
+}
+@supports (animation-timeline: scroll()) {
+  @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+    /* 10-3. Parallaxen räknas mot ett fast scrollspann (0–20 000 px) i stället för sidans max-scroll, som ändras
+       med viewporthöjden. Förskjutning = (1 − f) × scrollY oavsett skärmhöjd; JS sätter (1 − f) × 20 000. */
+    .parallax-item--hero .hero-topo-unit,
+    .parallax-item--hero .place-labels { animation-range: 0px 20000px; }
+  }
+}
+@media (max-width: 1023px) {
+  /* 10-4. En dag: texten under korten 8 px in på båda sidor, kortrubrikerna ett steg mindre (30 → 24) så de inte
+     konkurrerar med sektionsrubriken (36). */
+  .page .en-dag .en-dag-copy { padding-inline: var(--space-sm); box-sizing: border-box; }
+  .page .en-dag .en-dag-copy .td-textblock-title { font-size: var(--font-size-xl); letter-spacing: -0.021em; }
+  /* 10-5. Sista kortet: texten flyttad ut under bilden (JS ovan), samma uppställning som övriga kort. */
+  .page .en-dag .en-dag-slide.is-puff .en-dag-puff-shade { display: none; }
+  .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy {
+    position: relative;
+    inset: auto;
+    height: auto;
+    align-items: flex-start;
+    gap: 0;
+    margin: var(--space-lg) 0 0;
+    padding: 0 var(--space-sm);
+    color: var(--color-text-primary);
+    text-align: left;
+  }
+  .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy .td-heading-md { font-size: var(--font-size-xl); letter-spacing: -0.021em; }
+  .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy .td-button { margin-top: var(--space-lg); }
+}
+@media (max-width: 1023px) {
+  /* 10-6. Läget just nu: Fjällguiden-kortet tillbaka i innehållsytan som övriga kort (ångrar 9A-6). Fullbredden
+     gällde det stora Fjällguiden-blocket ("Vi svarar på dina frågor, stort som smått."), se nedan. */
+  .just-cols .td-fraga.td-guide {
+    width: 100%;
+    margin-inline: 0;
+    border-radius: 2px;
+  }
+  /* Fjällguiden-blocket i skärmens hela bredd; innehållet 24 px in som övrig text på yta. */
+  .faq .td-fraga-block {
+    flex: none; /* .faq är flex: annars krymper blocket till 386 */
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw); /* båda sidor: flexraden blir exakt 100vw, ingen centreringsförskjutning */
+    padding-inline: var(--space-xl);
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+}
+@media (max-width: 1023px) {
+  /* 10-7. Områdesblocket: textblocket 16 upp (72 → 56), rubriken ett steg mindre (36 → 30), sökknappen och
+     "Se alla" på samma rad. */
+  .boende .boende-copy { top: var(--space-4xl); }
+  .boende .boende-title { font-size: var(--font-size-2xl); letter-spacing: -0.02em; }
+  .boende .boende-actions { flex-wrap: nowrap; gap: var(--space-md); }
+  .boende .boende-all { flex: none; white-space: nowrap; }
+  /* 10-8. Bilderna fyller videons höjd i alla områden: desktopens zoom (Fjällbruden 155 % bredd, Brunkullan 175 %)
+     gav bara 348/396 px höga bilder i den 727 px höga mobilytan. */
+  .boende .boende-poster { background-size: cover !important; }
+}
