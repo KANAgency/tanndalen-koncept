@@ -2037,6 +2037,21 @@
       const enRise = enSun.querySelector(".en-dag-sun-rise");
       const enSet = enSun.querySelector(".en-dag-sun-set");
       const enMobile = matchMedia("(max-width: 1023px)");
+      /* Mobil (2026-11-18): placeEnDag returnerar före desktopens videologik, så videorna i svepkarusellen startade
+         aldrig. Här spelar videon när minst 60 % av den syns (karusellens överflöde räknas med), annars pausas den. */
+      if (!reduced && "IntersectionObserver" in window) {
+        const enVidIo = new IntersectionObserver((entries) => {
+          if (!enMobile.matches) return;
+          entries.forEach((entry) => {
+            const video = entry.target;
+            if (entry.intersectionRatio >= 0.6 && !enHeld.has(video) && !video.hidden) {
+              video.muted = true;
+              video.play().catch(() => {});
+            } else video.pause();
+          });
+        }, { threshold: [0, 0.6, 1] });
+        enVideos.forEach((video) => enVidIo.observe(video));
+      }
       const clamp01 = (value) => Math.min(1, Math.max(0, value));
       /* TODO: sommarens 09:00–22:00 är en platshållare tills klienten sätter tiderna. */
       const EN_DAY_WINDOW = {
