@@ -133,9 +133,84 @@
         transform: translate(-50%, -50%);
         transform-origin: center center;
       }
-      .pv-device iframe {
-        display: block; width: var(--phone-w); height: var(--phone-h);
-        border: 0; border-radius: 55px; background: #fff;
+      /* ---------- iPhone 16 Pro + Safari (iOS 26, Compact) ----------
+         Skärm 402 × 874 pt. Statusrad 54 pt, säker zon topp 62 / botten 34 (useyourloaf, iPhone 16-mått).
+         Sajtens viewport = ytan mellan säker zon i toppen och Safaris flytande fält: fasta bottenelement
+         hamnar ovanför fältet som på telefonen (Safari 26 ritar inte fixed-innehåll under fältet).
+         Sidorna saknar viewport-fit=cover → env(safe-area-inset-*) = 0 i Safari, och 0 i iframen. */
+      .ip-screen {
+        --ip-tint: #fff;      /* sidans färg i toppen (Safari tonar statusraden efter sidan) */
+        --ip-tint-b: #fff;    /* sidans färg i botten (tonar ytan bakom fältet) */
+        --ip-ink: #000;       /* statusradens färg, vänds efter tonen */
+        --ip-ink-b: #000;
+        --ip-top: 62px;       /* säker zon topp */
+        --ip-bar-h: 48px;     /* fältets knappar/adressfält, utfällt */
+        --ip-bar-bottom: 30px;/* från skärmens underkant till fältet */
+        --ip-gap: 8px;        /* luft mellan viewportens underkant och fältet */
+        position: relative;
+        width: var(--phone-w); height: var(--phone-h);
+        border-radius: 55px; overflow: hidden;
+        background: linear-gradient(var(--ip-tint) 0 50%, var(--ip-tint-b) 50% 100%);
+        font-family: -apple-system, "SF Pro Text", "SF Pro", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        transition: background-color 200ms;
+      }
+      .ip-screen iframe {
+        position: absolute; left: 0; top: var(--ip-top);
+        display: block; width: 100%;
+        height: calc(var(--phone-h) - var(--ip-top) - var(--ip-bar-bottom) - var(--ip-bar-h) - var(--ip-gap));
+        border: 0; background: transparent; /* vit iframebakgrund syntes som hårlinje i kanten vid skalning */
+      }
+      .ip-screen.is-min { --ip-bar-h: 30px; --ip-gap: 4px; }
+      .ip-status {
+        position: absolute; inset: 0 0 auto; height: 54px; z-index: 3;
+        display: grid; grid-template-columns: 1fr 125px 1fr; align-items: center;
+        color: var(--ip-ink); pointer-events: none;
+      }
+      .ip-time {
+        justify-self: center; transform: translateX(6px);
+        font-size: 17px; font-weight: 600; letter-spacing: -0.4px; font-variant-numeric: tabular-nums;
+        padding-top: 4px;
+      }
+      .ip-island {
+        grid-column: 2; align-self: start; margin-top: 11px;
+        width: 125px; height: 37px; border-radius: 19px; background: #000;
+      }
+      .ip-icons { justify-self: center; transform: translateX(-4px); display: flex; align-items: center; gap: 6px; padding-top: 4px; }
+      .ip-icons svg { display: block; fill: currentColor; }
+      .ip-safari {
+        position: absolute; left: 16px; right: 16px; bottom: var(--ip-bar-bottom); z-index: 3;
+        height: var(--ip-bar-h);
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: height 260ms cubic-bezier(.3,.7,.2,1);
+      }
+      .ip-glass {
+        height: 100%; border-radius: 999px;
+        background: rgba(250, 250, 250, 0.72);
+        -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6);
+        box-shadow: inset 0 0 0 0.5px rgba(255,255,255,.7), 0 0 0 0.5px rgba(0,0,0,.08), 0 6px 20px rgba(0,0,0,.14);
+        color: #000; display: grid; place-items: center;
+        transition: width 260ms cubic-bezier(.3,.7,.2,1), opacity 200ms, font-size 260ms;
+      }
+      .ip-screen.is-dark-b .ip-glass {
+        background: rgba(48, 48, 50, 0.66); color: #fff;
+        box-shadow: inset 0 0 0 0.5px rgba(255,255,255,.18), 0 6px 20px rgba(0,0,0,.3);
+      }
+      .ip-btn { width: var(--ip-bar-h); flex: none; border: 0; padding: 0; cursor: pointer; }
+      .ip-btn svg { width: 22px; height: 22px; display: block; }
+      .ip-url {
+        flex: 1 1 auto; min-width: 0;
+        display: flex; align-items: center; justify-content: center; gap: 7px;
+        font-size: 16px; font-weight: 500; letter-spacing: -0.2px; white-space: nowrap;
+      }
+      .ip-url svg { width: 17px; height: 17px; flex: none; }
+      .ip-screen.is-min .ip-btn { width: 0; opacity: 0; overflow: hidden; }
+      .ip-screen.is-min .ip-safari { gap: 0; }
+      .ip-screen.is-min .ip-url { flex: 0 0 auto; padding: 0 14px; font-size: 13px; }
+      .ip-screen.is-min .ip-url svg { display: none; }
+      .ip-home {
+        position: absolute; left: 50%; bottom: 8px; z-index: 3; transform: translateX(-50%);
+        width: 139px; height: 5px; border-radius: 3px; background: var(--ip-ink-b); pointer-events: none;
       }
       /* Desktopscen: sajten fyller hela bredden (minst 1440) i 100 %, höjden följer fönstret.
          Smalare än 1440 → 1440-layouten skalas ned med gul etikett. */
@@ -217,7 +292,7 @@
       </div>
 
       <footer class="sv-foot">
-        <span>Mobil visar sajten i 402 × 874 px. På en telefon öppnas den direkt.</span>
+        <span>Mobil visar sajten i Safari på en iPhone 16 Pro (402 × 874). På en telefon öppnas den direkt.</span>
         <span>Tips: <code>?plats=1</code> = På plats</span>
       </footer>
     </main>
@@ -242,7 +317,26 @@
         </div>
       </nav>
       <div class="pv-stage" id="pv-stage">
-        <div class="pv-device" id="pv-device"><iframe id="pv-frame" title="Mobilvy"></iframe></div>
+        <div class="pv-device" id="pv-device">
+          <div class="ip-screen" id="ip-screen">
+            <div class="ip-status" aria-hidden="true">
+              <span class="ip-time">9:41</span>
+              <span class="ip-island"></span>
+              <span class="ip-icons">
+                <svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="7.5" width="3.2" height="4.5" rx="1"/><rect x="5.2" y="5" width="3.2" height="7" rx="1"/><rect x="10.4" y="2.5" width="3.2" height="9.5" rx="1"/><rect x="15.6" y="0" width="3.2" height="12" rx="1"/></svg>
+                <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.4c2.4 0 4.6.9 6.2 2.5l1.2-1.2A10.5 10.5 0 0 0 8.5.6 10.5 10.5 0 0 0 1.1 3.7l1.2 1.2a8.7 8.7 0 0 1 6.2-2.5Zm0 3.5c1.4 0 2.7.5 3.7 1.5l1.2-1.2a7 7 0 0 0-9.8 0l1.2 1.2c1-1 2.3-1.5 3.7-1.5Zm0 3.4c-.5 0-1 .2-1.3.6L8.5 11.2l1.3-1.3c-.3-.4-.8-.6-1.3-.6Z"/></svg>
+                <svg width="28" height="13" viewBox="0 0 28 13"><rect x="0.5" y="0.5" width="24" height="12" rx="3.8" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2" y="2" width="21" height="9" rx="2.5"/><path d="M26 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2Z" fill-opacity=".45"/></svg>
+              </span>
+            </div>
+            <iframe id="pv-frame" title="Mobilvy"></iframe>
+            <div class="ip-safari" aria-hidden="true">
+              <button class="ip-glass ip-btn" type="button" id="ip-back" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4.5 7.5 12l7.5 7.5"/></svg></button>
+              <div class="ip-glass ip-url"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5.5h14M3 10h14M3 14.5h9"/></svg><span id="ip-domain">tanndalen.se</span></div>
+              <button class="ip-glass ip-btn" type="button" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="18.5" cy="12" r="1.9"/></svg></button>
+            </div>
+            <span class="ip-home" aria-hidden="true"></span>
+          </div>
+        </div>
         <div class="pv-screen" id="pv-screen"><iframe id="pv-dframe" title="Desktopvy"></iframe></div>
         <a class="pv-home" href="./" aria-label="Till sajtväljaren" title="Till sajtväljaren">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H2M6.5 3.5 2 8l4.5 4.5"/></svg>
@@ -327,6 +421,54 @@
         }
         fit();
         addEventListener("resize", fit);
+
+        // ---- Safari-beteende: toning efter sidan, fältet fälls ihop vid scroll nedåt ----
+        const scr = document.getElementById("ip-screen");
+        document.getElementById("ip-domain").textContent = site === "td" ? "tanndalen.se" : "orsagronklitt.se";
+        document.getElementById("ip-back").addEventListener("click", () => { try { frame.contentWindow.history.back(); } catch (err) {} });
+        const parse = (c) => { const m = c.match(/[\d.]+/g); return m ? m.map(Number) : [0, 0, 0, 0]; };
+        function colorAt(doc, x, y) {
+          // Översta element med (nästan) täckande bakgrund under punkten, annars body/html.
+          const els = doc.elementsFromPoint(x, y);
+          for (const el of els) {
+            const cs = getComputedStyle(el);
+            // SVG-former (t.ex. introns täckande ytor) har färgen i fill, inte i background.
+            const c = el instanceof doc.defaultView.SVGGeometryElement && cs.fill.startsWith("rgb") ? cs.fill : cs.backgroundColor;
+            const [r, g, b, a = 1] = parse(c);
+            if (a >= 0.6) return [r, g, b];
+          }
+          return [255, 255, 255];
+        }
+        const lum = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+        function tint() {
+          let doc; try { doc = frame.contentDocument; } catch (err) { return; }
+          if (!doc || !doc.body) return;
+          const w = frame.clientWidth, h = frame.clientHeight;
+          const top = colorAt(doc, w / 2, 1), bot = colorAt(doc, w / 2, h - 1);
+          scr.style.setProperty("--ip-tint", `rgb(${top})`);
+          scr.style.setProperty("--ip-tint-b", `rgb(${bot})`);
+          scr.style.setProperty("--ip-ink", lum(top) < 0.55 ? "#fff" : "#000");
+          scr.style.setProperty("--ip-ink-b", lum(bot) < 0.55 ? "#fff" : "#000");
+          scr.classList.toggle("is-dark-b", lum(bot) < 0.55);
+        }
+        function viewportLabel() {
+          size.textContent = `402 × 874 · viewport ${frame.clientWidth} × ${frame.clientHeight}`;
+        }
+        // Scrollen läses med en kort timer i stället för scroll-händelser: överlever att sajten navigerar
+        // i iframen och fungerar även när fönstret ligger i bakgrunden.
+        let lastY = 0, n = 0;
+        function poll() {
+          let y; try { y = frame.contentWindow.scrollY; } catch (err) { return; }
+          const dy = y - lastY;
+          if (y < 40 || dy < -8) scr.classList.remove("is-min");
+          else if (dy > 8) scr.classList.add("is-min");
+          if (Math.abs(dy) > 8 || y < 40) lastY = y;
+          if (dy !== 0 || ++n % 4 === 0) { tint(); viewportLabel(); }
+        }
+        frame.addEventListener("load", () => { lastY = 0; scr.classList.remove("is-min"); tint(); viewportLabel(); });
+        // 100 ms räcker för fältets reaktion; tonen provas om även utan scroll (intro, varumärkessekvens).
+        setInterval(poll, 100);
+        viewportLabel();
       })();
     </script>
   </body>
