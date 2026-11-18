@@ -45,6 +45,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 ## 5. Git
 - Repot `src/` har commit-historik (se `docs/status.md`). Du får committa på `main` med tydligt svenskt meddelande och trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - **Pusha aldrig** utan Johns uttryckliga begäran. Skapa aldrig repos, lägg inte till remotes. Använd aldrig kan-agency-organisationen för privata projekt.
+- **`main` vs `deploy`:** `main` är huvudrepot och pushas alltid först. `deploy` är bara publiceringsknappen till Azure (kollegornas förhandsvisning; workflowen kör bara vid push till `deploy`). `deploy` får aldrig egna commits, den sätts alltid till samma commit som `main` (`git push origin main && git push origin main:deploy`) och pushas bara när John vill visa något för kollegor. Rena docs-ändringar pushas bara till `main`.
 - Inga personuppgifter eller exporter som spårade filer.
 - Git kan behöva ta bort `.lock`-filer i `.git/`; be om behörighet om den saknas.
 - Det finns ingen versionshistorik utanför repot (`src/`). Föreslå aldrig git-återställning av annat. Använd lokala kopior/checkpoints.
