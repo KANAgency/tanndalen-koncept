@@ -8,6 +8,7 @@
   const sign = root.querySelector(".td-brand-sign");
   const COLORS = ["#A1B5BA", "#BF6A15", "#1B4021"];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mobileQ = matchMedia("(max-width: 1023px)");
 
   words.forEach((w) => {
     const t = w.textContent;
@@ -46,12 +47,32 @@
     const vw = pin.clientWidth, vh = pin.clientHeight;
 
     const open = ease(seg(p, 0.72, 0.88));
-    /* bildens storlek; ramarna (46 färg + 23 svart per sida) läggs utanpå */
-    const R = 46 * 1.5 * 2;
-    const w0 = Math.min(1180, vw - R - 120), h0 = Math.min(w0 * 0.67, vh - R - 80);
-    frame.style.setProperty("--brand-w", `${w0 + (vw - w0) * open}px`);
-    frame.style.setProperty("--brand-h", `${h0 + (vh - h0) * open}px`);
-    frame.style.setProperty("--brand-pad", `${46 * (1 - open)}px`);
+    if (mobileQ.matches) {
+      /* Mobil (John 18 nov): stående kort i full innehållsbredd (16 px kant), tunnare ramar –
+         färg 16, svart 10 (färgramen fortfarande tjockare). Kortet fyller höjden mellan skärmens
+         topp (menyn är undanstoppad här) och bokningsraden, så öppningen till helskärm blir kort. */
+      const PAD = 16, BLACK = 10, GUT = 16;
+      const bar = document.querySelector(".td-booking");
+      const barH = bar && getComputedStyle(bar).position === "fixed" ? bar.offsetHeight : 0;
+      const ring = 2 * (PAD + BLACK);
+      const w0 = vw - 2 * GUT - ring;
+      const h0 = vh - GUT - (barH + GUT) - ring;
+      frame.style.setProperty("--brand-w", `${w0 + (vw - w0) * open}px`);
+      frame.style.setProperty("--brand-h", `${h0 + (vh - h0) * open}px`);
+      frame.style.setProperty("--brand-pad", `${PAD * (1 - open)}px`);
+      frame.style.setProperty("--brand-black", `${BLACK * (1 - open)}px`);
+      /* kortet toppställt (GUT + svart ram), glider till 0 när det öppnas */
+      pin.style.paddingTop = `${(GUT + BLACK) * (1 - open)}px`;
+    } else {
+      /* bildens storlek; ramarna (46 färg + 23 svart per sida) läggs utanpå */
+      const R = 46 * 1.5 * 2;
+      const w0 = Math.min(1180, vw - R - 120), h0 = Math.min(w0 * 0.67, vh - R - 80);
+      frame.style.setProperty("--brand-w", `${w0 + (vw - w0) * open}px`);
+      frame.style.setProperty("--brand-h", `${h0 + (vh - h0) * open}px`);
+      frame.style.setProperty("--brand-pad", `${46 * (1 - open)}px`);
+      frame.style.removeProperty("--brand-black");
+      pin.style.paddingTop = "";
+    }
 
     let color = COLORS[0];
     SWAPS.forEach((s, i) => {

@@ -24,7 +24,7 @@
   box-sizing: content-box; /* färgramen läggs UTANPÅ bilden, bilden behåller sin storlek */
   background: var(--brand-frame, #A1B5BA);
   /* symmetrisk mörk ram utanpå säsongsramen, lika bred som den */
-  box-shadow: 0 0 0 calc(var(--brand-pad, 46px) / 2) var(--color-TD-night);
+  box-shadow: 0 0 0 var(--brand-black, calc(var(--brand-pad, 46px) / 2)) var(--color-TD-night);
 }
 .td-brand-media {
   position: relative;
@@ -113,6 +113,13 @@
 @media (max-width: 767px) {
   .td-brand { height: 240vh; }
   .td-brand-word { font-size: 22vw; }
+}
+
+/* Mobil (John 18 nov): stående kort, toppställt – höjd och ramar sätts i brand-sequence.js. */
+@media (max-width: 1023px) {
+  .td-brand-pin { align-items: flex-start; box-sizing: border-box; }
+  /* Vinterbild 1 (liggande): behåll vänsterkanten där skidåkarna går. */
+  html:not([data-season="summer"]) .td-brand-img:first-child img { object-position: 0% 50%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
