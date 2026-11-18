@@ -2389,25 +2389,12 @@
         placeAfterEnDag(sectionH);
       }
       function placeEnDagMobile() {
-        const slides = [...enDag.querySelectorAll(".en-dag-slide")];
-        const pin = enPin.getBoundingClientRect();
-        const span = Math.max(1, enDag.offsetHeight - innerHeight * 0.8);
-        const start = enDag.getBoundingClientRect().top + scrollY;
-        const t = Math.min(1, Math.max(0, (scrollY + 128 - start) / span));
-        const index = t * (slides.length - 1);
-        slides.forEach((slide, i) => {
-          const delta = i - index;
-          const abs = Math.abs(delta);
-          const scale = delta > 0 ? 1 - Math.min(delta, 1) * 0.06 : 1 - Math.min(-delta, 1) * 0.05;
-          const media = slide.querySelector(".en-dag-media");
-          const copy = slide.querySelector(".en-dag-copy");
-          const sample = slides[0].querySelector(".en-dag-copy");
-          const step = Math.min(pin.height - 36, (sample?.offsetTop || 0) + (sample?.offsetHeight || 0) + 24);
-          slide.style.transform = `translate3d(0, ${delta * step}px, 0)`;
-          slide.style.opacity = abs > 1.15 ? "0" : "1";
-          slide.style.zIndex = String(delta <= 0.2 ? 6 : 3);
-          if (media) media.style.transform = `scale(${scale})`;
-          if (copy) copy.style.opacity = String(Math.max(0, 1 - abs * 1.8));
+        /* Mobilrunda 9B (2026-11-18): i mobilen är En dag en vanlig svepkarusell (CSS scroll-snap),
+           ingen scrollstyrd stapling. Nolla inline-stilarna och låt CSS styra. */
+        enDag.querySelectorAll(".en-dag-slide, .en-dag-media, .en-dag-copy").forEach((el) => {
+          el.style.transform = "";
+          el.style.opacity = "";
+          el.style.zIndex = "";
         });
       }
       function easeOutSoft(u) {

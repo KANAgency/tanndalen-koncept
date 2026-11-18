@@ -6862,3 +6862,241 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .utforsakning-doodle img { inset: 0; width: 100%; height: 100%; }
   html[data-season="summer"] .utforsakning-doodle { top: -44px; height: 88px; }
 }
+
+/* Mobilrunda 9A, 2026-11-18 (John). */
+/* 5. Läget just nu, Alpint/Längd: ljus neutral bakgrund (neutral-subtlest #E0DFDE mot Dag #EBE8E5) i stället för
+   neutral-strong. Gäller desktop och mobil. Vit tumme kvar, all text Natt. */
+.just-nu-head .td-segmented { background: var(--color-TD-neutral-subtlest); }
+.just-nu-head .td-segmented button,
+.just-nu-head .td-segmented:has(.td-segmented-thumb) button,
+.just-nu-head .td-segmented:has(.td-segmented-thumb) button[aria-pressed="true"],
+.just-nu-head .td-segmented:has(.td-segmented-thumb) button[data-covered="true"] { color: var(--color-text-primary); }
+
+@media (max-width: 1023px) {
+  /* 1. Header: loggan 8 px vänster (padding 20 → 12), menyn 20 px höger – knappen 4 px från glasets högerkant
+     (samma luft som upp/ned: 48 − 40 = 2 × 4). Fjällguiden får namnet bredvid ikonen, 13 px. */
+  .top { padding: 0 0 0 12px; }
+  .top-start { margin-right: -4px; }
+  .actions { gap: 0; } /* Boka-menyn (tom på mobil) gav 8 px extra glipa före menyn. */
+  #fraga-launch {
+    width: auto;
+    min-width: 0;
+    gap: 6px;
+    padding: 0 10px 0 6px;
+  }
+  #fraga-launch .fraga-launch-name.help-short { display: inline; font-size: var(--font-size-13); line-height: 1; white-space: nowrap; }
+
+  /* 2. Storvigeln-etiketten 122 ned och 50 vänster (x 40 → −10, y −194 → −72): i höjd med "gång." till höger om
+     rubrikens sista rad. Hela 150 ned la den på första Aktuellt-kortet vid 393×852 (läget följer topografins svh-höjd).
+     Mot-animationen ligger kvar. */
+  .parallax-item--hero { --label-nudge-x: -10px; --label-nudge-y: -72px; }
+
+  /* 4. Läget just nu: kortens ytterkant 2 px, bilder/media inuti 0. */
+  .just-cols .td-just-nu-data,
+  .just-cols .td-videokort,
+  .just-cols .td-kamera,
+  .just-cols .td-pagang,
+  .just-cols .td-vader-sommar,
+  .just-cols .td-rapport,
+  .just-cols .td-nastasteg { border-radius: 2px; }
+  .just-cols .td-videokort-media,
+  .just-cols .td-videokort iframe,
+  .just-cols .td-videokort video,
+  .just-cols .td-kamera-media { border-radius: 0; }
+
+  /* 5. Reglaget mindre dominant: 48 → 44 px högt, text 16 → 14. Knapparna 40 synliga + 2 px osynlig
+     tryckyta upp/ned = 44. */
+  .just-nu-head .td-segmented { height: 44px; }
+  .just-nu-head .td-segmented button { font-size: var(--font-size-sm); }
+  .just-nu-head .td-segmented button::after { content: ""; position: absolute; inset: -2px 0; }
+
+  /* 6. Fjällguiden-kortet i Läget just nu: hela skärmbredden, ingen radie (fullbreddsblock har ingen). */
+  .just-cols .td-fraga.td-guide {
+    width: calc(100% + 32px);
+    margin-inline: -16px;
+    border-radius: 0;
+  }
+}
+
+/* 3. Aktuellt, frågekortet: följer inte längre de andra kortens höjd, 3:4 (≈ 18 % lägre). Bara ≤ 767 där korten
+   är en kolumn bred; 768–1023 har 519 px breda kort och lämnas. */
+@media (max-width: 767px) {
+  .td-aktuellt-track .td-aktuellt-kort[data-typ="fraga"] {
+    align-self: flex-start;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Mobilrunda 9B, 2026-11-18 (John). */
+@media (max-width: 1023px) {
+  /* 9B-1. En vinterdag: ingen sticky, ingen scrollkapning. Svepkarusell med scroll-snap och peek,
+     samma mått som Aktuellt-karusellen (kort 100vw − 56, glipa 12, sidpadding 16 → nästa kort skymtar ~28 px).
+     z-index 3 → 1 så sektionen aldrig ligger över bokningsbaren (fixed, z 2 i samma stackkontext .page).
+     JS-staplingen (placeEnDagMobile) nollar bara sina inline-stilar i mobilen. */
+  .page .en-dag {
+    z-index: 1;
+    height: auto;
+    margin-bottom: 0;
+  }
+  .page .en-dag .en-dag-pin {
+    position: relative;
+    top: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    pointer-events: auto;
+  }
+  .page .en-dag .en-dag-intro {
+    position: static;
+    top: auto;
+    align-items: stretch;
+    pointer-events: auto;
+  }
+  /* Rubriken som övriga sektionsrubriker i mobil (td-heading-lg: 36 px, vänsterställd som Aktuellt). */
+  .page .en-dag .en-dag-heading {
+    text-align: left;
+    font-size: var(--font-size-3xl);
+    line-height: 1.1;
+    letter-spacing: -0.019em;
+  }
+  .page .en-dag .en-dag-stack { display: block; }
+  .page .en-dag .en-dag-stage {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100vw;
+    margin: 28px 0 0 calc(50% - 50vw);
+    padding-inline: var(--space-lg);
+    scroll-padding-inline-start: var(--space-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .page .en-dag .en-dag-stage::-webkit-scrollbar { display: none; }
+  .page .en-dag .en-dag-slide {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: auto;
+    flex: 0 0 min(calc(100vw - 56px), 519px);
+    width: min(calc(100vw - 56px), 519px);
+    height: auto;
+    opacity: 1;
+    transform: none;
+    scroll-snap-align: start;
+    pointer-events: auto;
+  }
+  .page .en-dag .en-dag-media {
+    position: relative;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 4 / 5;
+    transform: none;
+  }
+  .page .en-dag .en-dag-copy {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    margin: var(--space-lg) 0 0;
+    opacity: 1;
+    text-align: left;
+    transform: none;
+  }
+  .page .en-dag .en-dag-copy .td-textblock { align-items: flex-start; text-align: left; }
+  .page .en-dag .en-dag-copy .td-textblock-actions { justify-content: flex-start; }
+
+  /* Bokningsbaren över allt innehåll (även Just nu z 5, områdesblocket, Hitta hit-faktakortet och sidfoten
+     låg över den i mobil), men under headern/menyn (z 30) och Fjällguiden (z 80). */
+  .page .td-booking { z-index: 25; }
+
+  /* 9B-2. Skarvarna: topografin 40 höger och 60 upp mot Frågeblocket (toppen 207 px ovanför blockets
+     underkant i stället för 147). Topografin förankras nu i Frågeblocket i JS (var fast y 6217), därav nytt
+     shift-värde (−530 → −465, inkl. parallaxens 8 % på den kortare sidan). Etiketten ned i luckan
+     Här bor skidåkarna → Utförsåkning, x 104–267 (vänster om doodlen, x 275) så den aldrig krockar trots
+     parallaxen. Storvigeln-etikettens typografi: namn 14/21, fakta 13/15, neutral-muted. */
+  .td-topo2-layer.parallax-item--skarvarna { --topo2-shift-x: 40px; --topo2-shift-y: -465px; }
+  .parallax-item--skarvarna .td-topo2-label {
+    margin: 792px 0 0 31px; /* 9B-2-label-pos: x 104–267, vänster om doodlen (x 275) */
+    gap: 0;
+    color: var(--color-TD-neutral-muted);
+  }
+  .parallax-item--skarvarna .td-topo2-name { font-size: var(--font-size-sm); line-height: 1.5; }
+  .parallax-item--skarvarna .td-topo2-facts { gap: 0; }
+  .parallax-item--skarvarna .td-topo2-facts p { font-size: var(--font-size-13); line-height: 1.154; }
+
+  /* 9B-3. Utförsåkning: textytan full bleed (375), bilden kvar i innehållsbredd (343) och ligger 40 px
+     ned i den mörka ytan. Rubriken som övriga sektionsrubriker (td-heading-lg mobil, 36 px).
+     Padding: sidor 24 (text på yta = rubrikernas linje x 24), topp 40 + överlappet, botten 56. */
+  .utforsakning .utforsakning-media { z-index: 1; }
+  .utforsakning .utforsakning-card {
+    width: 100vw;
+    margin-top: calc(-1 * var(--space-3xl));
+    margin-left: calc(50% - 50vw);
+    padding: calc(2 * var(--space-3xl)) var(--space-xl) var(--space-4xl);
+  }
+  .utforsakning-card .td-heading-4 {
+    font-size: var(--font-size-3xl);
+    line-height: 1.1;
+    letter-spacing: -0.019em;
+  }
+
+  /* 9B-4. Områdesvideon: texten centrerad i blockets bredd (24 px inre padding) och högre upp (105 → 72). */
+  .boende {
+    --boende-media-h: max(640px, min(100vh, 960px));
+    height: auto;
+  }
+  .boende .boende-copy {
+    top: calc(var(--space-5xl) + var(--space-sm));
+    right: var(--space-xl);
+    left: var(--space-xl);
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    text-align: center;
+  }
+  .boende .boende-actions { justify-content: center; }
+
+  /* 9B-5. Kort om området under videon, kloss i kloss: videoytan behåller sin höjd (--boende-media-h),
+     kortet ligger i flödet direkt under i en Natt-ruta med on-night-text. Ingen parallax i mobilen. */
+  .boende .boende-frame {
+    height: auto;
+    padding-top: var(--boende-media-h);
+  }
+  .boende .boende-parallax {
+    top: 0 !important;
+    height: var(--boende-media-h) !important;
+    transform: translateX(-50%) !important;
+  }
+  .boende .boende-controls {
+    top: calc(var(--boende-media-h) - 61px - 48px);
+    bottom: auto;
+  }
+  .boende .boende-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+    border: 0;
+    border-radius: 0;
+    background: var(--color-TD-night);
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  .boende .boende-card .boende-card-title,
+  .boende .boende-card .boende-fact .td-ui-title-sm,
+  .boende .boende-card.is-light .boende-card-title,
+  .boende .boende-card.is-light .boende-fact .td-ui-title-sm { color: var(--contrast-on-night); }
+}
