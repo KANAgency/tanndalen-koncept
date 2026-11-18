@@ -143,8 +143,10 @@ html.is-intro:not(.is-intro-ready) .quote {
   animation: intro-fail 0.01s linear 6s forwards;
 }
 
+/* backwards, inte both (John 2026-11-18): en kvarstående transform-animation gör .top till referensram för
+   den fasta mobilmenyn, som då blev 361 px bred och började 8 px ned tills introt var helt klart. */
 html.is-intro-reveal .top {
-  animation: intro-header 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: intro-header 250ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 html.is-intro-reveal .td-booking {
   animation: intro-rise 350ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
