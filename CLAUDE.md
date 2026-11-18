@@ -70,7 +70,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 - **TD-färg:** Natt `#24272A`, Dag `#EBE8E5`, Snö `#FFFFFF`, Accent `#BF6A15`, CTA `#AE6113` (WCAG-version av Accent; visa aldrig sida vid sida som två signaler), neutral `#686868`. Säsong: Vår `#F6E0A2`, Sommar `#1B4021`, Höst `#3C1F17`, Vinter `#A1B5BA`. Kontrastpar är en explicit tabell (`on-*`), inte beräknad. Dag = grundbakgrund, Snö = lyft, Natt = paus.
 - **CTA-regel:** de viktigaste CTA-elementen (Sök/Boka) har alltid CTA-färgen, aldrig säsongsfärg. Innehållsytor med knapp får ha CTA eller säsongsfärg.
 - **OG-färg:** off-white `#F5EEE5`, mörkgrön `#003E3A`, Orsa svart `#3C3C3B` (text), signal `#E74011` (sparsamt). Förslag (ej kundbekräftat): mörkgrön CTA.
-- **Spacing (brand-differentierat från `xl`):** `xs` 4, `sm` 8, `md` 12, `lg` 16 gemensamma; `xl` 20/24, `2xl` 24/32, `3xl` 32/40, `4xl` 40/56, `5xl` 48/64, `6xl` 64/88, `7xl` 80/112, `8xl` 96/144 (OG/TD). Radier 4/8/16/full. Breakpoints 640/1024/1280. Grid desktop 1440, mobil 393. Mobile-first.
+- **Spacing (brand-differentierat från `xl`):** `xs` 4, `sm` 8, `md` 12, `lg` 16 gemensamma; `xl` 20/24, `2xl` 24/32, `3xl` 32/40, `4xl` 40/56, `5xl` 48/64, `6xl` 64/88, `7xl` 80/112, `8xl` 96/144 (OG/TD). Radier 2/4/8/16/full (`radius/xs` 2 återinförd 18 nov: mobilens kort och media). Breakpoints 640/1024/1280. Grid desktop 1440, mobil 393. Mobile-first.
 - **Knappar:** 48/40/32 px (Large/Medium/Small). Pilar via boolesk egenskap `Arrow`. Detaljer i `docs/startsida-td.md`.
 
 ## 8. Innehåll och ton

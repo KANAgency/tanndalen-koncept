@@ -6912,7 +6912,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .just-cols .td-pagang,
   .just-cols .td-vader-sommar,
   .just-cols .td-rapport,
-  .just-cols .td-nastasteg { border-radius: 2px; }
+  .just-cols .td-nastasteg { border-radius: var(--radius-xs); }
   .just-cols .td-videokort-media,
   .just-cols .td-videokort iframe,
   .just-cols .td-videokort video,
@@ -7168,7 +7168,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .just-cols .td-fraga.td-guide {
     width: 100%;
     margin-inline: 0;
-    border-radius: 2px;
+    border-radius: var(--radius-xs);
   }
   /* Fjällguiden-blocket i skärmens hela bredd; innehållet 24 px in som övrig text på yta. */
   .faq .td-fraga-block {
@@ -7454,11 +7454,11 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 }
 @media (max-width: 1023px) {
   /* 14-2 (John 2026-11-18). En dags bilder och filmer får 2 px radie i mobil, som Just nu-korten. Desktop behåller 0. */
-  .page .en-dag .en-dag-media { border-radius: 2px; overflow: hidden; }
+  .page .en-dag .en-dag-media { border-radius: var(--radius-xs); overflow: hidden; }
 }
 @media (max-width: 1023px) {
   /* 14-3 (John 2026-11-18). Utförsåkning: bilden/filmen 2 px runt om i mobil (var 4 uppe, 0 nere sedan regel 8). */
-  .utforsakning .utforsakning-media { border-radius: 2px; }
+  .utforsakning .utforsakning-media { border-radius: var(--radius-xs); }
 }
 @media (max-width: 1023px) {
   /* 14-2. Huvudmenyn högst upp på sidan (John 2026-11-18): iOS Safari färgar ytan ovanför sidan (statusfältet) efter
