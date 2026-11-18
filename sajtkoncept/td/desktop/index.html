@@ -98,6 +98,11 @@
             mode = "onsite";
           }
         } catch (err) {}
+        /* Mobil (John 2026-11-18): På plats finns bara i vinterläge. Sommar + På plats → vinter före första renderingen. */
+        if (mode === "onsite" && document.documentElement.dataset.season === "summer" && matchMedia("(max-width: 1023px)").matches) {
+          document.documentElement.dataset.season = "winter";
+          try { localStorage.setItem("td-season", "winter"); } catch (err) {}
+        }
         document.documentElement.dataset.mode = mode;
         document.documentElement.dataset.baseMode = baseMode === "onsite" ? "returning" : baseMode;
         if (params.get("demo") === "0") document.documentElement.dataset.demo = "0";
@@ -1808,6 +1813,10 @@
         if (enDayLive) enDayLive.textContent = seasonBannerCopy[dayView].live;
       });
       document.dispatchEvent(new CustomEvent("td-season", { detail: getSeason() }));
+      /* Mobil (John 2026-11-18): väljer man På plats i sommarläge byts sidan till vinter – På plats finns bara i vinter. */
+      document.addEventListener("td-mode", (event) => {
+        if (event.detail?.onsite && getSeason() === "summer" && matchMedia("(max-width: 1023px)").matches) setSeason("winter");
+      });
       const menu = document.getElementById("site-menu");
       const menuPanel = document.getElementById("site-menu-panel");
       const menuControl = document.querySelector(".menu-control");
