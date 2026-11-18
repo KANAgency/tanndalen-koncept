@@ -273,6 +273,10 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Ny Järven-video i Waabi-kortet (kvadrat, kortet flyttat till plats 2): allrum (sväng höger mot köket) → bastu (bakåt/vänster) → kök (sväng höger). Kling 2.5, 16:9 1080p, bara startbild = oklippt/brett foto (allrum och kök: vänstra 75 %), CSS beskär till kvadrat. 13,4 s, 4,1 MB: `td/desktop/assets/video/boende-jarven-rundtur.mp4`. Bastutestet med Veo 3.1 Lite förkastat. Oura-raden har kvar gamla 9:16-videon.
 - Öppet: John funderar på nästa steg. Mobil fortfarande öppet.
 
+## Klart 18 nov: pushat och deployat
+- `main` och `deploy` pushade till 912e4b5 (15 commits). Deploy-run 44286263320 lyckades. Live: https://proud-field-005de6103.4.azurestaticapps.net/og/ – Handplockade boenden med båda rundturvideorna från R2. Före push: lokalt bygge OK, alla 29 R2-videoreferenser svarar 200.
+- GitHub-konto per mapp: `~/.config/git/kan.gitconfig` sätter användare `johnscottguggenheimerKAN` för KAN-mappar; ny PAT (repo, 1 år) sparad i macOS nyckelring. Gamla PAT "Push" (ingen utgång) kan tas bort. `gh` är inloggad med privata kontot men kan läsa KANAgency-repot.
+
 ## Klart 18 nov: OG-boendevideorna i R2
 - Uppladdade till KAN:s R2 (`td-video/og/`): `boende-lonnstigen-6-rundtur.mp4` + poster, `boende-limbygarden-rundtur.mp4` + poster. Verifierat: alla fyra svarar 200 på `pub-4e0fd720b7c94611ae98332f7f97e772.r2.dev/og/…`, rätt content-type, samma bytestorlek som lokalt.
 - Kontouppdelning: `sajtkoncept/.env` (gitignorerad) har KAN-kontots id + en R2-token (Workers R2 Storage: Edit, 1 år). Wrangler från `sajtkoncept/` går mot KAN, `wrangler login` (privat konto) orörd. Se `STRUKTUR.md` → Cloudflare-konto.
