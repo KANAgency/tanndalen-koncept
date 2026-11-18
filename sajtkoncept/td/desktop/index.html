@@ -3746,6 +3746,8 @@
           cards.forEach((el) => { if (el.parentElement !== target) target.append(el); delete el.dataset.mkey; });
         }
         placeStopLayer();
+        card.style.transform = "none";
+        card.style.opacity = "1";
         /* Mobil: faktakortet dras upp så det kommer direkt under Stockholms ruta när kartan släpper. */
         function syncFaktaPull() {
           if (!panMobileQ.matches || !mobileFit) { card.style.marginTop = ""; return; }
@@ -3857,6 +3859,8 @@
         }
         /* Mobil: en fast kamera som rymmer alla tre stoppen, etiketter och stopprutor. */
         const MOBILE_AREA_TOP = 108; /* under menyn och kartans övre toning (100 px) */
+        /* Mobil: Stockholm- och Orsa-namnen 12 px längre vänster, Tänndalen 12 px högre (John 18 nov). Skärmpx. */
+        const MOBILE_LABEL_NUDGE = 12;
         let mobileFit = null; /* cache: läses om vid resize/säsong, inte per scrollbild */
         function mobileReserveBottom() {
           const bar = document.querySelector(".td-booking");
@@ -3876,13 +3880,13 @@
           const maxY = pins[0].y;
           const padL = tandW / 2 + 16;
           const padR = 24;
-          const padT = 32 + cardH + 12; /* etikett + Tänndalens ruta ovanför */
-          const padB = 20 + cardH; /* Stockholms ruta under */
+          const padT = 32 + MOBILE_LABEL_NUDGE + cardH + 12; /* etikett + Tänndalens ruta ovanför */
+          const padB = 40 + cardH; /* Stockholms ruta under (40 px under ploppen) */
           const areaTop = MOBILE_AREA_TOP;
           const areaH = Math.max(200, h - areaTop - mobileReserveBottom());
           const sW = (w - padL - padR) / (maxX - minX);
           const sH = (areaH - padT - padB) / (maxY - minY);
-          const scale = Math.max(0.3, Math.min(SCALE0, sW, sH));
+          const scale = Math.max(0.2, Math.min(SCALE0, sW, sH)); /* golv 0.2: korta skärmar (iPhone med verktygsfält) ska ändå rymmas ovanför Hoppa över */
           const contentW = padL + (maxX - minX) * scale + padR;
           const contentH = padT + (maxY - minY) * scale + padB;
           const x0 = (w - contentW) / 2 + padL;
@@ -3906,9 +3910,12 @@
         function t0Cam() {
           return camAt(STOCK);
         }
+        /* Mobil (John 18 nov): markören står kvar i Stockholm en bit scroll efter att den poppat upp. */
+        const STOCK_HOLD_PX_MOBILE = 160;
         function travelOf(p, canTravel) {
           if (!canTravel) return 0;
-          const originP = journeyOriginPx / (2.5 * innerHeight);
+          const hold = panMobileQ.matches ? STOCK_HOLD_PX_MOBILE : 0;
+          const originP = (journeyOriginPx + hold) / (2.5 * innerHeight);
           if (p <= originP) return 0;
           if (p >= 0.9) return 1;
           return (p - originP) / (0.9 - originP);
@@ -3973,9 +3980,9 @@
             const py = cam.y + s * pin.y;
             let x;
             let y;
-            if (index === 0) { x = px + 12 - cw; y = py + 20; el.dataset.side = "under"; }
+            if (index === 0) { x = px - 8 - cw; y = py + 40; el.dataset.side = "under"; } /* 20 px ned + 20 px vänster (John 18 nov) */
             else if (index === 1) { x = px - 16 - cw; y = py + 20; el.dataset.side = "vänster-under"; }
-            else { x = px - 24; y = py - 32 - 12 - h; el.dataset.side = "ovanför"; }
+            else { x = px - 24; y = py - 32 - MOBILE_LABEL_NUDGE - 12 - h; el.dataset.side = "ovanför"; }
             x = Math.max(16, Math.min(w - 16 - cw, x));
             el.style.left = `${x.toFixed(1)}px`;
             el.style.top = `${y.toFixed(1)}px`;
@@ -4066,6 +4073,8 @@
         }
         function paintPan(p, snap) {
           const pinned = pinPx();
+          /* Läs layout innan något skrivs (annars tvingas ett layoutpass per bildruta). */
+          const stuck = sticky.getBoundingClientRect().top <= 1 && hitta.getBoundingClientRect().bottom > innerHeight - 1;
           const pastStart = pinned >= startPx();
           if (!pastStart) resetIntro();
           else armIntro();
@@ -4096,10 +4105,12 @@
           if (layoutChanged) {
           syncOrsaLabelGap();
           syncSthlmLabelSide();
+          const nudge = panMobileQ.matches ? MOBILE_LABEL_NUDGE * inv : 0; /* skärmpx → kartenheter */
           labelFor.forEach((el, index) => {
-            const home = labelHome[pins[index].city];
-            el.style.left = `${home.left}px`;
-            el.style.top = `${home.top}px`;
+            const city = pins[index].city;
+            const home = labelHome[city];
+            el.style.left = `${home.left - (city === "tand" ? 0 : nudge)}px`;
+            el.style.top = `${home.top - (city === "tand" ? nudge : 0)}px`;
             el.style.transformOrigin = home.origin;
             el.style.transform = `scale(${inv})`;
           });
@@ -4170,10 +4181,7 @@
             el.classList.toggle("is-on", !!reached && !leftBehind);
           });
           labelFor.forEach((label, index) => label.classList.toggle("is-current", index === current));
-          const stuck = sticky.getBoundingClientRect().top <= 1 && hitta.getBoundingClientRect().bottom > innerHeight - 1;
           hitta.classList.toggle("is-stuck", stuck);
-          card.style.transform = "none";
-          card.style.opacity = "1";
         }
         function alignPan() {
           /* Sections sit in document flow. Do not pull Hitta or Nästa back to --en-dag-end. */
@@ -4311,18 +4319,38 @@
         const qFactor = parseFloat(params.get("parallax"));
         if (Number.isFinite(qFactor) && qFactor >= 0.5 && qFactor <= 1) factor = qFactor;
         const debugOn = params.get("debug") === "parallax";
+        /* Prestanda (John 18 nov): rotens CSS-tal läses en gång och cachas (rensas i placeAnchors/resize).
+           getComputedStyle per bildruta efter en stilskrivning tvingade fram omräkning av hela sidan. */
+        let rootNumCache = {};
+        let lastOffsetStr = "";
+        let lastLayerH = "";
+        /* Skriv en CSS-variabel bara när värdet ändrats. */
+        function setVar(el, name, value) {
+          const key = `__v${name}`;
+          if (el[key] === value) return;
+          el[key] = value;
+          el.style.setProperty(name, value);
+        }
+        function rootNum(name) {
+          if (!(name in rootNumCache)) rootNumCache[name] = parseFloat(getComputedStyle(root).getPropertyValue(name));
+          return rootNumCache[name];
+        }
         function activeFactor() {
           if (reducedMotion) return 1;
           if (mobileQ.matches) {
-            const m = parseFloat(getComputedStyle(root).getPropertyValue("--parallax-factor-mobile"));
+            const m = rootNum("--parallax-factor-mobile");
             return Number.isFinite(m) ? m : 0.92;
           }
-          const cssF = parseFloat(getComputedStyle(root).getPropertyValue("--parallax-factor"));
+          const cssF = rootNum("--parallax-factor");
           return Number.isFinite(cssF) ? cssF : factor;
         }
         root.style.setProperty("--parallax-factor", String(factor));
         root.style.setProperty("--parallax-factor-mobile", "0.92");
-        root.style.setProperty("--parallax-offset", "0px");
+        /* --parallax-offset sätts på lagret, inte <html>: en variabel på roten räknar om stilen för hela sidan varje bildruta. */
+        function setParallaxOffset(v) {
+          (layer || root).style.setProperty("--parallax-offset", v);
+        }
+        setParallaxOffset("0px");
         let heroS0 = 0;
         let skarvarnaS0 = 0;
         let skarvarnaSc = 0;
@@ -4343,11 +4371,11 @@
         }
         function labelDelta() {
           if (reducedMotion || mobileQ.matches) return 0;
-          const d = parseFloat(getComputedStyle(root).getPropertyValue("--label-parallax-delta"));
+          const d = rootNum("--label-parallax-delta");
           return Number.isFinite(d) ? d : 0.04;
         }
         function labelMaxDrift() {
-          const m = parseFloat(getComputedStyle(root).getPropertyValue("--label-max-drift"));
+          const m = rootNum("--label-max-drift");
           return Number.isFinite(m) ? m : 40;
         }
         function clampedLabelDrift(y, s0) {
@@ -4585,11 +4613,10 @@
            Taket räknas varje bildruta mot footerns nederkant (sidans verkliga slut). */
         let layerFullH = 0;
         const pageFooter = document.querySelector("body > footer, footer");
-        function capLayerHeight(offset) {
+        function capLayerHeight(offset, pageEnd) {
           if (!layer || !pageFooter || !layerFullH) return;
-          const pageEnd = pageFooter.getBoundingClientRect().bottom + scrollY;
-          const h = Math.max(innerHeight, Math.min(layerFullH, pageEnd - layer.offsetTop - offset));
-          layer.style.height = `${h.toFixed(1)}px`;
+          const h = `${Math.max(innerHeight, Math.min(layerFullH, pageEnd - layer.offsetTop - offset)).toFixed(1)}px`;
+          if (h !== lastLayerH) { lastLayerH = h; layer.style.height = h; }
         }
         function layoutHeight(f) {
           const docH = document.documentElement.scrollHeight;
@@ -4605,8 +4632,8 @@
           const factFs = parseFloat(getComputedStyle(factEl).fontSize) || 14;
           const W = Math.round((nameFs / 0.0136 + factFs / 0.0106) / 2);
           hero.style.setProperty("--topo-w", `${W}px`);
-          hero.style.setProperty("--hero-topo-ty", "0px");
-          hero.style.setProperty("--hero-label-ty", "0px");
+          setVar(hero, "--hero-topo-ty", "0px");
+          setVar(hero, "--hero-label-ty", "0px");
           const label = hero.querySelector(".place-label-block");
           /* På plats är #statement dold: ankra mot Just nu-huvudet i stället. */
           const section = document.documentElement.dataset.mode === "onsite"
@@ -4665,12 +4692,12 @@
           const text = document.querySelector(".td-topo2-text");
           if (!skarvarna || mobileQ.matches) {
             skarvarnaS0 = 0;
-            if (text) text.style.setProperty("--skarvarna-text-ty", "0px");
+            if (text) setVar(text, "--skarvarna-text-ty", "0px");
             return;
           }
           /* Textlagrets s0 = panelens s_c så delta är 0 i mittläget. */
           skarvarnaS0 = skarvarnaSc;
-          if (text) text.style.setProperty("--skarvarna-text-ty", "0px");
+          if (text) setVar(text, "--skarvarna-text-ty", "0px");
         }
         function paintHeroDual() {
           const hero = document.querySelector(".parallax-item--hero");
@@ -4680,25 +4707,19 @@
           const cssPar = !reducedMotion && mobileQ.matches && CSS.supports("animation-timeline: scroll()");
           const topoTy = reducedMotion || cssPar ? 0 : (1 - fTopo) * y;
           if (hero) {
-            hero.style.setProperty("--hero-topo-ty", `${topoTy.toFixed(2)}px`);
+            setVar(hero, "--hero-topo-ty", `${topoTy.toFixed(2)}px`);
             const parEnd = cssPar ? `${((1 - fTopo) * Math.max(0, document.documentElement.scrollHeight - innerHeight)).toFixed(0)}px` : "0px";
             if (hero.dataset.parEnd !== parEnd) { hero.dataset.parEnd = parEnd; hero.style.setProperty("--hero-topo-par-end", parEnd); }
             /* Etikett-delta bara desktop; mobil delta = 0 via labelDelta(). */
-            hero.style.setProperty("--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
+            setVar(hero, "--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
           }
           const text = document.querySelector(".td-topo2-text");
           if (text) {
-            text.style.setProperty(
-              "--skarvarna-text-ty",
-              `${clampedLabelDrift(y, skarvarnaS0).toFixed(2)}px`
-            );
+            setVar(text, "--skarvarna-text-ty", `${clampedLabelDrift(y, skarvarnaS0).toFixed(2)}px`);
           }
           const citatItem = document.querySelector(".parallax-item--citat");
           if (citatItem) {
-            citatItem.style.setProperty(
-              "--citat-text-ty",
-              reducedMotion || mobileQ.matches ? "0px" : `${clampedLabelDrift(y, citatS0).toFixed(2)}px`
-            );
+            setVar(citatItem, "--citat-text-ty", reducedMotion || mobileQ.matches ? "0px" : `${clampedLabelDrift(y, citatS0).toFixed(2)}px`);
           }
         }
         function placeAnchors() {
@@ -4709,7 +4730,10 @@
             layer.style.height = `${layerFullH}px`;
           }
           /* Nollställ offset under mätning så getBoundingClientRect inte inkluderar parallax. */
-          root.style.setProperty("--parallax-offset", "0px");
+          rootNumCache = {};
+          lastOffsetStr = "";
+          lastLayerH = "";
+          setParallaxOffset("0px");
           void (layer && layer.offsetHeight);
           placeSkarvarnaHorizontal();
           placeQuoteLayout();
@@ -4793,14 +4817,17 @@
         }
         function paint() {
           raf = 0;
+          /* Läs först (layouten är ren efter scroll), skriv sedan – inga tvingade layoutpass mitt i bildrutan. */
+          updateLayerCover();
+          const pageEnd = pageFooter ? pageFooter.getBoundingClientRect().bottom + scrollY : 0;
           const f = activeFactor();
           const yPrime = scrollPrime();
           const offset = reducedMotion ? 0 : (1 - f) * yPrime;
-          root.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
-          capLayerHeight(offset);
+          const offsetStr = `${offset.toFixed(2)}px`;
+          if (offsetStr !== lastOffsetStr) { lastOffsetStr = offsetStr; setParallaxOffset(offsetStr); }
+          capLayerHeight(offset, pageEnd);
           paintHeroDual();
           paintCitat();
-          updateLayerCover();
           if (debugOn) updateDebug(f, yPrime, offset);
         }
         function requestPaint() {
