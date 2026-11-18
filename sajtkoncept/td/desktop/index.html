@@ -1817,6 +1817,12 @@
       document.addEventListener("td-mode", (event) => {
         if (event.detail?.onsite && getSeason() === "summer" && matchMedia("(max-width: 1023px)").matches) setSeason("winter");
       });
+      /* …och tvärtom: väljer man Sommar medan På plats är på stängs På plats av (samma väg som "Inte på plats?"). */
+      subscribeSeason((season) => {
+        if (season !== "summer" || document.documentElement.dataset.mode !== "onsite") return;
+        if (!matchMedia("(max-width: 1023px)").matches) return;
+        document.querySelector("[data-onsite-leave]")?.click();
+      });
       const menu = document.getElementById("site-menu");
       const menuPanel = document.getElementById("site-menu-panel");
       const menuControl = document.querySelector(".menu-control");
