@@ -279,7 +279,7 @@ html[data-season="summer"] .boka-row:focus-visible {
 /* Test: vinterfärgad ram runt herovideon (glasramen ratad 2026-11-15). Synkas med övriga block senare. */
 .hero-frame {
   background: transparent;
-  border-radius: 2px; /* hardkodad som aktuellt-kortets bild tills radius-token finns */
+  border-radius: var(--radius-sm);
 }
 /* Ramen: säsongsfärgad yta bakom videon som växer ut från videons kant (clip-path, ingen stroke = inget flimmer). */
 .hero-ram {
@@ -306,7 +306,7 @@ html.is-intro.is-intro-reveal .hero-ram {
   inset: var(--space-xl);
   width: calc(100% - 2 * var(--space-xl));
   height: calc(100% - 2 * var(--space-xl));
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
 }
 
 .hero .td-booking {
@@ -5720,7 +5720,7 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 .td-guide-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
 .td-guide-ai { padding: 0 6px; border: 1px solid currentColor; border-radius: var(--radius-sm); line-height: 16px; }
 .td-guide-status { display: inline-flex; align-items: flex-start; gap: var(--space-xs); text-align: right; }
-.td-guide-status-dot { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; background: var(--status-open); }
+.td-guide-status-dot { width: 8px; height: 8px; margin-top: 4px; border-radius: var(--radius-full); background: var(--status-open); }
 .td-guide-eyebrow { margin: var(--space-sm) 0 0; }
 .td-guide-lista { list-style: none; margin: 0; padding: 0; }
 .td-guide-rad + .td-guide-rad { border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
@@ -5790,7 +5790,7 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 .td-vader-detalj > strong + span { margin-top: auto; }
 .td-vader-text { margin: 0; }
 .td-vader-nu-rad { display: flex; align-items: center; gap: var(--space-sm); }
-.td-vader-dot { width: 4px; height: 4px; border-radius: var(--radius-full, 999px); background: currentColor; }
+.td-vader-dot { width: 4px; height: 4px; border-radius: var(--radius-full); background: currentColor; }
 .td-vader-detalj-tight { gap: 0; line-height: 1.3; padding-top: 13px; }
 .td-vader-main-top { align-items: flex-start; margin-bottom: 8px; margin-top: calc(-1 * var(--space-md) + 4px); }
 .td-vader-text-lg { font-size: var(--font-size-md); }
@@ -5844,8 +5844,8 @@ html[data-mode="onsite"] .just-cols-3 { display: grid; }
 .td-valla-sno .td-ui-kicker, .td-valla-val .td-ui-kicker { text-transform: uppercase; opacity: .7; }
 .td-valla-skala { display: flex; flex-direction: column; gap: var(--space-sm); }
 .td-valla-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: center; }
-.td-valla-seg { height: 10px; border-radius: 3px; opacity: .4; }
-.td-valla-seg[aria-current] { height: 20px; border-radius: 4px; opacity: 1; }
+.td-valla-seg { height: 10px; border-radius: var(--radius-sm); opacity: .4; }
+.td-valla-seg[aria-current] { height: 20px; border-radius: var(--radius-sm); opacity: 1; }
 .td-valla-seg[data-tone="gron"] { background: var(--wax-green); }
 .td-valla-seg[data-tone="bla"] { background: var(--wax-blue); }
 .td-valla-seg[data-tone="violett"] { background: var(--wax-violet); }
@@ -5914,14 +5914,14 @@ html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season
 .td-fraga-block-overrubrik-icon.td-guide-mark { width: 60px; height: 60px; margin-bottom: -6px; transform: translateX(-4px); }
 .td-fraga-block-overrubrik { margin-bottom: 20px; }
 /* Live-plopp för Fjällguiden */
-.fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
+.fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
 @keyframes fg-live-blink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-open) 50%, transparent); } 50% { opacity: .45; box-shadow: 0 0 0 4px color-mix(in srgb, var(--status-open) 0%, transparent); } }
 @media (prefers-reduced-motion: reduce) { .fg-live { animation: none; } }
 .td-guide .td-guide-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; }
 /* AI-taggen mindre överallt */
-.td-guide .td-guide-ai { height: 16px; min-width: 20px; padding: 0 3px; font-size: 10px; line-height: 14px; border-radius: 3px; }
-#fraga-launch .fraga-launch-ai { height: 15px; min-width: 18px; padding: 0 3px; font-size: 9px; line-height: 13px; border-radius: 3px; }
-.fraga-block-name .td-guide-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.td-guide .td-guide-ai { height: 16px; min-width: 20px; padding: 0 3px; font-size: 10px; line-height: 14px; border-radius: var(--radius-sm); }
+#fraga-launch .fraga-launch-ai { height: 15px; min-width: 18px; padding: 0 3px; font-size: 9px; line-height: 13px; border-radius: var(--radius-sm); }
+.fraga-block-name .td-guide-ai { height: 18px; min-width: 22px; padding: 0 4px; font-size: 11px; line-height: 16px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
 .td-guide .td-guide-ai { height: 14px; min-width: 18px; padding: 0 3px; font-size: 9px; line-height: 12px; }
 #fraga-launch .fraga-launch-ai { height: 13px; min-width: 16px; padding: 0 2px; font-size: 8px; line-height: 11px; }
 .fraga-block-name .td-guide-ai { height: 16px; min-width: 20px; padding: 0 3px; font-size: 10px; line-height: 14px; }
@@ -5957,7 +5957,7 @@ a.td-rapport.is-activity:hover .td-corner-link-label, a.td-rapport.is-activity:f
 .fraga-welcome-booking > p { margin: 0; }
 .fraga-welcome-booking-head { display: flex; justify-content: space-between; align-items: center; }
 .fraga-welcome-ok { display: inline-flex; align-items: center; gap: 6px; }
-.fraga-welcome-ok::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); }
+.fraga-welcome-ok::before { content: ""; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--status-open); }
 .fraga-welcome-next { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-TD-neutral-subtlest); }
 .fraga-welcome-next p { margin: 0; }
 .fraga-welcome-chip { flex: none; padding: 8px 14px; border: 1px solid var(--color-TD-neutral-subtle); border-radius: var(--radius-full); background: var(--color-TD-snow); color: var(--color-text-primary); cursor: pointer; }
@@ -6171,7 +6171,7 @@ html, body { overscroll-behavior-y: none; }
 .td-bo-alla {
   width: 44px; height: 44px; flex: 0 0 44px;
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 999px; background: #FFFFFF; color: var(--color-text-primary);
+  border-radius: var(--radius-full); background: #FFFFFF; color: var(--color-text-primary);
 }
 .td-bo-lista {
   list-style: none; margin: 0; padding: 0;
@@ -6181,16 +6181,16 @@ html, body { overscroll-behavior-y: none; }
 
 /* Waabi: stor bild plus rutnät med detalj och belägg */
 .td-bo-waabi-kort { display: flex; flex-direction: column; gap: 10px; }
-.td-bo-waabi-bildlank { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; }
+.td-bo-waabi-bildlank { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: var(--radius-sm); overflow: hidden; }
 .td-bo-waabi-bild { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 9s ease-out; }
 .td-bo-waabi-bildlank:hover .td-bo-waabi-bild { transform: scale(1.08); }
 .td-bo-waabi-pil {
   position: absolute; right: 16px; bottom: 16px; width: 56px; height: 56px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 999px; background: var(--color-cta-primary); color: #FFFFFF;
+  border-radius: var(--radius-full); background: var(--color-cta-primary); color: #FFFFFF;
 }
 .td-bo-waabi-rutor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.td-bo-waabi-rutor > * { aspect-ratio: 1 / 1; border-radius: 12px; margin: 0; }
+.td-bo-waabi-rutor > * { aspect-ratio: 1 / 1; border-radius: var(--radius-sm); margin: 0; }
 .td-bo-waabi-rutor img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .td-bo-ruta {
   box-sizing: border-box; padding: 12px; background: #FFFFFF;
@@ -6218,9 +6218,7 @@ html, body { overscroll-behavior-y: none; }
 .td-bo .td-bo-head { gap: var(--space-md); }
 .td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
 .td-bo .td-bo-head h2 { margin: 0; }
-/* Typografi on brand + mindre radier (2026-11-15) */
-.td-bo .td-bo-waabi-bildlank { border-radius: 4px; }
-.td-bo .td-bo-waabi-rutor > * { border-radius: 4px; }
+/* Typografi on brand (2026-11-15). Radierna är sm i grundreglerna ovan (2026-11-18). */
 .td-bo .td-bo-pris { font-size: inherit; font-weight: inherit; }
 .td-bo .td-bo-ruta-tal { font-size: var(--font-size-md); }
 .td-bo .td-bo-waabi-namn { margin: 8px 0 0; color: var(--color-TD-neutral); }
@@ -6267,7 +6265,7 @@ html, body { overscroll-behavior-y: none; }
 .td-bo-waabi-bildlank .td-bo-pristag { position: absolute; top: var(--space-md); left: var(--space-md); z-index: 2; }
 .td-bo-waabi-kort .td-bo-cta { align-self: flex-start; margin-top: auto; }
 .td-bo-waabi-kort .td-bo-waabi-rubrik { margin-bottom: var(--space-lg); }
-.td-bo-detalj { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px; }
+.td-bo-detalj { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--radius-sm); }
 .td-bo-detalj img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft); }
 .td-bo-detalj:hover img { transform: scale(1.04); }
 .td-bo-detalj:focus-visible { outline: 2px solid var(--color-text-primary); outline-offset: 2px; }
@@ -6523,7 +6521,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   /* Runda 2: ramen ut till statement-kanterna (16 px), videon kvar på 329×424. */
   .hero { width: calc(100vw - 32px); margin-left: 0; margin-top: 16px; }
   .hero-frame { aspect-ratio: 361 / 456; border-radius: var(--radius-sm); }
-  .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: 2px; }
+  .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: var(--radius-sm); }
   .hero-doodle { display: none; }
 }
 

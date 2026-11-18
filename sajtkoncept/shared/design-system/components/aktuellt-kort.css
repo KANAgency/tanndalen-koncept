@@ -39,7 +39,6 @@
 
 .td-aktuellt-kort[data-platta="glas"] {
   --td-aktuellt-plate: var(--color-frost-active);
-  --td-aktuellt-img-radius: 2px; /* hardkodad tills radius-token finns */
   background: transparent;
 }
 
@@ -65,7 +64,7 @@
   overflow: hidden;
   background: transparent;
   border: 1px solid rgb(255 255 255 / 0.3);
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   backdrop-filter: blur(2px); /* Figma 4 → CSS 2 */
   -webkit-backdrop-filter: blur(2px);
 }
@@ -190,7 +189,7 @@
   min-height: 629px;
   padding: var(--space-2xl) var(--space-2xl) var(--space-4xl);
   border: 0; /* button UA-border bort */
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   background: var(--td-aktuellt-plate);
   color: var(--td-aktuellt-on-plate);
   font-family: var(--font-family-TD-secondary), sans-serif;

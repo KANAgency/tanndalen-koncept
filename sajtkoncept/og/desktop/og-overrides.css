@@ -969,3 +969,10 @@ html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-ha
 .theme-OG .td-mer-plats-text { max-width: 22ch; }
 /* Luft ovanför Mer-blocken, samma som TD (160 px efter Just nu i läge 3). */
 .theme-OG .td-mer { margin-top: 160px; }
+
+/* Radier: TD gick till sm på Fråga-blocket och Aktuellt-kortets glas/fråga 2026-11-18 (TD-regel: innehåll = sm).
+   OG behåller sina tidigare värden tills OG:s radieregler är beslutade. */
+.theme-OG .td-fraga-block,
+.theme-OG .td-aktuellt-kort[data-typ="fraga"] { border-radius: var(--radius-md); }
+.theme-OG .td-aktuellt-kort[data-platta="glas"] { --td-aktuellt-img-radius: 2px; }
+.theme-OG .td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta { border-radius: 2px; }

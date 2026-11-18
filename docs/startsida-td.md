@@ -53,6 +53,17 @@ Rubrik "Just nu i dalen", "Uppdaterat 09:42", växel Alpint | Längd (förval Al
 - **Ikon-padding:** när en ikon står först *och följs av text* minskas padding på ikonsidan: Large 24, Medium 16, Small 8. Regeln: `:has(> :is(svg, .td-button-icon, .td-button-graphic):first-child + *)`.
   - Bugg rättad: första versionen träffade även ikon-only-knappar (karusellpilarna i Aktuellt hamnade snett).
 
+### Radier – regler (John 2026-11-18)
+Bara tokens: `none` 0, `sm` 4, `md` 8, `lg` 16, `full`. Inga hårdkodade px, inga `50%`/`999px`.
+1. **Innehåll på sidan = `sm`**: kort, bilder, video, bildrutor, plattor, fältgrupper, block, banners, chip-taggar. Även bild inuti ram eller platta (hero-filmen, aktuellt-kortets bild) – ingen 2 px.
+2. **Chrome som svävar över sidan = `md`**: header, menypanel, lägesmeny, kontopanel, bokningspanel, kartpanel.
+3. **Stora utfällda ytor = `lg`**: kalender, gästväljare, Fråga-panelen, bokningen i expanderat läge.
+4. **Allt man trycker på och markörer = `full`**: knappar, piller, sökfält, toggles, segmented, prickar, avatarer, pins.
+5. **Anslutande kant = `none`** på den sidan (utfälld kalender mot fältet, datumintervall).
+- Textknappar/länkar = `sm` (radien syns bara i fokus/hover). Små märken (AI-taggen) och datagrafik (vallasegment) = `sm`.
+- Enda undantaget: kartlinjens knyckar i Hitta hit (`--route-corner-radius` 40 px), grafik, inte komponent.
+- OG följer inte reglerna ännu: `og-overrides.css` håller kvar OG:s gamla värden på Fråga-blocket, frågekortet (8) och glaskortet (2).
+
 ### Typografi – `generated/typography-td.css`
 - **Ny:** `.td-ui-figure-xl` – Superclarendon Bold, 6rem (96 px), line-height 1, letter-spacing −0.04em. Figma-stil "UI/figure-xl".
 - **UI/caption = 13 px** (`--font-size-13`, line-height 1.385). Ändrat i `tokens.css`, `primitives.json` ("13": 13) och `typography-styles-tanndalen.json`. Figma-variabel `font/size/13`.
