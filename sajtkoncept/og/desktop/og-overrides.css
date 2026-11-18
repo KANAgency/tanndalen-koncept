@@ -900,7 +900,7 @@ html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-f
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-bottom: var(--space-8xl); /* 96 till En dags mörka yta */
+  margin-bottom: var(--space-8xl); /* luft till nästa block (uppmätt 144 i OG) */
 }
 .theme-OG .td-aktuellt-head {
   display: flex;
@@ -950,3 +950,22 @@ html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-ha
   --site-footer-font: var(--font-family-OG-secondary);
 }
 .theme-OG .site-footer-brand img { width: 140px; }
+
+/* ── Mer till er vecka (läge 3) / Mer att hitta på i dag (läge 4), port av TD:s .td-mer (18 nov). Korten = boendekortet
+   (.td-bo-waabi-*, redan portat). Synlighet styrs av blockordningen i index.html (hidden), inte av CSS. ── */
+.theme-OG .td-mer .td-bo-waabi-bildlank::before { height: 48%; background: linear-gradient(to bottom, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.4) 28%, rgb(0 0 0 / 0.14) 62%, rgb(0 0 0 / 0) 100%); }
+/* Bild saknas: tom platta i OG:s neutrala ton, så att det syns vad som ska fotas/genereras. */
+.theme-OG .td-mer-plats {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: var(--space-lg);
+  background: var(--color-OG-taupe-tint);
+  color: var(--color-OG-neutral-strong);
+  text-align: center;
+}
+.theme-OG .td-mer-bildlank .td-mer-plats { background: var(--color-OG-taupe); color: var(--color-OG-day); }
+.theme-OG .td-mer-bildlank:hover .td-mer-plats { transform: none; }
+.theme-OG .td-mer-plats-text { max-width: 22ch; }
+/* Luft ovanför Mer-blocken, samma som TD (160 px efter Just nu i läge 3). */
+.theme-OG .td-mer { margin-top: 160px; }
