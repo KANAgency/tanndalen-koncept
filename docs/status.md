@@ -272,7 +272,7 @@ TD:s En dag-bilder/-videor (endag-*, sommar-dag-*) och videorna i stora boendebl
 - Granskat: inga deformerade möbler, ingen eld. b hittar på ett fönster, en taklampa och en rund matta till vänster; d en pall/soffkant i vänster förgrund. Startbilderna är sommarbilder (Lönnstigen är vinter).
 - `og/desktop/assets/video/boende-limbygarden-rundtur.mp4` (17,6 s, 2,6 Mbit/s, 5,8 MB) + poster. Råklipp i `tanndalen-orsa/assets/boenden/orsa/limbygarden/limbygarden/video*/`. Ladda upp till R2 (`og/`) före deploy.
 - Kortet: video i stället för huvudbild; stödbild 2 = stenspisen med älghorn (bild 04, featuren) i stället för matsalen.
-- Verifierat: alla 26 bild-/videoreferenser i blocket finns på disk. **Inte verifierat i webbläsaren**: dev-servern (4173) var nere och kunde inte startas från appen (macOS nekar åtkomst till Desktop-mappen). Kör `python3 scripts/dev-server.py 4173` från `sajtkoncept/` och kolla /og/.
+- Verifierat 1440 px: Limbygården-videon spelar (17,6 s, 400 px bred), Lönnstigen 6 väntar pausad (en video per rad), stödbild 2 = stenspisen (serverad fil = disk, 275 534 B), inga konsolfel. Gammal stödbild kan ligga kvar i webbläsarcachen (samma filnamn) – hård omladdning.
 
 ## Klart 18 nov: OG – rundturvideo i Lönnstigen 6-kortet
 - Samma form som TD (Fjällöga/Järven): Kling 2.5, 4 × 5 s, 16:9 1080p, bara startbild (16:9-utsnitt, 75 % av bredden bort från rörelsen; vardagsrummet helbild för rak push), negativ prompt mot folk/eld/nya objekt. 4 × 325 = 1 300 credits ≈ 3,25 EUR. Magnific-projektet "Tänndalen - Orsa Grönklitt - Sajt - Inledande fas - 09665".
