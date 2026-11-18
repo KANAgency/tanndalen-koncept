@@ -570,3 +570,7 @@ Cykel ersätter Skidhyra i sommar och använder Skidhyras fält. Det är ett ant
 ## Repo och videor (2026-11-10)
 
 En git-repo under `src/` (branch `main`). Konsolideringscommit: `4e24285`. Gamla separata repon arkiverade i `../git-archive-pre-merge/` (`koncept.git`, old HEAD `f1e9443`; `design-system.git`, old HEAD `263c267`). Videor ligger inte i git (ignorerade via `**/assets/video/`). De måste finnas i `koncept/sites/td/desktop/assets/video/`: `klipp-8.mp4`, `hero-vinter.mov`, `area1.mp4`, `hero-sommar.mov`, `area2.mp4`, `endag-0830.mp4`, `endag-1530.mp4`. `test:td`: en körning, capture till `regression/td-after`, skriver aldrig över baseline; ersätt baseline med `npm run test:td:promote -- --confirm`.
+
+## OG: Mer-blocken även på sommaren (2026-11-18)
+
+Beslut (John): "Mer till er vecka" (läge 3) och "Mer att hitta på i dag" (läge 4) finns i OG i både vinter och sommar (`#mer-resa`, `#mer-resa-sommar`, `#mer-nu`, `#mer-nu-sommar`). Avviker medvetet från TD, där blocken bara finns på vintern. Skäl: OG:s sommar (klätterpark, cykel, bad) är en stor del av familjeaffären och har riktiga tillval att sälja.
