@@ -7293,3 +7293,7 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   /* 11-15. Rasmus Bent-citatet ett steg mindre (24 → 20). */
   .parallax-item--citat .td-citat--text .td-citat-quote { font-size: var(--font-size-lg); }
 }
+@media (max-width: 1023px) {
+  /* 11-16. Aktuellt: kortrubrikerna ett steg mindre (30 → 24), som En dag-korten. */
+  .td-aktuellt-track .td-aktuellt-kort .td-aktuellt-kort-rubrik { font-size: var(--font-size-xl); letter-spacing: -0.021em; }
+}
