@@ -3739,7 +3739,25 @@
           cards.forEach((card, index) => { card.querySelector("span").textContent = bodies[index]; });
         }
         syncPanStops();
-        document.addEventListener("td-season", syncPanStops);
+        document.addEventListener("td-season", () => { syncPanStops(); refreshMobileFit(); });
+        /* Mobil: stopprutorna i .hitta-pan-geo (ej i kartans mask) så toningen aldrig äter dem. */
+        function placeStopLayer() {
+          const target = panMobileQ.matches ? geo : world;
+          cards.forEach((el) => { if (el.parentElement !== target) target.append(el); delete el.dataset.mkey; });
+        }
+        placeStopLayer();
+        /* Mobil: faktakortet dras upp så det kommer direkt under Stockholms ruta när kartan släpper. */
+        function syncFaktaPull() {
+          if (!panMobileQ.matches || !mobileFit) { card.style.marginTop = ""; return; }
+          const pull = Math.max(0, Math.round(mobileFit.stageH - mobileFit.contentBottom - 24));
+          card.style.marginTop = `${-pull}px`;
+        }
+        function refreshMobileFit() {
+          mobileFit = null;
+          lastLayoutKey = "";
+          cards.forEach((el) => { delete el.dataset.mkey; });
+          if (panMobileQ.matches) mobileFitCam(); else syncFaktaPull();
+        }
         const length = line.getTotalLength();
         const stopT = pins.map((pin) => {
           let best = 0;
@@ -3838,14 +3856,18 @@
           };
         }
         /* Mobil: en fast kamera som rymmer alla tre stoppen, etiketter och stopprutor. */
-        const MOBILE_AREA_TOP = 88; /* under menyn */
+        const MOBILE_AREA_TOP = 108; /* under menyn och kartans övre toning (100 px) */
+        let mobileFit = null; /* cache: läses om vid resize/säsong, inte per scrollbild */
         function mobileReserveBottom() {
           const bar = document.querySelector(".td-booking");
           const barH = bar && getComputedStyle(bar).position === "fixed" ? bar.offsetHeight : 0;
           return barH + 16 + (skipBtnEl ? skipBtnEl.offsetHeight || 48 : 48) + 16;
         }
         function mobileFitCam() {
-          const { w, h } = stageSize();
+          if (mobileFit) return mobileFit;
+          const { w } = stageSize();
+          /* Stabil höjd (iOS: liten viewport) så kartan inte hoppar när verktygsfälten fälls ihop. */
+          const h = Math.min(stageSize().h, document.documentElement.clientHeight || innerHeight);
           const tandW = labelFor[2].offsetWidth || 110;
           const cardH = Math.max(...cards.map((el) => el.offsetHeight || 80));
           const minX = pins[2].x;
@@ -3864,8 +3886,11 @@
           const contentW = padL + (maxX - minX) * scale + padR;
           const contentH = padT + (maxY - minY) * scale + padB;
           const x0 = (w - contentW) / 2 + padL;
-          const y0 = areaTop + (areaH - contentH) / 2 + padT;
-          return { scale, x: x0 - scale * minX, y: y0 - scale * minY };
+          /* Hellre högt än centrerat: 25 % av överskottet ovanför. */
+          const y0 = areaTop + Math.max(0, areaH - contentH) * 0.25 + padT;
+          mobileFit = { scale, x: x0 - scale * minX, y: y0 - scale * minY, contentBottom: y0 - padT + contentH, stageH: stageSize().h };
+          syncFaktaPull();
+          return mobileFit;
         }
         function camAt(point) {
           if (panMobileQ.matches) return mobileFitCam();
@@ -3935,23 +3960,27 @@
           let top;
           let origin = "0 0";
           if (panMobileQ.matches && cam) {
-            /* Mobil: placera i skärmpx och räkna om till kartans rymd. Klämd mot 16 px kant. */
+            /* Mobil: rutan ligger i .hitta-pan-geo (utanför kartans toning) i skärmpx, klämd mot 16 px kant.
+               Kameran står still, så positionen räknas bara när den ändras. */
+            const key = `${cam.x.toFixed(1)}:${cam.y.toFixed(1)}:${inv.toFixed(4)}`;
+            if (el.dataset.mkey === key) return;
+            el.dataset.mkey = key;
             const { w } = stageSize();
             const s = 1 / inv;
+            const cw = el.offsetWidth || 196;
             const h = el.offsetHeight || 80;
             const px = cam.x + s * pin.x;
             const py = cam.y + s * pin.y;
             let x;
             let y;
-            if (index === 0) { x = px + 12 - w; y = py + 20; el.dataset.side = "under"; }
-            else if (index === 1) { x = px - 16 - el.offsetWidth; y = py + 20; el.dataset.side = "vänster-under"; }
+            if (index === 0) { x = px + 12 - cw; y = py + 20; el.dataset.side = "under"; }
+            else if (index === 1) { x = px - 16 - cw; y = py + 20; el.dataset.side = "vänster-under"; }
             else { x = px - 24; y = py - 32 - 12 - h; el.dataset.side = "ovanför"; }
-            if (index === 0) x = px + 12 - (el.offsetWidth || 180);
-            x = Math.max(16, Math.min(w - 16 - (el.offsetWidth || 180), x));
-            el.style.left = `${(x - cam.x) / s}px`;
-            el.style.top = `${(y - cam.y) / s}px`;
+            x = Math.max(16, Math.min(w - 16 - cw, x));
+            el.style.left = `${x.toFixed(1)}px`;
+            el.style.top = `${y.toFixed(1)}px`;
             el.style.transformOrigin = "0 0";
-            el.style.transform = `scale(${inv})`;
+            el.style.transform = "none";
             return;
           }
           if (index === 0) {
@@ -3986,6 +4015,7 @@
         }
         let cam = null;
         let camTarget = { x: 0, y: 0 };
+        let lastLayoutKey = "";
         function resetIntro() {
           introArmed = false;
           introStartedAt = 0;
@@ -4056,16 +4086,14 @@
             cam.x = clamped.x;
             cam.y = clamped.y;
           }
-          kart.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${scale})`;
-          if (panMobileQ.matches) {
-            const copyBottom = copy.getBoundingClientRect().bottom - sticky.getBoundingClientRect().top;
-            frame.style.setProperty("--hitta-fade-a", `${Math.max(0, copyBottom - 40).toFixed(0)}px`);
-            frame.style.setProperty("--hitta-fade-b", `${Math.max(160, copyBottom + 80).toFixed(0)}px`);
-          } else {
-            frame.style.removeProperty("--hitta-fade-a");
-            frame.style.removeProperty("--hitta-fade-b");
-          }
+          const kartTransform = `translate(${cam.x}px, ${cam.y}px) scale(${scale})`;
+          /* Skriv bara när något ändrats (mobil: kameran står still, så etiketter/ploppar rörs inte per scrollbild). */
+          const layoutKey = `${kartTransform}|${panMobileQ.matches}`;
+          const layoutChanged = layoutKey !== lastLayoutKey;
+          lastLayoutKey = layoutKey;
+          if (layoutChanged) kart.style.transform = kartTransform;
           const inv = 1 / scale;
+          if (layoutChanged) {
           syncOrsaLabelGap();
           syncSthlmLabelSide();
           labelFor.forEach((el, index) => {
@@ -4079,14 +4107,10 @@
             pin.el.style.transformOrigin = "center";
             pin.el.style.transform = `scale(${inv})`;
           });
-          done.setAttribute("d", routeD);
-          done.style.strokeDasharray = "0 9";
-          // Prickmönstret ligger stilla i kartan — bara masken avslöjar.
-          done.style.strokeDashoffset = "0";
+          }
+          // Prickmönstret ligger stilla i kartan — bara masken avslöjar. d/dasharray sätts en gång ovan.
           const tipLen = length * Math.max(0, Math.min(1, t));
           if (maskPath) {
-            maskPath.setAttribute("d", routeD);
-            maskPath.style.strokeDasharray = `${length}`;
             // Reveal bakom markören (≥ en markörradie) — ingen prick framför.
             const revealed = canTravel ? Math.max(0, tipLen - MASK_REVEAL_LAG) : 0;
             maskPath.style.strokeDashoffset = `${length - revealed}`;
@@ -4103,8 +4127,10 @@
           let pos = tip;
           if (!canTravel || t <= 0.001) pos = { x: pins[0].x, y: pins[0].y };
           else if (t >= 0.999) pos = { x: pins[pins.length - 1].x, y: pins[pins.length - 1].y };
-          point.setAttribute("cx", String(pos.x));
-          point.setAttribute("cy", String(pos.y));
+          const cxS = String(pos.x);
+          const cyS = String(pos.y);
+          if (point.getAttribute("cx") !== cxS) point.setAttribute("cx", cxS);
+          if (point.getAttribute("cy") !== cyS) point.setAttribute("cy", cyS);
           let pop = 0;
           if (pastStart) {
             if (reduced || introDone) pop = 1;
@@ -4179,6 +4205,8 @@
           addEventListener("resize", () => {
             try {
               placePanParts();
+              placeStopLayer();
+              refreshMobileFit();
               invalidateStopAnchors();
               alignPan();
               paintPan(panProgress(), true);

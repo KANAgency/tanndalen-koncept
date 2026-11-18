@@ -3788,17 +3788,54 @@ body.fraga-open { overflow: hidden; }
     position: absolute;
     top: 0;
     right: auto;
-    left: 16px;
-    width: calc(100vw - 32px);
+    left: 24px; /* text direkt på bakgrund: 8 px mer än korten (John 18 nov) */
+    width: calc(100vw - 48px);
     margin: 0;
     padding: 0;
     z-index: 8;
   }
 
+  /* Kartan tonas bort under textblocket: statisk dagfärg som följer texten (ingen JS per scrollbild). */
+  .page .td-hitta.is-pan .td-hitta-copy::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -24px;
+    bottom: -96px;
+    left: -24px;
+    z-index: -1;
+    background: linear-gradient(to bottom, var(--color-TD-day) 0, var(--color-TD-day) calc(100% - 96px), transparent 100%);
+    pointer-events: none;
+  }
+
+  .page .td-hitta.is-pan .td-hitta-ingress {
+    margin-top: var(--space-md);
+  }
+
+  .page .td-hitta.is-pan .td-hitta-copy a {
+    margin-top: var(--space-xl);
+  }
+
+  /* Gamla mobilregeln klippte kartan vid 1440-kärnan (skarp kant). I pan-läget ska hela underlaget synas. */
+  .page .td-hitta.is-pan .td-hitta-kart {
+    height: 1373px;
+    overflow: visible;
+    border-radius: 0;
+    will-change: transform;
+  }
+
+  .page .td-hitta.is-pan .hitta-world-map {
+    will-change: transform; /* eget lager: den stora kartbilden rastras en gång, inte vid varje markörsteg */
+  }
+
   .page .td-hitta.is-pan .hitta-pan-frame {
-    /* --hitta-fade-a/b sätts i JS: kartan tonas bort under textblocket tills det har scrollat ut. */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent var(--hitta-fade-a, 0px), #000 var(--hitta-fade-b, 160px), #000 calc(100% - 120px), transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, transparent var(--hitta-fade-a, 0px), #000 var(--hitta-fade-b, 160px), #000 calc(100% - 120px), transparent 100%);
+    /* Topp: under menyn. Botten: mjuk utfasning ovanför bokningsbaren. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 100px, #000 calc(100% - 220px), transparent calc(100% - 64px));
+    mask-image: linear-gradient(to bottom, transparent 0, #000 100px, #000 calc(100% - 220px), transparent calc(100% - 64px));
+  }
+
+  .page .td-hitta.is-pan .hitta-pan-geo {
+    z-index: 7;
   }
 
   .page .td-hitta.is-pan .hitta-pan-stop {
@@ -3810,6 +3847,7 @@ body.fraga-open { overflow: hidden; }
   }
 
   .page .td-faktakort.td-hitta-fakta-mobil {
+    z-index: 2; /* dras upp över kartans tomma botten (margin-top sätts i JS) */
     position: relative;
     top: auto;
     right: auto;
@@ -3819,6 +3857,31 @@ body.fraga-open { overflow: hidden; }
     margin-top: var(--space-xl);
     transform: none;
     opacity: 1;
+  }
+
+  /* Karta-länken är en hover-detalj; ingen karta att öppna på mobil. */
+  .page .td-hitta-fakta-mobil .td-faktakort-top .td-corner-link {
+    display: none;
+  }
+
+  .page .td-hitta-fakta-mobil .td-faktakort-stats > div {
+    gap: 6px; /* var 11 */
+  }
+
+  /* —— Mobil typografi och indrag (John 18 nov, testvärden) ——
+     Rubrik lg ett steg större (30 → 36, = heading-xl mobil). Text direkt på bakgrund 8 px längre in än korten. */
+  .td-heading-lg,
+  .td-heading-3 {
+    font-size: var(--font-size-3xl);
+    letter-spacing: -0.019em;
+  }
+
+  .td-aktuellt-titles,
+  .en-dag-intro,
+  .just-nu-head > div:not(.td-segmented),
+  .td-bo-head {
+    box-sizing: border-box;
+    padding-inline: 8px;
   }
 }
 
