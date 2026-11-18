@@ -7471,9 +7471,9 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .td-vader-sommar .td-vader-temp .td-ui-figure-xl { font-size: var(--font-size-88); line-height: 1; }
 }
 @media (max-width: 1023px) {
-  /* 14-5 (John 2026-11-18). Heron i sommar: solen 30 % större (129 → 168) och mittpunkten 24 px upp, 8 px höger
-     (från 52,5 px in från ramens högerkant / 12,5 px ovanför underkanten till 44,5 / 36,5). */
-  .hero-sun { right: -40px; bottom: -48px; width: 168px; height: 168px; }
+  /* 14-5 (John 2026-11-18). Heron i sommar: solen i ramens övre högra hörn, 140 px (var 129 nere till höger;
+     168 var för stor). Får klippas lite i skärmkanten. */
+  .hero-sun { top: -16px; right: -28px; bottom: auto; width: 140px; height: 140px; } /* top −16: slutar under headern (8–56) */
 }
 @media (max-width: 1023px) {
   /* 14-3. Menyknappen i mobil (John 2026-11-18): ingen hover (iOS lät rutan stå kvar efter tryck på krysset).
