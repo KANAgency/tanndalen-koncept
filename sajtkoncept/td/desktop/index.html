@@ -996,7 +996,7 @@
               </article>
             </div>
           </article>
-          <article class="en-dag-slide is-puff" data-time="16:00" data-name="Tillbaka i stugan" data-summer-time="19:00" data-summer-name="Musikkväll" data-summer-label="Musikkväll på Kalfjäll" data-summer-title="Njut av sommarkvällen" data-summer-cta="Hitta ert boende" data-summer-href="#boende" data-summer-src="assets/img/sommar-dag-05.jpg?v=2">
+          <article class="en-dag-slide is-puff" data-time="16:00" data-name="Tillbaka i stugan" data-summer-time="19:00" data-summer-name="Musikkväll" data-summer-label="Musikkväll på Kalfjäll" data-summer-title="Njut av sommarkvällen" data-summer-body="Ta med en filt och slå dig ner i gräset. Musiken spelar på kalfjället, och utsikten räcker hela vägen till Norge." data-summer-cta="Hitta ert boende" data-summer-href="#boende" data-summer-src="assets/img/sommar-dag-05.jpg?v=2">
             <div class="en-dag-media" data-depth="front">
               <img src="assets/img/endag-1700.jpg" alt="" />
               <img class="en-dag-season-photo" alt="Musikkväll på kalfjället i kvällsljus" loading="lazy" hidden />
@@ -2193,7 +2193,7 @@
         slide.dataset.winterName = slide.dataset.name || "";
         const puff = slide.classList.contains("is-puff");
         const title = slide.querySelector(puff ? ".td-heading-md" : ".td-textblock-title");
-        const body = slide.querySelector(".td-textblock-body");
+        const body = slide.querySelector(".td-textblock-body, .en-dag-puff-body");
         const label = slide.querySelector(".td-ui-label");
         const link = slide.querySelector(puff ? ".en-dag-puff-copy a" : ".td-textblock-actions a");
         if (title) slide.dataset.winterTitle = title.textContent;
@@ -2237,7 +2237,7 @@
           if (when) when.textContent = slide.dataset.name;
           if (typeof enTlRefresh === "function") enTlRefresh();
           const title = slide.querySelector(puff ? ".td-heading-md" : ".td-textblock-title");
-          const body = slide.querySelector(".td-textblock-body");
+          const body = slide.querySelector(".td-textblock-body, .en-dag-puff-body");
           const label = slide.querySelector(".td-ui-label");
           const link = slide.querySelector(puff ? ".en-dag-puff-copy a" : ".td-textblock-actions a");
           const actions = slide.querySelector(".td-textblock-actions");
