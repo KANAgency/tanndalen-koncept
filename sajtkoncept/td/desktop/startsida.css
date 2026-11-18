@@ -3797,8 +3797,9 @@ body.fraga-open { overflow: hidden; }
   }
 
   .page .td-hitta.is-pan .hitta-pan-frame {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 120px), transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 120px), transparent 100%);
+    /* --hitta-fade-a/b sätts i JS: kartan tonas bort under textblocket tills det har scrollat ut. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent var(--hitta-fade-a, 0px), #000 var(--hitta-fade-b, 160px), #000 calc(100% - 120px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, transparent var(--hitta-fade-a, 0px), #000 var(--hitta-fade-b, 160px), #000 calc(100% - 120px), transparent 100%);
   }
 
   .page .td-hitta.is-pan .hitta-pan-stop {

@@ -4057,6 +4057,14 @@
             cam.y = clamped.y;
           }
           kart.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${scale})`;
+          if (panMobileQ.matches) {
+            const copyBottom = copy.getBoundingClientRect().bottom - sticky.getBoundingClientRect().top;
+            frame.style.setProperty("--hitta-fade-a", `${Math.max(0, copyBottom - 40).toFixed(0)}px`);
+            frame.style.setProperty("--hitta-fade-b", `${Math.max(160, copyBottom + 80).toFixed(0)}px`);
+          } else {
+            frame.style.removeProperty("--hitta-fade-a");
+            frame.style.removeProperty("--hitta-fade-b");
+          }
           const inv = 1 / scale;
           syncOrsaLabelGap();
           syncSthlmLabelSide();
