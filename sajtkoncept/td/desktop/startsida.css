@@ -2791,7 +2791,9 @@ body[data-season="summer"] .top-progress { background: var(--color-season-summer
     --depth-max: 16px;
   }
 
-  body.menu-open { overflow: hidden; }
+  /* clip, inte hidden: hidden gör body till scrollcontainer och den klistrade headern (logga + stängkryss) scrollade iväg
+     med sidan när menyn var öppen (John 2026-11-18). */
+  body.menu-open { overflow: clip; }
 
   .top {
     position: sticky;
@@ -7296,4 +7298,101 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 @media (max-width: 1023px) {
   /* 11-16. Aktuellt: kortrubrikerna ett steg mindre (30 → 24), som En dag-korten. */
   .td-aktuellt-track .td-aktuellt-kort .td-aktuellt-kort-rubrik { font-size: var(--font-size-xl); letter-spacing: -0.021em; }
+}
+/* 12-1. En vinterdag, mobil tidslinje (vågrät, mellan rubriken och korten). Tiderna placeras efter klockslag
+   (--at 0–1), markören och fyllningen följer karusellen (--tl-pos, JS). Dold över 1024. */
+.en-dag-tl { display: none; }
+@media (max-width: 1023px) {
+  .page .en-dag .en-dag-tl {
+    --tl-inset: 18px; /* halva etikettbredden: första/sista tiden ryms i innehållsytan */
+    position: relative;
+    display: block;
+    height: 36px;
+    margin-top: var(--space-xl);
+  }
+  .page .en-dag .en-dag-stage { margin-top: var(--space-lg); }
+  .en-dag-tl-line {
+    position: absolute;
+    top: 2px; /* mitt på tidsprickarna (5 px) */
+    z-index: 1; /* markören över tidsprickarna */
+    pointer-events: none;
+    right: var(--tl-inset);
+    left: var(--tl-inset);
+    height: 1px;
+    background: var(--color-TD-neutral-subtle);
+  }
+  .en-dag-tl-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-TD-night);
+    transform: scaleX(var(--tl-pos, 0));
+    transform-origin: left center;
+  }
+  .en-dag-tl-knob {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--tl-pos, 0) * 100%);
+    width: 11px;
+    height: 11px;
+    border-radius: var(--radius-full);
+    background: var(--color-TD-night);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .en-dag-tl-times {
+    position: absolute;
+    inset: 0 var(--tl-inset);
+  }
+  .en-dag-tl-time {
+    position: absolute;
+    top: -8px;
+    left: calc(var(--at) * 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 44px;
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: var(--color-TD-neutral);
+    font: inherit;
+    cursor: pointer;
+    transform: translateX(-50%);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .en-dag-tl-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-full);
+    background: var(--color-TD-neutral-subtle);
+  }
+  .en-dag-tl-time.is-past .en-dag-tl-dot { background: var(--color-TD-night); }
+  .en-dag-tl-label {
+    font-family: var(--font-family-TD-secondary), sans-serif;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-book, 450);
+    line-height: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  .en-dag-tl-time.is-on { color: var(--color-TD-night); }
+  .en-dag-tl-time.is-on .en-dag-tl-label { font-weight: var(--font-weight-bold, 700); }
+  /* Sista kortet: tiden står på linjen, etiketten "16:00 · Tillbaka i stugan" ersätts av namnet (.en-dag-when). */
+  .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy > .td-ui-label { display: none; }
+}
+@media (max-width: 1023px) {
+  /* 12-2. Frågeblocket → Här bor skidåkarna: ~100 px mer luft (120 → 220). */
+  .faq:has(+ .td-bo) { --fraga-space-after: 220px; }
+}
+@media (max-width: 1023px) {
+  /* 12-3. Bildmodalen (bara Här bor skidåkarna, knappar med data-fokus): stående utsnitt 3:4 i nästan hela bredden i stället för en liten
+     liggande bild. Fokuspunkten per bild sätts i JS från knappens data-fokus. */
+  .td-bildmodal.is-staende { width: calc(100vw - 16px); max-width: none; }
+  .td-bildmodal.is-staende .td-bildmodal-bild {
+    width: 100%;
+    height: auto;
+    max-height: calc(100svh - 160px);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
 }
