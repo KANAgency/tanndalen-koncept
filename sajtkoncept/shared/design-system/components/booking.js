@@ -340,7 +340,8 @@ export function initBookingFields(root, options = {}) {
       if (pane.dataset.fieldsBound === "true") return;
       pane.dataset.fieldsBound = "true";
       const [dateField, guestField] = pane.querySelectorAll(".td-field");
-      dateField.dataset.mode = pane.dataset.cat === "liftkort" ? "day" : "range";
+      /* Liftkort väljer också dag eller period (John 18 nov: flerdagarskort). "day" finns kvar för data-mode="day" på panelen. */
+      dateField.dataset.mode = pane.dataset.mode === "day" ? "day" : "range";
       dateField.dataset.empty = dateField.querySelector(".td-field-value").textContent;
       guestField.dataset.empty = guestField.querySelector(".td-field-value").textContent;
       if (!inline) {
