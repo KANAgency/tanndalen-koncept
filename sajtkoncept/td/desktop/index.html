@@ -2453,23 +2453,29 @@
         when.textContent = slide.dataset.name;
         block.prepend(when);
       });
-      /* Mobil tidslinje (John 2026-11-18): vågrät mellan rubriken och korten. Runda 2: linjen är lika lång som
-         karusellen, varje klockslag sitter ett kortsteg från nästa och spåret följer karusellens scroll 1:1, så bara
-         aktuell tid (plus soluppgång/solnedgång i ändarna) syns. Markören står still, fyllningen växer. Tryck på en tid
-         scrollar till kortet. */
+      /* Mobil tidslinje (John 2026-11-18): vågrät mellan rubriken och korten. Spåret är lika långt som karusellen och
+         flyttas 1:1 med dess scroll. Runda 3: klockslagen högerställda mot sitt korts högerkant; soluppgången
+         vänsterställd mot första kortets vänsterkant. Sista kortet är undantaget: tiden vänsterställd mot kortets
+         vänsterkant och solnedgången högerställd mot dess högerkant. Linjen börjar/slutar en bit från solikonerna.
+         Markören och fyllningen följer scrollen mellan tiderna. Tryck på en tid scrollar till kortet. */
       const enTlStage = enDag.querySelector(".en-dag-stage");
       const enTl = document.createElement("div");
       enTl.className = "en-dag-tl";
-      enTl.innerHTML = '<div class="en-dag-tl-track"><div class="en-dag-tl-line"><span class="en-dag-tl-fill"></span></div><div class="en-dag-tl-times"></div></div><span class="en-dag-tl-knob" aria-hidden="true"></span>';
+      enTl.innerHTML = '<div class="en-dag-tl-track"><div class="en-dag-tl-line"><span class="en-dag-tl-fill"></span><span class="en-dag-tl-knob" aria-hidden="true"></span></div><div class="en-dag-tl-times"></div></div>';
       enDag.querySelector(".en-dag-stack")?.before(enTl);
       const enTlTrack = enTl.querySelector(".en-dag-tl-track");
       const enTlLine = enTl.querySelector(".en-dag-tl-line");
       const enTlFill = enTl.querySelector(".en-dag-tl-fill");
+      const enTlKnob = enTl.querySelector(".en-dag-tl-knob");
       const enTlTimes = enTl.querySelector(".en-dag-tl-times");
-      const EN_TL_LEAD = 72; /* px mellan soluppgång och första tiden, och mellan sista tiden och solnedgång */
+      const EN_TL_SUN = 32; /* solikonens bredd */
+      const EN_TL_GAP = 8; /* luft mellan solikonen och linjen */
+      const EN_TL_DOT = 2.5; /* halv tidsprick: prickens mitt ligger så här långt in från kortkanten */
       let enTlBtns = [];
       let enTlActive = -1;
       let enTlSnapCache = [];
+      let enTlPts = [];
+      let enTlLineStart = 0;
       function enTlSnaps() {
         const max = enTlStage.scrollWidth - enTlStage.clientWidth;
         return enSlides.map((slide) => Math.max(0, Math.min(max, slide.offsetLeft - enSlides[0].offsetLeft)));
@@ -2479,33 +2485,53 @@
         item.className = `en-dag-tl-time en-dag-tl-sun en-dag-tl-sun-${kind}`;
         const time = kind === "rise" ? enSunTimes.rise : enSunTimes.set;
         item.setAttribute("aria-label", `${kind === "rise" ? "Soluppgång" : "Solnedgång"} ${time}`);
-        item.innerHTML = `<img class="en-dag-tl-sun-icon" src="assets/icons/${kind === "rise" ? "soluppgang" : "solnedgang"}-48.svg" width="24" height="24" alt="" /><span class="en-dag-tl-label">${time}</span>`;
+        item.innerHTML = `<img class="en-dag-tl-sun-icon" src="assets/icons/${kind === "rise" ? "soluppgang" : "solnedgang"}-48.svg" width="${EN_TL_SUN}" height="${EN_TL_SUN}" alt="" /><span class="en-dag-tl-label">${time}</span>`;
         return item;
       }
       function enTlLayout() {
         if (!enMobile.matches || !enTlBtns.length) return;
         enTlSnapCache = enTlSnaps();
-        const last = enTlSnapCache[enTlSnapCache.length - 1] || 0;
-        const end = EN_TL_LEAD * 2 + last;
-        enTlTrack.style.width = `${end}px`;
+        const pad = parseFloat(getComputedStyle(enTlStage).paddingLeft) || 0;
+        const left = enSlides.map((slide) => pad + slide.offsetLeft - enSlides[0].offsetLeft);
+        const right = enSlides.map((slide, i) => left[i] + slide.offsetWidth);
+        const n = enSlides.length - 1;
         const items = [...enTlTimes.children];
-        items[0].style.left = "0px";
-        enTlBtns.forEach((btn, i) => { btn.style.left = `${EN_TL_LEAD + enTlSnapCache[i]}px`; });
-        items[items.length - 1].style.left = `${end}px`;
-        enTlLine.style.width = `${end}px`;
+        const rise = items[0];
+        const set = items[items.length - 1];
+        rise.style.left = `${left[0]}px`;
+        rise.classList.add("is-left");
+        enTlBtns.forEach((btn, i) => {
+          const last = i === n && n > 0;
+          btn.classList.toggle("is-left", last);
+          btn.classList.toggle("is-right", !last);
+          btn.style.left = `${last ? left[i] : right[i]}px`;
+        });
+        set.style.left = `${right[n]}px`;
+        set.classList.add("is-right");
+        enTlPts = enTlBtns.map((btn, i) => (i === n && n > 0 ? left[i] + EN_TL_DOT : right[i] - EN_TL_DOT));
+        enTlLineStart = left[0] + EN_TL_SUN + EN_TL_GAP;
+        const lineEnd = right[n] - EN_TL_SUN - EN_TL_GAP;
+        enTlLine.style.left = `${enTlLineStart}px`;
+        enTlLine.style.width = `${Math.max(0, lineEnd - enTlLineStart)}px`;
+        enTlTrack.style.width = `${right[n]}px`;
+        enTlActive = -1;
         enTlPaint();
       }
       function enTlPaint() {
         if (!enMobile.matches || !enTlSnapCache.length) return;
         const x = enTlStage.scrollLeft;
         enTlTrack.style.transform = `translate3d(${-x}px,0,0)`;
-        enTlFill.style.width = `${EN_TL_LEAD + x}px`;
-        let active = 0;
-        let best = Infinity;
-        enTlSnapCache.forEach((snap, i) => {
-          const d = Math.abs(snap - x);
-          if (d < best) { best = d; active = i; }
-        });
+        const snaps = enTlSnapCache;
+        let f = 0;
+        for (let i = 0; i < snaps.length - 1; i++) {
+          if (x >= snaps[i]) f = i + Math.min(1, (x - snaps[i]) / Math.max(1, snaps[i + 1] - snaps[i]));
+        }
+        const i0 = Math.floor(f);
+        const i1 = Math.min(enTlPts.length - 1, i0 + 1);
+        const pos = enTlPts[i0] + (enTlPts[i1] - enTlPts[i0]) * (f - i0) - enTlLineStart;
+        enTlFill.style.width = `${Math.max(0, pos)}px`;
+        enTlKnob.style.left = `${pos}px`;
+        const active = Math.round(f);
         if (active !== enTlActive) {
           enTlActive = active;
           enTlBtns.forEach((btn, i) => {

@@ -7299,19 +7299,19 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   /* 11-16. Aktuellt: kortrubrikerna ett steg mindre (30 → 24), som En dag-korten. */
   .td-aktuellt-track .td-aktuellt-kort .td-aktuellt-kort-rubrik { font-size: var(--font-size-xl); letter-spacing: -0.021em; }
 }
-/* 12-1. En vinterdag, mobil tidslinje (vågrät, mellan rubriken och korten). Runda 2 (John 2026-11-18): spåret är
-   lika långt som karusellen och flyttas 1:1 med den (JS sätter left per tid, bredd och transform). Soluppgång först,
-   solnedgång sist. Markören står still vid aktuell tid, fyllningen växer. Dold över 1024. */
+/* 12-1. En vinterdag, mobil tidslinje (vågrät, mellan rubriken och korten). Spåret är lika långt som karusellen och
+   flyttas 1:1 med den (JS sätter left per tid, linjens start/bredd, markör och transform). Runda 3 (John 2026-11-18):
+   tiderna högerställda mot sitt korts högerkant (.is-right), soluppgången och sista tiden vänsterställda (.is-left),
+   solnedgången högerställd mot sista kortets högerkant. Solikonerna 32 px med horisonten på linjens höjd och 8 px luft
+   till linjen. Dold över 1024. */
 .en-dag-tl { display: none; }
 @media (max-width: 1023px) {
   .page .en-dag .en-dag-tl {
-    --tl-x0: calc(var(--space-lg) + 18px); /* soluppgångens mitt: kortkanten + halv etikett */
-    --tl-y: 12px; /* linjens höjd i spåret */
-    --tl-lead: 72px; /* = EN_TL_LEAD i JS */
+    --tl-y: 22px; /* linjens höjd i spåret = solikonens horisont (22/32) */
     position: relative;
     display: block;
     width: 100vw;
-    height: 48px;
+    height: 52px;
     margin: var(--space-xl) 0 0 calc(50% - 50vw);
     overflow: hidden;
   }
@@ -7320,13 +7320,13 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     position: absolute;
     top: 0;
     bottom: 0;
-    left: var(--tl-x0);
+    left: 0;
     will-change: transform;
   }
   .en-dag-tl-line {
     position: absolute;
     top: var(--tl-y);
-    left: 0;
+    z-index: 1; /* markören över tidsprickarna */
     height: 1px;
     background: var(--color-TD-neutral-subtle);
     pointer-events: none;
@@ -7340,16 +7340,12 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   }
   .en-dag-tl-knob {
     position: absolute;
-    top: var(--tl-y);
-    left: calc(var(--tl-x0) + var(--tl-lead));
-    z-index: 2;
+    top: 50%;
     width: 11px;
     height: 11px;
-    margin-top: 0.5px;
     border-radius: var(--radius-full);
     background: var(--color-TD-night);
     transform: translate(-50%, -50%);
-    pointer-events: none;
   }
   .en-dag-tl-times {
     position: absolute;
@@ -7360,8 +7356,8 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     top: calc(var(--tl-y) - 10px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    align-items: flex-end;
+    gap: 9px;
     min-width: 44px;
     padding: 8px 0;
     border: 0;
@@ -7369,9 +7365,10 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
     color: var(--color-TD-neutral);
     font: inherit;
     cursor: pointer;
-    transform: translateX(-50%);
     -webkit-tap-highlight-color: transparent;
   }
+  .en-dag-tl-time.is-right { transform: translateX(-100%); }
+  .en-dag-tl-time.is-left { align-items: flex-start; }
   .en-dag-tl-dot {
     width: 5px;
     height: 5px;
@@ -7388,15 +7385,16 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   }
   .en-dag-tl-time.is-on { color: var(--color-TD-night); }
   .en-dag-tl-time.is-on .en-dag-tl-label { font-weight: var(--font-weight-bold, 700); }
-  /* Sol i ändarna: ikonens horisont (y 22/32 → 16.5 px av 24) ligger på linjen, tiden under. Ingen knapp. */
+  /* Solen i ändarna: 32 px, horisonten (y 22/32) i linjens höjd, tiden under i samma höjd som övriga tider. */
   .en-dag-tl-sun {
-    top: calc(var(--tl-y) - 16.5px);
+    top: calc(var(--tl-y) - 22px);
     gap: 0;
+    min-width: 0;
     padding: 0;
     cursor: default;
   }
-  .en-dag-tl-sun-icon { display: block; width: 24px; height: 24px; }
-  .en-dag-tl-sun .en-dag-tl-label { margin-top: 3px; }
+  .en-dag-tl-sun-icon { display: block; width: 32px; height: 32px; }
+  .en-dag-tl-sun .en-dag-tl-label { margin-top: 2px; }
   /* Sista kortet: tiden står på linjen, etiketten "16:00 · Tillbaka i stugan" ersätts av namnet (.en-dag-when). */
   .page .en-dag .en-dag-slide.is-puff > .en-dag-puff-copy > .td-ui-label { display: none; }
 }
