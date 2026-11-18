@@ -125,3 +125,37 @@ export function onsiteStorageKey() {
 export function stayStorageKey() {
   return "og-stay-orsa";
 }
+
+/** Sidfot (delad komponent /shared/js/site-footer.js, 18 nov). Samma grundform som TD; footern ska göras om. */
+export const SITE_FOOTER = {
+  logo: { src: "./assets/brand/logo-vertical-white.svg", alt: "Orsa Grönklitt", width: 140, height: 56 },
+  tagline: "Familjeresmålet bara fyra timmar från Stockholm.",
+  cta: { label: "Boka din vistelse", todo: "boka" },
+  columns: [
+    { title: "Åk och upplev", links: [
+      { label: "Boende", href: "#boenden-waabi" },
+      { label: "Liftkort", todo: "liftkort" },
+      { label: "Skidhyra", todo: "skidhyra" },
+      { label: "Skidskola", todo: "skidskola" },
+      { label: "Aktiviteter", todo: "aktiviteter" }
+    ] },
+    { title: "Hitta hit", links: [
+      { label: "Hitta hit", todo: "hitta" },
+      { label: "Webbkameror", todo: "webbkameror" },
+      { label: "Just nu", href: "#just-nu" },
+      { label: "Vanliga frågor", href: "#fragor" }
+    ] },
+    { title: "Orsa Grönklitt", links: [
+      { label: "Om Orsa Grönklitt", todo: "om" },
+      { label: "Kontakt", todo: "kontakt" },
+      { label: "Pressrum", todo: "press" },
+      { label: "Jobba hos oss", todo: "jobb" }
+    ] }
+  ],
+  copyright: "© 2026 Orsa Grönklitt",
+  legal: [
+    { label: "Integritet", todo: "integritet" },
+    { label: "Cookies", todo: "cookies" },
+    { label: "Tillgänglighet", todo: "tillganglighet" }
+  ]
+};

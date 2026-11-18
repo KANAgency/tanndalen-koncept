@@ -225,6 +225,20 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   clip-path: inset(0 -100vmax);
   color: var(--color-text-primary);
 }
+/* 18 nov (John): mörka ytan +64 px ovanför och 96 px under kortet. Läggs som marginal + utökad clip-path,
+   inte padding, så att sektionens box (som scrollmotorn i td-blocks.js räknar mot) är oförändrad.
+   --en-dag-hang = så långt kortet hänger ned under sektionen (sätts i JS). */
+@media (min-width: 1024px) {
+  .theme-OG .og-hp-blocks .en-dag {
+    --og-en-dag-air-top: 64px;
+    --og-en-dag-air-bottom: calc(var(--en-dag-hang, 0px) + 96px);
+    margin-top: var(--og-en-dag-air-top);
+    margin-bottom: var(--og-en-dag-air-bottom);
+    clip-path: inset(calc(-1 * var(--og-en-dag-air-top)) -100vmax calc(-1 * var(--og-en-dag-air-bottom)));
+  }
+  /* Läge 1–2 sommar: Handplockade boenden direkt efter En dag – 96 px mer luft. */
+  html.theme-OG[data-season="summer"]:is([data-mode="new"], [data-mode="returning"]) #boenden-waabi { padding-top: 96px; } /* padding: marginal kollapsar mot En dags marginal */
+}
 .theme-OG .en-dag .en-dag-sun-icon-wrap {
   background: transparent;
 }
@@ -362,7 +376,11 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   gap: var(--space-xs);
 }
 
-/* Staggered reveal continues: image, then booking bar (after kurbits/heading/body). */
+/* Heroramen (snöiga tallar) borttagen 18 nov – OG får en annan lösning. Bokningsbaren står i flödet
+   under ingressen; ankaret har den stängda barens höjd (81 px) så att panelen fortfarande fälls ut uppåt. */
+.theme-OG .og-hp-booking-anchor { height: 81px; }
+
+/* Staggered reveal continues: booking bar (after kurbits/heading/body). */
 .theme-OG .og-hp-hero-media-block {
   opacity: 1;
   transform: none;
@@ -872,3 +890,63 @@ html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-f
 /* Utfälld huvudmeny: luft mellan bilden och underrutan (8 px), något mindre än
    underrutans 14 px ned till nästa bild. 2026-11-17 */
 .theme-OG .og-hp-header .site-menu-sub.is-open { margin-top: 6px; }
+
+/* ── Aktuellt (port av TD:s #aktuellt, 18 nov). Kortkomponenten är delad (ds/components/aktuellt-kort.css);
+   här bara sektionens layout + OG-anpassningar. Rubriken använder samma stilar som Handplockade boenden. ── */
+.theme-OG .td-aktuellt {
+  --aktuellt-gap: 24px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: var(--space-8xl); /* 96 till En dags mörka yta */
+}
+.theme-OG .td-aktuellt-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.theme-OG .td-aktuellt-titles { display: flex; flex-direction: column; gap: var(--space-xs); }
+.theme-OG .td-aktuellt-titles > * { margin: 0; }
+.theme-OG .td-aktuellt-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--aktuellt-gap);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  --aktuellt-inline: max(var(--space-lg), (100vw - 1280px) / 2);
+  padding-inline: var(--aktuellt-inline);
+  scroll-padding-inline-start: var(--aktuellt-inline);
+  overflow-x: auto;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.theme-OG .td-aktuellt-track::-webkit-scrollbar { display: none; }
+/* Rubriker och meta i OG-färger (komponenten har TD:s neutral-strong). */
+.theme-OG .td-aktuellt-kort-meta { color: var(--color-OG-neutral-strong); }
+/* Frågekortet = Orsaguiden: guidefärgen (vinter sjöblå, sommar vår-gul) och Orsa svart, som Figma Aktuellt / Kort Typ=Fråga. */
+html.theme-OG[data-season] .td-aktuellt .td-aktuellt-kort[data-typ="fraga"] {
+  --td-aktuellt-plate: var(--color-OG-guide);
+  --td-aktuellt-on-plate: var(--contrast-on-OG-guide);
+}
+html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"]::before { background: var(--color-OG-orsa-black); }
+html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-halo { stroke: var(--color-OG-guide); }
+.theme-OG .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark { width: 32px; height: 32px; }
+.theme-OG .og-aktuellt-guide-name { font-family: var(--font-family-OG-primary), "Literata", serif; font-weight: 700; letter-spacing: -0.01em; }
+@media (max-width: 767px) {
+  .theme-OG .td-aktuellt { --aktuellt-gap: 12px; }
+  .theme-OG .td-aktuellt-track { box-sizing: border-box; scroll-snap-type: x mandatory; }
+}
+
+/* ── Sidfot: delad komponent (/ds/components/site-footer.css + /shared/js/site-footer.js, 18 nov), OG-färger och typsnitt.
+   Grundform som TD tills footern görs om. ── */
+.theme-OG .site-footer {
+  --site-footer-bg: var(--color-OG-night);
+  --site-footer-fg: var(--color-OG-day);
+  --site-footer-muted: var(--color-OG-neutral-muted);
+  --site-footer-heading: var(--color-OG-neutral-subtle);
+  --site-footer-rule: var(--color-OG-neutral-strong);
+  --site-footer-font: var(--font-family-OG-secondary);
+}
+.theme-OG .site-footer-brand img { width: 140px; }

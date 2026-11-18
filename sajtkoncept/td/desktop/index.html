@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="/ds/components/season-toggle.css?v=2" />
     <link rel="stylesheet" href="/ds/components/season-banner.css?v=radius-sm" />
     <link rel="stylesheet" href="startsida.css?v=mob7" />
+    <link rel="stylesheet" href="/ds/components/site-footer.css" />
     <link rel="stylesheet" href="brand-sequence.css" />
     <link rel="stylesheet" href="intro.css?v=mob4" />
     <script>
@@ -1655,56 +1656,12 @@
       </section>
       </main>
     </div>
-    <footer class="site-footer">
-      <div class="site-footer-inner">
-        <div class="site-footer-top">
-          <div class="site-footer-brand">
-            <img src="assets/brand/logo-horizontal-white.svg" alt="Tänndalen" width="206" height="32">
-            <p class="td-heading-sm">Skidåkning och fjäll på riktigt.</p>
-            <a class="td-button td-button-secondary td-button-md" href="#" data-todo="boka">Boka din vistelse</a>
-          </div>
-          <nav class="site-footer-nav" aria-label="Sidfot">
-            <div>
-              <h2>Åk</h2>
-              <ul>
-                <li><a href="#boende">Boende</a></li>
-                <li><a href="#" data-todo="liftkort">Liftkort</a></li>
-                <li><a href="#" data-todo="skidhyra">Skidhyra</a></li>
-                <li><a href="#" data-todo="skidskola">Skidskola</a></li>
-                <li><a href="#" data-todo="paket">Paket</a></li>
-              </ul>
-            </div>
-            <div>
-              <h2>Hitta hit</h2>
-              <ul>
-                <li><a href="#hitta">Hitta hit</a></li>
-                <li><a href="#" data-todo="webbkameror">Webbkameror</a></li>
-                <li><a href="#" data-todo="snorapport">Snörapport</a></li>
-                <li><a href="#fragor">Vanliga frågor</a></li>
-              </ul>
-            </div>
-            <div>
-              <h2>Tänndalen</h2>
-              <ul>
-                <li><a href="#" data-todo="om">Om Tänndalen</a></li>
-                <li><a href="#" data-todo="kontakt">Kontakt</a></li>
-                <li><a href="#" data-todo="press">Pressrum</a></li>
-                <li><a href="#" data-todo="jobb">Jobba hos oss</a></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div class="site-footer-rule"></div>
-        <div class="site-footer-bottom">
-          <p class="td-ui-body-sm">© 2026 Tänndalen</p>
-          <ul class="site-footer-legal">
-            <li><a class="td-ui-body-sm" href="#" data-todo="integritet">Integritet</a></li>
-            <li><a class="td-ui-body-sm" href="#" data-todo="cookies">Cookies</a></li>
-            <li><a class="td-ui-body-sm" href="#" data-todo="tillganglighet">Tillgänglighet</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
+    <footer class="site-footer" data-site-footer></footer>
+    <script type="module">
+      import { renderSiteFooter } from "/shared/js/site-footer.js";
+      import { SITE_FOOTER } from "./site-config.js";
+      renderSiteFooter(document.querySelector("[data-site-footer]"), SITE_FOOTER);
+    </script>
     <script>
       const body = document.body;
       try {

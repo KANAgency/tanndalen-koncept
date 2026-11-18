@@ -1,0 +1,118 @@
+/* Sidfot (site-footer) – delad komponent TD + OG, 18 nov. Grundform = TD:s footer (flyttad ur td/desktop/startsida.css
+   oförändrad). Markup: /shared/js/site-footer.js. Färger/typsnitt via variablerna nedan; TD-värden är standard. */
+.site-footer {
+  --site-footer-bg: var(--color-TD-night);
+  --site-footer-fg: var(--color-TD-snow);
+  --site-footer-muted: var(--color-TD-neutral-muted);
+  --site-footer-heading: var(--color-TD-neutral-subtle);
+  --site-footer-rule: var(--color-TD-neutral-strong);
+  --site-footer-font: var(--font-family-TD-secondary);
+}
+
+.site-footer {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 96px 0 40px;
+  background: var(--site-footer-bg);
+  color: var(--site-footer-fg);
+}
+
+.site-footer-inner {
+  width: min(1280px, calc(100% - var(--space-lg) * 2));
+  margin-inline: auto;
+}
+
+.site-footer-top {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.site-footer-brand img { display: block; width: 206px; height: auto; }
+
+.site-footer-brand .td-heading-sm { margin: var(--space-xl) 0; color: var(--site-footer-fg); }
+
+.site-footer-contact { margin: var(--space-xl) 0 0; color: var(--site-footer-muted); }
+
+.site-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.site-footer-nav h2 {
+  margin: 0 0 var(--space-md);
+  font-family: var(--site-footer-font), sans-serif;
+  font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.375;
+  letter-spacing: var(--font-tracking-normal);
+  text-transform: uppercase;
+  color: var(--site-footer-heading);
+}
+
+.site-footer-nav ul,
+.site-footer-legal { margin: 0; padding: 0; list-style: none; }
+
+.site-footer-nav li + li { margin-top: var(--space-sm); }
+
+.site-footer-nav a,
+.site-footer-legal a {
+  color: var(--site-footer-fg);
+  font-family: var(--site-footer-font), sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color var(--motion-duration-fast) linear, text-decoration-color var(--motion-duration-fast) linear;
+}
+
+.site-footer-nav a:hover,
+.site-footer-legal a:hover { text-decoration: underline 1px; color: var(--site-footer-fg); }
+
+.site-footer :focus-visible {
+  outline: 2px solid var(--site-footer-fg);
+  outline-offset: 2px;
+}
+
+.site-footer-rule {
+  height: 1px;
+  margin: var(--space-5xl) 0 var(--space-xl);
+  background: var(--site-footer-rule);
+}
+
+.site-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md) var(--space-xl);
+}
+
+.site-footer-bottom p { margin: 0; color: var(--site-footer-muted); }
+
+.site-footer-legal { display: flex; flex-wrap: wrap; gap: var(--space-xl); }
+
+.site-footer-legal a { color: var(--site-footer-muted); font-size: var(--font-size-sm); }
+
+@media (max-width: 1024px) {
+  .site-footer { padding: 72px 0 var(--space-2xl); }
+  .site-footer-top { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 600px) {
+  .site-footer-nav { grid-template-columns: 1fr; }
+  .site-footer-nav a,
+  .site-footer-legal a {
+    display: flex;
+    align-items: center;
+    min-height: var(--size-control-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer-nav a,
+  .site-footer-legal a { transition: none; }
+}

@@ -127,3 +127,37 @@ export function onsiteStorageKey() {
 export function stayStorageKey() {
   return stayKeyFor(SITE);
 }
+
+/** Sidfot (delad komponent /shared/js/site-footer.js, 18 nov). Innehåll oförändrat från tidigare statiska footer. */
+export const SITE_FOOTER = {
+  logo: { src: "assets/brand/logo-horizontal-white.svg", alt: "Tänndalen", width: 206, height: 32 },
+  tagline: "Skidåkning och fjäll på riktigt.",
+  cta: { label: "Boka din vistelse", todo: "boka" },
+  columns: [
+    { title: "Åk", links: [
+      { label: "Boende", href: "#boende" },
+      { label: "Liftkort", todo: "liftkort" },
+      { label: "Skidhyra", todo: "skidhyra" },
+      { label: "Skidskola", todo: "skidskola" },
+      { label: "Paket", todo: "paket" }
+    ] },
+    { title: "Hitta hit", links: [
+      { label: "Hitta hit", href: "#hitta" },
+      { label: "Webbkameror", todo: "webbkameror" },
+      { label: "Snörapport", todo: "snorapport" },
+      { label: "Vanliga frågor", href: "#fragor" }
+    ] },
+    { title: "Tänndalen", links: [
+      { label: "Om Tänndalen", todo: "om" },
+      { label: "Kontakt", todo: "kontakt" },
+      { label: "Pressrum", todo: "press" },
+      { label: "Jobba hos oss", todo: "jobb" }
+    ] }
+  ],
+  copyright: "© 2026 Tänndalen",
+  legal: [
+    { label: "Integritet", todo: "integritet" },
+    { label: "Cookies", todo: "cookies" },
+    { label: "Tillgänglighet", todo: "tillganglighet" }
+  ]
+};

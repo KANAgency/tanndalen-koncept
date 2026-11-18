@@ -489,6 +489,19 @@
   text-rendering: geometricPrecision;
 }
 
+/* UI/figure-xl (OG, 18 nov): stora siffran i väderkortet, samma roll som TD:s 96/96. Literata Bold,
+   lätt negativ spärrning (OG:s stora rubriker har −0,04, mildare för siffror). */
+.td-ui-figure-xl {
+  font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: var(--font-size-96);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
 .td-ui-figure-lg {
   font-family: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   font-size: var(--font-size-4xl);

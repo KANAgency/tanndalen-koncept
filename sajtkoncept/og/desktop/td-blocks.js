@@ -1358,7 +1358,7 @@ export function initTdBlocks(root = document) {
           kamera: {
             label: "Webbkamera · Södra skidområdet",
             /* TODO: byt ut när en kamerabild finns. */
-            image: "./assets/img/just-nu/sommar/webbkamera.jpg",
+            image: "./assets/img/just-nu/sommar/webbkamera-sommar.jpg", /* DJI_…0799 (tjärnen), 5:1-utsnitt 18 nov */
             alt: "Webbkamera vid södra skidområdet"
           }
         }
