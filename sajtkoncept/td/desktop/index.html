@@ -3661,7 +3661,21 @@
         const copy = hitta.querySelector(".td-hitta-copy");
         const card = hitta.querySelector(".td-faktakort");
         const sticky = hitta.querySelector(".td-hitta-sticky");
-        sticky.append(copy, card);
+        /* Mobil (John 18 nov): textblocket i fullbredd överst i sektionen (scrollar ut innan resan börjar),
+           kartan statisk med hela resan i bild, faktakortet efter sektionen. */
+        const panMobileQ = matchMedia("(max-width: 1023px)");
+        const hittaEnd = document.getElementById("hitta-end");
+        function placePanParts() {
+          if (panMobileQ.matches) {
+            hitta.insertBefore(copy, sticky);
+            hitta.after(card);
+            card.classList.add("td-hitta-fakta-mobil");
+          } else {
+            sticky.append(copy, card);
+            card.classList.remove("td-hitta-fakta-mobil");
+          }
+        }
+        placePanParts();
         const frame = document.createElement("div");
         frame.className = "hitta-pan-frame";
         sticky.insertBefore(frame, kart);
@@ -3686,6 +3700,18 @@
           orsa: { left: 599, top: 691.5, origin: "100% 50%" },
           tand: { left: 401.7, top: 419.4, origin: "50% 100%" }
         };
+        /* Mobil: Stockholm-etiketten till vänster om ploppen så hela resan ryms i bredd. */
+        function syncSthlmLabelSide() {
+          const el = labelFor[0];
+          const pin = pins[0];
+          if (panMobileQ.matches) {
+            labelHome.sthlm.left = pin.x - LABEL_GAP_MAP - (el.offsetWidth || 100);
+            labelHome.sthlm.origin = "100% 50%";
+          } else {
+            labelHome.sthlm.left = 996.8;
+            labelHome.sthlm.origin = "0 50%";
+          }
+        }
         function syncOrsaLabelGap() {
           const el = labelFor[1];
           const pin = pins[1];
@@ -3756,7 +3782,12 @@
         const STOCK_CARD = { dxRight: -16 / SCALE0, dyTop: 20 / SCALE0 };
         // Tänndalen: övre högra hörnet 32 CSS px vänster om och 32 under ploppmitten
         const TAND_CARD = { dxRight: -32 / SCALE0, dyTop: 32 / SCALE0 };
-        const START_PX = 120;
+        const START_PX_DESKTOP = 120;
+        /* Mobil: resan startar först när textblocket har scrollat ur bild. */
+        function startPx() {
+          if (!panMobileQ.matches) return START_PX_DESKTOP;
+          return Math.max(START_PX_DESKTOP, copy.offsetTop + copy.offsetHeight + 24);
+        }
         const INTRO_MS = 220;
         // Fade: börjar när resan startar (t=0), klar när markören är ~165 CSS-px från Stockholms plopp
         const STOCK_FADE_DIST_CSS = 165;
@@ -3773,11 +3804,12 @@
             }
           }
         }
+        const skipBtnEl = document.getElementById("hitta-skip");
         let introArmed = false;
         let introStartedAt = 0;
         let introDone = false;
         let introRaf = 0;
-        let journeyOriginPx = START_PX;
+        let journeyOriginPx = startPx();
         function panProgress() {
           const top = hitta.getBoundingClientRect().top;
           return Math.min(1, Math.max(0, -top / (2.5 * innerHeight)));
@@ -3805,7 +3837,38 @@
             y: Math.min(maxY, Math.max(minY, cam.y))
           };
         }
+        /* Mobil: en fast kamera som rymmer alla tre stoppen, etiketter och stopprutor. */
+        const MOBILE_AREA_TOP = 88; /* under menyn */
+        function mobileReserveBottom() {
+          const bar = document.querySelector(".td-booking");
+          const barH = bar && getComputedStyle(bar).position === "fixed" ? bar.offsetHeight : 0;
+          return barH + 16 + (skipBtnEl ? skipBtnEl.offsetHeight || 48 : 48) + 16;
+        }
+        function mobileFitCam() {
+          const { w, h } = stageSize();
+          const tandW = labelFor[2].offsetWidth || 110;
+          const cardH = Math.max(...cards.map((el) => el.offsetHeight || 80));
+          const minX = pins[2].x;
+          const maxX = pins[0].x;
+          const minY = pins[2].y;
+          const maxY = pins[0].y;
+          const padL = tandW / 2 + 16;
+          const padR = 24;
+          const padT = 32 + cardH + 12; /* etikett + Tänndalens ruta ovanför */
+          const padB = 20 + cardH; /* Stockholms ruta under */
+          const areaTop = MOBILE_AREA_TOP;
+          const areaH = Math.max(200, h - areaTop - mobileReserveBottom());
+          const sW = (w - padL - padR) / (maxX - minX);
+          const sH = (areaH - padT - padB) / (maxY - minY);
+          const scale = Math.max(0.3, Math.min(SCALE0, sW, sH));
+          const contentW = padL + (maxX - minX) * scale + padR;
+          const contentH = padT + (maxY - minY) * scale + padB;
+          const x0 = (w - contentW) / 2 + padL;
+          const y0 = areaTop + (areaH - contentH) / 2 + padT;
+          return { scale, x: x0 - scale * minX, y: y0 - scale * minY };
+        }
         function camAt(point) {
+          if (panMobileQ.matches) return mobileFitCam();
           const { w, h } = stageSize();
           const ax = 0.62 * w;
           const ay = 0.66 * h;
@@ -3871,6 +3934,26 @@
           let left;
           let top;
           let origin = "0 0";
+          if (panMobileQ.matches && cam) {
+            /* Mobil: placera i skärmpx och räkna om till kartans rymd. Klämd mot 16 px kant. */
+            const { w } = stageSize();
+            const s = 1 / inv;
+            const h = el.offsetHeight || 80;
+            const px = cam.x + s * pin.x;
+            const py = cam.y + s * pin.y;
+            let x;
+            let y;
+            if (index === 0) { x = px + 12 - w; y = py + 20; el.dataset.side = "under"; }
+            else if (index === 1) { x = px - 16 - el.offsetWidth; y = py + 20; el.dataset.side = "vänster-under"; }
+            else { x = px - 24; y = py - 32 - 12 - h; el.dataset.side = "ovanför"; }
+            if (index === 0) x = px + 12 - (el.offsetWidth || 180);
+            x = Math.max(16, Math.min(w - 16 - (el.offsetWidth || 180), x));
+            el.style.left = `${(x - cam.x) / s}px`;
+            el.style.top = `${(y - cam.y) / s}px`;
+            el.style.transformOrigin = "0 0";
+            el.style.transform = `scale(${inv})`;
+            return;
+          }
           if (index === 0) {
             // Övre högra hörnet = plopp + (dxRight, dyTop) i kartans rymd
             left = STOCK.x + STOCK_CARD.dxRight - w;
@@ -3907,7 +3990,7 @@
           introArmed = false;
           introStartedAt = 0;
           introDone = false;
-          journeyOriginPx = START_PX;
+          journeyOriginPx = startPx();
           if (introRaf) { cancelAnimationFrame(introRaf); introRaf = 0; }
           hitta.classList.remove("is-journey", "is-journey-intro");
           cards.forEach((el) => {
@@ -3917,7 +4000,7 @@
         }
         function finishIntro() {
           introDone = true;
-          journeyOriginPx = Math.max(START_PX, pinPx());
+          journeyOriginPx = Math.max(startPx(), pinPx());
           hitta.classList.add("is-journey");
           hitta.classList.remove("is-journey-intro");
           cards[0].classList.add("is-on", "is-intro");
@@ -3953,7 +4036,7 @@
         }
         function paintPan(p, snap) {
           const pinned = pinPx();
-          const pastStart = pinned >= START_PX;
+          const pastStart = pinned >= startPx();
           if (!pastStart) resetIntro();
           else armIntro();
           const canTravel = introDone;
@@ -3963,12 +4046,12 @@
           const want = camAt(focus);
           const scale = want.scale;
           camTarget = { x: want.x, y: want.y };
-          if (!canTravel || t <= 0.001 || !cam || snap) cam = { x: want.x, y: want.y };
+          if (panMobileQ.matches || !canTravel || t <= 0.001 || !cam || snap) cam = { x: want.x, y: want.y };
           else {
             cam.x += (want.x - cam.x) * camSmooth;
             cam.y += (want.y - cam.y) * camSmooth;
           }
-          {
+          if (!panMobileQ.matches) {
             const clamped = clampCam({ scale, x: cam.x, y: cam.y });
             cam.x = clamped.x;
             cam.y = clamped.y;
@@ -3976,6 +4059,7 @@
           kart.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${scale})`;
           const inv = 1 / scale;
           syncOrsaLabelGap();
+          syncSthlmLabelSide();
           labelFor.forEach((el, index) => {
             const home = labelHome[pins[index].city];
             el.style.left = `${home.left}px`;
@@ -4086,6 +4170,7 @@
           addEventListener("scroll", () => { try { requestPan(); } catch (error) { console.error(error); } }, { passive: true });
           addEventListener("resize", () => {
             try {
+              placePanParts();
               invalidateStopAnchors();
               alignPan();
               paintPan(panProgress(), true);
@@ -4097,7 +4182,7 @@
           return hitta.getBoundingClientRect().top + scrollY;
         }
         function travelShowFromY() {
-          return hittaDocTop() + START_PX;
+          return hittaDocTop() + startPx();
         }
         function travelArrivalY() {
           return hittaDocTop() + 0.9 * 2.5 * innerHeight;
@@ -4555,9 +4640,13 @@
           const hero = document.querySelector(".parallax-item--hero");
           const y = scrollPrime();
           const fTopo = activeFactor();
-          const topoTy = reducedMotion ? 0 : (1 - fTopo) * y;
+          /* Mobil: parallaxen körs som scrollstyrd CSS-animation (startsida.css, hero-topo-par) — JS sätter bara slutvärdet. */
+          const cssPar = !reducedMotion && mobileQ.matches && CSS.supports("animation-timeline: scroll()");
+          const topoTy = reducedMotion || cssPar ? 0 : (1 - fTopo) * y;
           if (hero) {
             hero.style.setProperty("--hero-topo-ty", `${topoTy.toFixed(2)}px`);
+            const parEnd = cssPar ? `${((1 - fTopo) * Math.max(0, document.documentElement.scrollHeight - innerHeight)).toFixed(0)}px` : "0px";
+            if (hero.dataset.parEnd !== parEnd) { hero.dataset.parEnd = parEnd; hero.style.setProperty("--hero-topo-par-end", parEnd); }
             /* Etikett-delta bara desktop; mobil delta = 0 via labelDelta(). */
             hero.style.setProperty("--hero-label-ty", `${clampedLabelDrift(y, heroS0).toFixed(2)}px`);
           }

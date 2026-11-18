@@ -53,7 +53,8 @@ function smootherstep(p) {
 }
 
 const MOBILE = matchMedia("(max-width: 1023px)");
-const MOBILE_COPY_GAP = 28; /* px, typed line under the masked symbol on mobile (John 2026-11-17: much closer) */
+const MOBILE_COPY_GAP = 40; /* px, typed line under the masked symbol on mobile (John 2026-11-17: much closer; 2026-11-18: +12) */
+const MOBILE_SYMBOL_LIFT = 24; /* px, masked symbol (and the line under it) higher on mobile, state B (John 2026-11-18) */
 
 /* Mobile: always two lines ("Älskat av" / "skidåkare."), see .intro-copy white-space in intro.css. */
 function seasonLine() {
@@ -188,7 +189,7 @@ export function init() {
     const sh = maxY - minY;
     const bh = bW * (sh / sw);
     const cx = w * 0.5;
-    const cy = h * 0.42;
+    const cy = h * 0.42 - (MOBILE.matches ? MOBILE_SYMBOL_LIFT : 0);
     const left = cx - bW / 2;
     const top = cy - bh / 2;
     const map = (x, y) => [left + (x - minX) / sw * bW, top + (y - minY) / sh * bh];

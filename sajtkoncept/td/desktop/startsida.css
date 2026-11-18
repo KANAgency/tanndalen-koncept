@@ -3770,6 +3770,58 @@ body.fraga-open { overflow: hidden; }
   transform: none;
 }
 
+/* —— Hitta hit, mobil (John 18 nov) ——
+   Textblocket i fullbredd överst i sektionen, över kartans intoning; scrollar ut innan resan börjar.
+   Kartan fast (kameran i JS rymmer alla tre stoppen). Faktakortet ligger efter sektionen.
+   Hoppa över bara under resan, ovanför bokningsbaren. */
+@media (max-width: 1023px) {
+  .page .td-hitta.is-pan {
+    margin-top: 48px;
+  }
+
+  .page .td-hitta.is-pan .td-hitta-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .page .td-hitta.is-pan .td-hitta-copy {
+    position: absolute;
+    top: 0;
+    right: auto;
+    left: 16px;
+    width: calc(100vw - 32px);
+    margin: 0;
+    padding: 0;
+    z-index: 8;
+  }
+
+  .page .td-hitta.is-pan .hitta-pan-frame {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 120px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 120px), transparent 100%);
+  }
+
+  .page .td-hitta.is-pan .hitta-pan-stop {
+    width: 172px;
+  }
+
+  .page .td-hitta.is-pan .td-hitta-skip {
+    bottom: calc(61px + env(safe-area-inset-bottom) + var(--space-lg));
+  }
+
+  .page .td-faktakort.td-hitta-fakta-mobil {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    margin-top: var(--space-xl);
+    transform: none;
+    opacity: 1;
+  }
+}
+
 /* Flödesankare under utforsakning — synligt citat i #parallax-layer. */
 .citat-band {
   position: relative;
@@ -6332,6 +6384,7 @@ html, body { overscroll-behavior-y: none; }
 
 html:is([data-mode="booking"], [data-mode="onsite"]) #en-dag,
 html:is([data-mode="booking"], [data-mode="onsite"]) #hitta,
+html:is([data-mode="booking"], [data-mode="onsite"]) .td-hitta-fakta-mobil,
 html:is([data-mode="booking"], [data-mode="onsite"]) #boenden-waabi,
 html:is([data-mode="booking"], [data-mode="onsite"]) #boende,
 html[data-mode="onsite"] #utforsakning { display: none; }
@@ -6516,20 +6569,28 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
 }
 
 /* Mobilhero (2026-11-17). Figma iPhone 16 - 1: media 948:2254, 345×440 (≈ 4:5), x 24, radie 4, 16 px under headern.
-   Säsongsramen som på desktop (John 2026-11-17), 8 px bred på mobil. Inga doodles. Ingen krympning/parallax. */
+   Säsongsramen som på desktop (John 2026-11-17), 8 px bred på mobil. Doodle nere till höger (2026-11-18). Ingen krympning/parallax. */
 @media (max-width: 1023px) {
   /* Runda 2: ramen ut till statement-kanterna (16 px), videon kvar på 329×424. */
   .hero { width: calc(100vw - 32px); margin-left: 0; margin-top: 16px; }
   .hero-frame { aspect-ratio: 361 / 456; border-radius: var(--radius-sm); }
   .hero-frame .hero-media { inset: var(--space-lg); width: calc(100% - 2 * var(--space-lg)); height: calc(100% - 2 * var(--space-lg)); border-radius: var(--radius-sm); }
-  .hero-doodle { display: none; }
+  /* John 2026-11-18: doodlen tillbaka nere till höger, ungefär halva desktopstorleken. */
+  .hero-sun { top: auto; right: -12px; bottom: -52px; width: 129px; height: 129px; }
+  .hero-goggles {
+    top: auto; right: -12px; bottom: -28px; width: 148px; height: 73px; /* 12 px upp (2026-11-18) */
+    -webkit-mask: url("assets/img/goggles-doodle.png") -22px -55px / 194px 194px no-repeat;
+    mask: url("assets/img/goggles-doodle.png") -22px -55px / 194px 194px no-repeat;
+    -webkit-mask-mode: alpha;
+    mask-mode: alpha;
+  }
 }
 
 /* Mobil: Storvigeln-topografin syns till höger strax under ingressen (John 2026-11-17).
    Desktopens fasta förskjutning (--topo-shift-y 600 px) flyttade den ned bakom Aktuellt. Etiketten väntar. */
 @media (max-width: 1023px) {
   .parallax-item--hero,
-  html[data-mode] .parallax-item--hero { --topo-shift-x: 200px; --topo-shift-y: -250px; } /* Runda 5: 250 upp, 200 höger (John 2026-11-17) */
+  html[data-mode] .parallax-item--hero { --topo-shift-x: 50px; --topo-shift-y: -250px; } /* Runda 5: 250 upp, 200 höger (John 2026-11-17). Runda 6–7: 100 + 50 vänster (2026-11-18) */
 
   /* Runda 5: ett steg mörkare i mobilen (neutral-light → neutral-subtle), båda topografierna. */
   .parallax-item--hero .hero-topo,
@@ -6545,5 +6606,73 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .parallax-item--hero .hero-topo {
     -webkit-mask: url("assets/img/topografi.svg") left top / contain no-repeat;
     mask: url("assets/img/topografi.svg") left top / contain no-repeat;
+  }
+}
+
+/* Mobilrunda 2026-11-18 (John). Bara mobil. */
+@media (max-width: 1023px) {
+  /* Glasmenyn 8 px bredare på varje sida; innehållet ligger kvar i sidans linjer. */
+  .top-glass,
+  html.is-scrolled .top-glass,
+  .top.is-scrolled .top-glass { inset: 0 -8px; }
+
+  .statement { margin-top: 32px; } /* 28 → 32 */
+
+  /* Topografietiketten (Storvigeln) syns i mobilen. Nudge skalad efter topobredden (≈ 685 / 1249 av desktop). */
+  .parallax-item--hero .place-labels { display: block; }
+  .parallax-item--hero .place-label { display: block; }
+  /* Toppen ligger bakom statement-texten: etiketten högerställd i luckan statement → Aktuellt (högerkant x 359). */
+  .parallax-item--hero { --label-nudge-x: 40px; --label-nudge-y: -221px; }
+
+  /* Aktuellt: eyebrow → rubrik 12 → 4, rubrik → kort 40 → 28, hela blocket 24 upp. */
+  .td-aktuellt-titles { gap: 4px; }
+  .td-aktuellt { gap: 28px; margin-top: calc(8px + var(--aktuellt-shift, 0px)); }
+
+  /* En vinterdag 64 px ned så rubriken inte ligger på Aktuellt-korten. */
+  .page .en-dag { margin-top: 112px; }
+
+  /* Läget just nu: en kolumn, alla kort i innehållsytan (16 px på båda sidor). */
+  .just-cols { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  .just-cols > * { height: auto; min-width: 0; }
+  .just-cols .td-just-nu-stack,
+  .just-cols .td-just-nu-stack-viewport,
+  .just-cols .td-just-nu-data,
+  .just-cols .td-fraga,
+  .just-cols .td-videokort { width: 100%; box-sizing: border-box; }
+  /* Datakorten: pagineringen lodrätt till höger som på desktop, men inne i kortet. */
+  .just-cols .td-just-nu-pager {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    left: auto;
+    flex-direction: column;
+    gap: 4px;
+    width: auto;
+    margin: 0;
+    transform: translateY(-50%);
+  }
+}
+
+/* Mjuk topo-parallax i mobilen: scrollstyrd CSS-animation (kompositorn) i stället för JS per scroll-event.
+   Slutvärdet (1 − f) × max-scroll sätts i JS (--hero-topo-par-end); JS-förskjutningen nollas då. */
+@keyframes hero-topo-par {
+  from { translate: 0 0; }
+  to { translate: 0 var(--hero-topo-par-end, 0px); }
+}
+@keyframes hero-label-par {
+  from { translate: 0 0; }
+  to { translate: 0 calc(-1 * var(--hero-topo-par-end, 0px)); }
+}
+@supports (animation-timeline: scroll()) {
+  @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+    .parallax-item--hero .hero-topo-unit {
+      animation: hero-topo-par linear both;
+      animation-timeline: scroll(root block);
+    }
+    /* Etiketten står still mot sidan (luckan är för smal för att den ska glida med topografin). */
+    .parallax-item--hero .place-labels {
+      animation: hero-label-par linear both;
+      animation-timeline: scroll(root block);
+    }
   }
 }

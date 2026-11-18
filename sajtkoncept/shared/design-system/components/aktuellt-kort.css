@@ -318,17 +318,19 @@
     scroll-snap-align: start;
   }
 
-  /* Tunnare ram: 24 → 16 px (−33 %). Brödtexten följer bildens kant. */
-  .td-aktuellt-kort-platta { padding: var(--space-lg); }
-  .td-aktuellt-kort-body { padding-inline: var(--space-lg); }
+  /* Tunnare ram: 24 → 16 → 14 px (John 2026-11-18). Brödtexten följer bildens kant. */
+  .td-aktuellt-kort-platta { padding: 14px; }
+  .td-aktuellt-kort-body { padding-inline: 14px; }
 
+  /* Kvadratisk bild på alla kort (John 2026-11-18), var 209 px hög. */
   .td-aktuellt-kort-bild {
-    height: 209px;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 
   .td-aktuellt-kort[data-typ="fraga"] {
     min-height: 400px;
-    padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+    padding: 14px 14px var(--space-2xl);
   }
 
   .td-aktuellt-kort[data-typ="fraga"] .td-aktuellt-kort-fraga.td-heading-md {

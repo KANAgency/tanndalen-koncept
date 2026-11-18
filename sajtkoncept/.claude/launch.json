@@ -1,1 +1,1 @@
-{"version":"0.0.1","configurations":[{"name":"td","url":"http://127.0.0.1:4173","port":4173}]}
+{"version":"0.0.1","configurations":[{"name":"td","url":"http://127.0.0.1:4173","port":4173},{"name":"td-lan","runtimeExecutable":"python3","runtimeArgs":["scripts/dev-server.py","4174","--lan"],"port":4174}]}
