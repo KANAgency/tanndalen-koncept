@@ -7435,3 +7435,10 @@ html[data-season="summer"] .utforsakning { --utforsakning-doodle-x: -70px; --utf
   .fraga-view[data-view="search"] .td-fraga-fragelista-platta { border-top: 1px solid var(--color-TD-neutral-light); }
 }
 @media (min-width: 1024px) { .citat-anchor-mobile { display: none; } }
+
+/* Mobilrunda 14, 2026-11-18 (John): sommarläget i mobil får vinterlägets mått. Bara mobil. */
+@media (max-width: 1023px) {
+  /* 14-1. Här bor skidåkarna ligger efter En dag i sommar. Desktopens 90/56 px (rad 6526) gällde även mobil;
+     nu samma rytm som vinterns En dag → Just nu: 48 px ovanför, Just nu:s egna 48 + 16 under. */
+  html[data-season="summer"] #boenden-waabi { margin-top: 48px; margin-bottom: 0; }
+}
