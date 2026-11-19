@@ -462,6 +462,26 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
 .theme-OG .og-hp-hero-scene .og-hp-hero-copy {
   margin-bottom: var(--og-hp-scene-landscape);
 }
+/* Sommar (19 nov): DJI 0812 (Rädsjön med bastuflotte, Webb_sommar). Samma mått och
+   horisont (61.3vw) som vinterbilden; himlen är vinterbildens gradient, tonad mot
+   sommarens horisontfärg, och sjön/skogen är originalets pixlar. Byggd lokalt. */
+/* Mer landskap på sommaren (31 → 46vw) så att bastuflotten (30 % av bildbredden
+   under horisonten) syns ovanför bokningsbaren. Mätt 1024: 53 px luft. */
+html[data-season="summer"].theme-OG .og-hp-hero-scene {
+  --og-hp-scene-landscape: 46vw;
+}
+@media (max-width: 639px) {
+  /* Mobil: horisontens fasta 80 px äter mer av bredden, så mer landskap behövs. */
+  html[data-season="summer"].theme-OG .og-hp-hero-scene {
+    --og-hp-scene-landscape: 58vw;
+  }
+}
+html[data-season="summer"].theme-OG .og-hp-hero-scene .og-hp-hero-media-block::before {
+  background-image: image-set(
+    url("./assets/img/og-hero-sky-summer-1600.jpg") 1x,
+    url("./assets/img/og-hero-sky-summer.jpg") 2x
+  );
+}
 
 /* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
 .en-dag .en-dag-season { display: none !important; }
