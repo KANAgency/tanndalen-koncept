@@ -4796,7 +4796,7 @@ html.is-intro:not(.is-intro-done) .page.page { --en-dag-end: calc(2235px + 200vh
 
 .utforsakning-eyebrow {
   margin: 0;
-  color: var(--color-TD-neutral);
+  color: var(--color-TD-neutral-strong);
   font-family: var(--font-family-TD-secondary), sans-serif;
   font-size: var(--font-size-base) /* TD/eyebrow-xs 16/22 */;
   font-weight: 700;
@@ -6334,7 +6334,7 @@ html, body { overscroll-behavior-y: none; }
 .page .td-bo-alla { color: var(--color-text-primary); }
 .page .td-bo-waabi-pil { color: #FFFFFF; }
 .td-bo .td-bo-head { gap: var(--space-md); }
-.td-bo .td-bo-eyebrow { color: var(--color-TD-neutral); }
+.td-bo .td-bo-eyebrow { color: var(--color-TD-neutral-strong); }
 .td-bo .td-bo-head h2 { margin: 0; }
 /* Typografi on brand (2026-11-15). Radierna är sm i grundreglerna ovan (2026-11-18). */
 .td-bo .td-bo-pris { font-size: inherit; font-weight: inherit; }
@@ -6507,7 +6507,7 @@ html[data-season="summer"] .utforsakning-clip:not([data-sasong="sommar"]) { disp
 html[data-season="summer"] .utforsakning-card { background: var(--color-TD-snow); }
 html[data-season="summer"] .utforsakning-card .td-heading-4,
 html[data-season="summer"] .utforsakning-card .td-lead-sm { color: var(--color-TD-night); }
-html[data-season="summer"] .utforsakning-card .utforsakning-eyebrow { color: var(--color-TD-neutral); }
+html[data-season="summer"] .utforsakning-card .utforsakning-eyebrow { color: var(--color-TD-neutral-strong); }
 html[data-season="summer"] .utforsakning-tabs { border-bottom-color: rgb(36 39 42 / 0.15); }
 html[data-season="summer"] .utforsakning-tab { color: var(--color-TD-neutral); }
 html[data-season="summer"] .utforsakning-tab[aria-selected="true"],
