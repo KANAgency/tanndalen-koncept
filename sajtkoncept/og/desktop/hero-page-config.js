@@ -79,7 +79,12 @@ export const HERO_PAGE_CONFIG = {
       { image: "./assets/img/og-intro-cykelbanan.jpg", video: "./assets/video/intro/cykelparken.mp4", line1: "Cykelbanan", clipDurationSec: 5, advanceEarlySec: 0.3 },
       { image: "./assets/img/og-intro-bryggfika.jpg", video: "./assets/video/intro/bryggfika.mp4", line1: "Bryggfika", clipDurationSec: 5, advanceEarlySec: 0.3 }
     ],
-    heroTitle: "Sommarlov i Dalarna"
+    /* Copy 19 nov: samma dualitet som vintern, fakta i docs/og-fakta.md (Sommar). */
+    heroTitle: "Sjön för barnen, leder för er.",
+    heroBody:
+      "Över 50 km cykelleder, klätterpark och sandstrand vid Rädsjön. Barnen hoppar från bryggan, ni tar ett varv i flowtrailen och möts vid poolen på Wärdshuset efteråt. Fyra timmar från Stockholm, med bastuflotte och SUP på samma sjö.",
+    heroBodyMobile:
+      "Över 50 km cykelleder, klätterpark och sandstrand vid Rädsjön. Fyra timmar från Stockholm, med bastuflotte och SUP på samma sjö."
   },
 
   /** How long each scene holds before crossfade (seconds). */
