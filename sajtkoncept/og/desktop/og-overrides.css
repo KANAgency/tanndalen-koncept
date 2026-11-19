@@ -429,8 +429,16 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   --og-hp-scene-horizon-gap: 80px; /* ingress → horisont */
   position: relative;
   isolation: isolate;
+  /* Bilden får inte sticka upp ovanför scenen (då syns den under introvideon redan
+     vid scroll 0). Klipp i överkant, släpp igenom bokningsbarens skugga nedåt. */
+  clip-path: inset(0 0 -120px 0);
 }
 .theme-OG .og-hp-hero-scene .og-hp-hero-media-block::before {
+  /* Toningen räknas från horisonten (61.3vw ner i bilden): genomskinlig 200 px ovanför ingressens underkant (= ovanför scenens topp)
+     , hel himmel 60 px under ingressen. Molnen syns genom toppen. */
+  --og-hp-scene-hz: calc(61.3vw - var(--og-hp-scene-horizon-gap));
+  -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--og-hp-scene-hz) - 200px), #000 calc(var(--og-hp-scene-hz) + 60px));
+  mask-image: linear-gradient(to bottom, transparent calc(var(--og-hp-scene-hz) - 200px), #000 calc(var(--og-hp-scene-hz) + 60px));
   content: "";
   position: absolute;
   z-index: -1;
@@ -444,8 +452,6 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
       url("./assets/img/og-hero-sky.jpg") 2x
     )
     center top / 100vw auto no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 30%);
   pointer-events: none;
 }
 .theme-OG .og-hp-hero-scene .og-hp-hero-copy {
