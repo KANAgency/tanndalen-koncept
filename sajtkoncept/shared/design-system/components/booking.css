@@ -25,6 +25,9 @@
   text-align: center;
 }
 
+/* TEST (John 19 nov): texten ett steg större än UI/kicker (xs 12 → sm 14), båda sajterna. */
+.td-booking-head.td-ui-kicker { font-size: var(--font-size-sm); }
+
 /* TEST (John 2026-11-19): lägre radie på den vita ramen när listen finns, 8.
    Id-selektor så att den vinner över lägena Bokning/På plats (startsida.css sätter radius-lg 16 där). */
 @media (min-width: 1024px) {
