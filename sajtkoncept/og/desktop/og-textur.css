@@ -1,36 +1,72 @@
 /*
  * OG materialton (beslut 19 nov): grängat papper, styrka 35, ovanpå off-white
  * (--color-bg-base). soft-light med 50 % grå som neutral → snittfärgen står kvar.
- * ?textur=papper|linne|sandsten|tra|lader&styrka=0–100 (og-textur.js) skriver
- * över --og-textur för jämförelse; "Av" i panelen sätter den till none.
+ * Texturväljaren (og-textur.js: Ingen | Papper 70 | Sandsten 65 | Läder 50) skriver
+ * över --og-textur; Ingen sätter den till none.
  */
 /* Texturen ligger på main (bakom heron och blocken) så att den löper obruten
  * även i glappet under bokningsbaren. Blocken blir genomskinliga; main har
  * samma bg-base, så färgen är oförändrad. */
 .theme-OG .og-hp-main {
   background-color: var(--color-bg-base);
-  background-image: var(--og-textur, url("./assets/img/textur-papper.svg"));
+  background-image: var(--og-textur, url("./assets/img/textur-papper.svg?v=5"));
   background-size: 480px 480px;
   background-blend-mode: soft-light;
 }
 .theme-OG .og-hp-main .og-hp-blocks {
   background: transparent;
 }
+/* Med intro är main genomskinlig (molnen ska synas bakom heron, og-overrides.css),
+ * så då bär blocken texturen själva. */
+.theme-OG .og-hp-page:not(.is-skip-intro) .og-hp-main .og-hp-blocks {
+  background-color: var(--color-bg-base);
+  background-image: var(--og-textur, url("./assets/img/textur-papper.svg?v=5"));
+  background-size: 480px 480px;
+  background-blend-mode: soft-light;
+  position: relative;
+}
+/* …och sträcker sig upp under områdesbilden: glappet mellan bildens underkant
+ * (halva bokningsbaren) och blocken är media-blockets margin-bottom (4rem, hero-page.css).
+ * z-index -1 lägger den under herosceneriet, så bilden täcker överlappet.
+ * Positionen räknas från underkanten, så rutnätet går ihop med blockens utan skarv. */
+.theme-OG .og-hp-page:not(.is-skip-intro) .og-hp-main .og-hp-blocks::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(4rem + 48px);
+  background-color: var(--color-bg-base);
+  background-image: var(--og-textur, url("./assets/img/textur-papper.svg?v=5"));
+  background-size: 480px 480px;
+  background-position: left bottom;
+  background-blend-mode: soft-light;
+  pointer-events: none;
+}
 
+/* Texturväljaren (og-textur.js): fyra små knappar nere till vänster. */
 .og-textur-panel {
   position: fixed;
   left: 16px;
   bottom: 16px;
   z-index: 9999;
   display: flex;
-  gap: 16px;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 8px;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
   background: rgb(255 255 255 / 0.92);
   box-shadow: 0 2px 12px rgb(0 0 0 / 0.15);
-  font: 13px/1.2 system-ui, sans-serif;
-  color: #3c3c3b;
+  font: 12px/1 system-ui, sans-serif;
 }
-.og-textur-panel label { display: flex; gap: 6px; align-items: center; }
-.og-textur-panel output { min-width: 2ch; font-variant-numeric: tabular-nums; }
+.og-textur-panel button {
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #3c3c3b;
+  font: inherit;
+  cursor: pointer;
+}
+.og-textur-panel button:hover { background: rgb(0 0 0 / 0.06); }
+.og-textur-panel button[aria-pressed="true"] { background: #003e3a; color: #f5eee5; }
