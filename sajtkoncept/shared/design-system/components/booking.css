@@ -13,41 +13,14 @@
   background: var(--color-booking-calendar-surface);
 }
 
-/* Panelhuvud (TEST, John 2026-11-19): baren ska förtydliga att den är bokning, som en del av panelen.
-   Rubrik vänster (Superclarendon), "Min bokning" höger. Tre varianter via data-head (?bokahuvud=):
-   a = tonad list (Dag-ljus) överst, b = vit med rubrik, c = Natt-list. Bara desktop. */
+/* Panelhuvud (TEST, John 2026-11-19): låg list överst i baren som säger att den är bokning.
+   Dag-bakgrund, liten centrerad text. Bara desktop. */
 .td-booking-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--color-TD-neutral-highlight);
-  color: var(--color-TD-night);
-}
-
-.td-booking-head h2 {
   margin: 0;
-}
-
-.td-booking-head button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-}
-
-.td-booking[data-head="b"] .td-booking-head {
-  padding: var(--space-lg) var(--space-lg) 0;
-  background: none;
-}
-
-.td-booking[data-head="c"] .td-booking-head {
-  background: var(--color-TD-night);
-  color: var(--color-TD-snow);
+  padding: 6px var(--space-lg);
+  background: var(--color-TD-day);
+  color: var(--color-TD-night);
+  text-align: center;
 }
 
 @media (max-width: 1023px) {

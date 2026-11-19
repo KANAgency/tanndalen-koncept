@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=radie1" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=radie2" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
-    <link rel="stylesheet" href="/ds/components/booking.css?v=head3" />
+    <link rel="stylesheet" href="/ds/components/booking.css?v=head4" />
     <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
@@ -420,17 +420,7 @@
           }
         </script>
         <div class="td-booking" id="booking" data-depth="front" role="group" aria-labelledby="booking-head">
-          <div class="td-booking-head"><h2 class="td-heading-xxs-regular" id="booking-head">Boka din resa</h2><button class="td-ui-caption" type="button" data-booking-account>Min bokning</button></div>
-          <script>
-            (function () {
-              var head = new URLSearchParams(location.search).get("bokahuvud");
-              if (head === "b" || head === "c") document.getElementById("booking").dataset.head = head;
-              document.querySelector("[data-booking-account]").addEventListener("click", function (event) {
-                event.stopPropagation();
-                document.getElementById("account-user")?.click();
-              });
-            })();
-          </script>
+          <p class="td-booking-head td-ui-kicker" id="booking-head">Boka din resa</p>
           <div class="td-booking-clip" id="booking-clip"></div>
           <div class="td-booking-cats" id="booking-cats"></div>
         </div>
