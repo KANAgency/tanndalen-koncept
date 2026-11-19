@@ -649,7 +649,7 @@ export function initTdBlocks(root = document) {
           /* Mjuk skugga: växer medan kortet lyfter in, krymper när det landar (2026-11-14). */
           {
             const lift = rising ? Math.pow(1 - clamp01(into), 2.5) : 0; /* tonar ned snabbt mot landning */
-            media.style.boxShadow = `0 ${Math.round(12 + 48 * lift)}px ${Math.round(36 + 104 * lift)}px rgb(36 39 42 / ${(0.16 + 0.22 * lift).toFixed(3)})`;
+            media.style.boxShadow = `0 ${Math.round(12 + 48 * lift)}px ${Math.round(36 + 104 * lift)}px rgb(60 60 59 / ${(0.16 + 0.22 * lift).toFixed(3)})`;
           }
           if (copy) {
             const land = index * span;
