@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=radie1" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=radie2" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
-    <link rel="stylesheet" href="/ds/components/booking.css?v=mob5" />
+    <link rel="stylesheet" href="/ds/components/booking.css?v=head1" />
     <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
@@ -419,7 +419,8 @@
             document.querySelector(".hero-goggles").setAttribute("aria-hidden", "true");
           }
         </script>
-        <div class="td-booking" id="booking" data-depth="front">
+        <div class="td-booking" id="booking" data-depth="front" role="group" aria-labelledby="booking-head">
+          <p class="td-booking-head td-ui-kicker" id="booking-head">Boka din resa</p>
           <div class="td-booking-clip" id="booking-clip"></div>
           <div class="td-booking-cats" id="booking-cats"></div>
         </div>
