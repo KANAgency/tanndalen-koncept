@@ -19,8 +19,8 @@
   margin: 0;
   padding: 6px var(--space-lg) 7px; /* 1 px extra under: optiskt centrerad */
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  background: var(--color-TD-day);
-  color: var(--color-TD-night);
+  background: var(--color-TD-night); /* TEST (John 19 nov): Dag gick ihop med sidans Dag, för mycket beige */
+  color: var(--color-TD-snow);
   text-align: center;
 }
 

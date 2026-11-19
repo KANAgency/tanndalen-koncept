@@ -313,9 +313,11 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   margin-right: auto;
   text-align: center;
 }
-/* Brödtexten smalare än rubriken (John 19 nov): ca 60 tecken per rad, centrerad. */
+/* Brödtexten smalare än rubriken (John 19 nov), centrerad. Bredden följer rubrikens
+   storlek (10 × rubrikens font-size, 600 px vid 1440) så att proportionen rubrik/brödtext
+   håller vid alla bredder; 32em var för smalt. */
 .theme-OG .og-hp-hero-copy p {
-  max-width: min(100%, 32em);
+  max-width: min(100%, calc(10 * clamp(var(--og-hp-hero-title-size-min), var(--og-hp-hero-title-size), var(--heading-2-size))));
   margin-inline: auto;
 }
 

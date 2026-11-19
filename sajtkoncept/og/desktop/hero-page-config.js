@@ -80,7 +80,7 @@ export const HERO_PAGE_CONFIG = {
       { image: "./assets/img/og-intro-bryggfika.jpg", video: "./assets/video/intro/bryggfika.mp4", line1: "Bryggfika", clipDurationSec: 5, advanceEarlySec: 0.3 }
     ],
     /* Copy 19 nov: samma dualitet som vintern, fakta i docs/og-fakta.md (Sommar). */
-    heroTitle: "Sjön för barnen, leder för er.",
+    heroTitle: "Barnen i sjön, ni på cykeln.",
     heroBody:
       "Över 50 km cykelleder, klätterpark och sandstrand vid Rädsjön. Barnen hoppar från bryggan, ni tar ett varv i flowtrailen och möts vid poolen på Wärdshuset efteråt. Fyra timmar från Stockholm, med bastuflotte och SUP på samma sjö.",
     heroBodyMobile:
@@ -174,7 +174,7 @@ export const HERO_PAGE_CONFIG = {
   heroTextAlignWithIntroHeadline: false,
 
   /* Copy 19 nov (John): manualens tonalitet s. 76–77 + dualiteten s. 87–88, fakta i docs/og-fakta.md. */
-  heroTitle: "Backe för barnen, spår för er.",
+  heroTitle: "Barnen i backen, ni i spåret.",
   heroBody:
     "24 nedfarter, upp till 145 km längdspår och Bärra Blåbär i Barnbacken. Barnen tar knappliften, ni tar ett varv i spåren och möts på Baka Kaka efteråt. Fyra timmar från Stockholm, och barn till och med 6 år åker gratis med hjälm.",
   /** ≤639 px: utan mittmeningen (John 19 nov), ca 6 rader i stället för 9. */
