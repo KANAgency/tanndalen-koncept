@@ -468,21 +468,34 @@
 .og-mix-text .td-ui-title { color: var(--color-OG-day); }
 .og-mix-text .td-ui-caption { font-size: var(--font-size-sm); color: color-mix(in srgb, var(--color-OG-day) 72%, transparent); }
 
-/* Kurbitsbård: nedtonad dekoration i underkant (manualen M71/G85: sparsamt, aldrig blickfång) */
-.og-mix-kurbits {
+/* Kurbitsbård: nedtonad dekoration i underkant (manualen M71/G85: sparsamt, aldrig blickfång).
+   Motivet alternerar rättvänt/speglat (John 19 nov) – tilen i kurbits-alternerande.svg är ett par. */
+.og-mix-kurbits,
+.og-fraga-kurbits {
+  --kurbits-inset: 0px;
+  --kurbits-tile: calc(34px * 1838 / 259); /* ett par (rättvänd + speglad) i 34 px höjd */
   position: absolute;
   left: 0;
   right: 0;
   bottom: var(--space-xl);
+  /* Bredden avrundas nedåt till hela par: jämna mellanrum och hela motiv i båda ändar */
+  width: round(down, calc(100% - 2 * var(--kurbits-inset)), var(--kurbits-tile));
+  margin-inline: auto;
   height: 34px;
   background: var(--color-OG-day);
   opacity: 0.14;
-  -webkit-mask: url("./assets/brand/kurbits.svg") center / auto 34px repeat-x;
-  mask: url("./assets/brand/kurbits.svg") center / auto 34px repeat-x;
-  -webkit-mask-repeat: space no-repeat;
-  mask-repeat: space no-repeat;
+  -webkit-mask: url("./assets/brand/kurbits-alternerande.svg") 0 50% / var(--kurbits-tile) 34px repeat-x;
+  mask: url("./assets/brand/kurbits-alternerande.svg") 0 50% / var(--kurbits-tile) 34px repeat-x;
   pointer-events: none;
 }
+/* Stora Orsaguiden: ingen skugga, kurbitsbård i botten i blockets förgrundsfärg */
+.theme-OG .td-fraga-block:has(.og-fraga-kurbits) {
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+  padding-bottom: calc(var(--space-5xl) + 40px);
+}
+.og-fraga-kurbits { --kurbits-inset: var(--space-xl); background: var(--fraga-fg); }
 
 @keyframes og-mix-in {
   from { opacity: 0; transform: translateY(4px); }

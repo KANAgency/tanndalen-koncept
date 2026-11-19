@@ -1049,3 +1049,8 @@ html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-ha
 
 /* 19 nov: TD-läckage. Bokningens backdrop i shared booking.css är TD-natt; i OG Orsa svart. */
 .theme-OG .td-booking-backdrop { background: rgb(60 60 59 / 0.4); }
+
+/* AI-taggen (John 19 nov): Literata sitter lägre i radboxen än Superclarendon, så taggen hamnade 0,9–1,25 px över namnets
+   versalmitt (TD: 0–0,3 px under). Optisk nedflyttning så den matchar TD. */
+.theme-OG .td-guide-ai { translate: 0 1px; }
+.theme-OG .fraga-block-name .td-guide-ai { translate: 0 1.5px; }
