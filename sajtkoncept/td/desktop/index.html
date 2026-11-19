@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/ds/components/aktuellt-kort.css?v=radie1" />
     <link rel="stylesheet" href="/ds/components/fraga-block.css?v=radie2" />
     <link rel="stylesheet" href="/ds/components/fraga-fragelista.css?v=1" />
-    <link rel="stylesheet" href="/ds/components/booking.css?v=head12" />
+    <link rel="stylesheet" href="/ds/components/booking.css?v=summary1" />
     <link rel="stylesheet" href="/ds/components/just-nu-header.css?v=sm32" />
     <link rel="stylesheet" href="/ds/components/just-nu-data.css" />
     <link rel="stylesheet" href="/ds/components/just-nu-stack.css?v=langd-data" />
@@ -1972,7 +1972,12 @@
             pill.style.height = `${button.offsetHeight}px`;
             pill.style.transform = `translate(${button.offsetLeft}px, ${button.offsetTop}px)`;
           }
-          clip.querySelectorAll(".td-booking-pane").forEach((pane) => pane.classList.toggle("is-shown", !same && pane.dataset.cat === id));
+          clip.querySelectorAll(".td-booking-pane").forEach((pane) => {
+            const shown = !same && pane.dataset.cat === id;
+            /* Bokad kategori (bocken på knappen) öppnar med summeringen, varje gång panelen öppnas. */
+            if (shown) pane.dataset.booked = String(button.classList.contains("is-done") && Boolean(pane.querySelector(".td-booking-summary")));
+            pane.classList.toggle("is-shown", shown);
+          });
           const shown = clip.querySelector(".is-shown");
           clip.style.height = shown ? `${shown.offsetHeight}px` : "0px";
         });
@@ -1998,7 +2003,23 @@
         }[id];
         const cal = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3V6M10 3V6M4 8H12M4 5H12V13H4V5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         const chev = `<svg class="td-field-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5L8 10.5L13 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-        pane.innerHTML = `<div class="td-field-group"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${dateLabel}</span><span class="td-field-value td-ui-body">${dateValue}</span></span>${cal}</button><hr class="td-field-divider"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${whoLabel}</span><span class="td-field-value td-ui-body">${whoValue}</span></span>${chev}</button></div><button class="td-button td-button-primary td-ui-cta td-booking-search" type="button">${icon}${search}</button>${links}`;
+        /* Bokat (läge Bokning/På plats): summering i stället för sökformuläret, "Boka nytt …" visar formuläret (John 2026-11-19).
+           Demofamiljen: 2 vuxna, barn 6 och 9 år. Alpint vuxen + 9-åringen, längd vuxen + 6-åringen. */
+        const summaries = {
+          boende: { title: "Ski Lodge Premium", rows: [["Datum", "12–19 feb 2027 · 7 nätter"], ["Resesällskap", "2 vuxna, 2 barn (6 och 9 år)"], ["Incheckning", "Från 15:00"]], again: "Boka nytt boende" },
+          liftkort: { title: "Liftkort 6 dagar", rows: [["Datum", "13–18 feb 2027"], ["Antal", "1 vuxen, 1 barn (9 år)"]], again: "Boka nya liftkort" },
+          skidhyra: { title: "Skidhyra 6 dagar", rows: [["Alpint", "1 vuxen, 1 barn (9 år)"], ["Längd", "1 vuxen, 1 barn (6 år)"], ["Datum", "13–18 feb 2027"], ["Hämtas", "12 feb från 14:00"]], again: "Boka ny skidhyra" }
+        };
+        const check = `<svg class="td-booking-summary-check" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="13" fill="currentColor"/><path d="M7 13.4l4 4.1L19 9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const summary = summaries[id]
+          ? `<div class="td-booking-summary"><div class="td-field-group td-booking-summary-card"><p class="td-booking-summary-head"><span class="td-ui-title">${summaries[id].title}</span><span class="td-booking-summary-status td-ui-label">${check}Bokat</span></p>${summaries[id].rows.map(([label, value]) => `<hr class="td-field-divider"><div class="td-booking-summary-row"><span class="td-field-label td-ui-label">${label}</span><span class="td-ui-body">${value}</span></div>`).join("")}</div><button class="td-button td-button-secondary td-button-fill-neutral td-button-md td-booking-again" type="button">${summaries[id].again}</button></div>`
+          : "";
+        pane.innerHTML = `<div class="td-booking-form"><div class="td-field-group"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${dateLabel}</span><span class="td-field-value td-ui-body">${dateValue}</span></span>${cal}</button><hr class="td-field-divider"><button class="td-field" type="button"><span><span class="td-field-label td-ui-label">${whoLabel}</span><span class="td-field-value td-ui-body">${whoValue}</span></span>${chev}</button></div><button class="td-button td-button-primary td-ui-cta td-booking-search" type="button">${icon}${search}</button>${links}</div>${summary}`;
+        pane.querySelector(".td-booking-again")?.addEventListener("click", () => {
+          pane.dataset.booked = "false";
+          clip.style.height = `${pane.offsetHeight}px`;
+          pane.querySelector(".td-booking-search")?.focus();
+        });
         clip.append(pane);
       }
       document.addEventListener("td-season", renderBookingCats);
@@ -7693,7 +7714,7 @@ window.tdScrollTrack = (track, delta, reduced) => {
       })();
     </script>
     <script type="module">
-      import { init } from "./modes.js?v=fit6";
+      import { init } from "./modes.js?v=fit7";
       init();
     </script>
   <script>

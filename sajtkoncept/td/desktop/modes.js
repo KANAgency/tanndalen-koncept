@@ -6,8 +6,8 @@ import {
   MODES_UI
 } from "./site-config.js";
 import * as stayApi from "./demo-stay.js";
-import { BOOKING_CALENDAR, ONSITE_CALENDAR, modes } from "./modes-content.js";
-import { createModesEngine } from "/shared/js/modes-engine.js?v=fit6";
+import { BOOKING_CALENDAR, ONSITE_CALENDAR, modes } from "./modes-content.js?v=checkin15";
+import { createModesEngine } from "/shared/js/modes-engine.js?v=fit7";
 
 export { modes };
 

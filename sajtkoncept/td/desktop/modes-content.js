@@ -6,8 +6,8 @@ export const BOOKING_CALENDAR = {
     {
       date: "2027-02-12",
       rows: [
-        { time: "12:00", title: "Checka in på Ski Lodge Premium" },
-        { time: "14:00", title: "Utrustning redo", link: "Se var" }
+        { time: "14:00", title: "Utrustning redo", link: "Se var" },
+        { time: "15:00", title: "Checka in på Ski Lodge Premium" }
       ]
     },
     {
