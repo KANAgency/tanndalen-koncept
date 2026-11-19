@@ -963,6 +963,24 @@ html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-f
   overscroll-behavior-x: contain;
 }
 .theme-OG .td-aktuellt-track::-webkit-scrollbar { display: none; }
+/* Plattorna i OG:s färgprofil (John 19 nov): bara vinter (#A1B5BA) får komma från TD, och bara i vintersyfte.
+   Sommar → mörkgrön, höst → taupe (mellangrön), vår → taupe-tint (neutral på taupe), svart glas → Orsa svart. */
+.theme-OG .td-aktuellt-kort[data-platta="sommar"] {
+  --td-aktuellt-plate: var(--color-OG-dark-green);
+  --td-aktuellt-on-plate: var(--color-OG-day);
+}
+.theme-OG .td-aktuellt-kort[data-platta="host"] {
+  --td-aktuellt-plate: var(--color-OG-taupe);
+  --td-aktuellt-on-plate: var(--color-OG-day);
+}
+.theme-OG .td-aktuellt-kort[data-platta="var"] {
+  --td-aktuellt-plate: var(--color-OG-taupe-tint);
+  --td-aktuellt-on-plate: var(--color-OG-orsa-black);
+}
+.theme-OG .td-aktuellt-kort[data-platta="glas-svart"] {
+  --td-aktuellt-plate: color-mix(in srgb, var(--color-OG-orsa-black) 80%, transparent);
+  --td-aktuellt-on-plate: var(--color-OG-snow);
+}
 /* Rubriker och meta i OG-färger (komponenten har TD:s neutral-strong). */
 .theme-OG .td-aktuellt-kort-meta { color: var(--color-OG-neutral-strong); }
 /* Frågekortet = Orsaguiden: guidefärgen (vinter sjöblå, sommar vår-gul) och Orsa svart, som Figma Aktuellt / Kort Typ=Fråga. */
