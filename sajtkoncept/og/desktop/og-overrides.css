@@ -135,9 +135,7 @@ html.theme-OG body.og-hp-page {
 /* Sekundär CTA = taupe-tint (--color-cta-secondary, Figma color/cta-secondary), skild från
    vinterfärgen (2026-11-17). Taupe-värdena kommer från tokens (color/OG/taupe*).
    --color-season-winter är OG:s vinterfärg (Is #D1DBE1 sedan 19 nov) och används för säsongsytor. */
-.theme-OG .td-button-fill-winter,
-.theme-OG .fraga-send,
-.theme-OG .fraga-follow-icon {
+.theme-OG .td-button-fill-winter {
   background: var(--color-cta-secondary);
   color: var(--color-text-primary);
 }
@@ -163,6 +161,11 @@ html.theme-OG body.og-hp-page {
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
 }
 html.theme-OG[data-season="summer"] { --color-OG-guide: var(--color-OG-season-spring); }
+/* Orsaguidens skicka-pil: guidens säsongsfärg, som TD:s .fraga-send (season-winter). Ikonen utan platta (John 2026-11-19). */
+.theme-OG .fraga-send {
+  background: var(--color-OG-guide);
+  color: var(--contrast-on-OG-guide);
+}
 .theme-OG .og-hp-header #fraga-launch {
   gap: 8px;
   background: var(--color-OG-guide);
@@ -985,6 +988,12 @@ html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-f
 }
 /* Rubriker och meta i OG-färger (komponenten har TD:s neutral-strong). */
 .theme-OG .td-aktuellt-kort-meta { color: var(--color-OG-neutral-strong); }
+/* Kicker-taggar i Aktuellt inverterade: mörk platta, ljus text (John 2026-11-19). TD behåller ljus tagg. */
+.theme-OG .td-aktuellt-kort-kicker .td-chip-tag-solid.td-chip-tag-dark {
+  border-radius: var(--radius-xs); /* 2 px (John 2026-11-19) */
+  background: var(--color-OG-orsa-black);
+  color: var(--color-OG-snow);
+}
 /* Frågekortet = Orsaguiden: guidefärgen (vinter sjöblå, sommar vår-gul) och Orsa svart, som Figma Aktuellt / Kort Typ=Fråga. */
 html.theme-OG[data-season] .td-aktuellt .td-aktuellt-kort[data-typ="fraga"] {
   --td-aktuellt-plate: var(--color-OG-guide);
@@ -1031,9 +1040,6 @@ html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-ha
 /* Luft ovanför Mer-blocken, samma som TD (160 px efter Just nu i läge 3). */
 .theme-OG .td-mer { margin-top: 160px; }
 
-/* Radier: TD gick till sm på Fråga-blocket och Aktuellt-kortets glas/fråga 2026-11-18 (TD-regel: innehåll = sm).
-   OG behåller sina tidigare värden tills OG:s radieregler är beslutade. */
-.theme-OG .td-fraga-block,
-.theme-OG .td-aktuellt-kort[data-typ="fraga"] { border-radius: var(--radius-md); }
-.theme-OG .td-aktuellt-kort[data-platta="glas"] { --td-aktuellt-img-radius: var(--radius-xs); }
-.theme-OG .td-aktuellt-kort[data-platta="glas"] .td-aktuellt-kort-platta { border-radius: var(--radius-xs); }
+/* Radier: TD gick till sm på Fråga-blocket 2026-11-18. OG behåller md där tills OG:s radieregler är beslutade.
+   Aktuellt (båda sajterna, John 2026-11-19): guidekort och färgad ram 4 px, bild och tagg 0 – styrs i ds/components/aktuellt-kort.css. */
+.theme-OG .td-fraga-block { border-radius: var(--radius-md); }
