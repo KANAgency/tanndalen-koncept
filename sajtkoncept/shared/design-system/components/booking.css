@@ -14,10 +14,11 @@
 }
 
 /* Panelhuvud (TEST, John 2026-11-19): låg list överst i baren som säger att den är bokning.
-   Dag-bakgrund, liten centrerad text. Bara desktop. */
+   Dag-bakgrund, liten centrerad text, radie 8 på alla hörn (inskjuten 8 px från barens kant). Bara desktop. */
 .td-booking-head {
-  margin: 0;
+  margin: var(--space-sm) var(--space-sm) 0;
   padding: 6px var(--space-lg);
+  border-radius: var(--radius-md);
   background: var(--color-TD-day);
   color: var(--color-TD-night);
   text-align: center;
