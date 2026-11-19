@@ -604,3 +604,6 @@ Beslut (John): "Mer till er vecka" (läge 3) och "Mer att hitta på i dag" (läg
 Beslut (John): OG:s off-white får en tunn papperstextur, styrka 35, på blockytan. Stöd i varumärkesmanualen (materialvärld: taktilt, naturligt). Genererad SVG med soft-light, så att grundfärgen inte flyttas. Ratat: fotografiska texturer, trä och läder. Linne och sandsten finns kvar i `?textur=` för jämförelse.
 
 Öppet: mobil och dagsljus, och om kort och header också ska ha textur.
+
+## OG: eget märke för Orsaguiden, B3 "Rundad klitt" (2026-11-19)
+Beslut (John): Orsaguiden får ett eget märke i stället för Fjällguidens spetsiga dubbeltopp. B3: en rundad klitt tecknad som en kontrastlinje (tjock över krönet, hårfin i fötterna, som Orsa-loggans bokstäver) med en hårfin inre kontur, sol i accent (signalorange). Samma idé som Fjällguiden (linjemärke + sol) så att guiderna hänger ihop som system. Ratat: kurbitsrullar och kulterminaler på hårfina linjer (försvinner i 24–28 px), helfylld siluett (B2), uppgående sol (B5), seriffötter (B4), O-monogram (D). TD:s Fjällguiden-märke oförändrat.
