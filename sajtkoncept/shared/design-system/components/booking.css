@@ -13,26 +13,27 @@
   background: var(--color-booking-calendar-surface);
 }
 
-/* Sidhuvud (TEST, John 2026-11-19): liten kicker som säger att baren är bokning.
-   Bara desktop; mobilens bottenbar har ingen plats. Hårlinje skiljer från kategorierna. */
-.td-booking-head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin: 0;
-  padding: var(--space-md) var(--space-lg) 0;
-  color: var(--color-TD-neutral-strong);
+/* Flik (TEST, John 2026-11-19): liten mappflik på barens överkant som säger att baren är bokning.
+   Samma yta som baren, sitter utanför den, så baren behåller sin form. Bara desktop. */
+.td-booking:has(.td-booking-head) {
+  overflow: visible;
+  border-top-left-radius: 0;
 }
 
-.td-booking-head::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--color-TD-neutral-subtlest);
+.td-booking-head {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin: 0;
+  padding: var(--space-sm) var(--space-lg) var(--space-xs);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--color-booking-calendar-surface);
+  color: var(--color-TD-night);
 }
 
 @media (max-width: 1023px) {
   .td-booking-head { display: none; }
+  .td-booking:has(.td-booking-head) { overflow: hidden; border-top-left-radius: var(--radius-sm); }
 }
 
 .td-booking-cats {
