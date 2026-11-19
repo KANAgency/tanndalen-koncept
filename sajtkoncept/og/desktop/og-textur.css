@@ -1,0 +1,30 @@
+/*
+ * OG materialton (beslut 19 nov): grängat papper, styrka 35, ovanpå off-white
+ * (--color-bg-base). soft-light med 50 % grå som neutral → snittfärgen står kvar.
+ * ?textur=papper|linne|sandsten|tra|lader&styrka=0–100 (og-textur.js) skriver
+ * över --og-textur för jämförelse; "Av" i panelen sätter den till none.
+ */
+.theme-OG .og-hp-blocks {
+  background-color: var(--color-bg-base);
+  background-image: var(--og-textur, url("./assets/img/textur-papper.svg"));
+  background-size: 480px 480px;
+  background-blend-mode: soft-light;
+}
+
+.og-textur-panel {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.92);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.15);
+  font: 13px/1.2 system-ui, sans-serif;
+  color: #3c3c3b;
+}
+.og-textur-panel label { display: flex; gap: 6px; align-items: center; }
+.og-textur-panel output { min-width: 2ch; font-variant-numeric: tabular-nums; }

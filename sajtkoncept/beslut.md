@@ -594,3 +594,9 @@ En git-repo under `src/` (branch `main`). Konsolideringscommit: `4e24285`. Gamla
 ## OG: Mer-blocken även på sommaren (2026-11-18)
 
 Beslut (John): "Mer till er vecka" (läge 3) och "Mer att hitta på i dag" (läge 4) finns i OG i både vinter och sommar (`#mer-resa`, `#mer-resa-sommar`, `#mer-nu`, `#mer-nu-sommar`). Avviker medvetet från TD, där blocken bara finns på vintern. Skäl: OG:s sommar (klätterpark, cykel, bad) är en stor del av familjeaffären och har riktiga tillval att sälja.
+
+## OG: materialton grängat papper (2026-11-19)
+
+Beslut (John): OG:s off-white får en tunn papperstextur, styrka 35, på blockytan. Stöd i varumärkesmanualen (materialvärld: taktilt, naturligt). Genererad SVG med soft-light, så att grundfärgen inte flyttas. Ratat: fotografiska texturer, trä och läder. Linne och sandsten finns kvar i `?textur=` för jämförelse.
+
+Öppet: mobil och dagsljus, och om kort och header också ska ha textur.
