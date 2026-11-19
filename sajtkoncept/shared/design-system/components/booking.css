@@ -14,14 +14,20 @@
 }
 
 /* Panelhuvud (TEST, John 2026-11-19): låg list överst i baren som säger att den är bokning.
-   Dag-bakgrund, liten centrerad text, radie 8 på alla hörn (inskjuten 8 px från barens kant). Bara desktop. */
+   Dag-bakgrund, liten centrerad text, kant i kant i topp och på sidor (radie 8 upptill = barens, raka hörn nertill). Radien sätts på listen eftersom baren har overflow: visible i lägena Bokning/På plats. Bara desktop. */
 .td-booking-head {
-  margin: var(--space-sm) var(--space-sm) 0;
-  padding: 6px var(--space-lg);
-  border-radius: var(--radius-md);
+  margin: 0;
+  padding: 6px var(--space-lg) 7px; /* 1 px extra under: optiskt centrerad */
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: var(--color-TD-day);
   color: var(--color-TD-night);
   text-align: center;
+}
+
+/* TEST (John 2026-11-19): lägre radie på den vita ramen när listen finns, 8.
+   Id-selektor så att den vinner över lägena Bokning/På plats (startsida.css sätter radius-lg 16 där). */
+@media (min-width: 1024px) {
+  #booking:has(.td-booking-head) { border-radius: var(--radius-md); }
 }
 
 @media (max-width: 1023px) {
