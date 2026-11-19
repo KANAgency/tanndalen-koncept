@@ -308,7 +308,7 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   width: 240px;
   aspect-ratio: 882 / 259;
   margin: 0 auto var(--space-xl, 24px);
-  background-color: var(--color-OG-taupe, #726D58);
+  background-color: var(--color-OG-cta, #003E3A); /* 19 nov: mörkgrön CTA (var taupe) */
   -webkit-mask: url("./assets/brand/kurbits.svg") center / contain no-repeat;
   mask: url("./assets/brand/kurbits.svg") center / contain no-repeat;
 }
