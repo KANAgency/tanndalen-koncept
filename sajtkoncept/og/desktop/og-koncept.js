@@ -15,7 +15,6 @@
   const P = {
     lyan: '<path class="linje" d="M5 15 16 5l11 10M8 13v14h16V13"/><circle class="accent" cx="16" cy="21" r="4"/><path class="linje" d="m14.4 17.4 1.6-1.6 1.6 1.6"/>',
     backen: '<path class="linje" d="M3 27c6 0 9-8 15-8s7 3 11 3"/><path class="linje" d="M11 22.5V8"/><path class="accent" d="M11 8h9l-2.5 3 2.5 3h-9z"/>',
-    skolan: '<path class="linje" d="M16 7 3 13l13 6 13-6z"/><path class="linje" d="M9 16.5V22c0 2 3 4 7 4s7-2 7-4v-5.5M27 13.5v6"/><circle class="accent" cx="27" cy="22" r="2.5"/>',
     berget: '<path class="linje" d="M3 27 13 10l5 8 3-4 8 13z"/><path class="linje" d="m9.6 15.6 3.4 2.4 2.6-2.2"/><circle class="accent" cx="25" cy="7" r="3.5"/>',
     stranden: '<circle class="accent" cx="16" cy="11" r="5"/><path class="linje" d="M3 21c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2M3 26.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2"/>',
     skogen: '<path class="linje" d="M12 4 5 14h4l-5 8h16l-5-8h4zM12 22v6"/><circle class="accent" cx="24" cy="24" r="4"/><path class="linje" d="m22.4 20.4 1.6-1.6 1.6 1.6"/>',
@@ -30,18 +29,20 @@
   /* ─────────────────────────── Block 1: Familjen ─────────────────────────── */
   const ZONER = {
     winter: [
-      { namn: "Blåbärslyan", fran: 0, till: 2, pikto: "lyan",
-        bilder: [["mer/AA102015.jpg", "Bärra i dörren till Blåbärslyan"], ["mer/AA104712.jpg", "Flicka på kälke i snön"]],
-        saker: [["Blåbärslyan", "Inomhuslek för de minsta, öppen från 21 dec."], ["Pulkabacken", "I barnområdet, med värmestuga intill."], ["Bärras Härbre", "Titta in hos Bärra i Blåbärsskogen."]] },
-      { namn: "Barnbacken", fran: 3, till: 6, pikto: "backen", chip: "0 kr liftkort", kortChip: "Åker gratis",
-        bilder: [["guide/guide-barra-barnbacken.jpg", "Barn i skidhjälm bredvid Bärra i barnbacken"], ["mer/AA102531.jpg", "Barn åker skidor med Bärra"]],
-        saker: [["Skidkarusellen", "Knappliftar och rullband i Barnbacken."], ["Skidskola i grupp", "Alpin grupp från ca 3–4 år."], ["Liftkort 0 kr", "Gratis till och med 6 år, med hjälm."]] },
-      { namn: "Skidskolan", fran: 7, till: 12, pikto: "skolan",
-        bilder: [["mer/AA102967.jpg", "Skidlärare och barn i skidskolevästar i backen"], ["aktuellt/barnens-vasalopp.jpg", "Barn i längdspåret"]],
-        saker: [["Skidskola i grupp", "Egen grupp på rätt nivå, medan ni åker själva."], ["Barnens Vasalopp", "Ca 900 meter i spåret, med Bärra."], ["Söderbacken och Mellanbacken", "Nästa steg efter Barnbacken."]] },
-      { namn: "Hela berget", fran: 13, till: 17, pikto: "berget",
+      /* Verifierat mot orsagronklitt.se 19 nov (barnsidor, skidskola, snowpark). Blåbärslyan = Bärras lekrum inomhus.
+         Bärras Härbre = dalastugan i Blåbärsskogen längs de blå nedfarterna (skylten säger "Härbret"). */
+      { namn: "Blåbärslyan", fran: 0, till: 2, pikto: "lyan", chip: "Inomhus",
+        bilder: [["mer/AA104712.jpg", "Flicka på kälke i snön"], ["guide/guide-barra-dansar.jpg", "Bärra Blåbär i snön"]],
+        saker: [["Blåbärslyan", "Bärras lekrum inomhus, med lek och pyssel."], ["Pulkabacken", "I barnområdet, med värmestuga intill."], ["Bärras kalas", "Varje tisdag."]] },
+      { namn: "Barnbacken", fran: 3, till: 6, pikto: "backen", chip: "Gratis liftkort",
+        bilder: [["guide/guide-barnomradet.jpg", "Flicka åker ut ur en blå tunnel i barnbacken, Bärra bredvid"], ["guide/guide-barra-barnbacken.jpg", "Barn i skidhjälm bredvid Bärra i barnbacken"]],
+        saker: [["Skidkarusellen", "Knappliftar som går sakta runt, runt."], ["Rullbandet", "Öva balansen före första liften."], ["Snölekis och Snögubbar", "Skidskolans första steg, 3–4 och 4–6 år."]] },
+      { namn: "Blåbärsskogen", fran: 7, till: 12, pikto: "skogen", chip: "Egen offpist",
+        bilder: [["guide/guide-blabarsskogen.jpg", "Pojke gör high five med Bärra utanför Härbret"], ["en-dag/harbret.jpg", "Barn och vuxen i pjäxor inne i Bärras Härbre"]],
+        saker: [["Bärras Härbre", "Dalastugan i skogen, längs de blå nedfarterna."], ["Offpisten", "Äventyrsled genom skogen, med kluriga svängar."], ["Fräsare i skidskolan", "Spår, hopp, puckel och offpist, 6–9 år."]] },
+      { namn: "Hela berget", fran: 13, till: 17, pikto: "berget", chip: "Snowpark",
         bilder: [["mer/AA106867.jpg", "Skidåkare svänger ner i nypreparerad backe"], ["aktuellt/kvallsakning.jpg", "Kvällsåkning i backen"]],
-        saker: [["Norrbacken", "24 nedfarter, från gröna till svarta."], ["Längdskola i grupp", "Från 13 år, med Almgren Coaching."], ["Elljusspåret", "4,2 km, tänt till 21."]] }
+        saker: [["Snowparken i Bananen", "Hopp, rails och boxar. Hjälm och ryggskydd."], ["Alla 24 nedfarter", "Från gröna till svarta."], ["Längdskola i grupp", "Från 13 år, med Almgren Coaching."]] }
     ],
     summer: [
       { namn: "Stranden", fran: 0, till: 2, pikto: "stranden",
@@ -61,20 +62,18 @@
   const IHOP = {
     winter: {
       sma: { bild: ["en-dag/brasan.jpg", "Familj vid elden i snön med pulka"], saker: [["Grillplatsen vid Barnbacken", "Korv och varm choklad mitt på dagen."], ["Pizza på Wärdshuset", "Efter sista åket."]] },
-      stora: { bild: ["guide/guide-toppstugan.jpg", "Toppstugan i snön"], saker: [["Fonduekväll i Toppstugan", "Hela familjen, högst upp."], ["Pizza på Wärdshuset", "Efter sista åket."]] },
-      cta: "Boka skidskola"
+      stora: { bild: ["guide/guide-toppstugan.jpg", "Toppstugan i snön"], saker: [["Fonduekväll i Toppstugan", "Hela familjen, högst upp."], ["Pizza på Wärdshuset", "Efter sista åket."]] }
     },
     summer: {
       sma: { bild: ["mer/AA108699.jpg", "Familj vid grillplatsen vid sjön"], saker: [["Rädsjön", "Sandstrand, brygga och fika."], ["Pizza på Wärdshuset", "Efter en dag i skogen."]] },
-      stora: { bild: ["mer/AA109821.jpg", "Pappa med barn på ryggen kliver upp på flotten"], saker: [["Bastuflotten på Rädsjön", "Bastu och dopp, hela gänget."], ["Pizza på Wärdshuset", "Efter en dag i skogen."]] },
-      cta: "Se sommarens aktiviteter"
+      stora: { bild: ["mer/AA109821.jpg", "Pappa med barn på ryggen kliver upp på flotten"], saker: [["Bastuflotten på Rädsjön", "Bastu och dopp, hela gänget."], ["Pizza på Wärdshuset", "Efter en dag i skogen."]] }
     }
   };
   const ORD = ["bebis", "ettåring", "tvååring", "treåring", "fyraåring", "femåring", "sexåring", "sjuåring", "åttaåring", "nioåring", "tioåring", "elvaåring", "tolvåring", "trettonåring", "fjortonåring", "femtonåring", "sextonåring", "sjuttonåring"];
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const namn = (age, count) => cap(ORD[age] + (count > 1 ? "arna" : "en"));
   const zonIndex = (age) => (age <= 2 ? 0 : age <= 6 ? 1 : age <= 12 ? 2 : 3);
-  const MAX_BARN = 5;
+  const MAX_BARN = 3; /* John 19 nov: fler blir löjligt */
 
   const familj = document.getElementById("familjen");
   if (familj) {
@@ -87,7 +86,7 @@
     let barn = [4, 9];
     try {
       const saved = JSON.parse(localStorage.getItem("og-koncept-barn") || "null");
-      if (Array.isArray(saved) && saved.length && saved.length <= MAX_BARN && saved.every((a) => Number.isInteger(a) && a >= 0 && a <= 17)) barn = saved;
+      if (Array.isArray(saved) && saved.length && saved.every((a) => Number.isInteger(a) && a >= 0 && a <= 17)) barn = saved.slice(0, MAX_BARN);
     } catch (e) {}
     barn = barn.map((age) => ({ id: ++uid, age }));
     const save = () => { try { localStorage.setItem("og-koncept-barn", JSON.stringify(barn.map((b) => b.age))); } catch (e) {} };
@@ -106,7 +105,7 @@
           ${pikto(z.pikto)}
           <span class="og-familj-zon-namn">${esc(z.namn)}</span>
           <span class="td-ui-caption og-familj-zon-alder">${z.fran}–${z.till} år</span>
-          ${season() === "winter" && z.chip ? `<span class="og-familj-zon-chip">${esc(z.chip)}</span>` : ""}
+          ${z.chip ? `<span class="og-familj-zon-chip">${esc(z.chip)}</span>` : ""}
         </div>`).join("");
     };
 
@@ -160,7 +159,7 @@
         const z = zs[zi];
         const n = (perZon[zi] = (perZon[zi] ?? -1) + 1);
         const [src, alt] = z.bilder[n % z.bilder.length];
-        const chip = s === "winter" && z.kortChip ? `<span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark">${esc(z.kortChip)}</span>` : "";
+        const chip = z.chip ? `<span class="td-chip-tag td-chip-tag-solid td-chip-tag-dark">${esc(z.chip)}</span>` : "";
         return `
           <article class="og-familj-kort">
             <div class="og-familj-kort-bild"><img src="${IMG + src}" alt="${esc(alt)}" decoding="async">${chip}</div>
@@ -175,11 +174,6 @@
       const span = 4 - (k % 4);
       const youngest = Math.min(...barn.map((b) => b.age));
       const ih = IHOP[s][youngest <= 6 ? "sma" : "stora"];
-      const free = barn.filter((b) => b.age <= 6).length;
-      const skola = barn.filter((b) => b.age >= 3).length;
-      const summa = s === "winter"
-        ? [free ? `<strong>${free}</strong> av ${barn.length} åker gratis med hjälm` : "", skola ? `<strong>${skola}</strong> kan gå i skidskola` : ""].filter(Boolean).join(" · ")
-        : `<strong>${barn.length}</strong> barn, <strong>${k * 3 + 2}</strong> förslag att spara till resan`;
       const bred = span >= 2;
       cards.push(`
         <article class="og-familj-ihop${bred ? " is-bred" : ""}" style="grid-column: span ${span}">
@@ -188,11 +182,11 @@
             <p class="td-ui-caption">Hela familjen</p>
             <h3 class="td-heading-xs">Det här gör ni ihop</h3>
             <ul class="og-familj-ihop-lista">${ih.saker.map(([t, d]) => `<li class="td-ui-body"><strong>${esc(t)}</strong><span class="td-ui-caption">${esc(d)}</span></li>`).join("")}</ul>
-            ${summa ? `<p class="td-ui-body og-familj-summa">${summa}</p>` : ""}
             <div class="og-familj-ctas">
-              <a class="td-button td-button-md td-button-secondary" href="#">${esc(IHOP[s].cta)}</a>
+              <a class="td-button td-button-md td-button-secondary" href="#">Sök boende</a>
               <button class="td-button td-button-md td-button-text-ljus" type="button" data-familj-fraga>Fråga Orsaguiden</button>
             </div>
+            <p class="td-ui-caption og-familj-cta-not">Barnen följer med in i sökningen.</p>
           </div>
         </article>`);
       grid.innerHTML = cards.join("");

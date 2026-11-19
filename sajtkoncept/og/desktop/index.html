@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="/ds/components/site-footer.css" />
     <link rel="stylesheet" href="./og-overrides.css?v=tdlack1" />
     <!-- KONCEPT 18 nov: OG-unika block (#familjen, #helgen) -->
-    <link rel="stylesheet" href="./og-koncept.css?v=1" />
+    <link rel="stylesheet" href="./og-koncept.css?v=2" />
     <!-- Materialton (papper). ?textur=… = jämförelsepanel -->
     <link rel="stylesheet" href="./og-textur.css?v=knappar1" />
     <script src="./og-textur.js?v=knappar1"></script>
@@ -1643,7 +1643,6 @@
       <!-- Handplockade boenden (port av TD:s #boenden-waabi, 17 nov). Riktiga R360-boenden, bilder ur R360. Pris saknas i R360-katalogen: [X]. -->
       <!-- KONCEPT (18 nov): två OG-unika block. Innehåll per säsong och logik i og-koncept.js, stil i og-koncept.css. -->
       <section class="og-koncept og-familj" id="familjen" aria-labelledby="familjen-title">
-        <p class="og-koncept-tag" title="Konceptblock för OG, inte godkänt. Text i [hakparentes] är overifierad.">Koncept</p>
         <header class="og-familj-head">
           <div class="og-familj-titlar">
             <p class="utforsakning-eyebrow">Familjen</p>
@@ -1657,7 +1656,7 @@
           </div>
           <div class="og-familj-skala" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div>
           <div class="og-familj-linjal-fot">
-            <p class="td-ui-caption og-familj-hint">Klicka på linjen för att lägga till ett barn. Valen sparas till nästa besök.</p>
+            <p class="td-ui-caption og-familj-hint">Klicka på linjen för att lägga till ett barn, upp till tre. Valen sparas till nästa besök.</p>
             <button class="td-button td-button-sm td-button-secondary og-familj-add" type="button" data-familj-add>+ Lägg till barn</button>
           </div>
           <p class="visually-hidden" aria-live="polite" data-familj-status></p>
@@ -1912,7 +1911,7 @@
       </div>
 
     <script type="module" src="./hero-page.js?v=rubrik-gap1"></script>
-    <script src="./og-koncept.js?v=1" defer></script>
+    <script src="./og-koncept.js?v=2" defer></script>
     <script type="module">
       import { init } from "./modes.js?v=fit7";
       init();

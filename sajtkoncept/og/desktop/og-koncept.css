@@ -70,7 +70,7 @@
 /* Åldersstickan */
 .og-familj-linjal {
   padding: var(--space-xl) var(--space-2xl) var(--space-lg);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   background: var(--color-bg-surface);
 }
 .og-familj-band {
@@ -292,13 +292,8 @@
 .og-familj-ihop-lista { display: flex; flex-direction: column; gap: var(--space-sm); }
 .og-familj-ihop-lista li { display: flex; flex-direction: column; }
 .og-familj-ihop-lista strong { font-weight: 700; }
-.og-familj-summa {
-  margin-top: var(--space-xs);
-  padding-top: var(--space-md);
-  border-top: 1px solid color-mix(in srgb, var(--color-OG-snow) 22%, transparent);
-}
-.og-familj-summa strong { font-family: var(--font-family-TD-primary), serif; font-size: var(--font-size-lg); }
 .og-familj-ctas { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: auto; padding-top: var(--space-md); }
+.og-familj-ihop .og-familj-cta-not { margin-top: calc(var(--space-xs) * -1); }
 .og-familj-ctas .td-button-text-ljus {
   background: transparent;
   color: var(--color-OG-snow);

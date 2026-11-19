@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-19 (OG Familjen: första genomgång)
+
+John: både Familjen och Helgen behålls, i olika sammanhang på startsidan. Familjen: max 3 barn, ingen Koncept-tagg, 2 px radie på korten, "Gratis liftkort" i stället för "0 kr liftkort" och chippar på fler nivåer. Valt av Claude (John ifrågasatte, inte bekräftat): zonen 7–12 blir Blåbärsskogen i stället för Skidskolan, summeringen tas bort och CTA:n blir Sök boende i stället för Boka skidskola, eftersom ihop-kortet gäller hela familjen. Ratat: "Pratande figurer" och "Blåbärskortet" som chippar (svagare belägg, okänd ålder).
+
 ## 2026-11-19 (OG: färgprofil – neutraler, taupe, vinter)
 
 John: OG ska ha en sammanhållen, dämpad palett där bara mörkgrön (CTA/fyllning) och signalorange (detalj, viktig CTA) är starka. **Neutralerna** bär taupe-tonen (OKLCH ton 96°, mättnad ~0,012) så att temperaturen är densamma överallt. **Taupe** är två färger: taupe #726D58 och taupe-tint #DFDCCF. **Regel:** mörk taupe används bara i små sekundära element (mindre knappar, taggar, ikoner, tunna linjer), aldrig som platta runt kort eller annan stor yta. **Säsong:** vinter = Is #D1DBE1 (kall grå med blå ton, låg mättnad), sommar = mörkgrön, vår och höst = taupe-tint. Ratat: TD:s säsongsfärger i OG, TD:s vinterblå #A1B5BA, sjöblå #9DC7CB, taupe-serie i åtta steg, vinterkandidaterna frost/skymning/gryning (för mättade) och lav/granfrost/skiffer/rimfrost.
