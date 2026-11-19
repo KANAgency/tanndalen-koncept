@@ -573,6 +573,13 @@ html.theme-OG video {
   box-shadow: 0 12px 40px color-mix(in srgb, var(--color-OG-black, #000) 18%, transparent);
 }
 
+/* Boka din resa-listen (John 2026-11-19): samma form som TD (booking.css). OG:s Dag (#F5EEE5) syns inte mot
+   barens #F5F4F0, så taupe-tint (#E1DBD0) ger samma steg som TD:s Dag mot vit bar. Text OG Natt. */
+.og-hp-booking-anchor .td-booking-head {
+  background: var(--color-OG-taupe-tint);
+  color: var(--color-OG-night);
+}
+
 .og-hp-booking-anchor .td-booking-cats > button,
 .og-hp-booking-anchor .td-booking-pill {
   width: 76px;

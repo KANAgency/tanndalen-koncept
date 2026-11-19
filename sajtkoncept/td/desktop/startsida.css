@@ -565,6 +565,9 @@ html.is-intro.is-intro-reveal .hero-ram {
     bottom: 0;
     transform: none;
   }
+  /* Sticky tabbar kloss i botten: inga rundade hörn i något läge (John 2026-11-19).
+     Id-selektor vinner över lägesregeln Bokning/På plats (radius-lg). */
+  #booking { border-radius: var(--radius-none); }
 }
 
 .hero-doodle {
