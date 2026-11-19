@@ -328,6 +328,16 @@ export function createModesEngine(deps) {
     });
   }
 
+  /* Natural width of the metrics row. scrollWidth misses overflow when the row is right-aligned
+     (it spills to the left), so measure first to last visible child (margins included) plus inline padding. */
+  function onsiteMetricsWidth(text) {
+    const styles = getComputedStyle(text);
+    const padding = (Number.parseFloat(styles.paddingLeft) || 0) + (Number.parseFloat(styles.paddingRight) || 0);
+    const visible = [...text.children].filter((child) => !child.hidden);
+    if (!visible.length) return padding;
+    return visible[visible.length - 1].getBoundingClientRect().right - visible[0].getBoundingClientRect().left + padding;
+  }
+
   /** Hide metrics from the end until the row fits; right-align as soon as centered layout is too tight. */
   function fitOnsiteMetrics() {
     document.querySelectorAll(selectors.onsiteStatus).forEach((status) => {
@@ -348,15 +358,16 @@ export function createModesEngine(deps) {
       const statusRect = status.getBoundingClientRect();
       const startRect = start.getBoundingClientRect();
       const startWidth = startRect.right - statusRect.left;
-      const textWidth = text.scrollWidth;
+      const textWidth = onsiteMetricsWidth(text);
 
       /* Centered needs equal side columns ≥ start block. */
       const fitsCentered = startWidth * 2 + textWidth + gap * 2 <= statusRect.width + 0.5;
       if (!fitsCentered) status.classList.add("is-metrics-tight");
 
-      const available = Math.max(0, statusRect.right - startRect.right - gap);
+      /* Minst 24 px luft mot titeln innan ett värde plockas bort. */
+      const available = Math.max(0, statusRect.right - startRect.right - Math.max(gap, 24));
       for (let i = metrics.length - 1; i >= 0; i -= 1) {
-        if (text.scrollWidth <= available + 0.5) break;
+        if (onsiteMetricsWidth(text) <= available + 0.5) break;
         metrics[i].hidden = true;
         syncOnsiteMetricSeps(metrics, seps);
         if (!status.classList.contains("is-metrics-tight")) status.classList.add("is-metrics-tight");

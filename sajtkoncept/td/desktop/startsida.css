@@ -5308,9 +5308,11 @@ html[data-season="summer"] .onsite-topbar {
   display: none !important;
 }
 
+/* Högerställd status (John 2026-11-19): värdena står alltid till höger. När de närmar sig titeln döljs de
+   bakifrån, Snödjup → Nysnö → Öppet (fitOnsiteMetrics i shared/js/modes-engine.js). */
 .onsite-topbar-status {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: var(--space-md);
   min-width: 0;
@@ -5348,12 +5350,13 @@ html[data-season="summer"] .onsite-topbar {
   display: flex;
   flex-wrap: nowrap;
   align-items: baseline;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0;
   margin: 0;
+  padding-inline-end: var(--space-lg);
   min-width: 0;
   color: inherit;
-  text-align: center;
+  text-align: right;
   white-space: nowrap;
 }
 
