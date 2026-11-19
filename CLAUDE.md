@@ -71,6 +71,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 - **CTA-regel:** de viktigaste CTA-elementen (Sök/Boka) har alltid CTA-färgen, aldrig säsongsfärg. Innehållsytor med knapp får ha CTA eller säsongsfärg.
 - **OG-färg:** off-white `#F5EEE5`, mörkgrön `#003E3A`, Orsa svart `#3C3C3B` (text), signal `#E74011` (sparsamt). Förslag (ej kundbekräftat): mörkgrön CTA.
 - **Spacing (brand-differentierat från `xl`):** `xs` 4, `sm` 8, `md` 12, `lg` 16 gemensamma; `xl` 20/24, `2xl` 24/32, `3xl` 32/40, `4xl` 40/56, `5xl` 48/64, `6xl` 64/88, `7xl` 80/112, `8xl` 96/144 (OG/TD). Radier 2/4/8/16/full (`radius/xs` 2 återinförd 18 nov: mobilens kort och media). Breakpoints 640/1024/1280. Grid desktop 1440, mobil 393. Mobile-first.
+- **Eyebrow vs kicker:** eyebrow namnger ett avsnitt eller block, alltid versaler (`Editorial/eyebrow-xs` 16/22, `-sm` 18/25, `eyebrow` 20/28, `UI/eyebrow` 12/16 inne i UI). Kicker (`UI/kicker` 12/16) är metadata om ett enskilt objekt (typ, tid, datum, status), som skrivet. Eyebrow har ingen mobilstorlek.
 - **Knappar:** 48/40/32 px (Large/Medium/Small). Pilar via boolesk egenskap `Arrow`. Detaljer i `docs/startsida-td.md`.
 
 ## 8. Innehåll och ton

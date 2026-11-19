@@ -1225,8 +1225,7 @@ body.fraga-open { overflow: hidden; }
 .fraga-card-copy { display: grid; gap: 4px; padding: 12px; }
 .fraga-card-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .fraga-card-aktivitet .td-ui-kicker { color: var(--color-TD-neutral); }
-.fraga-card-plats .td-ui-kicker { color: var(--color-TD-neutral); text-transform: uppercase; }
-.fraga-card-aktivitet .td-ui-kicker { text-transform: uppercase; }
+.fraga-card-plats .td-ui-kicker { color: var(--color-TD-neutral); }
 .fraga-card-arrow { flex: none; width: 16px; height: 16px; }
 @media (max-width: 720px) {
   .fraga-cards { grid-template-columns: 1fr; }
@@ -1953,7 +1952,7 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 }
 .td-guide-ai { font-family: var(--font-family-TD-secondary), sans-serif; font-size: 12px; font-weight: 700; }
 .td-guide-status { font-family: var(--font-family-TD-secondary), sans-serif; font-size: 12px; line-height: 1.3; }
-.td-guide-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin-top: var(--space-md); }
+.td-guide-eyebrow { margin-top: var(--space-md); }
 .td-guide-pil svg { display: none; }
 .td-guide-pil::before {
   content: ""; width: 16px; height: 16px; background: currentColor;
@@ -1964,7 +1963,6 @@ html[data-season="summer"] .td-guide { background: var(--color-season-summer); c
 /* På gång: ingen hörnpil */
 .td-pagang .td-corner-link { display: none; }
 /* Pistförare: versal caption, mindre citat, ljus tagg */
-[data-rapport-caption] { text-transform: uppercase; letter-spacing: 0.02em; }
 .td-rapport:not(.is-activity):not(.is-langd) [data-rapport-quote] { font-size: 22px; line-height: 1.25; }
 .td-rapport:not(.is-activity):not(.is-langd) .td-rapport-top .td-rapport-chip {
   background: var(--color-TD-snow); color: var(--color-text-primary);
@@ -2040,7 +2038,7 @@ html[data-mode="onsite"] .just-cols-3 { display: grid; }
 .td-valla-id { display: inline-flex; align-items: center; gap: var(--space-sm); }
 .td-valla-tid { opacity: .7; }
 .td-valla-sno, .td-valla-val > div { display: flex; flex-direction: column; gap: 2px; }
-.td-valla-sno .td-ui-kicker, .td-valla-val .td-ui-kicker { text-transform: uppercase; opacity: .7; }
+.td-valla-sno .td-ui-eyebrow, .td-valla-val .td-ui-eyebrow { opacity: .7; }
 .td-valla-skala { display: flex; flex-direction: column; gap: var(--space-sm); }
 .td-valla-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: center; }
 .td-valla-seg { height: 10px; border-radius: 3px; opacity: .4; }
@@ -2088,7 +2086,7 @@ a.td-rapport:hover .td-corner-link-label { opacity: 1; }
 .fraga-card-media img { transition: transform var(--motion-duration-slow, 600ms) var(--motion-easing-out-soft); }
 .fraga-card-media.is-empty { background: var(--color-TD-neutral-subtlest); }
 .fraga-card-copy { gap: 2px; padding: var(--space-md) var(--space-md) var(--space-lg); }
-.fraga-card .td-ui-kicker { text-transform: uppercase; color: var(--color-TD-neutral); }
+.fraga-card .td-ui-kicker { color: var(--color-TD-neutral); }
 .fraga-card-title { margin-top: 2px; }
 .fraga-card-arrow { opacity: .4; transition: transform var(--motion-duration-fast) var(--motion-easing-out-soft), opacity var(--motion-duration-fast) var(--motion-easing-out-soft); }
 .fraga-card:hover { background: var(--color-TD-neutral-subtlest); }

@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-19 (TD + OG: eyebrow och kicker)
+
+John: eyebrow och kicker är olika element, båda behövs, och kod och Figma ska vara exakt lika. Regel efter funktion: **eyebrow** namnger ett avsnitt eller block, alltid versaler (Editorial/eyebrow-xs 16/22, -sm 18/25, eyebrow 20/28, UI/eyebrow 12/16). **Kicker** är metadata om ett enskilt objekt (typ, tid, datum, status), UI/kicker 12/16 som skrivet. "Boka din resa"-listen är en eyebrow (versaler). Ratat: alla 12 px-etiketter i versaler (Figmas tidigare UI/kicker). Eyebrow har ingen mobilstorlek; komponenter som byter storlek på mobil byter stil (Aktuellt sm → xs).
+
 ## 2026-11-19 (OG: målgruppsprioritet)
 
 OG prioriterar familjen i 4 av 5 fall (John). Längdåkarna med "stora plånböcker" (OG-manualen s. 7) är sekundär målgrupp. Avgör krocken från 18 nov. Konsekvens för konceptblocken: Familjen är huvudspåret. Om Helgen ska behållas, och i så fall för vem, är fortfarande öppet. Mobilversion, riktiga uppgifter och Figma väntar på Johns bedömning.

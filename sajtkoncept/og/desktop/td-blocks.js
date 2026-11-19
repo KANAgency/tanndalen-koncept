@@ -1835,13 +1835,13 @@ export function initTdBlocks(root = document) {
           const w = WELCOME[welcomeState()];
           let html = `<h3 class="td-heading-sm fraga-welcome-title">${w.title}</h3><p class="td-body fraga-welcome-lead">${w.lead}</p>`;
           if (w.booking) {
-            html += `<div class="fraga-welcome-booking"><div class="fraga-welcome-booking-head"><span class="td-ui-kicker">Er bokning</span><span class="td-ui-caption fraga-welcome-ok">Boende bokat</span></div><p class="td-ui-title">${WELCOME_BOOKING.title}</p><p class="td-ui-body-sm">${WELCOME_BOOKING.line}</p><div class="fraga-welcome-next"><p class="td-ui-body-sm">${WELCOME_BOOKING.next}</p><button class="td-ui-body-sm fraga-welcome-chip" type="button" data-ask="${WELCOME_BOOKING.nextAsk}">${WELCOME_BOOKING.nextAsk}</button></div></div>`;
-            html += `<p class="td-ui-kicker fraga-welcome-kicker">Under er vecka</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_BOOKING.week.map(welcomeCard).join("")}</div>`;
+            html += `<div class="fraga-welcome-booking"><div class="fraga-welcome-booking-head"><span class="td-ui-eyebrow">Er bokning</span><span class="td-ui-caption fraga-welcome-ok">Boende bokat</span></div><p class="td-ui-title">${WELCOME_BOOKING.title}</p><p class="td-ui-body-sm">${WELCOME_BOOKING.line}</p><div class="fraga-welcome-next"><p class="td-ui-body-sm">${WELCOME_BOOKING.next}</p><button class="td-ui-body-sm fraga-welcome-chip" type="button" data-ask="${WELCOME_BOOKING.nextAsk}">${WELCOME_BOOKING.nextAsk}</button></div></div>`;
+            html += `<p class="td-ui-eyebrow fraga-welcome-kicker">Under er vecka</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_BOOKING.week.map(welcomeCard).join("")}</div>`;
           }
           if (w.events) {
-            html += `<p class="td-ui-kicker fraga-welcome-kicker">Kul för hela familjen idag</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_TODAY.map(welcomeCard).join("")}</div>`;
+            html += `<p class="td-ui-eyebrow fraga-welcome-kicker">Kul för hela familjen idag</p><div class="fraga-cards fraga-welcome-cards">${WELCOME_TODAY.map(welcomeCard).join("")}</div>`;
           }
-          if (w.tiles) html += `<p class="td-ui-kicker fraga-welcome-kicker">${w.nowLabel}</p><div class="fraga-welcome-tiles">${WELCOME_TILES[w.tiles].map(tileMarkup).join("")}</div>`;
+          if (w.tiles) html += `<p class="td-ui-eyebrow fraga-welcome-kicker">${w.nowLabel}</p><div class="fraga-welcome-tiles">${WELCOME_TILES[w.tiles].map(tileMarkup).join("")}</div>`;
           welcomeEl.innerHTML = html;
           suggestLabel.textContent = w.label;
           return ogFragor();

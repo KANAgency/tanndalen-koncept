@@ -46,7 +46,7 @@ export function stayStatus(stay, today) {
 }
 
 export function statusLabel(status, stay) {
-  const range = stay.rangeLabel.toUpperCase();
+  const range = stay.rangeLabel;
   if (status === "ongoing") return `Pågår nu · ${range}`;
   if (status === "ended") return `Avslutad · ${range}`;
   return `Kommande · ${range}`;

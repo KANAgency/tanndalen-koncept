@@ -187,7 +187,7 @@ Svaren förutsätter känt resesällskap: **två vuxna, barn 6 och 9 år, stuga 
 Inga döda ändar: följdfrågor pekar bara på frågor som har svar.
 
 ### Kort och följdfrågor – stil
-- Kort är `<a class="fraga-card">`: day-bakgrund, bild 140 px, kicker versal i neutral, titel UI/title-sm, pil ↗→ på 40 %.
+- Kort är `<a class="fraga-card">`: day-bakgrund, bild 140 px, kicker (som skrivet, 2026-11-19) i neutral, titel UI/title-sm, pil ↗→ på 40 %.
 - Hover: kortet mörknar till neutral-subtlest, bilden skalar 1.04, pilen full + 3 px.
 - Följdfrågor (pills): hover = night-bakgrund, vit text (som tertiärknapp).
 

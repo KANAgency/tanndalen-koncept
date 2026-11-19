@@ -4,7 +4,7 @@
   "$figma-groups": {
     "Heading": ["heading-xxxl", "heading-xxl", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "heading-xxs", "heading-xxxs"],
     "Editorial": ["annotation", "body-xl", "body-lg", "body", "body-sm", "eyebrow", "eyebrow-sm", "eyebrow-xs", "quote", "quote-sm", "quote-xs", "statement"],
-    "UI": ["ui-title", "ui-title-lg", "ui-title-sm", "ui-body", "ui-body-sm", "ui-caption", "ui-kicker", "ui-label", "ui-nav", "ui-cta", "ui-cta-sm", "ui-figure", "ui-figure-xl", "ui-figure-lg", "ui-figure-md", "ui-figure-sm", "ui-figure-sm-regular", "ui-figure-unit", "ui-figure-unit-lg", "ui-figure-unit-md"]
+    "UI": ["ui-title", "ui-title-lg", "ui-title-sm", "ui-body", "ui-body-sm", "ui-caption", "ui-kicker", "ui-eyebrow", "ui-label", "ui-nav", "ui-cta", "ui-cta-sm", "ui-figure", "ui-figure-xl", "ui-figure-lg", "ui-figure-md", "ui-figure-sm", "ui-figure-sm-regular", "ui-figure-unit", "ui-figure-unit-lg", "ui-figure-unit-md"]
   },
   "$naming": "leading är enhetslös multiplikator när den är ett tal. tracking är em (px / fontstorlek, tre decimaler).",
   "$weights": "Regular=400. Book=450. Bold=700.",
@@ -152,7 +152,8 @@
   "ui-body": { "group": "UI", "family": "TD.secondary", "size": "base", "weight": "book", "leading": 1.5, "tracking": 0, "note": "Figma UI/body. 16/150 %." },
   "ui-body-sm": { "group": "UI", "family": "TD.secondary", "size": "sm", "weight": "book", "leading": 1.5, "tracking": 0, "note": "Figma UI/body-sm. 14/150 %." },
   "ui-caption": { "group": "UI", "family": "TD.secondary", "size": "13", "weight": "book", "leading": 1.385, "tracking": 0, "note": "Figma UI/caption. 13/18 px (2026-11-12)." },
-  "ui-kicker": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.333, "tracking": 0 },
+  "ui-kicker": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.333, "tracking": 0, "note": "Figma UI/kicker. Metadata om ett enskilt objekt (typ, tid, datum, status). Som skrivet, inga versaler (2026-11-19)." },
+  "ui-eyebrow": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.333, "tracking": 0, "textCase": "uppercase", "note": "Figma UI/eyebrow. Namnger ett block inne i UI. 12/16, versaler (2026-11-19)." },
   "ui-label": { "group": "UI", "family": "TD.secondary", "size": "xs", "weight": "bold", "leading": 1.083, "tracking": 0 },
   "ui-nav": { "group": "UI", "family": "TD.secondary", "size": "sm", "weight": "book", "leading": 1.071, "tracking": 0 },
   "ui-cta": { "group": "UI", "family": "TD.secondary", "size": "base", "weight": "bold", "leading": 1.1, "tracking": 0 },

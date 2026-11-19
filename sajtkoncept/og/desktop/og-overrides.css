@@ -811,7 +811,6 @@ html[data-season="summer"] .onsite-topbar {
   gap: 6px;
   margin: 0;
   color: var(--color-TD-neutral-strong);
-  text-transform: uppercase;
 }
 
 .account-stay-status::before {

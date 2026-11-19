@@ -434,6 +434,18 @@
   text-rendering: geometricPrecision;
 }
 
+.td-ui-eyebrow {
+  font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.333;
+  letter-spacing: 0em;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  text-transform: uppercase;
+}
+
 .td-ui-label {
   font-family: "Radio Canada Big", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   font-size: var(--font-size-xs);
