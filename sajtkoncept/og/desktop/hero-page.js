@@ -10,6 +10,21 @@ import { initTdBlocks } from "./td-blocks.js";
 
 const INTRO_SEEN_KEY = "og_intro_seen";
 
+/** Hero-brödtext: hel text, plus kortare mobilversion (≤639 px) om heroBodyMobile finns. Växlas i CSS. */
+function setHeroBody(el, config) {
+  el.textContent = "";
+  const full = document.createElement("span");
+  full.className = "og-hp-hero-body-full";
+  full.textContent = config.heroBody;
+  el.append(full);
+  if (config.heroBodyMobile) {
+    const short = document.createElement("span");
+    short.className = "og-hp-hero-body-short";
+    short.textContent = config.heroBodyMobile;
+    el.append(short);
+  }
+}
+
 function prefersReducedMotion() {
   return matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -964,7 +979,7 @@ function initHeroPage() {
   }
   if (line2) line2.textContent = config.headlineLine2;
   if (heroTitle) heroTitle.textContent = config.heroTitle;
-  if (heroBody) heroBody.textContent = config.heroBody;
+  if (heroBody) setHeroBody(heroBody, config);
   if (heroFrameImg) {
     heroFrameImg.src = config.heroFrameSrc;
     heroFrameImg.alt = "";
@@ -1031,7 +1046,7 @@ function initHeroPage() {
     Object.assign(config, fresh);
     if (line2) line2.textContent = config.headlineLine2;
     if (heroTitle) heroTitle.textContent = config.heroTitle;
-    if (heroBody) heroBody.textContent = config.heroBody;
+    if (heroBody) setHeroBody(heroBody, config);
     introLoop?.setScenes(config.scenes);
   });
 
@@ -1120,7 +1135,7 @@ function initHeroPage() {
     root.style.setProperty("--og-hp-hero-frame-aspect", config.heroFrameAspect || "1280 / 707");
     if (line2) line2.textContent = config.headlineLine2;
     if (heroTitle) heroTitle.textContent = config.heroTitle;
-    if (heroBody) heroBody.textContent = config.heroBody;
+    if (heroBody) setHeroBody(heroBody, config);
     if (heroFrameImg && heroFrameImg.getAttribute("src") !== config.heroFrameSrc) {
       heroFrameImg.src = config.heroFrameSrc;
     }

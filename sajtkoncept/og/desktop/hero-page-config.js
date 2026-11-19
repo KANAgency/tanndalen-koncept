@@ -172,6 +172,9 @@ export const HERO_PAGE_CONFIG = {
   heroTitle: "Backe för barnen, spår för er.",
   heroBody:
     "24 nedfarter, upp till 145 km längdspår och Bärra Blåbär i Barnbacken. Barnen tar knappliften, ni tar ett varv i spåren och möts på Baka Kaka efteråt. Fyra timmar från Stockholm, och barn till och med 6 år åker gratis med hjälm.",
+  /** ≤639 px: utan mittmeningen (John 19 nov), ca 6 rader i stället för 9. */
+  heroBodyMobile:
+    "24 nedfarter, upp till 145 km längdspår och Bärra Blåbär i Barnbacken. Fyra timmar från Stockholm, och barn till och med 6 år åker gratis med hjälm.",
 
   /**
    * Rising cloud layers during intro scroll. Order: cloud-1 → cloud-2 → cloud-gradient.

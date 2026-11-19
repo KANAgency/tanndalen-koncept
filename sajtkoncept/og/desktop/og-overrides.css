@@ -319,6 +319,11 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   margin-right: auto;
   text-align: center;
 }
+/* Brödtexten smalare än rubriken (John 19 nov): ca 60 tecken per rad, centrerad. */
+.theme-OG .og-hp-hero-copy p {
+  max-width: min(100%, 34em);
+  margin-inline: auto;
+}
 
 /* Hero content rises into the white of the clouds, like White Desert:
    main is pulled up so its copy sits ~60 % down the screen when the header

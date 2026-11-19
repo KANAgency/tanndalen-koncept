@@ -498,6 +498,12 @@ html.theme-OG video {
   text-rendering: geometricPrecision;
 }
 
+.og-hp-hero-body-short { display: none; }
+@media (max-width: 639px) {
+  .og-hp-hero-body-full:has(+ .og-hp-hero-body-short) { display: none; }
+  .og-hp-hero-body-short { display: inline; }
+}
+
 .og-hp-hero-copy p {
   margin: 0;
   max-width: none;
