@@ -80,7 +80,7 @@ export const HERO_PAGE_CONFIG = {
       { image: "./assets/img/og-intro-bryggfika.jpg", video: "./assets/video/intro/bryggfika.mp4", line1: "Bryggfika", clipDurationSec: 5, advanceEarlySec: 0.3 }
     ],
     /* Copy 19 nov: samma dualitet som vintern, fakta i docs/og-fakta.md (Sommar). */
-    heroTitle: "Barnen i sjön, ni på cykeln.",
+    heroTitle: "Sjön för barnen, leder för er.",
     heroBody:
       "Över 50 km cykelleder, klätterpark och sandstrand vid Rädsjön. Barnen hoppar från bryggan, ni tar ett varv i flowtrailen och möts vid poolen på Wärdshuset efteråt. Fyra timmar från Stockholm, med bastuflotte och SUP på samma sjö.",
     heroBodyMobile:
@@ -169,12 +169,12 @@ export const HERO_PAGE_CONFIG = {
   heroTitleSizePx: 60,
   heroBodySizePx: 16,
   heroBodyLineHeightPx: 25.6, /* 16 × 1.6 Editorial/body-sm */
-  heroTitleBodyGapPx: 16, /* --space-lg */
+  heroTitleBodyGapPx: 24, /* --space-xl (John 19 nov: var 16) */
   /** When true, hero copy uses headlineLeftPx instead of heroCopyLeftPx. */
   heroTextAlignWithIntroHeadline: false,
 
   /* Copy 19 nov (John): manualens tonalitet s. 76–77 + dualiteten s. 87–88, fakta i docs/og-fakta.md. */
-  heroTitle: "Barnen i backen, ni i spåret.",
+  heroTitle: "Backe för barnen, spår för er.",
   heroBody:
     "24 nedfarter, upp till 145 km längdspår och Bärra Blåbär i Barnbacken. Barnen tar knappliften, ni tar ett varv i spåren och möts på Baka Kaka efteråt. Fyra timmar från Stockholm, och barn till och med 6 år åker gratis med hjälm.",
   /** ≤639 px: utan mittmeningen (John 19 nov), ca 6 rader i stället för 9. */
