@@ -17,7 +17,6 @@
   "color/OG/signal-orange-active": "var(--color-OG-signal-orange-active)",
   "color/OG/signal-orange-hover": "var(--color-OG-signal-orange-hover)",
   "color/OG/taupe": "var(--color-OG-taupe)",
-  "color/OG/taupe-light": "var(--color-OG-taupe-light)",
   "color/OG/taupe-tint": "var(--color-OG-taupe-tint)",
   "color/OG/tonal": "var(--color-OG-tonal)",
   "color/OG/tonal-active": "var(--color-OG-tonal-active)",

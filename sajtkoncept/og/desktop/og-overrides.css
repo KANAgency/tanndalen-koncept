@@ -145,11 +145,11 @@ html.theme-OG body.og-hp-page {
 .theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
 .theme-OG .og-hp-header .td-button-fill-winter,
 .theme-OG .og-hp-header .account-user {
-  background: var(--color-OG-taupe-light);
+  background: var(--color-OG-neutral-subtlest); /* 19 nov: var taupe-light (utgått) */
   color: var(--color-text-primary);
 }
-/* TEST 2026-11-17: menyknapp och konto ett steg mörkare (neutral-subtlest #E0DFDB)
-   så de skiljer sig från menypanelens glas (neutral-highlight = taupe-50 85 %). */
+/* TEST 2026-11-17: menyknapp och konto ett steg mörkare (neutral-subtlest)
+   så de skiljer sig från menypanelens glas (neutral-highlight 85 %). */
 .theme-OG .og-hp-header .menu-control,
 .theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
 .theme-OG .og-hp-header .account-user {
@@ -157,7 +157,7 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Orsaguiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-200 #DFDCCF sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
+   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-tint #DFDCCF sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
 .theme-OG {
   --color-OG-guide: var(--color-OG-season-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
@@ -210,15 +210,15 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
 
 /* En dag: secondary buttons (CTA, Hoppa över, Nästa) */
 /* TEST: En dag inverted, on Orsa svart. Contrast choices (on #3C3C3B):
-   text off-white #F5EEE5 (~10:1), labels/meta neutral-subtle #C3C2BD (~5.5:1),
-   timeline line/dots neutral-muted #A5A4A0, buttons off-white with dark text,
+   text off-white #F5EEE5 (~10:1), labels/meta neutral-subtle (~5.5:1),
+   timeline line/dots neutral-muted, buttons off-white with dark text,
    sun icon stays on a light disc so its dark strokes still read. */
 .theme-OG .og-hp-blocks .en-dag {
   --en-dag-bg: #1E1D1B; /* warm near-black between OG black #000 and Orsa svart #3C3C3B */
   --color-text-primary: #F5EEE5;
-  --color-TD-neutral: #C3C2BD;
-  --color-TD-neutral-muted: #A5A4A0;
-  --color-TD-neutral-subtlest: #4E4D49;
+  --color-TD-neutral: var(--color-OG-neutral-subtle);
+  --color-TD-neutral-muted: var(--color-OG-neutral-muted);
+  --color-TD-neutral-subtlest: var(--color-OG-neutral-strong);
   background: var(--en-dag-bg);
   /* full-bleed band behind the 1280px content column */
   box-shadow: 0 0 0 100vmax var(--en-dag-bg);
@@ -258,17 +258,7 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   outline-color: #F5EEE5;
 }
 
-/* OG neutral scale retinted to the taupe-light hue (Figma Neutral/*, same lightness
-   as the TD neutrals). Overrides the older cool greys from generated tokens. */
-.theme-OG {
-  --color-OG-neutral-highlight: var(--color-OG-taupe-50); /* 19 nov: taupe-serien (var #F5F4F0) */
-  --color-OG-neutral-subtlest: #E0DFDB;
-  --color-OG-neutral-light: #D8D7D3;
-  --color-OG-neutral-subtle: #C3C2BD;
-  --color-OG-neutral-muted: #A5A4A0;
-  --color-OG-neutral: #696864;
-  --color-OG-neutral-strong: #4E4D49;
-}
+/* OG-neutralerna (med taupe-hint) ligger i tokens sedan 19 nov; ingen override här längre. */
 
 /* Booking bar (and its calendar) on the lightest OG neutral instead of white. */
 .theme-OG {
@@ -292,7 +282,7 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
 /* Times in the timeline: light neutral (Muted), so they separate from the white names. */
 .theme-OG .en-dag .en-dag-sun-time,
 .theme-OG .en-dag .en-dag-sun-event-time {
-  color: var(--color-OG-neutral-muted, #A5A4A0);
+  color: var(--color-OG-neutral-muted);
 }
 /* TEST: timeline names in the primary font (Literata). */
 .theme-OG .en-dag .en-dag-sun-name,
