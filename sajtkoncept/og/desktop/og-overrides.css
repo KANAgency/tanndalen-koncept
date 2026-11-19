@@ -38,7 +38,7 @@ html.theme-OG body.og-hp-page {
   --color-TD-neutral-light: var(--color-OG-neutral-light);
   --color-TD-neutral-subtlest: var(--color-OG-neutral-subtlest);
   --color-TD-neutral-highlight: var(--color-OG-neutral-highlight);
-  --color-TD-icon-highlight: var(--color-accent);
+  --color-TD-icon-highlight: var(--color-OG-taupe); /* TEST 19 nov: ikonaccent taupe */
   --color-TD-icon-on-dark: var(--color-OG-day);
 
   --font-family-TD-primary: var(--font-family-OG-primary), "Literata", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;

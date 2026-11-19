@@ -54,7 +54,7 @@
 /* Piktogram (32-raster, 2 px linje + en accentform, samma logik som Icons / Content) */
 .og-pikto { width: 32px; height: 32px; flex: 0 0 auto; color: currentColor; }
 .og-pikto .linje { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.og-pikto .accent { fill: var(--color-accent); }
+.og-pikto .accent { fill: var(--color-OG-taupe); } /* TEST 19 nov: taupe i stället för signalorange */
 
 /* ── Block 1: Familjen ────────────────────────────────────── */
 .og-familj-head {
@@ -330,7 +330,7 @@
 .og-mix-etiketter { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
 .og-mix-pol { display: inline-flex; align-items: center; gap: var(--space-sm); font-weight: 700; font-size: var(--font-size-sm); }
 .og-mix-pol .og-pikto { width: 28px; height: 28px; }
-.og-mix-pol .og-pikto .accent { fill: var(--color-OG-cta-on-dark); }
+.og-mix-pol .og-pikto .accent { fill: var(--color-OG-taupe-tint); } /* TEST 19 nov: ljus taupe på mörkgrönt (taupe ger 2,3:1) */
 .og-mix-namn {
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-full);
