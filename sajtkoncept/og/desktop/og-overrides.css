@@ -417,6 +417,41 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
   .theme-OG .og-hp-booking-anchor { translate: none; transition: none; }
 }
 
+/* Herosceneriet (19 nov, TEST): kurbits, rubrik och ingress ligger i himlen på en
+   fullbreddsbild (DJI 0037, himlen förlängd och utbytt i Magnific). Bildens överkant
+   maskas till transparent, så molnövergången/sidans naturvita fortsätter in i himlen
+   utan skarv. Bokningsbaren överlappar bildens underkant med halva sin höjd.
+   Bilden är 100vw × 111.9vw med horisonten 61.3vw från överkant. Den förankras i
+   ingressens underkant (pseudoelementet sitter på media-blocket, som börjar direkt
+   efter ingressen), så horisonten hamnar alltid --og-hp-scene-horizon-gap under texten. */
+.theme-OG .og-hp-hero-scene {
+  --og-hp-scene-landscape: 31vw; /* ingress → bokningsbar */
+  --og-hp-scene-horizon-gap: 80px; /* ingress → horisont */
+  position: relative;
+  isolation: isolate;
+}
+.theme-OG .og-hp-hero-scene .og-hp-hero-media-block::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: calc(var(--og-hp-scene-horizon-gap) - var(--og-hp-scene-landscape) - 61.3vw);
+  bottom: calc(var(--og-hp-booking-cats-h, 81px) / 2);
+  width: 100vw;
+  translate: -50% 0;
+  background: image-set(
+      url("./assets/img/og-hero-sky-1600.jpg") 1x,
+      url("./assets/img/og-hero-sky.jpg") 2x
+    )
+    center top / 100vw auto no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 30%);
+  pointer-events: none;
+}
+.theme-OG .og-hp-hero-scene .og-hp-hero-copy {
+  margin-bottom: var(--og-hp-scene-landscape);
+}
+
 /* Säsongsväxlaren i En dag är borttagen (2026-11-12) */
 .en-dag .en-dag-season { display: none !important; }
 
