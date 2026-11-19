@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-19 (OG: färgprofil – neutraler, taupe, vinter)
+
+John: OG ska ha en sammanhållen, dämpad palett där bara mörkgrön (CTA/fyllning) och signalorange (detalj, viktig CTA) är starka. **Neutralerna** bär taupe-tonen (OKLCH ton 96°, mättnad ~0,012) så att temperaturen är densamma överallt. **Taupe** är två färger: taupe #726D58 och taupe-tint #DFDCCF. **Regel:** mörk taupe används bara i små sekundära element (mindre knappar, taggar, ikoner, tunna linjer), aldrig som platta runt kort eller annan stor yta. **Säsong:** vinter = Is #D1DBE1 (kall grå med blå ton, låg mättnad), sommar = mörkgrön, vår och höst = taupe-tint. Ratat: TD:s säsongsfärger i OG, TD:s vinterblå #A1B5BA, sjöblå #9DC7CB, taupe-serie i åtta steg, vinterkandidaterna frost/skymning/gryning (för mättade) och lav/granfrost/skiffer/rimfrost.
+
 ## 2026-11-19 (TD + OG: eyebrow och kicker)
 
 John: eyebrow och kicker är olika element, båda behövs, och kod och Figma ska vara exakt lika. Regel efter funktion: **eyebrow** namnger ett avsnitt eller block, alltid versaler (Editorial/eyebrow-xs 16/22, -sm 18/25, eyebrow 20/28, UI/eyebrow 12/16). **Kicker** är metadata om ett enskilt objekt (typ, tid, datum, status), UI/kicker 12/16 som skrivet. "Boka din resa"-listen är en eyebrow (versaler). Ratat: alla 12 px-etiketter i versaler (Figmas tidigare UI/kicker). Eyebrow har ingen mobilstorlek; komponenter som byter storlek på mobil byter stil (Aktuellt sm → xs).

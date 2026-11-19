@@ -40,7 +40,7 @@
     "season-autumn": { "ref": "color.OG.season-autumn" },
     "season-winter": {
       "ref": "color.OG.season-winter",
-      "note": "TEST: TD:s vinter #A1B5BA (sjöblå ratad 2026-11-17). Säsongsytor, inte sekundär CTA."
+      "note": "Is #D1DBE1 (John 2026-11-19). Säsongsytor, Orsaguiden vinter. Inte sekundär CTA."
     },
     "bg-surface": { "ref": "color.OG.snow" },
     "bg-base-dark": { "ref": "color.OG.night" },
@@ -115,7 +115,7 @@
     "on-cta-on-dark": { "ref": "color.OG.cta" },
     "on-day": { "ref": "color.OG.night" },
     "on-night": { "ref": "color.OG.day" },
-    "on-season-autumn": { "ref": "color.OG.day" },
+    "on-season-autumn": { "ref": "color.OG.night" },
     "on-season-spring": { "ref": "color.OG.night" },
     "on-season-summer": { "ref": "color.OG.day" },
     "on-season-winter": { "ref": "color.OG.night" },

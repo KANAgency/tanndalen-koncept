@@ -90,7 +90,7 @@
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: var(--color-OG-season-winter); /* ljusblå, inte OG:s taupe-override */
+  background: var(--color-OG-season-winter); /* Is #D1DBE1 */
   transform: scaleX(0);
   transform-origin: left center;
   pointer-events: none;

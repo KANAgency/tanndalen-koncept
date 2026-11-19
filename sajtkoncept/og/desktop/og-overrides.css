@@ -134,7 +134,7 @@ html.theme-OG body.og-hp-page {
 
 /* Sekundär CTA = taupe-tint (--color-cta-secondary, Figma color/cta-secondary), skild från
    vinterfärgen (2026-11-17). Taupe-värdena kommer från tokens (color/OG/taupe*).
-   --color-season-winter är OG:s riktiga vinterfärg (sjöblå) och används för säsongsytor. */
+   --color-season-winter är OG:s vinterfärg (Is #D1DBE1 sedan 19 nov) och används för säsongsytor. */
 .theme-OG .td-button-fill-winter,
 .theme-OG .fraga-send,
 .theme-OG .fraga-follow-icon {
@@ -157,7 +157,7 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Orsaguiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-tint #DFDCCF sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
+   Vinter: OG season-winter = Is #D1DBE1 (primitives.json). Sommar: OG season-spring = taupe-tint #DFDCCF sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
 .theme-OG {
   --color-OG-guide: var(--color-OG-season-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
@@ -1024,7 +1024,8 @@ html.theme-OG[data-season] .td-aktuellt-kort[data-typ="fraga"] .td-guide-mark-ha
   color: var(--color-OG-neutral-strong);
   text-align: center;
 }
-.theme-OG .td-mer-bildlank .td-mer-plats { background: var(--color-OG-taupe); color: var(--color-OG-day); }
+/* Mörk taupe får inte vara yta (John 19 nov): bildplatshållaren är ljus taupe som övriga. */
+.theme-OG .td-mer-bildlank .td-mer-plats { background: var(--color-OG-taupe-tint); color: var(--color-OG-night); }
 .theme-OG .td-mer-bildlank:hover .td-mer-plats { transform: none; }
 .theme-OG .td-mer-plats-text { max-width: 22ch; }
 /* Luft ovanför Mer-blocken, samma som TD (160 px efter Just nu i läge 3). */
