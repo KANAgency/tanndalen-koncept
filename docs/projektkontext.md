@@ -21,6 +21,7 @@ Bakgrund för design- och kodarbete. Källor: projektsammanställning 21 sep 202
 - **Kantar (jan 2026, n=1 186):** 67–74 % av svenskarna har ingen uppfattning om TD/OG: ett kännedomsproblem, inte ett produktproblem. Besökare är mycket mer positiva. Förstahandspreferens TD 3 %, OG 5 % (Sälen 26 %, Åre 21 %). Sommar är en obesatt möjlighet (consideration 12–15 %, men 35–42 % bland egna vinterbesökare). Attributdata har låga urval (n=16–19): flagga alltid urvalsstorlek.
 - **JTBD-personas:** 1 Familjen, 2 Stamgästen, 3 Spontanresenären (drabbas hårdast av mobilgapet), 4 Stugägaren, 5 Konferensbokaren, 6 Tomtspekulanten, 7 Bokningspersonal, 8 Redaktör. Workshopens målgruppslista: familj, stamgäst, förstagångsgäst, spontanresenär, äldre par, lokalbefolkning/stugägare, konferensbokare, tränings-/klubbgrupper, redaktörer, sommar-/dagsgäster; "skidåkare" delas i längd/alpint.
 - TD primär: familjer med barn 7–14 som vill ha äventyr. Sekundär: unga vuxna utan barn. OG: persona 1 bär sajten; längdskidor som trovärdighetsbevis.
+- **OG-prioritet (John, 19 nov 2026): familjen i 4 av 5 fall.** Längdåkarna ("stora plånböcker", OG-manualen s. 7) är sekundär målgrupp.
 
 ## 4. Teknisk verklighet
 - **Stack:** Umbraco behålls, helt ny lösning, .NET 8 → .NET 10. Hosting Umbraco Cloud. KAN rekommenderar att kunden äger sin Azure-prenumeration. Övriga system: Apsis, ImBox (ersätts av egen "Allt om"-lösning), Netigate, Mynewsdesk, Umbraco Forms, Cookiebot, Power BI, Axess, Teamtailor, SmartSign, Compusoft. Consent Mode 2, GTM.
@@ -46,7 +47,7 @@ Bakgrund för design- och kodarbete. Källor: projektsammanställning 21 sep 202
 2. Vilket TD-koncept gäller formellt (se ovan)?
 3. Norska för TD? Kan `tdidag.com` hämtas hem? Kan `shop.orsagronklitt.se` konsolideras in i R360?
 4. **R360-parametrar** utöver kategori-ID, och API för liftdata.
-5. OG: CTA-färg (mörkgrön), familj vs längdåkande citysinglar som prioritet (OG-manualen s. 7 prioriterar "längdåkare med stora plånböcker"), hur mycket urgency som överlever.
+5. OG: CTA-färg (mörkgrön), hur mycket urgency som överlever. (Målgruppsprioritet avgjord 19 nov: familjen i 4 av 5 fall, se §3.)
 6. Portföljroller OG/TD och korsförsäljningsasymmetri (ingen portföljarkitektur finns).
 7. Verifiera mot Tänndalen: Hamrafjället 1 137 m / 295 m, väderstation "på toppen", webbkamera "Storvigeln", pistnamn "Headstråket", antal pister (54 mot 57), footerlänkar, platshållartider.
 8. Vem skriver morgonrapporten, från vilken enhet? Rättigheter till porträtt och doodles.

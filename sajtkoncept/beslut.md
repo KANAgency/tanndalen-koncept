@@ -1,5 +1,9 @@
 # Beslut
 
+## 2026-11-19 (OG: målgruppsprioritet)
+
+OG prioriterar familjen i 4 av 5 fall (John). Längdåkarna med "stora plånböcker" (OG-manualen s. 7) är sekundär målgrupp. Avgör krocken från 18 nov. Konsekvens för konceptblocken: Familjen är huvudspåret. Om Helgen ska behållas, och i så fall för vem, är fortfarande öppet. Mobilversion, riktiga uppgifter och Figma väntar på Johns bedömning.
+
 ## 2026-11-18 (OG: konceptblock Familjen och Helgen, ej beslutat)
 
 Två OG-unika block byggda som koncept med röd "Koncept"-tagg: `#familjen` (åldersstickan, "Hur gamla är barnen?") och `#helgen` ("Bästa mixen i skidparadiset.", reglage koppla av ↔ ladda upp). Valt för att de bär var sin halva av OG:s positionering: familjen (persona 1, Bärra, gratis liftkort t.o.m. 6 år) och närhet + längd-DNA (4 h från Stockholm, elitspår, manualens prioriterade "längdåkare med stora plånböcker"). Ratat: OG-version av Hitta hit (TD har redan kartblocket), byakarta med piktogram (för tunt underlag om byarnas lägen), Vasaloppsnedräkning (för smal). Öppet: John bedömer; målgruppskrocken familj vs längdåkare (manualen s. 7 mot projektkontexten).
