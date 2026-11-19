@@ -579,11 +579,11 @@ html.theme-OG video {
   box-shadow: 0 12px 40px color-mix(in srgb, var(--color-OG-black, #000) 18%, transparent);
 }
 
-/* Boka din resa-listen (John 2026-11-19): samma form som TD (booking.css). TEST 19 nov: taupe-tint var för
-   likt sidans beige, så listen är Orsa svart med Snö-text (samma roll som TD:s Natt). */
+/* Boka din resa-listen (John 2026-11-19): samma form som TD (booking.css). TEST 19 nov: mörkgrön med Dag-text
+   (taupe-tint var för likt sidans beige, Orsa svart ratad). */
 .og-hp-booking-anchor .td-booking-head {
-  background: var(--color-OG-night);
-  color: var(--color-OG-snow);
+  background: var(--color-OG-dark-green);
+  color: var(--color-OG-day);
 }
 
 .og-hp-booking-anchor .td-booking-cats > button,
