@@ -1349,7 +1349,7 @@ export function initTdBlocks(root = document) {
             /* TODO: uthyrningssidan är inte vald. Tom sträng faller tillbaka på #. */
             rentalHref: "",
             image: "./assets/img/just-nu/sommar/svansjon.jpg?v=2",
-            alt: "Två personer paddlar kanot på en sjö omgiven av skog."
+            alt: "Pappa och barn kliver upp ur sjön på badstegen."
           },
           calendar: {
             senare: ["[10 jul] · Orsa GRVL", "[31 jul] · Grönklitt Trail"]
