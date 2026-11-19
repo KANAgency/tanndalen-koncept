@@ -41,7 +41,7 @@ QA[RAIN] = QA["Vad gör vi om det regnar?"] = {
   sources: src(["#aktiviteter", "Aktiviteter"], ["#service", "Mat och service"]),
   cards: [
     card("Aktivitet", "[Grönklitt Äventyrsbad]", "[Öppet 10–20], bassäng och bastu", "fraga-bastu.jpg"),
-    card("Aktivitet", "Blåbärslyan", "Inomhuslek, öppen i alla väder", "guide/guide-blabarslyan.jpg"),
+    card("Aktivitet", "Blåbärslyan", "Inomhuslek, öppen i alla väder", "guide/guide-barra-barnen.jpg"),
     card("Aktivitet", "[Klätterväggen]", "Från [5] år, boka på plats", "fraga-klatter.jpg")
   ],
   chips: ["Vad händer för barn idag?", "Var hittar vi Bärra?"],
