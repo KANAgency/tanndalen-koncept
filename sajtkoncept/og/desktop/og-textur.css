@@ -4,11 +4,17 @@
  * ?textur=papper|linne|sandsten|tra|lader&styrka=0–100 (og-textur.js) skriver
  * över --og-textur för jämförelse; "Av" i panelen sätter den till none.
  */
-.theme-OG .og-hp-blocks {
+/* Texturen ligger på main (bakom heron och blocken) så att den löper obruten
+ * även i glappet under bokningsbaren. Blocken blir genomskinliga; main har
+ * samma bg-base, så färgen är oförändrad. */
+.theme-OG .og-hp-main {
   background-color: var(--color-bg-base);
   background-image: var(--og-textur, url("./assets/img/textur-papper.svg"));
   background-size: 480px 480px;
   background-blend-mode: soft-light;
+}
+.theme-OG .og-hp-main .og-hp-blocks {
+  background: transparent;
 }
 
 .og-textur-panel {
