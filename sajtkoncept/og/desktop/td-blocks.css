@@ -2108,7 +2108,7 @@ a.td-rapport:hover .td-corner-link-label { opacity: 1; }
 .td-fraga-block .td-guide-mark-halo, #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-winter); }
 html[data-season="summer"] .td-fraga-block .td-guide-mark-halo, html[data-season="summer"] #fraga-launch .td-guide-mark-halo { stroke: var(--color-season-summer); }
 #fraga-launch .fraga-launch-name { font-size: 14px; }
-.td-fraga-block-overrubrik-icon.td-guide-mark { width: 60px; height: 60px; margin-bottom: -6px; transform: translateX(-4px); }
+.td-fraga-block-overrubrik-icon.td-guide-mark { width: 60px; height: 60px; margin-bottom: -9px; } /* B3-märket (viewBox 40) är centrerat i sin ruta: ingen sidoförskjutning; -9px ger samma luft till namnet som det gamla märket (≈15px) */
 .td-fraga-block-overrubrik { margin-bottom: 20px; }
 /* Live-plopp för Fjällguiden */
 .fg-live { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-open); margin-left: 2px; animation: fg-live-blink 2s ease-in-out infinite; }
