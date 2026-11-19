@@ -157,7 +157,7 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Orsaguiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG vår-gul #F6E0A2 (sommargrönt krockar med CTA). */
+   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-tint #E1DBD0 sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
 .theme-OG {
   --color-OG-guide: var(--color-OG-season-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
@@ -963,20 +963,7 @@ html[data-mode="onsite"] .just-cols-3 { grid-template-columns: none; grid-auto-f
   overscroll-behavior-x: contain;
 }
 .theme-OG .td-aktuellt-track::-webkit-scrollbar { display: none; }
-/* Plattorna i OG:s färgprofil (John 19 nov): bara vinter (#A1B5BA) får komma från TD, och bara i vintersyfte.
-   Sommar → mörkgrön, höst → taupe (mellangrön), vår → taupe-tint (neutral på taupe), svart glas → Orsa svart. */
-.theme-OG .td-aktuellt-kort[data-platta="sommar"] {
-  --td-aktuellt-plate: var(--color-OG-dark-green);
-  --td-aktuellt-on-plate: var(--color-OG-day);
-}
-.theme-OG .td-aktuellt-kort[data-platta="host"] {
-  --td-aktuellt-plate: var(--color-OG-taupe);
-  --td-aktuellt-on-plate: var(--color-OG-day);
-}
-.theme-OG .td-aktuellt-kort[data-platta="var"] {
-  --td-aktuellt-plate: var(--color-OG-taupe-tint);
-  --td-aktuellt-on-plate: var(--color-OG-orsa-black);
-}
+/* Svart glas i Orsa svart (sommar/höst/vår-plattorna följer OG:s säsongstokens sedan 19 nov). */
 .theme-OG .td-aktuellt-kort[data-platta="glas-svart"] {
   --td-aktuellt-plate: color-mix(in srgb, var(--color-OG-orsa-black) 80%, transparent);
   --td-aktuellt-on-plate: var(--color-OG-snow);
