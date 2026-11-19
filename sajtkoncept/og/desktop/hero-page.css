@@ -579,10 +579,12 @@ html.theme-OG video {
   box-shadow: 0 12px 40px color-mix(in srgb, var(--color-OG-black, #000) 18%, transparent);
 }
 
-/* Boka din resa-listen (John 2026-11-19): samma form som TD (booking.css). TEST 19 nov: ljusaste neutralen,
-   Orsa svart text, kicker utan versaler (taupe-tint, Orsa svart och mörkgrön ratade). */
+/* Boka din resa-listen (John 2026-11-19): samma form som TD (booking.css). TEST 19 nov: vit (ingen egen bakgrund),
+   Orsa svart text, kicker utan versaler, avdelare OG neutral-subtlest (taupe-tint, Orsa svart, mörkgrön och
+   ljusaste neutralen ratade). */
 .og-hp-booking-anchor .td-booking-head {
-  background: var(--color-OG-neutral-highlight);
+  --color-booking-head-divider: var(--color-OG-neutral-subtlest);
+  background: transparent;
   color: var(--color-OG-night);
 }
 

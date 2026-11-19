@@ -19,10 +19,21 @@
   margin: 0;
   padding: 6px var(--space-lg) 7px; /* 1 px extra under: optiskt centrerad */
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  /* TEST (John 19 nov): ljusaste neutralen, svart text, kicker utan versaler (versal list blev för blockig) */
-  background: var(--color-TD-neutral-highlight);
+  /* TEST (John 19 nov): ingen egen bakgrund (allt vitt), svart text, kicker utan versaler.
+     Avdelare 1 px i listens underkant, 8 px in från kortets kanter (samma färg som .td-field-divider). */
+  position: relative;
+  background: transparent;
   color: var(--color-TD-night);
   text-align: center;
+}
+.td-booking-head::after {
+  content: "";
+  position: absolute;
+  left: var(--space-sm, 8px);
+  right: var(--space-sm, 8px);
+  bottom: 0;
+  height: 1px;
+  background: var(--color-booking-head-divider, var(--color-TD-neutral-subtlest));
 }
 
 /* TEST (John 19 nov): texten ett steg större än UI/kicker (xs 12 → sm 14), båda sajterna. */
