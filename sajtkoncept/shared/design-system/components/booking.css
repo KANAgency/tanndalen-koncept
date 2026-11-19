@@ -19,17 +19,11 @@
   margin: 0;
   padding: 6px var(--space-lg) 7px; /* 1 px extra under: optiskt centrerad */
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  background: var(--color-TD-night);
-  color: var(--color-TD-snow);
+  /* TEST (John 19 nov): ljusaste neutralen, svart text, kicker utan versaler (versal list blev för blockig) */
+  background: var(--color-TD-neutral-highlight);
+  color: var(--color-TD-night);
   text-align: center;
 }
-
-/* TEST (John 19 nov): TD-listen i säsongsfärgen, text enligt kontrasttabellen on-season-*.
-   Bara TD (OG sätter egen färg i og/desktop/hero-page.css). */
-html.theme-TD[data-season="winter"] .td-booking-head { background: var(--color-TD-season-winter); color: var(--contrast-on-season-winter); }
-html.theme-TD[data-season="spring"] .td-booking-head { background: var(--color-TD-season-spring); color: var(--contrast-on-season-spring); }
-html.theme-TD[data-season="summer"] .td-booking-head { background: var(--color-TD-season-summer); color: var(--contrast-on-season-summer); }
-html.theme-TD[data-season="autumn"] .td-booking-head { background: var(--color-TD-season-autumn); color: var(--contrast-on-season-autumn); }
 
 /* TEST (John 2026-11-19): lägre radie på den vita ramen när listen finns, 8.
    Id-selektor så att den vinner över lägena Bokning/På plats (startsida.css sätter radius-lg 16 där). */
