@@ -263,9 +263,10 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
 
 /* OG-neutralerna (med taupe-hint) ligger i tokens sedan 19 nov; ingen override här längre. */
 
-/* Booking bar (and its calendar) on the lightest OG neutral instead of white. */
+/* Booking bar (and its calendar) on Snö (John 19 nov: neutral-highlight #F5F3EE gick ihop med sidans
+   Dag #F5EEE5, för mycket beige). Samma logik som TD: vit bar på Dag-sida, listen taupe-tint. */
 .theme-OG {
-  --color-booking-calendar-surface: var(--color-OG-neutral-highlight);
+  --color-booking-calendar-surface: var(--color-OG-snow);
 }
 
 /* En dag on black: timeline text white; headings regular, not bold. */
