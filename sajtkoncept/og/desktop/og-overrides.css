@@ -149,7 +149,7 @@ html.theme-OG body.og-hp-page {
   color: var(--color-text-primary);
 }
 /* TEST 2026-11-17: menyknapp och konto ett steg mörkare (neutral-subtlest #E0DFDB)
-   så de skiljer sig från menypanelens glas (neutral-highlight #F5F4F0 85 %). */
+   så de skiljer sig från menypanelens glas (neutral-highlight = taupe-50 85 %). */
 .theme-OG .og-hp-header .menu-control,
 .theme-OG .og-hp-header:has(.site-menu.is-open) .menu-control,
 .theme-OG .og-hp-header .account-user {
@@ -157,7 +157,7 @@ html.theme-OG body.og-hp-page {
 }
 
 /* Orsaguiden (motsvarar TD:s Fjällguiden): egen färg, skild från CTA (mörkgrön).
-   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-tint #E1DBD0 sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
+   Vinter: OG season-winter = sjöblå #9DC7CB (primitives.json). Sommar: OG season-spring = taupe-200 #DFDCCF sedan 19 nov (TD:s vår-gul ej tillåten i OG; sommargrönt = CTA). */
 .theme-OG {
   --color-OG-guide: var(--color-OG-season-winter);
   --contrast-on-OG-guide: var(--color-OG-orsa-black);
@@ -261,7 +261,7 @@ html.theme-OG[data-season] .td-fraga-block .td-guide-mark-halo { stroke: var(--c
 /* OG neutral scale retinted to the taupe-light hue (Figma Neutral/*, same lightness
    as the TD neutrals). Overrides the older cool greys from generated tokens. */
 .theme-OG {
-  --color-OG-neutral-highlight: #F5F4F0;
+  --color-OG-neutral-highlight: var(--color-OG-taupe-50); /* 19 nov: taupe-serien (var #F5F4F0) */
   --color-OG-neutral-subtlest: #E0DFDB;
   --color-OG-neutral-light: #D8D7D3;
   --color-OG-neutral-subtle: #C3C2BD;
