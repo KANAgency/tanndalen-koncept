@@ -11,7 +11,7 @@ Nuläge (nov 2026): kundprototyp med två koncept (TD och OG) som delar UX-princ
 
 ## 2. Roller och sanningskällor
 - **Figma är facit för design** (fil `HW7ZST3CotlOepEcjNI5LC`, sida Concept = 274:9). Claude Code bygger koden och kan nå Figma via MCP.
-- Vid motsägelse gäller (högst först): Figma → `docs/status.md` → `docs/startsida-td.md` → `docs/projektkontext.md` → äldre underlag i claude.ai-projektet "Tänndalen & Orsa Grönklitt". Är det oklart vilken som gäller: fråga John.
+- Vid motsägelse gäller (högst först): Figma → `docs/status.md` → `docs/startsida-td.md` → `docs/projektkontext.md` → övriga `docs/*.md` (trådsammanfattningar) → `docs/arkiv/`. Claude.ai-projektet "Tänndalen & Orsa Grönklitt" avvecklas; allt underlag ligger här. Är det oklart vilken som gäller: fråga John.
 - Ändra aldrig ett designbeslut utan att fråga. Säg alltid vad som ändrats.
 - Gissa inte, mät först. Skriv "could not measure" när något inte kan mätas. Skriv aldrig att något är klart utan att ha verifierat det.
 
@@ -91,5 +91,14 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 | Affär, KPI, målgrupper, varumärke, teknik, öppna frågor | `docs/projektkontext.md` |
 | TD startsida: koncept, intro, sektioner, Just nu, Fjällguiden, designbeslut, Figma-noder | `docs/startsida-td.md` |
 | Läge, commits, öppna punkter, nästa steg | `docs/status.md` |
+| Frågerutan / Fråga oss / Allt om: beslut, Figma-komponenter, Cursor-faser | `docs/fragerutan.md` |
+| R360, personalisering, På plats-läget | `docs/r360-personalisering-pa-plats.md` |
+| Konceptmålen (sex mål, kundversion) | `docs/konceptmal.md` |
+| OG: konceptriktning, hero, -magi-systemet | `docs/og-koncept-hero.md` (+ `docs/og-fakta.md`) |
+| TD copy: plattform, hero, andra budskapet, områdestexter | `docs/copy-td.md` |
+| TD designsystem: mobilgrid, responsiv typografi, knappar | `docs/designsystem-td.md` |
+| Uppdelning TD/OG i koden (shared/sites), regressionstest | `docs/overlamning-td-og-2026-11-20.md` |
+| Äldre versioner och underlag från databasen | `docs/arkiv/` |
+| JTBD-workshopappen (shadcn, UI-polish) | `../src-other/workshop-wizard/` (+ `docs/ui-polish-shadcn.md`) |
 | Mappstruktur, var nya filer hör hemma, dev-server, build och testkommandon | `sajtkoncept/STRUKTUR.md` |
 | Beslutslogg (datum, vad som beslutats, vad som ratades, öppet) – sök på datum/ämne, läs inte allt | `sajtkoncept/beslut.md` |
