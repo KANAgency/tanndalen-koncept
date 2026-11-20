@@ -29,7 +29,7 @@ Alla sökvägar är relativa från repo-roten `src/` (gren `main`). Projektmappe
 | Designsystem | `sajtkoncept/shared/design-system/` (`components/*`, `generated/tokens.css`, `generated/typography-td.css`, `tokens/*.json`) |
 | Byggoutput | `sajtkoncept/dist/` (gitignorerad) |
 | Lokal server | `python3 scripts/dev-server.py 4173` från `sajtkoncept/` → `http://127.0.0.1:4173/td/` (`?plats=1` = På plats, `?mode=new` m.fl.) |
-| Figma | `HW7ZST3CotlOepEcjNI5LC` (sidor: Concept, Foundations & Components, Assets, Blocks, Old, _Arkiv, Frågerutan). Gamla OG-Figmafilen är troligen inaktuell. |
+| Figma | `HW7ZST3CotlOepEcjNI5LC` (sidor sedan 20 nov: Concept, Foundations & Components, Assets, Arkiv · Frågerutan). Gamla OG-Figmafilen är troligen inaktuell. |
 
 ## 4. Arbetssätt (Johns preferenser)
 - Svara på svenska. Namnge menyer, inställningar och appar på engelska.
